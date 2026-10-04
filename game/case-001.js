@@ -1,6 +1,7 @@
 /* Cold Read — Chapter 1, Case 1: "The Long Way Home"
  * Pilot case. Standalone. Data format: game/SCHEMA.md.
  * Spoilers for testers: game/case-001-SPOILERS.md
+ * Check with: node game/tools/validate-case.js
  */
 window.CASE = {
   id: "case-001",
@@ -8,14 +9,14 @@ window.CASE = {
   number: 1,
   title: "The Long Way Home",
   tagline: "She texted her sister that she was walking home. She never took a step.",
-  start: { day: 1, time: "06:40", locationId: "loc-hq" },
+  start: { day: 1, time: "07:30", locationId: "loc-hq" },
 
   intro: [
     { art: "intro-1", caption: "Port Halden. Thursday, 05:50. The rain stopped hours ago. The Saltmarket Stairs never dry." },
     { art: "intro-2", caption: "A street sweeper finds a woman on the lower landing. He stops his cart, takes off his cap, and calls it in." },
     { art: "intro-3", caption: "Julian Marsh used to tell strangers their secrets on live television. He was never psychic. He was paying attention, and someone was paying researchers." },
     { art: "intro-4", caption: "Now he pays attention for the Port Halden Police. Major Crimes gave him a desk, a visitor's badge and Detective Sergeant Lena Cruz, who did not ask for him." },
-    { art: "intro-5", caption: "06:40. Lena drops a thin file in front of him. 'Don't read her. Read the evidence.'" }
+    { art: "intro-5", caption: "07:30. Lena drops a thin file in front of him. 'Don't read her. Read the evidence.'" }
   ],
 
   briefing: "Iris Kellan, thirty-four. Senior claims investigator at Halden Mutual Marine, Financial Quarter. A street sweeper found her at 05:50 on the lower landing of the Saltmarket Stairs in Old Town. Head injury, handbag missing. The doctor on scene says it looks like a fall, maybe helped along by someone who wanted the bag. Time of death between ten and one. Her sister got a text from Iris's phone at 23:12 saying she was walking home the long way. Uniform are knocking on doors. I would like this to be a mugging, because muggings are simple. That is not up to me. Scene first, then her flat in Hillcrest, then her office. And Marsh: no tricks with the family.",
@@ -127,7 +128,7 @@ window.CASE = {
         },
         {
           id: "h-fl-catbowl", label: "Cat bowl", x: 440, y: 520, r: 30,
-          text: "Ledger's bowl on the floor by the door, licked clean, and a second bowl with fresh food in it. Someone with a key fed the cat late last night. It was not Iris."
+          text: "Ledger's bowl on the floor by the door, licked clean, and a second bowl with fresh food in it. Someone with a key fed the cat late last night. Probably not Iris."
         },
         {
           id: "h-fl-box", label: "Document box", x: 830, y: 430, r: 45,
@@ -208,8 +209,8 @@ window.CASE = {
       id: "loc-restaurant",
       name: "The Anchor & Lamp",
       district: "The Docks",
-      description: "A busy fish restaurant on the quay with an open kitchen. At this hour the chairs are still on the tables and the grill is being scraped down.",
-      map: { x: 420, y: 500 },
+      description: "A busy fish restaurant on the old quay west of the Saltmarket Stairs, with an open kitchen. At this hour the chairs are still on the tables and the grill is being scraped down.",
+      map: { x: 120, y: 480 },
       art: "loc-restaurant",
       requires: ["fact-marcus-work"],
       hotspots: [
@@ -287,8 +288,8 @@ window.CASE = {
         },
         {
           id: "q-hanna-call", q: "Did you speak to her on Wednesday?",
-          a: "She rang me just after seven. She was in a café, I could hear cups and rain against a window. She said she had to go back into work for an hour. Someone wanted to talk to her before tomorrow. She said, 'He says he can explain.' I asked who. She said, 'Better you don't know until it's done.' She sounded relieved. Like it was going to be easier than she'd feared.",
-          cue: "She gives the time, the cups and the rain without being asked. Small, checkable details, offered freely.",
+          a: "Twice. Ten past eight in the morning, about Saturday; normal. Then just after seven in the evening. She was in a café, I could hear cups and rain against a window. She said she had to go back into work for an hour. Someone wanted to talk to her before tomorrow. She said, 'He says he can explain.' I asked who. She said, 'Better you don't know until it's done.' She sounded relieved. Like it was going to be easier than she'd feared.",
+          cue: "She gives the times, the cups and the rain without being asked. Small, checkable details, offered freely.",
           grants: ["fact-hanna-call"]
         },
         {
@@ -375,7 +376,7 @@ window.CASE = {
         },
         {
           id: "q-mar-wednesday", q: "Where were you on Wednesday night?",
-          a: "Here. On the grill from four till just after eleven. Then I walked home along the quay to Eastgate, like every night. Nobody walks with me, before you ask.",
+          a: "Here. On the grill from four till just after eleven. Then I walked home along the harbour wall and Quay Road to Eastgate, like every night. Nobody walks with me, before you ask.",
           cue: "Loud again, and annoyed. Back to his baseline."
         }
       ],
@@ -421,7 +422,7 @@ window.CASE = {
           id: "q-petra-wednesday", q: "Where were you on Wednesday evening?",
           a: "Home. All night.",
           lie: true,
-          cue: "Two words, delivered to the window instead of to you. After the speech she just gave about her boat, the brevity is loud."
+          cue: "Two words. After the speech she just gave about her boat, the sudden lack of detail is the change to note. A short answer is not a lie, but it gives you nothing to check."
         },
         {
           id: "q-petra-surveyor", q: "Who surveyed the Petrel for the insurance?",
@@ -441,7 +442,7 @@ window.CASE = {
         {
           item: "ev-kiosk-cam",
           a: "All right. Yes. I walked past the top of the stairs. I live on Saltmarket Lane, I walk past them every night. I was at the co-op meeting till ten, then a drink at the Seamen's Mission. When I heard where she'd been found, and that I'd shouted at her in a café the day before... I panicked. I didn't look down the steps. Why would I?",
-          cue: "She meets your eyes now. The lie was about fear, not about anything she saw.",
+          cue: "She meets your eyes now and gives you things you can check: the meeting, the Mission, the walk home.",
           grants: ["fact-petra-saltmarket"]
         },
         {
@@ -464,18 +465,18 @@ window.CASE = {
       locationId: "loc-office",
       available: { from: "08:30", to: "18:30" },
       requires: [],
-      description: "Silver hair, good suit, a black armband already on his sleeve. He shakes your hand with both of his and holds it a beat too long. His desk is immaculate. He offers coffee before you have sat down.",
+      description: "Silver hair, good suit, a black armband on his sleeve. He shakes your hand, offers coffee, and rests his forearms on an immaculate desk, hands open.",
       questions: [
         {
           id: "q-wh-iris", q: "Tell me about Iris.",
           a: "One of the best investigators I've had in twenty-five years. Rigorous. Relentless, sometimes too much so. She'd got her teeth into a claim lately, the Grey Petrel, a very difficult claimant, Petra Lund. Threats, I gather. And there was a boyfriend, an ex, who came by in a temper a month ago. I hope you'll look at both of them.",
-          cue: "Relaxed, fluent, warm. Open hands on the desk, steady eye contact, short natural sentences. This is his baseline. Note also that he has handed you two suspects before you asked for any."
+          cue: "Relaxed, fluent, warm. Open hands on the desk, steady eye contact, short natural sentences. This is his baseline."
         },
         {
           id: "q-wh-evening", q: "Where were you on Wednesday evening?",
           a: "I left here at ten past six. Took the number 4 tram home to Hillcrest, had a bowl of soup, watched the second half of the Halden-Varn match, which was dreadful, two-nil. Then I drove down to the Harbour Club for the quiz night. Arrived about twenty to eleven, stayed until half past twelve. Thirty people can tell you I was there.",
           lie: true,
-          cue: "Until now his answers have been short and easy. This one arrives as a complete, ordered paragraph, with a tram number and a football score nobody asked for, and his fingers go to his cufflink. On its own that proves nothing. It is a change from his own baseline, and it tells you which part of his evening he has rehearsed. The verifiable part, the club, starts at 22:40.",
+          cue: "Until now his answers have been short and easy. This one arrives as a complete, ordered paragraph, with a tram number and a football score nobody asked for. A change from his own baseline proves nothing: nervous innocent people prepare too. It tells you which part of his account to check. Only the club, from 22:40, comes with witnesses.",
           grants: ["fact-whitlock-alibi"]
         },
         {
@@ -483,14 +484,14 @@ window.CASE = {
           requires: ["ev-phone-extract"],
           a: "Did I? Yes, I suppose I did. The quarterly figures. A deadline. Routine. Two minutes, if that.",
           lie: true,
-          cue: "'Did I?' comes first, then 'yes'. He is deciding how much you already know before he answers.",
+          cue: "'Did I?' comes first, then 'yes'. It could be a real lapse or a man buying time. What you can test is the content: does a two-minute call about quarterly figures fit what she did next?",
           grants: ["fact-whitlock-call"]
         },
         {
           id: "q-wh-calendar", q: "You asked Nico what Iris's private appointment on Thursday was.",
           requires: ["fact-whitlock-knew"],
-          a: "I manage a team of nine. I keep an eye on their calendars. That's my job. Iris had been under strain; I was concerned.",
-          cue: "For the first time in the conversation he breaks eye contact, to glance at the glass door behind you."
+          a: "I manage a team of eight. I keep an eye on their calendars. That's my job. Iris had been under strain; I was concerned.",
+          cue: "His answer is general where the question was specific: all eight calendars, not the one appointment he asked Nico about."
         },
         {
           id: "q-wh-northline", q: "Who does Halden Mutual use for hull surveys?",
@@ -502,12 +503,12 @@ window.CASE = {
         {
           item: "ev-shelf-ring",
           a: "The Helm? It's away being re-engraved. Twenty-five years, and they spelt my name wrong. Typical.",
-          cue: "Fast and smiling, and no name of an engraver, no ticket, no date it is due back. People telling the truth about errands usually reach for the boring details that make them easy to check."
+          cue: "Fast and smiling, and no name of an engraver, no ticket, no date it is due back. Nothing you could check."
         },
         {
           item: "fact-nico-car",
           a: "Nico's a nice lad with a poor memory. Half the car park drives a green estate.",
-          cue: "He smiles with his mouth. His hand has gone back to the cufflink."
+          cue: "He smiles. He does not say where his own car was."
         },
         {
           item: "ev-garage-log",
@@ -517,7 +518,7 @@ window.CASE = {
         {
           item: "ev-northline-check",
           a: "I'd like my solicitor present for any questions about company procurement.",
-          cue: "He does not look at the page. He already knows what is on it."
+          cue: "He does not look at the page."
         },
         {
           item: "ev-phone-extract",
@@ -544,16 +545,21 @@ window.CASE = {
           cue: "Fluent and eager, leaning in. This is how he sounds when he is comfortable."
         },
         {
+          id: "q-nico-files", q: "Did you and Iris ever clash?",
+          a: "Once. Last month she sent back one of my files, the Halcyon claim, with 'not good enough' on it in red, and copied Graham in. I was furious for a day. I said things in the kitchen I'm not proud of. Then she sat with me for an evening and showed me what I'd missed. That's what she was like.",
+          cue: "He offers the bad part himself, before you can find it."
+        },
+        {
           id: "q-nico-left", q: "What time did you leave on Wednesday?",
           a: "Six. On the dot. Same as always.",
           lie: true,
-          cue: "'On the dot', and 'same as always'. Two reassurances where one time would do. It is the only number he has been precise about all morning, and he says it to the desk."
+          cue: "'On the dot', and 'same as always'. Two reassurances where one time would do, and nothing you could check: no who, no where."
         },
         {
           id: "q-nico-badge", q: "The lobby log says you badged out at 19:52, not six.",
           requires: ["ev-badge-log"],
-          a: "Okay. Okay. I was printing my CV on the colour printer. I've got an interview at Brightwater Re on Monday and I didn't want Graham to know. That's all. But listen. I go out through the car park to get my bike. Graham's green estate was in his bay, number twelve. I remember because he'd left at ten past six and I thought, he's got a taxi to his quiz, good for him. It was definitely there.",
-          cue: "Now the details come in a rush: the printer, the interview, the bay number, the reason he noticed. Specific and checkable. He has stopped watching the glass office.",
+          a: "Okay. Okay. I was printing my CV on the colour printer. I've got an interview at Brightwater Re on Monday and I didn't want Graham to know. That's all. But listen. I badge out at the front, then go round and down the ramp to the bike cage in the car park. Graham's green estate was in his bay, number twelve. I remember because he'd left at ten past six and I thought, he's got a taxi to his quiz, good for him. It was definitely there.",
+          cue: "Now the details come in a rush: the printer, the interview, the bay number, the reason he noticed. Specific and checkable.",
           grants: ["fact-nico-car"]
         },
         {
@@ -565,8 +571,12 @@ window.CASE = {
       ],
       presentations: [
         {
-          item: "ev-newsletter",
+          item: "ev-newsletter", requires: ["ev-shelf-ring"],
           a: "The Helm Award. He's very proud of it. It's been on that shelf since the spring. Actually... I haven't seen it this week."
+        },
+        {
+          item: "ev-newsletter",
+          a: "The Helm Award. He's very proud of it. It's been on that shelf behind his desk since the spring."
         },
         {
           item: "ev-iris-copies",
@@ -585,8 +595,8 @@ window.CASE = {
       doc: {
         kind: "report",
         title: "PHPD Major Crimes — Preliminary Scene Notes, MC-26-0412",
-        meta: [["Deceased", "Iris KELLAN, 34"], ["Location", "Lower landing, Saltmarket Stairs, Old Town"], ["Found", "Thu 05:50 by T. Ferreira (street sweeper)"], ["Doctor on scene", "Dr. A. Sorensen, Medical Examiner's Office"], ["Notes made", "Thu 07:05"]],
-        text: "Position: prone across lower landing, head downhill, arms beneath body. Coat buttoned. Fully clothed. Boots found on step below landing.\nInjuries: laceration with underlying depressed fracture, back of head (right side). Abrasions to face, palms and both knees.\nCore temperature 21.4°C at 06:52. Ambient 6°C, wind NW, ground wet. Estimate assumes body outdoors throughout: death approx. 22:00–01:00.\nProperty: phone in inner coat pocket (screen cracked). Handbag not located. Wallet not located.\nProvisional view: head injury consistent with a fall down stone steps. Robbery not excluded.\nFull post-mortem examination scheduled Thursday morning."
+        meta: [["Deceased", "Iris KELLAN, 34"], ["Found", "Thu 05:50 by T. Ferreira (street sweeper)"], ["Doctor on scene", "Dr. A. Sorensen"], ["Notes made", "Thu 07:05"]],
+        text: "Prone on lower landing, arms beneath body.\nInjuries: depressed fracture, back of head (right). Abrasions to face, palms, knees.\nCore temperature 21.4°C at 06:52. Ambient 6°C, wind, ground wet. Assuming body outdoors throughout: death approx. 22:00–01:00.\nProperty: phone in inner coat pocket. Handbag and wallet not located.\nProvisional: a fall down stone steps; robbery not excluded.\nFull post-mortem examination scheduled Thursday 08:00."
       }
     },
     {
@@ -594,19 +604,17 @@ window.CASE = {
       summary: "Rain 17:50 to 21:40. Stairs were wet and muddy all night.",
       doc: {
         kind: "report",
-        title: "Port Halden Met Office — Hourly Observations, Harbour Station",
-        meta: [["Date", "Wednesday into Thursday"], ["Station", "PH-03 Harbour"]],
+        title: "Port Halden Met Office — Harbour Station, Wednesday night",
         table: {
-          cols: ["Time", "Conditions", "Rain (mm)", "Temp (°C)"],
+          cols: ["Time", "Conditions", "Temp (°C)"],
           rows: [
-            ["17:00", "Overcast, dry", "0.0", "9"],
-            ["17:50", "Rain begins", "—", "9"],
-            ["18:00–21:00", "Moderate rain", "2.0–4.0 per hour", "8–7"],
-            ["21:40", "Rain ends", "—", "7"],
-            ["22:00–05:00", "Dry, cloudy, wind NW 18 km/h", "0.0", "6–5"]
+            ["17:50", "Rain begins", "9"],
+            ["18:00–21:00", "Moderate rain, 2–4 mm per hour", "8–7"],
+            ["21:40", "Rain ends", "7"],
+            ["22:00–05:00", "Dry, cloudy, wind NW 18 km/h", "6–5"]
           ]
         },
-        text: "Surface water and run-off reported on Old Town stairways and lanes until morning."
+        text: "Run-off reported on Old Town stairways until morning."
       }
     },
     {
@@ -616,17 +624,17 @@ window.CASE = {
         kind: "photo",
         title: "Scene photograph 4 of 22 — lower landing",
         meta: [["Taken", "Thu 06:21, PC Odell"]],
-        text: "Wide shot from the turn of the stair. The deceased lies face down across the landing. Coat buttoned to the collar, hem straight. Both arms beneath the body. Boots off and set on the next step down. No scattered belongings. No blood trail on the steps above the landing."
+        text: "Face down across the landing, coat buttoned, hem straight, arms beneath the body. Boots on the next step down. No scattered belongings. No blood on the steps above."
       }
     },
     {
       id: "ev-shoes", name: "Her boots: clean soles", key: true,
-      summary: "Soles clean and dry, though every step was mud. Grey fibres in the heel seam.",
+      summary: "Tread clean, though every step was mud. Grey fibres in the heel seam.",
       doc: {
         kind: "object",
-        title: "Exhibit IK/3 — pair of black leather ankle boots, size 38",
-        meta: [["Recovered", "Step below lower landing, Saltmarket Stairs"], ["Condition", "Dry"]],
-        text: "Uppers dry, lightly scuffed at the toes. Soles and tread: clean. No mud, no leaf litter, no grit in the tread. A few short grey synthetic fibres caught in the stitching of the left heel.\nNote by Julian: the upper flight is ankle-deep in wet leaf mud. Nobody walks down it and arrives with clean soles."
+        title: "Exhibit IK/3 — black leather ankle boots, size 38",
+        meta: [["Recovered", "Step below lower landing"], ["Condition", "Damp, but clean"]],
+        text: "Uppers and soles damp from the wet step. Tread clean: no mud, no leaf litter, no grit. A few short grey synthetic fibres in the stitching of the left heel."
       }
     },
     {
@@ -635,8 +643,8 @@ window.CASE = {
       doc: {
         kind: "object",
         title: "Exhibit IK/1 — mobile phone",
-        meta: [["Recovered", "Inner coat pocket"], ["State", "Screen cracked, locked, 31% battery"]],
-        text: "Lock screen shows one notification: a message from 'Hanna' at 06:33. The phone requires a passcode. Sealed and sent to digital forensics on request."
+        meta: [["State", "Screen cracked, locked"]],
+        text: "Lock screen shows one notification: a message from 'Hanna' at 06:33. Passcode required."
       }
     },
     {
@@ -649,8 +657,7 @@ window.CASE = {
         table: {
           cols: ["Item", "Price"],
           rows: [["Fish soup", "9.50"], ["Bread", "2.00"], ["Pot of tea", "3.20"], ["Total", "14.70"]]
-        },
-        text: "Thank you. See you tomorrow."
+        }
       }
     },
     {
@@ -659,39 +666,38 @@ window.CASE = {
       doc: {
         kind: "camera",
         title: "Saltmarket Late Shop — camera 2 (doorway), Wednesday night",
-        meta: [["View", "Top flight of Saltmarket Stairs; at the far edge, a strip of Quay Road at the bottom"], ["Blind spot", "The lower landing is hidden by the turn of the stair"]],
+        meta: [["Recording reviewed", "Wed 21:00 to Thu 06:00"], ["View", "Top flight; at the far edge, a strip of Quay Road"], ["Blind spot", "Lower landing, hidden by the turn of the stair"]],
         table: {
           cols: ["Time", "Observed"],
           rows: [
-            ["21:47", "Shop shutter lowered halfway. Lane empty."],
-            ["22:21", "A dark estate car stops on Quay Road at the foot of the stairs. Headlights off. Plate not readable."],
-            ["22:22–22:28", "Movement at the foot of the stairs, too dark to make out. One figure, possibly two shapes."],
-            ["22:29", "Headlights on. The car drives off east along Quay Road."],
-            ["23:05", "A woman in a bright yellow oilskin walks along Saltmarket Lane across the top of the stairs. Does not look down. Continues east."],
-            ["23:16", "A large man with a holdall walks east along Quay Road past the foot of the stairs, looking at a phone. Does not stop."],
-            ["05:48", "Street sweeper's cart arrives at the top of the stairs."],
-            ["05:50", "Sweeper goes down the stairs, returns running at 05:51."]
+            ["21:47", "Shutter lowered halfway. Lane empty."],
+            ["22:21", "A dark estate car stops on Quay Road at the foot of the stairs. Lights off. Plate not readable."],
+            ["22:22–22:28", "Movement at the foot of the stairs, too dark to see."],
+            ["22:29", "Lights on. The car drives off east."],
+            ["23:05", "A woman in a bright yellow oilskin crosses the top of the stairs. Does not look down."],
+            ["23:16", "A large man with a holdall walks east along Quay Road, looking at a phone."],
+            ["05:50", "Street sweeper goes down the stairs; returns running at 05:51."]
           ]
         },
-        text: "No one goes down or comes up the top flight between 21:47 and 05:50."
+        text: "No one goes down or comes up the top flight between 21:00 and 05:50."
       }
     },
     {
       id: "ev-drag-marks", name: "Drag marks at the foot of the stairs", key: true,
-      summary: "Parallel scuffs up the bottom three steps from Quay Road: she was carried up, not down.",
+      summary: "Parallel scuffs up the bottom three steps from Quay Road: dragged up, not walked down.",
       doc: {
         kind: "photo",
-        title: "Scene photograph 23 (taken on revisit) — bottom steps at Quay Road",
-        text: "Two parallel scuff lines through the moss on the front edges of the bottom three steps, about 30 cm apart, running from the Quay Road kerb up to the lower landing. Consistent with heels dragged upward. A smear of mud on the kerb edge. The scuffs are on top of the wet moss, so they were made after the rain stopped at 21:40."
+        title: "Scene photograph 23 (revisit) — bottom steps at Quay Road",
+        text: "Two parallel scuffs through the moss on the front edges of the bottom three steps, 30 cm apart, from the kerb up to the landing. Consistent with something heavy, perhaps wrapped, dragged upward. Mud from the scuffs still lies on the step edges, where run-off has washed the steps around them clean, so they were made after the heavy rain stopped at 21:40."
       }
     },
     {
       id: "ev-fridge-note", name: "Sticky note on the fridge", key: false,
-      summary: "'Box: Petrel's loss date, DDMM, read right to left.'",
+      summary: "'Box: Petrel's loss date, DDMM, digits backwards.'",
       doc: {
         kind: "note",
         title: "Yellow sticky note, fridge door",
-        text: "BOX: PETREL'S LOSS DATE, DDMM, READ RIGHT TO LEFT."
+        text: "BOX: PETREL'S LOSS DATE, DDMM, DIGITS BACKWARDS."
       }
     },
     {
@@ -699,11 +705,10 @@ window.CASE = {
       summary: "Thursday 09:00: Compliance, 'Bring everything. Tell nobody.'",
       doc: {
         kind: "note",
-        title: "Paper week-planner, open on Iris's desk at home",
+        title: "Paper week-planner, Iris's desk at home",
         table: {
           cols: ["Day", "Entries"],
           rows: [
-            ["Monday", "Dentist 08:00 (moved). Ring Hanna re Saturday."],
             ["Tuesday", "P. Lund, Tidewater 14:00. Sell Wren?? Tell M. tonight."],
             ["Wednesday", "Archive: pull ALL NSS files. Print in archive, not on the floor."],
             ["Thursday", "09:00 R. Achebe, Compliance, 6th floor. BRING EVERYTHING. TELL NOBODY."],
@@ -717,9 +722,9 @@ window.CASE = {
       summary: "Iris was selling the Wren, co-owned with Marcus. She wrote she'd pay him half.",
       doc: {
         kind: "letter",
-        title: "Printed listing: 'WREN — 7.2 m sloop, sound, sails 2023'",
+        title: "Printed listing: 'WREN — 7.2 m sloop, sails 2023'",
         meta: [["Asking", "€14,500"], ["Contact", "I. Kellan"]],
-        text: "Well-kept day sailer, moored Hillcrest Marina. Joint ownership; sale agreed by both owners.\n\nHandwritten across the bottom in black ink, square capitals:\nM, I HAVE TOLD YOU. I WILL PAY YOU YOUR HALF, EVERY PENNY. I AM NOT DOING THIS TO HURT YOU. I.\n\nBeneath, in a different hand, pressed hard enough to tear the paper: 'IT'S NOT ABOUT THE MONEY.'"
+        text: "Joint ownership.\n\nHandwritten across the bottom, square capitals:\nM, I HAVE TOLD YOU. I WILL PAY YOU YOUR HALF, EVERY PENNY. I AM NOT DOING THIS TO HURT YOU. I.\n\nBeneath, in a different hand, pressed hard enough to tear the paper: 'IT'S NOT ABOUT THE MONEY.'"
       }
     },
     {
@@ -727,28 +732,28 @@ window.CASE = {
       summary: "14 claims surveyed by Northline. Fees 15 times market rate. Every one approved by GW.",
       doc: {
         kind: "report",
-        title: "Private working file, from the document box: 'NSS — WHO IS NORTHLINE?'",
-        meta: [["Contents", "Photocopied invoices, Iris's summary table, a printed draft email"], ["Sorted", "By vessel name"]],
+        title: "From the document box: 'NSS — WHO IS NORTHLINE?'",
+        meta: [["Contents", "Photocopied invoices, Iris's summary table, printed copy of the email she sent"], ["Sorted", "By vessel name"]],
         table: {
-          cols: ["Vessel", "Claim no.", "Date of loss", "Northline fee (€)", "Approved by"],
+          cols: ["Vessel", "Claim no.", "Date of loss", "Northline fee (€)"],
           rows: [
-            ["Baltic Rose", "1745", "02/08/2024", "41,200", "G. Whitlock"],
-            ["Cormorant", "1588", "19/11/2023", "38,900", "G. Whitlock"],
-            ["Dunlin", "2040", "07/04/2025", "44,000", "G. Whitlock"],
-            ["Grey Petrel", "2291", "17/03/2026", "46,500", "G. Whitlock"],
-            ["Halden Star", "1903", "23/01/2025", "43,100", "G. Whitlock"],
-            ["Kittiwake", "1406", "11/05/2023", "39,800", "G. Whitlock"],
-            ["Marram", "2176", "30/10/2025", "45,900", "G. Whitlock"],
-            ["Norrland", "1811", "14/10/2024", "42,700", "G. Whitlock"],
-            ["Osprey II", "1522", "28/08/2023", "40,300", "G. Whitlock"],
-            ["Pelican Bay", "2233", "09/01/2026", "47,200", "G. Whitlock"],
-            ["Sea Lavender", "1690", "15/03/2024", "44,600", "G. Whitlock"],
-            ["Tern", "1967", "21/02/2025", "43,800", "G. Whitlock"],
-            ["Westering", "2118", "03/07/2025", "46,100", "G. Whitlock"],
-            ["Whimbrel", "1857", "29/11/2024", "48,300", "G. Whitlock"]
+            ["Baltic Rose", "1745", "02/08/2024", "41,200"],
+            ["Cormorant", "1588", "19/11/2023", "38,900"],
+            ["Dunlin", "2040", "07/04/2025", "44,000"],
+            ["Grey Petrel", "2291", "17/03/2026", "46,500"],
+            ["Halden Star", "1903", "23/01/2025", "43,100"],
+            ["Kittiwake", "1406", "11/05/2023", "39,800"],
+            ["Marram", "2176", "30/10/2025", "45,900"],
+            ["Norrland", "1811", "14/10/2024", "42,700"],
+            ["Osprey II", "1522", "28/08/2023", "40,300"],
+            ["Pelican Bay", "2233", "09/01/2026", "47,200"],
+            ["Sea Lavender", "1690", "15/03/2024", "44,600"],
+            ["Tern", "1967", "21/02/2025", "43,800"],
+            ["Westering", "2118", "03/07/2025", "46,100"],
+            ["Whimbrel", "1857", "29/11/2024", "48,300"]
           ]
         },
-        text: "Total Northline fees: €612,400. Market rate for a hull survey: €1,800–€3,500.\nEvery one marked EXPEDITE. Every one signed GW.\nNorthline: no listing with the Marine Surveyors' Register. Address is a mailbox in Eastgate.\n\nDraft email (printed, not sent): 'Ruth — I need to report a concern about approvals in Claims, and it involves my own line manager. I'd like to bring you documents in person, not by email. Thursday 9:00 if you can. Please do not copy anyone in Claims. — Iris'"
+        text: "Total €612,400; a hull survey costs €1,800–€3,500. Every one approved by G. Whitlock, marked EXPEDITE. Northline: not on the Marine Surveyors' Register; address a mailbox in Eastgate.\n\nEmail, sent Tuesday 23:14: 'Ruth — I need to report a concern about approvals in Claims, and it involves my own line manager. Documents in person, Thursday 9:00. Please copy nobody in Claims. — Iris'"
       }
     },
     {
@@ -757,8 +762,8 @@ window.CASE = {
       doc: {
         kind: "report",
         title: "Halden Mutual Marine — Hull Claim HM-M-2291",
-        meta: [["Vessel", "GREY PETREL, 19 m stern trawler"], ["Owner / claimant", "Petra LUND, c/o Fishermen's Co-operative Hall, The Docks"], ["Date of loss", "17/03/2026"], ["Circumstances", "Flooding in heavy sea off Halden Light; vessel sank; crew of three rescued"], ["Sum claimed", "€340,000"], ["Survey", "Northline Survey Services Ltd. Fee €46,500"], ["Handler", "I. Kellan"], ["Status", "Under investigation"]],
-        text: "Survey extract: 'Main engine: Volda 6-cylinder, in fair condition, inspected aboard.'\n\nIris's margin notes:\n'Co-op register: Petrel refitted 2019 with a BRANDT 8. Did anyone actually go aboard?'\n'Fee is 15x market. Who approved this? (GW. Again.)'\n'Lund angry, not evasive. Angry is not the same as guilty.'"
+        meta: [["Vessel", "GREY PETREL, 19 m stern trawler"], ["Claimant", "Petra LUND, c/o Fishermen's Co-operative Hall, The Docks"], ["Date of loss", "17/03/2026"], ["Circumstances", "Flooded and sank off Halden Light; crew of three rescued"], ["Sum claimed", "€340,000"], ["Survey", "Northline Survey Services Ltd., fee €46,500"], ["Handler", "I. Kellan — under investigation"]],
+        text: "Survey extract: 'Main engine: Volda 6-cylinder, in fair condition, inspected aboard.'\n\nIris's margin notes:\n'Co-op register: refitted 2019 with a BRANDT 8. Did anyone actually go aboard?'\n'Fee 15x market. Approved by? GW. Again.'\n'Lund angry, not evasive. Angry is not the same as guilty.'"
       }
     },
     {
@@ -767,8 +772,8 @@ window.CASE = {
       doc: {
         kind: "object",
         title: "Company laptop on Iris Kellan's desk",
-        meta: [["Asset tag", "HM-LT-0417"], ["IT sticker", "Screen lock after 30 min idle — Halden Mutual IT"], ["State", "Docked, lid closed, powered on"]],
-        text: "The desktop version of her phone's messaging app is pinned to the taskbar, signed in. Anyone sitting at this desk while the screen was unlocked could send messages as Iris."
+        meta: [["Asset tag", "HM-LT-0417"], ["IT sticker", "Screen lock after 30 min idle"], ["State", "Docked, lid closed, powered on"]],
+        text: "Her phone's messaging app is pinned to the taskbar, signed in. Anyone at this desk while it was unlocked could send messages as Iris."
       }
     },
     {
@@ -777,7 +782,7 @@ window.CASE = {
       doc: {
         kind: "photo",
         title: "Halden Mutual Quarterly, Spring — 'Twenty-five years at the Helm'",
-        text: "Head of Claims Graham Whitlock this spring received the company's Helm Award for twenty-five years' service: a solid brass ship's wheel, 18 cm across, with eight turned spoke-ends around the rim, mounted on a square polished granite base, 12 cm a side.\n\nPhoto caption: 'Graham at his desk, with the Helm in pride of place on the shelf behind him.' The photograph shows the wheel standing between three glass plaques and a framed photo of a yacht."
+        text: "Head of Claims Graham Whitlock receives the Helm Award for twenty-five years' service: a solid brass ship's wheel, 18 cm across, eight turned spoke-ends on the rim, on a granite base 12 cm square.\n\nCaption: 'Graham at his desk, the Helm on the shelf behind him, between three glass plaques and a photo of a yacht.'"
       }
     },
     {
@@ -786,7 +791,7 @@ window.CASE = {
       doc: {
         kind: "photo",
         title: "Whitlock's office — award shelf",
-        text: "Three glass plaques and a framed yacht photograph. Between them, a sharply edged square of clean wood, 12 cm a side, in an otherwise even film of dust. Whatever stood there was there for months and was moved within the last day or two."
+        text: "Between three glass plaques and a yacht photograph: a sharp-edged square of clean wood, 12 cm a side, in an even film of dust. Something stood there for months and was moved in the last day or two."
       }
     },
     {
@@ -795,7 +800,7 @@ window.CASE = {
       doc: {
         kind: "photo",
         title: "4th floor file archive — end of aisle F",
-        text: "Grey nylon loop-pile carpet, the same throughout the archive. One patch roughly 1 m across is visibly cleaner and still damp at the base, with a smell of carpet shampoo. The wall-mounted spill kit nearby has a broken seal; its log card's last entry reads 'March — coffee spill, Reception'. Nothing logged since. Sample taken for comparison with fibres from the body."
+        text: "Grey nylon loop-pile carpet throughout. One patch about 1 m across is cleaner, damp at the base, smelling of carpet shampoo. The wall spill kit has a broken seal; its log card's last entry: 'March — coffee spill, Reception'. Sample taken to compare with fibres from the body."
       }
     },
     {
@@ -805,7 +810,7 @@ window.CASE = {
         kind: "report",
         title: "Archive box 1406 — Hull Claim HM-M-1406, KITTIWAKE",
         meta: [["Date of loss", "11/05/2023"], ["Surveyor", "Northline Survey Services Ltd., signed 'R. Dahl, MNSS'"], ["Fee", "€39,800"]],
-        text: "Approval memo, typed, initialled in blue ink:\n'Survey fees approved in full. New panel firm — expedite payment, no further sign-off required. GW.'\n\nIris's sticky note on the front: 'MNSS does not exist. I checked. Who is R. Dahl?'"
+        text: "Approval memo, initialled: 'Fees approved in full. New panel firm — expedite, no further sign-off required. GW.'\n\nIris's sticky note on the front: 'MNSS does not exist. I checked. Who is R. Dahl?'"
       }
     },
     {
@@ -818,15 +823,14 @@ window.CASE = {
           cols: ["Day", "Time", "Observed"],
           rows: [
             ["Tue", "14:05", "Iris sits at the window table with a woman in a bright yellow oilskin."],
-            ["Tue", "14:28", "The woman stands, points at Iris, voice raised. Other customers look round."],
-            ["Tue", "14:31", "The woman sits down again. They talk quietly. Iris writes in a small black notebook."],
-            ["Tue", "14:40", "The woman leaves. Iris stays, writing, until 15:02."],
+            ["Tue", "14:28", "The woman stands, points at Iris, voice raised."],
+            ["Tue", "14:31", "She sits again; they talk quietly. Iris writes in a small black notebook."],
+            ["Tue", "14:40", "The woman leaves. Iris stays, writing."],
             ["Wed", "18:20", "Iris arrives alone, coat wet. Window table."],
-            ["Wed", "18:41", "Pays by card."],
-            ["Wed", "18:52", "Answers her phone. Listens more than she speaks, about two minutes. Afterwards sits very still."],
+            ["Wed", "18:52", "Answers her phone; mostly listens, about two minutes. Then sits very still."],
             ["Wed", "18:58", "Writes in the black notebook."],
-            ["Wed", "19:05", "Makes a call, about six minutes. Shoulders drop; she nods while talking."],
-            ["Wed", "19:24", "Leaves, turning uphill towards the Mercer Street tram stop (trams to the Financial Quarter)."]
+            ["Wed", "19:05", "Makes a call, about six minutes. Her shoulders drop."],
+            ["Wed", "19:24", "Leaves uphill for the Mercer Street tram (to the Financial Quarter)."]
           ]
         }
       }
@@ -837,7 +841,7 @@ window.CASE = {
       doc: {
         kind: "note",
         title: "Flyer, Tidewater Café noticeboard",
-        text: "FISHERMEN'S CO-OPERATIVE — OPEN MEETING\nWednesday, 19:30, Co-op Hall, The Docks\n'Insurance surveys: who is checking the checkers?'\nAll skippers and owners welcome. Tea from 19:00."
+        text: "FISHERMEN'S CO-OPERATIVE — OPEN MEETING\nWednesday 19:30, Co-op Hall, The Docks\n'Insurance surveys: who is checking the checkers?'"
       }
     },
     {
@@ -846,7 +850,7 @@ window.CASE = {
       doc: {
         kind: "report",
         title: "The Anchor & Lamp — kitchen records, Wednesday",
-        meta: [["Clock card", "M. BELL — in 15:52, out 23:04"], ["Manager's note", "Short-staffed (Davey off sick). No breaks taken on grill."]],
+        meta: [["Clock card", "M. BELL — in 15:52, out 23:04"], ["Manager's note", "Short-staffed. No breaks on grill."]],
         table: {
           cols: ["Ticket printed", "Station", "Initialled"],
           rows: [
@@ -855,7 +859,7 @@ window.CASE = {
             ["21:30", "Grill", "MB"], ["21:44", "Grill", "MB"], ["22:10", "Grill", "MB"], ["22:38", "Grill", "MB"]
           ]
         },
-        text: "Each ticket is initialled by the cook when the dish leaves the pass."
+        text: "The cook initials each ticket as the dish leaves the pass."
       }
     },
     {
@@ -864,8 +868,8 @@ window.CASE = {
       doc: {
         kind: "report",
         title: "Fishermen's Co-operative — Minutes of Open Meeting, Wednesday",
-        meta: [["Opened", "19:30"], ["Closed", "21:50"], ["Attendance", "31 signatures (sheet attached), incl. P. Lund, GREY PETREL"]],
-        text: "1. Fuel prices (19:35–20:30).\n2. Insurance surveys (20:35–20:55). P. Lund stated that no surveyor boarded her vessel, yet her claim includes a large survey fee. Asked whether others had been billed for surveys that never took place. J. Osei (CORMORANT) and K. Brandvold (TERN) reported the same firm: Northline. Secretary to write to the Marine Surveyors' Register.\n3. Harbour dues (21:00–21:45). P. Lund seconded the motion.\nMeeting closed 21:50."
+        meta: [["Opened", "19:30"], ["Closed", "21:50"], ["Attendance", "31 signatures, incl. P. Lund, GREY PETREL"]],
+        text: "1. Fuel prices (19:35–20:30).\n2. Insurance surveys (20:35–20:55). P. Lund: no surveyor boarded her vessel, yet her claim carries a large survey fee. J. Osei (CORMORANT) and K. Brandvold (TERN) name the same firm: Northline.\n3. Harbour dues (21:00–21:45). Seconded P. Lund."
       }
     },
     {
@@ -873,7 +877,7 @@ window.CASE = {
       summary: "Iris's real texts are formal and signed '— I'. The 23:12 text is not.",
       doc: {
         kind: "messages",
-        title: "Messages: Hanna Kellan's phone, thread with 'Iris'",
+        title: "Hanna Kellan's phone, thread with 'Iris'",
         table: {
           cols: ["When", "From", "Message"],
           rows: [
@@ -899,16 +903,15 @@ window.CASE = {
             ["Tue 10:31", "Call out", "Petra Lund", "3 min 02 s"],
             ["Tue 21:58", "Message in", "Marcus", "You'll regret this. I mean it. Half that boat is mine."],
             ["Tue 22:19", "Message in", "Marcus", "That came out wrong. I'm sorry. Call me when you're not angry."],
-            ["Tue 23:14", "Email out", "R. Achebe (personal account)", "Subject: Confidential — request to meet"],
+            ["Tue 23:14", "Email out", "R. Achebe", "Subject: Confidential — request to meet"],
             ["Wed 08:12", "Call out", "Hanna", "1 min 10 s"],
-            ["Wed 12:40", "Call in (missed)", "Marcus", "—"],
             ["Wed 18:52", "Call in", "Graham Whitlock (mobile)", "2 min 14 s"],
             ["Wed 19:05", "Call out", "Hanna", "6 min 21 s"],
             ["Wed 23:12", "Message out", "Hanna", "'walking home the long way. need air. talk tmrw x' — see note"],
             ["Thu 06:33", "Message in", "Hanna", "?? since when do you walk anywhere at night. call me"]
           ]
         },
-        text: "Theo's note: the 23:12 message was not typed on this phone. Server metadata: created Wed 20:51 on the linked desktop app, device name HM-LT-0417, with 'schedule send' set for 23:12. No other message in two years of history was ever scheduled."
+        text: "Theo's note: the 23:12 message was not typed on this phone. Created Wed 20:51 on the linked desktop app, device HM-LT-0417, scheduled for 23:12. Nothing else in two years was ever scheduled. Halden Mutual IT: HM-LT-0417 was last unlocked with Iris's password at 20:24, so still unlocked at 20:51."
       }
     },
     {
@@ -917,6 +920,7 @@ window.CASE = {
       doc: {
         kind: "report",
         title: "Halden Mutual — lobby access control, Wednesday (4th floor staff)",
+        meta: [["Released", "Under warrant, after the homicide finding"]],
         table: {
           cols: ["Name", "In", "Out", "In", "Out"],
           rows: [
@@ -926,26 +930,26 @@ window.CASE = {
             ["Six other claims staff", "08:20–09:05", "17:00–18:45", "—", "—"]
           ]
         },
-        text: "Cleaning contractor attends Tuesdays and Fridays only. Night security patrols the exterior at 23:00 and 03:00.\nTheo's note: 'This is the lobby system only. The car park downstairs belongs to the building, not to Halden Mutual. Different system, different company.'"
+        text: "Cleaners: Tuesdays and Fridays only.\nTheo's note: 'Lobby only. The car park belongs to the building: different system, different company. It has its own lift to the office floors. It doesn't pass the lobby gates.'"
       }
     },
     {
       id: "ev-garage-log", name: "Car park logs and traffic cameras", key: true,
-      summary: "Whitlock's fob re-entered at 19:40. His car left the office car park at 22:04 and was on Quay Road at 22:17.",
+      summary: "Whitlock's fob re-entered at 19:55. His car left the car park at 22:04 and was on Quay Road at 22:17.",
       doc: {
         kind: "camera",
         title: "Harbour Point Tower car park + city traffic cameras (Theo Park)",
         table: {
           cols: ["Time", "Source", "Event"],
           rows: [
-            ["Wed 19:40", "Car park pedestrian door", "Fob G-118 (registered: G. Whitlock, Halden Mutual) — entry"],
-            ["Wed 22:04", "Car park exit barrier", "Bay 12 vehicle, green estate PH 62 KTR (G. Whitlock) — exit"],
+            ["Wed 19:55", "Car park pedestrian door", "Fob G-118 (G. Whitlock, Halden Mutual) — entry"],
+            ["Wed 22:04", "Car park exit barrier", "Bay 12, green estate PH 62 KTR (G. Whitlock) — exit"],
             ["Wed 22:17", "Traffic camera, Quay Road west", "PH 62 KTR westbound"],
             ["Wed 22:31", "Traffic camera, Quay Road west", "PH 62 KTR eastbound"],
             ["Wed 22:38", "Harbour Club car park camera", "PH 62 KTR enters"]
           ]
         },
-        text: "Theo's note: 'His car never left the office car park between 08:15 and 22:04. So he didn't drive to the Harbour Club from home. And Quay Road west of the cameras is a dead end at the Saltmarket Stairs.'"
+        text: "No other fob used the pedestrian door between 18:00 and 23:00.\nTheo's note: 'His car sat in the car park from 08:15 to 22:04, so he didn't drive to the club from home. Quay Road west of that camera is a dead end for cars at the Saltmarket Stairs; only a footpath carries on along the harbour wall.'"
       }
     },
     {
@@ -954,7 +958,7 @@ window.CASE = {
       doc: {
         kind: "bank",
         title: "Northline Survey Services Ltd. — registry and account summary",
-        meta: [["Registered", "2022, Eastgate (mailbox address)"], ["Director", "Rolf DAHL"], ["Marine Surveyors' Register", "No entry"], ["Records obtained", "Production order, Thu (DS Cruz)"]],
+        meta: [["Registered", "2022, Eastgate (mailbox address)"], ["Director", "Rolf DAHL"], ["Marine Surveyors' Register", "No entry"], ["Obtained", "Production order (DS Cruz)"]],
         table: {
           cols: ["Date", "Payer", "Payee", "Amount (€)"],
           rows: [
@@ -963,20 +967,20 @@ window.CASE = {
             ["14/09/2023", "Halden Mutual Marine", "Northline Survey Services", "40,300"],
             ["20/09/2023", "Northline Survey Services", "M. Whitlock", "28,210"],
             ["…", "…", "…", "…"],
-            ["02/04/2026", "Halden Mutual Marine", "Northline Survey Services", "46,500 (held: claim under investigation)"]
+            ["02/04/2026", "Halden Mutual Marine", "Northline Survey Services", "46,500 (held: under investigation)"]
           ]
         },
-        text: "Theo's note: 'Rolf Dahl is the brother of Margit Whitlock, née Dahl, married to Graham Whitlock since 1998. Northline has no staff, no surveyors and no other clients. Within a week of every fee, it pays seventy per cent on to an account in Margit Whitlock's name: €396,130 in three years.'"
+        text: "Theo's note: 'Rolf Dahl's sister is Margit Whitlock, née Dahl, Graham's wife since 1998. Northline has no staff and no other clients. Within a week of every fee it passes seventy per cent to Margit: €396,130 in three years.'"
       }
     },
     {
       id: "ev-autopsy", name: "Post-mortem report", key: true,
-      summary: "One patterned blow, then moved. Fall injuries made after death. Grey carpet fibres. Death 19:30–21:30.",
+      summary: "One patterned blow, then moved. Fall injuries most likely after death. Grey carpet fibres. Death about 19:30–21:30.",
       doc: {
         kind: "autopsy",
         title: "Medical Examiner's Office — Post-mortem Examination, Iris KELLAN",
-        meta: [["Pathologist", "Dr. Anika Sorensen"], ["Examined", "Thu 10:00–13:30"], ["Case", "MC-26-0412"]],
-        text: "1. Cause of death: a single blunt-force injury to the back of the head (right side), with depressed skull fracture. The injury is patterned: a curved edge consistent with a circle of about 18 cm diameter, interrupted at regular intervals by small rounded projections. Not consistent with the straight edge of a stone step.\n2. Abrasions to face, palms and knees show no vital reaction (no bleeding into the surrounding tissue). They were caused after death.\n3. Lividity: fixed pattern on the front, consistent with the position she was found in, plus a faint pattern across the shoulders and buttocks. She lay on her back on a flat surface for a period, likely one to three hours, before being placed face down.\n4. Trace: grey nylon loop-pile carpet fibres in the hair and in the wound margins; traces of a carpet-cleaning detergent on the left coat sleeve.\n5. Stomach: partly digested fish soup and bread. Digestion rates vary widely; this supports, but cannot fix, a time of death within a few hours of an early-evening meal.\n6. Time of death, revised: the scene estimate assumed the body lay outdoors all night. Allowing for a first period indoors at room temperature, and a period wrapped, the temperature reading of 06:52 fits death between 19:30 and 21:30.\nConclusion: homicide. She was killed indoors and moved to the Saltmarket Stairs afterwards."
+        meta: [["Pathologist", "Dr. Anika Sorensen"], ["Examined", "Thu from 08:00 (preliminary findings by phone; written report to follow)"], ["Case", "MC-26-0412"]],
+        text: "1. Cause: one blunt-force blow to the back of the head (right), depressed skull fracture. Patterned: a curved edge, part of a circle roughly 16 to 20 cm across, interrupted at regular intervals by small rounded impressions. Consistent with a heavy object with a curved, knobbed rim; not consistent with the straight edge of a stone step.\n2. Abrasions to face, palms and knees show no visible vital reaction (no bleeding into the surrounding tissue). They were most likely caused after death.\n3. Lividity: fixed on the front, matching the position found, with a faint pattern across shoulders and buttocks: she lay on her back on a flat surface, likely one to three hours, before being placed face down.\n4. Trace: grey nylon loop-pile carpet fibres in the hair and wound margins; carpet-cleaning detergent on the left coat sleeve.\n5. Stomach: partly digested fish soup and bread. Digestion varies widely; this supports, but cannot fix, a death within a few hours of an early meal.\n6. Time of death, revised: the scene estimate assumed she lay outdoors all night. Allowing for a period indoors and a period wrapped, the 06:52 reading is compatible with death roughly between 19:30 and 21:30. This is an estimate resting on assumptions about room temperature and how long she was wrapped; narrow it with other records, not on its own.\nConclusion: homicide; killed indoors and moved."
       }
     }
   ],
@@ -994,9 +998,9 @@ window.CASE = {
     { id: "fact-no-surveyor", text: "Petra: no surveyor from Northline ever boarded the Grey Petrel.", key: true },
     { id: "fact-nico-car", text: "Nico left at 19:52 via the car park. Whitlock's green estate was still in bay 12.", key: true },
     { id: "fact-whitlock-knew", text: "Whitlock asked Nico at 16:00 Wednesday what Iris's private Thursday 09:00 appointment was.", key: true },
-    { id: "fact-whitlock-alibi", text: "Whitlock says: left 18:10, tram home, at home alone, then drove from home to the Harbour Club, arriving 22:40.", key: true },
+    { id: "fact-whitlock-alibi", text: "Whitlock says: left 18:10, tram home, soup and football at home, then drove from home to the Harbour Club, arriving 22:40.", key: true },
     { id: "fact-whitlock-call", text: "Whitlock says his 18:52 call to Iris was about the quarterly figures.", key: false },
-    { id: "fact-revised-tod", text: "Revised time of death: between 19:30 and 21:30 on Wednesday. Killed indoors, then moved.", key: true },
+    { id: "fact-revised-tod", text: "Revised time of death: roughly 19:30 to 21:30 on Wednesday. Killed indoors, then moved.", key: true },
     { id: "fact-kill-site", text: "Iris was killed in the 4th-floor file archive at Halden Mutual.", key: true }
   ],
 
@@ -1005,7 +1009,7 @@ window.CASE = {
     {
       id: "ded-clean-shoes", items: ["ev-shoes", "ev-weather"],
       title: "She never walked down those steps",
-      text: "It rained until 21:40 and the stairs ran with mud all night, yet her soles are clean and dry. Iris did not walk to that landing. Someone put her there.",
+      text: "It rained until 21:40 and the stairs ran with mud all night, yet her tread is clean. Iris did not walk to that landing. Someone put her there.",
       key: true, grants: [], requires: []
     },
     {
@@ -1017,19 +1021,19 @@ window.CASE = {
     {
       id: "ded-sent-from-office", items: ["ev-phone-extract", "ev-laptop"],
       title: "The fake text came from inside Halden Mutual",
-      text: "The 23:12 message was created at 20:51 on device HM-LT-0417: the laptop docked at Iris's desk on the 4th floor. Whoever wrote it was sitting at her desk at 20:51, and her screen locks after 30 minutes idle.",
+      text: "The 23:12 message was created at 20:51 on HM-LT-0417, the laptop docked at Iris's desk, unlocked since 20:24. Whoever wrote it was at her desk at 20:51. Next: who was in the building. Halden Mutual's lawyers will not release staff access records for what is still officially a fall.",
       key: true, grants: [], requires: []
     },
     {
       id: "ded-the-call", items: ["ev-phone-extract", "fact-hanna-call"],
       title: "Whitlock called her back to the office",
-      text: "At 18:52 Whitlock rang Iris for two minutes. Thirteen minutes later she told Hanna she was going back to work because 'he says he can explain'. The camera shows her heading for the Financial Quarter tram. The quarterly figures story does not fit.",
+      text: "At 18:52 Whitlock rang Iris for two minutes. Thirteen minutes later she told Hanna she was going back to work because 'he says he can explain', and the camera shows her heading for the Financial Quarter tram. The quarterly figures story does not fit.",
       key: true, grants: [], requires: []
     },
     {
       id: "ded-alibi-collapse", items: ["ev-garage-log", "fact-whitlock-alibi"],
       title: "Whitlock's evening is a lie",
-      text: "He said he went home by tram and drove to the club from home. In fact he slipped back into the building through the car park at 19:40, his car never left until 22:04, and at 22:17 it was on the dead-end stretch of Quay Road below the Saltmarket Stairs, exactly when the late shop camera saw a dark estate stop there.",
+      text: "He said he went home by tram and drove to the club from home. In fact he came back into the building through the car park at 19:55, his car never left until 22:04, and at 22:17 it was on the dead-end stretch of Quay Road below the Saltmarket Stairs, just before the late shop camera saw a dark estate stop there.",
       key: true, grants: [], requires: []
     },
     {
@@ -1041,25 +1045,25 @@ window.CASE = {
     {
       id: "ded-weapon", items: ["ev-autopsy", "ev-newsletter"],
       title: "The weapon was the Helm Award",
-      text: "The wound is a curved edge about 18 cm across, broken by regular rounded projections. Whitlock's Helm Award is a brass ship's wheel 18 cm across with eight spoke-ends on the rim. And it is no longer on his shelf.",
+      text: "The wound is a curved edge roughly 16 to 20 cm across, broken by regular rounded impressions. Whitlock's Helm Award is a brass ship's wheel 18 cm across with eight spoke-ends on the rim.",
       key: true, grants: [], requires: []
     },
     {
       id: "ded-motive", items: ["ev-iris-copies", "ev-northline-check"],
       title: "Northline is Whitlock",
-      text: "Fourteen inflated survey fees, all approved and expedited by Whitlock, paid to a firm run by his brother-in-law that passes the money to his wife. Iris was taking it to Compliance at 09:00 on Thursday. Whitlock knew about the meeting by 16:00 on Wednesday.",
+      text: "Fourteen inflated survey fees, all approved and expedited by Whitlock, paid to a firm run by his brother-in-law that passes the money to his wife. Iris was taking it to Compliance at 09:00 on Thursday.",
       key: true, grants: [], requires: []
     },
     {
       id: "ded-marcus-cleared", items: ["ev-rota", "fact-revised-tod"],
       title: "Marcus was on the grill",
-      text: "Between 19:30 and 21:30 Marcus initialled a grill ticket every fifteen minutes on a short-staffed line with no breaks. His walk past the stairs at 23:16 came long after she was dead and placed there. His lie was about embarrassment, not murder.",
+      text: "Between 19:30 and 21:30 Marcus initialled a grill ticket every fifteen minutes on a short-staffed line with no breaks. His walk past the stairs at 23:16 came long after she was placed there. His lie was about embarrassment, not murder.",
       key: false, grants: [], requires: []
     },
     {
       id: "ded-petra-cleared", items: ["ev-coop-minutes", "fact-revised-tod"],
       title: "Petra was at the co-op meeting",
-      text: "From 19:30 to 21:50 Petra was in a hall with thirty witnesses, and at 20:35 she stood up to accuse Northline in public. She was furious with Iris, but she was also on the same side, and she was nowhere near Iris when Iris died.",
+      text: "From 19:30 to 21:50 Petra was in a hall with thirty witnesses, and at 20:35 she stood up to accuse Northline in public. She was furious with Iris, but on the same side, and nowhere near her when she died.",
       key: false, grants: [], requires: []
     }
   ],
@@ -1073,15 +1077,15 @@ window.CASE = {
       grants: ["ev-phone-extract"]
     },
     {
-      id: "rq-badge", label: "Halden Mutual lobby badge records, Wednesday", requires: ["ded-sent-from-office"],
+      id: "rq-badge", label: "Halden Mutual lobby badge records, Wednesday (warrant)", requires: ["ded-sent-from-office", "tw-autopsy"],
       delayMinutes: 45,
-      result: "Lobby badge log's in. Iris came back at 19:58 and never badged out. On paper, the only person in that office at 20:51 was her. Paper is only the front door, mind.",
+      result: "Warrant came through, so their lawyers coughed up the lobby log. Iris came back at 19:58 and never badged out. On paper, the only person in that office at 20:51 was her. Paper is only the front door, mind.",
       grants: ["ev-badge-log"]
     },
     {
       id: "rq-garage", label: "Building car park logs and traffic cameras", requires: ["ev-badge-log"],
       delayMinutes: 60,
-      result: "Building management finally answered. Car park door and barrier logs, plus traffic cameras for every car registered to a 4th-floor badge holder. One of them is interesting. Very interesting.",
+      result: "Building management finally answered. Car park door and barrier logs, plus traffic cameras for every car registered to a 4th-floor badge holder. One of them is very interesting.",
       grants: ["ev-garage-log"]
     },
     {
@@ -1096,7 +1100,7 @@ window.CASE = {
   puzzles: [
     {
       id: "pz-docbox",
-      prompt: "A fireproof document box with a four-digit combination wheel. The fridge note said: 'Box: Petrel's loss date, DDMM, read right to left.' Enter the four digits.",
+      prompt: "A fireproof document box with a four-digit combination wheel. The fridge note said: 'Box: Petrel's loss date, DDMM, digits backwards.' Enter the four digits.",
       answer: "3071",
       grants: ["ev-iris-copies"],
       hintToken: true
@@ -1116,19 +1120,19 @@ window.CASE = {
     requires: ["ded-clean-shoes", "ded-text-not-hers", "fact-whitlock-alibi", "ev-phone-extract"],
     orAfter: { day: 1, time: "15:00" },
     title: "She was dead before the rain stopped",
-    text: "Dr. Sorensen rings Lena from the mortuary and Lena puts her on speaker. One blow to the back of the head, with a curved, patterned edge that no stone step ever made. The scrapes from the 'fall' were made after death. Grey carpet fibres in her hair. And because she spent her first hours indoors, the temperature reading means something else entirely: she died between 19:30 and 21:30. Lena hangs up and looks at the board for a long time. 'Everyone we've checked has an alibi for eleven o'clock,' she says. 'Nobody's been asked about eight.'",
+    text: "Dr. Sorensen rings Lena from the mortuary and Lena puts her on speaker. One blow to the back of the head, with a curved, patterned edge that no stone step ever made. The scrapes from the 'fall' were most likely made after death. Grey carpet fibres in her hair. And because she spent her first hours indoors, the temperature reading means something else entirely: she probably died between about half seven and half nine. Lena hangs up and looks at the board for a long time. 'We've been asking everyone about eleven o'clock,' she says. 'Nobody's been asked about eight.' Then she picks the phone up again. 'It's a homicide now. I can get warrants.'",
     art: "intro-twist",
     grants: ["ev-autopsy", "fact-revised-tod"],
     unlocks: []
   },
 
-  hintTokensFrom: ["ded-clean-shoes", "ded-text-not-hers", "ded-sent-from-office", "ded-the-call", "pz-docbox", "pz-archive"],
+  hintTokensFrom: ["ev-prelim-report", "ded-clean-shoes", "ded-text-not-hers", "ded-sent-from-office", "ded-the-call", "pz-docbox", "pz-archive"],
 
   /* ================================================================ HINTS (Lena) */
   hints: [
     {
       id: "hint-scene", requires: [], until: ["ded-clean-shoes"],
-      text: "You looked at her face. Look at her feet. Then look at what the sky was doing last night. The weather sheet is on my whiteboard, where I left it for you."
+      text: "You looked at her face. Now look at the rest of her, and at what last night was like out there. My whiteboard might help."
     },
     {
       id: "hint-sister", requires: ["ev-hanna-messages"], until: ["ded-text-not-hers"],
@@ -1143,8 +1147,16 @@ window.CASE = {
       text: "That note is about a date. Somebody's claim file will have it printed on the front. Her desk at work, probably."
     },
     {
-      id: "hint-building", requires: ["ded-sent-from-office"], until: ["ev-garage-log"],
+      id: "hint-device", requires: ["ev-phone-extract"], until: ["ded-sent-from-office"],
+      text: "Theo gave you a device name, not a person. Things with names like that have a tag stuck on them somewhere. Find the tag."
+    },
+    {
+      id: "hint-building", requires: ["ded-sent-from-office", "tw-autopsy"], until: ["ev-garage-log"],
       text: "If that text was written in the building, the building knows who was in it. And a tower with a car park has more than one door. Ask whoever left last."
+    },
+    {
+      id: "hint-alibi", requires: ["ev-garage-log"], until: ["ded-alibi-collapse"],
+      text: "You have his account of the evening in your notebook and the building's account on the board. Lay one over the other."
     },
     {
       id: "hint-carpet", requires: ["tw-autopsy"], until: ["fact-kill-site"],
@@ -1152,7 +1164,7 @@ window.CASE = {
     },
     {
       id: "hint-weapon", requires: ["tw-autopsy"], until: ["ded-weapon"],
-      text: "Sorensen has drawn you the edge of the weapon. Somebody in that office has been photographed with something that shape. Check what's pinned on the walls."
+      text: "Sorensen has described the edge of whatever hit her. Something that shape lives somewhere in that office. Walls and shelves are worth a second look."
     },
     {
       id: "hint-money", requires: ["ev-iris-copies"], until: ["ded-motive"],
@@ -1168,40 +1180,61 @@ window.CASE = {
       { id: "m-exposure", text: "To stop her exposing a survey-fee fraud at her Compliance meeting the next morning." },
       { id: "m-claim", text: "To stop her rejecting a €340,000 insurance claim." },
       { id: "m-boat", text: "Rage over the sale of a boat they co-owned and the end of their relationship." },
-      { id: "m-career", text: "Fear that she would be promoted over him and expose his weak work." }
+      { id: "m-cover", text: "To stop her reporting that he had waved through Petra Lund's insurance fraud." }
     ],
     motive: "m-exposure",
     methods: [
-      { id: "md-staged", text: "Struck once from behind with a heavy brass object in the Halden Mutual archive, driven to the Saltmarket Stairs and arranged to look like a fall, with a scheduled text to fake the time." },
-      { id: "md-pushed", text: "Pushed down the Saltmarket Stairs during a late-night confrontation." },
-      { id: "md-mugged", text: "Attacked on the stairs by someone who wanted her bag, and left where she fell." },
-      { id: "md-followed", text: "Followed from the Tidewater Café and struck from behind on the stairs on her way to the tram." }
+      { id: "md-staged", text: "Struck once from behind with the brass award in the archive, moved to the stairs after dark, and a text scheduled from her laptop to fake the time." },
+      { id: "md-desk", text: "Struck at her desk with a glass plaque, carried out through the lobby, and the 23:12 text typed on her own phone on the way to the stairs." },
+      { id: "md-carpark", text: "Struck with a tool in the tower car park as she arrived, driven to the stairs, and the text scheduled from his own laptop." },
+      { id: "md-mugged", text: "Attacked on the stairs late at night by someone who wanted her bag, left where she fell, and her phone missed in her coat." }
     ],
     method: "md-staged",
-    proofs: ["ded-alibi-collapse", "ded-sent-from-office", "ded-the-call", "ded-killed-in-office", "ded-weapon", "ded-motive", "ev-garage-log"],
-    proofsNeeded: 2,
+    proofs: ["ded-alibi-collapse", "ded-killed-in-office", "ded-weapon", "ded-motive", "ev-garage-log", "ded-sent-from-office"],
+    proofsNeeded: 3,
     success: {
       title: "The Helm",
-      text: "Interview Room 2. Whitlock's solicitor reads the car park log twice and stops taking notes. Julian does not perform. He lays the pages down one at a time: the 18:52 call, the 19:40 door, the 20:51 text, the 22:04 barrier, the carpet, the photograph of the brass wheel on the shelf. Whitlock looks at the photograph longest. 'She was going to walk into Ruth Achebe's office and say my name like a diagnosis,' he says at last. 'Twenty-five years. I asked her to come back so I could explain. I only wanted her to listen.' He stops. 'She turned round to leave.' The award is found the next day, wrapped in a dust sheet in his garage at home. Lena writes the charge in her neat block capitals. In the corridor afterwards she says, without looking at Julian, 'Good work.' Then, because she is Lena: 'Don't get used to it.'"
+      text: "Interview Room 2. Whitlock's solicitor reads the car park log twice and stops taking notes. Julian does not perform. He lays the pages down one at a time: the 18:52 call, the 19:55 door, the 20:51 text, the 22:04 barrier, the carpet, the photograph of the brass wheel on the shelf. The solicitor leans in and murmurs that his client has nothing to say. Whitlock looks at the photograph and says it anyway. 'She was going to walk into Ruth Achebe's office and say my name like a diagnosis. Twenty-five years. I asked her to come back so I could explain. I only wanted her to listen.' He stops. 'She turned round to leave.' The award is found the next day, wrapped in a dust sheet in his garage at home. Lena writes the charge in her neat block capitals. In the corridor afterwards she says, without looking at Julian, 'Good work.' Then, because she is Lena: 'Don't get used to it.'"
     },
     failure: {
       title: "The wrong door",
-      text: "The charge holds for nine days. Then the defence asks the questions you didn't, and the case comes apart in a single morning in court. Someone who did not kill Iris Kellan spent those nine days in a cell, and will be stopped in the street for the rest of their life. Graham Whitlock sends flowers to the funeral and a card in his own handwriting. Hanna Kellan stops returning Lena's calls. Lena closes the file on her desk and leaves her hand on it. 'We reopen,' she says. 'Quietly. And this time we read the evidence, not the people we already decided about.'"
+      text: "The charge holds for nine days. Then the defence asks the questions you didn't, and the case comes apart in a single morning in court. Whoever stood in that dock walks out into a city that has already made up its mind about them. Iris's colleagues send flowers to the funeral. Hanna Kellan stops returning Lena's calls. Lena closes the file on her desk and leaves her hand on it. 'We reopen,' she says. 'Quietly. And this time we read the evidence, not the people we already decided about.'"
     }
   },
 
-  /* ================================================================ REOPEN */
+  /* ================================================================ REOPEN
+   * The reopened run is the original file reviewed three weeks later. What the first team
+   * photographed, recorded and took statements on is replayed "from the file"; what is still
+   * out in the world (the shelf, the carpet, Nico, the car park logs, the late shop recorder)
+   * has changed.
+   */
   reopen: {
-    intro: "Three weeks later, the charge has collapsed and the case is back on Lena's desk. Three weeks is a long time. Whoever killed Iris Kellan has had time to tidy up, records have aged out, and people who talked freely the first time have had time to be frightened. Same victim. Same city. The trail will not be where you left it.",
+    intro: "Three weeks later the charge has collapsed and the file is back on Lena's desk. She lays out everything from the first morning: the scene as it was photographed, the statements as they were taken, the recordings the first team copied. 'That part doesn't change,' she says. 'What's still out there does. Whoever did this has had three weeks to tidy up, records have aged out, and people who talked freely have had time to be frightened.'",
+    briefing: "The file, three weeks on. Iris Kellan, thirty-four, claims investigator at Halden Mutual Marine, found at 05:50 on the lower landing of the Saltmarket Stairs. The first team worked it as a fall that someone had helped along, charged the wrong person, and watched it fall apart in court. Everything they photographed, copied and took down is in these boxes, and it is still good. Everything else out there is three weeks older. We start where they started. Scene, flat, office. And this time, Marsh, we read every page.",
+
     evidence: {
+      "ev-kiosk-cam": {
+        name: "Late shop owner's statement",
+        summary: "The recording is gone. The owner remembers a car at the foot of the stairs around 22:20, a woman in yellow after 23:00, a big man later.",
+        doc: {
+          kind: "statement",
+          title: "Statement of the Saltmarket Late Shop owner, taken by PC Odell, Thursday 06:40",
+          meta: [["Recording", "Overwritten after 14 days. The first team did not copy it."]],
+          table: null,
+          text: "'I watched it with the constable. Nobody came down the top steps all night. About twenty past ten a car stopped on Quay Road at the bottom. Dark, an estate maybe; no plate at that distance. Lights off a few minutes, then off east. Just after eleven a woman in one of those yellow fishing coats went along the lane. Bit later a big fella with a bag walked along the road at the bottom. That's all.'"
+        }
+      },
+      "ev-drag-marks": {
+        doc: { title: "Scene photograph 19 (first morning, re-examined) — bottom steps at Quay Road" }
+      },
       "ev-garage-log": {
-        summary: "Barrier records gone, but traffic cameras and a backup still place Whitlock's car on Quay Road at 22:17.",
+        summary: "Barrier records gone, but a backup and traffic cameras still show Whitlock re-entering at 19:55 and his car on Quay Road at 22:17.",
         doc: {
           title: "Car park records (partly purged) + city traffic cameras (Theo Park)",
           table: {
             cols: ["Time", "Source", "Event"],
             rows: [
-              ["Wed 19:40", "Building management backup tape, pedestrian door", "Fob G-118 (G. Whitlock) — entry"],
+              ["Wed 19:55", "Building management backup, pedestrian door", "Fob G-118 (G. Whitlock) — entry"],
               ["Wed 22:04", "Car park exit barrier", "Not available: barrier logs auto-deleted after 14 days"],
               ["Wed 22:09", "Traffic camera, Harbour Point Tower exit ramp", "Green estate PH 62 KTR (G. Whitlock) leaves the tower ramp"],
               ["Wed 22:17", "Traffic camera, Quay Road west", "PH 62 KTR westbound"],
@@ -1209,27 +1242,127 @@ window.CASE = {
               ["Wed 22:38", "Harbour Club car park camera", "PH 62 KTR enters"]
             ]
           },
-          text: "Theo's note: 'The building only keeps barrier logs for fourteen days, so those are gone. But the city keeps traffic cameras for ninety, and the tower's exit ramp is on one. He drove out of his office car park at 22:09, not from home, and he went down the dead end below the Saltmarket Stairs.'"
+          text: "No other fob used the pedestrian door between 18:00 and 23:00.\nTheo's note: 'Barrier logs only last fourteen days, but the city keeps traffic cameras for ninety, and the tower's exit ramp is on one. He drove out of his office car park at 22:09, not from home, and went down Quay Road west, a dead end for cars at the Saltmarket Stairs; only a footpath carries on along the harbour wall.'"
         }
       }
     },
+
     hotspots: {
+      "h-st-kiosk": {
+        text: "The late shop at the top of the stairs, shutter half up, the dome camera still above the door. The owner shrugs: the recorder keeps a fortnight and has long since recorded over that night. All that survives is the statement a constable took from him on the first morning."
+      },
+      "h-st-steps": {
+        text: "Scene photograph from the first morning: every step of the upper flight slick with grey mud and leaf litter, the uniformed officers' boot prints smeared across it. Nobody could have walked down there that night without carrying some of it."
+      },
+      "h-st-pocket": {
+        text: "From the evidence store: her dark wool coat, buttoned to the throat when she was found. Bagged from the inside pocket: her phone, screen cracked in a starburst, and a folded card slip from a café."
+      },
+      "h-st-body": {
+        text: "Scene photograph from the first morning: Iris Kellan face down across the lower landing, head towards the lower flight, arms tucked beneath her, coat buttoned and neat, no bag. Looked at again, she seems less like someone who fell than someone who was put down carefully."
+      },
+      "h-st-shoes": {
+        text: "From the evidence store: her black leather ankle boots, photographed side by side on the step below the landing, toes down. You turn them over and look at the soles."
+      },
+      "h-st-drag": {
+        text: "The moss has been scoured by three weeks of rain. But in the first morning's wide shots of the bottom steps, now you know what to look for: two parallel scuffs running up the front edges from the Quay Road kerb to the landing, and a curl of mud on the kerb."
+      },
+      "h-fl-catbowl": {
+        text: "Ledger's bowls by the door; Hanna has been feeding him since. In the first team's photographs: one bowl licked clean, one filled late that night by someone with a key. Probably not Iris."
+      },
+      "h-of-desk": {
+        text: "Iris's desk has been cleared into two archive boxes labelled KELLAN — HOLD FOR POLICE. On top, one thick claim file with sticky tabs down its edge and notes in the margins in square capitals."
+      },
       "h-of-shelf": {
-        text: "Through the glass of the corner office: the shelf of awards behind the desk. The brass ship's wheel is back between the glass plaques, glowing as if it had just been polished. Up close it smells of metal polish, and a brand-new green felt pad has been glued under its granite base.",
+        text: "Through the glass of the corner office: the shelf of awards behind the desk. The brass ship's wheel is back between the glass plaques, glowing as if just polished. Up close it smells of metal polish, and a new green felt pad has been glued under its granite base.",
         grants: ["ev-award-polished"]
       },
       "h-of-carpet": {
-        text: "At the end of archive aisle F, one carpet tile about a metre across is a brighter grey than the rest, its pile not yet trodden flat. Pinned to the archive door is a facilities work order.",
+        requires: ["tw-autopsy"],
+        text: "At the end of archive aisle F, two carpet tiles, a metre of floor, are a brighter grey than the rest, their pile not yet trodden flat. Pinned to the archive door is a facilities work order.",
         grants: ["ev-new-tile"]
+      },
+      "h-ca-cctv": {
+        text: "The camera above the till. The owner's recorder only keeps a week, but he burned a copy for the first investigation, and it is in the file."
+      },
+      "h-re-clock": {
+        text: "By the kitchen pass: the punch clock and a rack of cards. The first team took that Wednesday's cards and order tickets; the copies are in the file."
       }
     },
+
     questions: {
+      "q-hanna-message": {
+        a: "A text. Twelve minutes past eleven that night. I've read it a hundred times since. Here. Read it yourself."
+      },
+      "q-dol-iris": {
+        a: "She carried my shopping up four flights every Saturday and pretended it was on her way. I fed her cat when she worked late. I've got her key. Fed him at midnight that night, as it happens, because he wouldn't stop crying at the door."
+      },
       "q-nico-badge": {
-        a: "Okay. I was printing my CV; I've got an interview elsewhere. The car? I... I don't really remember. I wasn't paying attention. But there's something. Last week Graham took me for lunch. He's never done that. He said there'd be a senior adjuster post soon, and then he said, 'You remember I left at six that Wednesday, don't you? People get confused.' I said yes. I didn't know what else to say.",
-        cue: "On the car his answers go vague and he watches the glass office again. On the lunch he is suddenly precise: the day, the restaurant, the exact words. He was not trying to remember the lunch. He has not been able to forget it.",
+        a: "Okay. I was printing my CV; I've got an interview elsewhere. I badge out at the front, then go round and down the ramp to the bike cage. The car? I... I don't really remember. I wasn't paying attention. But there's something. Last week Graham took me for lunch. He's never done that. He said there'd be a senior adjuster post soon, and then he said, 'You'd gone by six that Wednesday, hadn't you? So you wouldn't have seen anything in the car park. People get confused.' I said yes. I didn't know what else to say.",
+        cue: "On the car his answers go vague and he watches the glass office. On the lunch he is suddenly precise: the day, the restaurant, the exact words. He was not trying to remember the lunch. He has not been able to forget it.",
         grants: ["ev-nico-statement"]
       }
     },
+
+    people: {
+      "p-whitlock": {
+        description: "Silver hair, good suit. The black armband has gone. He shakes your hand, offers coffee, and rests his forearms on an immaculate desk, hands open. He has been interviewed before and is not worried about being interviewed again.",
+        presentations: [
+          {
+            item: "ev-award-polished",
+            a: "Back from the engraver. Looks rather well, doesn't it? I'd like it back when you're finished with it.",
+            cue: "Still no engraver's name, no ticket, no date. Nothing you could check."
+          },
+          {
+            item: "ev-nico-statement",
+            a: "I took a junior colleague to lunch. If that's a crime, half this building should be arrested.",
+            cue: "He answers the lunch. He does not answer the sentence about the car park."
+          },
+          {
+            item: "ev-garage-log",
+            a: "I think I'd like to speak to a solicitor before I say anything else.",
+            cue: "He sits very still. The warmth is gone, and in its place is something careful and tired."
+          },
+          {
+            item: "ev-northline-check",
+            a: "I'd like my solicitor present for any questions about company procurement.",
+            cue: "He does not look at the page."
+          },
+          {
+            item: "ev-phone-extract",
+            a: "I really don't see what Iris's text messages have to do with me.",
+            cue: "He reads the 23:12 line twice. His eyes do not go to the 18:52 call at all."
+          }
+        ]
+      },
+      "p-nico": {
+        presentations: [
+          {
+            item: "ev-newsletter", requires: ["ev-award-polished"],
+            a: "It was gone for a week or so. Now it's back and he polishes it himself. I've never seen him polish anything."
+          },
+          {
+            item: "ev-newsletter",
+            a: "The Helm Award. He's very proud of it. It's on the shelf behind his desk."
+          },
+          {
+            item: "ev-iris-copies",
+            a: "Northline. That's it, that's what she meant. Every one of these is a Graham sign-off. I've never seen a Northline surveyor in this building. Not once."
+          }
+        ]
+      }
+    },
+
+    twist: {
+      text: "Lena asks Dr. Sorensen to come up and walk them through her full post-mortem report, the one the first team read only as far as 'head injury'. One blow to the back of the head, with a curved, patterned edge no stone step ever made. The scrapes from the 'fall' were most likely made after death. Grey carpet fibres in her hair. And because she spent her first hours indoors, the temperature reading means she probably died between about half seven and half nine. Lena looks at the board for a long time. 'They asked everyone about eleven o'clock,' she says. 'Nobody was asked about eight.' Then she picks up the phone. 'Homicide, on paper this time. Now I can get warrants.'"
+    },
+
+    solution: {
+      success: {
+        title: "The Helm",
+        text: "Interview Room 2. Whitlock's solicitor reads the traffic camera log twice and stops taking notes. Julian does not perform. He lays the pages down one at a time: the 18:52 call, the 19:55 door, the 20:51 text, the car on Quay Road, the archive, the photograph of the brass wheel on the shelf. The solicitor leans in and murmurs that his client has nothing to say. Whitlock looks at the photograph and says it anyway. 'She was going to walk into Ruth Achebe's office and say my name like a diagnosis. Twenty-five years. I asked her to come back so I could explain. I only wanted her to listen.' He stops. 'She turned round to leave.' By the end of the week the lab has the award. Lena writes the charge in her neat block capitals. In the corridor afterwards she says, without looking at Julian, 'Good work.' Then, because she is Lena: 'Don't get used to it.'"
+      }
+    },
+
     addEvidence: [
       {
         id: "ev-award-polished", name: "The Helm Award, back and polished", key: true,
@@ -1238,52 +1371,66 @@ window.CASE = {
           kind: "object",
           title: "Brass ship's wheel on granite base, Whitlock's shelf",
           meta: [["Diameter", "18 cm, eight spoke-ends on the rim"], ["Base", "Granite, 12 cm square"]],
-          text: "Freshly polished: no tarnish in the crevices of the spoke-ends, where three years of tarnish would be expected. A new green felt pad has been glued under the base; the spring newsletter photograph shows bare granite. Taken for forensic examination: under the new felt, a dark residue in the joint between brass and granite."
+          text: "Freshly polished: no tarnish in the crevices of the spoke-ends, where months of handling would leave some. A new green felt pad is glued under the base; the spring newsletter photo shows bare granite. Taken for forensic examination: under the felt, a dark residue in the joint between brass and granite."
         }
       },
       {
-        id: "ev-new-tile", name: "Replaced carpet tile and work order", key: true,
-        summary: "Archive carpet tile replaced, on a work order raised by Whitlock the morning after.",
+        id: "ev-new-tile", name: "Replaced carpet tiles and work order", key: true,
+        summary: "Two archive carpet tiles replaced, on a work order Whitlock raised the day after she was found.",
         doc: {
           kind: "report",
           title: "Harbour Point Tower Facilities — Work Order 4471",
           meta: [["Raised by", "G. Whitlock, Halden Mutual"], ["Raised", "Friday 07:12"], ["Location", "4th floor archive, end of aisle F"], ["Completed", "Saturday"]],
-          text: "Request: 'Replace one carpet tile, coffee spill. Urgent, please, before Monday.'\nFacilities note: old tile bagged for the skip; skip collected Monday. Contractor comment: 'No coffee smell. Tile had been shampooed already. Damp underneath.'\nThe surrounding tiles are grey nylon loop-pile, the same carpet throughout the archive."
+          text: "Request: 'Replace two carpet tiles, coffee spill. Urgent, please, before Monday.'\nContractor's note: 'No coffee smell. Tiles already shampooed, damp underneath. Old tiles bagged for the skip.' Skip collected Monday.\nThe surrounding carpet is grey nylon loop-pile, the same throughout the archive."
         }
       },
       {
         id: "ev-nico-statement", name: "Nico's statement: the lunch", key: true,
-        summary: "Whitlock took Nico to lunch, hinted at a promotion, and told him to remember 'I left at six'.",
+        summary: "Whitlock took Nico to lunch, hinted at a promotion, and told him what he had and hadn't seen.",
         doc: {
           kind: "statement",
           title: "Witness statement — Nicolas VARGA",
           meta: [["Taken by", "DS L. Cruz"], ["Present", "J. Marsh (consultant)"]],
-          text: "'On the Tuesday, about two weeks after Iris died, Graham Whitlock invited me to lunch at Calloway's on Dock Street. He has never done that before. He told me a senior adjuster post would be coming up. As we were leaving he said, \"You remember I left at six that Wednesday, don't you? People get confused.\" I said yes. I had not said anything to him about that Wednesday. Nobody had asked me about his times. I was frightened, which is why I was vague about the car park when you asked me.'"
+          text: "'About two weeks after Iris died, Graham Whitlock took me to lunch at Calloway's on Dock Street. He has never done that before. He told me a senior adjuster post would be coming up. As we were leaving he said, \"You'd gone by six that Wednesday, hadn't you? So you wouldn't have seen anything in the car park. People get confused.\" I said yes. I hadn't said anything to him about the car park. I was frightened, which is why I was vague when you asked me.'"
         }
       }
     ],
+
     addDeductions: [
+      {
+        id: "ded-alibi-collapse", items: ["ev-garage-log", "fact-whitlock-alibi"],
+        title: "Whitlock's evening is a lie",
+        text: "He said he went home by tram and drove to the club from home. In fact his fob let him back into the building through the car park at 19:55, his car did not leave the tower until about 22:09, and at 22:17 it was heading down the dead-end stretch of Quay Road below the Saltmarket Stairs.",
+        key: true, grants: [], requires: []
+      },
       {
         id: "ded-award-cleaned", items: ["ev-award-polished", "ev-autopsy"],
         title: "The weapon came back clean",
-        text: "The wound is a curved edge 18 cm across with regular rounded projections. The Helm is a brass wheel 18 cm across with eight spoke-ends. Someone has polished it, padded its base and put it back, and there is residue in the joint they couldn't reach.",
+        text: "The wound is a curved edge roughly 16 to 20 cm across with regular rounded impressions. The Helm is a brass wheel 18 cm across with eight spoke-ends. Someone has polished it, padded its base and put it back, and there is residue in the joint they couldn't reach.",
         key: true, grants: [], requires: []
       },
       {
         id: "ded-killed-in-office-r", items: ["ev-autopsy", "ev-new-tile"],
         title: "She died in the archive",
-        text: "Grey loop-pile fibres and carpet detergent on her body. In the archive, one tile of that carpet was shampooed, then replaced on Whitlock's own urgent work order the morning after, for a coffee spill that didn't smell of coffee.",
+        text: "Grey loop-pile fibres and carpet detergent on her body. In the archive, two tiles of that carpet were shampooed, then replaced on Whitlock's own urgent work order the day after she was found, for a coffee spill that didn't smell of coffee.",
         key: true, grants: ["fact-kill-site"], requires: []
       },
       {
         id: "ded-tampering", items: ["ev-nico-statement", "fact-whitlock-alibi"],
         title: "Whitlock is coaching a witness",
-        text: "Nobody had told Whitlock that his leaving time mattered, yet he took Nico to lunch to fix 'I left at six' in his memory, and dangled a promotion while he did it. People who were at home all evening do not need witnesses for six o'clock.",
+        text: "Whitlock went out of his way to tell Nico what Nico had and hadn't seen, and dangled a promotion while he did it. A man with nothing to hide in that car park does not need a witness to have seen nothing there.",
         key: true, grants: [], requires: []
       }
     ],
     removeDeductions: ["ded-killed-in-office"],
-    proofs: ["ded-alibi-collapse", "ded-sent-from-office", "ded-the-call", "ded-killed-in-office-r", "ded-award-cleaned", "ded-weapon", "ded-motive", "ded-tampering", "ev-garage-log"]
+    proofs: ["ded-alibi-collapse", "ded-sent-from-office", "ded-killed-in-office-r", "ded-award-cleaned", "ded-weapon", "ded-motive", "ded-tampering", "ev-garage-log"],
+
+    addHints: [
+      {
+        id: "hint-r-nico", requires: ["ev-badge-log"], until: ["ded-tampering"],
+        text: "Nico was frightened the first time. Three weeks on he's more frightened. Ask him about that night again, and listen for the part he's sure of."
+      }
+    ]
   },
 
   /* ================================================================ DEBRIEF */
@@ -1291,7 +1438,7 @@ window.CASE = {
     {
       flag: "ded-clean-shoes",
       title: "The clean boots", technique: "Staging recognition",
-      explanation: "Offenders sometimes arrange a scene to tell a story: a fall, a robbery, a suicide. Investigators test the story against small physical facts it cannot control, such as weather, mud, footwear, the order of injuries. Here the scene said 'she fell walking home', but her soles were clean on a staircase running with mud.",
+      explanation: "Offenders sometimes arrange a scene to tell a story: a fall, a robbery, a suicide. Investigators test the story against small physical facts it cannot control, such as weather, mud, footwear, the order of injuries. Here the scene said 'she fell walking home', but her tread was clean on a staircase running with mud.",
       tip: "When a scene tells you a story, ask what else would have to be true if the story were real, and go and check one of those things."
     },
     {
@@ -1303,31 +1450,31 @@ window.CASE = {
     {
       flag: "q-wh-evening",
       title: "The rehearsed paragraph", technique: "Baseline deviation",
-      explanation: "There is no single gesture that means someone is lying. What is useful is change: how a person answers easy, neutral questions compared with the questions that matter. Whitlock was brief and relaxed about work, then gave a long, over-detailed account of exactly the hours that needed covering. A change like that is a signal to check the account, not a conclusion.",
+      explanation: "There is no single gesture that means someone is lying. Gaze aversion, fidgeting and self-touching are the most widely believed signs of lying and among the least reliable in research. What is more useful is change: how a person answers easy, neutral questions compared with the questions that matter. Whitlock was brief and relaxed about work, then gave a long, over-detailed account of exactly the hours that needed covering. Even then, a change can come from stress or fear of the police rather than lying, and comparisons only help when the easy and hard questions are similar in kind. A change is a signal to check the account, not a conclusion.",
       tip: "Before judging how someone answers a hard question, notice how they answer a few easy ones. Judge the difference, not the behaviour."
     },
     {
       flag: "fact-marcus-boat",
-      title: "Marcus lied too", technique: "Lies have many motives (the Othello error)",
-      explanation: "Marcus lied about seeing Iris on Tuesday, and Petra lied about being out on Wednesday. Both lies were real, and neither was about murder: embarrassment and fear. Treating an anxious or lying person as guilty because they are anxious or lying is a well-known trap, sometimes called the Othello error. A lie proves a lie. It tells you to find out why.",
+      title: "Marcus lied too", technique: "A lie is not a confession",
+      explanation: "Marcus lied about seeing Iris on Tuesday, and Petra lied about being out on Wednesday. Both lies were real, and neither was about murder: one was embarrassment, the other fear. A lie proves only that someone is hiding something; your job is to find out what. A related trap, which Paul Ekman called the Othello error, is reading a truthful person's fear of not being believed as a sign of lying.",
       tip: "When you catch someone in a lie, ask what else they might be protecting before deciding what the lie means."
     },
     {
       flag: "q-nico-badge",
       title: "Checkable details", technique: "Verifiable detail",
-      explanation: "Accounts that are truthful often contain details that can be checked: times, places, other people, records. Research on the 'verifiability approach' suggests liars tend to avoid such details because they can be checked. When Nico corrected his story, it came with checkable specifics: a printer, an interview, what he saw and why he noticed. Whitlock's story about the award came with no engraver, no ticket and no date.",
+      explanation: "Truthful accounts often contain details that can be checked: times, places, other people, records. Research on the verifiability approach suggests liars tend to avoid such details, because they can be checked. When Nico corrected his story, it came with checkable specifics: a printer, an interview, where he went and when. Whitlock's evening was full of detail too, but look at what kind: a tram number and a football score anyone could know, at home, with no witness named and no record. The verifiability approach counts details that could be checked against a record or a person, not details that just sound specific.",
       tip: "Ask for details that could be checked, then check one. Notice who offers them freely and who goes vague."
     },
     {
       flag: "tw-autopsy",
       title: "Eleven o'clock was a fiction", technique: "Time of death is an estimate",
-      explanation: "Body-temperature estimates depend on assumptions about where the body was and what covered it. The scene estimate assumed she lay outside all night; once the pathologist knew she had been indoors and wrapped, the same reading pointed hours earlier. Injuries made after death show no bleeding into the surrounding tissue, which is how the 'fall' was exposed.",
+      explanation: "Body-temperature estimates depend on assumptions about where the body was and what covered it. The scene estimate assumed she lay outside all night; once the pathologist knew she had been indoors and wrapped, the same reading pointed hours earlier. Injuries made after death usually show little or no bleeding into the surrounding tissue, which is how the 'fall' was exposed.",
       tip: "Treat any time-of-death figure as a range resting on assumptions. If the assumptions change, the range changes."
     },
     {
       flag: "ded-alibi-collapse",
       title: "The car that never went home", technique: "Alibi verification and timeline consistency",
-      explanation: "An alibi only matters if it covers the real time of the crime, and only if independent records agree with it. Whitlock's alibi was real but covered the wrong hours. His account of the right hours fell apart against door logs, a barrier record and traffic cameras that nobody could coach.",
+      explanation: "An alibi only matters if it covers the real time of the crime, and only if independent records agree with it. Whitlock's alibi was real but covered the wrong hours. His account of the right hours fell apart against door logs, car park records and traffic cameras that nobody could coach.",
       tip: "Build the timeline from records first, then lay each person's account on top of it. The gaps and overlaps do the work."
     },
     {

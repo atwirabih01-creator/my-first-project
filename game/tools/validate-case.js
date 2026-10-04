@@ -16,7 +16,9 @@ vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(file, "utf8"), sandbox, { filename: file });
 var RAW = sandbox.window.CASE;
 
-var errors = [], warnings = [];
+var errors = [], warnings = [], notes = [];
+var REOPEN_INFO = {};
+function note(m) { notes.push(m); }
 function err(m) { errors.push(m); }
 function warn(m) { warnings.push(m); }
 function arr(a) { return Array.isArray(a) ? a : []; }
@@ -33,6 +35,10 @@ function mergeInto(t, o) {
     } else t[k] = o[k];
   }
 }
+function upsert(list, item) {
+  for (var i = 0; i < list.length; i++) if (list[i].id === item.id) { list[i] = item; return; }
+  list.push(item);
+}
 function build(reopened) {
   var c = clone(RAW);
   ["intro", "locations", "people", "evidence", "facts", "deductions", "requests", "puzzles", "hints", "hintTokensFrom", "debrief"].forEach(function (k) { c[k] = arr(c[k]); });
@@ -42,11 +48,20 @@ function build(reopened) {
     c.evidence.forEach(function (e) { if (r.evidence && r.evidence[e.id]) mergeInto(e, r.evidence[e.id]); });
     c.locations.forEach(function (l) { arr(l.hotspots).forEach(function (h) { if (r.hotspots && r.hotspots[h.id]) mergeInto(h, r.hotspots[h.id]); }); });
     c.people.forEach(function (p) { arr(p.questions).forEach(function (q) { if (r.questions && r.questions[q.id]) mergeInto(q, r.questions[q.id]); }); });
-    arr(r.addEvidence).forEach(function (e) { c.evidence = c.evidence.filter(function (x) { return x.id !== e.id; }); c.evidence.push(e); });
+    arr(r.addEvidence).forEach(function (e) { upsert(c.evidence, e); });
     var rm = arr(r.removeDeductions);
     c.deductions = c.deductions.filter(function (d) { return rm.indexOf(d.id) === -1; });
-    arr(r.addDeductions).forEach(function (d) { c.deductions = c.deductions.filter(function (x) { return x.id !== d.id; }); c.deductions.push(d); });
+    arr(r.addDeductions).forEach(function (d) { upsert(c.deductions, d); });   // same id replaces in place
+    if (typeof r.briefing === "string" && r.briefing) c.briefing = r.briefing;
+    var pp = r.people || {};
+    c.people.forEach(function (p) { if (pp[p.id]) mergeInto(p, pp[p.id]); });
+    if (r.twist && c.twist) mergeInto(c.twist, r.twist);
+    if (r.solution) mergeInto(c.solution, r.solution);
     if (Array.isArray(r.proofs) && r.proofs.length) c.solution.proofs = r.proofs.slice();
+    // added hints go first (engine picks the first relevant hint); same id replaces
+    var added = arr(r.addHints), addedIds = added.map(function (h) { return h.id; });
+    c.hints = added.concat(c.hints.filter(function (h) { return addedIds.indexOf(h.id) === -1; }));
+    if (Array.isArray(r.hintTokensFrom)) c.hintTokensFrom = r.hintTokensFrom.slice();
   }
   return c;
 }
@@ -250,7 +265,7 @@ function simulate(c, opts) {
       }
     });
     var tw = c.twist;
-    if (tw && !has(tw.id)) {
+    if (tw && !has(tw.id) && !opts.noTwist) {
       var byReq = arr(tw.requires).length > 0 && met(tw.requires);
       if (byReq || opts.timePasses) {
         set(tw.id, byReq ? "twist (by flags)" : "twist (by time)");
@@ -336,6 +351,18 @@ function reachReport(c, label) {
   // hints whose `until` can never complete would never retire
   c.hints.forEach(function (h) { if (arr(h.until).length && !arr(h.until).every(function (u) { return F[u]; })) err(label + ": hint " + h.id + " can never retire (until unreachable)"); });
 
+  // The case must not be chargeable before the twist: with the twist blocked (no flags, no time),
+  // fewer than proofsNeeded valid proofs may be reachable.
+  var preTwist = simulate(c, { timePasses: false, noTwist: true }).F;
+  out.preTwistProofs = arr(s.proofs).filter(function (p) { return preTwist[p]; });
+  if (out.preTwistProofs.length >= (s.proofsNeeded || 2)) err(label + ": " + out.preTwistProofs.length + " valid proofs reachable before the twist (" + out.preTwistProofs.join(", ") + "); proofsNeeded is " + s.proofsNeeded + ", so the case can be charged early");
+
+  // map points should not collide (artist draws a marker at each)
+  for (var i = 0; i < c.locations.length; i++) for (var j = i + 1; j < c.locations.length; j++) {
+    var a = c.locations[i].map, b = c.locations[j].map;
+    if (a && b && Math.hypot(a.x - b.x, a.y - b.y) < 80) err(label + ": map points of " + c.locations[i].id + " and " + c.locations[j].id + " are closer than 80");
+  }
+
   out.counts = {
     locations: c.locations.length, people: c.people.length, evidence: c.evidence.length, facts: c.facts.length,
     deductions: c.deductions.length, requests: c.requests.length, puzzles: c.puzzles.length, hints: c.hints.length,
@@ -343,6 +370,7 @@ function reachReport(c, label) {
     questions: c.people.reduce(function (n, p) { return n + arr(p.questions).length; }, 0)
   };
   out.reachedCount = Object.keys(F).length;
+  out.proofsNeeded = s.proofsNeeded;
   return out;
 }
 
@@ -360,8 +388,44 @@ function checkReopenKeys() {
   Object.keys(r.hotspots || {}).forEach(function (k) { if (!hsIds[k]) err("reopen.hotspots key '" + k + "' is not a hotspot id"); });
   Object.keys(r.questions || {}).forEach(function (k) { if (!qIds[k]) err("reopen.questions key '" + k + "' is not a question id"); });
   arr(r.removeDeductions).forEach(function (k) { if (!dIds[k]) err("reopen.removeDeductions '" + k + "' is not a deduction id"); });
-  var overrides = Object.keys(r.evidence || {}).length + Object.keys(r.hotspots || {}).length + Object.keys(r.questions || {}).length;
-  if (overrides < 3 || overrides > 5) warn("reopen overrides " + overrides + " items (brief asks for 3-5)");
+  var pIds = {}; base.people.forEach(function (p) { pIds[p.id] = 1; });
+  Object.keys(r.people || {}).forEach(function (k) {
+    if (!pIds[k]) err("reopen.people key '" + k + "' is not a person id");
+    if (r.people[k] && r.people[k].questions) warn("reopen.people." + k + " overrides the whole questions list; prefer reopen.questions");
+    if (r.people[k] && r.people[k].id) err("reopen.people." + k + " must not change the id");
+  });
+  if (r.twist) {
+    if (r.twist.id) err("reopen.twist must not change the twist id");
+    Object.keys(r.twist).forEach(function (k) { if (!(k in base.twist) && k !== "art") warn("reopen.twist sets '" + k + "', which the base twist does not have"); });
+  }
+  if (r.solution) {
+    ["killer", "suspects"].forEach(function (k) { if (r.solution[k]) err("reopen.solution must keep the same " + k); });
+    if (r.solution.proofs && r.proofs) warn("reopen sets proofs in both reopen.proofs and reopen.solution.proofs");
+  }
+  if (r.briefing) { var bw = words(r.briefing); if (bw < 80 || bw > 150) warn("reopen.briefing is " + bw + " words (80-150)"); }
+  var hIds = {}; base.hints.forEach(function (h) { hIds[h.id] = 1; });
+  arr(r.addHints).forEach(function (h) { if (hIds[h.id]) note("reopen.addHints replaces existing hint " + h.id); });
+  var replaced = arr(r.addDeductions).filter(function (d) { return dIds[d.id]; }).map(function (d) { return d.id; });
+  replaced.forEach(function (id) { if (arr(r.removeDeductions).indexOf(id) !== -1) err("reopen both removes and replaces deduction " + id); });
+  REOPEN_INFO.replacedDeductions = replaced;
+  REOPEN_INFO.addedDeductions = arr(r.addDeductions).filter(function (d) { return !dIds[d.id]; }).map(function (d) { return d.id; });
+
+  // Trail overrides change what the player can obtain; framing overrides only change wording.
+  var trail = [], framing = [];
+  function classify(map, kind) {
+    Object.keys(map || {}).forEach(function (k) {
+      var o = map[k];
+      ("grants" in o || "requires" in o || "puzzle" in o) ? trail.push(kind + ":" + k) : framing.push(kind + ":" + k);
+    });
+  }
+  classify(r.hotspots, "hotspot"); classify(r.questions, "question");
+  // evidence content overrides that change the route to the truth count as trail (listed explicitly by key flag)
+  Object.keys(r.evidence || {}).forEach(function (k) {
+    var e = base.evidence.filter(function (x) { return x.id === k; })[0];
+    (e && e.key && r.evidence[k].doc && (r.evidence[k].doc.text || r.evidence[k].doc.table !== undefined)) ? trail.push("evidence:" + k) : framing.push("evidence:" + k);
+  });
+  REOPEN_INFO.trail = trail; REOPEN_INFO.framing = framing;
+  if (trail.length < 3 || trail.length > 6) warn("reopen changes " + trail.length + " trail items (brief asks for 3-5)");
   if (!r.intro) err("reopen.intro missing");
 }
 
@@ -383,12 +447,17 @@ function show(o) {
   console.log("  counts: " + Object.keys(o.counts).map(function (k) { return k + " " + o.counts[k]; }).join(", "));
   console.log("  twist reachable by its flags: " + (o.twistByFlags ? "yes" : "NO") + " (time fallback also set)");
   console.log("  proofs: " + o.proofs.map(function (p) { return p.id + (p.ok ? " ok" : " UNREACHABLE"); }).join(", "));
+  console.log("  valid proofs reachable before the twist: " + o.preTwistProofs.length + (o.preTwistProofs.length ? " (" + o.preTwistProofs.join(", ") + ")" : "") + "; proofsNeeded " + o.proofsNeeded);
   console.log("  key items unreachable: " + (o.keyUnreachable.length ? o.keyUnreachable.join(", ") : "none"));
   console.log("  anything unreachable: " + (o.unreachable.length ? o.unreachable.join(", ") : "none"));
 }
 console.log("Cold Read case validator: " + path.relative(process.cwd(), file) + " (" + RAW.id + ", \"" + RAW.title + "\")");
 show(normal); show(reopened);
 console.log("  retired by reopen overrides (expected, replaced by the new trail): " + (RETIRED.length ? RETIRED.join(", ") : "none"));
+console.log("  reopen trail changes: " + REOPEN_INFO.trail.join(", "));
+console.log("  reopen framing-only changes: " + REOPEN_INFO.framing.join(", "));
+console.log("  reopen deductions replaced: " + (REOPEN_INFO.replacedDeductions.join(", ") || "none") + "; added: " + (REOPEN_INFO.addedDeductions.join(", ") || "none"));
+notes.forEach(function (n) { console.log("  note: " + n); });
 console.log("\nWarnings (" + warnings.length + "):"); warnings.forEach(function (w) { console.log("  - " + w); });
 console.log("Errors (" + errors.length + "):"); errors.forEach(function (e) { console.log("  - " + e); });
 console.log(errors.length ? "\nRESULT: FAIL" : "\nRESULT: OK");
