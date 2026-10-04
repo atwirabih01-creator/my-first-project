@@ -210,7 +210,9 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .pin__label { font-size: .85rem; font-weight: 600; background: rgba(11,13,16,.82); padding: 3px 8px; border-radius: 2px; white-space: nowrap; margin-left: -10px; border: 1px solid var(--line); }
 .pin--left { flex-direction: row-reverse; transform: translate(calc(-100% + 22px), -22px); }
 .pin--left .pin__label { margin-left: 0; margin-right: -10px; }
+.pin:hover, .pin:focus-visible { z-index: 2; }
 .pin:hover .pin__label, .pin:focus-visible .pin__label { border-color: var(--accent); }
+@media (max-width: 600px) { .pin__label { display: none; } .pin, .pin--left { transform: translate(-22px, -22px); flex-direction: row; } }
 .loclist { margin-top: 14px; display: grid; gap: 8px; }
 .loc { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
 .loc--here { border-color: var(--accent-dim); }

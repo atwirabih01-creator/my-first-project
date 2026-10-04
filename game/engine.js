@@ -119,16 +119,30 @@
       c.locations.forEach(function (l) { arr(l.hotspots).forEach(function (h) { if (hs[h.id]) mergeInto(h, hs[h.id]); }); });
       var qs = r.questions || {};
       c.people.forEach(function (p) { arr(p.questions).forEach(function (q) { if (qs[q.id]) mergeInto(q, qs[q.id]); }); });
-      arr(r.addEvidence).forEach(function (e) { c.evidence = c.evidence.filter(function (x) { return x.id !== e.id; }); c.evidence.push(e); });
+      arr(r.addEvidence).forEach(function (e) { upsert(c.evidence, e); });
       var rm = arr(r.removeDeductions);
       c.deductions = c.deductions.filter(function (d) { return rm.indexOf(d.id) === -1; });
-      arr(r.addDeductions).forEach(function (d) { c.deductions = c.deductions.filter(function (x) { return x.id !== d.id; }); c.deductions.push(d); });
+      arr(r.addDeductions).forEach(function (d) { upsert(c.deductions, d); });   // same id replaces in place
+      if (typeof r.briefing === "string" && r.briefing) c.briefing = r.briefing;
+      var po = r.people || {};
+      c.people.forEach(function (p) { if (po[p.id]) { for (var pk in po[p.id]) p[pk] = po[p.id][pk]; } });
+      if (r.twist && typeof r.twist === "object") { c.twist = c.twist || {}; for (var tk in r.twist) c.twist[tk] = r.twist[tk]; }
+      if (r.solution && typeof r.solution === "object") { for (var sk in r.solution) c.solution[sk] = r.solution[sk]; }
       if (Array.isArray(r.proofs) && r.proofs.length) c.solution.proofs = r.proofs.slice();
+      if (Array.isArray(r.hintTokensFrom)) c.hintTokensFrom = r.hintTokensFrom.slice();
+      /* addHints go first, so reopen-specific hints win; a hint with an existing id replaces it. */
+      var added = arr(r.addHints);
+      var addedIds = added.map(function (h) { return h.id; });
+      c.hints = added.concat(c.hints.filter(function (h) { return addedIds.indexOf(h.id) === -1; }));
     }
     c.solution.suspects = arr(c.solution.suspects); c.solution.motives = arr(c.solution.motives);
     c.solution.methods = arr(c.solution.methods); c.solution.proofs = arr(c.solution.proofs);
     if (typeof c.solution.proofsNeeded !== "number") c.solution.proofsNeeded = 2;
     return c;
+  }
+  function upsert(list, item) {
+    for (var i = 0; i < list.length; i++) if (list[i].id === item.id) { list[i] = item; return; }
+    list.push(item);
   }
   /* Overrides replace fields; a nested `doc` object is merged one level deep. */
   function mergeInto(target, over) {
@@ -148,7 +162,7 @@
       IDX.person[p.id] = p;
       p.questions = arr(p.questions); p.presentations = arr(p.presentations);
       p.questions.forEach(function (q) { IDX.q[q.id] = q; IDX.qPerson[q.id] = p; });
-      p.presentations.forEach(function (pr, i) { if (!pr.id) pr.id = "pr-" + p.id + "-" + (pr.item || i); });
+      p.presentations.forEach(function (pr, i) { if (!pr.id) pr.id = "pr-" + p.id + "-" + (pr.item || "item") + "-" + i; });
     });
     C.locations.forEach(function (l) {
       IDX.loc[l.id] = l; l.hotspots = arr(l.hotspots);
@@ -326,7 +340,7 @@
           logEntry("event", str(tw.title, "A turn in the case"), tw.text);
           grant(tw.grants, true);
           arr(tw.unlocks).forEach(function (u) { setFlag(u); });
-          S.event = { title: str(tw.title, "A turn in the case"), text: str(tw.text), art: tw.art || null, kind: "twist" };
+          S.event = { title: str(tw.title, "A turn in the case"), text: str(tw.text), art: tw.art || null, kind: "twist", t: S.t };
           changed = true;
         }
       }
@@ -434,7 +448,7 @@
         var got = arr(z.grants).filter(function (g) { return IDX.ev[g]; });
         if (got.length) setTimeout(function () { if (!S.event) openDoc(got[0]); }, 50);
       } else {
-        msg.textContent = "That doesn't fit. Look again at what you've found.";
+        msg.textContent = "That doesn't open it. No time lost; look again at what you've found.";
         input.select();
       }
     };
@@ -467,10 +481,11 @@
     closeModal();
     var keyP = personId + "|" + itemId;
     var pr = null;
-    p.presentations.forEach(function (x) { if (!pr && x.item === itemId && reqMet(x.requires)) pr = x; });
-    var again = !!S.presented[keyP];
+    p.presentations.forEach(function (x) { if (x.item === itemId && reqMet(x.requires)) pr = x; }); // last match wins
+    var which = pr ? pr.id : "default";
+    var again = S.presented[keyP] === which;
     if (!again) spend(typeof (pr && pr.minutes) === "number" ? pr.minutes : COST.present);
-    S.presented[keyP] = true;
+    S.presented[keyP] = which;
     var a = pr ? str(pr.a) : str(p.defaultPresentation, "Nothing. A shrug.");
     var cue = pr ? str(pr.cue) : "";
     (S.history[p.id] = S.history[p.id] || []).push({ t: S.t, q: "You show: " + itemLabel(itemId) + (again ? " (again)" : ""), a: a, cue: cue, shown: true });
@@ -527,6 +542,13 @@
     return (h === 1 ? "an hour" : h + " hours") + (r ? " and " + r + " minutes" : "");
   }
 
+  function waitButtons(k) {
+    return el("div", { class: "scene__wait" }, [
+      btn("Wait 30 minutes", "wait" + k, wait, "btn--sm"),
+      btn("Wait until morning", "wait-morning" + k, waitMorning, "btn--sm btn--ghost"),
+      k ? null : el("span", { class: "muted" }, "Let the clock run while Theo works or someone arrives.")
+    ]);
+  }
   function wait() {
     if (S.loc !== hqId()) return;
     spend(COST.wait);
@@ -534,11 +556,30 @@
     commit();
   }
 
+  /* 07:00 the next day; in the small hours (before 05:00) that means 07:00 the same calendar day. */
+  function nextMorning(t) {
+    var seven = (dayOf(t) - 1) * 1440 + 7 * 60;
+    return (t % 1440) < 5 * 60 ? seven : seven + 1440;
+  }
+  /* Jump to the next 07:00, stopping at each Theo result and the twist time on the way, in order. */
+  function waitMorning() {
+    if (S.loc !== hqId()) return;
+    var target = nextMorning(S.t);
+    var stops = S.pending.map(function (p) { return p.due; });
+    var tw = C.twist;
+    if (tw && tw.id && !has(tw.id) && tw.orAfter && tw.orAfter.time) stops.push(absT(tw.orAfter.day || 1, tw.orAfter.time));
+    stops = stops.filter(function (x) { return x > S.t && x < target; }).sort(function (a, b) { return a - b; });
+    stops.forEach(function (x) { S.t = x; settle(false); });
+    S.t = target;
+    logEntry("event", "Waited", "Overnight at headquarters, until " + fmtT(target) + ".");
+    commit();
+  }
+
   function askHint() {
     if (tokensLeft() <= 0) return;
     var relevant = C.hints.filter(function (h) {
       var until = arr(h.until);
-      var retired = until.length > 0 && until.every(has);
+      var retired = until.length > 0 && until.every(function (u) { return has(u) || !!S.requested[u]; });
       return reqMet(h.requires) && !retired;
     });
     var fresh = relevant.filter(function (h) { return S.hintsShown.indexOf(h.id) === -1; });
@@ -1105,7 +1146,7 @@
           return el("li", null, btn(str(p.name) + (av ? "" : " · from " + p.available.from), "here-" + p.id, function () { S.ui.person = p.id; goSection("people"); }, "chip"));
         }))
       ]) : null,
-      isHQ ? el("div", { class: "scene__wait" }, [btn("Wait 30 minutes", "wait", wait, "btn--sm"), el("span", { class: "muted" }, " Let the clock run while Theo works or someone arrives.")]) : null
+      isHQ ? waitButtons("") : null
     ]);
   }
 
@@ -1350,7 +1391,7 @@
       avail.length ? el("ul", { class: "qlist" }, avail.map(function (r) {
         return el("li", null, btn(str(r.label, r.id), "rq-" + r.id, function () { sendRequest(r.id); }, "qbtn", { "aria-label": str(r.label) + " (takes about " + durationText(typeof r.delayMinutes === "number" ? r.delayMinutes : 60) + ")" }));
       })) : el("p", { class: "muted" }, "Nothing to ask for right now. New leads open new requests."),
-      atHQ ? el("div", { class: "scene__wait" }, [btn("Wait 30 minutes", "wait-theo", wait, "btn--sm")]) : el("p", { class: "muted" }, "You can wait for results at headquarters.")
+      atHQ ? waitButtons("-theo") : el("p", { class: "muted" }, "You can wait for results at headquarters.")
     ]);
   }
 
@@ -1443,7 +1484,7 @@
     root.appendChild(el("div", { class: "event-card", role: "alertdialog", "aria-modal": "true", "aria-labelledby": "event-title" }, [
       art ? el("div", { class: "event-card__art" }, artBox(art, "event-card__svg", false, null)) : el("div", { class: "event-card__art event-card__art--none", "aria-hidden": "true" }),
       el("div", { class: "event-card__inner" }, [
-        el("p", { class: "event-card__kicker" }, "Breaking development · " + fmtT(S.t)),
+        el("p", { class: "event-card__kicker" }, "Breaking development · " + fmtT(typeof e.t === "number" ? e.t : S.t)),
         el("h2", { class: "event-card__title display", id: "event-title" }, e.title),
         el("p", { class: "event-card__text prose" }, e.text),
         btn("Continue", "event-continue", function () { S.event = null; save(); render(); playFx(); }, "btn--primary btn--lg")

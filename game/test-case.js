@@ -88,7 +88,9 @@ window.CASE = {
       ],
       presentations: [
         { item: "ev-receipt", a: "That's Dana's card, but she never used a card. Somebody paid for two drinks on it. Her address is on the tab file if you need it.",
-          cue: "He frowns at the time printed on it, genuinely puzzled.", grants: ["fact-flat-key"] }
+          cue: "He frowns at the time printed on it, genuinely puzzled.", grants: ["fact-flat-key"] },
+        { item: "ev-receipt", requires: ["ev-camera"], a: "Two drinks on her card, and someone at my back door twenty minutes later. You think he waited for me to leave.",
+          cue: "He goes quiet and checks the back door over your shoulder." }
       ],
       defaultPresentation: "Can't help you with that."
     },
@@ -199,6 +201,8 @@ window.CASE = {
 
   hintTokensFrom: ["ded-alibi-broken", "pz-safe"],
   hints: [
+    { id: "hint-theo", requires: ["ev-receipt"], until: ["rq-phone"],
+      text: "A card receipt has a phone number behind it somewhere. Theo could pull her records." },
     { id: "hint-door", requires: ["q-sam-close"], until: ["ev-camera"],
       text: "Sam touched his neck when he talked about the back door. Ask him about it again." },
     { id: "hint-money", requires: ["tw-test-autopsy"], until: ["ded-motive"],
@@ -238,9 +242,17 @@ window.CASE = {
         doc: { kind: "report", title: "Handwriting comparison", text: "The signature on the 23:52 receipt matches Rex Vance's company cheques." } }
     ],
     addDeductions: [
+      { id: "ded-alibi-broken", items: ["ev-camera", "fact-rex-alibi"], title: "The coat at the back door (reviewed)",
+        text: "The camera puts a long coat at the back door at 00:20; Rex says he was asleep.", key: true, grants: [] },
       { id: "ded-motive-2", items: ["ev-bank", "fact-scared"], title: "What scared her", text: "Dana was scared of what the accounts showed: Rex was stealing.", key: true, grants: ["fact-motive"] }
     ],
     removeDeductions: ["ded-motive"],
+    briefing: "Reopened file. Same body, same bar, three weeks colder. Read what we have again and do not trust the first team's version.",
+    people: { "p-sam": { description: "Sam looks thinner. He has been reading about the case and keeps his hands flat on the bar." } },
+    twist: { title: "The coroner, again" },
+    solution: { success: { title: "Confession", text: "Second time, it holds. Rex reads the camera log and puts the pen down. 'Just numbers,' he says." } },
+    addHints: [{ id: "hint-reopen", requires: [], until: ["ev-camera"], text: "The first team never opened the back door. Start there." }],
+    hintTokensFrom: ["ded-alibi-broken", "pz-safe", "q-sam-backdoor"],
     proofs: ["ev-camera", "ev-autopsy", "ded-alibi-broken", "ded-motive-2", "ev-bank"]
   },
 

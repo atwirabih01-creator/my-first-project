@@ -178,6 +178,13 @@ async function run(viewport, label) {
   await waitStampGone();
   await click("modal-ok");
   await snap("bar-door");
+  await go("people");
+  if (await k("person-back").count() === 0) await click("person-p-sam");
+  const tShow = await clock();
+  await click("show-evidence");
+  await click("present-ev-receipt");
+  check((await text(".conv")).includes("waited for me to leave"), "later presentation with met requires wins");
+  check((await clock()) !== tShow, "new presentation reaction costs time");
 
   // Theo request
   await go("theo");
@@ -206,9 +213,11 @@ async function run(viewport, label) {
   check(await page.locator(".scene__art.art--placeholder").count() === 1, "missing scene art shows placeholder");
   await click("hs-h-flat-safe");
   await click("open-puzzle");
+  const tPuzzle = await clock();
   await page.fill("#puzzle-input", "0000");
   await click("puzzle-submit");
-  check((await text(".puzzle__msg")).includes("doesn't fit"), "wrong puzzle answer rejected");
+  check((await text(".puzzle__msg")).includes("doesn't open it"), "wrong puzzle answer rejected gently");
+  check((await clock()) === tPuzzle, "wrong puzzle answer costs no time");
   await page.fill("#puzzle-input", " 19 58 ");
   await snap("puzzle");
   await click("puzzle-submit");
@@ -221,7 +230,7 @@ async function run(viewport, label) {
   check((await text(".stat--hint .stat__val")) === "1", "hint token earned from puzzle");
   await click("hint-open");
   await click("hint-ask");
-  check((await text(".modal")).includes("locked away"), "first relevant hint shown");
+  check((await text(".modal")).includes("locked away"), "first relevant hint shown (pending Theo request satisfies until)");
   await snap("hint");
   await click("modal-ok");
   check((await text(".stat--hint .stat__val")) === "0", "hint token spent");
@@ -315,10 +324,20 @@ async function run(viewport, label) {
   check((await text(".reopen__text")).includes("Three weeks later"), "reopen intro text shown first");
   await snap("reopen");
   await click("reopen-continue");
+  check((await text(".casefile")).includes("three weeks colder"), "reopen briefing override");
   await click("begin");
 
   // Second run with overrides
   check((await clock()) === "Day 1, 06:40", "reopen restarts the clock");
+  await click("wait-morning");
+  await k("event-continue").waitFor({ timeout: 4000 });
+  check((await text(".event-card")).includes("The coroner, again"), "reopen twist override");
+  check((await text(".event-card__kicker")).includes("Day 1, 12:00"), "wait until morning fires the twist at its time");
+  await snap("twist-overnight");
+  await click("event-continue");
+  await waitStampGone();
+  check((await clock()) === "Day 2, 07:00", "wait until morning jumps to 07:00 next day");
+  check((await text(".stat--hint .stat__val")) === "0", "reopen resets tokens");
   await go("notebook");
   await click("nb-notes");
   check((await page.inputValue("[data-k='notes']")).includes("Rex lied"), "notes kept after reopen");
@@ -330,14 +349,13 @@ async function run(viewport, label) {
   await click("modal-ok");
   await go("people");
   await click("person-p-sam");
+  check((await text(".person")).includes("thinner"), "reopen people override");
   await click("ask-q-sam-night");
-  await dismissEvent();
-  await waitStampGone();
-  await go("people");
-  if (await k("person-back").count() === 0) await click("person-p-sam");
   check((await text(".conv")).includes("Rex Vance"), "reopen question override applied");
   await click("ask-q-sam-close");
   await click("ask-q-sam-backdoor");
+  await go("scene");
+  check((await text(".stat--hint .stat__val")) === "1", "reopen hintTokensFrom replaced (token from question)");
   await go("scene");
   await click("hs-h-bar-door");
   await waitStampGone();
@@ -352,7 +370,7 @@ async function run(viewport, label) {
   await click("review");
   await click("file-charge");
   await k("ending-continue").waitFor();
-  check((await text(".ending")).includes("Just numbers"), "confession scene shown");
+  check((await text(".ending")).includes("Second time"), "confession scene shown (reopen solution override)");
   await snap("confession");
   await click("ending-continue");
   await page.locator(".debrief").waitFor();
@@ -411,7 +429,7 @@ async function smokeIndex(viewport, label) {
   const ids = await page.evaluate(() => ({ locs: window.CASE.locations.filter((l) => !(l.requires || []).length).map((l) => l.id) }));
   for (const loc of ids.locs) {
     await go("map");
-    await k("pin-" + loc).click();
+    await k("travel-" + loc).click();
     await page.waitForTimeout(50);
     if (await k("event-continue").count()) await k("event-continue").click();
     const hs = await page.locator(".hs").evaluateAll((els) => els.map((e) => e.getAttribute("data-k")));
@@ -438,12 +456,174 @@ async function smokeIndex(viewport, label) {
   await browser.close();
 }
 
+/* Plays the real case through the UI like a thorough player: every place, hotspot, question,
+   presentation, Theo request and defined connection, waiting at HQ when stuck. Then charges the
+   wrong suspect, reopens, plays again and charges correctly, ending on the debrief. */
+async function playRealCase(viewport, label) {
+  if (!fs.existsSync(path.join(GAME, "case-001.js"))) return;
+  console.log(`\n=== index.html full play ${label} ${viewport.width}x${viewport.height} ===`);
+  const browser = await playwright.chromium.launch({ executablePath: findChromium() });
+  const page = await browser.newPage({ viewport });
+  const errors = [];
+  const noArt = !fs.existsSync(path.join(GAME, "art.js"));
+  page.on("console", (m) => { if (m.type() === "error" && !(noArt && /ERR_FILE_NOT_FOUND|art\.js/.test(m.text()))) errors.push(m.text()); });
+  page.on("pageerror", (e) => errors.push(String(e)));
+  page.on("dialog", (d) => { errors.push("dialog"); d.dismiss(); });
+  await page.route(/fonts\.(googleapis|gstatic)\.com/, (r) => r.fulfill({ status: 200, contentType: "text/css", body: "" }));
+  await page.goto("file://" + path.join(GAME, "index.html"));
+  await page.evaluate(() => { try { localStorage.clear(); } catch (e) { /* ignore */ } });
+  await page.reload();
+  const mobile = viewport.width < 800;
+  const k = (key) => page.locator(`[data-k="${key}"]`).first();
+  const exists = async (key) => (await page.locator(`[data-k="${key}"]`).count()) > 0;
+  const settle = async () => {
+    for (let i = 0; i < 6; i++) {
+      if (await exists("event-continue")) { await k("event-continue").click(); }
+      await page.waitForFunction(() => !document.querySelector(".stamp-layer.is-on"), null, { timeout: 8000 });
+      if (!(await exists("event-continue"))) break;
+    }
+  };
+  const click = async (key) => { await settle(); await k(key).click(); await page.waitForTimeout(20); await settle(); };
+  const close = async () => { if (await page.locator("#modal-root .modal").count()) await click("modal-close"); };
+  const go = async (sec) => { await close(); await click((mobile ? "mtab-" : "tab-") + sec); };
+  const keys = async (prefix, sel) => page.locator(`${sel || ""}[data-k^="${prefix}"]`).evaluateAll((els) => els.map((e) => e.getAttribute("data-k")));
+  const flags = async () => page.evaluate(() => { try { return JSON.parse(localStorage.getItem("coldread:" + window.CASE.id)).flags; } catch (e) { return {}; } });
+  const CASE = await page.evaluate(() => window.CASE);
+  const answers = Object.fromEntries((CASE.puzzles || []).map((z) => [z.id, z.answer]));
+  const allDeds = (CASE.deductions || []).concat((CASE.reopen && CASE.reopen.addDeductions) || []);
+  const presentationsFor = (pid) => {
+    const p = CASE.people.find((x) => x.id === pid) || {};
+    const ro = (CASE.reopen && CASE.reopen.people && CASE.reopen.people[pid] && CASE.reopen.people[pid].presentations) || [];
+    return (p.presentations || []).concat(ro);
+  };
+
+  const sweep = async () => {
+    // places, hotspots, people
+    await go("map");
+    const locs = (await keys("travel-")).map((x) => x.slice(7));
+    for (const loc of locs) {
+      await go("map");
+      await click("travel-" + loc);
+      for (const h of await keys("hs-", ".hs:not(.hs--done)")) {
+        await click(h);
+        if (await exists("open-puzzle")) {
+          await click("open-puzzle");
+          const hsId = h.slice(3);
+          const pz = (CASE.locations.flatMap((l) => l.hotspots)).find((x) => x.id === hsId);
+          await page.fill("#puzzle-input", answers[pz.puzzle] || "");
+          await click("puzzle-submit");
+        }
+        await close();
+      }
+      // puzzles left unsolved on examined hotspots
+      for (const h of await keys("hs-", ".hs--puzzle")) { await click(h); if (await exists("open-puzzle")) { await click("open-puzzle"); const pz = CASE.locations.flatMap((l) => l.hotspots).find((x) => x.id === h.slice(3)); await page.fill("#puzzle-input", answers[pz.puzzle] || ""); await click("puzzle-submit"); } await close(); }
+      await go("people");
+      if (await exists("person-back")) await click("person-back");
+      const here = await page.locator(".plist").first().locator("[data-k^='person-']").evaluateAll((els) => els.filter((e) => !e.classList.contains("pcard--off")).map((e) => e.getAttribute("data-k")));
+      if (!(await page.locator(".minihead", { hasText: "Here at" }).count())) continue;
+      for (const pk of here) {
+        if (!(await exists(pk))) continue;
+        await click(pk);
+        for (let n = 0; n < 20; n++) { const q = await keys("ask-"); if (!q.length) break; await click(q[0]); }
+        const f = await flags();
+        for (const pr of presentationsFor(pk.slice(7))) {
+          if (!f[pr.item] || !(pr.requires || []).every((r) => f[r])) continue;
+          if (!(await exists("show-evidence"))) break;
+          await click("show-evidence");
+          if (await exists("present-" + pr.item)) await click("present-" + pr.item); else await close();
+        }
+        if (await exists("person-back")) await click("person-back");
+      }
+    }
+    // board
+    await go("board");
+    let f = await flags();
+    for (const d of allDeds) {
+      if (f[d.id]) continue;
+      const [a, b] = d.items;
+      if (!(await exists("chip-" + a)) || !(await exists("chip-" + b))) continue;
+      if ((await keys("chip-", ".bcard.is-on")).length) { for (const on of await keys("chip-", ".bcard.is-on")) await click(on); }
+      await click("chip-" + a); await click("chip-" + b); await click("connect");
+      f = await flags();
+    }
+    // Theo
+    await go("theo");
+    for (const r of await keys("rq-")) await click(r);
+  };
+
+  const playUntilStuck = async () => {
+    let last = -1;
+    for (let round = 0; round < 12; round++) {
+      await sweep();
+      const n = Object.keys(await flags()).length;
+      if (n === last) {
+        // nothing new: wait at HQ for results / people / the twist
+        await go("map"); await click("travel-" + (CASE.locations.find((l) => l.district === "HQ") || CASE.locations[0]).id);
+        const t0 = Object.keys(await flags()).length;
+        await click("wait-morning");
+        await sweep();
+        if (Object.keys(await flags()).length === t0) break;
+      }
+      last = Object.keys(await flags()).length;
+    }
+  };
+
+  const solve = async (suspect, motive, method, proofs) => {
+    await go("solve");
+    await click("sus-" + suspect); await click("mot-" + motive); await click("met-" + method);
+    for (const p of proofs) await click("proof-" + p);
+    await click("review"); await click("file-charge");
+    await k("ending-continue").waitFor();
+  };
+
+  await click("start"); await click("intro-skip"); await click("begin");
+  await playUntilStuck();
+  let f = await flags();
+  const sol = CASE.solution;
+  const keyTotal = CASE.evidence.filter((e) => e.key).length + CASE.deductions.filter((d) => d.key).length;
+  const keyFound = CASE.evidence.filter((e) => e.key && f[e.id]).length + CASE.deductions.filter((d) => d.key && f[d.id]).length;
+  console.log(`  run 1: ${Object.keys(f).length} flags, key leads ${keyFound}/${keyTotal}, twist ${f[CASE.twist.id] ? "fired" : "NOT fired"}, clock ${await page.locator(".stat--clock .stat__val").textContent()}`);
+  check(f[CASE.twist.id], `real ${label}: twist fired`);
+  const found = sol.proofs.filter((p) => f[p]);
+  check(found.length >= sol.proofsNeeded, `real ${label}: run 1 reached ${found.length} valid proofs (need ${sol.proofsNeeded})`);
+  await page.screenshot({ path: path.join(SHOTS, `real-${label}-board.png`) });
+  const wrong = sol.suspects.find((x) => x !== sol.killer);
+  const pickProofs = (fl) => { const own = sol.proofs.filter((p) => fl[p]); const extra = Object.keys(fl).filter((x) => /^(ev|ded)-/.test(x) && own.indexOf(x) === -1); return own.concat(extra).slice(0, 3); };
+  await solve(wrong, sol.motive, sol.method, pickProofs(f));
+  check((await page.locator(".ending").textContent()).length > 20, `real ${label}: failure scene shown`);
+  await page.screenshot({ path: path.join(SHOTS, `real-${label}-failure.png`) });
+  await click("ending-continue"); await click("reopen");
+  await page.screenshot({ path: path.join(SHOTS, `real-${label}-reopen.png`) });
+  await click("reopen-continue"); await click("begin");
+  await playUntilStuck();
+  f = await flags();
+  const sol2proofs = (CASE.reopen && (CASE.reopen.proofs || (CASE.reopen.solution && CASE.reopen.solution.proofs))) || sol.proofs;
+  const own2 = sol2proofs.filter((p) => f[p]);
+  console.log(`  run 2 (reopened): ${Object.keys(f).length} flags, valid proofs found: ${own2.join(", ")}`);
+  check(own2.length >= ((CASE.reopen && CASE.reopen.solution && CASE.reopen.solution.proofsNeeded) || sol.proofsNeeded), `real ${label}: reopened run reached enough proofs`);
+  await solve(sol.killer, sol.motive, sol.method, own2.slice(0, 3));
+  check((await page.locator(".ending--win").count()) === 1, `real ${label}: correct charge gives confession`);
+  await page.screenshot({ path: path.join(SHOTS, `real-${label}-confession.png`) });
+  await click("ending-continue");
+  await page.locator(".debrief").waitFor();
+  const fnd = await page.locator(".dcard--found").count(), mis = await page.locator(".dcard--missed").count();
+  console.log(`  debrief: ${fnd} found, ${mis} missed`);
+  check(fnd + mis === CASE.debrief.length, `real ${label}: debrief lists all ${CASE.debrief.length} entries`);
+  await page.screenshot({ path: path.join(SHOTS, `real-${label}-debrief.png`), fullPage: true });
+  const ov = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  check(ov <= 0, `real ${label}: no horizontal overflow on debrief`);
+  check(errors.length === 0, `real ${label}: no console errors` + (errors.length ? ": " + errors.slice(0, 5).join(" | ") : ""));
+  await browser.close();
+}
+
 (async () => {
   try {
     await run({ width: 1280, height: 800 }, "desktop");
     await run({ width: 390, height: 844 }, "phone");
     await smokeIndex({ width: 1280, height: 800 }, "desktop");
     await smokeIndex({ width: 360, height: 740 }, "phone360");
+    await playRealCase({ width: 1280, height: 800 }, "desktop");
+    await playRealCase({ width: 390, height: 844 }, "phone");
   } catch (e) {
     console.error("Test crashed:", e);
     results.push({ ok: false, msg: "crash: " + e.message });
