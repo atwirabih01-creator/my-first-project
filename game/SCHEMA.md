@@ -136,7 +136,14 @@ window.CASE = {
     hotspots: { "h-…": { /* fields to override */ } },
     questions: { "q-…": { /* fields to override */ } },
     addEvidence: [], addDeductions: [], removeDeductions: [],
-    proofs: []                          // replaces solution.proofs if given
+    // addDeductions: a deduction whose id already exists replaces it
+    proofs: [],                         // replaces solution.proofs if given
+    briefing: "…",                      // optional: replaces briefing
+    people: { "p-…": { /* fields to override, e.g. description, presentations, defaultPresentation */ } },
+    twist: { /* fields to override */ },
+    solution: { /* fields to override, e.g. success, failure, proofs */ },
+    addHints: [],                       // extra hints for the reopened run
+    hintTokensFrom: []                  // optional: replaces hintTokensFrom
   },
 
   debrief: [{

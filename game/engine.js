@@ -245,13 +245,14 @@
     if (!root) return;
     var t = el("div", { class: "toast " + (kind ? "toast--" + kind : ""), role: "status" }, text);
     root.appendChild(t);
+    while (root.children.length > 3) root.removeChild(root.firstChild);
     setTimeout(function () { t.classList.add("toast--out"); }, 3600);
     setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 4200);
   }
   function stamp(sub) { fxQueue.push({ type: "stamp", sub: sub }); }
   var stampBusy = false;
   function playFx() {
-    if (stampBusy || !fxQueue.length) return;
+    if (stampBusy || !fxQueue.length || (S && S.event && S.status === "play")) return;
     var fx = fxQueue.shift();
     var layer = document.getElementById("stamp-layer");
     if (!layer) return;
@@ -631,11 +632,11 @@
     if (S && screenOverride !== "title" && S.status === "intro" && !m && (e.key === "ArrowRight")) { nextSlide(); }
   });
 
-  function focusKey(k) {
+  function focusKey(k, noScroll) {
     setTimeout(function () {
       if (document.querySelector("#modal-root .modal") || document.querySelector(".event-card")) return;
       var n = document.querySelector("[data-k='" + k + "']");
-      if (n) { try { n.focus({ preventScroll: false }); } catch (e) { n.focus(); } }
+      if (n) { try { n.focus({ preventScroll: !!noScroll }); } catch (e) { n.focus(); } }
     }, 20);
   }
 
@@ -711,7 +712,19 @@
             return m ? { from: m[1], time: m[2] || "", text: m[3] } : { from: "", time: "", text: line };
           });
         }
-        var me = d.me || (msgs[0] && msgs[0].from);
+        /* Whose phone is it? doc.me if given; else a sender named as "<Name>'s" in the title or meta; else the first sender. */
+        var me = d.me;
+        if (!me) {
+          var hay = (str(d.title) + " " + arr(d.meta).map(function (m) { return arr(m).join(" "); }).join(" ")).toLowerCase();
+          var senders = [];
+          msgs.forEach(function (m) { if (m.from && senders.indexOf(String(m.from)) === -1) senders.push(String(m.from)); });
+          senders.forEach(function (n) {
+            if (me) return;
+            var first = n.toLowerCase().split(/\s+/)[0];
+            if (hay.indexOf(n.toLowerCase() + "'s") !== -1 || new RegExp("\\b" + first.replace(/[^a-z0-9]/g, "") + "\\b[^,;:]*'s (phone|mobile|messages)").test(hay)) me = n;
+          });
+          if (!me) me = msgs[0] && msgs[0].from;
+        }
         append(wrap, [
           el("div", { class: "phone" }, [
             el("div", { class: "phone__bar" }, [el("span", { class: "phone__dot", "aria-hidden": "true" }), title]),
@@ -794,9 +807,11 @@
         el("div", { class: "casefile__photo" }, artBox(artString("portraits", v.portrait || v.id), "portrait", true, v.name ? "Photo of " + v.name : null)),
         el("div", { class: "casefile__vinfo" }, [
           el("h3", { class: "casefile__vhead" }, "Victim profile"),
-          el("dl", { class: "doc__meta" }, fields.map(function (f) { return el("div", { class: "doc__metarow" }, [el("dt", null, f[0]), el("dd", null, String(f[1]))]); })),
-          v.bio ? el("p", { class: "prose casefile__bio" }, v.bio) : null
-        ])
+          el("p", { class: "casefile__vname" }, str(v.name, "Unknown")),
+          el("p", { class: "casefile__vsub" }, [v.age ? String(v.age) : "", v.age && v.occupation ? " \u00b7 " : "", str(v.occupation)])
+        ]),
+        el("dl", { class: "doc__meta casefile__vmeta" }, fields.filter(function (f) { return ["Name", "Age", "Occupation"].indexOf(f[0]) === -1; }).map(function (f) { return el("div", { class: "doc__metarow" }, [el("dt", null, f[0]), el("dd", null, String(f[1]))]); })),
+        v.bio ? el("p", { class: "prose casefile__bio" }, v.bio) : null
       ])
     ]);
   }
@@ -808,6 +823,8 @@
     var active = document.activeElement && document.activeElement.getAttribute && document.activeElement.getAttribute("data-k");
     app.innerHTML = "";
     var st = S ? S.status : "title";
+    var screenKey = screenOverride === "title" || !S ? "title" : st;
+    if (render.last !== screenKey) { render.last = screenKey; keepScroll = {}; try { window.scrollTo(0, 0); } catch (e) { /* ignore */ } }
     document.body.setAttribute("data-screen", st);
     if (screenOverride === "title" || !S) renderTitle();
     else if (st === "intro") renderIntro();
@@ -878,7 +895,7 @@
 
   function nextSlide() {
     if (S.introIdx < C.intro.length - 1) { S.introIdx++; save(); render(); focusKey("intro-next"); }
-    else { S.status = "casefile"; save(); render(); focusKey("begin"); }
+    else { S.status = "casefile"; save(); render(); focusKey("begin", true); }
   }
   function renderIntro() {
     var i = Math.min(S.introIdx, Math.max(0, C.intro.length - 1));
@@ -895,7 +912,7 @@
           ])
         ])
       ]),
-      btn("Skip intro", "intro-skip", function () { S.status = "casefile"; save(); render(); focusKey("begin"); }, "btn--ghost intro__skip")
+      btn("Skip intro", "intro-skip", function () { S.status = "casefile"; save(); render(); focusKey("begin", true); }, "btn--ghost intro__skip")
     ]));
   }
 
@@ -917,7 +934,7 @@
         el("div", { class: "big-stamp big-stamp--amber", "aria-hidden": "true" }, "Reopened"),
         el("h1", { class: "display" }, str(C.title)),
         el("p", { class: "prose reopen__text" }, str(C.reopen && C.reopen.intro, "The case is open again. Same victim. Look harder.")),
-        btn("Read the case file", "reopen-continue", function () { S.status = "casefile"; save(); render(); focusKey("begin"); }, "btn--primary btn--lg")
+        btn("Read the case file", "reopen-continue", function () { S.status = "casefile"; save(); render(); focusKey("begin", true); }, "btn--primary btn--lg")
       ])
     ]));
   }
@@ -1451,7 +1468,7 @@
         ])
       ])
     ]));
-    focusKey("ending-continue");
+    focusKey("ending-continue", true);
   }
   function renderFailed() {
     app.appendChild(el("main", { class: "screen failed" }, [
@@ -1465,7 +1482,7 @@
         ])
       ])
     ]));
-    focusKey("reopen");
+    focusKey("reopen", true);
   }
   function renderDebrief() {
     var keys = keyItems(), found = keys.filter(has).length;

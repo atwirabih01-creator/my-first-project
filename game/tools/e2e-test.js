@@ -55,6 +55,7 @@ async function run(viewport, label) {
   const click = async (key) => { await k(key).click(); await page.waitForTimeout(60); };
   const snap = async (name) => {
     shot++;
+    await page.waitForTimeout(400); // let entrance animations settle
     const file = path.join(SHOTS, `${label}-${String(shot).padStart(2, "0")}-${name}.png`);
     await page.screenshot({ path: file, fullPage: false });
     const ov = await page.evaluate(() => ({ sw: document.documentElement.scrollWidth, cw: document.documentElement.clientWidth, bw: document.body.scrollWidth }));
@@ -382,10 +383,67 @@ async function run(viewport, label) {
   await browser.close();
 }
 
+/* Smoke test of index.html with the real case (and art.js when present): every open location,
+   every visible hotspot, every document, every section. Skipped when case-001.js is absent. */
+async function smokeIndex(viewport, label) {
+  if (!fs.existsSync(path.join(GAME, "case-001.js"))) { console.log("\n(skip index smoke: no case-001.js)"); return; }
+  console.log(`\n=== index.html smoke ${label} ${viewport.width}x${viewport.height} ===`);
+  const browser = await playwright.chromium.launch({ executablePath: findChromium() });
+  const page = await browser.newPage({ viewport });
+  const errors = [];
+  page.on("console", (m) => { if (m.type() === "error" && !(/art\.js/.test(m.text()) && !fs.existsSync(path.join(GAME, "art.js")))) errors.push(m.text()); });
+  page.on("pageerror", (e) => errors.push(String(e)));
+  page.on("requestfailed", (r) => { if (/art\.js$/.test(r.url()) && !fs.existsSync(path.join(GAME, "art.js"))) return; if (!/fonts\./.test(r.url())) errors.push("Request failed: " + r.url()); });
+  await page.route(/fonts\.(googleapis|gstatic)\.com/, (r) => r.fulfill({ status: 200, contentType: "text/css", body: "" }));
+  await page.goto("file://" + path.join(GAME, "index.html"));
+  await page.evaluate(() => { try { localStorage.clear(); } catch (e) { /* ignore */ } });
+  await page.reload();
+  const k = (key) => page.locator(`[data-k="${key}"]`).first();
+  const mobile = viewport.width < 800;
+  const go = async (s) => { await k((mobile ? "mtab-" : "tab-") + s).click(); };
+  const overflow = async (name) => {
+    const ov = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    check(ov <= 0, `index ${label}: no horizontal overflow at ${name}`);
+  };
+  await k("start").click();
+  await k("intro-skip").click();
+  await k("begin").click();
+  const ids = await page.evaluate(() => ({ locs: window.CASE.locations.filter((l) => !(l.requires || []).length).map((l) => l.id) }));
+  for (const loc of ids.locs) {
+    await go("map");
+    await k("pin-" + loc).click();
+    await page.waitForTimeout(50);
+    if (await k("event-continue").count()) await k("event-continue").click();
+    const hs = await page.locator(".hs").evaluateAll((els) => els.map((e) => e.getAttribute("data-k")));
+    for (const h of hs) {
+      if (await k("event-continue").count()) await k("event-continue").click();
+      await page.waitForFunction(() => !document.querySelector(".stamp-layer.is-on"), null, { timeout: 8000 });
+      await k(h).click();
+      if (await k("modal-close").count()) await k("modal-close").click();
+    }
+    await overflow("scene " + loc);
+  }
+  await page.waitForFunction(() => !document.querySelector(".stamp-layer.is-on"), null, { timeout: 8000 });
+  await go("evidence");
+  const docs = await page.locator("[data-k^='ev-open-']").evaluateAll((els) => els.map((e) => e.getAttribute("data-k")));
+  for (const d of docs) {
+    await k(d).click();
+    await overflow("document " + d);
+    await page.screenshot({ path: path.join(SHOTS, `index-${label}-${d}.png`) });
+    await k("modal-close").click();
+  }
+  check(docs.length > 0, `index ${label}: ${docs.length} documents opened`);
+  for (const s of ["people", "board", "notebook", "theo", "solve", "map"]) { await go(s); await overflow("section " + s); await page.screenshot({ path: path.join(SHOTS, `index-${label}-${s}.png`) }); }
+  check(errors.length === 0, `index ${label}: no console errors` + (errors.length ? ": " + errors.join(" | ") : ""));
+  await browser.close();
+}
+
 (async () => {
   try {
     await run({ width: 1280, height: 800 }, "desktop");
     await run({ width: 390, height: 844 }, "phone");
+    await smokeIndex({ width: 1280, height: 800 }, "desktop");
+    await smokeIndex({ width: 360, height: 740 }, "phone360");
   } catch (e) {
     console.error("Test crashed:", e);
     results.push({ ok: false, msg: "crash: " + e.message });
