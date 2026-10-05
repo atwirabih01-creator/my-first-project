@@ -1,7 +1,7 @@
 /* Cold Read end-to-end test.
    Plays the development case (test.html) from start to debrief at desktop and phone sizes.
 
-   Run:  NODE_PATH=/opt/node22/lib/node_modules node game/tools/e2e-test.js
+   Run:  NODE_PATH=/opt/node22/lib/node_modules node game/tools/e2e-test.js   (ONLY=test|smoke|real for one part)
    Env:  SHOTS=<dir> to choose where screenshots go (default: <tmp>/coldread-shots)
          CHROMIUM=<path> to choose the browser binary (default: /opt/pw-browsers/chromium if present)
 
@@ -484,7 +484,10 @@ async function playRealCase(viewport, label) {
     }
   };
   const click = async (key) => { await settle(); await k(key).click(); await page.waitForTimeout(20); await settle(); };
-  const close = async () => { if (await page.locator("#modal-root .modal").count()) await click("modal-close"); };
+  const close = async () => {
+    await page.waitForTimeout(80); // a solved puzzle opens its document a moment later
+    for (let i = 0; i < 3 && await page.locator("#modal-root .modal").count(); i++) await click("modal-close");
+  };
   const go = async (sec) => { await close(); await click((mobile ? "mtab-" : "tab-") + sec); };
   const keys = async (prefix, sel) => page.locator(`${sel || ""}[data-k^="${prefix}"]`).evaluateAll((els) => els.map((e) => e.getAttribute("data-k")));
   const flags = async () => page.evaluate(() => { try { return JSON.parse(localStorage.getItem("coldread:" + window.CASE.id)).flags; } catch (e) { return {}; } });
@@ -618,12 +621,11 @@ async function playRealCase(viewport, label) {
 
 (async () => {
   try {
-    await run({ width: 1280, height: 800 }, "desktop");
-    await run({ width: 390, height: 844 }, "phone");
-    await smokeIndex({ width: 1280, height: 800 }, "desktop");
-    await smokeIndex({ width: 360, height: 740 }, "phone360");
-    await playRealCase({ width: 1280, height: 800 }, "desktop");
-    await playRealCase({ width: 390, height: 844 }, "phone");
+    // ONLY=test|smoke|real limits the run to one part (the full real-case play takes several minutes).
+    const only = process.env.ONLY || "";
+    if (!only || only === "test") { await run({ width: 1280, height: 800 }, "desktop"); await run({ width: 390, height: 844 }, "phone"); }
+    if (!only || only === "smoke") { await smokeIndex({ width: 1280, height: 800 }, "desktop"); await smokeIndex({ width: 360, height: 740 }, "phone360"); }
+    if (!only || only === "real") { await playRealCase({ width: 1280, height: 800 }, "desktop"); await playRealCase({ width: 390, height: 844 }, "phone"); }
   } catch (e) {
     console.error("Test crashed:", e);
     results.push({ ok: false, msg: "crash: " + e.message });

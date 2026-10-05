@@ -72,6 +72,8 @@ window.CASE = {
       lie: false                      // true if the answer is a lie (used in debrief)
     }],
     presentations: [{                 // showing them a piece of evidence or a fact
+                                      // several for the same item: the LAST one whose requires are met wins
+                                      // (put more specific, later-game reactions after the general one)
       item: "ev-…", a: "…", cue: "…", grants: [], requires: []
     }],
     defaultPresentation: "…"          // reply when shown something with no special reaction

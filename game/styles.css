@@ -580,3 +580,11 @@ body.has-modal { overflow: hidden; }
   .opts--suspects { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .title__buttons .btn { min-width: 140px; }
 }
+@media (max-width: 400px) {
+  .topbar { gap: 6px; padding-left: 4px; padding-right: 8px; }
+  .topbar__brand { font-size: 1.02rem; padding: 0 2px; }
+  .topbar__stats { gap: 8px; }
+  .stat--hint .stat__label { display: none; }
+  .stat--clock .stat__val, .stat--prog .stat__val { overflow: visible; font-size: .8rem; }
+  .stat--hint { padding: 4px 8px; }
+}
