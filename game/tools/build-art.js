@@ -87,12 +87,15 @@ const clip = (n, inner) => "<clipPath id='" + id(n) + "'>" + inner + "</clipPath
 /* ============================================================ MAP */
 function buildMap() {
   P = "mp"; W = 2.5; seed = 11;
-  const coast = [[0, 362], [100, 356], [205, 392], [262, 432], [302, 476], [334, 520], [372, 554], [500, 568], [700, 566], [850, 556], [1000, 548]];
+  // Harbour: the old quay juts out in the west (The Anchor & Lamp); the water reaches up to the foot of the Saltmarket Stairs
+  const coast = [[0, 548], [90, 542], [190, 530], [214, 470], [240, 412], [290, 400], [350, 420], [400, 462], [450, 520], [500, 556], [700, 566], [850, 556], [1000, 548]];
   const coastY = x => { for (let i = 1; i < coast.length; i++) if (x <= coast[i][0]) { const a = coast[i - 1], b = coast[i]; return a[1] + (b[1] - a[1]) * (x - a[0]) / (b[0] - a[0]); } return 548; };
-  const water = "M0 362 C70 352 150 360 205 392 C255 422 290 470 330 520 C360 556 420 566 500 568 C640 572 800 560 1000 548 L1000 600 L0 600 Z";
-  const pins = [[430, 330], [230, 300], [780, 130], [560, 170], [170, 190], [420, 500], [650, 520]];
+  const water = "M0 548 C40 546 120 540 190 530 C200 510 206 490 214 470 C222 450 230 425 244 412 C262 398 290 396 318 404 C350 414 380 436 400 462 C420 490 440 520 470 546 C520 568 640 572 700 566 C800 560 900 552 1000 548 L1000 600 L0 600 Z";
+  // pins come from the case file so the clear marker areas always match the engine's pins
+  let pins = [[430, 330], [230, 300], [780, 130], [560, 170], [170, 190], [120, 480], [650, 520]];
+  try { global.window = global.window || {}; require(path.resolve(__dirname, "..", "case-001.js")); pins = window.CASE.locations.map(l => [l.map.x, l.map.y]); } catch (e) { /* keep defaults */ }
   const nearPin = (x, y, d) => pins.some(p => Math.hypot(p[0] - x, p[1] - y) < d);
-  const labels = [[115, 258, 170, 26], [470, 80, 250, 26], [890, 205, 150, 26], [880, 400, 140, 26], [560, 455, 150, 26]];
+  const labels = [[66, 440, 80, 20], [312, 452, 160, 22], [115, 258, 170, 26], [470, 80, 250, 26], [890, 205, 150, 26], [880, 400, 140, 26], [560, 455, 150, 26]];
   const nearLabel = (x, y) => labels.some(l => Math.abs(l[0] - x) < l[2] / 2 + 6 && Math.abs(l[1] - 8 - y) < 18);
   let blocks = "";
   for (let y = 10; y < 560; y += 22) {
@@ -101,7 +104,7 @@ function buildMap() {
       const cy0 = coastY(cx);
       if (cy > cy0 - 34) continue;
       let w = rr(12, 20), h = rr(9, 15), f = K.n3, rot = 0;
-      const docks = cx > 330 && cy > cy0 - 140;
+      const docks = (cx > 400 && cy > cy0 - 140) || (cx < 214 && cy > 425);
       if (docks) { if ((Math.floor(x / 26) + Math.floor(y / 22)) % 2) continue; w = rr(30, 46); h = rr(10, 14); f = "#202f39"; }
       else if (cx < 340) { w = rr(9, 16); h = rr(8, 13); rot = rr(-14, 14); f = "#22303a"; if (rnd() < 0.1) continue; }
       else if (cx > 700 && cy < 250) { if (rnd() < 0.45) continue; w = rr(9, 13); h = rr(8, 11); f = "#1f2e37"; rot = rr(-30, 30); }
@@ -112,9 +115,10 @@ function buildMap() {
     }
   }
   const roads = [
-    ["M0 340 C80 334 160 346 215 374 C265 401 300 446 340 496 C372 534 430 546 510 548 C650 550 800 538 1000 526", 9], // Quay Road
+    ["M262 384 C300 380 340 394 372 420 C400 444 426 490 456 518 C500 546 640 552 760 546 C860 540 940 532 1000 528", 9], // Quay Road (dead end for cars at the stairs)
     ["M60 232 C200 252 330 296 430 312 C560 332 700 344 1000 366", 8],    // Harbour Avenue
-    ["M140 0 C150 100 165 175 182 228 C198 276 214 300 236 332 C250 352 262 368 275 392", 6], // Mercer St
+    ["M140 0 C150 100 165 175 182 228 C194 262 206 284 222 296", 6], // Mercer St to Saltmarket Lane
+    ["M0 420 C60 418 120 424 160 432 C180 438 196 450 200 470", 5],      // Old Quay lane
     ["M545 0 C535 120 522 220 504 320 C490 400 474 470 462 548", 8],     // Tower Road
     ["M548 214 C650 196 720 152 800 122 C870 96 930 62 1000 40", 7],      // Hillcrest Road
     ["M640 336 C720 306 830 288 1000 262", 6],                             // Eastgate Road
@@ -128,12 +132,16 @@ function buildMap() {
   for (let i = 0; i < 26; i++) { const x = rr(10, 960), y = rr(Math.max(coastY(x) + 10, 380), 594); if (y > 596) continue; waves += pa("M" + x.toFixed(0) + " " + y.toFixed(0) + " q8 -4 16 0 t16 0", null, { s: K.t2, w: 1.2, op: 0.5 }); }
   const contours = [60, 110, 160, 210].map((r, i) => el(900, 40, r * 1.5, r, null, { s: "#2a3d4a", w: 1.2, op: 0.7 - i * 0.12, dash: "6 5" })).join("");
   const piers = [[470, 18], [560, 22], [720, 22], [870, 18]].map(p => re(p[0], coastY(p[0]) - 4, p[1], 600 - coastY(p[0]) + 4, "#1b2731", { s: K.n0, w: 1.5 })).join("") +
-    pa("M20 470 L140 452 L150 460 L34 480 Z", "#1b2731", { s: K.n0, w: 1.5 }); // breakwater
+    re(100, 532, 70, 68, "#1b2731", { s: K.n0, w: 1.5 }) + // the old quay
+    pa("M250 562 L400 578 L398 588 L246 572 Z", "#1b2731", { s: K.n0, w: 1.5 }); // breakwater
   const cranes = [[600, 548], [780, 540], [905, 534]].map(c => g({ stroke: "#566f7e", "stroke-width": 2, fill: "none", opacity: 0.8 },
     pa("M" + c[0] + " " + c[1] + " l0 -34 l26 0 M" + c[0] + " " + (c[1] - 34) + " l-8 0 M" + (c[0] + 22) + " " + (c[1] - 34) + " l0 10"))).join("");
   const markers = pins.map(p => ci(p[0], p[1], 26, "#2b3e4c", { s: K.a2, w: 1.2, op: 0.55, dash: "3 5" }) + ci(p[0], p[1], 26, u("amb"), { s: null, op: 0.35 })).join("");
   const halo = { stroke: K.n0, "stroke-width": 5, "paint-order": "stroke", "stroke-linejoin": "round" };
   const dl = (x, y, s, size) => tx(x, y, s, Object.assign({ "text-anchor": "middle", "font-size": size || 19, "letter-spacing": 5, fill: "#9db0b8" }, halo));
+  // footpath along the harbour wall from the stairs to the old quay; a bar where Quay Road ends
+  const footpath = pa("M262 384 C246 396 232 420 222 452 C212 486 200 512 180 522 C150 530 120 520 110 504", null, { s: "#7d8f99", w: 1.6, dash: "3 4", op: 0.9 }) +
+    li(256, 376, 266, 392, "#9db0b8", 3);
   const stairsHatch = g({ stroke: "#7d8f99", "stroke-width": 1.5, opacity: 0.8 }, [0, 1, 2, 3, 4, 5].map(i => li(222 + i * 5, 330 + i * 9, 236 + i * 5, 328 + i * 9)).join(""));
   const lighthouse = g({}, re(40, 548, 9, 26, "#cfc4ab", { s: K.ink, w: 1.5 }), re(38, 543, 13, 6, K.a3, { s: K.ink, w: 1.5 }),
     pa("M45 545 L-10 520 L-10 572 Z", K.a3, { s: null, op: 0.18 }), pa("M45 545 L140 528 L140 556 Z", K.a3, { s: null, op: 0.14 }));
@@ -141,16 +149,16 @@ function buildMap() {
     tx(0, -36, "N", { "text-anchor": "middle", "font-size": 13, fill: "#9db0b8" }));
   const title = g({}, tx(28, 46, "PORT HALDEN", Object.assign({ "font-size": 26, "letter-spacing": 8, fill: K.a3 }, halo)),
     tx(30, 68, "City map, Major Crimes copy", { "font-size": 12, "letter-spacing": 2, fill: "#7d8f99", "font-style": "italic" }));
-  const quayLabel = "<path id='" + id("qr") + "' d='M10 330 C80 324 140 330 190 350' fill='none'/>" +
+  const quayLabel = "<path id='" + id("qr") + "' d='M872 538 C920 534 960 530 998 528' fill='none'/>" +
     "<text font-family='Georgia, serif' font-size='11' letter-spacing='3' fill='#7d8f99'><textPath href='#" + id("qr") + "'>QUAY ROAD</textPath></text>";
   const body = re(0, 0, 1000, 600, K.n2, { s: null }) +
-    pa("M0 0 H340 V380 C250 360 150 350 0 362 Z", "#18252f", { s: null, op: 0.9 }) + // Old Town tint
+    pa("M0 0 H340 V396 C260 400 120 410 0 412 Z", "#18252f", { s: null, op: 0.9 }) + // Old Town tint
     pa("M700 0 H1000 V250 C900 262 790 256 700 250 Z", "#162129", { s: null }) + contours +
-    pa(water, "#0b161c", { s: K.ink, w: 3 }) + pa(water, u("wg"), { s: null }) + waves + piers + blocks + roadsSvg + tram + quayLabel + stairsHatch + cranes +
+    pa(water, "#0b161c", { s: K.ink, w: 3 }) + pa(water, u("wg"), { s: null }) + waves + piers + blocks + roadsSvg + tram + quayLabel + footpath + stairsHatch + cranes +
     pa("M20 120 C40 70 120 40 200 52 C280 64 330 120 340 190", null, { s: "#3a4c58", w: 3, dash: "1 6", op: 0.8 }) + // old town wall
     markers + lighthouse + compass + title +
-    dl(115, 258, "OLD TOWN") + dl(470, 80, "FINANCIAL QUARTER", 17) + dl(890, 205, "HILLCREST") + dl(880, 400, "EASTGATE") + dl(560, 455, "THE DOCKS") +
-    tx(205, 520, "Halden Harbour", Object.assign({ "text-anchor": "middle", "font-size": 18, "font-style": "italic", "letter-spacing": 3, fill: K.t4 }, halo)) +
+    dl(115, 258, "OLD TOWN") + dl(470, 80, "FINANCIAL QUARTER", 17) + dl(890, 205, "HILLCREST") + dl(880, 400, "EASTGATE") + dl(560, 455, "THE DOCKS") + tx(66, 440, "Old Quay", Object.assign({ "text-anchor": "middle", "font-size": 13, "font-style": "italic", "letter-spacing": 2, fill: "#9db0b8" }, halo)) +
+    tx(312, 452, "Halden Harbour", Object.assign({ "text-anchor": "middle", "font-size": 16, "font-style": "italic", "letter-spacing": 3, fill: K.t4 }, halo)) +
     fog(200, 560, 260, 40, 0.15) + fog(800, 590, 300, 30, 0.12);
   return svg(1000, 600, lg("wg", 0, 0, 0, 1, [[0, K.t1, 0.25], [1, K.n0, 0.4]]), body);
 }
@@ -649,7 +657,6 @@ function face(o) {
       " C" + F(cx + w * 0.42) + " " + F(cy + 44) + " " + F(cx + w * 0.2) + " " + F(cy + 62) + " " + F(cx + w * 0.02) + " " + F(cy + 90) + " L" + F(cx + w + 30) + " " + F(cy + 90) + " L" + F(cx + w + 30) + " " + F(cy - 90) + " Z", sd, { s: null }),
     // jaw shadow and cheekbone
     pa("M" + F(cx - w) + " " + F(cy + 30) + " C" + F(cx - w * 0.7) + " " + F(cy + 60) + " " + F(cx - w * 0.3) + " " + F(cy + 74) + " " + F(cx) + " " + F(cy + 76) + " L" + F(cx) + " " + F(cy + 100) + " L" + F(cx - w - 10) + " " + F(cy + 100) + " Z", sd, { s: null, op: 0.45 }),
-    pa("M" + F(cx - w * 0.8) + " " + F(cy + 20) + " q" + F(w * 0.2) + " 8 " + F(w * 0.34) + " 4", null, { s: sd, w: 2, op: 0.35 }),
     o.stubble ? pa("M" + F(cx - w) + " " + F(cy + 22) + " C" + F(cx - w * 0.8) + " " + F(cy + 64) + " " + F(cx - w * 0.3) + " " + F(cy + 80) + " " + F(cx) + " " + F(cy + 80) + " C" + F(cx + w * 0.3) + " " + F(cy + 80) + " " + F(cx + w * 0.8) + " " + F(cy + 64) + " " + F(cx + w) + " " + F(cy + 22) +
       " L" + F(cx + w * 0.5) + " " + F(cy + 34) + " C" + F(cx + w * 0.3) + " " + F(cy + 40) + " " + F(cx - w * 0.3) + " " + F(cy + 40) + " " + F(cx - w * 0.5) + " " + F(cy + 34) + " Z", o.stubble, { s: null, op: 0.5 }) : "",
     // rim light on the shadow edge
@@ -813,6 +820,11 @@ reg("portraits", "p-whitlock", function () {
   b += pa("M103 146 C96 104 114 70 150 66 C188 64 206 92 199 144 C197 128 194 116 189 108 C180 112 168 112 158 106 C146 100 132 96 124 88 C120 104 112 116 108 128 C106 134 104 140 103 146 Z", "#c4c3bd", { w: 2.6 }) +
     pa("M124 88 C140 100 160 106 186 104 M130 80 C150 84 170 86 192 96 M140 72 C160 74 180 80 196 92", null, { s: "#8f8d86", w: 1.5 }) + pa("M124 88 L118 74", null, { s: "#6f6d66", w: 1.6 }) + pa("M110 108 q4 -16 12 -26", null, { s: "#eceae2", w: 2, op: 0.7 }); // silver hair, side parting
   b += "</g>";
+  // forearms resting on the immaculate desk, hands open
+  b += po("0,330 300,330 300,360 0,360", "#3a2c22", { w: 3 }) + li(0, 330, 300, 330, "#5a4634", 2);
+  b += pa("M40 334 C60 316 96 310 120 318 L124 334 Z", "#2a2f38", { w: 2.4 }) + pa("M260 334 C240 316 204 310 180 318 L176 334 Z", "#2a2f38", { w: 2.4 });
+  b += pa("M118 320 C128 312 146 314 150 324 C146 332 132 336 120 334 Z", SK.warm[0], { w: 2.2 }) + pa("M182 320 C172 312 154 314 150 324 C154 332 168 336 180 334 Z", SK.warm[1], { w: 2.2 }) +
+    pa("M128 318 l8 6 M140 316 l6 8 M172 318 l-8 6 M160 316 l-6 8", null, { s: SK.warm[1], w: 1.2 }) + re(112, 318, 8, 6, "#c9c3b0", { w: 1 }) + re(180, 318, 8, 6, "#c9c3b0", { w: 1 });
   b += sh("M196 0 H300 V250 H196 Z", 0.15);
   return svg(300, 360, defs, b);
 });
@@ -831,6 +843,197 @@ reg("portraits", "p-nico", function () {
   b += pa("M160 268 C180 266 196 278 200 300 L190 300 C186 288 176 280 162 280 Z", "#4a5a66", { w: 2 }); // bag strap
   b += sh("M196 0 H300 V360 H196 Z", 0.2);
   return svg(300, 360, defs, b);
+});
+
+
+/* ============================================================ INTRO */
+// Julian and Lena heads, reused at any size via a transform (drawn in a 300x360 portrait frame)
+function julianHead() {
+  return face({ cx: 150, cy: 150, w: 47, jaw: 0.84, chin: 78, skin: SK.warm[0], shade: SK.warm[1], mouth: "wry", brow: 0.6, browW: 4, browC: "#1d1611", lids: 0.45, stubble: "#3a2c22", iris: "#5a6a6a", lip: "#7a4c40", age: 1 }) +
+    pa("M100 140 C92 92 120 64 154 64 C190 64 212 92 202 142 C198 118 190 102 172 96 C160 104 136 104 118 98 C108 110 102 124 100 140 Z", "#1f1915", { w: 2.6 }) +
+    pa("M101 136 C100 124 102 114 106 106 L110 132 Z M201 138 C202 124 200 114 196 106 L192 132 Z", "#8f8d86", { s: null }) + pa("M126 80 C146 70 172 72 190 86", null, { s: "#4a3c32", w: 1.8 });
+}
+function lenaHead() {
+  return face({ cx: 150, cy: 152, w: 43, jaw: 0.7, chin: 76, skin: SK.olive[0], shade: SK.olive[1], mouth: "tight", brow: 1.2, browW: 3.6, browC: "#140f0c", lids: 0.4, iris: "#3a2a20", lip: "#7a4a40" }) +
+    pa("M106 146 C98 96 124 70 152 70 C184 70 206 96 198 146 C194 120 186 104 166 98 C146 100 124 108 110 124 Z", "#15100d", { w: 2.6 }) +
+    pa("M180 86 C206 84 214 104 204 116 C196 124 188 116 190 104", "#15100d", { w: 2.4 }) + pa("M120 96 C134 86 160 82 182 90", null, { s: "#3e3029", w: 1.6 });
+}
+
+reg("intro", "intro-1", function () {
+  P = "i1"; W = 3; seed = 101;
+  const defs = lg("sky", 0, 0, 0, 1, [[0, "#0f1a22"], [0.6, "#1f3440"], [1, "#2b4450"]]);
+  let b = re(0, 0, 1000, 600, u("sky"), { s: null });
+  // the harbour and the city beyond, in fog
+  b += pa("M0 300 L60 280 L60 230 L110 230 L110 270 L170 250 L200 180 L230 250 L300 240 L320 200 L360 200 L360 250 L440 240 L470 150 L480 150 L490 240 L560 250 L600 220 L660 230 L700 190 L760 220 L820 210 L860 240 L940 230 L1000 250 V340 H0 Z", "#16242d", { w: 2 });
+  [[80, 250], [130, 262], [215, 230], [330, 225], [470, 200], [610, 236], [720, 214], [870, 236], [950, 244]].forEach(p => { b += re(p[0], p[1], 6, 8, K.a3, { s: null, op: 0.8 }) + glow(p[0] + 3, p[1] + 4, 20, 0.5); });
+  b += pa("M780 210 l0 -70 l60 0 M780 140 l-20 0 M832 140 l0 20", null, { s: "#16242d", w: 5 }); // crane
+  b += re(0, 320, 1000, 120, "#0e1a21", { s: null }) + [340, 360, 384, 410].map((y, i) => pa("M" + (i * 40) + " " + y + " q30 -5 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0", null, { s: K.t2, w: 1.4, op: 0.5 })).join("");
+  b += re(900, 210, 10, 60, K.paper, { w: 2 }) + glow(905, 210, 60, 0.7) + pa("M905 212 L640 160 L640 240 Z", K.a4, { s: null, op: 0.06 }); // Halden Light
+  b += fog(500, 300, 520, 70, 0.35) + fog(300, 340, 300, 40, 0.25);
+  // Old Town walls either side of the stairs
+  b += pa("M0 160 L180 200 L330 600 L0 600 Z", "#121b21", { w: 3 }) + pa("M1000 140 L780 200 L640 600 L1000 600 Z", "#0f171c", { w: 3 });
+  for (let i = 0; i < 6; i++) b += re(40 + i * 18, 250 + i * 50, 30, 40, i % 2 ? "#0a0f13" : "#2a2214", { w: 2 });
+  b += re(860, 300, 40, 60, K.a1, { w: 2 }) + glow(880, 330, 60, 0.5) + re(820, 420, 36, 54, "#0a0f13", { w: 2 });
+  // the stairs dropping away, wet and shining
+  for (let i = 0; i < 14; i++) {
+    const t = i / 14, t2 = (i + 1) / 14;
+    const y1 = 600 - t * 360, y2 = 600 - t2 * 360, xl1 = 330 - t * 150, xr1 = 640 + t * 140, xl2 = 330 - t2 * 150, xr2 = 640 + t2 * 140;
+    const L1 = 330 - (1 - t) * 0 - t * 0, h = (y1 - y2);
+    const yl = 600 - Math.pow(t, 0.75) * 380, yl2 = 600 - Math.pow(t2, 0.75) * 380;
+    const wl = 310 * (1 - Math.pow(t, 0.75) * 0.72), wl2 = 310 * (1 - Math.pow(t2, 0.75) * 0.72);
+    b += po([500 - wl / 2, yl, 500 + wl / 2, yl, 500 + wl2 / 2, yl2 + (yl - yl2) * 0.35, 500 - wl2 / 2, yl2 + (yl - yl2) * 0.35].map(v => v.toFixed(1)).join(" "), "#3a4950", { w: 2 });
+    b += po([500 - wl2 / 2, yl2 + (yl - yl2) * 0.35, 500 + wl2 / 2, yl2 + (yl - yl2) * 0.35, 500 + wl2 / 2, yl2, 500 - wl2 / 2, yl2].map(v => v.toFixed(1)).join(" "), "#1f292e", { w: 1.6 });
+    b += pa("M" + (500 - wl * 0.3).toFixed(0) + " " + (yl - 4).toFixed(0) + " h" + (wl * 0.25).toFixed(0), null, { s: K.a4, w: 2, op: 0.45 - t * 0.25 });
+  }
+  // lamp at the top of the stairs
+  b += li(700, 600, 700, 120, K.ink, 8) + li(700, 122, 650, 122, K.ink, 6) + pa("M632 120 h36 l-6 14 h-24 Z", K.a3, { w: 2.5 }) + glow(650, 136, 260, 0.85) + glow(650, 132, 50, 1);
+  b += el(520, 560, 120, 18, K.a3, { s: null, op: 0.15 }) + el(520, 560, 60, 8, K.a4, { s: null, op: 0.25 }); // puddle reflection
+  b += fog(500, 470, 260, 90, 0.18) + sh("M0 0 H1000 V80 H0 Z", 0.3);
+  return svg(1000, 600, defs, b);
+});
+
+reg("intro", "intro-2", function () {
+  P = "i2"; W = 3; seed = 102;
+  const defs = lg("sky", 0, 0, 0, 1, [[0, "#13202a"], [1, "#24363f"]]);
+  let b = re(0, 0, 1000, 600, u("sky"), { s: null });
+  b += pa("M0 220 L120 200 L160 120 L240 130 L260 200 L1000 190 V600 H0 Z", "#151f26", { w: 3 });
+  b += pa("M0 380 H1000 V600 H0 Z", "#2a343a", { w: 3 }); // Saltmarket Lane
+  for (let x = 0; x < 1000; x += 46) b += li(x, 380, x - 80, 600, "#20292e", 1.6);
+  // the top of the stairs on the right, falling away into darkness
+  b += po("640,380 900,380 1000,450 1000,600 560,600", "#0b1014", { w: 3 });
+  for (let i = 0; i < 6; i++) b += pa("M" + (650 + i * 14) + " " + (400 + i * 34) + " L" + (900 + i * 22) + " " + (400 + i * 34), null, { s: "#3a464c", w: 3, op: 1 - i * 0.15 });
+  b += el(860, 590, 30, 6, "#1a1e24", { s: null, op: 0.9 }); // far below, a dark shape on the landing
+  b += pa("M640 380 L560 600", null, { s: "#4f5c63", w: 8 }) + pa("M900 380 L1000 450", null, { s: "#4f5c63", w: 8 });
+  // the late shop light and the lamp
+  b += re(60, 230, 180, 150, "#26323a", { w: 3 }) + re(80, 300, 140, 80, "#3a2c16", { w: 2 }) + glow(150, 340, 140, 0.8);
+  b += li(560, 380, 560, 80, K.ink, 7) + li(560, 82, 600, 82, K.ink, 5) + pa("M590 80 h28 l-5 12 h-18 Z", K.a3, { w: 2 }) + glow(604, 100, 240, 0.85);
+  // the sweeper's cart
+  b += re(250, 310, 120, 66, "#4d6a5a", { w: 3 }) + ci(270, 382, 14, "#1a1f23", { w: 3 }) + ci(350, 382, 14, "#1a1f23", { w: 3 }) + li(370, 320, 420, 270, K.ink, 5) + li(300, 310, 290, 220, "#6a5a3a", 5) + pa("M280 220 h20 l6 -40 h-32 Z", "#3a3022", { w: 2.4 });
+  b += re(250, 336, 120, 8, K.a4, { s: null, op: 0.6 });
+  // the sweeper: cap off and held to his chest, phone at his ear, looking down the stairs
+  b += g({},
+    pa("M470 380 L476 300 L520 300 L526 380 Z", "#1c242a", { w: 3 }), // legs
+    pa("M454 306 C452 250 470 214 498 210 C530 214 548 250 544 306 Z", "#4a5a4c", { w: 3 }), // jacket
+    pa("M456 270 H542 M458 290 H540", null, { s: K.a4, w: 5 }), // reflective bands
+    el(500, 184, 24, 28, SK.ruddy[0], { w: 3 }), pa("M500 156 C520 156 528 172 524 186 L512 180 Z", SK.ruddy[1], { s: null }),
+    pa("M478 176 C478 156 494 150 506 152 C520 154 526 164 524 178 C516 166 500 162 478 176 Z", "#8e8a80", { w: 2.4 }), // grey hair
+    pa("M524 176 C540 180 548 196 546 214 L532 216 C532 204 528 194 520 190 Z", SK.ruddy[0], { w: 2.6 }), re(522, 168, 10, 20, K.ink, { w: 1.5, rx: 2 }), // arm up, phone
+    pa("M462 246 C474 240 490 244 496 254 C488 262 472 264 462 258 Z", "#2a3c48", { w: 2.4 }), pa("M470 252 C480 258 496 260 506 256", null, { s: "#1c2a33", w: 3 }), // cap held to chest
+    glow(500, 250, 120, 0.3));
+  b += rain(0.06) + fog(780, 520, 240, 80, 0.2);
+  return svg(1000, 600, defs, b);
+});
+
+reg("intro", "intro-3", function () {
+  P = "i3"; W = 3; seed = 103;
+  const defs = "<radialGradient id='" + id("spot") + "' cx='0.5' cy='0' r='1'><stop offset='0' stop-color='" + K.a5 + "' stop-opacity='.55'/><stop offset='1' stop-color='" + K.a3 + "' stop-opacity='0'/></radialGradient>";
+  let b = re(0, 0, 1000, 600, "#07090c", { s: null });
+  // stage, curtain, the show's light rig
+  b += pa("M0 0 H1000 V60 C900 90 820 60 760 90 C700 60 600 90 500 70 C400 90 300 60 240 90 C180 60 100 90 0 60 Z", "#1c1414", { w: 3 });
+  for (let x = 40; x < 1000; x += 80) b += ci(x, 30, 8, "#2a2d30", { w: 2 }) + glow(x, 36, 26, 0.4);
+  b += po("400,0 600,0 760,470 240,470", u("spot"), { s: null });
+  b += el(500, 470, 270, 34, K.a4, { s: null, op: 0.18 }) + pa("M0 430 H1000 V600 H0 Z", "#0f1013", { s: null }) + pa("M0 430 H1000", null, { s: "#3a2e22", w: 4 });
+  // Julian on stage, three-quarter back view, one hand reaching towards the audience
+  b += g({},
+    pa("M462 470 L470 370 L534 370 L540 470 Z", "#121418", { w: 3 }), // trousers
+    pa("M444 380 C440 300 460 250 500 246 C540 250 562 300 556 380 Z", "#181b22", { w: 3 }), // jacket
+    pa("M552 290 C590 300 640 320 690 338 L686 352 C640 340 590 326 546 316 Z", "#181b22", { w: 3 }), pa("M686 336 C700 334 712 340 714 348 C706 354 694 356 686 352 Z", SK.warm[0], { w: 2.4 }), // reaching arm
+    el(500, 218, 26, 30, SK.warm[1], { w: 3 }), pa("M474 214 C470 188 488 176 504 178 C522 180 530 196 526 214 C516 200 494 198 474 214 Z", "#1f1915", { w: 2.4 }),
+    pa("M524 222 C530 230 528 244 520 250", null, { s: "#c8c2b0", w: 1.4, op: 0.9 }), ci(523, 220, 3, "#d8d2c0", { w: 1.2 }), // the earpiece: someone was feeding him
+    pa("M520 250 C516 270 506 290 504 320", null, { s: "#c8c2b0", w: 1, op: 0.5 }),
+    pa("M456 300 C460 280 470 266 486 260", null, { s: "#5a4a3a", w: 2, op: 0.6 }));
+  // the audience in silhouette; one woman picked out by a second, smaller light
+  for (let r = 0; r < 3; r++) for (let c = 0; c < 14; c++) {
+    const x = 20 + c * 74 + (r % 2) * 36, y = 520 + r * 36;
+    if (r === 0 && c === 11) continue;
+    b += el(x, y, 18, 22, "#050608", { s: "#1b1d20", w: 2 }) + pa("M" + (x - 32) + " " + (y + 60) + " C" + (x - 30) + " " + (y + 20) + " " + (x + 30) + " " + (y + 20) + " " + (x + 32) + " " + (y + 60) + " Z", "#050608", { s: "#1b1d20", w: 2 });
+  }
+  b += po("830,0 880,0 870,540 790,540", K.a4, { s: null, op: 0.08 }) + el(834, 512, 20, 24, "#4a3a30", { w: 2.4 }) + pa("M812 504 C812 482 856 482 856 504 L860 530 L808 530 Z", "#6a4a38", { w: 2 }) + pa("M800 570 C802 534 866 534 868 570 Z", "#3a3040", { w: 2.4 }) + glow(834, 520, 70, 0.5);
+  // studio camera with its red tally light
+  b += g({}, re(70, 300, 130, 70, "#25292e", { w: 3 }), re(200, 316, 40, 38, "#1a1d21", { w: 3 }), ci(240, 335, 16, "#0d0f12", { w: 3 }), li(130, 370, 100, 470, K.ink, 6), li(130, 370, 160, 470, K.ink, 6), ci(88, 312, 5, K.red, { s: null }), glow(88, 312, 26, 0.6), tx(96, 352, "LIVE", { "font-size": 14, fill: K.red, "font-family": "Arial, sans-serif", "letter-spacing": 2 }));
+  return svg(1000, 600, defs, b);
+});
+
+reg("intro", "intro-4", function () {
+  P = "i4"; W = 3; seed = 104;
+  const defs = lg("wall", 0, 0, 0, 1, [[0, "#22303a"], [1, "#18222a"]]) + lg("win", 0, 0, 0, 1, [[0, "#2a4450"], [1, "#132028"]]) + clip("wc", re(640, 50, 320, 300, "#000", { s: null }));
+  let b = re(0, 0, 1000, 600, u("wall"), { s: null });
+  b += re(632, 42, 336, 316, "#121a20", { w: 4 }) + re(640, 50, 320, 300, u("win"), { s: null });
+  b += g({ "clip-path": u("wc") }, pa("M640 260 L700 230 L740 250 L800 200 L860 230 L960 210 V350 H640 Z", "#101a20", { s: null }), [690, 760, 830, 900].map((x, i) => re(x, 262 + (i % 2) * 14, 6, 8, K.a3, { s: null })).join(""), rain(0.9));
+  b += li(800, 50, 800, 350, "#121a20", 5) + li(640, 200, 960, 200, "#121a20", 5);
+  b += re(0, 420, 1000, 180, "#1a2229", { s: null }) + pa("M0 420 H1000", null, { w: 3 });
+  // Julian's bare desk
+  b += po("140,430 640,430 690,500 90,500", "#4a3a2c", { w: 3.5 }) + re(90, 500, 600, 20, K.woodD, { w: 3.5 }) + re(110, 520, 26, 80, K.woodD, { w: 3 }) + re(644, 520, 26, 80, K.woodD, { w: 3 });
+  b += pa("M560 452 L586 452 L582 480 L564 480 Z", "#5a4a3a", { w: 2.5 }) + pa("M573 452 q-4 -22 -18 -30 M573 452 q2 -26 14 -36", null, { s: "#6d5f3c", w: 2.2 }); // dead plant
+  // Julian, seated, visitor's badge on his lapel
+  b += pa("M200 430 C196 352 236 312 300 306 C364 312 404 352 400 430 Z", "#22262e", { w: 3 }); // jacket
+  b += pa("M270 310 L300 380 L330 310 Z", "#c9c3b0", { w: 2.4 });
+  b += re(338, 344, 30, 40, "#e0dccf", { w: 2 }) + re(338, 344, 30, 10, K.a2, { s: null }) + li(353, 344, 353, 330, K.a2, 2) + tx(353, 376, "VISITOR", { "font-size": 6, "text-anchor": "middle", fill: K.ink, "font-family": "Arial, sans-serif" });
+  b += pa("M230 430 C240 410 270 404 300 410 L300 436 Z M370 430 C360 410 330 404 300 410 L300 436 Z", "#22262e", { w: 2.6 }) + el(280, 436, 26, 10, SK.warm[0], { w: 2.4 }) + el(322, 436, 26, 10, SK.warm[1], { w: 2.4 }); // hands on the desk
+  b += g({ transform: "translate(300 246) scale(0.62) translate(-150 -152)" }, julianHead());
+  // Lena, standing, arms folded, did not ask for him
+  b += pa("M640 600 L652 470 L740 470 L752 600 Z", "#1c1f26", { w: 3 });
+  b += pa("M620 480 C612 380 640 300 696 292 C752 300 780 380 772 480 Z", "#2c3542", { w: 3 }); // blazer
+  b += pa("M672 296 L696 360 L720 296 Z", "#cfc8b4", { w: 2.4 });
+  b += pa("M630 400 C660 380 730 380 764 400 C740 420 660 424 630 400 Z", "#2c3542", { w: 3 }) + pa("M636 404 C670 396 720 396 758 404", null, { s: "#1e2530", w: 2 }) +
+    el(744, 398, 14, 8, SK.olive[0], { w: 2 }) + el(648, 402, 14, 8, SK.olive[1], { w: 2 }); // folded arms
+  b += re(678, 452, 22, 16, K.a2, { w: 2 }) + li(640, 460, 760, 460, K.ink, 4); // badge on her belt
+  b += g({ transform: "translate(696 222) scale(0.8) translate(-150 -154)" }, lenaHead());
+  b += pa("M640 50 L960 50 L1000 600 L560 600 Z", K.t4, { s: null, op: 0.04 }) + hat("M780 290 L1000 290 L1000 600 L800 600 Z", 0.2);
+  return svg(1000, 600, defs, b);
+});
+
+reg("intro", "intro-5", function () {
+  P = "i5"; W = 3; seed = 105;
+  let b = re(0, 0, 1000, 600, "#2a2119", { s: null });
+  for (let y = 0; y < 600; y += 60) b += li(0, y + rr(-6, 6), 1000, y + rr(-6, 6), "#221a14", 3); // desk grain
+  b += glow(520, 300, 420, 0.5);
+  // the wall clock, from above the desk
+  b += ci(860, 110, 70, "#d6d0bf", { w: 5 }) + ci(860, 110, 60, null, { s: "#7d7768", w: 1.5 });
+  for (let i = 0; i < 12; i++) { const a = i * Math.PI / 6; b += li(860 + 52 * Math.sin(a), 110 - 52 * Math.cos(a), 860 + 58 * Math.sin(a), 110 - 58 * Math.cos(a), K.ink, i % 3 ? 2 : 4); }
+  const hA = (6 + 40 / 60) * Math.PI / 6, mA = 40 * Math.PI / 30;
+  b += li(860, 110, 860 + 30 * Math.sin(hA), 110 - 30 * Math.cos(hA), K.ink, 6) + li(860, 110, 860 + 48 * Math.sin(mA), 110 - 48 * Math.cos(mA), K.ink, 4) + ci(860, 110, 5, K.red, { w: 1.5 });
+  // the thin file landing, Lena's hand letting go
+  b += g({ transform: "rotate(-6 500 330)" }, re(330, 210, 340, 240, "#c49a52", { w: 4 }), re(330, 200, 120, 18, "#b48a45", { w: 3 }), re(356, 236, 290, 190, K.paperL, { w: 2, op: 0.3 }),
+    tx(380, 270, "MC-26-0412", { "font-size": 26, fill: K.redD, "font-family": "'Courier New', monospace", "letter-spacing": 2 }),
+    re(370, 290, 120, 6, "#7a5a2a", { s: null, op: 0.6 }), re(370, 304, 90, 6, "#7a5a2a", { s: null, op: 0.6 }), re(560, 230, 80, 100, "#2a2a2a", { w: 2, op: 0.15 }));
+  b += pa("M300 200 l-30 -20 M310 240 l-40 -8 M690 220 l40 -14", null, { s: K.paperL, w: 3, op: 0.35 }); // motion
+  b += pa("M560 0 C560 60 580 110 600 140 L700 170 C720 130 720 60 700 0 Z", "#2c3542", { w: 3 }) + pa("M596 140 C590 170 610 200 640 206 C666 210 690 196 700 170 C680 160 640 150 596 140 Z", SK.olive[0], { w: 3 }) +
+    pa("M620 196 l-6 22 M640 204 l-2 24 M660 202 l2 22", null, { w: 3 }) + pa("M640 160 C656 166 676 168 690 166", null, { s: SK.olive[1], w: 2 });
+  // Julian's coffee and his hands, waiting
+  b += el(180, 470, 60, 60, "#e0dccf", { w: 4 }) + el(180, 470, 46, 46, "#2a1a10", { s: null }) + el(166, 456, 12, 6, "#5a3a20", { s: null, op: 0.8 }) + pa("M236 470 q30 0 26 -26", null, { w: 6 });
+  b += pa("M380 600 C380 560 400 530 440 520 L520 540 L520 600 Z", SK.warm[0], { w: 3 }) + pa("M440 520 l10 30 M470 526 l6 28", null, { s: SK.warm[1], w: 2 }) + pa("M380 600 C376 586 372 600 372 600", "#22262e", { w: 3 });
+  b += sh("M0 0 H1000 V600 H0 Z", 0.0);
+  return svg(1000, 600, "", b);
+});
+
+reg("intro", "intro-twist", function () {
+  P = "it"; W = 3; seed = 106;
+  const defs = lg("wall", 0, 0, 0, 1, [[0, "#1d2a33"], [1, "#141d23"]]) + lg("win", 0, 0, 0, 1, [[0, "#3a5560"], [1, "#1e3038"]]) + clip("wc", re(48, 60, 200, 300, "#000", { s: null }));
+  let b = re(0, 0, 1000, 600, u("wall"), { s: null });
+  // window: the rain has stopped, last drops on the glass
+  b += re(40, 52, 216, 316, "#121a20", { w: 4 }) + re(48, 60, 200, 300, u("win"), { s: null });
+  b += g({ "clip-path": u("wc") }, pa("M48 260 L90 240 L130 250 L170 220 L248 236 V360 H48 Z", "#16242c", { s: null }), [[70, 120], [110, 180], [160, 100], [200, 160], [90, 300], [220, 280], [140, 320]].map(p => ci(p[0], p[1], 3, "#b8cfd4", { s: null, op: 0.6 }) + pa("M" + p[0] + " " + (p[1] + 3) + " v10", null, { s: "#b8cfd4", w: 1.4, op: 0.4 })).join(""));
+  b += li(148, 60, 148, 360, "#121a20", 5);
+  // the evidence board
+  b += re(300, 50, 660, 360, "#7a5c3c", { w: 4 }) + re(308, 58, 644, 344, "#8a6a45", { s: null });
+  const pin = (x, y) => ci(x, y, 4, K.red, { w: 1.2 });
+  const card = (x, y, w, h, inner, rot) => g({ transform: "rotate(" + (rot || 0) + " " + (x + w / 2) + " " + (y + h / 2) + ")" }, re(x, y, w, h, "#d8d2c0", { w: 2 }), inner || "", pin(x + w / 2, y + 6));
+  b += card(340, 80, 120, 90, re(348, 90, 104, 72, "#3a454b", { s: null }) + pa("M350 160 L380 120 L420 140 L450 100", null, { s: "#9aa6ac", w: 4 }), -3); // stairs photo
+  b += card(500, 90, 100, 76, re(508, 100, 84, 58, "#2b3342", { s: null }) + pa("M520 140 l10 -24 l12 0 l2 18 l14 6 Z", "#101216", { w: 1.5 }), 4); // the boots
+  b += card(640, 76, 130, 96, re(648, 86, 114, 80, "#1d2b36", { s: null }) + pa("M650 150 C690 140 720 150 760 130", null, { s: "#3c5160", w: 4 }) + ci(700, 120, 5, K.a3, { s: null }), -2); // map
+  b += card(810, 96, 110, 80, [104, 114, 124, 134, 144, 154].map(y => li(820, y + 4, 908, y + 4, "#6d6a60", 1.4)).join(""), 3); // weather sheet
+  b += card(380, 230, 110, 80, [0, 1, 2, 3, 4].map(i => li(390, 252 + i * 10, 478, 252 + i * 10, "#6d6a60", 1.4)).join(""), 2); // messages
+  b += card(560, 220, 70, 70, tx(595, 262, "?", { "text-anchor": "middle", "font-size": 30, fill: K.ink }), -5);
+  b += g({ transform: "rotate(-4 755 270)" }, re(700, 240, 110, 60, K.note, { w: 2 }), tx(755, 278, "19:30 - 21:30", { "text-anchor": "middle", "font-size": 15, fill: K.ink, "font-family": "'Courier New', monospace", "font-weight": "bold" }), pin(755, 246));
+  b += pa("M400 86 L550 96 L705 82 M550 96 L435 236 M705 82 L755 246 M865 102 L755 246 M595 226 L755 246", null, { s: K.red, w: 2, op: 0.85 });
+  // desk phone on speaker, its light on
+  b += po("380,520 620,520 660,600 340,600", "#3a2c22", { w: 3 }) + po("440,470 560,470 590,540 410,540", "#1f2428", { w: 3 }) + pa("M430 470 C430 444 570 444 570 470", "#2a3035", { w: 3 }) + ci(560, 500, 6, K.a3, { w: 1.5 }) + glow(560, 500, 40, 0.8) +
+    [0, 1, 2, 3].map(i => li(450 + i * 18, 500, 450 + i * 18, 520, "#4a5258", 4)).join("") + pa("M600 470 q14 -14 0 -28 M616 476 q24 -22 0 -48", null, { s: K.a3, w: 2.4, op: 0.6 });
+  // Lena from behind, looking at the board for a long time
+  b += pa("M720 600 C716 520 740 470 790 462 C840 470 864 520 860 600 Z", "#2c3542", { w: 3 }) + el(790, 430, 32, 38, "#15100d", { w: 3 }) + pa("M816 412 C834 412 840 430 832 442 C824 448 816 440 818 430", "#15100d", { w: 2.4 }) + pa("M770 466 L790 452 L810 466", SK.olive[1], { w: 2 });
+  b += hat("M0 420 H1000 V600 H0 Z", 0.2) + glow(560, 500, 240, 0.25);
+  return svg(1000, 600, defs, b);
 });
 
 /* ============================================================ OUTPUT */
