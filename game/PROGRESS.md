@@ -23,10 +23,21 @@ check in with the owner. Save (commit and push) after every step.
 
 ## Next session
 
-1. Images: generate the rest with Canva and download them (method below).
-2. Engine: show caseFile documents and new victim fields on the opening screen.
-3. Generate remaining realistic images, place hotspots on them, wire into art.js (engine needs to support photo images instead of SVG strings).
-4. Full test play (Evidence Collector), then publish link.
+Team leader's choice (owner said "choose what is best"): free Hugging Face token. The owner is adding
+it as an API credential named HF_TOKEN (scoped to huggingface.co) in the environment settings.
+
+1. Check the token works: generate one image with FLUX.1-schnell (pip install gradio_client;
+   Client("black-forest-labs/FLUX.1-schnell", hf_token=...).predict(..., api_name="/infer")).
+   If the credential is injected by the proxy rather than as an env var, try without hf_token
+   first. If nothing works, fall back: keep the 5 photos + drawings, and use Canva again when its
+   monthly allowance refills.
+2. Generate the 10 pictures in game/images/PROMPTS.md (people 4:5, scenes 5:3), save as
+   game/images/<art key>.jpg, add them to game/photos.js.
+3. Re-place each scene's hotspots in case-001.js on the new photos (look at each photo; keep the
+   validator passing).
+4. Full test play (Evidence Collector), fix issues, then publish the link for the owner.
+5. Map and intro slides: improved drawings (Technical Artist) if time allows.
+(Done already: engine shows photos and the full case file.)
 
 ## How to get full-size images out of Canva
 
