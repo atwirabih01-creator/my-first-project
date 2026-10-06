@@ -15,6 +15,12 @@ check in with the owner. Save (commit and push) after every step.
 | Full test play (Evidence Collector) | Not started |
 | Publish link for the owner | Not started |
 
+## Owner decision 2026-10-06: pictures plan (D + C)
+
+- Real photos for people and places: the owner makes them with a free tool (Microsoft Designer / Bing Image Creator) from game/images/PROMPTS.md (10 prompts) and uploads them. Crop scenes to 5:3, save as game/images/<art key>.jpg, then re-place hotspots on each photo.
+- Map and intro slides stay as improved code drawings.
+- Engine update for photos + full case file: in progress (Frontend Developer).
+
 ## Next session
 
 1. Images: generate the rest with Canva and download them (method below).
