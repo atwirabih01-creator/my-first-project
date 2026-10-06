@@ -289,9 +289,9 @@
     if (!root) return;
     var t = el("div", { class: "toast " + (kind ? "toast--" + kind : ""), role: "status" }, text);
     root.appendChild(t);
-    while (root.children.length > 3) root.removeChild(root.firstChild);
-    setTimeout(function () { t.classList.add("toast--out"); }, 3600);
-    setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 4200);
+    while (root.children.length > 2) root.removeChild(root.firstChild);
+    setTimeout(function () { t.classList.add("toast--out"); }, 2400);
+    setTimeout(function () { if (t.parentNode) t.parentNode.removeChild(t); }, 2900);
   }
   function stamp(sub) { fxQueue.push({ type: "stamp", sub: sub }); }
   var stampBusy = false;
@@ -415,6 +415,7 @@
   function commit() { settle(false); save(); render(); playFx(); }
 
   /* ------------------------------------------------------------------ actions */
+  var arrivedAt = null;   /* hotspots pulse once on the render right after arriving */
   function travel(locId) {
     var l = IDX.loc[locId];
     if (!l || !locUnlocked(l)) return;
@@ -425,7 +426,9 @@
       logEntry("event", "Travelled", "Arrived at " + str(l.name, l.id));
     }
     S.ui.stage = "scene"; S.ui.mobile = "scene"; S.ui.person = null;
+    arrivedAt = locId;
     commit();
+    arrivedAt = null;
     focusKey("scene-title");
   }
 
@@ -565,6 +568,7 @@
     logEntry("event", "Request to Theo", r.label);
     commit();
   }
+  function shortDur(m) { return m < 60 ? m + " min" : (m % 60 ? Math.floor(m / 60) + " h " + (m % 60) + " min" : (m / 60) + " h"); }
   function durationText(m) {
     if (m < 60) return m + " minutes";
     var h = Math.floor(m / 60), r = m % 60;
@@ -574,7 +578,11 @@
   function waitButtons(k) {
     return el("div", { class: "scene__wait" }, [
       btn("Wait 30 minutes", "wait" + k, wait, "btn--sm"),
-      btn("Wait until morning", "wait-morning" + k, waitMorning, "btn--sm btn--ghost"),
+      S.ui.confirmMorning ? el("span", { class: "confirm-inline", role: "group", "aria-label": "Confirm wait until morning" }, [
+        el("span", null, "Skip to " + fmtT(nextMorning(S.t)) + "?"),
+        btn("Yes, wait", "wait-morning-yes" + k, function () { S.ui.confirmMorning = false; waitMorning(); }, "btn--sm btn--primary"),
+        btn("No", "wait-morning-no" + k, function () { S.ui.confirmMorning = false; save(); render(); focusKey("wait-morning" + k); }, "btn--sm")
+      ]) : btn("Wait until morning", "wait-morning" + k, function () { S.ui.confirmMorning = true; save(); render(); focusKey("wait-morning-no" + k); }, "btn--sm btn--ghost"),
       k ? null : el("span", { class: "muted" }, "Let the clock run while Theo works or someone arrives.")
     ]);
   }
@@ -604,6 +612,20 @@
     commit();
   }
 
+  /* Fallback "go here next": an unvisited place, unexamined spots, someone with unasked questions, or Theo. */
+  function directionHint() {
+    var locs = C.locations.filter(locUnlocked);
+    var unvisited = locs.filter(function (l) { return !S.visited[l.id]; })[0];
+    if (unvisited) return "You haven't been to " + str(unvisited.name) + " yet. Go and look.";
+    var unseen = locs.filter(function (l) { return l.hotspots.some(function (h) { return hsVisible(h) && !has(h.id); }); })[0];
+    if (unseen) return "There's still something at " + str(unseen.name) + " you haven't looked at properly.";
+    var person = C.people.filter(function (p) { return personAppeared(p) && p.questions.some(function (q) { return !has(q.id) && reqMet(q.requires); }); })[0];
+    if (person) return str(person.name) + " still has things to tell you" + (IDX.loc[person.locationId] ? ", at " + str(IDX.loc[person.locationId].name) : "") + (person.available && person.available.from ? " (" + person.available.from + "\u2013" + person.available.to + ")" : "") + ".";
+    var rq = C.requests.filter(function (r) { return !S.requested[r.id] && reqMet(r.requires); })[0];
+    if (rq) return "Theo's sitting on his hands. Ask him to " + str(rq.label).replace(/^./, function (c) { return c.toLowerCase(); }) + ".";
+    return null;
+  }
+
   function askHint() {
     if (tokensLeft() <= 0) return;
     var relevant = C.hints.filter(function (h) {
@@ -614,6 +636,14 @@
     var fresh = relevant.filter(function (h) { return S.hintsShown.indexOf(h.id) === -1; });
     var pick = fresh[0];
     if (!pick) {
+      var dir = directionHint();
+      if (dir) {
+        S.hintsSpent++;
+        logEntry("event", "Hint from Lena", dir);
+        commit();
+        showHintModal("\u201c" + dir + "\u201d");
+        return;
+      }
       var again = relevant[0];
       showHintModal(again ? "Lena repeats herself, for free: “" + again.text + "”" : "Lena shrugs. “Nothing to add. Read your notebook again; it's all there.” (No token spent.)");
       return;
@@ -912,6 +942,7 @@
     var screenKey = screenOverride === "title" || !S ? "title" : st;
     if (render.last !== screenKey) { render.last = screenKey; keepScroll = {}; try { window.scrollTo(0, 0); } catch (e) { /* ignore */ } }
     document.body.setAttribute("data-screen", st);
+    document.body.classList.remove("in-conv");
     if (screenOverride === "title" || !S) renderTitle();
     else if (st === "intro") renderIntro();
     else if (st === "casefile") renderCaseFile();
@@ -1096,6 +1127,7 @@
     var stageTabs = el("div", { class: "tabs tabs--stage", role: "tablist", "aria-label": "Investigation view" }, SECTIONS.filter(function (s) { return s.where === "stage"; }).map(tabBtn("stage")));
     var panelTabs = el("div", { class: "tabs tabs--panel", role: "tablist", "aria-label": "Case tools" }, SECTIONS.filter(function (s) { return s.where === "panel"; }).map(tabBtn("panel")));
 
+    document.body.classList.toggle("in-conv", S.ui.panel === "people" && !!S.ui.person);
     var main = el("div", { class: "main", "data-mobile": mobileSec.where }, [
       top,
       el("div", { class: "layout" }, [
@@ -1115,7 +1147,7 @@
     return function (s) {
       var on = S.ui[where] === s.id, b = badgeFor(s.id);
       return el("button", { class: "tab" + (on ? " is-on" : ""), role: "tab", type: "button", "aria-selected": on ? "true" : "false", k: "tab-" + s.id, onclick: function () { goSection(s.id); } }, [
-        icon(s.icon), el("span", null, s.label), b ? el("span", { class: "badge", "aria-label": b + " new" }, String(b)) : null
+        icon(s.icon), el("span", null, s.short || s.label), b ? el("span", { class: "badge", "aria-label": b + " new" }, String(b)) : null
       ]);
     };
   }
@@ -1165,7 +1197,7 @@
     var isHQ = l.id === hqId();
     var done = visible.filter(function (h) { return has(h.id); });
 
-    return el("div", { class: "scene" }, [
+    return el("div", { class: "scene" + (arrivedAt === l.id ? " scene--arrive" : "") }, [
       el("div", { class: "scene__head" }, [
         el("h2", { class: "scene__title display", tabindex: "-1", k: "scene-title" }, str(l.name)),
         el("span", { class: "scene__district" }, str(l.district))
@@ -1184,7 +1216,7 @@
             style: "left:" + (hx / 10) + "%;top:" + (hy / 6) + "%;width:" + (2 * r / 10) + "%;height:" + (2 * r / 6) + "%",
             "aria-label": ex ? str(h.label, "Examined") + (pz ? " (unsolved)" : "") : "Something worth a closer look",
             onclick: function () { examine(h.id); }
-          }, [el("span", { class: "hs__ring", "aria-hidden": "true" }), ex ? el("span", { class: "hs__label" + (hx > 780 ? " hs__label--left" : "") }, str(h.label)) : null]);
+          }, [el("span", { class: "hs__ring", "aria-hidden": "true" }), ex ? el("span", { class: "hs__label" + (hx > 560 ? " hs__label--left" : "") + (hy < 40 ? " hs__label--down" : hy > 560 ? " hs__label--up" : "") }, str(h.label)) : null]);
         }))
       ]),
       el("p", { class: "scene__help" }, visible.length ? (done.length + " of " + visible.length + " things examined here. Look for faint marks and tap anything that seems worth a closer look.") : "Nothing here to examine."),
@@ -1442,7 +1474,7 @@
       ]),
       el("h3", { class: "minihead" }, "Ask Theo to…"),
       avail.length ? el("ul", { class: "qlist" }, avail.map(function (r) {
-        return el("li", null, btn(str(r.label, r.id), "rq-" + r.id, function () { sendRequest(r.id); }, "qbtn", { "aria-label": str(r.label) + " (takes about " + durationText(typeof r.delayMinutes === "number" ? r.delayMinutes : 60) + ")" }));
+        return el("li", null, btn([str(r.label, r.id), el("span", { class: "qbtn__time" }, "~" + shortDur(typeof r.delayMinutes === "number" ? r.delayMinutes : 60))], "rq-" + r.id, function () { sendRequest(r.id); }, "qbtn", { "aria-label": str(r.label) + " (takes about " + durationText(typeof r.delayMinutes === "number" ? r.delayMinutes : 60) + ")" }));
       })) : el("p", { class: "muted" }, "Nothing to ask for right now. New leads open new requests."),
       atHQ ? waitButtons("-theo") : el("p", { class: "muted" }, "You can wait for results at headquarters.")
     ]);

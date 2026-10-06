@@ -210,6 +210,7 @@ async function run(viewport, label) {
 
   // Theo request
   await go("theo");
+  check((await text("[data-k='rq-rq-phone']")).includes("~1 h"), "Theo request button shows its wait time");
   await click("rq-rq-phone");
   check((await text(".theo")).includes("On it"), "Theo acknowledges request");
   const sentAt = await clock();
@@ -353,6 +354,9 @@ async function run(viewport, label) {
   // Second run with overrides
   check((await clock()) === "Day 1, 06:40", "reopen restarts the clock");
   await click("wait-morning");
+  check((await clock()) === "Day 1, 06:40", "wait until morning asks first (no time passes)");
+  check((await text(".confirm-inline")).includes("Day 2, 07:00"), "confirm shows the target time");
+  await click("wait-morning-yes");
   await k("event-continue").waitFor({ timeout: 4000 });
   check((await text(".event-card")).includes("The coroner, again"), "reopen twist override");
   check((await text(".event-card__kicker")).includes("Day 1, 12:00"), "wait until morning fires the twist at its time");
@@ -588,7 +592,7 @@ async function playRealCase(viewport, label) {
         // nothing new: wait at HQ for results / people / the twist
         await go("map"); await click("travel-" + (CASE.locations.find((l) => l.district === "HQ") || CASE.locations[0]).id);
         const t0 = Object.keys(await flags()).length;
-        await click("wait-morning");
+        await click("wait-morning"); await click("wait-morning-yes");
         await sweep();
         if (Object.keys(await flags()).length === t0) break;
       }
