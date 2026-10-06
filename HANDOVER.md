@@ -98,7 +98,7 @@ game/
    (`Client("black-forest-labs/FLUX.1-schnell", hf_token=…)`, `api_name="/infer"`). Anonymous
    HF quota is zero from this environment. Pollinations (no key) works but is weak and adds a
    logo — not recommended. Fallback: keep drawings, use Canva again after refill.
-2. **QA fixes** (17 items) in `game/reviews/qa-1.md`. Engine items 1–10 are done (2026-10-06); left: 11–12 (engine) and 13–17 (content). Original list: Most important: phone document tables
+2. **QA fixes** (17 items) in `game/reviews/qa-1.md`. Items 1–10 and 13–17 are done (2026-10-06); only optional 11–12 are left. Original list: Most important: phone document tables
    squeezed (words break), hint button useless when lost (needs a "go here next" fallback),
    "Wait until morning" needs a confirm, hotspots too faint, toasts pile up, label overlaps,
    desktop "Solve" tab pushed off-screen; content: body still on stairs after the post-mortem,
@@ -131,7 +131,7 @@ game/
 1. Ask the owner whether the Hugging Face token is set up. If yes, test one image, then make the
    10 pictures in `game/images/PROMPTS.md` (incl. the stairs redo), add to `photos.js`, re-place
    scene hotspots, validate. If no, skip to step 2.
-2. Fix remaining QA items 11–12 (Frontend Developer) and 13–17 (Narrative Designer); run all tests.
+2. Optional QA items 11–12 (Frontend Developer); run all tests.
 3. Quick QA re-check (Evidence Collector), then send the owner a new single-file build.
 4. Owner plays the pilot and gives feedback → apply it.
 5. Then: merge to `main` (with okay), plan Chapter 1 (10 cases incl. 3 connected + finale, the

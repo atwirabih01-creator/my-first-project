@@ -19,7 +19,7 @@ window.CASE = {
     { art: "intro-5", caption: "07:30. Lena drops a thin file in front of him. 'Don't read her. Read the evidence.'" }
   ],
 
-  briefing: "Iris Kellan, thirty-four. Senior claims investigator at Halden Mutual Marine, Harbour Point Tower, Financial Quarter. Lived alone in Hillcrest. At 05:50 a city street sweeper, Tomas Ferreira, found her on the lower landing of the Saltmarket Stairs in Old Town, face down, with a head injury. PC Odell was there at 06:04, the paramedics pronounced her at 06:10, and the stairs have been closed at both ends since. What we have: she was fully dressed, coat buttoned, boots off and standing on the step below her. Her phone was in her inside pocket, screen cracked, locked. No handbag, no wallet, no keys. Dr. Sorensen looked at her at the scene: one bad injury to the back of the head, scrapes to the face and hands, and on the temperature she puts death between ten last night and one this morning. Her view, for now, is a fall down the steps, possibly helped by someone who wanted the bag. There have been two bag snatches on Mercer Street this month, and uniform will tell you all about them. The emergency card on the phone gave us the sister, Hanna. PC Okafor told her at five past seven. Hanna had a text from Iris's phone at 23:12: walking home the long way, need air. If that's right, Iris was alive at 23:12 and on her way home, which puts her on those stairs exactly when the doctor likes. What we don't have: anyone who saw her after the early evening, where she spent it, where the bag went, and why a woman who lives in Hillcrest was on the Saltmarket Stairs at all, because they are nowhere near her way home. Nobody has viewed a camera yet. The late shop at the top of the stairs has one. Sorensen is holding the body at the scene until we've walked it, then she does the post-mortem and rings. Hanna will be at the flat from nine. The neighbour downstairs has a key. I've told her line manager; he's in from half past eight. The contacts are in the file. So: scene first, while it's still ours, then the flat, then the office. Anything with a password on it goes to Theo. I would like this to be a mugging, because muggings are simple. That is not up to me. And Marsh: no tricks with the family.",
+  briefing: "Iris Kellan, thirty-four. Senior claims investigator at Halden Mutual Marine, Harbour Point Tower, Financial Quarter. Lived alone in Hillcrest. At 05:50 a city street sweeper, Tomas Ferreira, found her on the lower landing of the Saltmarket Stairs in Old Town, face down, with a head injury. PC Odell was there at 06:04, the paramedics pronounced her at 06:10, and the stairs have been closed at both ends since.\n\nWhat we have: she was fully dressed, coat buttoned, boots off and standing on the step below her. Her phone was in her inside pocket, screen cracked, locked. No handbag, no wallet, no keys. Dr. Sorensen looked at her at the scene: one bad injury to the back of the head, scrapes to the face and hands, and on the temperature she puts death between ten last night and one this morning. Her view, for now, is a fall down the steps, possibly helped by someone who wanted the bag. There have been two bag snatches on Mercer Street this month, and uniform will tell you all about them.\n\nThe emergency card on the phone gave us the sister, Hanna. PC Okafor told her at five past seven. Hanna had a text from Iris's phone at 23:12: walking home the long way, need air. If that's right, Iris was alive at 23:12 and on her way home, which puts her on those stairs exactly when the doctor likes.\n\nWhat we don't have: anyone who saw her after the early evening, where she spent it, where the bag went, and why a woman who lives in Hillcrest was on the Saltmarket Stairs at all, because they are nowhere near her way home. Nobody has viewed a camera yet. The late shop at the top of the stairs has one.\n\nSorensen is holding the body at the scene until we've walked it, then she does the post-mortem and rings. Hanna will be at the flat from nine. The neighbour downstairs has a key. I've told her line manager; he's in from half past eight. The contacts are in the file.\n\nSo: scene first, while it's still ours, then the flat, then the office. Anything with a password on it goes to Theo. I would like this to be a mugging, because muggings are simple. That is not up to me. And Marsh: no tricks with the family.",
 
   caseFile: ["ev-first-officer", "ev-scene-log", "ev-prelim-report", "ev-nok-note", "ev-contacts"],
 
@@ -89,8 +89,8 @@ window.CASE = {
           grants: ["ev-phone", "ev-cafe-receipt"]
         },
         {
-          id: "h-st-body", label: "The body", x: 590, y: 420, r: 55,
-          text: "A white forensic sheet ringed by numbered yellow evidence markers covers the lower landing. You lift its edge. Iris Kellan lies face down, head towards the lower flight, arms tucked beneath her. Her coat is buttoned and neat. Her hair is matted at the back. No bag. She looks less like someone who fell than someone who was put down carefully.",
+          id: "h-st-body", label: "The landing", x: 590, y: 420, r: 55,
+          text: "The lower landing, ringed by numbered yellow evidence markers. Scene photograph 4, taken at 06:21 before anyone moved anything, shows how she lay: face down, head towards the lower flight, arms tucked beneath her, coat buttoned and neat, hair matted at the back. No bag. She looks less like someone who fell than someone who was put down carefully.",
           grants: ["ev-scene-photo"]
         },
         {
@@ -173,14 +173,12 @@ window.CASE = {
         },
         {
           id: "h-of-carpet", label: "Archive carpet", x: 640, y: 510, r: 45,
-          requires: ["tw-autopsy"],
-          text: "Through the open archive door, at the end of aisle F: a patch of grey loop-pile carpet about a metre across that is cleaner than the rest. You kneel. It is still faintly damp at the base and smells of carpet shampoo.",
+          text: "Through the open archive door, at the end of aisle F: a patch of grey loop-pile carpet about a metre across that is cleaner than the rest. You kneel. It is still faintly damp at the base and smells of carpet shampoo. Somebody spilled something and cared about it.",
           grants: ["ev-carpet-patch"]
         },
         {
           id: "h-of-archive", label: "Archive terminal", x: 880, y: 420, r: 45,
-          requires: ["ev-iris-copies"],
-          text: "Just inside the archive door, a box-retrieval terminal on a steel stand. A sticky note on its side in Iris's square capitals: START AT THE BEGINNING.",
+          text: "Just inside the archive door, a box-retrieval terminal on a steel stand. It wants a four-digit claim number. A sticky note on its side in Iris's square capitals: START AT THE BEGINNING. The beginning of what, she doesn't say.",
           puzzle: "pz-archive"
         }
       ]
@@ -1372,7 +1370,7 @@ window.CASE = {
     },
     {
       id: "pz-archive",
-      prompt: "Archive retrieval terminal: 'ENTER FOUR-DIGIT CLAIM NUMBER TO LOCATE BOX.' A sticky note on its side reads: START AT THE BEGINNING. Iris's Northline file lists fourteen claims.",
+      prompt: "Archive retrieval terminal: 'ENTER FOUR-DIGIT CLAIM NUMBER TO LOCATE BOX.' A sticky note on its side, in Iris's capitals, reads: START AT THE BEGINNING.",
       answer: "1406",
       grants: ["ev-archive-file"],
       hintToken: true
@@ -1432,6 +1430,10 @@ window.CASE = {
       text: "Sorensen has described the edge of whatever hit her. Something that shape lives somewhere in that office. Walls and shelves are worth a second look."
     },
     {
+      id: "hint-close-doors", requires: ["tw-autopsy", "fact-argument", "ev-kiosk-cam"], until: ["ded-marcus-cleared", "ded-petra-cleared"],
+      text: "Before anyone gets charged, close the doors behind us. Two people lied to us about that week. Find out where each of them was at the new time, on paper."
+    },
+    {
       id: "hint-money", requires: ["ev-iris-copies"], until: ["ded-motive"],
       text: "She circled one company name fourteen times. Iris couldn't find out who owns it. Theo can."
     }
@@ -1459,7 +1461,7 @@ window.CASE = {
     proofsNeeded: 3,
     success: {
       title: "The Helm",
-      text: "Interview Room 2. Whitlock's solicitor reads the car park log twice and stops taking notes. Julian does not perform. He lays the pages down one at a time: the 18:52 call, the 19:55 door, the 20:51 text, the 22:04 barrier, the carpet, the photograph of the brass wheel on the shelf. The solicitor leans in and murmurs that his client has nothing to say. Whitlock looks at the photograph and says it anyway. 'She was going to walk into Ruth Achebe's office and say my name like a diagnosis. Twenty-five years. I asked her to come back so I could explain. I only wanted her to listen.' He stops. 'She turned round to leave.' The award is found the next day, wrapped in a dust sheet in his garage at home. Lena writes the charge in her neat block capitals. In the corridor afterwards she says, without looking at Julian, 'Good work.' Then, because she is Lena: 'Don't get used to it.'"
+      text: "Interview Room 2. Whitlock's solicitor reads the car park log twice and stops taking notes. Julian does not perform. He lays the pages down one at a time: the 18:52 call, the 19:55 door, the 20:51 text, the 22:04 barrier, the carpet, the newsletter photograph of the brass wheel, and beside it the clean square in the dust where it used to stand. The solicitor leans in and murmurs that his client has nothing to say. Whitlock looks at the photograph and says it anyway. 'She was going to walk into Ruth Achebe's office and say my name like a diagnosis. Twenty-five years. I asked her to come back so I could explain. I only wanted her to listen.' He stops. 'She turned round to leave.' The award is found the next day, wrapped in a dust sheet in his garage at home. Lena writes the charge in her neat block capitals. In the corridor afterwards she says, without looking at Julian, 'Good work.' Then, because she is Lena: 'Don't get used to it.'"
     },
     failure: {
       title: "The wrong door",
@@ -1475,7 +1477,7 @@ window.CASE = {
    */
   reopen: {
     intro: "Three weeks later the charge has collapsed and the file is back on Lena's desk. She lays out everything from the first morning: the scene as it was photographed, the statements as they were taken, the recordings the first team copied. 'That part doesn't change,' she says. 'What's still out there does. Whoever did this has had three weeks to tidy up, records have aged out, and people who talked freely have had time to be frightened.'",
-    briefing: "The file, three weeks on. Iris Kellan, thirty-four, senior claims investigator at Halden Mutual Marine. Found at 05:50 on a Thursday morning on the lower landing of the Saltmarket Stairs by a street sweeper: face down, head injury, handbag gone. The first team worked it the way the scene asked them to. A fall down the steps, maybe helped by someone who wanted the bag, some time between ten and one, with a text from her phone at 23:12 to prove she was alive and walking home. They charged the wrong person, and it came apart in court in a single morning. Here is what has not changed. Everything they photographed, bagged, copied and wrote down is in these boxes: the scene photographs, the property, the statements, the doctor's notes, the café recording. Paper doesn't get frightened and it doesn't tidy up. Treat it as if you'd collected it yourself this morning, and read every page, including the ones they skimmed. Here is what has. Three weeks is long enough for recordings to be overwritten and logs to be deleted. It is long enough for whoever did this to put things back where they belong and clean what they couldn't move. And it is long enough for people who talked freely the first time to start working out what talking costs them. Expect the trail to be thinner in some places and newer in others. We start where they started. Scene, flat, office. Anything with a password or a log on it goes to Theo, and the sooner the better. Sorensen will walk us through her report when we're ready for it. And this time, Marsh, nobody gets charged because we liked the look of them for it.",
+    briefing: "The file, three weeks on. Iris Kellan, thirty-four, senior claims investigator at Halden Mutual Marine. Found at 05:50 on a Thursday morning on the lower landing of the Saltmarket Stairs by a street sweeper: face down, head injury, handbag gone. The first team worked it the way the scene asked them to. A fall down the steps, maybe helped by someone who wanted the bag, some time between ten and one, with a text from her phone at 23:12 to prove she was alive and walking home. They charged the wrong person, and it came apart in court in a single morning.\n\nHere is what has not changed. Everything they photographed, bagged, copied and wrote down is in these boxes: the scene photographs, the property, the statements, the doctor's notes, the café recording. Paper doesn't get frightened and it doesn't tidy up. Treat it as if you'd collected it yourself this morning, and read every page, including the ones they skimmed.\n\nHere is what has. Three weeks is long enough for recordings to be overwritten and logs to be deleted. It is long enough for whoever did this to put things back where they belong and clean what they couldn't move. And it is long enough for people who talked freely the first time to start working out what talking costs them. Expect the trail to be thinner in some places and newer in others.\n\nWe start where they started. Scene, flat, office. Anything with a password or a log on it goes to Theo, and the sooner the better. Sorensen will walk us through her report when we're ready for it. And this time, Marsh, nobody gets charged because we liked the look of them for it.",
 
     evidence: {
       "ev-contacts": {
@@ -1616,7 +1618,6 @@ window.CASE = {
         grants: ["ev-award-polished"]
       },
       "h-of-carpet": {
-        requires: ["tw-autopsy"],
         text: "At the end of archive aisle F, two carpet tiles, a metre of floor, are a brighter grey than the rest, their pile not yet trodden flat. Pinned to the archive door is a facilities work order.",
         grants: ["ev-new-tile"]
       },
@@ -1698,7 +1699,7 @@ window.CASE = {
     solution: {
       success: {
         title: "The Helm",
-        text: "Interview Room 2. Whitlock's solicitor reads the traffic camera log twice and stops taking notes. Julian does not perform. He lays the pages down one at a time: the 18:52 call, the 19:55 door, the 20:51 text, the car on Quay Road, the archive, the photograph of the brass wheel on the shelf. The solicitor leans in and murmurs that his client has nothing to say. Whitlock looks at the photograph and says it anyway. 'She was going to walk into Ruth Achebe's office and say my name like a diagnosis. Twenty-five years. I asked her to come back so I could explain. I only wanted her to listen.' He stops. 'She turned round to leave.' By the end of the week the lab has the award. Lena writes the charge in her neat block capitals. In the corridor afterwards she says, without looking at Julian, 'Good work.' Then, because she is Lena: 'Don't get used to it.'"
+        text: "Interview Room 2. Whitlock's solicitor reads the traffic camera log twice and stops taking notes. Julian does not perform. He lays the pages down one at a time: the 18:52 call, the 19:55 door, the 20:51 text, the car on Quay Road, the archive, the newsletter photograph of the brass wheel, and beside it the wheel itself in an evidence bag, polished, with its new felt pad. The solicitor leans in and murmurs that his client has nothing to say. Whitlock looks at the bag and says it anyway. 'She was going to walk into Ruth Achebe's office and say my name like a diagnosis. Twenty-five years. I asked her to come back so I could explain. I only wanted her to listen.' He stops. 'She turned round to leave.' By the end of the week the lab has the award. Lena writes the charge in her neat block capitals. In the corridor afterwards she says, without looking at Julian, 'Good work.' Then, because she is Lena: 'Don't get used to it.'"
       }
     },
 

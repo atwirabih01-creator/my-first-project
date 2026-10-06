@@ -104,7 +104,7 @@ The body is held at the scene until Lena and Julian have walked it, so the scene
 6. **Phone extraction**: the 18:52 Whitlock call; the 23:12 text was created at 20:51 on HM-LT-0417, which was unlocked from 20:24.
    - **extraction + laptop → "The fake text came from inside Halden Mutual"**. Halden Mutual's lawyers won't release access records for what is still officially a fall.
    - **extraction + Hanna's call → "Whitlock called her back to the office"** (a strong lead, deliberately not a proof).
-7. **Twist (autopsy)**: a patterned blow; the "fall" injuries most likely made after death; grey carpet fibres; death roughly **19:30–21:30**. It is now a homicide, so Lena can get warrants. New hotspots appear at the stairs (drag marks) and the office (shampooed archive carpet).
+7. **Twist (autopsy)**: a patterned blow; the "fall" injuries most likely made after death; grey carpet fibres; death roughly **19:30–21:30**. It is now a homicide, so Lena can get warrants. A new hotspot appears at the stairs (drag marks); the shampooed archive carpet, visible from the start as an odd detail, now means something.
    - **autopsy + carpet → "She died in the archive"**; **autopsy + newsletter → "The weapon was the Helm Award"**.
 8. **Badge log** (needs the twist; 45 min): Iris in at 19:58 and never out; Nico out at 19:52. Confront Nico: CV printing, and **Whitlock's car in bay 12 at 19:52**. Request car park logs (60 min): fob in at 19:55, car out at 22:04, Quay Road at 22:17.
    - **car park logs + Whitlock's alibi → "Whitlock's evening is a lie"**.
