@@ -31,11 +31,14 @@ window.CASE = {
   intro: [                            // opening sequence, 3–6 slides
     { art: "intro-1", caption: "…" }  // art = key in ART.intro
   ],
-  briefing: "…",                      // what happened, 80–150 words, from Lena
+  briefing: "…",                      // what happened, what was done, what is unknown, where to start; 250–400 words, from Lena
+  caseFile: ["ev-…"],                 // 4–6 evidence ids granted at the start and shown together as the opening case file
 
   victim: {
     id: "p-victim", name: "…", age: 0, occupation: "…",
-    bio: "…",                         // 60–120 words, includes hidden leads
+    bio: "…",                         // 150–250 words, includes hidden leads
+    family: "…", work: "…", routine: "…",  // optional: one short paragraph each (relationships, workplace, daily habits)
+    lastSeen: "…",                    // optional: last confirmed sightings, as known at the start
     foundAt: "…", foundBy: "…",
     timeOfDeath: "…",                 // as estimated at start, e.g. "Between 22:00 and 01:00"
     causeOfDeath: "…"                 // as believed at start (may change later)

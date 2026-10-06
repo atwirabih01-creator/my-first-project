@@ -198,6 +198,18 @@ function checkBuild(c, label) {
   refs(c.hintTokensFrom, "hintTokensFrom");
   c.hints.forEach(function (h) { refs(h.requires, h.id + ".requires"); refs(h.until, h.id + ".until"); });
 
+  // opening case file
+  if (c.caseFile !== undefined) {
+    if (!Array.isArray(c.caseFile)) err(label + ": caseFile must be a list of evidence ids");
+    else {
+      if (c.caseFile.length < 4 || c.caseFile.length > 6) warn(label + ": caseFile has " + c.caseFile.length + " items (4-6)");
+      refs(c.caseFile, "caseFile", ["evidence"]);
+      c.caseFile.forEach(function (id, i) { if (c.caseFile.indexOf(id) !== i) err(label + ": caseFile lists '" + id + "' twice"); });
+      var cfProofs = c.caseFile.filter(function (id) { return arr(c.solution.proofs).indexOf(id) !== -1; });
+      if (cfProofs.length) err(label + ": caseFile items are free at the start and must not be proofs: " + cfProofs.join(", "));
+    }
+  }
+
   // solution
   var s = c.solution;
   refs(s.suspects, "solution.suspects", ["person"]);
@@ -222,6 +234,7 @@ function simulate(c, opts) {
   function set(id, why) { if (id && !F[id]) { F[id] = why; order.push(id); return true; } return false; }
   function met(req) { return arr(req).every(has); }
   function grantAll(list, why) { var ch = false; arr(list).forEach(function (g) { if (set(g, why)) ch = true; }); return ch; }
+  arr(c.caseFile).forEach(function (id) { set(id, "case file (start)"); });
   var changed = true, rounds = 0;
   while (changed && rounds++ < 500) {
     changed = false;
@@ -286,6 +299,7 @@ function grantedSet(c) {
   c.people.forEach(function (p) { arr(p.questions).forEach(function (q) { add(q.grants); }); arr(p.presentations).forEach(function (pr) { add(pr.grants); }); });
   c.deductions.forEach(function (d) { add(d.grants); }); c.requests.forEach(function (r) { add(r.grants); });
   c.puzzles.forEach(function (z) { add(z.grants); }); add(c.twist && c.twist.grants);
+  add(c.caseFile);
   return g;
 }
 var RETIRED = [];
@@ -344,6 +358,7 @@ function reachReport(c, label) {
   c.people.forEach(function (p) { arr(p.questions).forEach(function (q) { g(q.grants); }); arr(p.presentations).forEach(function (pr) { g(pr.grants); }); });
   c.deductions.forEach(function (d) { g(d.grants); }); c.requests.forEach(function (r) { g(r.grants); });
   c.puzzles.forEach(function (z) { g(z.grants); }); g(c.twist && c.twist.grants);
+  g(c.caseFile);
   c.evidence.concat(c.facts).forEach(function (x) { if (!granted[x.id] && !retired(label, x.id)) err(label + ": '" + x.id + "' is never granted by anything"); });
 
   // debrief flags (warning only in reopen, where some routes change)
@@ -402,7 +417,7 @@ function checkReopenKeys() {
     ["killer", "suspects"].forEach(function (k) { if (r.solution[k]) err("reopen.solution must keep the same " + k); });
     if (r.solution.proofs && r.proofs) warn("reopen sets proofs in both reopen.proofs and reopen.solution.proofs");
   }
-  if (r.briefing) { var bw = words(r.briefing); if (bw < 80 || bw > 150) warn("reopen.briefing is " + bw + " words (80-150)"); }
+  if (r.briefing) { var bw = words(r.briefing); if (bw < 250 || bw > 400) warn("reopen.briefing is " + bw + " words (250-400)"); }
   var hIds = {}; base.hints.forEach(function (h) { hIds[h.id] = 1; });
   arr(r.addHints).forEach(function (h) { if (hIds[h.id]) note("reopen.addHints replaces existing hint " + h.id); });
   var replaced = arr(r.addDeductions).filter(function (d) { return dIds[d.id]; }).map(function (d) { return d.id; });
@@ -431,8 +446,14 @@ function checkReopenKeys() {
 
 /* ------------------------------------------------------------ text-length checks */
 function checkTexts() {
-  var b = words(RAW.briefing); if (b < 80 || b > 150) warn("briefing is " + b + " words (80-150)");
-  var v = words(RAW.victim && RAW.victim.bio); if (v < 60 || v > 120) warn("victim bio is " + v + " words (60-120)");
+  var b = words(RAW.briefing); if (b < 250 || b > 400) warn("briefing is " + b + " words (250-400)");
+  var v = words(RAW.victim && RAW.victim.bio); if (v < 150 || v > 250) warn("victim bio is " + v + " words (150-250)");
+  ["family", "work", "routine", "lastSeen"].forEach(function (k) {
+    var t = RAW.victim && RAW.victim[k];
+    if (t === undefined) warn("victim." + k + " is missing");
+    else if (typeof t !== "string" || words(t) < 20) err("victim." + k + " must be a short paragraph of plain text");
+  });
+  if (!Array.isArray(RAW.caseFile)) warn("no caseFile: the opening case file will be empty");
   var n = arr(RAW.intro).length; if (n < 3 || n > 6) warn("intro has " + n + " slides (3-6)");
 }
 
@@ -451,6 +472,7 @@ function show(o) {
   console.log("  key items unreachable: " + (o.keyUnreachable.length ? o.keyUnreachable.join(", ") : "none"));
   console.log("  anything unreachable: " + (o.unreachable.length ? o.unreachable.join(", ") : "none"));
 }
+console.log("Opening case file: " + arr(RAW.caseFile).join(", "));
 console.log("Cold Read case validator: " + path.relative(process.cwd(), file) + " (" + RAW.id + ", \"" + RAW.title + "\")");
 show(normal); show(reopened);
 console.log("  retired by reopen overrides (expected, replaced by the new trail): " + (RETIRED.length ? RETIRED.join(", ") : "none"));

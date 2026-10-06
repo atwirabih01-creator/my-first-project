@@ -19,14 +19,20 @@ window.CASE = {
     { art: "intro-5", caption: "07:30. Lena drops a thin file in front of him. 'Don't read her. Read the evidence.'" }
   ],
 
-  briefing: "Iris Kellan, thirty-four. Senior claims investigator at Halden Mutual Marine, Financial Quarter. A street sweeper found her at 05:50 on the lower landing of the Saltmarket Stairs in Old Town. Head injury, handbag missing. The doctor on scene says it looks like a fall, maybe helped along by someone who wanted the bag. Time of death between ten and one. Her sister got a text from Iris's phone at 23:12 saying she was walking home the long way. Uniform are knocking on doors. I would like this to be a mugging, because muggings are simple. That is not up to me. Scene first, then her flat in Hillcrest, then her office. And Marsh: no tricks with the family.",
+  briefing: "Iris Kellan, thirty-four. Senior claims investigator at Halden Mutual Marine, Harbour Point Tower, Financial Quarter. Lived alone in Hillcrest. At 05:50 a city street sweeper, Tomas Ferreira, found her on the lower landing of the Saltmarket Stairs in Old Town, face down, with a head injury. PC Odell was there at 06:04, the paramedics pronounced her at 06:10, and the stairs have been closed at both ends since. What we have: she was fully dressed, coat buttoned, boots off and standing on the step below her. Her phone was in her inside pocket, screen cracked, locked. No handbag, no wallet, no keys. Dr. Sorensen looked at her at the scene: one bad injury to the back of the head, scrapes to the face and hands, and on the temperature she puts death between ten last night and one this morning. Her view, for now, is a fall down the steps, possibly helped by someone who wanted the bag. There have been two bag snatches on Mercer Street this month, and uniform will tell you all about them. The emergency card on the phone gave us the sister, Hanna. PC Okafor told her at five past seven. Hanna had a text from Iris's phone at 23:12: walking home the long way, need air. If that's right, Iris was alive at 23:12 and on her way home, which puts her on those stairs exactly when the doctor likes. What we don't have: anyone who saw her after the early evening, where she spent it, where the bag went, and why a woman who lives in Hillcrest was on the Saltmarket Stairs at all, because they are nowhere near her way home. Nobody has viewed a camera yet. The late shop at the top of the stairs has one. Sorensen is holding the body at the scene until we've walked it, then she does the post-mortem and rings. Hanna will be at the flat from nine. The neighbour downstairs has a key. I've told her line manager; he's in from half past eight. The contacts are in the file. So: scene first, while it's still ours, then the flat, then the office. Anything with a password on it goes to Theo. I would like this to be a mugging, because muggings are simple. That is not up to me. And Marsh: no tricks with the family.",
+
+  caseFile: ["ev-first-officer", "ev-scene-log", "ev-prelim-report", "ev-nok-note", "ev-contacts"],
 
   victim: {
     id: "p-victim",
     name: "Iris Kellan",
     age: 34,
     occupation: "Senior claims investigator, Halden Mutual Marine",
-    bio: "Iris Kellan grew up in The Docks, the elder of two sisters. For six years she investigated marine insurance claims at Halden Mutual and was known for refusing to sign anything she had not checked twice. She lived alone in a fourth-floor flat at Calder Court, Hillcrest, with a grey cat called Ledger. She separated from Marcus Bell, a chef, three months ago; they still co-owned a small sailboat. For the past fortnight she had been working on a disputed trawler claim and, her sister says, sleeping with the light on. Her work diary for Thursday morning was marked private.",
+    bio: "Iris Kellan grew up in The Docks, the elder of two daughters of a harbour electrician. She left school at eighteen, studied accountancy at night, and spent four years at the Port Halden tax office before Halden Mutual Marine recruited her as a claims investigator. Six years on she was a senior investigator, known on the fourth floor as 'the auditor' for refusing to sign anything she had not checked twice. Colleagues describe her as private, precise and hard to fool; nobody describes her as warm. She lived alone in a fourth-floor flat at Calder Court, Hillcrest, with a grey cat called Ledger. She separated from Marcus Bell, a chef, three months ago; they still co-owned a small sailboat, the Wren, which she had recently put up for sale. For the past fortnight she had been working on a disputed trawler claim and, her sister says, sleeping with the light on. She had no criminal record, no known debts and no reported threats against her. Her work diary for Thursday morning was marked private.",
+    family: "Mother, Annelie Kellan, 63, lives in the south; Hanna is telling her by phone. Father, Henrik Kellan, a harbour electrician, died two years ago; Iris dealt with the estate. One sister, Hanna Kellan, 29, a physiotherapist living in Eastgate, the person Iris spoke to most and the next of kin on her phone. No children. Ex-partner Marcus Bell, together about four years, separated three months ago; Hanna calls the break-up 'loud but not dangerous'. Mr Bell's address and workplace are not yet confirmed.",
+    work: "Senior claims investigator, Halden Mutual Marine, 4th floor, Harbour Point Tower, Financial Quarter. She checks large hull and cargo claims before they are paid, which means questioning skippers and owners who do not always welcome her. Reports to Graham Whitlock, Head of Claims, who recruited her six years ago. No disciplinary record. Current caseload, according to her sister: one large disputed claim on a sunken trawler. The company was told of her death by phone at 07:25 and has offered full cooperation.",
+    routine: "Weekdays: the Hillcrest tram at about 08:15, at her desk by 08:40. Often worked late and often ate alone in Old Town cafés after work. Swam at the Eastgate baths on Monday and Friday mornings. After dark she took the tram or a taxi and, her sister says, avoided the Saltmarket Stairs, which she called 'a broken ankle waiting to happen'. The neighbour, who has a key, feeds the cat when she works late. Texted her sister most evenings.",
+    lastSeen: "As known at 07:30 on Thursday. Wednesday 08:05: seen leaving Calder Court with her work bag by the downstairs neighbour, Ms Finch (by phone to PC Okafor, 07:20). Wednesday early evening: spoke to her sister by phone; details still to be taken. Wednesday 23:12: text from her phone to her sister, 'walking home the long way. need air. talk tmrw x'. Overnight: did not come home; the neighbour fed the cat at midnight and the flat was empty. No confirmed sighting after the early evening. Found 05:50 Thursday.",
     foundAt: "Lower landing, Saltmarket Stairs, Old Town (between Saltmarket Lane and Quay Road)",
     foundBy: "Tomas Ferreira, city street sweeper, 05:50 Thursday",
     timeOfDeath: "Between 22:00 Wednesday and 01:00 Thursday",
@@ -45,9 +51,8 @@ window.CASE = {
       requires: [],
       hotspots: [
         {
-          id: "h-hq-file", label: "Preliminary file", x: 270, y: 380, r: 45,
-          text: "On Lena's desk, squared to the edge: a manila folder stamped MC-26-0412, the scene doctor's preliminary notes clipped to the front. Her pen lies parallel to it.",
-          grants: ["ev-prelim-report"]
+          id: "h-hq-file", label: "Lena's working file", x: 270, y: 380, r: 45,
+          text: "On Lena's desk, squared to the edge: her own copy of file MC-26-0412, already bristling with coloured tabs. Blue for anything someone has checked, red for anything nobody has. Most of the tabs are red. Her pen lies parallel to the folder."
         },
         {
           id: "h-hq-weather", label: "Weather sheet", x: 720, y: 170, r: 40,
@@ -85,7 +90,7 @@ window.CASE = {
         },
         {
           id: "h-st-body", label: "The body", x: 590, y: 420, r: 55,
-          text: "Iris Kellan lies face down across the lower landing, head towards the lower flight, arms tucked beneath her. Her coat is buttoned and neat. Her hair is matted at the back. No bag. She looks less like someone who fell than someone who was put down carefully.",
+          text: "A white forensic sheet ringed by numbered yellow evidence markers covers the lower landing. You lift its edge. Iris Kellan lies face down, head towards the lower flight, arms tucked beneath her. Her coat is buttoned and neat. Her hair is matted at the back. No bag. She looks less like someone who fell than someone who was put down carefully.",
           grants: ["ev-scene-photo"]
         },
         {
@@ -590,13 +595,273 @@ window.CASE = {
   /* ================================================================ EVIDENCE */
   evidence: [
     {
+      "id": "ev-first-officer",
+      "name": "First officer's report",
+      "key": false,
+      "summary": "PC Odell: found 05:50, pronounced 06:10, cordon, canvass. A car heard on Quay Road 'after ten'.",
+      "doc": {
+        "kind": "report",
+        "title": "PHPD Response — First Officer's Report, Saltmarket Stairs",
+        "meta": [
+          [
+            "Officer",
+            "PC J. Odell, Old Town Response"
+          ],
+          [
+            "Call",
+            "05:52, emergency call from T. Ferreira (street sweeper)"
+          ],
+          [
+            "Arrived",
+            "06:04"
+          ],
+          [
+            "Written",
+            "07:10 Thursday"
+          ]
+        ],
+        "table": {
+          "cols": [
+            "Time",
+            "Action"
+          ],
+          "rows": [
+            [
+              "06:04",
+              "Arrived Saltmarket Lane. Mr Ferreira waiting by his cart at the top of the stairs, shaken but clear."
+            ],
+            [
+              "06:06",
+              "Went down by the left-hand rail. Female, face down on the lower landing. No breathing, no pulse, cold to the touch. Did not move her."
+            ],
+            [
+              "06:10",
+              "Paramedics (crew 14) confirmed life extinct."
+            ],
+            [
+              "06:12",
+              "Cordons at Saltmarket Lane and Quay Road. Scene log started. Single approach path down the left rail."
+            ],
+            [
+              "06:21",
+              "Scene photographs taken."
+            ],
+            [
+              "06:30",
+              "Forensic sheet placed over the deceased. Evidence markers 1 to 9 placed."
+            ],
+            [
+              "06:40",
+              "Spoke to the late shop owner at the top of the stairs. Shutter half down at 21:47; saw and heard nothing. His camera covers the steps; recording offered, not yet viewed."
+            ],
+            [
+              "06:45",
+              "Dr. Sorensen arrived."
+            ],
+            [
+              "06:50–07:05",
+              "House-to-house, Saltmarket Lane 2–14 and the Quay Road flats."
+            ]
+          ]
+        },
+        "text": "Finder: Mr Ferreira sweeps Saltmarket Lane at about 05:45 every morning and went down to clear leaves from the steps. He saw her on the landing, touched her shoulder, then ran up to call. Nobody else about.\nHouse-to-house: most residents heard nothing. Mrs R. Pell, ground floor, Quay Road flats, heard a car stop below her window 'some time after ten', engine running for a few minutes; she did not look. Saltmarket Lane no. 9: no answer, card left.\nNotes: steps wet and muddy throughout. No sign of a struggle on the steps; no blood trail. Two street robberies on Mercer Street this month (CR 26/3318 and 26/3402: young male on a bicycle snatching bags; both bags later found in the harbour with cash removed, both victims unhurt)."
+      }
+    },
+    {
+      "id": "ev-scene-log",
+      "name": "Scene log and property inventory",
+      "key": false,
+      "summary": "What was on her and around her. No bag, wallet, keys or work pass. Watch and earrings left.",
+      "doc": {
+        "kind": "report",
+        "title": "Scene Log and Property Inventory — Saltmarket Stairs, MC-26-0412",
+        "meta": [
+          [
+            "Compiled by",
+            "PC J. Odell"
+          ],
+          [
+            "Searched",
+            "Stairs, landing, bins at both ends, Quay Road drain (06:35)"
+          ]
+        ],
+        "table": {
+          "cols": [
+            "Marker",
+            "Item",
+            "Where",
+            "Notes"
+          ],
+          "rows": [
+            [
+              "1",
+              "Deceased",
+              "Lower landing",
+              "Face down; under sheet from 06:30"
+            ],
+            [
+              "2",
+              "Wool coat, dark grey",
+              "On deceased",
+              "Buttoned to the collar"
+            ],
+            [
+              "3",
+              "Mobile phone (IK/1)",
+              "Inner coat pocket",
+              "Screen cracked, locked. Emergency card: 'Hanna (sister)'"
+            ],
+            [
+              "4",
+              "Card payment slip, folded",
+              "Inner coat pocket",
+              "From a café; bagged, not yet read"
+            ],
+            [
+              "5",
+              "Ankle boots, pair (IK/3)",
+              "Step below the landing",
+              "Side by side, toes down"
+            ],
+            [
+              "6",
+              "Wristwatch, steel",
+              "Left wrist",
+              "Glass intact, running, correct time"
+            ],
+            [
+              "7",
+              "Gold stud earrings, pair",
+              "On deceased",
+              "Both present"
+            ],
+            [
+              "8",
+              "Hair grip",
+              "Landing, beside head",
+              "Matches deceased's"
+            ],
+            [
+              "9",
+              "Cigarette end",
+              "Upper flight, step 31",
+              "Old and sodden; probably unrelated"
+            ]
+          ]
+        },
+        "text": "Not found: handbag, wallet, house keys, work pass.\nEntry log: 05:50 T. Ferreira (finder), landing and back. 06:06 PC Odell. 06:10 paramedics (2). 06:21 PC Odell, photographs. 06:45 Dr. A. Sorensen. Removal held for DS Cruz's walk-through."
+      }
+    },
+    {
+      "id": "ev-nok-note",
+      "name": "Next-of-kin notification",
+      "key": false,
+      "summary": "Hanna told at 07:05. She asked twice whether Iris had 'really been walking'.",
+      "doc": {
+        "kind": "report",
+        "title": "Next-of-Kin Notification — Hanna KELLAN",
+        "meta": [
+          [
+            "Officer",
+            "PC N. Okafor"
+          ],
+          [
+            "Time",
+            "07:05 Thursday"
+          ],
+          [
+            "Place",
+            "Hanna Kellan's flat, 22 Tanner Row, Eastgate"
+          ]
+        ],
+        "text": "Next of kin taken from the emergency card on the deceased's phone. Told Ms Kellan in person at 07:05. She was dressed for work, phone in her hand. Disbelief at first; then she asked twice whether her sister had 'really been walking'. She showed me a text from Iris's number at 23:12 ('walking home the long way. need air. talk tmrw x'), which she read at about 06:30; she replied at 06:33 and had no answer. She confirmed the deceased from a scene photograph of the face at 07:12. Formal identification after the post-mortem.\nGiven so far, not yet a statement: Iris lived alone at 4C Calder Court, Hillcrest; downstairs neighbour Ms Finch holds a key. Works at Halden Mutual Marine. Ex-partner Marcus Bell, separated three months; Ms Kellan did not know his current address. Mother in the south; Ms Kellan will tell her. Last spoke to Iris by phone on Wednesday evening; too upset to give details.\nMs Kellan will be at her sister's flat from about 09:00 to feed the cat and will talk to us there. Welfare leaflet given."
+      }
+    },
+    {
+      "id": "ev-contacts",
+      "name": "Initial contacts list",
+      "key": false,
+      "summary": "Who to see first, where and when: sister, neighbour, line manager, doctor, Theo.",
+      "doc": {
+        "kind": "report",
+        "title": "Initial Contacts — MC-26-0412 (DS L. Cruz, 07:30)",
+        "table": {
+          "cols": [
+            "Who",
+            "Role",
+            "Where",
+            "When",
+            "Notes"
+          ],
+          "rows": [
+            [
+              "Hanna Kellan",
+              "Sister, next of kin",
+              "Iris's flat, 4C Calder Court, Hillcrest",
+              "From 09:00",
+              "Told 07:05. Not yet interviewed."
+            ],
+            [
+              "Dolores Finch",
+              "Downstairs neighbour, keyholder",
+              "3C Calder Court, Hillcrest",
+              "Up from 07:00",
+              "Saw Iris leave Wed 08:05 (by phone to PC Okafor, 07:20)."
+            ],
+            [
+              "Graham Whitlock",
+              "Head of Claims, line manager",
+              "Halden Mutual Marine, 4th floor, Harbour Point Tower",
+              "08:30–18:30",
+              "Told by phone 07:25. Shocked. Said she had been dealing with 'a difficult claimant'."
+            ],
+            [
+              "Marcus Bell",
+              "Ex-partner, chef",
+              "Not known",
+              "—",
+              "Ask the sister or the neighbour."
+            ],
+            [
+              "Dr. Anika Sorensen",
+              "Medical Examiner",
+              "Saltmarket Stairs, then the mortuary",
+              "—",
+              "Post-mortem after our walk-through. Will ring."
+            ],
+            [
+              "Theo Park",
+              "Records and digital, Major Crimes",
+              "By phone",
+              "Any time",
+              "Phone IK/1 when we're ready."
+            ],
+            [
+              "Late shop owner",
+              "Witness; camera",
+              "Top of the Saltmarket Stairs",
+              "Open",
+              "Recording not yet viewed."
+            ],
+            [
+              "Tomas Ferreira",
+              "Finder",
+              "City depot, Eastgate",
+              "Off shift",
+              "Statement taken. Nothing further expected."
+            ]
+          ]
+        }
+      }
+    },
+    {
       id: "ev-prelim-report", name: "Preliminary scene report", key: false,
       summary: "Scene doctor: head injury from a fall, death 22:00–01:00, bag missing.",
       doc: {
         kind: "report",
         title: "PHPD Major Crimes — Preliminary Scene Notes, MC-26-0412",
         meta: [["Deceased", "Iris KELLAN, 34"], ["Found", "Thu 05:50 by T. Ferreira (street sweeper)"], ["Doctor on scene", "Dr. A. Sorensen"], ["Notes made", "Thu 07:05"]],
-        text: "Prone on lower landing, arms beneath body.\nInjuries: depressed fracture, back of head (right). Abrasions to face, palms, knees.\nCore temperature 21.4°C at 06:52. Ambient 6°C, wind, ground wet. Assuming body outdoors throughout: death approx. 22:00–01:00.\nProperty: phone in inner coat pocket. Handbag and wallet not located.\nProvisional: a fall down stone steps; robbery not excluded.\nFull post-mortem examination scheduled Thursday 08:00."
+        text: "Arrived 06:45. Prone on lower landing, arms beneath body. Clothing not removed at scene.\nInjuries: depressed fracture, back of head (right). Abrasions to face, palms, knees. No obvious defensive injuries to the hands.\nBleeding: little blood on the landing for a scalp wound of this kind; probably washed away by rain.\nRigor well established in jaw and limbs. Lividity on the front, consistent with the position found.\nCore temperature 21.4°C at 06:52. Ambient 6°C, wind, ground wet. Assuming body outdoors throughout: death approx. 22:00–01:00.\nProperty: phone in inner coat pocket. Handbag and wallet not located.\nProvisional: a fall down stone steps; robbery not excluded.\nBody held at scene for the investigating officers' walk-through (DS Cruz). Full post-mortem examination immediately after removal."
       }
     },
     {
@@ -979,7 +1244,7 @@ window.CASE = {
       doc: {
         kind: "autopsy",
         title: "Medical Examiner's Office — Post-mortem Examination, Iris KELLAN",
-        meta: [["Pathologist", "Dr. Anika Sorensen"], ["Examined", "Thu from 08:00 (preliminary findings by phone; written report to follow)"], ["Case", "MC-26-0412"]],
+        meta: [["Pathologist", "Dr. Anika Sorensen"], ["Examined", "Thu, on arrival at the mortuary (preliminary findings by phone; written report to follow)"], ["Case", "MC-26-0412"]],
         text: "1. Cause: one blunt-force blow to the back of the head (right), depressed skull fracture. Patterned: a curved edge, part of a circle roughly 16 to 20 cm across, interrupted at regular intervals by small rounded impressions. Consistent with a heavy object with a curved, knobbed rim; not consistent with the straight edge of a stone step.\n2. Abrasions to face, palms and knees show no visible vital reaction (no bleeding into the surrounding tissue). They were most likely caused after death.\n3. Lividity: fixed on the front, matching the position found, with a faint pattern across shoulders and buttocks: she lay on her back on a flat surface, likely one to three hours, before being placed face down.\n4. Trace: grey nylon loop-pile carpet fibres in the hair and wound margins; carpet-cleaning detergent on the left coat sleeve.\n5. Stomach: partly digested fish soup and bread. Digestion varies widely; this supports, but cannot fix, a death within a few hours of an early meal.\n6. Time of death, revised: the scene estimate assumed she lay outdoors all night. Allowing for a period indoors and a period wrapped, the 06:52 reading is compatible with death roughly between 19:30 and 21:30. This is an estimate resting on assumptions about room temperature and how long she was wrapped; narrow it with other records, not on its own.\nConclusion: homicide; killed indoors and moved."
       }
     }
@@ -1210,18 +1475,92 @@ window.CASE = {
    */
   reopen: {
     intro: "Three weeks later the charge has collapsed and the file is back on Lena's desk. She lays out everything from the first morning: the scene as it was photographed, the statements as they were taken, the recordings the first team copied. 'That part doesn't change,' she says. 'What's still out there does. Whoever did this has had three weeks to tidy up, records have aged out, and people who talked freely have had time to be frightened.'",
-    briefing: "The file, three weeks on. Iris Kellan, thirty-four, claims investigator at Halden Mutual Marine, found at 05:50 on the lower landing of the Saltmarket Stairs. The first team worked it as a fall that someone had helped along, charged the wrong person, and watched it fall apart in court. Everything they photographed, copied and took down is in these boxes, and it is still good. Everything else out there is three weeks older. We start where they started. Scene, flat, office. And this time, Marsh, we read every page.",
+    briefing: "The file, three weeks on. Iris Kellan, thirty-four, senior claims investigator at Halden Mutual Marine. Found at 05:50 on a Thursday morning on the lower landing of the Saltmarket Stairs by a street sweeper: face down, head injury, handbag gone. The first team worked it the way the scene asked them to. A fall down the steps, maybe helped by someone who wanted the bag, some time between ten and one, with a text from her phone at 23:12 to prove she was alive and walking home. They charged the wrong person, and it came apart in court in a single morning. Here is what has not changed. Everything they photographed, bagged, copied and wrote down is in these boxes: the scene photographs, the property, the statements, the doctor's notes, the café recording. Paper doesn't get frightened and it doesn't tidy up. Treat it as if you'd collected it yourself this morning, and read every page, including the ones they skimmed. Here is what has. Three weeks is long enough for recordings to be overwritten and logs to be deleted. It is long enough for whoever did this to put things back where they belong and clean what they couldn't move. And it is long enough for people who talked freely the first time to start working out what talking costs them. Expect the trail to be thinner in some places and newer in others. We start where they started. Scene, flat, office. Anything with a password or a log on it goes to Theo, and the sooner the better. Sorensen will walk us through her report when we're ready for it. And this time, Marsh, nobody gets charged because we liked the look of them for it.",
 
     evidence: {
+      "ev-contacts": {
+        "name": "Contacts list, annotated for the review",
+        "summary": "The first morning's contacts, with Lena's notes three weeks on.",
+        "doc": {
+          "title": "Initial Contacts — MC-26-0412, annotated for the review (DS L. Cruz)",
+          "table": {
+            "cols": [
+              "Who",
+              "Role",
+              "Where",
+              "When",
+              "Notes"
+            ],
+            "rows": [
+              [
+                "Hanna Kellan",
+                "Sister, next of kin",
+                "Iris's flat, 4C Calder Court, Hillcrest",
+                "From 09:00",
+                "Still feeding the cat. Will see us there. Not happy with us."
+              ],
+              [
+                "Dolores Finch",
+                "Downstairs neighbour, keyholder",
+                "3C Calder Court, Hillcrest",
+                "Up from 07:00",
+                "Re-interview. First statement in box 2."
+              ],
+              [
+                "Graham Whitlock",
+                "Head of Claims, line manager",
+                "Halden Mutual Marine, 4th floor, Harbour Point Tower",
+                "08:30–18:30",
+                "Cooperative the first time. Re-interview."
+              ],
+              [
+                "Marcus Bell",
+                "Ex-partner, chef",
+                "See box 2",
+                "—",
+                "Re-interview. Ask the neighbour where to find him."
+              ],
+              [
+                "Dr. Anika Sorensen",
+                "Medical Examiner",
+                "Mortuary",
+                "—",
+                "Full report in the file. She will walk us through it."
+              ],
+              [
+                "Theo Park",
+                "Records and digital, Major Crimes",
+                "By phone",
+                "Any time",
+                "Logs age out. Ask early."
+              ],
+              [
+                "Late shop owner",
+                "Witness",
+                "Top of the Saltmarket Stairs",
+                "Open",
+                "Recording overwritten. Statement in the file."
+              ],
+              [
+                "Tomas Ferreira",
+                "Finder",
+                "City depot, Eastgate",
+                "Off shift",
+                "Nothing further."
+              ]
+            ]
+          }
+        }
+      },
       "ev-kiosk-cam": {
         name: "Late shop owner's statement",
         summary: "The recording is gone. The owner remembers a car at the foot of the stairs around 22:20, a woman in yellow after 23:00, a big man later.",
         doc: {
           kind: "statement",
-          title: "Statement of the Saltmarket Late Shop owner, taken by PC Odell, Thursday 06:40",
+          title: "Statement of the Saltmarket Late Shop owner, taken by PC Odell, Thursday 11:20",
           meta: [["Recording", "Overwritten after 14 days. The first team did not copy it."]],
           table: null,
-          text: "'I watched it with the constable. Nobody came down the top steps all night. About twenty past ten a car stopped on Quay Road at the bottom. Dark, an estate maybe; no plate at that distance. Lights off a few minutes, then off east. Just after eleven a woman in one of those yellow fishing coats went along the lane. Bit later a big fella with a bag walked along the road at the bottom. That's all.'"
+          text: "'I watched it with the constable later that morning. Nobody came down the top steps all night. About twenty past ten a car stopped on Quay Road at the bottom. Dark, an estate maybe; no plate at that distance. Lights off a few minutes, then off east. Just after eleven a woman in one of those yellow fishing coats went along the lane. Bit later a big fella with a bag walked along the road at the bottom. That's all.'"
         }
       },
       "ev-drag-marks": {

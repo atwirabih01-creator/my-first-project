@@ -58,17 +58,43 @@ The scene estimate (22:00–01:00) assumed she had lain outside all night, and t
 | 23:16 | Marcus walks east past the foot of the stairs from the restaurant (west, along the harbour-wall footpath) | Late shop camera; Marcus |
 | ~00:00 | Dolores feeds the cat | Dolores; cat bowl |
 
-**Thursday (day 1)**:
-- 05:50: Tomas Ferreira finds the body.
-- 06:52: temperature reading; scene notes written at 07:05.
-- 07:30: play starts.
-- From 08:00: post-mortem; Sorensen phones through her findings.
+**Thursday (day 1), as recorded in the opening case file**
+| Time | Event | Source |
+|---|---|---|
+| 05:50 | Tomas Ferreira finds the body; emergency call 05:52 | First officer's report; scene log |
+| 06:04 / 06:10 | PC Odell arrives; paramedics pronounce | First officer's report |
+| 06:21 / 06:30 | Scene photographs; forensic sheet and markers 1–9 placed (matches the scene art) | First officer's report; scene log |
+| 06:33 | Hanna replies to the 23:12 text | Hanna's messages; extraction |
+| 06:40 | Late shop owner spoken to; recording offered, not yet viewed | First officer's report |
+| 06:45–07:05 | Dr. Sorensen at the scene; core temperature 06:52; notes 07:05 | Preliminary report |
+| 06:50–07:05 | House-to-house: Mrs Pell heard a car "some time after ten"; no answer at Saltmarket Lane no. 9 (Petra's house; she is already at the co-op) | First officer's report |
+| 07:05 | PC Okafor tells Hanna in person; she identifies Iris from a photo at 07:12 | Next-of-kin note |
+| 07:20 | Dolores tells PC Okafor by phone that Iris left at 08:05 on Wednesday | Contacts list; victim "last seen" |
+| 07:25 | Lena phones Whitlock; he mentions "a difficult claimant" | Contacts list |
+| 07:30 | Play starts | — |
+| after the walk-through | Body removed; post-mortem; Sorensen rings (the twist) | Briefing; autopsy |
 
-The twist fires once the player has the clean-boots and wrong-text deductions, Whitlock's alibi statement and the phone extraction. A fast player reaches that at about 09:45–10:30; the fallback is 15:00.
+The body is held at the scene until Lena and Julian have walked it, so the scene always shows it, whichever location the player visits first. The twist fires once the player has the clean-boots and wrong-text deductions, Whitlock's alibi statement and the phone extraction. A fast player reaches that at about 09:45–10:30; the fallback is 15:00.
+
+### Opening case file (granted at the start)
+`caseFile`: first officer's report, scene log and property inventory, the doctor's preliminary notes, the next-of-kin notification, and the initial contacts list. Together with the longer briefing and victim profile (`family`, `work`, `routine`, `lastSeen`), they add hidden leads and red herrings but **no new answers**. None of them is a proof, and none feeds a deduction.
+
+**Hidden leads (all consistent with the true story):**
+- Mrs Pell heard a car stop on Quay Road "some time after ten". This matches the car at 22:21.
+- The doctor notes little blood for a scalp wound and blames the rain. But the rain stopped at 21:40, before her own estimated time of death.
+- The inventory lists the boots "side by side, toes down", and the watch and earrings untouched. That is odd for a robbery.
+- Iris avoided the Saltmarket Stairs and took a tram or taxi after dark (victim `routine`). Her stairs are nowhere near her way home (briefing). Hanna asked twice whether Iris had "really been walking".
+- Whitlock recruited Iris and is her line manager (victim `work`). This matches Dolores's "He's been good to me".
+- Whitlock volunteers "a difficult claimant" on the phone at 07:25. This is his first push towards Petra.
+
+**Red herrings:**
+- Two bag snatches on Mercer Street this month. The robber is a cyclist, both victims were unhurt, and the bags were found in the harbour with the cash taken. Nothing like a dragged, neatly placed body with the watch and earrings left.
+- A cigarette end on step 31: old and sodden.
+- No answer at Saltmarket Lane no. 9 (Petra).
 
 ## Intended solve path
 
-1. **HQ**: preliminary report (earns a hint token) and weather sheet (rain ended 21:40).
+1. **HQ**: the opening case file is already in hand (the preliminary report in it earns a hint token at the start). Weather sheet on the whiteboard (rain ended 21:40).
 2. **Saltmarket Stairs**: body, coat pocket (phone and café slip), boots (clean tread), late shop camera (car 22:21–22:29, Petra 23:05, Marcus 23:16). Ask Theo to open the phone (90 min).
    - **boots + weather → "She never walked down those steps"**.
 3. **Flat (Hillcrest)**: Dolores (Tuesday row; "reported a friend"). Fridge note, planner (Compliance 09:00, "tell nobody"), boat listing. Hanna from 09:00: the 23:12 text, Iris's writing style, the 19:05 call.
