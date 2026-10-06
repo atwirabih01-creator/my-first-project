@@ -70,13 +70,37 @@
   var PLACEHOLDER_WIDE = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 600' role='img' aria-label='Image not available'><defs><pattern id='phh' width='24' height='24' patternUnits='userSpaceOnUse' patternTransform='rotate(45)'><rect width='24' height='24' fill='#13171b'/><rect width='2' height='24' fill='#1b2026'/></pattern></defs><rect width='1000' height='600' fill='url(#phh)'/><rect x='1' y='1' width='998' height='598' fill='none' stroke='#2a3139' stroke-width='2'/><g fill='none' stroke='#3a434c' stroke-width='3'><circle cx='500' cy='280' r='46'/><path d='M533 313 L580 360'/></g><text x='500' y='420' fill='#59626b' font-family='Georgia,serif' font-size='26' text-anchor='middle' letter-spacing='6'>NO IMAGE ON FILE</text></svg>";
   var PLACEHOLDER_PORTRAIT = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 360' role='img' aria-label='Portrait not available'><rect width='300' height='360' fill='#14181c'/><rect x='1' y='1' width='298' height='358' fill='none' stroke='#2a3139' stroke-width='2'/><ellipse cx='150' cy='140' rx='58' ry='70' fill='#1d2328'/><path d='M50 360 Q150 220 250 360Z' fill='#1d2328'/><text x='150' y='335' fill='#59626b' font-family='Georgia,serif' font-size='16' text-anchor='middle' letter-spacing='4'>NO PHOTO</text></svg>";
 
-  function artString(group, key) {
-    if (!key) return null;
+  /* ART.photos[key] = "images/<key>.jpg": a relative image path that wins over the SVG for that key. */
+  function photoFor(key) {
+    var p = ART.photos;
+    if (!key || !p || typeof p !== "object" || typeof p[key] !== "string") return null;
+    var src = p[key].trim();
+    return (/^[\w\-./]+\.(jpe?g|png|webp|avif)$/i.test(src) && src.indexOf("..") === -1 && src.charAt(0) !== "/") ? src : null;
+  }
+  function svgFor(group, key) {
     var g = group ? ART[group] : null;
-    if (g && typeof g === "object" && typeof g[key] === "string" && g[key].indexOf("<svg") !== -1) return g[key];
+    if (key && g && typeof g === "object" && typeof g[key] === "string" && g[key].indexOf("<svg") !== -1) return g[key];
     return null;
   }
+  /* Returns a photo descriptor {photo, svg}, an SVG string, or null (placeholder). */
+  function artString(group, key) {
+    if (!key) return null;
+    var svg = svgFor(group, key), ph = photoFor(key);
+    return ph ? { photo: ph, svg: svg } : svg;
+  }
   function artBox(svg, cls, portrait, label) {
+    if (svg && typeof svg === "object") {
+      var fallback = svg.svg;
+      var box = el("div", { class: "art art--photo " + (cls || "") });
+      var img = el("img", { src: svg.photo, alt: label || "", loading: "lazy", decoding: "async", draggable: "false" });
+      if (!label) img.setAttribute("aria-hidden", "true");
+      img.addEventListener("error", function () {
+        var alt = artBox(fallback || null, cls, portrait, label);
+        if (box.parentNode) box.parentNode.replaceChild(alt, box);
+      });
+      box.appendChild(img);
+      return box;
+    }
     var d = el("div", { class: "art " + (cls || "") + (svg ? "" : " art--placeholder") });
     d.innerHTML = svg || (portrait ? PLACEHOLDER_PORTRAIT : PLACEHOLDER_WIDE); /* trusted ART markup */
     var s = d.querySelector("svg");
@@ -87,7 +111,10 @@
     }
     return d;
   }
-  function anyArt(key) { return artString("intro", key) || artString("scenes", key) || artString("evidence", key); }
+  function anyArt(key) {
+    var svg = svgFor("intro", key) || svgFor("scenes", key) || svgFor("evidence", key), ph = photoFor(key);
+    return ph ? { photo: ph, svg: svg } : svg;
+  }
 
   /* ------------------------------------------------------------------ time */
   function hm(s) {
@@ -108,7 +135,7 @@
     c.intro = arr(c.intro); c.locations = arr(c.locations); c.people = arr(c.people);
     c.evidence = arr(c.evidence); c.facts = arr(c.facts); c.deductions = arr(c.deductions);
     c.requests = arr(c.requests); c.puzzles = arr(c.puzzles); c.hints = arr(c.hints);
-    c.hintTokensFrom = arr(c.hintTokensFrom); c.debrief = arr(c.debrief);
+    c.hintTokensFrom = arr(c.hintTokensFrom); c.debrief = arr(c.debrief); c.caseFile = arr(c.caseFile);
     c.victim = c.victim || {}; c.solution = c.solution || {};
     c.start = c.start || {};
     if (reopened && c.reopen) {
@@ -280,11 +307,10 @@
     layer.classList.add("is-on");
     var done = function () {
       layer.classList.remove("is-on"); layer.innerHTML = ""; stampBusy = false;
-      layer.removeEventListener("click", done);
       playFx();
     };
-    layer.addEventListener("click", done);
-    setTimeout(done, reduceMotion ? 1500 : 1900);
+    setTimeout(function () { card.classList.add("stamp--out"); }, 1200);
+    setTimeout(done, 1550);
   }
 
   /* ------------------------------------------------------------------ logging & granting */
@@ -621,6 +647,7 @@
     S = freshState(n, notes);
     S.failures = fails;
     S.status = "reopen";
+    grantCaseFile();
     settle(true); save(); render();
   }
 
@@ -835,25 +862,40 @@
 
   function caseFileNode() {
     var v = C.victim || {};
-    var fields = [["Name", v.name], ["Age", v.age], ["Occupation", v.occupation], ["Found at", v.foundAt], ["Found by", v.foundBy], ["Time of death", v.timeOfDeath], ["Cause of death", v.causeOfDeath]]
-      .filter(function (f) { return f[1] !== undefined && f[1] !== null && f[1] !== ""; });
+    var found = [v.foundAt ? "Found: " + v.foundAt : "", v.foundBy ? "Found by: " + v.foundBy : "", v.timeOfDeath ? "Estimated time of death: " + v.timeOfDeath : ""].filter(Boolean).join("\n");
+    var sections = [["Background", v.bio], ["Family", v.family], ["Work", v.work], ["Routine", v.routine], ["Last seen", v.lastSeen], ["Found", found], ["Cause of death, as believed", v.causeOfDeath]]
+      .filter(function (x) { return typeof x[1] === "string" && x[1].trim(); });
+    var docs = arr(C.caseFile).map(function (id) { return IDX.ev[id]; }).filter(Boolean);
     return el("div", { class: "casefile" }, [
-      el("section", { class: "casefile__brief doc doc--report" }, [
-        el("div", { class: "doc__letterhead" }, "Port Halden Police Department · Major Crimes Unit"),
+      el("section", { class: "casefile__brief doc doc--report", "aria-label": "Briefing" }, [
+        el("div", { class: "doc__letterhead" }, "Port Halden Police Department \u00b7 Major Crimes Unit"),
         el("h3", { class: "doc__title" }, "Briefing"),
         textBlock(str(C.briefing, "No briefing on file.")),
-        el("div", { class: "doc__sign" }, "— DS Lena Cruz")
+        el("div", { class: "doc__sign" }, "\u2014 DS Lena Cruz")
       ]),
-      el("section", { class: "casefile__victim" }, [
-        el("div", { class: "casefile__photo" }, artBox(artString("portraits", v.portrait || v.id), "portrait", true, v.name ? "Photo of " + v.name : null)),
-        el("div", { class: "casefile__vinfo" }, [
-          el("h3", { class: "casefile__vhead" }, "Victim profile"),
-          el("p", { class: "casefile__vname" }, str(v.name, "Unknown")),
-          el("p", { class: "casefile__vsub" }, [v.age ? String(v.age) : "", v.age && v.occupation ? " \u00b7 " : "", str(v.occupation)])
+      el("section", { class: "vcard", "aria-label": "Victim profile" }, [
+        el("div", { class: "vcard__head" }, [
+          el("div", { class: "vcard__photo" }, artBox(artString("portraits", v.portrait || v.id), "portrait", true, v.name ? "Photo of " + v.name : null)),
+          el("div", { class: "vcard__id" }, [
+            el("p", { class: "vcard__kicker" }, "Victim profile"),
+            el("h3", { class: "vcard__name display" }, str(v.name, "Unknown")),
+            el("p", { class: "vcard__sub" }, [v.age ? "Age " + v.age : "", v.age && v.occupation ? " \u00b7 " : "", str(v.occupation)])
+          ])
         ]),
-        el("dl", { class: "doc__meta casefile__vmeta" }, fields.filter(function (f) { return ["Name", "Age", "Occupation"].indexOf(f[0]) === -1; }).map(function (f) { return el("div", { class: "doc__metarow" }, [el("dt", null, f[0]), el("dd", null, String(f[1]))]); })),
-        v.bio ? el("p", { class: "prose casefile__bio" }, v.bio) : null
-      ])
+        el("div", { class: "vcard__body" }, sections.map(function (x) {
+          return el("section", { class: "vcard__sec" }, [el("h4", { class: "vcard__h" }, x[0]), el("p", { class: "vcard__text prose" }, x[1])]);
+        }))
+      ]),
+      docs.length ? el("section", { class: "casefile__docs", "aria-label": "Case file documents" }, [
+        el("h3", { class: "casefile__docshead display" }, "In the file"),
+        el("p", { class: "muted" }, "Handed over with the case. They stay in your evidence."),
+        el("ul", { class: "files" }, docs.map(function (e) {
+          var kd = (e.doc && e.doc.kind) || "object";
+          return el("li", null, el("button", { class: "file file--" + kd, type: "button", k: "cf-open-" + e.id, onclick: function () { openDoc(e.id); } }, [
+            el("span", { class: "file__kind" }, kindLabel(kd)), el("span", { class: "file__name" }, str(e.name, e.id)), el("span", { class: "file__sum" }, str(e.summary))
+          ]));
+        }))
+      ]) : null
     ]);
   }
 
@@ -926,8 +968,16 @@
     var st = { intro: "Opening", casefile: "Case file", reopen: "Case reopened", play: "Investigating", confession: "Charged", consequence: "Charged", solved: "Case closed", failed: "Case failed" }[s.status] || "In progress";
     return "Saved: " + st + " · " + fmtT(s.t) + (s.reopened ? " · Reopened" : "");
   }
+  /* caseFile: evidence handed over at the start, shown together on the opening case file. */
+  function grantCaseFile() {
+    var ids = arr(C.caseFile).filter(function (id) { return IDX.ev[id]; });
+    grant(ids, true);
+    ids.forEach(function (id) { delete S.newItems[id]; });
+    fxQueue.length = 0;
+  }
   function startNew() {
     S = freshState(0, "");
+    grantCaseFile();
     settle(true);
     screenOverride = null;
     if (!C.intro.length) S.status = "casefile";
