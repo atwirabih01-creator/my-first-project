@@ -121,6 +121,10 @@ async function run(viewport, label) {
   await click("modal-ok");
   check((await clock()) === "Day 1, 06:45", "examine costs 5 minutes");
 
+  // Events timeline empty at first
+  await go("notebook");
+  await click("nb-events");
+  check((await text(".notebook")).includes("Times will appear here"), "events timeline shows hint when empty");
   // People: Ivy
   await go("people");
   check(await k("person-p-rex").count() === 0, "Rex hidden before twist");
@@ -320,8 +324,17 @@ async function run(viewport, label) {
 
   // Notebook
   await go("notebook");
+  await click("nb-log");
   check(await page.locator(".entry--statement").count() >= 5, "statements logged");
   await snap("notebook-log");
+  await click("nb-events");
+  const evOrder = await page.locator(".events .entry__title").allTextContents();
+  check(evOrder.length === 4 && /Card receipt/.test(evOrder[1]) && /About 23:30/.test(evOrder[0]) && /Alley camera/.test(evOrder[2]) && /About 00:30/.test(evOrder[3]), "events timeline sorted by event time with 'about': " + evOrder.join(" / "));
+  check((await text(".events")).includes("Thursday (the day before)"), "events grouped by day with day names");
+  await snap("notebook-events");
+  await click("evt-ev-camera");
+  check(await page.locator(".modal .doc--camera").count() === 1, "tapping a timeline event opens it");
+  await click("modal-ok");
   await click("nb-timeline");
   check(await page.locator(".tl__item").count() > 10, "timeline lists entries");
   await snap("notebook-timeline");
@@ -336,6 +349,7 @@ async function run(viewport, label) {
   await snap("solve-form");
   await click("review");
   await snap("solve-review");
+  check(await page.locator(".weak").count() === 0, "no weak-charge warning for a well-supported charge");
   await click("file-charge");
   await k("ending-continue").waitFor();
   await snap("consequence");
@@ -395,7 +409,13 @@ async function run(viewport, label) {
   await click("sus-p-rex"); await click("mot-m-audit"); await click("met-md-blows");
   await click("proof-ev-autopsy"); await click("proof-ev-camera"); await click("proof-ev-receipt");
   await click("review");
-  await click("file-charge");
+  check((await text(".weak")).includes("This won't hold"), "weak-charge warning when most key leads are missing");
+  check(!(await text(".weak")).match(/suspect|motive|method|proof/i), "warning does not say which part is wrong");
+  await snap("weak-charge");
+  await click("solve-back");
+  check(await k("review").count() === 1, "keep investigating returns to the form");
+  await click("review");
+  await click("file-charge-anyway");
   await k("ending-continue").waitFor();
   check((await text(".ending")).includes("Second time"), "confession scene shown (reopen solution override)");
   await snap("confession");
@@ -604,7 +624,7 @@ async function playRealCase(viewport, label) {
     await go("solve");
     await click("sus-" + suspect); await click("mot-" + motive); await click("met-" + method);
     for (const p of proofs) await click("proof-" + p);
-    await click("review"); await click("file-charge");
+    await click("review"); await click((await exists("file-charge")) ? "file-charge" : "file-charge-anyway");
     await k("ending-continue").waitFor();
   };
 

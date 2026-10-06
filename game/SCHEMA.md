@@ -96,6 +96,12 @@ window.CASE = {
 
   facts: [{ id: "fact-…", text: "…", key: false }],   // statements that go in the notebook
 
+  // Optional on any evidence, fact or deduction: when the thing it records happened, for the
+  // notebook's "Timeline of events" (sorted by this, not by when the player learned it).
+  // at: { day: 0, time: "20:51", approx: true }   day 0 = the day before the body was found,
+  //                                                day 1 = the day it was found; approx shows "about"
+  // dayNames: ["Wednesday", "Thursday"]           // optional top-level: names for day 0, day 1, …
+
   deductions: [{                      // connecting two items on the evidence board
     id: "ded-…", items: ["ev-…", "fact-…"],   // exactly two ids, order does not matter
     title: "…", text: "…", key: true,

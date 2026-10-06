@@ -6,6 +6,7 @@ window.CASE = {
   title: "The Test Tide",
   tagline: "A small case for checking the machinery.",
   start: { day: 1, time: "06:40", locationId: "loc-hq" },
+  dayNames: ["Thursday", "Friday"],
   caseFile: ["ev-statement"],
 
   intro: [
@@ -137,11 +138,11 @@ window.CASE = {
         text: "Deceased female found at foot of cellar steps.\nNo signs of forced entry noted.\nProbable accidental fall. Refer to coroner." } },
     { id: "ev-glass", name: "Two glasses", key: false, summary: "Two drinks, one glass wiped.",
       doc: { kind: "photo", title: "Exhibit 1: glasses on bar", text: "Two whisky tumblers. Left: lipstick trace. Right: wiped, partial print on base." } },
-    { id: "ev-receipt", name: "Card receipt", key: true, summary: "Dana's card, two drinks, 23:52.",
+    { id: "ev-receipt", name: "Card receipt", key: true, at: { day: 0, time: "23:52" }, summary: "Dana's card, two drinks, 23:52.",
       doc: { kind: "receipt", title: "THE ANCHOR BAR",
         meta: [["Date", "Day 0"], ["Time", "23:52"], ["Card", "**** 4471 HOLT D"]],
         table: { cols: ["Item", "Price"], rows: [["Malt whisky", "7.50"], ["Malt whisky", "7.50"], ["TOTAL", "15.00"]] } } },
-    { id: "ev-camera", name: "Alley camera log", key: true, summary: "Back door opened at 00:20.",
+    { id: "ev-camera", name: "Alley camera log", key: true, at: { day: 1, time: "00:20" }, summary: "Back door opened at 00:20.",
       doc: { kind: "camera", title: "Quay St. camera 3, motion log",
         table: { cols: ["Time", "Event"], rows: [["23:58", "Figure exits front door (Sam)"], ["00:20", "Back door opens, figure in long coat"], ["00:31", "Back door closes"]] } } },
     { id: "ev-note", name: "Fridge note", key: false, summary: "Note: 'Mum's year'.",
@@ -160,7 +161,7 @@ window.CASE = {
       doc: { kind: "statement", title: "Witness statement: S. Okafor",
         meta: [["Taken by", "DS L. Cruz"], ["Time", "Day 1, 07:30"]],
         text: "I closed at midnight. Dana was still finishing her drink with a man I didn't know. I left by the front." } },
-    { id: "ev-autopsy", name: "Autopsy summary", key: true, summary: "Two head wounds: not a fall.",
+    { id: "ev-autopsy", name: "Autopsy summary", key: true, at: { day: 1, time: "00:30", approx: true }, summary: "Two head wounds: not a fall.",
       doc: { kind: "autopsy", title: "Coroner's preliminary findings",
         meta: [["Pathologist", "Dr. H. Lindqvist"], ["Subject", "Holt, Dana, 41"]],
         text: "Two distinct impact wounds to the back of the skull.\nThe second is inconsistent with a single fall.\nEstimated time of death: 00:15 to 00:45." } },
@@ -170,7 +171,7 @@ window.CASE = {
   ],
 
   facts: [
-    { id: "fact-good-coat", text: "A man in an expensive coat was drinking with Dana last night.", key: false },
+    { id: "fact-good-coat", at: { day: 0, time: "23:30", approx: true }, text: "A man in an expensive coat was drinking with Dana last night.", key: false },
     { id: "fact-sam-locked", text: "Sam claims he locked the back door himself.", key: false },
     { id: "fact-flat-key", text: "The bar's tab file has Dana's home address in Hillcrest.", key: false },
     { id: "fact-latch", text: "The back door latch was forced from outside.", key: false },

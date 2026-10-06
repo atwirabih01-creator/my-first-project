@@ -436,6 +436,15 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .tl__item { position: relative; display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 8px; }
 .tl__item::before { content: ""; position: absolute; left: -23px; top: 6px; width: 9px; height: 9px; border-radius: 50%; background: var(--bg-2); border: 1px solid var(--accent-dim); }
 .tl__item--deduction::before, .tl__item--event::before { background: var(--accent); }
+.events__day { font-size: 1.2rem; margin: 16px 0 8px; }
+.evline { display: flex; flex-direction: column; gap: 2px; text-align: left; background: none; border: 0; padding: 0; min-height: 44px; justify-content: center; color: var(--text); cursor: pointer; width: 100%; overflow-wrap: anywhere; }
+div.evline { cursor: default; }
+button.evline:hover .entry__title { color: var(--accent); }
+.evline__sub { color: var(--muted); font-size: .86rem; }
+.tl__item .evline { min-width: 0; }
+.weak { margin-top: 4px; padding: 14px 16px; border-left: 3px solid var(--red-ink); background: var(--surface-2); display: grid; gap: 8px; }
+.weak__line { font-family: var(--display); font-size: 1.3rem; font-style: italic; }
+.weak__who { font-size: .82rem; color: var(--muted); }
 .tl__t { color: var(--accent); font-size: .82rem; padding-top: 1px; }
 
 /* ---------- solve */

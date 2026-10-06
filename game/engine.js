@@ -663,6 +663,12 @@
     return out;
   }
   function proofsRequired() { return Math.min(3, Math.max(1, proofOptions().length)); }
+  /* Lena warns (without saying what is wrong) when the proof is thin or most key leads are missing. */
+  function weakCharge() {
+    var sol = C.solution, keys = keyItems();
+    var hits = S.solve.proofs.filter(function (p) { return has(p) && sol.proofs.indexOf(p) !== -1; }).length;
+    return hits < sol.proofsNeeded || keys.filter(has).length < keys.length / 2;
+  }
   function fileCharge() {
     var s = S.solve, sol = C.solution;
     var picks = s.proofs.filter(function (p) { return has(p); });
@@ -1421,9 +1427,43 @@
       ])
     ]);
   }
+  /* "Timeline of events": collected items with `at`, sorted by when they happened (day 0 = the day before). */
+  function eventsTimeline() {
+    var items = [];
+    C.evidence.concat(C.facts, C.deductions).forEach(function (it) {
+      if (!it || !it.at || !has(it.id) || !/^\d{1,2}:\d{2}$/.test(String(it.at.time || ""))) return;
+      items.push({ id: it.id, day: typeof it.at.day === "number" ? it.at.day : 1, m: hm(it.at.time), time: it.at.time, approx: !!it.at.approx,
+        label: IDX.ev[it.id] ? str(it.name, it.id) : IDX.ded[it.id] ? str(it.title, it.id) : str(it.text, it.id),
+        sub: IDX.ev[it.id] ? str(it.summary) : IDX.ded[it.id] ? "Deduction" : "Fact" });
+    });
+    var head = [el("h3", { class: "minihead" }, "Timeline of events"), el("p", { class: "muted" }, "What happened when, from what you have found. Not when you learned it.")];
+    if (!items.length) return el("div", null, head.concat(el("p", { class: "muted" }, "Times will appear here as you find them.")));
+    items.sort(function (a, b) { return a.day - b.day || a.m - b.m; });
+    var names = arr(C.dayNames);
+    var dayLabel = function (d) {
+      var n = names[d];
+      if (d === 0) return n ? n + " (the day before)" : "The day before";
+      if (d === 1) return n ? n + " (the body is found)" : "The day the body is found";
+      return n || "Day " + d;
+    };
+    var groups = [];
+    items.forEach(function (it) { var g = groups[groups.length - 1]; if (!g || g.day !== it.day) groups.push(g = { day: it.day, list: [] }); g.list.push(it); });
+    return el("div", { class: "events" }, head.concat(groups.map(function (g) {
+      return el("section", null, [el("h3", { class: "events__day display" }, dayLabel(g.day)), el("ol", { class: "tl" }, g.list.map(function (it) {
+        var open = IDX.ev[it.id] ? function () { openDoc(it.id); } : null;
+        return el("li", { class: "tl__item" }, [
+          el("span", { class: "tl__t mono" }, (it.approx ? "~" : "") + it.time),
+          el(open ? "button" : "div", open ? { class: "evline", type: "button", k: "evt-" + it.id, onclick: open, "aria-label": (it.approx ? "About " : "") + it.time + ": " + it.label } : { class: "evline" }, [
+            el("span", { class: "entry__title" }, (it.approx ? "About " + it.time + ". " : "") + it.label),
+            it.sub ? el("span", { class: "evline__sub" }, it.sub) : null
+          ])
+        ]);
+      }))]);
+    })));
+  }
   function renderNotebook() {
     var mode = S.ui.nb || "log";
-    var sub = el("div", { class: "seg", role: "tablist", "aria-label": "Notebook view" }, [["log", "Log"], ["timeline", "Timeline"], ["notes", "My notes"]].map(function (m) {
+    var sub = el("div", { class: "seg", role: "tablist", "aria-label": "Notebook view" }, [["log", "Log"], ["events", "Events"], ["timeline", "Learned"], ["notes", "Notes"]].map(function (m) {
       return el("button", { class: "seg__btn" + (mode === m[0] ? " is-on" : ""), role: "tab", "aria-selected": mode === m[0] ? "true" : "false", type: "button", k: "nb-" + m[0], onclick: function () { S.ui.nb = m[0]; save(); render(); } }, m[1]);
     }));
     var content;
@@ -1434,6 +1474,8 @@
       ta.addEventListener("input", function () { S.notes = ta.value; clearTimeout(timer); timer = setTimeout(save, 250); });
       ta.addEventListener("blur", function () { S.notes = ta.value; save(); });
       content = el("div", null, [ta, el("p", { class: "muted" }, "Saved with your game.")]);
+    } else if (mode === "events") {
+      content = eventsTimeline();
     } else if (mode === "timeline") {
       var sorted = S.log.slice().sort(function (a, b) { return a.t - b.t; });
       var days = {};
@@ -1516,7 +1558,14 @@
           el("p", { class: "doc__formline" }, "Supporting proof"),
           el("ol", { class: "charge__proofs" }, s.proofs.map(function (p) { return el("li", null, itemLabel(p)); }))
         ]),
-        el("div", { class: "row" }, [
+        weakCharge() ? el("div", { class: "weak", role: "alert" }, [
+          el("p", { class: "weak__line" }, "\u201cThis won't hold. A jury needs more than that.\u201d"),
+          el("p", { class: "weak__who" }, "\u2014 DS Lena Cruz"),
+          el("div", { class: "row" }, [
+            btn("Charge anyway", "file-charge-anyway", fileCharge, "btn--danger btn--lg"),
+            btn("Keep investigating", "solve-back", function () { s.review = false; save(); render(); focusKey("review"); }, "btn--lg")
+          ])
+        ]) : el("div", { class: "row" }, [
           btn("File the charge", "file-charge", fileCharge, "btn--danger btn--lg"),
           btn("Go back", "solve-back", function () { s.review = false; save(); render(); focusKey("review"); }, "btn--lg")
         ])
