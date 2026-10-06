@@ -34,3 +34,11 @@ Approved game plan (owner approved 2026-10-04): `docs/Cold-Read-Game-Plan.pdf`. 
 - **Chapter 1, Case 1** (the pilot) is a standalone case (not part of the hidden-villain
   thread), and should teach the tools while still being genuinely challenging. Target play
   time 25–40 minutes.
+
+## Update 2026-10-06 (owner decision)
+
+- **Art direction changed:** the owner wants people and scenes to look realistic, not illustrated.
+  Images are generated with AI through the owner's Canva account. Crime scenes show the body
+  covered by a forensic sheet with evidence markers (Canva blocks visible bodies), which also
+  matches real crime scene photography.
+- **Case file:** the opening case file should be a full, detailed police file, not a short summary.
