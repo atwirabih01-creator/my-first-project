@@ -71,8 +71,10 @@
   var PLACEHOLDER_PORTRAIT = "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 360' role='img' aria-label='Portrait not available'><rect width='300' height='360' fill='#14181c'/><rect x='1' y='1' width='298' height='358' fill='none' stroke='#2a3139' stroke-width='2'/><ellipse cx='150' cy='140' rx='58' ry='70' fill='#1d2328'/><path d='M50 360 Q150 220 250 360Z' fill='#1d2328'/><text x='150' y='335' fill='#59626b' font-family='Georgia,serif' font-size='16' text-anchor='middle' letter-spacing='4'>NO PHOTO</text></svg>";
 
   /* ART.photos[key] = "images/<key>.jpg": a relative image path that wins over the SVG for that key. */
+  var badPhotos = {};   /* photos that failed to load once are not retried this session */
   function photoFor(key) {
     var p = ART.photos;
+    if (badPhotos[key]) return null;
     if (!key || !p || typeof p !== "object" || typeof p[key] !== "string") return null;
     var src = p[key].trim();
     return (/^[\w\-./]+\.(jpe?g|png|webp|avif)$/i.test(src) && src.indexOf("..") === -1 && src.charAt(0) !== "/") ? src : null;
@@ -86,7 +88,7 @@
   function artString(group, key) {
     if (!key) return null;
     var svg = svgFor(group, key), ph = photoFor(key);
-    return ph ? { photo: ph, svg: svg } : svg;
+    return ph ? { photo: ph, svg: svg, key: key } : svg;
   }
   function artBox(svg, cls, portrait, label) {
     if (svg && typeof svg === "object") {
@@ -95,6 +97,7 @@
       var img = el("img", { src: svg.photo, alt: label || "", loading: "lazy", decoding: "async", draggable: "false" });
       if (!label) img.setAttribute("aria-hidden", "true");
       img.addEventListener("error", function () {
+        if (svg.key) badPhotos[svg.key] = true;
         var alt = artBox(fallback || null, cls, portrait, label);
         if (box.parentNode) box.parentNode.replaceChild(alt, box);
       });
@@ -113,7 +116,7 @@
   }
   function anyArt(key) {
     var svg = svgFor("intro", key) || svgFor("scenes", key) || svgFor("evidence", key), ph = photoFor(key);
-    return ph ? { photo: ph, svg: svg } : svg;
+    return ph ? { photo: ph, svg: svg, key: key } : svg;
   }
 
   /* ------------------------------------------------------------------ time */

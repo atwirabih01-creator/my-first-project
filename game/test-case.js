@@ -6,6 +6,7 @@ window.CASE = {
   title: "The Test Tide",
   tagline: "A small case for checking the machinery.",
   start: { day: 1, time: "06:40", locationId: "loc-hq" },
+  caseFile: ["ev-statement"],
 
   intro: [
     { art: "intro-1", caption: "Port Halden. The fog comes in before the sun does." },
@@ -18,6 +19,10 @@ window.CASE = {
   victim: {
     id: "p-victim", name: "Dana Holt", age: 41, occupation: "Co-owner, Holt & Vance Shipping",
     bio: "Dana ran the books at a small shipping firm with her partner Rex Vance. Friends describe her as careful with money and careless with sleep. She had recently asked an accountant about an audit. She drank at the Anchor Bar most Thursdays and always paid in cash, except, apparently, last night.",
+    family: "One sister, Ivy Holt, 36, who identified the body. Parents dead. Never married.",
+    work: "Co-owner of Holt & Vance Shipping with Rex Vance. She kept the books; he kept the clients.",
+    routine: "Office by eight, home by seven. The Anchor Bar most Thursdays, always cash.",
+    lastSeen: "Thursday 23:50, at the end of the bar with a man in a good coat (bartender's first account).",
     foundAt: "Cellar steps behind the Anchor Bar, The Docks",
     foundBy: "A delivery driver",
     timeOfDeath: "Between 23:00 and 01:00",

@@ -43,9 +43,16 @@ async function run(viewport, label) {
   const context = await browser.newContext({ viewport, deviceScaleFactor: 1, hasTouch: label === "phone", isMobile: label === "phone" });
   const page = await context.newPage();
   const errors = [];
+  // test-art.js points p-sam at a missing photo on purpose; the browser logs that one load failure.
+  const failed = [];
+  page.on("requestfailed", (r) => failed.push(r.url()));
   page.on("console", (m) => { if (m.type() === "error") errors.push(m.text()); });
   page.on("pageerror", (e) => errors.push(String(e)));
   page.on("dialog", (d) => { errors.push("Unexpected dialog: " + d.type()); d.dismiss(); });
+  const realErrors = () => {
+    const onlyIntended = failed.length > 0 && failed.every((u) => /does-not-exist\.jpg$/.test(u));
+    return errors.filter((e) => !(onlyIntended && /ERR_FILE_NOT_FOUND/.test(e)));
+  };
   await page.route(/fonts\.(googleapis|gstatic)\.com/, (r) => r.fulfill({ status: 200, contentType: "text/css", body: "" }));
   await page.route(/^https?:\/\//, (r) => { if (!/fonts\./.test(r.request().url())) { errors.push("Network request: " + r.request().url()); r.abort(); } else r.fallback(); });
 
@@ -93,6 +100,10 @@ async function run(viewport, label) {
   // Case file
   await k("begin").waitFor();
   check((await text(".casefile")).includes("Dana Holt"), "case file shows victim");
+  for (const h of ["Background", "Family", "Work", "Routine", "Last seen", "Found", "Cause of death"]) check((await text(".vcard")).includes(h), `victim profile section: ${h}`);
+  await click("cf-open-ev-statement");
+  check(await page.locator(".modal .doc--statement").count() === 1, "case file document opens in the document viewer");
+  await click("modal-ok");
   await snap("casefile");
   await click("begin");
 
@@ -116,6 +127,9 @@ async function run(viewport, label) {
   await click("person-p-ivy");
   await click("ask-q-ivy-dana");
   check((await text(".conv")).includes("sensible one"), "answer shown");
+  await page.waitForFunction(() => { const i = document.querySelector(".person__img img"); return i && i.complete && i.naturalWidth > 0; }, null, { timeout: 5000 });
+  check(true, "portrait photo loads (ART.photos)");
+  check(await page.locator(".person__img img[loading='lazy']").count() === 1, "photo is lazy-loaded");
   check(await page.locator(".conv .cue--obs").count() >= 1, "behaviour cue shown separately");
   check((await clock()) === "Day 1, 06:55", "question costs 10 minutes");
   await snap("question-ivy");
@@ -131,6 +145,12 @@ async function run(viewport, label) {
   await click("hs-h-bar-glass"); await click("modal-ok");
   await click("hs-h-bar-receipt");
   await page.waitForSelector(".stamp-layer.is-on", { timeout: 3000 });
+  await page.waitForTimeout(450);
+  const overlap = await page.evaluate(() => {
+    const a = document.querySelector(".stamp").getBoundingClientRect(), b = document.querySelector(".modal .obs__text").getBoundingClientRect();
+    return !(a.right <= b.left || a.left >= b.right || a.bottom <= b.top || a.top >= b.bottom);
+  });
+  check(!overlap, "stamp does not cover the observation text");
   await snap("stamp-receipt");
   await waitStampGone();
   await click("modal-ok");
@@ -149,6 +169,8 @@ async function run(viewport, label) {
   // Sam: question -> twist
   await go("people");
   await click("person-p-sam");
+  await page.waitForTimeout(300);
+  check(await page.locator(".person__img svg").count() === 1, "broken photo falls back to the SVG portrait");
   await click("ask-q-sam-night");
   await dismissEvent();
   await waitStampGone();
@@ -325,6 +347,7 @@ async function run(viewport, label) {
   await snap("reopen");
   await click("reopen-continue");
   check((await text(".casefile")).includes("three weeks colder"), "reopen briefing override");
+  check(await k("cf-open-ev-statement").count() === 1, "case file documents present in reopen run");
   await click("begin");
 
   // Second run with overrides
@@ -397,7 +420,9 @@ async function run(viewport, label) {
   check(err2.length === 0, "game runs with storage blocked");
   await ctx2.close();
 
-  check(errors.length === 0, "no console errors" + (errors.length ? ": " + errors.join(" | ") : ""));
+  const errs = realErrors();
+  check(errs.length === 0, "no console errors" + (errs.length ? ": " + errs.join(" | ") : ""));
+  check(failed.filter((u) => /does-not-exist/.test(u)).length <= 2, "a broken photo is not retried on every redraw (" + failed.length + " attempts)");
   await browser.close();
 }
 

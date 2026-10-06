@@ -28,4 +28,6 @@
       "p-rex": portrait("#2e2a26", "#777066")
     }
   };
+  /* p-ivy uses a real photo; p-sam points at a missing file to test the fall back to SVG. */
+  window.ART.photos = { "p-ivy": "images/p-hanna.jpg", "p-sam": "images/does-not-exist.jpg" };
 })();

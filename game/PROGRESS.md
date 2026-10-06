@@ -19,7 +19,7 @@ check in with the owner. Save (commit and push) after every step.
 
 - Real photos for people and places: the owner makes them with a free tool (Microsoft Designer / Bing Image Creator) from game/images/PROMPTS.md (10 prompts) and uploads them. Crop scenes to 5:3, save as game/images/<art key>.jpg, then re-place hotspots on each photo.
 - Map and intro slides stay as improved code drawings.
-- Engine update for photos + full case file: in progress (Frontend Developer).
+- Engine update for photos + full case file: DONE (tests: test 254/254, smoke 60/60, real 16/16). Photos are listed in game/photos.js (separate from art.js). Owner can't make images manually; options offered: free Hugging Face token (HF_TOKEN in environment API credentials, FLUX.1-schnell via gradio_client), Pollinations (no setup, weaker + logo), or improved drawings.
 
 ## Next session
 

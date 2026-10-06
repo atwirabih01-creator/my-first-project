@@ -170,6 +170,14 @@ window.ART = {
 };
 ```
 
+**Photos.** `ART.photos = { "p-hanna": "images/p-hanna.jpg" }` maps any art key (portrait, scene,
+intro, twist art, `doc.art`) to a relative image path (.jpg/.png/.webp next to index.html). If a key
+is in `ART.photos`, the engine shows the photo instead of the SVG; if the photo fails to load it falls
+back to the SVG, then to the placeholder. Photos load lazily. Portraits fill the 300×360 box
+(object-fit: cover, focused on the face at 50% 25%). Scene photos should be 5:3; the engine crops
+other ratios to cover the 1000×600 box from the centre, and hotspot x/y are measured in that box.
+Intro and twist photos are cropped the same way.
+
 Every SVG is a complete string. No external images or fonts. The engine draws hotspots on top
 of scenes using the same 1000×600 coordinates, so each hotspot's object must be drawn at its
 `x, y`. A missing art key shows a neutral placeholder, never an error.
