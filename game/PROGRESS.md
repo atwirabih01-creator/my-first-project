@@ -12,8 +12,8 @@ check in with the owner. Save (commit and push) after every step.
 | Game screens (engine) | Done: all tests pass (test case 226/226, real case smoke 52/52, full bot play-through 16/16 on desktop and phone) |
 | Artwork | Changing to realistic AI images via Canva (owner decision 2026-10-06). Test images made: victim portrait, crime scene. Full-size download WORKS (see method below); images saved in game/images/: p-victim, loc-stairs (to redo: covered body larger), p-hanna, p-dolores, p-marcus. STILL NEEDED: p-petra, p-whitlock, p-nico, scenes loc-hq, loc-flat, loc-office, loc-cafe, loc-restaurant, loc-coop, loc-stairs redo, intro-1..5, intro-twist, map. Canva AI allowance ran out on 2026-10-06 (free plan monthly quota); prompts for p-petra/p-whitlock/p-nico/stairs redo were already written in the session. Owner asked: regenerate the stairs scene with the covered body larger and closer. Old code art stays until replaced. Previously: Mostly done: all scenes and portraits exist; needs update for revised case (restaurant moved to map x 120, y 480) and a hotspot-position check |
 | Longer case file | Written (case-001.js: 393-word briefing, full victim profile, 5 opening documents in `caseFile`). Validator OK. Next: engine must display `caseFile` and the new victim fields (family, work, routine, lastSeen) on the opening case file screen |
-| Full test play (Evidence Collector) | Not started |
-| Publish link for the owner | Not started |
+| Full test play (Evidence Collector) | Done round 1: nearly ready. 17 fixes listed in game/reviews/qa-1.md (engine 1–12, content 13–17). Next: Frontend Developer does 1–12, Narrative Designer does 13–17 |
+| Publish link for the owner | Preview published (https://claude.ai/artifact/E41d2iMXhR65pp3im1rYo3); owner's Safari too old for artifacts, so also sent a single-file HTML build (inline everything, photos as data URIs) |
 
 ## Owner decision 2026-10-06: pictures plan (D + C)
 
