@@ -1,0 +1,97 @@
+
+################ GBPJPY: 167 versions tested ################
+Best version per strategy x timeframe -> avg R per trade over 12 months (worse half in brackets)
+tf                                               5min               15min               30min                  1h
+strategy                                                                                                         
+Asian sweep reversal               -0.21 (-0.27) n205  -0.20 (-0.29) n195  -0.19 (-0.27) n171   -0.09 (-0.10) n77
+Breakout + retest (limit order)                     -  -0.07 (-0.10) n146  -0.12 (-0.22) n114   -0.08 (-0.17) n72
+Fair value gap retrace (limit)     +0.10 (-0.01) n223  +0.02 (-0.09) n100   -0.09 (-0.15) n75   -0.03 (-0.20) n28
+Key level sweep reversal            +0.02 (-0.04) n36   +0.16 (+0.13) n29   -0.04 (-0.04) n81   -0.01 (-0.08) n86
+London breakout (Asian box)        -0.09 (-0.30) n135  -0.06 (-0.07) n189  -0.08 (-0.10) n172  -0.05 (-0.05) n126
+NY draw to London high/low          -0.02 (-0.15) n79   +0.21 (+0.08) n11    +0.04 (-0.71) n9                   -
+NY open fade                        -0.15 (-0.16) n60   +0.05 (+0.05) n23                   -                   -
+NY opening-range breakout          -0.22 (-0.26) n113  -0.10 (-0.14) n190                   -                   -
+Trend pullback (EMA20 + 1H EMA50)  -0.17 (-0.17) n216  +0.01 (-0.07) n167  +0.03 (-0.06) n116   -0.10 (-0.14) n51
+VWAP pullback                      +0.04 (+0.01) n133  +0.34 (+0.15) n109    +0.00 (+0.00) n0                   -
+
+Qualified (positive in BOTH halves, >=40 trades): 3
+     strategy                                                 params   n  win  avgR  winter  summer   PF   ddR  streak
+VWAP pullback {'tf': '15min', 'win': 'W1', 'rr': 3, 'anchor': 'day'} 109 0.46 0.343   0.149   0.479 1.57  -8.9     6.0
+VWAP pullback {'tf': '15min', 'win': 'W1', 'rr': 2, 'anchor': 'day'} 109 0.50 0.186   0.026   0.298 1.33  -9.9     6.0
+VWAP pullback  {'tf': '5min', 'win': 'W1', 'rr': 2, 'anchor': 'day'} 133 0.42 0.044   0.013   0.066 1.07 -10.4     7.0
+
+################ GBPUSD: 167 versions tested ################
+Best version per strategy x timeframe -> avg R per trade over 12 months (worse half in brackets)
+tf                                               5min               15min               30min                  1h
+strategy                                                                                                         
+Asian sweep reversal               -0.06 (-0.08) n130  -0.13 (-0.16) n216   +0.03 (-0.00) n87   -0.19 (-0.20) n77
+Breakout + retest (limit order)                     -  -0.06 (-0.23) n106   -0.01 (-0.20) n92   +0.11 (+0.07) n61
+Fair value gap retrace (limit)     +0.00 (+0.00) n202  +0.00 (-0.06) n141   -0.11 (-0.15) n50   +0.21 (-0.25) n15
+Key level sweep reversal           -0.03 (-0.09) n142  -0.06 (-0.07) n133  -0.10 (-0.11) n118   -0.07 (-0.15) n99
+London breakout (Asian box)        -0.15 (-0.31) n129  -0.14 (-0.28) n212  -0.11 (-0.21) n201  -0.03 (-0.14) n173
+NY draw to London high/low          -0.12 (-0.32) n57   +0.42 (-0.04) n12    -1.12 (-1.12) n6                   -
+NY open fade                        +0.01 (-0.01) n99   -0.11 (-0.12) n31                   -                   -
+NY opening-range breakout           -0.03 (-0.06) n89   -0.14 (-0.16) n85                   -                   -
+Trend pullback (EMA20 + 1H EMA50)  -0.13 (-0.26) n197  -0.10 (-0.15) n141  -0.14 (-0.15) n140   -0.07 (-0.11) n97
+VWAP pullback                        +0.00 (+0.00) n0    +0.00 (+0.00) n0    +0.00 (+0.00) n0                   -
+
+Qualified (positive in BOTH halves, >=40 trades): 3
+                       strategy                                             params   n  win  avgR  winter  summer   PF   ddR  streak
+Breakout + retest (limit order) {'tf': '1h', 'stop': 'bar', 'rr': 2, 'bias': True}  61 0.48 0.109   0.075   0.130 1.19  -8.0     7.0
+Breakout + retest (limit order) {'tf': '1h', 'stop': 'bar', 'rr': 3, 'bias': True}  61 0.44 0.185   0.049   0.268 1.31  -8.0     7.0
+ Fair value gap retrace (limit)               {'tf': '5min', 'win': 'W2', 'rr': 3} 202 0.32 0.001   0.002   0.001 1.00 -20.5    11.0
+
+################ NAS100: 167 versions tested ################
+Best version per strategy x timeframe -> avg R per trade over 12 months (worse half in brackets)
+tf                                               5min               15min               30min                  1h
+strategy                                                                                                         
+Asian sweep reversal               -0.07 (-0.09) n225  -0.11 (-0.12) n169  -0.01 (-0.04) n195   -0.01 (-0.02) n83
+Breakout + retest (limit order)                     -  -0.05 (-0.10) n164   +0.01 (-0.06) n87   +0.04 (-0.10) n84
+Fair value gap retrace (limit)     +0.23 (+0.18) n207   +0.22 (+0.12) n96   +0.12 (-0.07) n58   +0.27 (-0.01) n24
+Key level sweep reversal           +0.00 (-0.04) n192   -0.07 (-0.10) n76   -0.04 (-0.06) n69   -0.04 (-0.13) n97
+London breakout (Asian box)        -0.07 (-0.13) n136  -0.08 (-0.13) n194  -0.05 (-0.12) n126  -0.05 (-0.11) n149
+NY draw to London high/low          -0.15 (-0.16) n59    -0.07 (-0.07) n4    +0.45 (+0.00) n2                   -
+NY open fade                        +0.32 (+0.00) n82   -0.14 (-0.17) n31                   -                   -
+NY opening-range breakout          -0.00 (-0.16) n214  -0.01 (-0.03) n184                   -                   -
+Trend pullback (EMA20 + 1H EMA50)  -0.06 (-0.06) n227  +0.03 (-0.02) n162  +0.19 (+0.14) n107   -0.04 (-0.05) n67
+VWAP pullback                        +0.00 (+0.00) n0  +0.00 (+0.00) n107    +0.00 (+0.00) n0                   -
+
+Qualified (positive in BOTH halves, >=40 trades): 9
+                         strategy                                                 params   n  win  avgR  winter  summer   PF   ddR  streak
+   Fair value gap retrace (limit)                   {'tf': '5min', 'win': 'W2', 'rr': 2} 207 0.44 0.233   0.181   0.281 1.40 -10.2     8.0
+   Fair value gap retrace (limit)                   {'tf': '5min', 'win': 'W2', 'rr': 3} 207 0.34 0.196   0.240   0.156 1.28 -18.8    15.0
+Trend pullback (EMA20 + 1H EMA50)                  {'tf': '30min', 'win': 'W2', 'rr': 2} 107 0.46 0.186   0.244   0.135 1.39  -7.3     8.0
+   Fair value gap retrace (limit)                  {'tf': '15min', 'win': 'W2', 'rr': 2}  96 0.46 0.223   0.310   0.117 1.41  -7.8     5.0
+   Fair value gap retrace (limit)                  {'tf': '15min', 'win': 'W2', 'rr': 3}  96 0.36 0.199   0.291   0.086 1.31 -14.8     7.0
+Trend pullback (EMA20 + 1H EMA50)                  {'tf': '30min', 'win': 'W2', 'rr': 3} 107 0.41 0.164   0.278   0.064 1.32  -8.5     8.0
+   Fair value gap retrace (limit)                   {'tf': '5min', 'win': 'W1', 'rr': 3} 237 0.33 0.157   0.010   0.287 1.21 -24.0    14.0
+                     NY open fade                      {'tf': '5min', 'k': 0.3, 'rr': 2}  82 0.50 0.319   0.002   0.474 1.63  -5.8     5.0
+                    VWAP pullback {'tf': '15min', 'win': 'W2', 'rr': 3, 'anchor': 'day'} 107 0.31 0.002   0.003   0.001 1.00 -11.5    10.0
+
+################ XAUUSD: 167 versions tested ################
+Best version per strategy x timeframe -> avg R per trade over 12 months (worse half in brackets)
+tf                                               5min               15min               30min                 1h
+strategy                                                                                                        
+Asian sweep reversal               -0.10 (-0.33) n134   -0.07 (-0.11) n85   +0.00 (-0.02) n46  +0.06 (+0.00) n82
+Breakout + retest (limit order)                     -   +0.43 (+0.27) n75   +0.23 (+0.14) n62  +0.09 (+0.07) n38
+Fair value gap retrace (limit)     +0.21 (+0.14) n200  +0.25 (+0.01) n100   +0.53 (+0.29) n57  -0.06 (-0.07) n19
+Key level sweep reversal            +0.19 (+0.17) n80   +0.35 (+0.34) n62   +0.17 (+0.09) n50  +0.18 (+0.17) n83
+London breakout (Asian box)         +0.10 (+0.03) n91   +0.16 (+0.09) n89   +0.21 (+0.20) n88  +0.21 (+0.19) n84
+NY draw to London high/low          -0.07 (-0.26) n59   -0.08 (-0.46) n11    +0.45 (+0.00) n2                  -
+NY open fade                        -0.00 (-0.01) n78   +0.01 (-0.00) n59                   -                  -
+NY opening-range breakout          +0.02 (-0.04) n121  +0.04 (+0.02) n116                   -                  -
+Trend pullback (EMA20 + 1H EMA50)  +0.11 (+0.06) n211  +0.06 (+0.01) n158  +0.17 (+0.10) n118  +0.14 (+0.04) n73
+VWAP pullback                      +0.23 (+0.17) n117    +0.00 (+0.00) n0    +0.00 (+0.00) n0                  -
+
+Qualified (positive in BOTH halves, >=40 trades): 53
+                       strategy                                                                 params   n  win  avgR  winter  summer   PF  ddR  streak
+       Key level sweep reversal {'tf': '15min', 'win': 'W2', 'rr': 3, 'bias': True, 'level': 'london'}  62 0.48 0.347   0.343   0.351 1.67 -7.9     8.0
+ Fair value gap retrace (limit)                                  {'tf': '30min', 'win': 'W2', 'rr': 3}  57 0.58 0.526   0.726   0.288 2.47 -2.1     2.0
+Breakout + retest (limit order)                  {'tf': '15min', 'stop': 'bar', 'rr': 3, 'bias': True}  75 0.41 0.432   0.603   0.274 1.69 -6.1     5.0
+Breakout + retest (limit order)                 {'tf': '15min', 'stop': 'bar', 'rr': 3, 'bias': False} 102 0.37 0.254   0.255   0.254 1.38 -6.8     6.0
+ Fair value gap retrace (limit)                                  {'tf': '30min', 'win': 'W2', 'rr': 2}  57 0.58 0.413   0.551   0.248 2.15 -2.1     2.0
+       Key level sweep reversal {'tf': '15min', 'win': 'W2', 'rr': 2, 'bias': True, 'level': 'london'}  62 0.48 0.245   0.206   0.281 1.47 -7.9     8.0
+    London breakout (Asian box)                    {'tf': '30min', 'win': 'W1', 'rr': 3, 'bias': True}  88 0.53 0.214   0.202   0.223 2.11 -3.1     5.0
+    London breakout (Asian box)                       {'tf': '1h', 'win': 'W1', 'rr': 3, 'bias': True}  84 0.51 0.211   0.194   0.222 2.11 -3.2     4.0
+                  VWAP pullback                  {'tf': '5min', 'win': 'W1', 'rr': 3, 'anchor': 'day'} 117 0.35 0.230   0.291   0.175 1.32 -9.4     7.0
+       Key level sweep reversal     {'tf': '1h', 'win': 'BOTH', 'rr': 2, 'bias': False, 'level': 'pd'}  83 0.60 0.182   0.173   0.188 1.75 -3.1     4.0

@@ -1,0 +1,252 @@
+<title>Four-Pair Session Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one readable column (~70ch) with wide tables/charts allowed to scroll; trading-desk ink palette, gold used only as the accent */
+:root{
+  --bg:#f6f7f9; --panel:#ffffff; --ink:#18202b; --muted:#566273; --line:#dfe3ea;
+  --accent:#9a6b00; --accent-soft:#fbf3df;
+  --good:#0f7a4a; --good-soft:#e3f4ec; --bad:#b4332a; --bad-soft:#fbe7e5; --warn:#8a5a00; --warn-soft:#fdf1d8;
+  --display:"Archivo", "Helvetica Neue", Arial, sans-serif;
+  --body:"Source Sans 3", "Segoe UI", Roboto, Arial, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141b; --panel:#161d27; --ink:#e7ebf1; --muted:#9aa6b6; --line:#2a3342;
+  --accent:#e2b44b; --accent-soft:#2b2412;
+  --good:#47c08a; --good-soft:#12291f; --bad:#ef7b70; --bad-soft:#2e1614; --warn:#e9b65a; --warn-soft:#2c2210; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141b; --panel:#161d27; --ink:#e7ebf1; --muted:#9aa6b6; --line:#2a3342;
+  --accent:#e2b44b; --accent-soft:#2b2412;
+  --good:#47c08a; --good-soft:#12291f; --bad:#ef7b70; --bad-soft:#2e1614; --warn:#e9b65a; --warn-soft:#2c2210; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:17px/1.6 var(--body);padding-inline:16px;padding-block:28px 64px}
+main{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:44px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(30px,5vw,42px);font-weight:800;letter-spacing:-.01em}
+h2{font-size:25px;font-weight:700;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+h3{font-size:19px;font-weight:700;margin-top:6px}
+section{display:flex;flex-direction:column;gap:14px}
+p,ul,ol{margin:0} ul,ol{padding-left:1.3em;display:flex;flex-direction:column;gap:6px}
+.eyebrow{font:600 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.lede{font-size:19px;color:var(--muted)}
+.muted{color:var(--muted)} .small{font-size:14.5px}
+.num,td.num,th.num{font-family:var(--mono);font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.g{color:var(--good)} .r{color:var(--bad)}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font:600 12px/1.3 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+tr:last-child td{border-bottom:0}
+.pill{display:inline-block;font:600 12px/1 var(--mono);letter-spacing:.04em;padding:5px 8px;border-radius:999px;white-space:nowrap}
+.pill.go{background:var(--good-soft);color:var(--good)} .pill.no{background:var(--bad-soft);color:var(--bad)} .pill.watch{background:var(--warn-soft);color:var(--warn)}
+.verdict{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--accent);padding:18px 20px;display:flex;flex-direction:column;gap:10px;border-radius:4px}
+.callout{background:var(--warn-soft);color:var(--ink);padding:14px 16px;border-radius:4px}
+.callout.bad{background:var(--bad-soft)}
+.steps{counter-reset:s;list-style:none;padding:0;gap:0;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:4px 12px;padding:14px 16px;border-bottom:1px solid var(--line)}
+.steps li:last-child{border-bottom:0}
+.steps li::before{content:counter(s);grid-row:1/span 2;font:700 22px/1 var(--display);color:var(--accent);padding-top:2px}
+.steps b{display:block} .steps span{color:var(--muted);font-size:15.5px;min-width:0}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.kv div{background:var(--panel);padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.kv .k{font:600 11.5px/1.2 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kv .v{font:700 22px/1.2 var(--display);font-variant-numeric:tabular-nums}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.two > div{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}
+svg{display:block;width:100%;min-width:640px;height:auto}
+svg .pos{fill:var(--good)} svg .neg{fill:var(--bad)} svg .zero{fill:var(--line)}
+svg .grid{stroke:var(--line);stroke-width:1} svg .zero-line{stroke:var(--muted);stroke-width:1}
+svg .ax{fill:var(--muted);font:11px var(--mono)} svg .split{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:4 3}
+details{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 14px}
+summary{cursor:pointer;font-weight:600}
+summary:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+a{color:var(--accent)}
+code{font:14px var(--mono);background:var(--accent-soft);padding:1px 5px;border-radius:3px}
+footer{color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+
+<main>
+<header style="display:flex;flex-direction:column;gap:12px">
+  <div class="eyebrow">Day-trading research · GBPUSD · XAUUSD · NAS100 · GBPJPY · all times Doha (UTC+3) · version 2</div>
+  <h1>Four-Pair Session Playbook</h1>
+  <p class="lede">18 months of minute-by-minute prices, 10 strategies tested on every pair and every timeframe you asked for, two sealed tests, and two independent checkers. Below is the plain answer for each pair, with its strategy and weekly P&amp;L.</p>
+</header>
+
+<section>
+  <h2>The answer for each pair</h2>
+  <div class="callout bad"><b>Correction to version 1.</b> Version 1 called the gold London breakout "proven". I then ran a second sealed test on Apr–Sep 2025, data no one had looked at, and gold lost (−0.05R per trade). Every other pair's candidate lost too. None of the strategies is proven. The table shows the best candidate for each pair and how it did across all three periods.</div>
+  <div class="scroll"><table>
+    <tr><th>Pair</th><th>Best strategy found</th><th class="num">18-month total at 1%</th><th class="num">Worst drawdown</th><th>Verdict</th></tr>
+    <tr><td><b>XAUUSD</b></td><td>Gold NY Fair-Value-Gap (30 min, 16–18 Doha)</td><td class="num g">+23.4%</td><td class="num r">−7.3%</td><td><span class="pill watch">BEST CANDIDATE</span> Positive in all 3 periods, but mostly from one</td></tr>
+    <tr><td><b>GBPJPY</b></td><td>VWAP pullback (15 min, 9–12 Doha)</td><td class="num g">+6.6%</td><td class="num r">−14.5%</td><td><span class="pill no">NOT SAFE</span> Too volatile for a 5% limit</td></tr>
+    <tr><td><b>GBPUSD</b></td><td>Breakout + retest limit (1 hour, 9–12 Doha)</td><td class="num r">−4.3%</td><td class="num r">−10.9%</td><td><span class="pill no">NO EDGE</span></td></tr>
+    <tr><td><b>NAS100</b></td><td>NY Fair-Value-Gap (5 min, 16–18 Doha)</td><td class="num r">−11.2%</td><td class="num r">−34.7%</td><td><span class="pill no">NO EDGE</span></td></tr>
+  </table></div>
+  <div class="verdict">
+    <p><b>Where that leaves your challenge:</b> no tested strategy stayed inside a 5% maximum loss at 1% risk over all 18 months. Gold is the only market with a consistent positive result. At <b>0.5% risk</b>, the gold FVG strategy made <b>+11.7%</b> over 18 months, its worst drawdown was <b>−3.6%</b>, and it averaged under one trade a week. That stays inside your rules, but at that pace an 8% target takes many months.</p>
+    <p>My recommendation: don't buy a challenge expecting these rules to pass it. If you go ahead, trade only the gold strategy at 0.5% risk, after 4+ weeks on demo. Treat GBPUSD, GBPJPY and NAS100 as markets you study, not markets you trade, until a strategy survives a test like this one.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Your 8 steps: what was done</h2>
+  <div class="scroll"><table>
+    <tr><th>Step</th><th>What you asked</th><th>Done</th></tr>
+    <tr><td class="num">1</td><td>GBPUSD, XAUUSD, NAS100, GBPJPY</td><td>✅ All four, separately</td></tr>
+    <tr><td class="num">2</td><td>Study each pair in the Asian, London and New York sessions</td><td>✅ 265 days per pair, every fact checked in both 6-month halves (section below)</td></tr>
+    <tr><td class="num">3</td><td>Backtest 5+ proven strategies on each pair, 4–6 months, on 1H/30m/15m/5m</td><td>✅ 10 strategies × 4 timeframes × settings = 167 versions <b>per pair</b>, over 12 months</td></tr>
+    <tr><td class="num">4</td><td>Entries only 09–12 and 16–18 Doha, phone after</td><td>✅ Built into every test</td></tr>
+    <tr><td class="num">5</td><td>Build the strategy from each pair's repeating behaviour</td><td>✅ 4 strategies added from the study: breakout-retest, NY draw to London high/low, VWAP pullback, FVG</td></tr>
+    <tr><td class="num">6</td><td>1–4h hold, 1:2–1:3, 1% / 3% / 5% rules, 2–4 green days a week</td><td>⚠️ Rules applied. No candidate reached 2–4 green days a week safely.</td></tr>
+    <tr><td class="num">7</td><td>Proper backtest with supervision</td><td>✅ Two sealed tests, 2 audits by a Reality Checker (6 bugs found and fixed), 1 Statistician review</td></tr>
+    <tr><td class="num">8</td><td>One strategy per pair with weekly P&amp;L, steps, risks, when to step back</td><td>✅ Below, with an honest verdict on each</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>Your trading day, mapped to the market</h2>
+  <p>Doha keeps the same clock all year. London (from 25 Oct) and New York (from 1 Nov) move one hour later against Doha in winter.</p>
+  <div class="scroll"><table>
+    <tr><th>Doha time</th><th>Market</th><th>You</th></tr>
+    <tr><td class="num">03:00–09:00</td><td>Asian session: builds the "Asian box" (session high and low)</td><td class="muted">asleep / commute</td></tr>
+    <tr><td class="num">09:00–12:00</td><td>Frankfurt, then London opens: 10:00 summer, 11:00 winter</td><td><b>Window 1</b>: GBPUSD, GBPJPY setups</td></tr>
+    <tr><td class="num">15:30 / 16:30</td><td>US data (CPI, jobs): 15:30 summer, 16:30 winter</td><td>phone</td></tr>
+    <tr><td class="num">16:00–18:00</td><td>New York stock open: 16:30 summer, 17:30 winter. Busiest hours for gold and NAS100</td><td><b>Window 2</b>: gold and NAS100 setups</td></tr>
+  </table></div>
+</section>
+
+<section>
+  <h2>Step 2: what each pair does, session by session</h2>
+  <p>Measured over 265 trading days (Oct 2025 – Oct 2026), with sessions in each city's own local time. A fact is marked <b>repeats</b> only if it held within 8 points in both 6-month halves.</p>
+  <div class="two">
+    <div><h3>XAUUSD</h3><ul>
+      <li>Asia's direction matches the whole day's direction <b>74%</b> of days.</li>
+      <li>London stays inside the Asian box <b>29%</b> of days (repeats) and almost never breaks both sides (0%).</li>
+      <li>London makes the day's high or low only <b>16%</b> of the time (repeats). The day's extremes form in Asia (34–43%) or New York.</li>
+      <li>The day closes on the side London broke first <b>77%</b> of days.</li>
+      <li>New York takes the London high on 65% of days and the London low on 58%.</li>
+    </ul></div>
+    <div><h3>NAS100</h3><ul>
+      <li>New York takes the London <b>high 73%</b> and the London <b>low 68%</b> of days (both repeat). This is the most reliable NAS fact.</li>
+      <li>London rarely sets the day's high or low (<b>16%</b>, repeats).</li>
+      <li>London's first break of the Asian box is upward 59% of the time.</li>
+      <li>After that break it is close to a coin flip: it carries on 54% of the time and reverses 46%.</li>
+      <li>Thursday has the widest range: 520 points, against 475 on average.</li>
+    </ul></div>
+    <div><h3>GBPUSD</h3><ul>
+      <li>London almost always breaks the Asian box: it stays inside only <b>3%</b> of days (repeats).</li>
+      <li>After London's first break: carries on 55%, reverses 45%. This is the "Judas sweep", and it is a coin flip.</li>
+      <li>London's direction matches the day's direction <b>63%</b> of the time (repeats).</li>
+      <li>The day closes on the side of London's first break 67% of the time.</li>
+      <li>The day's high is most often set in New York (32%). Wednesday and Thursday are the widest days.</li>
+    </ul></div>
+    <div><h3>GBPJPY</h3><ul>
+      <li>After London's first break of the Asian box, London <b>carries on 64%</b> and reverses 36% (repeats).</li>
+      <li>The day closes on the side of that first break <b>76%</b> of days (repeats).</li>
+      <li>London's direction matches the day's direction <b>69%</b> of the time (repeats).</li>
+      <li>London stays inside the Asian box only 10% of days (repeats).</li>
+      <li>Thursday is the widest day: 147 pips, against 134 on average.</li>
+    </ul></div>
+  </div>
+  <div class="callout"><b>Why strong facts didn't become profitable trades.</b> GBPJPY "carries on 64%" sounds like an edge. But a trade with a 1:2 or 1:3 target needs the move to travel 2–3 times its stop <i>within 4 hours</i>, and after costs it usually didn't. A fact about where the day <i>closes</i> is not a fact about where price goes in your 4-hour hold.</div>
+</section>
+
+<section>
+  <h2>Step 3: every strategy, every timeframe, per pair</h2>
+  <p>Ten strategies: the five classics (Asian sweep reversal, London breakout, NY opening-range breakout, trend pullback, key-level sweep reversal), the NY open fade, and four built from the study (breakout + retest, NY draw to London high/low, VWAP pullback, fair-value-gap retrace). Each was tested on each pair with 1:2 and 1:3 targets and with or without the 1-hour trend filter.</p>
+  <h3>XAUUSD</h3>{{PIVOT_XAUUSD}}
+  <h3>NAS100</h3>{{PIVOT_NAS100}}
+  <h3>GBPUSD</h3>{{PIVOT_GBPUSD}}
+  <h3>GBPJPY</h3>{{PIVOT_GBPJPY}}
+  <p class="small muted">With 167 versions per pair, a good number will look profitable in both halves by luck alone. That is why each pair's best candidate then had to pass a sealed test on Apr–Sep 2025.</p>
+</section>
+
+<section>
+  <h2>Step 8 · XAUUSD: Gold NY Fair-Value-Gap</h2>
+  <p><span class="pill watch">BEST CANDIDATE, NOT PROVEN</span> Positive in all three periods. Most of the profit came from Oct 2025 – Mar 2026, and the 2025 sealed test was only slightly positive (+0.10R on 16 trades).</p>
+  <ol class="steps">
+    <li><b>16:00 Doha: read the 1-hour trend.</b><span>50 EMA on the 1H chart. Up-trend: the last closed 1H candle is above the EMA and the EMA is higher than 5 candles ago. Down-trend: the opposite. No clear trend means no trade.</span></li>
+    <li><b>Find a fair value gap on the 30-minute chart in the trend direction.</b><span>For an up-trend: three candles where candle 3's low is above candle 1's high, and candle 2 is green. (A down-trend is the mirror.) Candle 3 must close between 16:00 and 18:00 Doha.</span></li>
+    <li><b>Place a limit order at the middle of the gap.</b><span>Stop just beyond candle 1's far end. Target 1:3. Cancel the order if it hasn't filled within 1 hour, or by 18:00. If two gaps appear, keep only the order that fills first.</span></li>
+    <li><b>Size for 0.5% risk.</b><span>Lots = (account × 0.5%) ÷ (stop distance in $ × 100 oz). Check your broker's contract size.</span></li>
+    <li><b>From your phone: close the trade 4 hours after the fill</b> if the stop or target hasn't closed it already.</li>
+  </ol>
+  {{STATS_XAUUSD}}
+  <div class="scroll" style="padding:10px">{{CHART_XAUUSD}}</div>
+  <details><summary>All 80 weeks</summary><div class="scroll" style="margin-top:10px"><table><tr><th>Week of</th><th class="num">Trades</th><th class="num">P&amp;L at 1%</th><th class="num">Green days</th></tr>{{WEEKS_XAUUSD}}</table></div></details>
+  <div class="two">
+    <div><h3>Confluence / confirmation</h3><ul><li>Clear 1H trend</li><li>Gap in the trend direction, middle candle the same colour as the trend</li><li>Fill between 16:00 and 18:00 Doha</li><li>No US data release in the next 30 minutes <i>(precaution, not tested)</i></li></ul></div>
+    <div><h3>Step back when</h3><ul><li>CPI, jobs report or Fed day: skip <i>(precaution, not tested)</i></li><li>Drawdown of −3% from your peak: stop and review</li><li>7 losses in a row (the worst run seen)</li></ul></div>
+  </div>
+  <p class="small muted">Alternative tested for gold: the London breakout from version 1 (09–12 Doha). Over 18 months it made +16.2%, but its worst drawdown was −8.6% and it lost in the 2025 sealed test.</p>
+</section>
+
+<section>
+  <h2>Step 8 · GBPJPY: VWAP Pullback</h2>
+  <p><span class="pill no">NOT SAFE FOR A 5% LIMIT</span> +6.6% over 18 months, but a −14.5% drawdown, and it lost money in the 2025 sealed test.</p>
+  <ol class="steps">
+    <li><b>Put VWAP on the 15-minute chart, anchored at 03:00 Doha</b> (the start of the trading day).</li>
+    <li><b>Between 09:00 and 12:00 Doha, read the trend:</b><span>at least 4 of the last 6 fifteen-minute candles closed on the same side of VWAP.</span></li>
+    <li><b>Entry:</b><span>a candle dips back to VWAP and closes back on the trend side, in the trend direction (a green candle closing above VWAP for a buy). Enter at the close.</span></li>
+    <li><b>Stop</b> beyond the lowest low (or highest high) of the last 6 candles. <b>Target 1:3.</b> <b>Close after 4 hours.</b></li>
+  </ol>
+  {{STATS_GBPJPY}}
+  <div class="scroll" style="padding:10px">{{CHART_GBPJPY}}</div>
+  <details><summary>All 80 weeks</summary><div class="scroll" style="margin-top:10px"><table><tr><th>Week of</th><th class="num">Trades</th><th class="num">P&amp;L at 1%</th><th class="num">Green days</th></tr>{{WEEKS_GBPJPY}}</table></div></details>
+  <p><b>Risks:</b> win rate only 37%, and losing runs of up to 10 trades. Short trades suffer most from spreads. <b>Avoid</b> Bank of Japan and Bank of England days.</p>
+</section>
+
+<section>
+  <h2>Step 8 · GBPUSD: Breakout + Retest</h2>
+  <p><span class="pill no">NO EDGE</span> −4.3% over 18 months, and it lost in 2 of 3 periods. This was the best of 167 GBPUSD versions; everything else was worse.</p>
+  <ol class="steps">
+    <li><b>Mark the Asian box</b> (03:00–09:00 Doha high and low).</li>
+    <li><b>Wait for a clear 1H trend</b> (the same EMA 50 rule as gold), then for the first 1-hour candle that closes outside the box in the trend direction. These candles close at 10:00, 11:00 and 12:00.</li>
+    <li><b>Place a limit order back at the box edge</b> (the retest). Stop beyond the breakout candle. Target 1:3. Cancel at 12:00 if not filled. Close after 4 hours.</li>
+  </ol>
+  {{STATS_GBPUSD}}
+  <div class="scroll" style="padding:10px">{{CHART_GBPUSD}}</div>
+  <details><summary>All 80 weeks</summary><div class="scroll" style="margin-top:10px"><table><tr><th>Week of</th><th class="num">Trades</th><th class="num">P&amp;L at 1%</th><th class="num">Green days</th></tr>{{WEEKS_GBPUSD}}</table></div></details>
+  <p><b>Why GBPUSD resists:</b> London breaks the Asian box 97% of days, but it then carries on or reverses at close to 50/50, and the daily range (about 79 pips) leaves little room after costs.</p>
+</section>
+
+<section>
+  <h2>Step 8 · NAS100: NY Fair-Value-Gap</h2>
+  <p><span class="pill no">NO EDGE</span> −11.2% over 18 months, with a −34.7% drawdown in the 2025 sealed test. The NY open fade from version 1 also faded.</p>
+  <ol class="steps">
+    <li><b>Read the 1H trend</b> (EMA 50 rule) at 16:00 Doha.</li>
+    <li><b>Find a 5-minute fair value gap in the trend direction</b> between 16:00 and 18:00 Doha.</li>
+    <li><b>Limit order at the middle of the gap.</b> Stop beyond candle 1. Target 1:2. Cancel after 1 hour or at 18:00. Close after 4 hours.</li>
+  </ol>
+  {{STATS_NAS100}}
+  <div class="scroll" style="padding:10px">{{CHART_NAS100}}</div>
+  <details><summary>All 80 weeks</summary><div class="scroll" style="margin-top:10px"><table><tr><th>Week of</th><th class="num">Trades</th><th class="num">P&amp;L at 1%</th><th class="num">Green days</th></tr>{{WEEKS_NAS100}}</table></div></details>
+  <p><b>The useful NAS fact still stands:</b> New York takes the London high or low on about 70% of days. No entry rule I tested turned that into a profit within 4 hours after costs.</p>
+</section>
+
+<section>
+  <h2>How it was tested</h2>
+  <ol>
+    <li><b>Data:</b> 1-minute Dukascopy prices, Apr 2025 – Oct 2026, for all four pairs: about 2 million candles.</li>
+    <li><b>Strict accounting:</b> spread and commission on every trade. Buy limits fill only when the ask reaches them, and short trades exit on the ask. A stop and target hit in the same minute count as a loss. Entries only in your windows. A 4-hour maximum hold.</li>
+    <li><b>Selection</b> on Oct 2025 – Oct 2026: a version had to be profitable in both 6-month halves.</li>
+    <li><b>Sealed test 1</b> (Oct 2025 – Mar 2026), used in version 1, and <b>sealed test 2</b> (Apr–Sep 2025). Rules were written down and locked before each test.</li>
+    <li><b>Checkers:</b> the Reality Checker rebuilt and hand-checked trades twice and found 6 issues, all fixed. One of them made limit-order strategies look better than they were. The Statistician measured how much of each result could be luck.</li>
+  </ol>
+</section>
+
+<section>
+  <h2>Limits of this research</h2>
+  <ul>
+    <li>Only the rule types listed above were tested. Discretionary reading (judging context by eye) can't be backtested this way.</li>
+    <li>Prices come from one data feed. Your broker's prices and spreads will differ slightly.</li>
+    <li>The news-day precautions are sensible, but they weren't part of the tests.</li>
+    <li>18 months covers several market moods, but the future can differ again. Re-check every 30 live trades.</li>
+  </ul>
+</section>
+
+<footer>
+  Version 2, prepared 7 Oct 2026. Team: lead analyst (data, study, backtests), Reality Checker (2 code and trade audits), Statistician (luck and selection review). Scripts and results are in the project's <code>trading-research</code> folder. This is research, not financial advice. Leveraged trading can lose money.
+</footer>
+</main>

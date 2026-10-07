@@ -30,3 +30,6 @@ def us_dst(day):
     y=day.year; mar=pd.Timestamp(y,3,1,tz="UTC"); nov=pd.Timestamp(y,11,1,tz="UTC")
     start=mar+pd.Timedelta(days=(6-mar.weekday())%7+7); end=nov+pd.Timedelta(days=(6-nov.weekday())%7)
     return start<=day<end
+
+# measured median Dukascopy spread (ask-bid) in owner hours; used to trigger buy-limit fills and short exits on the ASK
+SPREAD = {"GBPUSD":0.00006,"GBPJPY":0.016,"XAUUSD":0.61,"NAS100":1.0}

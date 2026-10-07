@@ -1,0 +1,7 @@
+Locked Wed Oct  7 21:17:08 UTC 2026 BEFORE opening sealed test Apr-2025..Sep-2025 (raw_2025):
+GBPUSD : BRT tf=1h stop=bar rr=3 bias=True maxstop=0.6
+GBPJPY : VWP tf=15min win=W1 rr=3 anchor=day maxstop=0.5
+NAS100 : FVG tf=5min win=W2 rr=2 maxstop=0.5
+XAUUSD : ABO tf=30min win=W1 rr=3 bias=True maxstop=0.6   (already passed 1 sealed test)
+XAUUSD challenger : FVG tf=30min win=W2 rr=3 maxstop=0.5
+PASS = avg R > 0 after costs AND P(avg<=0) < 0.20.  STRONG = lower 90% bound of avg R > 0.
