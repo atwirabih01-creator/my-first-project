@@ -31,3 +31,15 @@ Ask the owner before anything that spends money, posts or sends anything publicl
 ## Learning from mistakes
 When the owner corrects an agent or says they prefer something, write that rule into
 this file or into the relevant agent's file, so the team remembers it next time.
+
+### Rules learned so far
+- **Follow numbered instructions step by step.** When the owner gives numbered steps,
+  work through every step and report back against each one (done / partly / not done).
+  Don't skip a step or merge steps silently.
+- **Trading research: treat each market separately.** Study each pair's own behaviour,
+  test at least the requested number of strategies on *each* pair and *each* requested
+  timeframe, and show the per-pair, per-timeframe results table. Don't apply one
+  strategy type to every pair.
+- **Trading research: never call a strategy "proven" after one out-of-sample test.**
+  Check it on more than one unseen period, and fix any backtest-realism issues found by
+  the checkers before quoting numbers.
