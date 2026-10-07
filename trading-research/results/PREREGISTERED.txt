@@ -1,0 +1,6 @@
+Locked Wed Oct  7 14:25:43 UTC 2026 BEFORE opening holdout Oct-2025..Mar-2026:
+NAS100 : NYF  tf=5min k=0.3 rr=2 maxstop=0.5
+XAUUSD : ABO  tf=30min win=W1 rr=3 bias=True maxstop=0.6
+GBPUSD : ABO  tf=1h   win=W1 rr=3 bias=True maxstop=0.6
+GBPJPY : ABO  tf=1h   win=W1 rr=3 pdfade=True maxstop=0.6
+Pass rule: avg R > 0 on holdout after costs, no single drawdown worse than -8R.

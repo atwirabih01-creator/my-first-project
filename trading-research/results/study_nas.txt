@@ -1,0 +1,13 @@
+
+================ NAS100  (136 trading days, 2026-03-30 -> 2026-10-06) ================
+Avg daily range 516 | Asia range 207 (median 186) | London 195 | NY 413  [pips/points]
+London (09-15 Doha) takes Asia HIGH 58% | Asia LOW 39% | BOTH 10% | neither 13%
+Your 09-12 window takes Asia high 53% | low 32% | at least one 80%
+After London sweeps Asia high, London closes back BELOW it: 41% | sweeps low & closes back ABOVE: 53%
+Judas swing (first Asia side swept, day closes the other way vs London open): 42% of sweep days
+Prev-day HIGH taken 61% (closes back below it 37%) | Prev-day LOW taken 39% (closes back above 49%)
+Your 16-18 window takes London high 56% | London low 53% | NY reverses London's direction 49%
+Hour (Doha) when DAY HIGH forms: {3: 0.15, 4: 0.01, 5: 0.01, 7: 0.01, 8: 0.04, 9: 0.03, 10: 0.02, 11: 0.01, 12: 0.01, 13: 0.01, 14: 0.04, 15: 0.06, 16: 0.1, 17: 0.06, 18: 0.1, 19: 0.04, 20: 0.07, 21: 0.04, 22: 0.12, 23: 0.09}
+Hour (Doha) when DAY LOW forms:  {3: 0.16, 4: 0.05, 5: 0.02, 6: 0.03, 7: 0.04, 8: 0.04, 9: 0.01, 10: 0.01, 11: 0.03, 12: 0.03, 13: 0.02, 14: 0.01, 15: 0.03, 16: 0.1, 17: 0.12, 18: 0.06, 19: 0.03, 20: 0.04, 21: 0.04, 22: 0.07, 23: 0.05}
+Avg 1H range by Doha hour: {1: 83, 2: 68, 3: 106, 4: 90, 5: 71, 6: 63, 7: 62, 8: 75, 9: 75, 10: 79, 11: 93, 12: 72, 13: 70, 14: 87, 15: 114, 16: 206, 17: 196, 18: 144, 19: 118, 20: 110, 21: 105, 22: 119, 23: 59}
+Avg day range by weekday: {'Mon': 470.0, 'Tue': 589.0, 'Wed': 484.0, 'Thu': 566.0, 'Fri': 469.0}

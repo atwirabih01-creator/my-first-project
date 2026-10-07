@@ -1,0 +1,51 @@
+
+######## GBPUSD: avg move over next 4h in % of daily range, when feature=+1 minus when -1 (positive=continuation) ########
+ feature     window  design  design_n  design_hit  test  test_n  test_hit
+    mom1 09-12 Doha     1.5       474        0.51   2.4     412      0.51
+    mom1 16-18 Doha     7.4       338        0.53  -2.7     293      0.47
+    mom3 09-12 Doha     2.4       472        0.52  -2.2     413      0.48
+    mom3 16-18 Doha     7.3       340        0.51  -7.5     295      0.42
+ day_dir 09-12 Doha     2.8       475        0.54   4.2     412      0.51
+ day_dir 16-18 Doha     7.1       338        0.52   5.6     295      0.52
+    bias 09-12 Doha    -5.9       476        0.46   6.9     413      0.58
+    bias 16-18 Doha     9.6       340        0.52   2.4     295      0.47
+asia_pos 09-12 Doha     3.9       208        0.57  -0.1     190      0.47
+asia_pos 16-18 Doha     8.6       259        0.51   3.7     205      0.48
+ prevday 09-12 Doha    -0.1       476        0.49  -2.9     413      0.51
+ prevday 16-18 Doha     6.1       340        0.51   1.2     295      0.49
+   swept 09-12 Doha     3.1       262        0.55   0.6     259      0.46
+   swept 16-18 Doha     1.6       205        0.54   7.2     170      0.57
+
+######## XAUUSD: avg move over next 4h in % of daily range, when feature=+1 minus when -1 (positive=continuation) ########
+ feature     window  design  design_n  design_hit  test  test_n  test_hit
+    mom1 09-12 Doha     0.7       469        0.52   4.7     413      0.54
+    mom1 16-18 Doha    -3.4       334        0.46  -7.2     295      0.44
+    mom3 09-12 Doha     4.8       469        0.53   0.5     413      0.46
+    mom3 16-18 Doha    -8.2       335        0.39  -9.9     295      0.41
+ day_dir 09-12 Doha     5.1       469        0.54   6.5     413      0.52
+ day_dir 16-18 Doha    -3.0       335        0.44  -1.2     295      0.53
+    bias 09-12 Doha     4.6       469        0.52  -1.6     413      0.46
+    bias 16-18 Doha    -4.2       335        0.48  -4.1     295      0.48
+asia_pos 09-12 Doha     9.2       120        0.57   3.6     118      0.46
+asia_pos 16-18 Doha    -4.9       214        0.41  -7.0     189      0.46
+ prevday 09-12 Doha     0.6       469        0.48  -5.9     413      0.46
+ prevday 16-18 Doha     4.2       335        0.57   2.1     295      0.51
+   swept 09-12 Doha    11.5       201        0.56   7.1     195      0.50
+   swept 16-18 Doha    -3.0       268        0.44  -3.9     249      0.50
+
+######## GBPJPY: avg move over next 4h in % of daily range, when feature=+1 minus when -1 (positive=continuation) ########
+ feature     window  design  design_n  design_hit  test  test_n  test_hit
+    mom1 09-12 Doha    -2.9       475        0.50  -0.7     413      0.50
+    mom1 16-18 Doha    11.0       336        0.57  -1.9     295      0.45
+    mom3 09-12 Doha    -2.3       475        0.51   7.4     411      0.54
+    mom3 16-18 Doha     8.2       338        0.56  -2.1     295      0.42
+ day_dir 09-12 Doha    -5.3       476        0.46   6.0     411      0.54
+ day_dir 16-18 Doha    11.3       340        0.55   3.6     295      0.51
+    bias 09-12 Doha   -11.5       476        0.48   4.6     413      0.52
+    bias 16-18 Doha    11.5       340        0.57  -2.3     295      0.45
+asia_pos 09-12 Doha    -0.1       190        0.52  15.0     144      0.58
+asia_pos 16-18 Doha    10.9       214        0.56   2.6     191      0.50
+ prevday 09-12 Doha   -12.3       476        0.50  -7.3     413      0.41
+ prevday 16-18 Doha     3.0       340        0.48  -7.7     295      0.42
+   swept 09-12 Doha   -12.8       270        0.47  18.6     207      0.61
+   swept 16-18 Doha    10.6       208        0.55   3.1     208      0.56

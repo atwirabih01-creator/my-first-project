@@ -1,0 +1,52 @@
+
+===== GBPJPY: 0 of 132 rules profitable in BOTH halves =====
+Empty DataFrame
+Columns: [pair, strat, params, n, IS_n, IS_avgR, IS_win, OOS_n, OOS_avgR, OOS_win, PF, totR, ddR, streak, worst_half]
+Index: []
+best per family:
+Empty DataFrame
+Columns: [pair, strat, params, n, IS_n, IS_avgR, IS_win, OOS_n, OOS_avgR, OOS_win, PF, totR, ddR, streak, worst_half]
+Index: []
+
+===== GBPUSD: 3 of 132 rules profitable in BOTH halves =====
+  pair strat                                                        params  n  IS_n  IS_avgR  IS_win  OOS_n  OOS_avgR  OOS_win   PF  totR  ddR  streak  worst_half
+GBPUSD   ABO  {'tf': '1h', 'win': 'W1', 'rr': 3, 'bias': True, 'be': None} 77    41    0.083    0.41     36     0.144     0.44 1.26   8.6 -7.2       4       0.083
+GBPUSD   ABO {'tf': '1h', 'win': 'W1', 'rr': 3, 'bias': False, 'be': None} 99    53    0.142    0.45     46     0.055     0.41 1.24  10.0 -7.8       5       0.055
+GBPUSD   ABO  {'tf': '1h', 'win': 'W1', 'rr': 2, 'bias': True, 'be': None} 77    41    0.020    0.41     36     0.089     0.44 1.12   4.0 -6.5       4       0.020
+best per family:
+  pair strat                                                       params  n  IS_n  IS_avgR  IS_win  OOS_n  OOS_avgR  OOS_win   PF  totR  ddR  streak  worst_half
+GBPUSD   ABO {'tf': '1h', 'win': 'W1', 'rr': 3, 'bias': True, 'be': None} 77    41    0.083    0.41     36     0.144     0.44 1.26   8.6 -7.2       4       0.083
+
+===== NAS100: 12 of 132 rules profitable in BOTH halves =====
+  pair strat                                                                              params  n  IS_n  IS_avgR  IS_win  OOS_n  OOS_avgR  OOS_win   PF  totR  ddR  streak  worst_half
+NAS100   NYF                                       {'tf': '5min', 'k': 0.3, 'rr': 2, 'be': None} 53    23    0.711    0.61     30     0.393     0.57 2.30  28.1 -3.1       3       0.393
+NAS100   NYF                                       {'tf': '5min', 'k': 0.2, 'rr': 2, 'be': None} 81    39    0.366    0.49     42     0.443     0.55 1.89  32.9 -5.0       3       0.366
+NAS100   NYF                                        {'tf': '5min', 'k': 0.3, 'rr': 2, 'be': 1.0} 53    23    0.461    0.48     30     0.244     0.33 1.90  17.9 -4.2       7       0.244
+NAS100   NYF                                        {'tf': '5min', 'k': 0.2, 'rr': 2, 'be': 1.0} 81    39    0.248    0.41     42     0.204     0.29 1.54  18.2 -6.3       9       0.204
+NAS100   NYF                                       {'tf': '5min', 'k': 0.2, 'rr': 3, 'be': None} 81    39    0.392    0.41     42     0.157     0.40 1.48  21.9 -7.7       5       0.157
+NAS100   TPB   {'tf': '15min', 'win': 'W2', 'rr': 3, 'dirmode': 'day', 'dmin': 0.25, 'be': None} 53    32    0.146    0.44     21     0.391     0.67 1.56  12.9 -8.0       6       0.146
+NAS100   NYF                                       {'tf': '5min', 'k': 0.3, 'rr': 3, 'be': None} 53    23    0.611    0.48     30     0.141     0.43 1.66  18.3 -6.6       5       0.141
+NAS100   TPB   {'tf': '15min', 'win': 'W2', 'rr': 2, 'dirmode': 'day', 'dmin': 0.25, 'be': None} 53    32    0.125    0.44     21     0.273     0.67 1.43   9.7 -7.1       6       0.125
+NAS100   TPB {'tf': '15min', 'win': 'BOTH', 'rr': 2, 'dirmode': 'day', 'dmin': 0.25, 'be': None} 66    39    0.303    0.54     27     0.075     0.56 1.50  13.8 -8.0       6       0.075
+NAS100   TPB {'tf': '15min', 'win': 'BOTH', 'rr': 3, 'dirmode': 'day', 'dmin': 0.25, 'be': None} 66    39    0.394    0.54     27     0.071     0.56 1.63  17.3 -8.4       6       0.071
+best per family:
+  pair strat                                                                            params  n  IS_n  IS_avgR  IS_win  OOS_n  OOS_avgR  OOS_win   PF  totR  ddR  streak  worst_half
+NAS100   NYF                                     {'tf': '5min', 'k': 0.3, 'rr': 2, 'be': None} 53    23    0.711    0.61     30     0.393     0.57 2.30  28.1 -3.1       3       0.393
+NAS100   TPB {'tf': '15min', 'win': 'W2', 'rr': 3, 'dirmode': 'day', 'dmin': 0.25, 'be': None} 53    32    0.146    0.44     21     0.391     0.67 1.56  12.9 -8.0       6       0.146
+
+===== XAUUSD: 11 of 132 rules profitable in BOTH halves =====
+  pair strat                                                                              params  n  IS_n  IS_avgR  IS_win  OOS_n  OOS_avgR  OOS_win   PF  totR  ddR  streak  worst_half
+XAUUSD   ABO                     {'tf': '30min', 'win': 'W1', 'rr': 3, 'bias': True, 'be': None} 51    30    0.258    0.53     21     0.184     0.48 2.43  11.6 -1.3       5       0.184
+XAUUSD   ABO                     {'tf': '30min', 'win': 'W1', 'rr': 2, 'bias': True, 'be': None} 51    30    0.231    0.53     21     0.183     0.48 2.33  10.8 -1.3       5       0.183
+XAUUSD   TPB {'tf': '30min', 'win': 'BOTH', 'rr': 2, 'dirmode': 'day', 'dmin': 0.15, 'be': None} 67    37    0.214    0.46     30     0.146     0.50 1.54  12.3 -5.5       6       0.146
+XAUUSD   ABO                    {'tf': '30min', 'win': 'W1', 'rr': 3, 'bias': False, 'be': None} 66    36    0.186    0.53     30     0.139     0.47 1.87  10.9 -2.8       5       0.139
+XAUUSD   ABO                    {'tf': '30min', 'win': 'W1', 'rr': 2, 'bias': False, 'be': None} 66    36    0.164    0.53     30     0.139     0.47 1.81  10.1 -2.8       5       0.139
+XAUUSD   TPB {'tf': '30min', 'win': 'BOTH', 'rr': 2, 'dirmode': 'day', 'dmin': 0.25, 'be': None} 44    24    0.172    0.38     20     0.132     0.55 1.45   6.8 -4.1       5       0.132
+XAUUSD   TPB {'tf': '30min', 'win': 'BOTH', 'rr': 3, 'dirmode': 'day', 'dmin': 0.15, 'be': None} 67    37    0.111    0.43     30     0.157     0.50 1.38   8.8 -5.5       6       0.111
+XAUUSD   ABO                        {'tf': '1h', 'win': 'W1', 'rr': 3, 'bias': True, 'be': None} 53    29    0.348    0.52     24     0.075     0.50 2.20  11.9 -3.1       4       0.075
+XAUUSD   ABO                        {'tf': '1h', 'win': 'W1', 'rr': 2, 'bias': True, 'be': None} 53    29    0.329    0.52     24     0.074     0.50 2.14  11.3 -3.1       4       0.074
+XAUUSD   TPB {'tf': '30min', 'win': 'BOTH', 'rr': 3, 'dirmode': 'day', 'dmin': 0.25, 'be': None} 44    24    0.056    0.33     20     0.099     0.55 1.22   3.3 -4.1       5       0.056
+best per family:
+  pair strat                                                                              params  n  IS_n  IS_avgR  IS_win  OOS_n  OOS_avgR  OOS_win   PF  totR  ddR  streak  worst_half
+XAUUSD   ABO                     {'tf': '30min', 'win': 'W1', 'rr': 3, 'bias': True, 'be': None} 51    30    0.258    0.53     21     0.184     0.48 2.43  11.6 -1.3       5       0.184
+XAUUSD   TPB {'tf': '30min', 'win': 'BOTH', 'rr': 2, 'dirmode': 'day', 'dmin': 0.15, 'be': None} 67    37    0.214    0.46     30     0.146     0.50 1.54  12.3 -5.5       6       0.146

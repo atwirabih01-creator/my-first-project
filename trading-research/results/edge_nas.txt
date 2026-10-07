@@ -1,0 +1,17 @@
+
+######## NAS100: avg move over next 4h in % of daily range, when feature=+1 minus when -1 (positive=continuation) ########
+ feature     window  design  design_n  design_hit  test  test_n  test_hit
+    mom1 09-12 Doha    -1.3       469        0.49   1.1     413      0.51
+    mom1 16-18 Doha    -2.8       335        0.51  -6.7     295      0.46
+    mom3 09-12 Doha     2.6       469        0.54   4.6     413      0.54
+    mom3 16-18 Doha    -3.8       335        0.51   2.4     295      0.52
+ day_dir 09-12 Doha    -0.8       469        0.51   1.7     413      0.54
+ day_dir 16-18 Doha     2.1       335        0.56  -4.5     295      0.48
+    bias 09-12 Doha     3.3       469        0.55  -0.8     413      0.51
+    bias 16-18 Doha     3.0       335        0.57  -2.2     295      0.50
+asia_pos 09-12 Doha     5.6       152        0.60   2.4     167      0.53
+asia_pos 16-18 Doha     6.6       204        0.57  -5.1     190      0.49
+ prevday 09-12 Doha    -2.3       469        0.49  -0.9     413      0.48
+ prevday 16-18 Doha     0.3       335        0.51  10.0     295      0.54
+   swept 09-12 Doha     1.1       225        0.59  -2.1     244      0.52
+   swept 16-18 Doha     9.1       231        0.55  -8.6     205      0.46
