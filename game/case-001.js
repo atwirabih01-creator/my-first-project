@@ -21,6 +21,7 @@ window.CASE = {
 
   briefing: "Iris Kellan, thirty-four. Senior claims investigator at Halden Mutual Marine, Harbour Point Tower, Financial Quarter. Lived alone in Hillcrest. At 05:50 a city street sweeper, Tomas Ferreira, found her on the lower landing of the Saltmarket Stairs in Old Town, face down, with a head injury. PC Odell was there at 06:04, the paramedics pronounced her at 06:10, and the stairs have been closed at both ends since.\n\nWhat we have: she was fully dressed, coat buttoned, boots off and standing on the step below her. Her phone was in her inside pocket, screen cracked, locked. No handbag, no wallet, no keys. Dr. Sorensen looked at her at the scene: one bad injury to the back of the head, scrapes to the face and hands, and on the temperature she puts death between ten last night and one this morning. Her view, for now, is a fall down the steps, possibly helped by someone who wanted the bag. There have been two bag snatches on Mercer Street this month, and uniform will tell you all about them.\n\nThe emergency card on the phone gave us the sister, Hanna. PC Okafor told her at five past seven. Hanna had a text from Iris's phone at 23:12: walking home the long way, need air. If that's right, Iris was alive at 23:12 and on her way home, which puts her on those stairs exactly when the doctor likes.\n\nWhat we don't have: anyone who saw her after the early evening, where she spent it, where the bag went, and why a woman who lives in Hillcrest was on the Saltmarket Stairs at all, because they are nowhere near her way home. Nobody has viewed a camera yet. The late shop at the top of the stairs has one.\n\nSorensen is holding the body at the scene until we've walked it, then she does the post-mortem and rings. Hanna will be at the flat from nine. The neighbour downstairs has a key. I've told her line manager; he's in from half past eight. The contacts are in the file.\n\nSo: scene first, while it's still ours, then the flat, then the office. Anything with a password on it goes to Theo. I would like this to be a mugging, because muggings are simple. That is not up to me. And Marsh: no tricks with the family.",
 
+  dayNames: ["Wednesday", "Thursday", "Friday"],
   caseFile: ["ev-first-officer", "ev-scene-log", "ev-prelim-report", "ev-nok-note", "ev-contacts"],
 
   victim: {
@@ -593,7 +594,7 @@ window.CASE = {
   /* ================================================================ EVIDENCE */
   evidence: [
     {
-      "id": "ev-first-officer",
+      "id": "ev-first-officer", "at": { "day": 1, "time": "06:04" },
       "name": "First officer's report",
       "key": false,
       "summary": "PC Odell: found 05:50, pronounced 06:10, cordon, canvass. A car heard on Quay Road 'after ten'.",
@@ -666,7 +667,7 @@ window.CASE = {
       }
     },
     {
-      "id": "ev-scene-log",
+      "id": "ev-scene-log", "at": { "day": 1, "time": "05:50" },
       "name": "Scene log and property inventory",
       "key": false,
       "summary": "What was on her and around her. No bag, wallet, keys or work pass. Watch and earrings left.",
@@ -751,7 +752,7 @@ window.CASE = {
       }
     },
     {
-      "id": "ev-nok-note",
+      "id": "ev-nok-note", "at": { "day": 1, "time": "07:05" },
       "name": "Next-of-kin notification",
       "key": false,
       "summary": "Hanna told at 07:05. She asked twice whether Iris had 'really been walking'.",
@@ -853,7 +854,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-prelim-report", name: "Preliminary scene report", key: false,
+      id: "ev-prelim-report", at: { day: 0, time: "23:30", approx: true }, name: "Preliminary scene report", key: false,
       summary: "Scene doctor: head injury from a fall, death 22:00–01:00, bag missing.",
       doc: {
         kind: "report",
@@ -863,7 +864,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-weather", name: "Met Office report, Wednesday night", key: false,
+      id: "ev-weather", at: { day: 0, time: "21:40" }, name: "Met Office report, Wednesday night", key: false,
       summary: "Rain 17:50 to 21:40. Stairs were wet and muddy all night.",
       doc: {
         kind: "report",
@@ -881,7 +882,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-scene-photo", name: "Scene photograph", key: false,
+      id: "ev-scene-photo", at: { day: 1, time: "06:21" }, name: "Scene photograph", key: false,
       summary: "Face down on the landing, coat buttoned, arms tucked under. Neat for a fall.",
       doc: {
         kind: "photo",
@@ -911,7 +912,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-cafe-receipt", name: "Tidewater Café card slip", key: false,
+      id: "ev-cafe-receipt", at: { day: 0, time: "18:41" }, name: "Tidewater Café card slip", key: false,
       summary: "Dinner at the Tidewater Café, paid 18:41 on Wednesday.",
       doc: {
         kind: "receipt",
@@ -924,7 +925,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-kiosk-cam", name: "Late shop camera log", key: true,
+      id: "ev-kiosk-cam", at: { day: 0, time: "22:21" }, name: "Late shop camera log", key: true,
       summary: "A car stops at the foot of the stairs 22:21–22:29. Petra passes 23:05, Marcus 23:16.",
       doc: {
         kind: "camera",
@@ -964,7 +965,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-planner", name: "Iris's week planner", key: true,
+      id: "ev-planner", at: { day: 1, time: "09:00" }, name: "Iris's week planner", key: true,
       summary: "Thursday 09:00: Compliance, 'Bring everything. Tell nobody.'",
       doc: {
         kind: "note",
@@ -1077,7 +1078,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-cafe-cctv", name: "Tidewater Café camera log", key: true,
+      id: "ev-cafe-cctv", at: { day: 0, time: "18:20" }, name: "Tidewater Café camera log", key: true,
       summary: "Tue: Iris and Petra argue. Wed: Iris takes a call at 18:52, rings someone at 19:05, leaves 19:24.",
       doc: {
         kind: "camera",
@@ -1099,7 +1100,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-coop-flyer", name: "Co-op meeting flyer", key: false,
+      id: "ev-coop-flyer", at: { day: 0, time: "19:30" }, name: "Co-op meeting flyer", key: false,
       summary: "Open meeting at the Co-op Hall, Wednesday 19:30: insurance surveys.",
       doc: {
         kind: "note",
@@ -1108,7 +1109,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-rota", name: "Anchor & Lamp clock cards and grill tickets", key: false,
+      id: "ev-rota", at: { day: 0, time: "15:52" }, name: "Anchor & Lamp clock cards and grill tickets", key: false,
       summary: "Marcus clocked in 15:52, out 23:04, and initialled grill tickets all evening.",
       doc: {
         kind: "report",
@@ -1126,7 +1127,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-coop-minutes", name: "Co-op meeting minutes", key: false,
+      id: "ev-coop-minutes", at: { day: 0, time: "19:30" }, name: "Co-op meeting minutes", key: false,
       summary: "Petra signed in at 19:30 and spoke at 20:35 about Northline. Meeting ran to 21:50.",
       doc: {
         kind: "report",
@@ -1136,7 +1137,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-hanna-messages", name: "Hanna's messages from Iris", key: true,
+      id: "ev-hanna-messages", at: { day: 0, time: "23:12" }, name: "Hanna's messages from Iris", key: true,
       summary: "Iris's real texts are formal and signed '— I'. The 23:12 text is not.",
       doc: {
         kind: "messages",
@@ -1155,7 +1156,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-phone-extract", name: "Phone extraction: calls and messages", key: true,
+      id: "ev-phone-extract", at: { day: 0, time: "18:52" }, name: "Phone extraction: calls and messages", key: true,
       summary: "18:52 call from Whitlock. The 23:12 text was scheduled at 20:51 from her work laptop.",
       doc: {
         kind: "phone-log",
@@ -1178,7 +1179,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-badge-log", name: "Halden Mutual lobby badge log", key: true,
+      id: "ev-badge-log", at: { day: 0, time: "19:58" }, name: "Halden Mutual lobby badge log", key: true,
       summary: "Iris badged back in at 19:58 and never out. Nico out 19:52. Whitlock out 18:10.",
       doc: {
         kind: "report",
@@ -1197,7 +1198,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-garage-log", name: "Car park logs and traffic cameras", key: true,
+      id: "ev-garage-log", at: { day: 0, time: "19:55" }, name: "Car park logs and traffic cameras", key: true,
       summary: "Whitlock's fob re-entered at 19:55. His car left the car park at 22:04 and was on Quay Road at 22:17.",
       doc: {
         kind: "camera",
@@ -1237,7 +1238,7 @@ window.CASE = {
       }
     },
     {
-      id: "ev-autopsy", name: "Post-mortem report", key: true,
+      id: "ev-autopsy", at: { day: 0, time: "20:30", approx: true }, name: "Post-mortem report", key: true,
       summary: "One patterned blow, then moved. Fall injuries most likely after death. Grey carpet fibres. Death about 19:30–21:30.",
       doc: {
         kind: "autopsy",
@@ -1254,16 +1255,16 @@ window.CASE = {
     { id: "fact-marcus-work", text: "Marcus Bell works the grill at the Anchor & Lamp on the quay, mostly nights.", key: false },
     { id: "fact-iris-reporting", text: "Iris asked Dolores if she had ever reported a friend: 'He's not a friend. He's been good to me.'", key: false },
     { id: "fact-iris-style", text: "Hanna: Iris texted formally, full sentences, signed '— I'. Never kisses, never 'tmrw'.", key: true },
-    { id: "fact-hanna-call", text: "At 19:05 Wednesday Iris told Hanna she was going back to work: someone wanted to talk first. 'He says he can explain.'", key: true },
+    { id: "fact-hanna-call", at: { day: 0, time: "19:05" }, text: "At 19:05 Wednesday Iris told Hanna she was going back to work: someone wanted to talk first. 'He says he can explain.'", key: true },
     { id: "fact-marcus-boat", text: "Marcus admits the Tuesday row was about selling their boat, the Wren. He apologised by text the same night.", key: false },
-    { id: "fact-petra-saltmarket", text: "Petra admits walking past the top of the Saltmarket Stairs at 23:05, going home from the co-op and the Seamen's Mission.", key: false },
+    { id: "fact-petra-saltmarket", at: { day: 0, time: "23:05" }, text: "Petra admits walking past the top of the Saltmarket Stairs at 23:05, going home from the co-op and the Seamen's Mission.", key: false },
     { id: "fact-petra-cafe", text: "Petra: by the end of Tuesday's meeting Iris said she'd been 'asking the wrong person the wrong questions'.", key: false },
     { id: "fact-no-surveyor", text: "Petra: no surveyor from Northline ever boarded the Grey Petrel.", key: true },
-    { id: "fact-nico-car", text: "Nico left at 19:52 via the car park. Whitlock's green estate was still in bay 12.", key: true },
-    { id: "fact-whitlock-knew", text: "Whitlock asked Nico at 16:00 Wednesday what Iris's private Thursday 09:00 appointment was.", key: true },
-    { id: "fact-whitlock-alibi", text: "Whitlock says: left 18:10, tram home, soup and football at home, then drove from home to the Harbour Club, arriving 22:40.", key: true },
-    { id: "fact-whitlock-call", text: "Whitlock says his 18:52 call to Iris was about the quarterly figures.", key: false },
-    { id: "fact-revised-tod", text: "Revised time of death: roughly 19:30 to 21:30 on Wednesday. Killed indoors, then moved.", key: true },
+    { id: "fact-nico-car", at: { day: 0, time: "19:52" }, text: "Nico left at 19:52 via the car park. Whitlock's green estate was still in bay 12.", key: true },
+    { id: "fact-whitlock-knew", at: { day: 0, time: "16:00", approx: true }, text: "Whitlock asked Nico at 16:00 Wednesday what Iris's private Thursday 09:00 appointment was.", key: true },
+    { id: "fact-whitlock-alibi", at: { day: 0, time: "18:10" }, text: "Whitlock says: left 18:10, tram home, soup and football at home, then drove from home to the Harbour Club, arriving 22:40.", key: true },
+    { id: "fact-whitlock-call", at: { day: 0, time: "18:52" }, text: "Whitlock says his 18:52 call to Iris was about the quarterly figures.", key: false },
+    { id: "fact-revised-tod", at: { day: 0, time: "20:30", approx: true }, text: "Revised time of death: roughly 19:30 to 21:30 on Wednesday. Killed indoors, then moved.", key: true },
     { id: "fact-kill-site", text: "Iris was killed in the 4th-floor file archive at Halden Mutual.", key: true }
   ],
 
@@ -1276,25 +1277,25 @@ window.CASE = {
       key: true, grants: [], requires: []
     },
     {
-      id: "ded-text-not-hers", items: ["ev-hanna-messages", "fact-iris-style"],
+      id: "ded-text-not-hers", at: { day: 0, time: "23:12" }, items: ["ev-hanna-messages", "fact-iris-style"],
       title: "Someone else wrote the 23:12 text",
       text: "No capitals, no full stops, 'tmrw', a kiss and no '— I'. It breaks every habit in two years of her messages. The last 'proof' that she was alive at 23:12 was written by someone else.",
       key: true, grants: [], requires: []
     },
     {
-      id: "ded-sent-from-office", items: ["ev-phone-extract", "ev-laptop"],
+      id: "ded-sent-from-office", at: { day: 0, time: "20:51" }, items: ["ev-phone-extract", "ev-laptop"],
       title: "The fake text came from inside Halden Mutual",
       text: "The 23:12 message was created at 20:51 on HM-LT-0417, the laptop docked at Iris's desk, unlocked since 20:24. Whoever wrote it was at her desk at 20:51. Next: who was in the building. Halden Mutual's lawyers will not release staff access records for what is still officially a fall.",
       key: true, grants: [], requires: []
     },
     {
-      id: "ded-the-call", items: ["ev-phone-extract", "fact-hanna-call"],
+      id: "ded-the-call", at: { day: 0, time: "18:52" }, items: ["ev-phone-extract", "fact-hanna-call"],
       title: "Whitlock called her back to the office",
       text: "At 18:52 Whitlock rang Iris for two minutes. Thirteen minutes later she told Hanna she was going back to work because 'he says he can explain', and the camera shows her heading for the Financial Quarter tram. The quarterly figures story does not fit.",
       key: true, grants: [], requires: []
     },
     {
-      id: "ded-alibi-collapse", items: ["ev-garage-log", "fact-whitlock-alibi"],
+      id: "ded-alibi-collapse", at: { day: 0, time: "22:04" }, items: ["ev-garage-log", "fact-whitlock-alibi"],
       title: "Whitlock's evening is a lie",
       text: "He said he went home by tram and drove to the club from home. In fact he came back into the building through the car park at 19:55, his car never left until 22:04, and at 22:17 it was on the dead-end stretch of Quay Road below the Saltmarket Stairs, just before the late shop camera saw a dark estate stop there.",
       key: true, grants: [], requires: []
@@ -1555,6 +1556,7 @@ window.CASE = {
         }
       },
       "ev-kiosk-cam": {
+        at: { day: 0, time: "22:20", approx: true },
         name: "Late shop owner's statement",
         summary: "The recording is gone. The owner remembers a car at the foot of the stairs around 22:20, a woman in yellow after 23:00, a big man later.",
         doc: {
@@ -1715,7 +1717,7 @@ window.CASE = {
         }
       },
       {
-        id: "ev-new-tile", name: "Replaced carpet tiles and work order", key: true,
+        id: "ev-new-tile", at: { day: 2, time: "07:12" }, name: "Replaced carpet tiles and work order", key: true,
         summary: "Two archive carpet tiles replaced, on a work order Whitlock raised the day after she was found.",
         doc: {
           kind: "report",
@@ -1738,7 +1740,7 @@ window.CASE = {
 
     addDeductions: [
       {
-        id: "ded-alibi-collapse", items: ["ev-garage-log", "fact-whitlock-alibi"],
+        id: "ded-alibi-collapse", at: { day: 0, time: "22:09" }, items: ["ev-garage-log", "fact-whitlock-alibi"],
         title: "Whitlock's evening is a lie",
         text: "He said he went home by tram and drove to the club from home. In fact his fob let him back into the building through the car park at 19:55, his car did not leave the tower until about 22:09, and at 22:17 it was heading down the dead-end stretch of Quay Road below the Saltmarket Stairs.",
         key: true, grants: [], requires: []

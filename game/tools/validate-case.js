@@ -168,6 +168,16 @@ function checkBuild(c, label) {
     }
   });
 
+  // timeline times (`at`) and day names
+  if (c.dayNames !== undefined && (!Array.isArray(c.dayNames) || c.dayNames.some(function (n) { return typeof n !== "string" || !n; }))) err(label + ": dayNames must be a list of names");
+  c.evidence.concat(c.facts, c.deductions).forEach(function (it) {
+    if (!it || it.at === undefined) return;
+    var a = it.at;
+    if (!a || typeof a !== "object" || typeof a.day !== "number" || a.day < 0 || Math.floor(a.day) !== a.day || !TIME_RE.test(String(a.time || "")) || (a.approx !== undefined && typeof a.approx !== "boolean"))
+      err(label + ": " + it.id + ".at must be { day: whole number >= 0, time: HH:MM, approx?: true/false }");
+    else if (Array.isArray(c.dayNames) && a.day >= c.dayNames.length) warn(label + ": " + it.id + ".at.day " + a.day + " has no name in dayNames");
+  });
+
   // deductions
   c.deductions.forEach(function (d) {
     if (arr(d.items).length !== 2) err(label + ": " + d.id + " must have exactly 2 items");
