@@ -31,3 +31,17 @@ Ask the owner before anything that spends money, posts or sends anything publicl
 ## Learning from mistakes
 When the owner corrects an agent or says they prefer something, write that rule into
 this file or into the relevant agent's file, so the team remembers it next time.
+
+## Day-trading project (owner's standing preferences)
+- Two agents: **Trading Research Lead** (Agent 1, studies and writes rules) and
+  **Backtest & Performance Manager** (Agent 2, tests, judges, reports; has the final call).
+  The leader passes work between them via files in `trading/<market>/`.
+- Pipeline: research → idea → rules → backtest → validate → provide → live. Step by step.
+- Markets one at a time: EURUSD → GBPUSD → XAUUSD → NASDAQ 100. Same-day trades only.
+- 1% risk per trade. At least 6 months of history. Times in Doha AND New York time.
+- Agents have full freedom on sessions, style and ideas; start fresh. Study news days; the
+  owner decides whether to avoid them.
+- Owner receives only ONE proven strategy per market: why it works, backtest results with a
+  week-by-week table of the whole history, then clear A-to-Z steps (mark, wait, confirm,
+  enter, stop loss, take profit).
+- Reports on Sundays only, simple words, few charts. No mid-week messages.
