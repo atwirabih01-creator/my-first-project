@@ -11,10 +11,22 @@ Markets, in order: GBPUSD → XAUUSD → NASDAQ 100 → EURUSD. One market at a 
 | `NSXUSD_M1.csv.gz` | Nasdaq 100 index (CFD) | bid |
 | `EURUSD_M1.csv.gz` | EUR/USD | bid |
 
-- One row per minute: `time_utc, open, high, low, close`. Period: 1 Oct 2025 → 30 Sep 2026 (12 months).
-- Source: HistData.com (free). Refresh/extend with `python3 trading/tools/fetch_histdata.py GBPUSD 2025-10 2026-09`.
-- **Times are UTC** and verified: they match Dukascopy's UTC prices exactly, and the US stock open
-  spike lands at 09:30 New York time in both winter and summer.
+- One row per minute: `time_utc, open, high, low, close`. Period: 1 Oct 2023 → 30 Sep 2026 (3 years).
+- Source: HistData.com (free). Refresh/extend with `python3 trading/tools/fetch_histdata.py GBPUSD 2023-10 2026-09`.
+- **Times are UTC** and verified. HistData's raw clock is "London time minus 5 hours" (not EST, not New
+  York time); the downloader converts it. Checked against Dukascopy's UTC prices (exact match in
+  September and in the mid-March weeks when the US and UK clocks differ), and the US stock-open spike
+  lands at 09:30 New York time in winter, in the mismatch weeks, and in summer.
+  Do NOT apply any extra clock correction in your own scripts.
+
+## Data periods (who may look at what)
+| Period | Use | Who may load it |
+|---|---|---|
+| 2024-10-01 → 2026-06-30 (21 months) | **Design**: research, ideas, rules | Agent 1 and Agent 2 |
+| 2023-10-01 → 2024-09-30 (12 months) | **Hidden test A**: never seen by anyone | **Agent 2 only**, and only after the rules are frozen |
+| 2026-07-01 → 2026-09-30 (3 months) | **Hidden test B**: most recent months | **Agent 2 only**, after the rules are frozen |
+Agent 1 must filter out everything outside the design period immediately after loading.
+(GBPUSD v1 was built on Oct 2025–Jun 2026 only and was dropped; see `GBPUSD/feedback.md`.)
 - Load: `pd.read_csv(path, parse_dates=["time_utc"])`.
 
 ## Time zones (all reports must show Doha AND New York time)

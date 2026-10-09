@@ -1,0 +1,56 @@
+GBPUSD v1 backtest (Agent 2) [prior]. Cost 1.5 pips/trade. R after costs.
+
+Skipped days (missing window data): 2024-12-25 (no window data), 2024-12-26 (previous day 2024-12-25 has only 208 one-minute bars), 2025-10-01 (no window data)
+Hidden-period news candidates (spike ratio; kept if >= 2.0): 
+
+=== PRIOR YEAR 2024-10-01..2025-09-30
+  trades  94 | win 30.9% | avg win +1.54R avg loss -1.02R | total -21.89R (avg -0.233) | PF 0.67 | max DD -26.21R / -23.4% | longest losing run 9 | 3+ loss runs 10 | account -20.3%
+  exits: {'stop': 54, 'target': 22, '16:00 close': 18}
+  median stop 14.0 pips, smallest 3.1, largest 150.1
+  by long/short:
+    long           n= 51 win= 25.5% total=-20.46R avg=-0.401R PF=0.49
+    short          n= 43 win= 37.2% total= -1.43R avg=-0.033R PF=0.95
+  by news day:
+    not labelled   n= 94 win= 30.9% total=-21.89R avg=-0.233R PF=0.67
+  by month:
+    2024-10        n= 10 win= 40.0% total= +0.19R avg=+0.019R PF=1.03
+    2024-11        n=  7 win= 14.3% total= -3.72R avg=-0.531R PF=0.34
+    2024-12        n=  7 win= 42.9% total= +0.83R avg=+0.119R PF=1.17
+    2025-01        n=  8 win= 75.0% total= +6.91R avg=+0.863R PF=4.54
+    2025-02        n=  7 win= 28.6% total= -3.16R avg=-0.452R PF=0.37
+    2025-03        n= 10 win= 20.0% total= -3.52R avg=-0.352R PF=0.51
+    2025-04        n=  6 win= 33.3% total= -2.75R avg=-0.458R PF=0.42
+    2025-05        n=  5 win= 40.0% total= +0.35R avg=+0.070R PF=1.10
+    2025-06        n=  8 win= 37.5% total= -1.92R avg=-0.241R PF=0.60
+    2025-07        n= 11 win= 18.2% total= -5.28R avg=-0.480R PF=0.42
+    2025-08        n= 11 win= 18.2% total= -6.58R avg=-0.598R PF=0.28
+    2025-09        n=  4 win=  0.0% total= -3.24R avg=-0.810R PF=0.00
+  by exit type:
+    16:00 close    n= 18 win= 38.9% total= -1.43R avg=-0.080R PF=0.70
+    stop           n= 54 win=  0.0% total=-61.61R avg=-1.141R PF=0.00
+    target         n= 22 win=100.0% total=+41.15R avg=+1.871R PF=inf
+  by stop size:
+    a) <=8p        n= 14 win= 14.3% total=-11.83R avg=-0.845R PF=0.22
+    b) 8-15p       n= 36 win= 30.6% total= -7.24R avg=-0.201R PF=0.74
+    c) >15p        n= 44 win= 36.4% total= -2.83R avg=-0.064R PF=0.88
+  by weekday:
+    Fri            n= 18 win= 27.8% total= -5.52R avg=-0.306R PF=0.55
+    Mon            n= 24 win= 41.7% total= -0.49R avg=-0.020R PF=0.97
+    Thu            n= 16 win=  6.2% total=-14.30R avg=-0.894R PF=0.12
+    Tue            n= 16 win= 12.5% total=-10.69R avg=-0.668R PF=0.26
+    Wed            n= 20 win= 55.0% total= +9.11R avg=+0.456R PF=2.02
+  by NY entry time:
+    08:15          n= 16 win= 18.8% total= -9.88R avg=-0.617R PF=0.36
+    08:30          n=  6 win= 33.3% total= -0.67R avg=-0.111R PF=0.85
+    08:45          n= 10 win= 40.0% total= +2.84R avg=+0.284R PF=1.66
+    09:00          n=  9 win= 22.2% total= -4.11R avg=-0.457R PF=0.48
+    09:15          n=  9 win= 11.1% total= -5.98R avg=-0.665R PF=0.25
+    09:30          n=  8 win= 37.5% total= +1.02R avg=+0.128R PF=1.22
+    09:45          n=  7 win= 42.9% total= +1.00R avg=+0.143R PF=1.33
+    10:00          n=  4 win=  0.0% total= -4.49R avg=-1.123R PF=0.00
+    10:15          n= 10 win= 40.0% total= -2.15R avg=-0.215R PF=0.64
+    10:30          n=  8 win= 50.0% total= +0.83R avg=+0.103R PF=1.22
+    10:45          n=  3 win= 33.3% total= -2.42R avg=-0.806R PF=0.10
+    11:00          n=  4 win= 50.0% total= +2.12R avg=+0.530R PF=2.28
+
+chance true average <= 0: 96.1%
