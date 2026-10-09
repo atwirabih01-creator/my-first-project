@@ -2,6 +2,85 @@
 
 ---
 
+## v1 "Fade the big opening gap": hidden year C (Oct 2021 – Sep 2023) and FINAL verdict, 9 Oct 2026
+
+### Final verdict: **DROP**
+The unchanged v1 was run on two more years nobody had seen (C, including the whole 2022 bear market). It made **+3.1 R over 80 trades
+(+0.04 R per trade, PF 1.11)**, and −1.4 R without its 3 best trades. Across **all unseen data (C + A + B): 169 trades, +6.7 R,
++0.04 R per trade, PF 1.12, about a 1 in 4 chance of no edge at all (bootstrap 26%)**, against +0.14 R per trade in the design years.
+Each unseen period is negative without its 3 best trades, and the long side has no edge on unseen data (84 trades, +0.1 R).
+It does not lose money, but it does not show an edge you can rely on, so it is not handed to the owner.
+
+### 1. How it was run
+- `backtest/backtest_v1.py --with-c`: **the same rules and code**. I only added the 2021–23 US holidays and early closes from the published
+  NYSE/Nasdaq calendars, the C earnings dates (labels only), and joined `data/hidden/NSXUSD_M1_2021-10_2023-09.csv.gz` in front of
+  the main file (one continuous run, Oct 2021 – Sep 2026). Outputs: `trades_v1_withC.csv`, `days_v1_withC.csv`, `summary_v1_withC.txt`
+  (`analyze_withC.py`), `weekly_v1_withC.csv`.
+- **C days: 516.** Traded 80; gap too small 278. **Missing price data: 109 days with a hole of more than 15 minutes** (Jan 2, Feb 6,
+  Mar 23, Apr 19, May 22, Jun 21, Jul 19), 3 more days skipped as the day after one, and 9 days of ATR warm-up in early Aug 2023 after
+  the gap. Holidays 14, early closes 3, day after a holiday or early close 10. ATR warm-up at the start: 10 days (1–14 Oct 2021).
+  So C is really Oct 2021 – Feb 2023 plus mid-Aug – Sep 2023.
+- In the joined run A gets 2 trades in early Oct 2023 that were warm-up before (3 Oct and 6 Oct 2023, −0.42 R together): A is now
+  63 trades, +1.91 R (the A-only run was 61 trades, +2.33 R). Macro news days (NFP/CPI/PPI/FOMC) are not labelled in C.
+
+### 2. Key numbers (2.0 points cost)
+| Period | Trades | Win rate | Avg win / loss | Total | PF | Max drawdown | Longest losing run | 3+ loss runs | Chance avg ≤ 0 | Without best 3 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| **C hidden** Oct 21 – Sep 23 | 80 | 48.8% | +0.78 / −0.67 | **+3.11 R** | 1.11 | −8.2 R (−7.9%) | 5 | 8 | 33% | **−1.37 R** |
+| C1: Oct 21 – Dec 22 (bear market) | 65 | 47.7% | +0.80 / −0.67 | +1.91 R | 1.08 | −8.2 R (−7.9%) | 5 | 6 | 40% | −2.57 R |
+| C2: 2023 (Jan–Feb, Aug–Sep) | 15 | 53.3% | +0.72 / −0.65 | +1.20 R | 1.26 | −2.3 R | 3 | 2 | 34% | −2.01 R (sample too small) |
+| A hidden (joined run) | 63 | 52.4% | +0.67 / −0.67 | +1.91 R | 1.10 | −4.6 R (−4.5%) | 4 | 2 | 37% | −2.18 R |
+| B hidden | 26 | 53.8% | +0.62 / −0.58 | +1.64 R | 1.23 | −1.4 R | 4 | 1 | 33% | −1.94 R |
+| **All unseen C + A + B** | 169 | 50.9% | +0.71 / −0.66 | **+6.67 R** | 1.12 | −8.2 R (−7.9%) | 5 | 11 | **26%** | +2.19 R |
+| Design Y1 + Y2 | 128 | 59.4% | +0.68 / −0.65 | +17.81 R | 1.53 | −8.3 R (−8.0%) | 6 | 5 | 2% | +11.74 R |
+| All 5 years | 297 | 54.5% | +0.69 / −0.65 | +24.48 R | 1.28 | −8.3 R (−8.0%) | 6 | 16 | 3% | +18.41 R |
+
+**Cost stress (total R at 0 / 2 / 4 / 6 points):** C +3.93 / +3.11 / +2.29 / +1.48; C1 +2.55 / +1.91 / +1.27 / +0.64;
+C2 +1.38 / +1.20 / +1.02 / +0.84; unseen C+A+B +8.47 / +6.67 / +4.87 / +3.07.
+
+**Long vs short:**
+| Period | Longs (after gap down) | Shorts (after gap up) |
+|---|---|---|
+| C | 47 tr, 43% won, **−2.19 R** (−2.67 at 4.0) | 33 tr, 58% won, +5.30 R |
+| C1 bear market | 39 tr, 41% won, **−2.92 R** | 26 tr, 58% won, +4.83 R |
+| C2 2023 | 8 tr, +0.74 R | 7 tr, +0.46 R |
+| A | 26 tr, −0.42 R | 37 tr, +2.33 R |
+| B | 11 tr, +2.70 R | 15 tr, −1.05 R |
+| **Unseen C + A + B** | **84 tr, 50% won, +0.09 R (−0.83 at 4.0)** | 85 tr, 52% won, +6.58 R |
+The side that works flips with the market's mood: buying gap-downs failed in the 2022 bear market, shorting gap-ups failed in the
+2026 rally (Q2 2026 −4.8 R, B −1.1 R).
+
+**Exits:** C target 26 (32%) +23.5 R, stop 16 (20%) −16.2 R, 16:00 close 38 (48%) **−4.3 R**. All unseen data: 16:00 closes 86 trades −3.2 R.
+Over 5 years, 151 of 297 trades (51%) ended at 16:00, −3.9 R in total.
+
+**C by quarter:** 2021Q4 +4.56, 2022Q1 +0.67, **2022Q2 −3.60, 2022Q3 −2.62**, 2022Q4 +2.90, 2023Q1 +0.66, 2023Q3 +0.54.
+12 of 19 months positive; without its best month (Nov 2021, +2.59 R) C is +0.52 R. Unseen C+A+B: 20 of 34 months positive,
+**−1.44 R without its 3 best months.**
+**Days after big-tech earnings:** C +3.02 R (9 trades), so the A/B weakness (−4.0 R) was not a real pattern. Do not build on it.
+
+### 3. Against the team leader's bar for WORKS (unseen data C + A + B)
+| Requirement | Result | Pass? |
+|---|---|---|
+| Positive at 2.0 points | C +3.11, A +1.91, B +1.64 | Yes, but tiny |
+| Positive at 4.0 points | C +2.29, A +1.12, B +1.46 | Yes, but tiny |
+| Longs and shorts not clearly negative | Longs C −2.19 (bear market −2.92), unseen total +0.09; shorts B −1.05 | **Borderline: longs have no edge** |
+| Longest losing run ≤ 7 | 5 in C, 6 over 5 years | Yes |
+| Not carried by a month or a handful of trades | C −1.37, A −2.18, B −1.94 without best 3; C+A+B −1.44 without best 3 months | **No** |
+| Clear evidence of an edge | +0.04 R per trade, 26% chance of none | **No** |
+
+### 4. What this means, and suggestions
+- **Big Nasdaq gaps are only partly taken back, and not reliably enough to pay.** The design years (+0.14 R per trade) were the best
+  two years of five, not typical ones. On unseen data the edge is about a quarter of that.
+- **Do not rescue v1 by trading only shorts.** Shorts were positive on unseen data overall (+6.6 R), but they lost in B and in
+  Q2 2026, and choosing a side after seeing all five years would be fitting to the past. All the Nasdaq hidden data is now used up.
+- **If Nasdaq is revisited**, a genuinely new idea is needed, judged first before costs, and on new data (a forward paper test, or
+  years before Oct 2021).
+- My recommendation to the team leader: **move on to the next market (EURUSD).**
+
+*Past results do not guarantee future results.*
+
+---
+
 ## v1 "Fade the big opening gap": tested 9 Oct 2026
 
 ### Verdict: **IMPROVE** (not ready for the owner)

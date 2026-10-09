@@ -22,6 +22,9 @@ import pandas as pd
 HERE = Path(__file__).resolve().parent
 DATA = HERE.parents[1] / "data" / "NSXUSD_M1.csv.gz"
 DESIGN_ONLY = "--design" in sys.argv
+# --with-c : join the hidden file Oct 2021 - Sep 2023 (period "C") in front of the main file (Agent 2 only).
+WITH_C = "--with-c" in sys.argv
+DATA_C = HERE.parents[1] / "data" / "hidden" / "NSXUSD_M1_2021-10_2023-09.csv.gz"
 # --gapk=0.4 : sensitivity check only (writes trades_v1_gapk0.4.csv); the v1 rule is 0.5
 GAPK_ARG = [a.split("=")[1] for a in sys.argv if a.startswith("--gapk=")]
 
@@ -33,11 +36,15 @@ if GAPK_ARG:
 ATR_N, ATR_MIN = 14, 10
 MAX_HOLE = 15  # minutes
 
-PERIODS = [("A", "2023-10-01", "2024-09-30"), ("Y1", "2024-10-01", "2025-09-30"),
+PERIODS = [("C", "2021-10-01", "2023-09-30"), ("A", "2023-10-01", "2024-09-30"), ("Y1", "2024-10-01", "2025-09-30"),
            ("Y2", "2025-10-01", "2026-06-30"), ("B", "2026-07-01", "2026-09-30")]
 
 # ---------------- US stock-market calendar (NYSE / Nasdaq published calendars) ----------------
 HOLIDAYS = {
+    # 2021-23 (hidden C)
+    "2021-11-25", "2021-12-24", "2022-01-17", "2022-02-21", "2022-04-15", "2022-05-30", "2022-06-20", "2022-07-04",
+    "2022-09-05", "2022-11-24", "2022-12-26", "2023-01-02", "2023-01-16", "2023-02-20", "2023-04-07", "2023-05-29",
+    "2023-06-19", "2023-07-04", "2023-09-04",
     # 2023-24
     "2023-11-23", "2023-12-25", "2024-01-01", "2024-01-15", "2024-02-19", "2024-03-29", "2024-05-27", "2024-06-19",
     "2024-07-04", "2024-09-02",
@@ -48,7 +55,7 @@ HOLIDAYS = {
     "2025-11-27", "2025-12-25", "2026-01-01", "2026-01-19", "2026-02-16", "2026-04-03", "2026-05-25", "2026-06-19",
     "2026-07-03", "2026-09-07",
 }
-EARLY_CLOSES = {"2023-11-24", "2024-07-03", "2024-11-29", "2024-12-24", "2025-07-03", "2025-11-28", "2025-12-24"}
+EARLY_CLOSES = {"2021-11-26", "2022-11-25", "2023-07-03", "2023-11-24", "2024-07-03", "2024-11-29", "2024-12-24", "2025-07-03", "2025-11-28", "2025-12-24"}
 
 # ---------------- labels only (never used to decide a trade) ----------------
 NFP = ["2023-10-06", "2023-11-03", "2023-12-08", "2024-01-05", "2024-02-02", "2024-03-08", "2024-04-05", "2024-05-03",
@@ -77,6 +84,11 @@ FOMC = ["2023-11-01", "2023-12-13", "2024-01-31", "2024-03-20", "2024-05-01", "2
 # Big-tech earnings, all after the 16:00 close (Alpha Vantage EARNINGS "reportedDate", post-market). The reaction is the
 # NEXT trading day's gap, so that next day is labelled EARN. Hidden A and B dates fetched by Agent 2 on 9 Oct 2026.
 EARN_REPORTED = {
+    # hidden C (Alpha Vantage, fetched by Agent 2 on 9 Oct 2026); macro news (NFP/CPI/PPI/FOMC) is NOT labelled in C
+    "C_NVDA": ["2021-11-17", "2022-02-16", "2022-05-25", "2022-08-24", "2022-11-16", "2023-02-22", "2023-05-24", "2023-08-23"],
+    "C_AAPL": ["2021-10-28", "2022-01-27", "2022-04-28", "2022-07-28", "2022-10-27", "2023-02-02", "2023-05-04", "2023-08-03"],
+    "C_MSFT": ["2021-10-26", "2022-01-25", "2022-04-26", "2022-07-26", "2022-10-25", "2023-01-24", "2023-04-25", "2023-07-25"],
+    "C_GOOGL": ["2021-10-26", "2022-02-01", "2022-04-26", "2022-07-26", "2022-10-25", "2023-02-02", "2023-04-25", "2023-07-25"],
     "NVDA": ["2023-11-21", "2024-02-21", "2024-05-22", "2024-08-28", "2024-11-20", "2025-02-26", "2025-05-28",
              "2025-08-27", "2025-11-19", "2026-02-25", "2026-05-20", "2026-08-26"],
     "AAPL": ["2023-11-02", "2024-02-01", "2024-05-02", "2024-08-01", "2024-10-31", "2025-01-30", "2025-05-01",
@@ -98,6 +110,10 @@ def period_of(d):
 
 def main():
     df = pd.read_csv(DATA, parse_dates=["time_utc"])
+    if WITH_C:
+        dc = pd.read_csv(DATA_C, parse_dates=["time_utc"])
+        dc = dc[dc["time_utc"] < df["time_utc"].min()]
+        df = pd.concat([dc, df], ignore_index=True).sort_values("time_utc").reset_index(drop=True)
     if DESIGN_ONLY:
         df = df[(df["time_utc"] >= "2024-10-01") & (df["time_utc"] < "2026-07-01")].copy()
     ny = df["time_utc"].dt.tz_localize("UTC").dt.tz_convert("America/New_York")
@@ -223,10 +239,10 @@ def main():
 
     tr = pd.DataFrame(trades)
     dd = pd.DataFrame(days)
-    suffix = ("_designonly" if DESIGN_ONLY else "") + (f"_gapk{GAP_K:g}" if GAPK_ARG else "")
+    suffix = ("_designonly" if DESIGN_ONLY else "") + ("_withC" if WITH_C else "") + (f"_gapk{GAP_K:g}" if GAPK_ARG else "")
     tr.to_csv(HERE / f"trades_v1{suffix}.csv", index=False, float_format="%.5f")
     dd.to_csv(HERE / f"days_v1{suffix}.csv", index=False, float_format="%.4f")
-    for p in ["A", "Y1", "Y2", "B"]:
+    for p in ["C", "A", "Y1", "Y2", "B"]:
         x = tr[tr.period == p]
         if len(x):
             print(f"{p}: {len(x)} trades, win {np.mean(x.r > 0)*100:.1f}%, total {x.r.sum():+.2f} R")

@@ -1,24 +1,3 @@
-# NASDAQ 100: weekly report (Agent 2)
-
-**Strategy:** v1 "Fade the big opening gap" (rules in `strategy.md`). **Report date:** Sunday edition, prepared 9 Oct 2026.
-**Status:** tested on 5 years (Oct 2021 – Sep 2026). **Final verdict: DROP.** See `feedback.md`.
-
-How to read the table:
-- One row per week, Monday to Friday, 27 Sep 2021 to 2 Oct 2026. 1 R = the 1% of the account risked on a trade.
-- Costs of 2.0 index points per trade are already taken off every result.
-- **Period:** C = hidden test Oct 2021 – Sep 2023 (opened after the rules were frozen; includes the 2022 bear market),
-  A = hidden test Oct 2023 – Sep 2024, Y1 and Y2 = the data the rules were designed on (Oct 2024 – Jun 2026),
-  B = hidden test Jul – Sep 2026. C, A and B were never used to build the rules.
-- This table comes from one continuous run (C joined in front of the main file). Because of that, A no longer needs an ATR
-  warm-up in Oct 2023 and has 2 extra trades (3 and 6 Oct 2023) compared with the earlier A-only run (A: 63 trades, +1.91 R).
-- **Mar – Jul 2023 has missing price data on almost every day**, so those weeks show "skipped: missing price data" and no trades.
-- The trade is entered at 09:35 New York = 16:35 Doha (US summer time) / 17:35 Doha (US winter time), and is closed by 16:00 New York
-  = 23:00 Doha (summer) / 00:00 midnight Doha (winter) at the latest.
-- **Notes:** each trade as "weekday, direction, how it ended, result". "16:00 close" = neither stop nor target was hit. Labels:
-  NFP (US jobs report), CPI (US inflation), PPI (producer prices), FOMC (US interest-rate decision), EARN (day after Nvidia / Apple /
-  Microsoft / Alphabet results). In C only EARN is labelled. "skipped" = the day could not be traded by the rules (holiday, half day,
-  missing price data, ATR warm-up, or the day after one of those); the number of skipped days is in brackets.
-
 | Week (Mon - Fri) | Period | Trades | Wins | Losses | Win rate | Result (R) | Running total (R) | Notes |
 |---|---|---|---|---|---|---|---|---|
 | 27 Sep 21 - 01 Oct 21 | C | 0 | 0 | 0 | - | 0 | +0.00 | skipped: first day in file (1 d) |
@@ -283,33 +262,3 @@ How to read the table:
 | 14 Sep 26 - 18 Sep 26 | B | 3 | 2 | 1 | 67% | +1.65 | +24.52 | Mon long 16:00 close +1.30; Wed short target +0.78 (FOMC); Thu short 16:00 close -0.43 |
 | 21 Sep 26 - 25 Sep 26 | B | 2 | 1 | 1 | 50% | -0.04 | +24.48 | Mon short stop -1.01; Thu long target +0.97; skipped: no price data (1 d) |
 | 28 Sep 26 - 02 Oct 26 | B | 0 | 0 | 0 | - | 0 | +24.48 | skipped: day after a skipped day, no price data (2 d) |
-
-## Summary in plain words
-
-**Totals (2.0 points cost), 297 trades over 5 years, +24.5 R.** But almost all of that comes from the two years the rules were
-designed on. In the three periods nobody had seen, the strategy only just broke even:
-
-| Period | Trades | Win rate | Total | Average per trade | Without its 3 best trades |
-|---|---|---|---|---|---|
-| **C, hidden (Oct 21 – Sep 23)** | 80 | 48.8% | **+3.1 R** | +0.04 R | **−1.4 R** |
-| **A, hidden (Oct 23 – Sep 24)** | 63 | 52.4% | **+1.9 R** | +0.03 R | **−2.2 R** |
-| Y1, design | 64 | 59.4% | +11.8 R | +0.18 R | +6.0 R |
-| Y2, design | 64 | 59.4% | +6.0 R | +0.09 R | +0.9 R |
-| **B, hidden (Jul – Sep 26)** | 26 | 53.8% | **+1.6 R** | +0.06 R | **−1.9 R** |
-| **All unseen (C + A + B)** | 169 | 50.9% | **+6.7 R** | +0.04 R | +2.2 R |
-
-**What worked:** it never lost much. Every period ended slightly positive, the longest losing run was 6 trades, and the worst
-drop from a peak was about 8 R (8% of the account). Costs hardly matter.
-
-**What did not work:**
-- On unseen data the profit per trade (+0.04 R) is so small that it could easily be luck: about a 1 in 4 chance there is no edge at all.
-- Every unseen period goes negative without its 3 best trades.
-- Buying after a gap down made nothing on unseen data (84 trades, +0.1 R), and lost in the 2022 bear market (39 trades, −2.9 R).
-- 2022 Q2 and Q3 lost 6.2 R together. The gains came mostly from Oct – Nov 2021 and Oct – Dec 2022.
-- Half of all trades end at 16:00 with nothing gained (151 trades, −3.9 R over 5 years).
-
-**What is being changed:** v1 is dropped. It is not handed to the owner. The next market in the plan is EURUSD.
-
-**What to watch next week:** nothing to trade from this strategy.
-
-*Past results do not guarantee future results.*
