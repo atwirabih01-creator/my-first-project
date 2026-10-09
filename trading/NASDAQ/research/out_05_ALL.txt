@@ -1,0 +1,28 @@
+--- V1
+  Y1: n  63 win 54.0% total  +11.2R avg +0.178R PF 1.44 maxDD  -3.6R lrun  5 | cost0:  +12.1R | cost4:  +10.3R PF 1.40
+  Y2: n  64 win 54.7% total   +9.1R avg +0.142R PF 1.38 maxDD -10.7R lrun  9 | cost0:   +9.8R | cost4:   +8.3R PF 1.34
+  ALL: n 127 win 54.3% total  +20.3R avg +0.160R PF 1.41 maxDD -10.7R lrun  9 | cost0:  +21.9R | cost4:  +18.6R PF 1.37
+  longs: Y1 n24 +5.5R (cost4 +5.1) | Y2 n26 +6.9R (cost4 +6.6)
+  shorts: Y1 n39 +5.8R (cost4 +5.2) | Y2 n38 +2.2R (cost4 +1.7)
+  exits: {'time': 47, 'stop': 41, 'target': 39} | median risk 157 pts, min 90
+--- V2
+  Y1: n  63 win 60.3% total  +11.9R avg +0.188R PF 1.74 maxDD  -3.6R lrun  4 | cost0:  +12.5R | cost4:  +11.3R PF 1.70
+  Y2: n  64 win 59.4% total   +6.1R avg +0.095R PF 1.35 maxDD  -8.3R lrun  6 | cost0:   +6.6R | cost4:   +5.5R PF 1.31
+  ALL: n 127 win 59.8% total  +17.9R avg +0.141R PF 1.54 maxDD  -8.3R lrun  6 | cost0:  +19.0R | cost4:  +16.8R PF 1.50
+  longs: Y1 n24 +5.7R (cost4 +5.5) | Y2 n26 +3.8R (cost4 +3.6)
+  shorts: Y1 n39 +6.1R (cost4 +5.8) | Y2 n38 +2.3R (cost4 +2.0)
+  exits: {'time': 64, 'target': 42, 'stop': 21} | median risk 236 pts, min 135
+--- V3
+  Y1: n  63 win 50.8% total  +17.8R avg +0.282R PF 1.67 maxDD  -4.2R lrun  5 | cost0:  +18.6R | cost4:  +16.9R PF 1.63
+  Y2: n  64 win 51.6% total  +12.7R avg +0.199R PF 1.49 maxDD -12.0R lrun 10 | cost0:  +13.5R | cost4:  +12.0R PF 1.46
+  ALL: n 127 win 51.2% total  +30.5R avg +0.240R PF 1.58 maxDD -12.0R lrun 10 | cost0:  +32.1R | cost4:  +28.8R PF 1.54
+  longs: Y1 n24 +6.5R (cost4 +6.2) | Y2 n26 +6.5R (cost4 +6.2)
+  shorts: Y1 n39 +11.3R (cost4 +10.7) | Y2 n38 +6.3R (cost4 +5.8)
+  exits: {'time': 83, 'stop': 44} | median risk 157 pts, min 90
+--- V4
+  Y1: n  39 win 61.5% total   +8.8R avg +0.226R PF 1.64 maxDD  -5.0R lrun  5 | cost0:   +9.4R | cost4:   +8.2R PF 1.59
+  Y2: n  45 win 51.1% total   +0.1R avg +0.003R PF 1.01 maxDD  -5.6R lrun  6 | cost0:   +0.8R | cost4:   -0.5R PF 0.98
+  ALL: n  84 win 56.0% total   +9.0R avg +0.107R PF 1.28 maxDD  -5.6R lrun  6 | cost0:  +10.2R | cost4:   +7.8R PF 1.24
+  longs: Y1 n17 +4.2R (cost4 +4.0) | Y2 n21 -1.8R (cost4 -2.1)
+  shorts: Y1 n22 +4.6R (cost4 +4.3) | Y2 n24 +2.0R (cost4 +1.6)
+  exits: {'target': 33, 'stop': 28, 'time': 23} | median risk 144 pts, min 73

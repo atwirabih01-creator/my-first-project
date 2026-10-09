@@ -1,0 +1,101 @@
+=== 1. Gap at 09:30 NY (Doha 16:30 summer / 17:30 winter) vs previous 16:00 close. Size in % and in ATR units
+Y1: days 222, gap up 58%, mean |gap| 0.606% = 0.40 ATR
+Y2: days 177, gap up 58%, mean |gap| 0.624% = 0.45 ATR
+gap fill = price touches previous 16:00 close during 09:30-16:00 (% of days)
+                     n  fill_by_1000  fill_by_1030  fill_by_1200  fill_by_1600
+year gdir gsz                                                                 
+Y1   down <0.1ATR   19          74.0          74.0          79.0          89.0
+          0.1-0.25  26          38.0          62.0          65.0          69.0
+          0.25-0.5  25           8.0          20.0          40.0          56.0
+          >0.5ATR   24           0.0          17.0          21.0          38.0
+     up   <0.1ATR   22          73.0          86.0          91.0          91.0
+          0.1-0.25  37          57.0          70.0          73.0          76.0
+          0.25-0.5  30          17.0          30.0          40.0          47.0
+          >0.5ATR   39           5.0           8.0          21.0          33.0
+Y2   down <0.1ATR   12          83.0          83.0          83.0          92.0
+          0.1-0.25  18          44.0          50.0          56.0          67.0
+          0.25-0.5  19          32.0          32.0          37.0          47.0
+          >0.5ATR   25           4.0          12.0          24.0          40.0
+     up   <0.1ATR   16         100.0         100.0         100.0         100.0
+          0.1-0.25  27          52.0          56.0          67.0          78.0
+          0.25-0.5  22          18.0          23.0          23.0          36.0
+          >0.5ATR   38           8.0          18.0          26.0          29.0
+
+=== 2. Does the RTH session go WITH the gap or AGAINST it? (RTH 09:30->16:00 return sign vs gap sign)
+                     n  with_gap_pct
+year gdir gsz                       
+Y1   down <0.1ATR   19          42.0
+          0.1-0.25  26          50.0
+          0.25-0.5  25          44.0
+          >0.5ATR   24          38.0
+     up   <0.1ATR   22          59.0
+          0.1-0.25  37          62.0
+          0.25-0.5  30          60.0
+          >0.5ATR   39          44.0
+Y2   down <0.1ATR   12          42.0
+          0.1-0.25  18          44.0
+          0.25-0.5  19          42.0
+          >0.5ATR   25          40.0
+     up   <0.1ATR   16          50.0
+          0.1-0.25  27          52.0
+          0.25-0.5  22          73.0
+          >0.5ATR   38          39.0
+               size   mean  median
+year gsz                          
+Y1   <0.1ATR     41 -0.113   0.044
+     0.1-0.25    63  0.149   0.117
+     0.25-0.5    55 -0.037   0.057
+     >0.5ATR     63 -0.196  -0.174
+Y2   <0.1ATR     28  0.062  -0.018
+     0.1-0.25    45 -0.098  -0.080
+     0.25-0.5    41  0.156   0.140
+     >0.5ATR     63 -0.149  -0.193
+
+=== 3. Opening drive: does the first k minutes' direction continue to 16:00? (rest-of-day move, in ATR units, signed by first move)
+first  5 min Y1: continue 56.8% | mean rest-of-day +0.065 ATR | after UP start: n109 cont 64.2% mean +0.086 | after DOWN start: n113 cont 49.6% mean +0.044
+first  5 min Y2: continue 57.6% | mean rest-of-day +0.062 ATR | after UP start: n89 cont 60.7% mean +0.063 | after DOWN start: n88 cont 54.5% mean +0.061
+first 15 min Y1: continue 62.6% | mean rest-of-day +0.158 ATR | after UP start: n117 cont 67.5% mean +0.169 | after DOWN start: n105 cont 57.1% mean +0.146
+first 15 min Y2: continue 53.1% | mean rest-of-day -0.018 ATR | after UP start: n91 cont 60.4% mean -0.007 | after DOWN start: n86 cont 45.3% mean -0.030
+first 30 min Y1: continue 54.5% | mean rest-of-day +0.043 ATR | after UP start: n121 cont 60.3% mean +0.057 | after DOWN start: n101 cont 47.5% mean +0.026
+first 30 min Y2: continue 53.7% | mean rest-of-day +0.006 ATR | after UP start: n96 cont 59.4% mean +0.002 | after DOWN start: n81 cont 46.9% mean +0.009
+first 60 min Y1: continue 54.1% | mean rest-of-day +0.023 ATR | after UP start: n119 cont 60.5% mean +0.028 | after DOWN start: n103 cont 46.6% mean +0.017
+first 60 min Y2: continue 50.8% | mean rest-of-day -0.008 ATR | after UP start: n96 cont 58.3% mean -0.012 | after DOWN start: n81 cont 42.0% mean -0.003
+
+   same, only when the first 30 min moved strongly (|move| > 0.25 ATR)
+   Y1 up: n39 continue 64.1% mean rest +0.232 ATR
+   Y1 down: n45 continue 53.3% mean rest +0.109 ATR
+   Y2 up: n38 continue 65.8% mean rest +0.132 ATR
+   Y2 down: n40 continue 52.5% mean rest +0.123 ATR
+
+=== 4. Opening range breakout (OR = first 30 / 60 min high-low). After OR ends, which side breaks first, and does price then reach +1 OR beyond the break before the other side?
+OR 15 min: OR size mean 0.35 ATR
+             n  reach_1OR  back_to_other_side  neither
+year side                                             
+Y1   -1    113       50.4                43.4      6.2
+      1    109       58.7                34.9      6.4
+Y2   -1     82       43.9                46.3      9.8
+      1     95       36.8                45.3     17.9
+OR 30 min: OR size mean 0.47 ATR
+             n  reach_1OR  back_to_other_side  neither
+year side                                             
+Y1   -1    105       41.0                37.1     21.9
+      1    117       37.6                32.5     29.9
+Y2   -1     81       44.4                32.1     23.5
+      1     94       26.6                29.8     43.6
+OR 60 min: OR size mean 0.60 ATR
+             n  reach_1OR  back_to_other_side  neither
+year side                                             
+Y1   -1     92       26.1                19.6     54.3
+      1    126       15.1                20.6     64.3
+Y2   -1     78       32.1                17.9     50.0
+      1     92       13.0                15.2     71.7
+
+=== 5. When is the RTH high / low set? (% of days, by 30-min block, NY time)
+Y1
+      09:30  10:00  10:30  11:00  11:30  12:00  12:30  13:00  13:30  14:00  14:30  15:00  15:30
+high   27.5    6.8    6.8    6.3    3.6    4.1    2.7    5.9    2.3    5.0    6.3    5.9   17.1
+low    34.2   12.6    6.3    4.5    4.1    2.7    3.2    3.2    1.8    5.0    5.0    6.8   10.8
+Y2
+      09:30  10:00  10:30  11:00  11:30  12:00  12:30  13:00  13:30  14:00  14:30  15:00  15:30
+high   31.1    9.0    4.0    5.1    3.4    4.5    2.8    2.3    5.6    2.8    4.5    7.9   16.9
+low    37.3   10.7    7.3    5.6    5.6    3.4    3.4    3.4    5.6    1.1    2.8    2.8   10.7
