@@ -6,7 +6,7 @@ from levels import day_table
 
 df = load()
 days = day_table(df)
-cd = days[days.complete & days.pdh.notna()].copy()
+cd = days[days.complete & days.prev_complete & days.pdh.notna()].copy()
 utc2 = lambda t, tz: t.tz_localize("UTC").tz_convert(tz)
 
 def ctx(t_start, d, side):

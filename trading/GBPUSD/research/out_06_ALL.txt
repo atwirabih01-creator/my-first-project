@@ -1,0 +1,7 @@
+London session (08:00 London-08:00 NY) range: median 41.0 pips
+NY morning (08-12 NY) takes London high: 253/444 = 57% | London low: 224/444 = 50% | either: 402/444 = 91%
+After NY takes a London extreme (n=402): back to London mid by 17:00 NY 216/402 = 54%; day closes beyond the level 200/402 = 50%; median max extension 23.8 pips
+   break AGAINST London's direction (n=111): back to mid 57%, close beyond 49%, med ext 24.9
+   break WITH London's direction (n=291): back to mid 53%, close beyond 50%, med ext 23.5
+After the 16:00 London fix, NY afternoon continued the 08:00 NY->fix move: 213/436 = 49%
+  when 08:00 NY->fix move >= 30 pips: 62/124 = 50% avg after-fix move in that direction +0.5 pips

@@ -1,0 +1,12 @@
+--- F1 Asia false break, London, 2R
+  cost 1.5: Y1: n=203 win=35% -27.9R PF=0.82 DD=-36.5 run=10 | Y2: n=159 win=41% +1.8R PF=1.02 DD=-21.0 run=7 | ALL: n=362 win=38% -26.1R PF=0.90 DD=-40.8 run=10
+  cost 3.0: Y1: n=203 win=35% -63.0R PF=0.64 DD=-64.5 run=10 | Y2: n=159 win=41% -26.4R PF=0.79 DD=-38.9 run=7 | ALL: n=362 win=38% -89.5R PF=0.71 DD=-95.9 run=10
+--- F2 Asia breakout, London, 2R
+  cost 1.5: Y1: n=225 win=38% -11.0R PF=0.93 DD=-23.3 run=10 | Y2: n=173 win=32% -34.4R PF=0.71 DD=-45.6 run=11 | ALL: n=398 win=36% -45.5R PF=0.83 DD=-58.4 run=11
+  cost 3.0: Y1: n=225 win=37% -30.2R PF=0.81 DD=-33.9 run=10 | Y2: n=173 win=31% -50.3R PF=0.61 DD=-55.0 run=11 | ALL: n=398 win=34% -80.6R PF=0.72 DD=-85.2 run=11
+--- F3 London opening-range breakout
+  cost 1.5: Y1: n=226 win=38% -25.0R PF=0.81 DD=-35.1 run=9 | Y2: n=175 win=38% -11.5R PF=0.89 DD=-26.7 run=13 | ALL: n=401 win=38% -36.5R PF=0.84 DD=-53.2 run=13
+  cost 3.0: Y1: n=226 win=36% -39.0R PF=0.72 DD=-44.9 run=9 | Y2: n=175 win=37% -23.6R PF=0.78 DD=-31.1 run=13 | ALL: n=401 win=37% -62.6R PF=0.74 DD=-71.4 run=13
+--- F4 NY opening-range breakout
+  cost 1.5: Y1: n=219 win=47% +2.2R PF=1.02 DD=-13.9 run=7 | Y2: n=170 win=40% -18.3R PF=0.78 DD=-26.6 run=8 | ALL: n=389 win=44% -16.1R PF=0.91 DD=-26.6 run=8
+  cost 3.0: Y1: n=219 win=46% -10.6R PF=0.90 DD=-17.4 run=7 | Y2: n=170 win=38% -29.0R PF=0.68 DD=-36.7 run=8 | ALL: n=389 win=43% -39.6R PF=0.79 DD=-43.0 run=8

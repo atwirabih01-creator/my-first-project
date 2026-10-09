@@ -1,0 +1,72 @@
+Part A: top-25% days: range >= 110.4 pips, n=64; avg range 150.4
+Big days by weekday: {0: 13, 1: 12, 2: 12, 3: 15, 4: 12} (0=Mon)
+Direction up: 59%
+Main leg start session:
+ sess
+Evening/pre-Asia                      23
+Asia                                  17
+London morning                        10
+Frankfurt 07-08 Ldn                    6
+NY morning 08-12 NY                    5
+London midday (12:00 Ldn-08:00 NY)     2
+NY afternoon                           1
+Context at the leg's starting extreme:
+ sweeps
+none                         34
+Asia high swept              10
+Asia low swept;PDL swept      7
+Asia low swept                5
+PDL swept                     4
+PDH swept                     2
+Asia high swept;PDH swept     2
+Big-day close-to-open as share of range (trendiness): median 0.66
+Other days trendiness: median 0.44
+Asia range on big days: median 35.2 vs other days 26.9
+Previous-day range before big days: median 97.6 vs other days 83.1
+
+Part B: legs >= 50 pips (25-pip reversal zigzag): n=521, on 225 of 254 days; median size 67.6
+Leg start session:
+ sess
+NY morning 08-12 NY                   150
+London morning                        112
+Asia                                   89
+Evening/pre-Asia                       80
+Frankfurt 07-08 Ldn                    36
+NY afternoon                           30
+London midday (12:00 Ldn-08:00 NY)     24
+Leg start hour (NY clock; Doha = +7 summer / +8 winter):
+ nyh
+0     10
+1     14
+2     35
+3     33
+4     29
+5     24
+6     27
+7     24
+8     50
+9     44
+10    42
+11    14
+12     9
+13    10
+14     7
+15     2
+16     2
+17    54
+18    26
+19     9
+20    19
+21    16
+22    11
+23    10
+Context at leg start:
+ sweeps
+none                         263
+Asia high swept;PDH swept     59
+Asia low swept;PDL swept      54
+Asia high swept               53
+Asia low swept                44
+PDL swept                     24
+PDH swept                     24
+Median leg duration 239 min

@@ -6,7 +6,7 @@ from levels import day_table
 
 df = load()
 days = day_table(df)
-cd = days[days.complete & days.pdh.notna()]
+cd = days[days.complete & days.prev_complete & days.pdh.notna()]
 D = df[df.tday.isin(cd.index)]
 
 def price_at(g, clock, minute):
@@ -39,12 +39,12 @@ pairs = [("prev day", "prevday", None, "dayopen", "dayclose"),
          ("NY 08-10 -> 10-17 NY", "N8", "N10", "N10", "dayclose"),
          ("08 NY->16:00 Ldn fix -> fix-17 NY", "N8", "L16", "L16", "dayclose"),
          ("day open->12 NY -> 12-17 NY", "dayopen", "N12", "N12", "dayclose")]
-print(f"{'pair':48s} {'n':>4s} {'corr':>6s} {'follow%':>8s} {'avg follow pips':>16s} {'half1':>7s} {'half2':>7s}")
+print(f"{'pair':48s} {'n':>4s} {'corr':>6s} {'follow%':>8s} {'avg follow pips':>16s} {"Y1":>7s} {"Y2":>7s}")
 for name, a, b, c, d in pairs:
     f = P[a] if b is None else (P[b] - P[a]) / PIP
     t = (P[d] - P[c]) / PIP
     m = f.notna() & t.notna() & (f != 0)
     f, t = f[m], t[m]
     fol = np.sign(f) * t
-    h = f.index < "2026-02-15"
+    h = f.index < "2025-10-01"
     print(f"{name:48s} {len(f):4d} {np.corrcoef(f, t)[0,1]:+6.2f} {(fol > 0).mean():8.0%} {fol.mean():+16.1f} {fol[h].mean():+7.1f} {fol[~h].mean():+7.1f}")

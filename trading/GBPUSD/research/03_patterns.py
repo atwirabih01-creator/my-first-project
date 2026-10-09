@@ -4,7 +4,7 @@ from levels import day_table
 
 df = load()
 days = day_table(df)
-cd = days[days.complete & days.pdh.notna()]
+cd = days[days.complete & days.prev_complete & days.pdh.notna()]
 D = df[df.tday.isin(cd.index)]
 print(f"days studied: {len(cd)}")
 print(f"Asia range (00:00-07:00 London): avg {cd.arng.mean():.1f} median {cd.arng.median():.1f} pips; "

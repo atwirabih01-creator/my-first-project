@@ -1,0 +1,12 @@
+--- V0 v1 replica (PDH/PDL, NY 08-11)
+  cost 1.5: Y1: n=94 win=31% -21.9R PF=0.67 DD=-26.2 run=9 | Y2: n=64 win=48% +9.8R PF=1.29 DD=-4.6 run=4 | ALL: n=158 win=38% -12.0R PF=0.88 DD=-26.2 run=9
+  cost 3.0: Y1: n=94 win=31% -33.2R PF=0.55 DD=-33.6 run=9 | Y2: n=64 win=48% +1.1R PF=1.03 DD=-8.0 run=4 | ALL: n=158 win=38% -32.1R PF=0.72 DD=-36.2 run=9
+--- V1 + mood: range-bound only (ER5<0.5)
+  cost 1.5: Y1: n=49 win=27% -15.7R PF=0.58 DD=-16.7 run=9 | Y2: n=36 win=53% +10.8R PF=1.63 DD=-4.5 run=4 | ALL: n=85 win=38% -4.9R PF=0.91 DD=-17.2 run=9
+  cost 3.0: Y1: n=49 win=27% -22.0R PF=0.48 DD=-20.7 run=9 | Y2: n=36 win=53% +6.2R PF=1.32 DD=-5.0 run=4 | ALL: n=85 win=38% -15.8R PF=0.75 DD=-21.4 run=9
+--- V2 + min stop 8 pips
+  cost 1.5: Y1: n=94 win=32% -17.7R PF=0.72 DD=-23.9 run=9 | Y2: n=64 win=50% +14.4R PF=1.46 DD=-4.4 run=4 | ALL: n=158 win=39% -3.3R PF=0.97 DD=-23.9 run=9
+  cost 3.0: Y1: n=94 win=32% -27.8R PF=0.61 DD=-29.2 run=9 | Y2: n=64 win=50% +7.1R PF=1.20 DD=-6.8 run=4 | ALL: n=158 win=39% -20.7R PF=0.81 DD=-29.2 run=9
+--- V3 = V1 + V2 (pre-registered v2 candidate)
+  cost 1.5: Y1: n=49 win=27% -14.9R PF=0.60 DD=-16.3 run=9 | Y2: n=36 win=56% +14.6R PF=1.95 DD=-4.4 run=4 | ALL: n=85 win=39% -0.3R PF=1.00 DD=-16.9 run=9
+  cost 3.0: Y1: n=49 win=27% -20.3R PF=0.51 DD=-20.0 run=9 | Y2: n=36 win=56% +10.9R PF=1.64 DD=-4.7 run=4 | ALL: n=85 win=39% -9.5R PF=0.84 DD=-20.6 run=9

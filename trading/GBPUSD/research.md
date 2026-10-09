@@ -1,205 +1,192 @@
-# GBPUSD research (Agent 1)
+# GBPUSD research (Agent 1), round 2
 
-**Data used:** HistData 1-minute bid prices, **1 Oct 2025 to 30 Jun 2026 only** (the "development period").
-July to September 2026 was not loaded or looked at; it is kept hidden for Agent 2's check.
-191 full trading days studied (3 short days removed: 1 Oct 2025 partial start, 25 Dec 2025 holiday,
-18 May 2026 data gap). Over the period GBPUSD moved sideways in a wide band (1.302 to 1.384; it started at 1.348 and ended at 1.326).
+**Data used:** HistData 1-minute bid prices with the corrected UTC clock, **design period only: 1 Oct 2024 to 30 Jun 2026 (21 months)**.
+The file is read in chunks and every chunk is filtered at once. Asserts in `research/common.py` stop the run if any bar from
+hidden test A (Oct 2023 – Sep 2024) or hidden test B (Jul 2026 onward) gets through. Neither hidden period was looked at.
+No clock fix is applied in the scripts: the data is already correct.
 
-**How a "day" is counted:** the normal forex day, from 17:00 New York to 17:00 New York the next day
-(= 00:00 Doha in US summer time, 01:00 Doha in US winter time).
-**Times:** Doha is always UTC+3. New York is UTC-4 in US summer time (2nd Sunday of March to 1st Sunday of
-November) and UTC-5 in US winter time. So **Doha = New York + 7 hours in summer, + 8 hours in winter.**
-Sessions are defined on London's or New York's own clock, so their summer-time changes are handled.
-**1 pip = 0.0001.** All scripts are in `trading/GBPUSD/research/` (see its README to re-run).
+**Two design years** are compared throughout:
+- **Y1** = Oct 2024 – Sep 2025 (254 usable days). GBPUSD trended: down from 1.337 (1 Oct 2024) to 1.216 (17 Jan 2025), then up to 1.374 (1 Jul 2025), then a sharp drop in July.
+- **Y2** = Oct 2025 – Jun 2026 (189–192 usable days). Sideways: month-end closes stayed between 1.315 and 1.368.
+
+**Rule for this report:** a finding counts only if it shows in **both** years. Findings that flip between the years are treated as noise.
+
+**Usable days:** 449 full trading days (5 removed: 1 Oct 2024 partial start, 7 Nov 2024 data gap at the FOMC hour,
+25 Dec 2024, 25 Dec 2025, 18 May 2026 data gap). Days whose previous day was one of these are also left out of level-based studies.
+**Day** = 17:00 New York to 17:00 New York. Weekend bars (e.g. Sunday bars before 17:00 NY) belong to Monday.
+**Times:** Doha = New York + 7 h in US summer time (2nd Sunday of March to 1st Sunday of November), + 8 h in US winter time.
+Sessions are defined on London's or New York's own clock. **1 pip = 0.0001.**
+Scripts: `trading/GBPUSD/research/`. Run any script with `GBP_PERIOD=Y1`, `Y2` or `ALL`. Outputs are in `out_NN_<period>.txt`.
 
 ---
 
-## 1. When does GBPUSD move?
+## A. Summary: what held and what did not
 
-### By hour (average high-to-low range inside each hour, pips)
-| New York | Doha (summer / winter) | Avg range | Median | What happens |
+| Finding | Y1 | Y2 | Holds? |
+|---|---|---|---|
+| Busiest hours are 08:00–11:00 NY; 10:00 NY is the peak hour | 29.8 pips | 29.1 pips | **Yes** |
+| Dead hours 12:00 NY – 02:00 NY (hourly range ~10–18 pips) | yes | yes | **Yes** |
+| London breaks at least one side of the Asia range (07:00–12:00 London) | 95% | 96% | **Yes** |
+| First Asia break comes in the 07:00–08:00 London hour | 71% | 66% | **Yes** |
+| After the first Asia break, price returns to the Asia middle that day | 70% | 77% | **Yes** |
+| ...but the day closes beyond the broken level (true breakout) | 52% | 48% | **Yes: coin flip** |
+| Earlier move predicts later move (11 pairs tested) | no | no | **Yes: no edge, both years** |
+| NY morning trades beyond the London range | 91% | 89% | **Yes** |
+| ...and afterwards closes beyond it | 50% | 49% | **Yes: coin flip** |
+| Big days trend (open-to-close / range): big vs other days | 0.66 vs 0.44 | 0.63 vs 0.38 | **Yes** |
+| Big days start before NY (evening/Asia/London) | 58 of 64 | 46 of 48 | **Yes** |
+| Big days follow a wider Asia range and a wider previous day | 35 vs 27; 98 vs 83 | 34 vs 26; 91 vs 80 | **Yes** (descriptive only) |
+| News days are wider than normal days (median) | 99.5 vs 83.0 | 97.6 vs 77.7 | **Yes** |
+| Bank of England days are the widest news days | 120 | 136 | **Yes** |
+| PDH broken → day closes back below it | **47%** | **55%** | **No (flips)** |
+| PDL broken → day closes back above it | **44%** | **57%** | **No (flips)** |
+| Widest weekday | Wed/Thu/Mon similar | Thursday | **No** |
+| UK CPI: first 15-min move keeps going | **3 of 12** | **8 of 9** | **No (flips)** |
+| US CPI: first 15-min move is undone | 7 of 12 | 6 of 8 | Weak / small sample |
+| London moved 30+ pips → NY continues | **49%** | **60%** | **No** |
+
+**The main lesson:** GBPUSD's *timing* is very stable (when it moves, how big, when big moves start), but its *direction* after any
+simple event is a coin flip in both years. "False break" behaviour at the previous day's high/low was real in the sideways year (Y2)
+and absent in the trending year (Y1). That is exactly why v1 worked on Y2 and failed on Y1.
+
+---
+
+## 1. When does GBPUSD move? (held in both years)
+
+### By hour (average high-low range inside each hour, pips, 21 months; Y1 / Y2 in brackets for the key hours)
+| New York | Doha (summer / winter) | Avg | Median | Note |
 |---|---|---|---|---|
-| 19:00-01:00 | 02:00-08:00 / 03:00-09:00 | 9-13 | 8-11 | Asia: quiet |
-| 02:00 | 09:00 / 10:00 | 20.5 | 17.6 | Frankfurt + London open (07:00-08:00 London) |
-| 03:00 | 10:00 / 11:00 | 21.7 | 20.1 | London morning |
-| 04:00 | 11:00 / 12:00 | 20.5 | 17.7 | London morning |
-| 05:00 | 12:00 / 13:00 | 16.2 | 15.2 | London lunch dip |
-| 06:00-07:00 | 13:00-14:00 / 14:00-15:00 | 19-21 | 17 | pre-New York |
-| 08:00 | 15:00 / 16:00 | 24.8 | 22.9 | US data at 08:30 |
-| 09:00 | 16:00 / 17:00 | 24.3 | 22.5 | US stock market opens 09:30 |
-| **10:00** | **17:00 / 18:00** | **29.1** | **25.8** | **busiest hour** (10:00 US data, run-up to London 4pm fix) |
-| 11:00 | 18:00 / 19:00 | 21.6 | 20.0 | London fix, London closes |
-| 12:00-16:00 | 19:00-23:00 / 20:00-00:00 | 10-17 | 9-16 | fading New York afternoon |
+| 19:00–01:00 | 02:00–08:00 / 03:00–09:00 | 10–14 | 9–12 | Asia: quiet |
+| 02:00 | 09:00 / 10:00 | 20.9 | 18.1 | Frankfurt + London open |
+| 03:00 | 10:00 / 11:00 | 23.2 (24.6 / 21.5) | 21.1 | London morning |
+| 04:00 | 11:00 / 12:00 | 21.4 | 19.3 | |
+| 05:00–07:00 | 12:00–14:00 / 13:00–15:00 | 18–20 | 16–18 | London lunch, pre-NY |
+| 08:00 | 15:00 / 16:00 | 26.9 (28.6 / 24.6) | 23.1 | US data at 08:30 |
+| 09:00 | 16:00 / 17:00 | 25.2 | 22.5 | US stocks open 09:30 |
+| **10:00** | **17:00 / 18:00** | **29.5 (29.8 / 29.1)** | **26.6** | **peak hour** |
+| 11:00 | 18:00 / 19:00 | 23.1 | 20.8 | London fix, London close |
+| 12:00–16:00 | 19:00–23:00 / 20:00–00:00 | 11–18 | 9–17 | fading |
+| 17:00 | 00:00 / 01:00 | 12.3 | 10.9 | rollover: wide spreads, almost no net movement (cleanness 0.29–0.33) |
 
-The "cleanness" of an hour (how much of the range became net movement) is 0.45-0.56 in every hour except the 17:00 NY rollover hour (0.32).
-No hour is clearly "cleaner" than another; the busy hours are bigger, not tidier.
-
-### By session (same day, pips)
-| Session (local clock) | Doha (summer / winter) | Avg | Median | Made the day's high | Made the day's low |
+### By session (21 months)
+| Session (local clock) | Doha (summer / winter) | Avg | Median | Made day's high | Made day's low |
 |---|---|---|---|---|---|
-| Asia 00:00-07:00 London | 02:00-09:00 / 03:00-10:00 | 31.6 | 27.4 | 20% | 13% |
-| Frankfurt hour 07:00-08:00 London | 09:00-10:00 / 10:00-11:00 | 20.7 | 17.6 | 7% | 3% |
-| London morning 08:00-12:00 London | 10:00-14:00 / 11:00-15:00 | 39.2 | 34.6 | 12% | 17% |
-| London full 08:00-16:30 London | | 65.0 | 59.6 | 39% | 48% |
-| London-NY overlap 08:00 NY-16:00 London | 15:00-18:00 / 16:00-19:00 | 67.1 | 61.4 | 36% | 28% |
-| New York 08:00-17:00 NY | 15:00-00:00 / 16:00-01:00 | 60.8 | 55.4 | 51% | 46% |
-| NY afternoon 12:00-17:00 NY | 19:00-00:00 / 20:00-01:00 | 33.8 | 28.4 | 23% | 20% |
-(The "made the day's high/low" columns overlap because the sessions overlap.)
+| Asia 00:00–07:00 London | 02:00–09:00 / 03:00–10:00 | 32.6 | 27.8 | 19% | 13% |
+| Frankfurt hour 07:00–08:00 London | 09:00–10:00 / 10:00–11:00 | 21.6 | 19.3 | 8% | 3% |
+| London morning 08:00–12:00 London | 10:00–14:00 / 11:00–15:00 | 41.4 | 37.0 | 14% | 16% |
+| London full 08:00–16:30 London | | 68.9 | 63.1 | 40% | 45% |
+| London–NY overlap 08:00 NY – 16:00 London | 15:00–18:00 / 16:00–19:00 | 71.6 | 64.5 | 37% | 31% |
+| New York 08:00–17:00 NY | 15:00–00:00 / 16:00–01:00 | 64.0 | 57.8 | 50% | 47% |
+| NY afternoon 12:00–17:00 NY | 19:00–00:00 / 20:00–01:00 | 34.3 | 29.1 | 24% | 20% |
+Each year's session numbers are within about 10% of these (Y1 slightly wider; Y1 day average 95.0, Y2 87.0 pips).
+**Whole day, 21 months:** average 91.6 pips, median 82.9 (middle half 66–108).
 
-**Whole day:** average range 87.0 pips, median 80.2 (middle half of days: 62-105 pips).
+### By weekday (21 months): does NOT hold as a pattern
+Mon 80.4, Tue 76.4, Wed 87.5, Thu 86.4, Fri 80.3 (median pips). Y1's widest days were Wed/Thu/Mon (82–90), Y2's was Thursday (86).
+Only "Tuesday is a bit quieter" and "Wed/Thu a bit wider" appear in both years, by small margins. Not usable.
 
-### By weekday
-| Day | Avg range | Median | Avg open-to-close move | Days |
-|---|---|---|---|---|
-| Mon | 83.1 | 71.4 | 42.6 | 38 |
-| Tue | 85.3 | 76.0 | 40.5 | 39 |
-| Wed | 88.6 | 81.4 | 46.9 | 38 |
-| **Thu** | **95.9** | **85.8** | 48.4 | 37 |
-| Fri | 82.4 | 77.7 | 38.7 | 39 |
-Thursday is the widest day (BoE decisions are on Thursdays: 6 of them sit here). Monday has the lowest median.
-Differences between the other days are small and could be chance with ~38 days each.
-
-### By month (avg daily range)
-Oct 83, Nov 79, Dec 74, Jan 91, Feb 87, **Mar 118**, Apr 91, May 82, Jun 77. March 2026 was a high-volatility month;
-results that depend on March alone should be treated with care.
+### By month
+Wide months: Jan 2025 (113 avg), Apr 2025 (127, US tariff shock), Mar 2026 (118). Quiet: Oct 2024 (77), Dec 2025 (74), Jun 2026 (77).
 
 ---
 
-## 2. Where do the big moves come from?
+## 2. Where do big moves come from? (held in both years)
+**Big days** = top 25% of days (108+ pips over 21 months; 111 days).
+- Direction: 59% up in Y1, 52% in Y2. Close to even.
+- They trend: open-to-close is 63–66% of the range, against 38–44% on other days.
+- **They start early:** the starting extreme (the low of an up day, the high of a down day) was set before New York on 58 of 64 (Y1) and
+  46 of 48 (Y2) big days. Most were in the evening/Asia session (40 and 31). Only 5 and 2 started in the NY morning.
+- About half started with no sweep of the Asia or previous-day level at all (34 of 64; 23 of 48).
+- Wider Asia range and wider previous day beforehand (see table A). **But knowing this does not tell you the direction.**
 
-**Big days** (top 25% of days, range of 104.7 pips or more, 48 days):
-- Up 52% / down 48%: no direction bias.
-- On big days the price **trends**: the open-to-close move is a median 63% of the day's range (only 39% on other days).
-- The main move usually **starts early**: the day's starting extreme (the low on up days, the high on down days)
-  was set in the evening or Asia session on 31 of 48 big days (65%); in Frankfurt/London morning on 14 (29%);
-  in New York only 3 (6%). In other words, a big day usually doesn't "start" at the NY open; it is already running.
-- At the starting extreme, 25 of 48 (52%) had just traded through the Asia high/low and/or the previous day's
-  high/low (a "sweep"); 23 (48%) had no such level.
-- Warning signs before big days: a wider Asia range (median 37.0 vs 26.5 pips) and a wider previous day (90.0 vs 79.5).
+**All moves of 50+ pips** (swing ends after a 25-pip pullback; Y1 521 moves, Y2 336 moves; median about 67 pips, about 4 hours long):
+- Start in the NY morning (08:00–12:00 NY): 29% in Y1, 30% in Y2. The single biggest window both years.
+- After 12:00 NY: only about 6% in both years.
+- Start at a sweep of an Asia/previous-day level: 50% (Y1) and 52% (Y2). That is about what you get by chance, because turning
+  points tend to sit beyond these levels anyway.
 
-**All moves of 50+ pips inside a day** (measured with a swing filter: a swing ends when price comes back 25 pips; 336 moves on 157 of 191 days, median size 66 pips, median length about 4 hours):
-- Where they start: **NY morning 08:00-12:00 NY: 97 (29%)**, London morning: 79 (24%), Asia: 62 (18%),
-  evening before Asia: 37, Frankfurt hour: 23, London midday: 22, NY afternoon: 16 (5%).
-- By New York hour, starts peak from 02:00 to 10:00 NY (22-32 per hour), then collapse after 11:00 NY (13, then 6 or fewer).
-- 171 of 336 (51%) started at a point where price had just gone beyond the Asia high/low and/or the previous day's
-  high/low. Of these, 74 swept both an Asia level and the previous-day level at once.
-  Caution: the day's turning points often lie beyond these levels by definition, so this number is only a hint, not proof.
-
----
-
-## 3. What repeats? (counts out of 191 days unless stated)
-
-### Asia range (00:00-07:00 London)
-- Asia range: average 31.6 pips, median 27.4 (middle half 21-36).
-- **London (07:00-12:00 London) takes out at least one side of the Asia range on 183/191 = 96% of days.**
-  Asia high taken 60%, Asia low taken 62%, both 26%. Both sides taken by the end of the day: 50%.
-- First break comes at 07:00-08:00 London on 66% of days, 08:00-09:00 on 21%.
-- **After the first break, price usually comes back:** it returned to the middle of the Asia range later that day
-  in 146/190 = 77% of cases, and reached the opposite Asia side in 94/190 = 49%.
-  But the break also runs first: it went 10+ pips beyond the level before any return in 55% of cases, 20+ pips in 38%, 30+ in 27%.
-  The day closed beyond the broken level in 48%. So a break is close to a coin flip as to where the day ends.
-- **Trading the break (continuation) lost money in a quick check** (section 7): -32 R over 172 trades.
-- Trading the failed break (reversal) was roughly break-even: about 0 R over 161-163 trades.
-
-### Previous day's high (PDH) and low (PDL)
-- PDH taken during the day: 84/191 = 44%; on 46 of those 84 (55%) the day closed back below it.
-- PDL taken: 103/191 = 54%; on 58 of those 103 (56%) the day closed back above it.
-- Outside day (both taken): 14%. Inside day (neither): 16%.
-
-### London vs New York
-- New York morning (08:00-12:00 NY) trades beyond the London session's (08:00 London-08:00 NY) high or low on 90% of days.
-  Afterwards price came back to the middle of the London range on 56%; the day closed beyond the level on 47%. A coin flip.
-- New York kept London's direction on 48% of days (coin flip). When London had moved 30+ pips, New York kept the direction 25/43 = 58%, average +10 pips (small sample, weak).
-- London first hour (08:00-09:00 London): the rest of the day kept its direction 47% of the time.
-- London 4pm fix (16:00 London = 11:00 NY): the afternoon continued the 08:00 NY-to-fix move only 46% of the time (no usable edge).
-- The London 08:00 opening price was traded again after 10:00 London on 166/191 = 87% of days: price rarely runs away from the London open for good.
-
-### Does an earlier move predict a later one? (section 07 of the scripts)
-Eleven simple "earlier move vs later move" pairs were tested (previous day, Asia, London first hour, London morning,
-NY first hour, etc.). **None showed a useful link**: correlations ran from -0.15 to +0.10, and "follow the earlier
-direction" was right 45-52% of the time. The strongest was a weak tendency for London's first hour to be partly undone by
-12:00 London (correlation -0.15; fading it was right 53% of the time, about 1.6 pips on average, far too small after costs).
-**Plain conclusion: on GBPUSD in this period, simple direction-guessing from earlier moves does not work.** Any edge must
-come from *where* price reacts (key levels), not from *which way* it has been going.
-
----
-
-## 4. News days
-
-**No paid economic calendar is connected** (the FMP calendar requires a higher plan). Dates were built from the
-published schedules (US Bureau of Labor Statistics 2026 schedule pages, Federal Reserve and Bank of England
-meeting calendars, the usual ONS UK CPI pattern) and from known shutdown delays in Oct-Nov 2025 (September jobs
-report moved to 20 Nov 2025; Oct+Nov jobs report on 16 Dec 2025; September CPI on 24 Oct 2025; October CPI cancelled).
-**Every date was then checked in the price data**: a real release shows a jump in the 5 minutes from the release
-minute. **34 of 37 dates showed a 5-minute range at least 2x normal.** The 3 doubtful ones: US CPI 11 Mar 2026
-(1.1x), UK CPI 21 Jan 2026 (1.9x), UK CPI 22 Apr 2026 (1.4x). These may be right with a dull reaction, or the date may be off;
-confidence is medium on those three, high on the rest. Full list: `research/news_calendar.py`, results: `research/out_04.txt`.
-
-| Event (release time) | Doha time (summer / winter) | Events | 5-min jump after release (median) | Normal for that 5 min | Range 1h after | Range 4h after | First 15 min direction kept for the next 3h45 |
-|---|---|---|---|---|---|---|---|
-| US jobs report NFP (08:30 NY) | 15:30 / 16:30 | 8 | 30.2 pips | 6.8 | 55.4 | 66.3 | 4/8 |
-| US CPI (08:30 NY) | 15:30 / 16:30 | 8 | 24.5 | 6.8 | 37.8 | 50.9 | **1/8 (usually reversed)** |
-| FOMC decision (14:00 NY) | 21:00 / 22:00 | 6 | 25.5 | 4.3 | 43.5 | 57.5 | 3/6 |
-| Bank of England (12:00 London) | 14:00 (London summer) / 15:00 (London winter) | 6 | 26.8 | 5.5 | 47.2 | 91.5 | 2/6 |
-| UK CPI (07:00 London) | 09:00 / 10:00 | 9 | 18.9 | 5.8 | 28.0 | 36.7 | **8/9 (usually kept)** |
-
-- **News days are wider days:** median daily range 97.6 pips on news days (35 days) vs 77.6 on normal days (156).
-  By type: BoE days 136 (widest), FOMC 111, NFP 96, UK CPI 88, US CPI 71 (US CPI days were not wider than normal).
-- **Before the news:** in the hour before NFP the median range was 12.5 pips, below the 17-23 pips usual for that hour: a quiet wait.
-  Before FOMC and BoE the hour before was not quiet (median 23-24 pips), partly because other events fell nearby.
-- **Behaviour after the first reaction:** UK CPI's first 15-minute move kept going in 8 of 9 cases; US CPI's first move was
-  undone in 7 of 8 cases. Samples are tiny (8-9 events), so treat these as observations, not rules.
-- News days are **not** removed from any test. The owner decides that. In the chosen idea, news days are reported separately.
-
----
-
-## 5. Bad conditions (when it fakes out or does nothing)
-- **Dead hours:** 12:00 NY to 02:00 NY (19:00/20:00 to 09:00/10:00 Doha). Hourly ranges of 9-17 pips, mostly 10-13: costs (1.5 pips)
-  eat a large share of any move. Large moves almost never start after 12:00 NY (only 16 of 336 big moves started in the NY afternoon).
-- **Fake-outs are the normal case, not the exception:** breaks of the Asia range, the London range and the previous day's
-  high/low each ended back inside on roughly half of days or more (sections 3). Buying breakouts without anything else lost money.
-- **The 17:00 NY hour** (00:00/01:00 Doha) has a 12.4-pip range but almost no net movement (cleanness 0.32): spread widening at the daily rollover, not real movement.
-- **Holiday days** (25 Dec, 1 Jan) are thin; 25 Dec had only 261 one-minute bars.
-- **Narrow Asia sessions are NOT a reliable sign of a big London move** in this data: big days had *wider* Asia ranges (median 37 vs 26.5).
-
----
-
-## 6. Idea chosen for v1: New York false break of the previous day's high or low
-
-**What it is (plain words):** many traders leave their stop-loss orders just above yesterday's high and just below
-yesterday's low. When New York opens (08:00-11:00 NY), with US data and big volume, price often pushes through one of these
-levels, triggers those orders, and then, if no real buyers (or sellers) follow, falls back to the other side of the level.
-We wait for that failure to be **confirmed by a 15-minute candle closing back on the other side**, then trade back the
-other way, with the stop just beyond the extreme of the fake move.
-
-**Why it should keep working:** it is based on how orders sit in the market (stops around obvious levels) and on the fact,
-measured above, that breaks of obvious levels in GBPUSD fail about half the time or more. The New York morning is when the
-largest share of big moves starts (29%) and when volume is highest, so false moves there are large enough to beat costs.
-
-**Evidence (development data only, quick check with costs of 1.5 pips per trade):**
-- 66 trades in 9 months (about 7 a month), 48% winners, +12.6 R total (R = amount risked), average +0.19 R per trade,
-  profit factor 1.38, worst losing run -3.9 R.
-- Both halves positive: Oct-mid Feb +7.9 R (34 trades), mid Feb-Jun +4.7 R (32 trades). 7 of 9 months positive (Feb -0.3 R, Apr -0.6 R).
-- Nearby settings give similar results (target 1.5R / 3R, signal window ending 10:00 or 12:00 NY, exit at 12:00 NY: +8 to +16 R).
-  But using 5-minute candles (+4.7 R) or 30-minute candles (+1.2 R) instead of 15-minute ones weakens it a lot.
-- News days: +5.8 R from 14 trades; normal days +6.8 R from 52 trades.
-- **How strong is this? Weak to moderate.** The average result is only about 1.2 standard errors above zero; a bootstrap
-  gives about an 11% chance the true average is zero or worse. I also tried about 11 idea/setting combinations before picking
-  this one, which raises the chance that it is luck. It is the most promising idea found, not a proven one.
-  The hidden Jul-Sep 2026 period is the real test.
-
-**Ideas tested and rejected (all with the same costs):**
-| Idea | Trades | Result |
+## 3. Repeating behaviours (counts per year)
+| Behaviour | Y1 (254 days) | Y2 (189 days) |
 |---|---|---|
-| Asia range breakout in London (stop at Asia middle, target 2R or 1R) | 172 | -32 R / -37 R: **clearly negative** |
-| Asia range false break in London (15-min close back inside, target opposite side or 2R) | 161 | -7.5 R / -0.8 R: break-even, no edge |
-| Same with 5-minute candles | 167 | -19.5 R |
-| Previous-day high/low false break during London | 82 | -3.7 R |
-| False break of a level that is both Asia AND previous-day extreme, London | 82 | -20.6 R |
-| False break of the London range during New York | 130 | -24.3 R |
+| Asia range (median) | 28.4 pips | 27.3 pips |
+| Asia high taken 07–12 London | 66% | 61% |
+| Asia low taken 07–12 London | 57% | 63% |
+| Both Asia sides taken 07–12 London | 28% | 28% |
+| First break runs 10+ pips before any return to the Asia middle | 61% | 56% |
+| First break runs 20+ pips before any return to the Asia middle | 44% | 38% |
+| Returns to the Asia middle later | 70% | 77% |
+| Reaches the opposite Asia side later | 50% | 51% |
+| Day closes beyond the first broken level | 52% | 48% |
+| PDH traded | 50% | 44% |
+| PDL traded | 46% | 54% |
+| Outside day / inside day | 11% / 14% | 14% / 15% |
+| London 08:00 open price traded again after 10:00 London | 79% | 86% |
+| NY continues London's direction | 48% | 49% |
+| Rest of the day continues London's first hour | 50% | 48% |
+| NY afternoon continues the 08:00 NY → 4pm-fix move | 50% | 48% |
 
-## 7. Backup ideas (if v1 fails)
-1. **Asia false break in London, with the target at the Asia middle** instead of the far side. Supported by the 77% return-to-middle count,
-   but the stop has to sit beyond the sweep, so the reward is small; a quick estimate suggests it is only marginal after costs.
-2. **UK CPI follow-through**: trade in the direction of the first 15 minutes after UK CPI (8 of 9 kept going). Very small sample; only 9 days a year.
-3. **US CPI fade**: trade against the first 15-minute move after US CPI (7 of 8 reversed). Same small-sample problem; could be combined with backup 2 as a "news reaction" strategy if the owner wants to trade news.
+**Does an earlier move predict a later one?** (`07_predictability_scan.py`, 11 pairs, 443–444 days): correlations −0.10 to +0.10.
+"Follow the earlier direction" was right 46–51% of the time. Average follow-through was −3 to +2 pips, which is less than the trading cost.
+The only pair with the same sign in both years was "NY 08–09 → 09–12 NY" (fade worked: −2.8 and −2.9 pips). Split by size of the first hour,
+the effect is not stable (`10_ny_first_hour.py`), so it is not usable.
+
+## 4. News days (dates re-checked with the corrected clock)
+No paid calendar is connected; the FMP calendar needs a higher plan. Dates come from published schedules: the BLS schedule, the Fed and
+BoE meeting calendars, and the ONS UK CPI pattern. The Oct–Nov 2025 shutdown delays are included. **Each date was checked in the price data:**
+84 of 87 events show a 5-minute jump at the release minute of at least 2x normal.
+- **US CPI on 11 Mar 2026 is now confirmed (2.75x).** The earlier doubt came from the old clock problem.
+- Still doubtful (1.4–1.9x, dull reaction or wrong date): UK CPI 17 Sep 2025, UK CPI 21 Jan 2026, UK CPI 22 Apr 2026, US CPI 10 Jun 2026.
+- 7 Nov 2024 (FOMC + BoE) is excluded because the data is missing the FOMC hour.
+- Full list: `research/news_calendar.py`. Per-event results: `research/out_04_events.csv`.
+
+| Event (release time) | Doha (summer / winter) | 5-min jump Y1 / Y2 (median) | Normal | 4-hour range after, Y1 / Y2 | Day range Y1 / Y2 |
+|---|---|---|---|---|---|
+| US NFP (08:30 NY) | 15:30 / 16:30 | 51.7 / 30.2 | 6–8 | 89 / 66 | 101 / 96 |
+| US CPI (08:30 NY) | 15:30 / 16:30 | 43.8 / 26.3 | 6–8 | 77 / 51 | 97 / 71 |
+| FOMC (14:00 NY) | 21:00 / 22:00 | 25.9 / 22.0 | 4 | 76 / 75 | 99 / 111 |
+| BoE (12:00 London) | 14:00 / 15:00 (London summer / winter) | 45.9 / 30.8 | 5.5 | 70 / 92 | 120 / 136 |
+| UK CPI (07:00 London) | 09:00 / 10:00 (London summer / winter) | 24.0 / 18.9 | 5.8 | 49 / 46 | 92 / 88 |
+
+- News days are wider in both years: median 97.8 vs 80.7 pips over 21 months.
+- The hour before the release is quieter than usual for NFP and UK CPI (median 10–17 pips). Not for FOMC and BoE.
+- **Direction after the first 15 minutes is not consistent:** UK CPI follow-through was 3/12 in Y1 and 8/9 in Y2; US CPI follow-through
+  was 5/12 and 2/8. The round-1 "news reaction" backup ideas are therefore **dropped as noise**.
+
+## 5. Bad conditions (held in both years)
+- 12:00 NY to 02:00 NY (19:00/20:00 to 09:00/10:00 Doha): small ranges, costs eat a big share, and only about 6% of big moves start after 12:00 NY.
+- The 17:00 NY rollover hour: spread noise, no real movement.
+- Breaks of Asia, London and previous-day levels end beyond the level only about half the time in both years. Pure breakout trading has no edge.
+- Holiday days (25 Dec) and data-gap days are thin. The day after them has no proper "previous day".
+
+---
+
+## 6. Round 2 idea testing (all on the 21 design months, results per design year)
+Fill model: enter at the close of the signal candle. Stop and target are checked on the following 1-minute bars; if both are hit in the same bar, the stop counts.
+Costs 1.5 pips (and 3 pips as a stress test). Code: `11_v2_check.py`, `12_other_families.py`. **7 rule variants were tried in round 2** (round 1 tried about 11).
+
+| # | Variant (decided before seeing its result) | Y1 @1.5 | Y2 @1.5 | Y1 @3 | Y2 @3 | Longest losing run | Trades |
+|---|---|---|---|---|---|---|---|
+| 0 | v1 replica (baseline, matches Agent 2 exactly) | −21.9 R | +9.8 R | −33.2 | +1.1 | 9 | 158 |
+| 1 | v1 + market mood: trade only if the last 5 days were range-bound (ER5 < 0.5) | −15.7 R | +10.8 R | −22.0 | +6.2 | 9 | 85 |
+| 2 | v1 + minimum stop 8 pips | −17.7 R | +14.4 R | −27.8 | +7.1 | 9 | 158 |
+| 3 | v1 + mood + minimum stop (the planned v2) | −14.9 R | +14.6 R | −20.3 | +10.9 | 9 | 85 |
+| F1 | Asia false break in London, 2R | −27.9 R | +1.8 R | −63.0 | −26.4 | 10 | 362 |
+| F2 | Asia breakout in London, 2R | −11.0 R | −34.4 R | −30.2 | −50.3 | 11 | 398 |
+| F3 | London opening-range (08–09 London) breakout | −25.0 R | −11.5 R | −39.0 | −23.6 | 13 | 401 |
+| F4 | NY opening-range (08–09 NY) breakout | +2.2 R | −18.3 R | −10.6 | −29.0 | 8 | 389 |
+
+ER5 = how much of the last 5 full days' high-to-low range became net movement (0 = went nowhere, 1 = went straight). The cut-off of 0.5 was fixed in advance.
+On the design data the median ER5 was 0.43–0.45, and I looked at that distribution only, not at results, before fixing the cut-off.
+
+**Result: none of the 7 variants is positive in both years.**
+- The mood switch did not rescue the false-break idea. Even on "range-bound" days, Y1 lost −15.7 R with a 27% win rate.
+  So the Y1 failure is not explained by the 5-day trend measure.
+- Breakout versions lose in at least one year, mostly in both.
+
+## 7. Conclusion
+On 21 months of corrected data, GBPUSD shows **stable timing but no stable direction** after any of the simple, well-known setups I tested.
+I found no idea that meets the bar (positive in both years, still positive at 3-pip costs, losing run ≤ 6, about 150+ trades).
+**Recommendation: pause GBPUSD and move to XAUUSD**, keeping the timing findings above. They also tell us where *not* to trade:
+the afternoon, the rollover hour, and breakout entries.
+Ideas I have not tested and could try if GBPUSD is reopened: a volatility-timing approach, for example trading only on days with a wide
+Asia range plus a rule that captures the early trend of big days. Today I have no evidence that the direction of those days can be known in advance.

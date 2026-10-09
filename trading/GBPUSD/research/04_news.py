@@ -5,7 +5,7 @@ from news_calendar import EVENTS
 
 df = load()
 days = day_table(df)
-cd = days[days.complete & days.pdh.notna()]
+cd = days[days.complete & days.prev_complete & days.pdh.notna()]
 D = df[df.tday.isin(cd.index)].set_index("time_utc")
 m1 = D[["open", "high", "low", "close"]]
 

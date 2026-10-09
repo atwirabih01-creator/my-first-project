@@ -26,6 +26,8 @@ def day_table(df):
         r["ldn12"] = g.open.values[noon_ldn[0]] if len(noon_ldn) else np.nan
         r["pdh"] = prev["hi"] if prev is not None else np.nan
         r["pdl"] = prev["lo"] if prev is not None else np.nan
+        # previous trading day must be a full day (not a holiday / data gap), otherwise PDH/PDL are not real
+        r["prev_complete"] = bool(prev["complete"]) if prev is not None else False
         rows.append(r)
         prev = r
     t = pd.DataFrame(rows).set_index("tday")

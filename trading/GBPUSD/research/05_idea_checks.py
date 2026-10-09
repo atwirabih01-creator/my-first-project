@@ -11,7 +11,7 @@ import sys
 COST = 1.5
 df = load()
 days = day_table(df)
-cd = days[days.complete & days.pdh.notna()]
+cd = days[days.complete & days.prev_complete & days.pdh.notna()]
 D = df[df.tday.isin(cd.index)]
 news = set(pd.read_csv("out_04_events.csv", parse_dates=["tday"]).tday.dropna())
 
@@ -99,9 +99,9 @@ def summary(name, T):
     w = T.R > 0
     pf = T.R[w].sum() / -T.R[~w].sum() if (~w).any() else np.inf
     eq = T.R.cumsum(); dd = (eq - eq.cummax()).min()
-    h1 = T[T.tday < "2026-02-15"].R; h2 = T[T.tday >= "2026-02-15"].R
+    h1 = T[T.tday < "2025-10-01"].R; h2 = T[T.tday >= "2025-10-01"].R
     print(f"{name:55s} n={len(T):3d} win={w.mean():.0%} avgR={T.R.mean():+.3f} totR={T.R.sum():+6.1f} PF={pf:.2f} maxDD={dd:.1f}R "
-          f"| half1 {h1.sum():+.1f}R (n={len(h1)}) half2 {h2.sum():+.1f}R (n={len(h2)}) | news {T[T.news].R.sum():+.1f}R n={T.news.sum()} "
+          f"| Y1 {h1.sum():+.1f}R (n={len(h1)}) Y2 {h2.sum():+.1f}R (n={len(h2)}) | news {T[T.news].R.sum():+.1f}R n={T.news.sum()} "
           f"| med stop {T.risk.median():.1f}p")
 
 

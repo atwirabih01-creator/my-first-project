@@ -1,0 +1,10 @@
+== Y1 (n=254)
+  first-hour move  0-10  pips n=128: fade 09->12 right 56% avg  +4.3 | fade 09->16 avg  +4.1
+  first-hour move 10-20  pips n= 67: fade 09->12 right 51% avg  -0.2 | fade 09->16 avg  -2.0
+  first-hour move 20-30  pips n= 35: fade 09->12 right 49% avg  -0.8 | fade 09->16 avg  +0.7
+  first-hour move 30-999 pips n= 24: fade 09->12 right 54% avg  +8.5 | fade 09->16 avg  +5.1
+== Y2 (n=190)
+  first-hour move  0-10  pips n=103: fade 09->12 right 51% avg  +2.9 | fade 09->16 avg  +5.8
+  first-hour move 10-20  pips n= 56: fade 09->12 right 52% avg  +0.9 | fade 09->16 avg  -0.2
+  first-hour move 20-30  pips n= 19: fade 09->12 right 47% avg  -0.5 | fade 09->16 avg  +7.8
+  first-hour move 30-999 pips n= 12: fade 09->12 right 92% avg +18.3 | fade 09->16 avg  +8.7

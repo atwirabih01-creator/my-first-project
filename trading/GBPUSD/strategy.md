@@ -1,7 +1,27 @@
-# GBPUSD strategy: v1, "New York false break of yesterday's high/low"
+# GBPUSD strategy
 
-**Version:** v1 (2026-10-09). Author: Agent 1 (Trading Research Lead). Status: **waiting for Agent 2's backtest.**
-Research behind it: `research.md` section 6. Quick-check code: `research/08_level_sweeps.py` (function `sweep_level` with `pd_lv`)
+## Status (round 2, 9 Oct 2026): **no v2 proposed. Recommendation: pause GBPUSD.**
+I re-did the research on the 21 design months (Oct 2024 – Jun 2026) with the corrected clock and tested 7 rule variants,
+each fixed in advance. That includes v1 with a market-mood switch (trade only after range-bound days) and a minimum stop.
+**None was positive in both design years.** Details: `research.md` sections 6–7.
+I am not sending a v2 to backtest. A rule set that already fails on design data would only use up hidden test A
+(Oct 2023 – Sep 2024), which can be used only once.
+
+## Settled points (apply to any future GBPUSD version and to re-runs of v1)
+1. **Forced-close price:** the trade closes at the **close of the last 1-minute bar before the forced-close time**
+   (for v1: the close of the 15:59 NY bar). Same as Agent 2's reading.
+2. **Sunday bars before 17:00 NY** (and any other weekend bars) **belong to Monday's trading day.** They count toward Monday's
+   levels, never as a day of their own. Friday stays Monday's "previous day".
+3. **The day after a holiday or data gap:** if the previous trading day has fewer than 1,300 one-minute bars (a normal day has about 1,435),
+   its high/low is not real, so **no trade that day**. The same applies to a day that itself has fewer than 1,300 bars.
+   In the design data this affects 25 Dec 2024, 25 Dec 2025, 7 Nov 2024 (missing the FOMC hour), 18 May 2026 (data gap), the partial first day 1 Oct 2024, and the day after each.
+
+---
+
+# v1 "New York false break of yesterday's high/low": DROPPED (9 Oct 2026)
+
+**Version:** v1 (2026-10-09). Author: Agent 1 (Trading Research Lead). Status: **DROPPED** by Agent 2 (lost −21.9 R in Oct 2024 – Sep 2025; see feedback.md).
+Research behind it: round-1 research (Oct 2025–Jun 2026 only; now replaced by the round-2 research.md). Quick-check code: `research/08_level_sweeps.py` (function `sweep_level` with `pd_lv`)
 and `research/09_pd_sweep_ny_robustness.py` (the "BASE" line). Not financial advice.
 
 ## The idea in one paragraph

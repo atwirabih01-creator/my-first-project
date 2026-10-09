@@ -4,7 +4,7 @@ from levels import day_table
 
 df = load()
 days = day_table(df)
-cd = days[days.complete & days.pdh.notna()]
+cd = days[days.complete & days.prev_complete & days.pdh.notna()]
 D = df[df.tday.isin(cd.index)]
 res = []
 for tday, g in D.groupby("tday"):

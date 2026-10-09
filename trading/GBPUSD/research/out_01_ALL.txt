@@ -1,0 +1,68 @@
+HOURLY (New York local hour; Doha = NY+7 in US summer time, NY+8 in US winter time)
+NY 00:00 | Doha 07:00 (summer) / 08:00 (winter) | avg  10.0 | med   8.8 | avg net   5.2 | clean 0.52
+NY 01:00 | Doha 08:00 (summer) / 09:00 (winter) | avg  13.1 | med  11.4 | avg net   6.5 | clean 0.49
+NY 02:00 | Doha 09:00 (summer) / 10:00 (winter) | avg  20.9 | med  18.1 | avg net  10.8 | clean 0.52
+NY 03:00 | Doha 10:00 (summer) / 11:00 (winter) | avg  23.2 | med  21.1 | avg net  12.1 | clean 0.52
+NY 04:00 | Doha 11:00 (summer) / 12:00 (winter) | avg  21.4 | med  19.3 | avg net  10.6 | clean 0.49
+NY 05:00 | Doha 12:00 (summer) / 13:00 (winter) | avg  17.8 | med  16.2 | avg net   8.4 | clean 0.47
+NY 06:00 | Doha 13:00 (summer) / 14:00 (winter) | avg  18.6 | med  16.8 | avg net   9.3 | clean 0.50
+NY 07:00 | Doha 14:00 (summer) / 15:00 (winter) | avg  20.4 | med  17.9 | avg net  10.3 | clean 0.50
+NY 08:00 | Doha 15:00 (summer) / 16:00 (winter) | avg  26.9 | med  23.1 | avg net  13.3 | clean 0.50
+NY 09:00 | Doha 16:00 (summer) / 17:00 (winter) | avg  25.2 | med  22.5 | avg net  11.9 | clean 0.47
+NY 10:00 | Doha 17:00 (summer) / 18:00 (winter) | avg  29.5 | med  26.6 | avg net  15.1 | clean 0.51
+NY 11:00 | Doha 18:00 (summer) / 19:00 (winter) | avg  23.1 | med  20.8 | avg net  11.4 | clean 0.49
+NY 12:00 | Doha 19:00 (summer) / 20:00 (winter) | avg  18.0 | med  16.6 | avg net   8.1 | clean 0.45
+NY 13:00 | Doha 20:00 (summer) / 21:00 (winter) | avg  15.9 | med  14.2 | avg net   7.4 | clean 0.47
+NY 14:00 | Doha 21:00 (summer) / 22:00 (winter) | avg  15.4 | med  12.4 | avg net   7.9 | clean 0.51
+NY 15:00 | Doha 22:00 (summer) / 23:00 (winter) | avg  12.9 | med  10.4 | avg net   6.3 | clean 0.49
+NY 16:00 | Doha 23:00 (summer) / 00:00 (winter) | avg  11.2 | med   9.4 | avg net   5.2 | clean 0.47
+NY 17:00 | Doha 00:00 (summer) / 01:00 (winter) | avg  12.3 | med  10.9 | avg net   3.9 | clean 0.32
+NY 18:00 | Doha 01:00 (summer) / 02:00 (winter) | avg  12.0 | med   9.5 | avg net   6.5 | clean 0.54
+NY 19:00 | Doha 02:00 (summer) / 03:00 (winter) | avg  11.0 | med   9.1 | avg net   5.5 | clean 0.50
+NY 20:00 | Doha 03:00 (summer) / 04:00 (winter) | avg  13.7 | med  11.8 | avg net   6.6 | clean 0.48
+NY 21:00 | Doha 04:00 (summer) / 05:00 (winter) | avg  13.4 | med  11.8 | avg net   6.4 | clean 0.48
+NY 22:00 | Doha 05:00 (summer) / 06:00 (winter) | avg  11.4 | med  10.1 | avg net   5.4 | clean 0.47
+NY 23:00 | Doha 06:00 (summer) / 07:00 (winter) | avg  10.3 | med   9.1 | avg net   5.1 | clean 0.49
+
+SESSIONS: avg / median range (pips), share of days the session made the day's high or low
+Asia (00:00-07:00 London)                avg  32.6 med  27.8 | made day high 19% | made day low 13%
+Frankfurt hour (07:00-08:00 London)      avg  21.6 med  19.3 | made day high 8% | made day low 3%
+London morning (08:00-12:00 London)      avg  41.4 med  37.0 | made day high 14% | made day low 16%
+London full (08:00-16:30 London)         avg  68.9 med  63.1 | made day high 40% | made day low 45%
+Overlap (08:00 NY - 16:00 London)        avg  71.6 med  64.5 | made day high 37% | made day low 31%
+NY full (08:00-17:00 NY)                 avg  64.0 med  57.8 | made day high 50% | made day low 47%
+NY afternoon (12:00-17:00 NY)            avg  34.3 med  29.1 | made day high 24% | made day low 20%
+
+DAILY range (17:00-17:00 NY): avg 91.6, median 82.9, 25th pct 66.1, 75th pct 107.9, n=449
+
+WEEKDAY: avg range, median range, avg net move, n
+Mon avg  91.5 med  80.4 net  48.8 n=90
+Tue avg  87.0 med  76.4 net  41.2 n=91
+Wed avg  94.5 med  87.5 net  48.3 n=89
+Thu avg  97.5 med  86.4 net  50.9 n=88
+Fri avg  87.5 med  80.3 net  44.2 n=91
+
+MONTH: avg daily range
+          mean  median  count
+m                            
+2024-10   77.4    69.7     22
+2024-11   96.8    87.4     20
+2024-12   90.8    81.9     21
+2025-01  112.9   105.5     22
+2025-02   94.9    87.4     20
+2025-03   82.4    78.7     21
+2025-04  127.4   105.4     22
+2025-05   97.2    89.4     22
+2025-06   96.3    87.5     21
+2025-07   92.1    86.3     23
+2025-08   80.5    76.9     21
+2025-09   89.9    80.4     22
+2025-10   83.8    81.2     23
+2025-11   78.5    70.8     20
+2025-12   73.6    69.6     22
+2026-01   90.9    81.0     21
+2026-02   86.9    81.8     20
+2026-03  118.0   104.7     22
+2026-04   91.4    78.9     22
+2026-05   81.6    85.1     20
+2026-06   77.3    68.4     22
