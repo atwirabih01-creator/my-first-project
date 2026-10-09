@@ -1,0 +1,139 @@
+# NASDAQ v1 - summary (Agent 2). Cost 2.0 points per trade unless stated.
+
+## Main table (2.0 points)
+| Period | Trades | Win rate | Avg win / loss | Total | PF | Max drawdown | Longest losing run | 3+ loss runs | Chance avg <= 0 | Without best 3 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| A (hidden) | 61 | 52.5% | +0.67 / -0.66 | +2.33 R | 1.12 | -4.6 R (-4.5%) | 4 | 2 | 34% | -1.76 R |
+| Y1 | 64 | 59.4% | +0.73 / -0.62 | +11.81 R | 1.74 | -3.6 R (-3.5%) | 4 | 2 | 3% | +5.96 R |
+| Y2 | 64 | 59.4% | +0.62 / -0.67 | +6.00 R | 1.34 | -8.3 R (-8.0%) | 6 | 3 | 16% | +0.85 R |
+| B (hidden) | 26 | 53.8% | +0.62 / -0.58 | +1.64 R | 1.23 | -1.4 R (-1.4%) | 4 | 1 | 33% | -1.94 R |
+| A + B hidden | 87 | 52.9% | +0.65 / -0.64 | +3.97 R | 1.15 | -4.6 R (-4.5%) | 4 | 3 | 29% | -0.12 R |
+| All 36 months | 215 | 56.7% | +0.67 / -0.64 | +21.78 R | 1.37 | -8.3 R (-8.0%) | 6 | 8 | 3% | +15.71 R |
+
+## Cost stress (total R; PF in brackets; longest losing run)
+| Period | 0.0 pts | 2.0 pts | 4.0 pts | 6.0 pts |
+|---|---|---|---|---|
+| A (hidden) | +3.10 (PF 1.17, run 4) | +2.33 (PF 1.12, run 4) | +1.56 (PF 1.08, run 4) | +0.78 (PF 1.04, run 4) |
+| Y1 | +12.41 (PF 1.79, run 4) | +11.81 (PF 1.74, run 4) | +11.21 (PF 1.69, run 4) | +10.60 (PF 1.64, run 4) |
+| Y2 | +6.52 (PF 1.38, run 6) | +6.00 (PF 1.34, run 6) | +5.49 (PF 1.31, run 6) | +4.98 (PF 1.28, run 6) |
+| B (hidden) | +1.83 (PF 1.26, run 4) | +1.64 (PF 1.23, run 4) | +1.46 (PF 1.21, run 4) | +1.27 (PF 1.18, run 4) |
+| A + B hidden | +4.93 (PF 1.19, run 4) | +3.97 (PF 1.15, run 4) | +3.01 (PF 1.11, run 4) | +2.06 (PF 1.08, run 4) |
+| All 36 months | +23.85 (PF 1.41, run 6) | +21.78 (PF 1.37, run 6) | +19.71 (PF 1.33, run 6) | +17.64 (PF 1.29, run 6) |
+
+## Long (after gap down) vs short (after gap up), 2.0 pts
+| Period | Longs: n, win, total, PF | Shorts: n, win, total, PF | Longs at 4.0 | Shorts at 4.0 |
+|---|---|---|---|---|
+| A (hidden) | 24 tr, 58%, -0.00 R, PF 1.00 | 37 tr, 49%, +2.33 R, PF 1.22 | -0.34 R | +1.89 R |
+| Y1 | 24 tr, 67%, +5.72 R, PF 1.79 | 40 tr, 55%, +6.09 R, PF 1.69 | +5.51 R | +5.70 R |
+| Y2 | 26 tr, 58%, +3.76 R, PF 1.50 | 38 tr, 61%, +2.24 R, PF 1.23 | +3.56 R | +1.94 R |
+| B (hidden) | 11 tr, 64%, +2.70 R, PF 2.89 | 15 tr, 47%, -1.05 R, PF 0.81 | +2.62 R | -1.16 R |
+| A + B hidden | 35 tr, 60%, +2.69 R, PF 1.28 | 52 tr, 48%, +1.28 R, PF 1.08 | +2.28 R | +0.73 R |
+| All 36 months | 85 tr, 61%, +12.17 R, PF 1.50 | 130 tr, 54%, +9.61 R, PF 1.27 | +11.34 R | +8.37 R |
+
+## Exit types (2.0 pts)
+| Period | Target | Stop | 16:00 close |
+|---|---|---|---|
+| A (hidden) | 18 (30%), +14.39 R | 12 (20%), -12.15 R | 31 (51%), +0.09 R |
+| Y1 | 22 (34%), +22.11 R | 10 (16%), -10.11 R | 32 (50%), -0.20 R |
+| Y2 | 20 (31%), +17.73 R | 11 (17%), -11.14 R | 33 (52%), -0.59 R |
+| B (hidden) | 5 (19%), +4.65 R | 4 (15%), -4.03 R | 17 (65%), +1.03 R |
+| A + B hidden | 23 (26%), +19.04 R | 16 (18%), -16.18 R | 48 (55%), +1.12 R |
+| All 36 months | 65 (30%), +58.89 R | 37 (17%), -37.43 R | 113 (53%), +0.33 R |
+16:00 closes that were winners: 57 of 113; average +0.003 R
+Stops filled worse than the stop price (price jumped past): 1; worst -1.057 R
+
+## News vs normal days (2.0 pts)
+| Period | Normal days | News days | of which NFP/CPI | of which EARN (day after big-tech earnings) |
+|---|---|---|---|---|
+| A (hidden) | 49 tr, +5.09 R, win 55% | 12 tr, -2.77 R, win 42% | 6 tr, -0.24 R, win 50% | 7 tr, -2.92 R, win 29% |
+| Y1 | 44 tr, +9.64 R, win 61% | 20 tr, +2.16 R, win 55% | 12 tr, -2.00 R, win 33% | 9 tr, +2.31 R, win 67% |
+| Y2 | 49 tr, +6.18 R, win 61% | 15 tr, -0.17 R, win 53% | 9 tr, -0.10 R, win 44% | 4 tr, +1.64 R, win 75% |
+| B (hidden) | 17 tr, +1.79 R, win 53% | 9 tr, -0.15 R, win 56% | 3 tr, -0.01 R, win 67% | 4 tr, -1.09 R, win 25% |
+| A + B hidden | 66 tr, +6.88 R, win 55% | 21 tr, -2.91 R, win 48% | 9 tr, -0.26 R, win 56% | 11 tr, -4.01 R, win 27% |
+| All 36 months | 159 tr, +22.71 R, win 58% | 56 tr, -0.92 R, win 52% | 30 tr, -2.35 R, win 43% | 24 tr, -0.07 R, win 50% |
+By event type (all 36 months): NFP 13 tr -1.68 R, CPI 17 tr -0.67 R, PPI 5 tr +0.30 R, FOMC 5 tr -1.15 R, EARN 24 tr -0.07 R
+
+## By month (2.0 pts): trades, total R  [longs R / shorts R]
+A: 2023-10: 1 tr +0.87 [+0.9/+0.0]; 2023-11: 3 tr +0.34 [+0.0/+0.3]; 2023-12: 5 tr -0.61 [-0.3/-0.3]; 2024-01: 8 tr -0.91 [-0.6/-0.3]; 2024-02: 7 tr -0.63 [+0.6/-1.2]; 2024-03: 7 tr -0.63 [-1.6/+1.0]; 2024-04: 7 tr +3.42 [+1.5/+1.9]; 2024-05: 4 tr +1.71 [+0.1/+1.6]; 2024-06: 4 tr -0.28 [+0.0/-0.3]; 2024-07: 6 tr -3.32 [-2.0/-1.3]; 2024-08: 6 tr +1.59 [+1.5/+0.1]; 2024-09: 3 tr +0.78 [+0.0/+0.8]
+   A: 6 of 12 months positive; best month +3.42 R (2024-04), worst -3.32 R (2024-07); total without best month -1.09 R
+Y1: 2024-10: 4 tr +0.24 [-0.3/+0.6]; 2024-11: 3 tr +0.05 [+0.0/+0.0]; 2024-12: 7 tr -0.49 [+1.1/-1.6]; 2025-01: 7 tr +1.01 [+0.8/+0.2]; 2025-02: 4 tr +2.09 [+1.8/+0.3]; 2025-03: 5 tr +0.01 [+0.1/-0.1]; 2025-04: 9 tr +3.56 [+0.9/+2.6]; 2025-05: 9 tr +2.60 [+2.2/+0.4]; 2025-06: 4 tr -1.73 [-0.6/-1.2]; 2025-07: 3 tr +3.17 [+0.0/+3.2]; 2025-08: 3 tr -0.88 [-1.0/+0.1]; 2025-09: 6 tr +2.18 [+0.7/+1.4]
+   Y1: 9 of 12 months positive; best month +3.56 R (2025-04), worst -1.73 R (2025-06); total without best month +8.25 R
+Y2: 2025-10: 9 tr +3.02 [+2.2/+0.8]; 2025-11: 5 tr +2.86 [+1.5/+1.4]; 2025-12: 5 tr -0.28 [-0.9/+0.6]; 2026-01: 8 tr +2.74 [-0.6/+3.4]; 2026-02: 3 tr +0.34 [-0.2/+0.6]; 2026-03: 11 tr +2.17 [+1.9/+0.3]; 2026-04: 7 tr -0.44 [+1.6/-2.0]; 2026-05: 6 tr -4.58 [-2.1/-2.5]; 2026-06: 10 tr +0.18 [+0.4/-0.3]
+   Y2: 6 of 9 months positive; best month +3.02 R (2025-10), worst -4.58 R (2026-05); total without best month +2.99 R
+B: 2026-07: 12 tr +0.56 [-0.4/+1.0]; 2026-08: 6 tr -1.02 [+0.5/-1.5]; 2026-09: 8 tr +2.09 [+2.6/-0.5]
+   B: 2 of 3 months positive; best month +2.09 R (2026-09), worst -1.02 R (2026-08); total without best month -0.45 R
+
+## By quarter (2.0 pts): total R [longs / shorts]
+2023Q4: 9 tr +0.60 [+0.5/+0.1]; 2024Q1: 22 tr -2.17 [-1.7/-0.5]; 2024Q2: 15 tr +4.85 [+1.6/+3.2]; 2024Q3: 15 tr -0.94 [-0.5/-0.4]; 2024Q4: 14 tr -0.20 [+0.8/-1.0]; 2025Q1: 16 tr +3.11 [+2.7/+0.5]; 2025Q2: 22 tr +4.42 [+2.5/+1.9]; 2025Q3: 12 tr +4.47 [-0.3/+4.8]; 2025Q4: 19 tr +5.60 [+2.8/+2.8]; 2026Q1: 22 tr +5.25 [+1.1/+4.2]; 2026Q2: 23 tr -4.84 [-0.1/-4.8]; 2026Q3: 26 tr +1.64 [+2.7/-1.1]
+
+## By weekday (2.0 pts): total R per period
+Mon: A 7 tr +1.84, Y1 18 tr +4.11, Y2 17 tr +0.24, B 5 tr +1.64
+Tue: A 8 tr +0.76, Y1 6 tr +3.73, Y2 10 tr -0.97, B 8 tr -1.66
+Wed: A 21 tr -1.61, Y1 13 tr +0.51, Y2 10 tr +0.93, B 2 tr +0.83
+Thu: A 19 tr +2.85, Y1 15 tr +3.38, Y2 13 tr +5.23, B 8 tr -1.25
+Fri: A 6 tr -1.51, Y1 12 tr +0.08, Y2 14 tr +0.57, B 3 tr +2.08
+
+## By gap size (gap / ATR), 2.0 pts, all 36 months and A
+(0.5, 0.75]: all 106 tr +7.46 R (win 58%); A 31 tr +0.24 R
+(0.75, 1.0]: all 48 tr +6.67 R (win 58%); A 12 tr +0.88 R
+(1.0, 1.5]: all 49 tr +6.40 R (win 55%); A 15 tr +0.41 R
+(1.5, 10.0]: all 12 tr +1.25 R (win 50%); A 3 tr +0.81 R
+
+## Sensitivity: gap threshold 0.4 ATR instead of 0.5 (information only, not the rule)
+A: 84 tr, win 53.6%, +1.39 R at 2.0, +0.34 R at 4.0
+Y1: 88 tr, win 55.7%, +9.82 R at 2.0, +8.99 R at 4.0
+Y2: 79 tr, win 53.2%, +0.02 R at 2.0, -0.60 R at 4.0
+B: 34 tr, win 50.0%, +1.34 R at 2.0, +1.11 R at 4.0
+Extra trades with gaps 0.4-0.5 ATR: A 23 tr -0.94 R, Y1 24 tr -1.99 R, Y2 15 tr -5.98 R, B 8 tr -0.30 R
+
+## Days skipped / not traded
+period  status                                                  
+A       ATR warm-up (1 full sessions of 1)                            1
+        ATR warm-up (2 full sessions of 2)                            1
+        ATR warm-up (3 full sessions of 3)                            1
+        ATR warm-up (4 full sessions of 4)                            1
+        ATR warm-up (5 full sessions of 5)                            1
+        ATR warm-up (6 full sessions of 6)                            1
+        ATR warm-up (7 full sessions of 7)                            1
+        ATR warm-up (8 full sessions of 8)                            1
+        ATR warm-up (9 full sessions of 9)                            1
+        TRADE                                                        61
+        first day in file (no previous day)                           1
+        gap too small                                               169
+        not full: US holiday                                          7
+        not full: data hole 29 min in 09:30-16:00                     1
+        not full: early close                                         2
+        previous day not full (US holiday)                            6
+        previous day not full (data hole 29 min in 09:30-16:00)       1
+        previous day not full (early close)                           1
+B       TRADE                                                        26
+        gap too small                                                34
+        not full: US holiday                                          2
+        not full: no cash-session bars                                1
+        previous day not full (US holiday)                            2
+        previous day not full (no cash-session bars)                  1
+Y1      TRADE                                                        64
+        gap too small                                               168
+        not full: US holiday                                          8
+        not full: data hole 180 min in 09:30-16:00                    2
+        not full: data hole 240 min in 09:30-16:00                    1
+        not full: early close                                         3
+        previous day not full (US holiday)                            7
+        previous day not full (data hole 180 min in 09:30-16:00)      2
+        previous day not full (data hole 240 min in 09:30-16:00)      1
+        previous day not full (early close)                           2
+Y2      TRADE                                                        64
+        gap too small                                               113
+        not full: US holiday                                          5
+        not full: data hole 60 min in 09:30-16:00                     1
+        not full: early close                                         2
+        previous day not full (US holiday)                            4
+        previous day not full (data hole 60 min in 09:30-16:00)       1
+        previous day not full (early close)                           2
+Hidden A warm-up: the file starts 1 Oct 2023 (Sunday evening); 2 Oct has no previous day and 3-13 Oct have fewer than 10 full sessions for the ATR -> first tradable day 16 Oct 2023 (10 trading days lost).
+
+## Weeks: 157 weeks, 125 with trades; positive 71, negative 53; worst week -2.48 R, best +3.15 R
+   A: 37 traded weeks, 17 up, 20 down
+   Y1: 40 traded weeks, 25 up, 14 down
+   Y2: 34 traded weeks, 22 up, 12 down
+   B: 12 traded weeks, 6 up, 6 down
