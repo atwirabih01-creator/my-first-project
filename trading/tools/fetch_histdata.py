@@ -1,6 +1,6 @@
 """Download free 1-minute price history from HistData.com and save it as one clean file.
 
-Usage:  python3 trading/tools/fetch_histdata.py GBPUSD 2025-10 2026-09
+Usage:  python3 trading/tools/fetch_histdata.py GBPUSD 2025-10 2026-09 [optional output path]
 Output: trading/data/<SYMBOL>_M1.csv.gz with columns
         time_utc, open, high, low, close  (bid prices, one row per minute)
 
@@ -61,7 +61,7 @@ def _download(opener, sym, page, html, date, datemonth):
     return df[["time_utc", "open", "high", "low", "close"]]
 
 
-def main(sym, start, end):
+def main(sym, start, end, out=None):
     opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
     parts = []
     for y, m in months(start, end):
@@ -79,10 +79,11 @@ def main(sym, start, end):
         time.sleep(1)
     data = pd.concat(parts).drop_duplicates("time_utc").sort_values("time_utc")
     OUT.mkdir(parents=True, exist_ok=True)
-    path = OUT / f"{sym}_M1.csv.gz"
+    path = Path(out) if out else OUT / f"{sym}_M1.csv.gz"
+    path.parent.mkdir(parents=True, exist_ok=True)
     data.to_csv(path, index=False)
     print(f"saved {len(data)} bars, {data.time_utc.min()} -> {data.time_utc.max()} UTC, to {path}")
 
 
 if __name__ == "__main__":
-    main(*sys.argv[1:4])
+    main(*sys.argv[1:5])

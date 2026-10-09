@@ -26,6 +26,11 @@ Markets, in order: GBPUSD → XAUUSD → NASDAQ 100 → EURUSD. One market at a 
 | 2023-10-01 → 2024-09-30 (12 months) | **Hidden test A**: never seen by anyone | **Agent 2 only**, and only after the rules are frozen |
 | 2026-07-01 → 2026-09-30 (3 months) | **Hidden test B**: most recent months | **Agent 2 only**, after the rules are frozen |
 Agent 1 must filter out everything outside the design period immediately after loading.
+
+**Per-market exceptions (once a market's hidden tests have been opened, they are used up):**
+- **XAUUSD from v2 on:** all of Oct 2023 – Sep 2026 is design data (hidden A and B were opened by Agent 2 for v1).
+  The new hidden test is `data/hidden/XAUUSD_M1_2022-10_2023-09.csv.gz` (Oct 2022 – Sep 2023, clock checked
+  against the NFP 08:30 NY spike). **Agent 2 only, after v2 is frozen. Agent 1 must never open `data/hidden/`.**
 (GBPUSD v1 was built on Oct 2025–Jun 2026 only and was dropped; see `GBPUSD/feedback.md`.)
 - Load: `pd.read_csv(path, parse_dates=["time_utc"])`.
 
