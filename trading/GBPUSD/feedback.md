@@ -9,6 +9,56 @@
 
 ---
 
+## Round 2 review: Agent 1's recommendation to pause GBPUSD (no v2), reviewed 9 Oct 2026
+
+### Verdict: **CONFIRM PAUSE**
+I re-built two of the seven variants with my own code, on design data only, and they come out the same as Agent 1's. I found
+no bug, no double-counted cost and no wrong session time that could have wrongly killed a good idea. Every variant loses in at
+least one design year, and every one has a losing run of 7 or more, which is too long for the owner. Sending a v2 would only use
+up hidden test A, which can be used only once.
+
+### 1. Spot-check: do Agent 1's numbers reproduce? **Yes.**
+My own script is `backtest/review_round2.py`, with its output in `backtest/review_round2.txt`. It reads the design months
+only: anything outside 1 Oct 2024 – 30 Jun 2026 is dropped as the file is read. I did not open hidden test A or hidden test B.
+Results below use 1.5-pip costs (3-pip costs in brackets).
+
+| Variant | Who | Y1 (Oct 2024 – Sep 2025) | Y2 (Oct 2025 – Jun 2026) | Longest losing run |
+|---|---|---|---|---|
+| v1 replica | Agent 1 | 94 trades, −21.9 R (−33.2) | 64 trades, +9.8 R (+1.1) | 9 |
+| v1 replica | **Agent 2** | 94 trades, −21.9 R (−33.2) | 64 trades, +9.8 R (+1.1) | 9 |
+| Planned v2 (mood filter + 8-pip minimum stop) | Agent 1 | 49 trades, −14.9 R (−20.3) | 36 trades, +14.6 R (+10.9) | 9 |
+| Planned v2 | **Agent 2** | 48 trades, −16.8 R (−22.1) | 37 trades, +13.5 R (+9.5) | 9 |
+| NY opening-range breakout | Agent 1 | 219 trades, +2.2 R (−10.6) | 170 trades, −18.3 R (−29.0) | 8 |
+| NY opening-range breakout | **Agent 2** | 219 trades, +2.2 R (−10.6) | 170 trades, −18.3 R (−29.0) | 8 |
+
+- The v1 replica and the NY opening-range breakout match to the decimal.
+- The planned v2 is off by one trade per year. That comes from how the 5-day "mood" measure is counted: I use the last 5
+  complete days, while Agent 1 also counts holiday stub days. It does not change the answer, because year 1 loses heavily
+  either way.
+
+### 2. Errors in Agent 1's reasoning that could have killed a good idea? **None found.**
+- **Costs:** taken off once per trade. The conversion between the older and newer scripts reverses it correctly.
+- **Times:** sessions use New York and London clocks with their own summer time. The data clock is now fixed in the file
+  itself, and the v1 replica matching my independent figure (−21.9 R in Y1) confirms this.
+- **No looking into the future:** the mood measure only uses days before the trade day. Signals use closed 15-minute candles.
+- **Fair test:** each variant had one setting, decided before seeing its result. The 0.5 mood cut-off was taken from the
+  spread of the mood measure, not from the results, so nothing was tuned to make the ideas look bad.
+- **I did not re-code the Asia and London variants.** All three lose clearly in both years: −45.5 R, −36.5 R and −26.1 R
+  over two years. A cost or timing slip of the kind I checked for could not turn those positive.
+- **A small note:** the opening-range breakout puts its stop at the far side of the 08:00–09:00 range, which can be wide.
+  That is a design choice, not a bug, and a tighter stop would be a new, untested idea.
+
+### 3. What this means
+- The false-break idea works in some years (Y2) and fails badly in others (Y1). A simple mood filter does not separate them.
+  Even on "calm" days, Y1 won only 25–27% of trades.
+- Breakouts lose in at least one year, and mostly in both.
+- I agree with keeping hidden test A (Oct 2023 – Sep 2024) unused. It should stay unused for GBPUSD until a genuinely new
+  idea is positive in both design years, still positive at 3-pip costs, and has a losing run of 6 or less.
+- Moving on to XAUUSD is the right call. If GBPUSD is reopened later, Agent 1's untested "volatility timing" idea (trade
+  only on days with a wide Asia range) is a sensible first try, judged by the same bar.
+
+---
+
 ## v1 "New York false break of yesterday's high/low": tested 9 Oct 2026
 
 ### Verdict: **DROP**
