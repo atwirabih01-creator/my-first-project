@@ -1,0 +1,16 @@
+Y1  @0.40: n 218 | win 54.1% | total  +12.4R | avg +0.057R | PF 1.13 | maxDD -8.5R | longest losing run 7
+Y1  @0.80: n 218 | win 54.1% | total   +4.2R | avg +0.019R | PF 1.04 | maxDD -11.4R | longest losing run 7
+Y2  @0.40: n 157 | win 56.7% | total  +15.8R | avg +0.101R | PF 1.27 | maxDD -10.3R | longest losing run 5
+Y2  @0.80: n 157 | win 56.7% | total  +13.6R | avg +0.087R | PF 1.23 | maxDD -10.9R | longest losing run 5
+ALL @0.40: n 375 | win 55.2% | total  +28.2R | avg +0.075R | PF 1.18 | maxDD -10.3R | longest losing run 7
+ALL @0.80: n 375 | win 55.2% | total  +17.8R | avg +0.047R | PF 1.11 | maxDD -11.4R | longest losing run 7
+Y1 longs n 125 | win 54.4% | total   +6.0R | avg +0.048R | PF 1.11 | maxDD -8.2R | longest losing run 4
+Y1 shorts n  93 | win 53.8% | total   +6.4R | avg +0.069R | PF 1.16 | maxDD -7.5R | longest losing run 7
+Y1 news days n  40 | win 47.5% | total   -3.3R | avg -0.082R | PF 0.84 | maxDD -5.1R | longest losing run 4
+Y1 normal days n 178 | win 55.6% | total  +15.6R | avg +0.088R | PF 1.21 | maxDD -8.5R | longest losing run 6
+Y2 longs n  92 | win 55.4% | total   +5.4R | avg +0.059R | PF 1.16 | maxDD -5.9R | longest losing run 4
+Y2 shorts n  65 | win 58.5% | total  +10.4R | avg +0.160R | PF 1.42 | maxDD -7.1R | longest losing run 4
+Y2 news days n  25 | win 68.0% | total   +7.7R | avg +0.307R | PF 1.94 | maxDD -2.1R | longest losing run 2
+Y2 normal days n 132 | win 54.5% | total   +8.2R | avg +0.062R | PF 1.16 | maxDD -15.1R | longest losing run 6
+exits: {('Y1', 'stop'): 88, ('Y1', 'target'): 107, ('Y1', 'time'): 23, ('Y2', 'stop'): 51, ('Y2', 'target'): 69, ('Y2', 'time'): 37}
+trades per month avg: 17.9 | days with no signal: see count of usable days

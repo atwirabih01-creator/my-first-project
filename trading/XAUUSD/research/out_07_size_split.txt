@@ -1,0 +1,9 @@
+overnight |move| bucket (x ATR) -> n, follow rate 08-16, avg follow 08-16 (xATR), avg follow 08-12
+Y1 (0.0, 0.15]  n 57 follow  56% avg +0.007 | 08-12 -0.028
+Y1 (0.15, 0.3]  n 60 follow  57% avg +0.076 | 08-12 +0.078
+Y1 (0.3, 0.5]   n 54 follow  39% avg -0.052 | 08-12 -0.068
+Y1 (0.5, 5.0]   n 59 follow  63% avg +0.115 | 08-12 +0.095
+Y2 (0.0, 0.15]  n 51 follow  57% avg +0.060 | 08-12 +0.002
+Y2 (0.15, 0.3]  n 44 follow  59% avg +0.022 | 08-12 +0.025
+Y2 (0.3, 0.5]   n 33 follow  55% avg +0.016 | 08-12 -0.062
+Y2 (0.5, 5.0]   n 49 follow  53% avg +0.069 | 08-12 -0.002

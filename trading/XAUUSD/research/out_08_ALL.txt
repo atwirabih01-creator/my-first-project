@@ -1,0 +1,31 @@
+--- A1 baseline (2R)
+  Y1: n 209 win 45.5% total   +13.4R avg +0.064R PF 1.12 maxDD  -19.8R lrun  8 | @0.80:    +5.5R PF 1.05
+  Y2: n 157 win 49.7% total   +21.6R avg +0.137R PF 1.31 maxDD  -13.2R lrun  5 | @0.80:   +19.3R PF 1.28
+  ALL: n 366 win 47.3% total   +34.9R avg +0.095R PF 1.20 maxDD  -19.8R lrun  8 | @0.80:   +24.9R PF 1.14
+  longs: Y1 n120 +14.8R Y2 n92 +3.7R
+  shorts: Y1 n89 -1.5R Y2 n65 +17.9R
+  exits: {'stop': 158, 'time': 136, 'target': 72}
+   A1 by quarter: {Period('2024Q4', 'Q-DEC'): 5.4, Period('2025Q1', 'Q-DEC'): -12.5, Period('2025Q2', 'Q-DEC'): 12.4, Period('2025Q3', 'Q-DEC'): 8.1, Period('2025Q4', 'Q-DEC'): -5.9, Period('2026Q1', 'Q-DEC'): 6.3, Period('2026Q2', 'Q-DEC'): 21.2}
+   A1 by signal NY hour: {(2, 'Y1'): 1.9, (2, 'Y2'): 8.6, (3, 'Y1'): -3.3, (3, 'Y2'): -3.4, (4, 'Y1'): 4.4, (4, 'Y2'): 2.4, (5, 'Y1'): 1.6, (5, 'Y2'): -0.8, (6, 'Y1'): -0.0, (6, 'Y2'): 5.7, (7, 'Y1'): 3.1, (7, 'Y2'): 4.8, (8, 'Y1'): 2.1, (8, 'Y2'): 6.5, (9, 'Y1'): 5.5, (9, 'Y2'): -0.2, (10, 'Y1'): -0.5, (10, 'Y2'): -0.0, (11, 'Y1'): -1.3, (11, 'Y2'): -2.0}
+   A1 risk in x ATR: median 0.269
+--- A1a no target, hold to 16:00 NY
+  Y1: n 209 win 45.0% total   +42.0R avg +0.201R PF 1.39 maxDD  -16.5R lrun  8 | @0.80:   +34.2R PF 1.30
+  Y2: n 157 win 46.5% total   +14.6R avg +0.093R PF 1.20 maxDD  -16.8R lrun  6 | @0.80:   +12.3R PF 1.17
+  ALL: n 366 win 45.6% total   +56.6R avg +0.155R PF 1.31 maxDD  -16.8R lrun  8 | @0.80:   +46.5R PF 1.25
+  longs: Y1 n120 +30.9R Y2 n92 -5.8R
+  shorts: Y1 n89 +11.0R Y2 n65 +20.4R
+  exits: {'time': 204, 'stop': 162}
+--- A1b target 1R
+  Y1: n 209 win 55.0% total   +15.8R avg +0.075R PF 1.18 maxDD   -7.7R lrun  7 | @0.80:    +8.0R PF 1.08
+  Y2: n 157 win 56.7% total   +15.8R avg +0.101R PF 1.27 maxDD  -10.3R lrun  5 | @0.80:   +13.6R PF 1.23
+  ALL: n 366 win 55.7% total   +31.6R avg +0.086R PF 1.21 maxDD  -10.3R lrun  7 | @0.80:   +21.6R PF 1.14
+  longs: Y1 n120 +7.2R Y2 n92 +5.4R
+  shorts: Y1 n89 +8.6R Y2 n65 +10.4R
+  exits: {'target': 173, 'stop': 133, 'time': 60}
+--- A1c London-only signals 07:00-12:00 London
+  Y1: n 166 win 44.0% total    +4.5R avg +0.027R PF 1.05 maxDD  -16.0R lrun  7 | @0.80:    -2.0R PF 0.98
+  Y2: n 103 win 47.6% total   +12.5R avg +0.121R PF 1.25 maxDD  -11.9R lrun  6 | @0.80:   +10.9R PF 1.21
+  ALL: n 269 win 45.4% total   +17.0R avg +0.063R PF 1.12 maxDD  -16.5R lrun  7 | @0.80:    +8.9R PF 1.06
+  longs: Y1 n95 +9.7R Y2 n58 -5.5R
+  shorts: Y1 n71 -5.2R Y2 n45 +18.0R
+  exits: {'stop': 131, 'time': 79, 'target': 59}

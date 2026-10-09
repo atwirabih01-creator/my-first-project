@@ -1,0 +1,49 @@
+--- M1 momentum at 10:00 NY, stop 0.5 ATR, exit 16:00
+  Y1: n 230 win 53.0% total    +9.7R avg +0.042R PF 1.17 maxDD   -5.6R lrun  6 | @0.80:    +5.5R PF 1.09
+  Y2: n 176 win 52.8% total   +15.1R avg +0.086R PF 1.36 maxDD   -7.2R lrun  6 | @0.80:   +13.8R PF 1.32
+  ALL: n 406 win 53.0% total   +24.9R avg +0.061R PF 1.25 maxDD   -7.2R lrun  6 | @0.80:   +19.3R PF 1.19
+  longs: Y1 n131 +11.2R Y2 n106 +2.6R
+  shorts: Y1 n99 -1.5R Y2 n70 +12.6R
+  exits: {'time': 360, 'stop': 46}
+--- M2 overnight trend at 08:00 NY, stop 0.5 ATR, exit 16:00
+  Y1: n 230 win 51.7% total   +18.6R avg +0.081R PF 1.26 maxDD   -8.8R lrun  8 | @0.80:   +14.3R PF 1.20
+  Y2: n 177 win 54.8% total   +16.1R avg +0.091R PF 1.30 maxDD   -7.7R lrun  5 | @0.80:   +14.8R PF 1.27
+  ALL: n 407 win 53.1% total   +34.7R avg +0.085R PF 1.28 maxDD  -10.8R lrun  8 | @0.80:   +29.1R PF 1.23
+  longs: Y1 n143 +11.0R Y2 n104 +4.5R
+  shorts: Y1 n87 +7.6R Y2 n73 +11.6R
+  exits: {'time': 318, 'stop': 89}
+--- A1 Asia breakout continuation, stop Asia middle, 2R
+  Y1: n 209 win 45.5% total   +13.4R avg +0.064R PF 1.12 maxDD  -19.8R lrun  8 | @0.80:    +5.5R PF 1.05
+  Y2: n 157 win 49.7% total   +21.6R avg +0.137R PF 1.31 maxDD  -13.2R lrun  5 | @0.80:   +19.3R PF 1.28
+  ALL: n 366 win 47.3% total   +34.9R avg +0.095R PF 1.20 maxDD  -19.8R lrun  8 | @0.80:   +24.9R PF 1.14
+  longs: Y1 n120 +14.8R Y2 n92 +3.7R
+  shorts: Y1 n89 -1.5R Y2 n65 +17.9R
+  exits: {'stop': 158, 'time': 136, 'target': 72}
+--- A2 Asia false break in London, 2R
+  Y1: n 163 win 30.1% total   -39.3R avg -0.241R PF 0.69 maxDD  -48.1R lrun 10 | @0.80:   -59.5R PF 0.58
+  Y2: n 107 win 29.0% total   -18.5R avg -0.173R PF 0.77 maxDD  -24.4R lrun  7 | @0.80:   -23.3R PF 0.72
+  ALL: n 270 win 29.6% total   -57.8R avg -0.214R PF 0.72 maxDD  -67.1R lrun 10 | @0.80:   -82.8R PF 0.63
+  longs: Y1 n69 -30.1R Y2 n50 -4.0R
+  shorts: Y1 n94 -9.2R Y2 n57 -14.5R
+  exits: {'stop': 189, 'target': 77, 'time': 4}
+--- P1 PDH/PDL false break 08-11 NY, 2R
+  Y1: n  76 win 38.2% total    -0.4R avg -0.006R PF 0.99 maxDD  -11.0R lrun  9 | @0.80:    -6.3R PF 0.86
+  Y2: n  65 win 44.6% total    +9.4R avg +0.144R PF 1.28 maxDD   -7.7R lrun  5 | @0.80:    +7.8R PF 1.23
+  ALL: n 141 win 41.1% total    +8.9R avg +0.063R PF 1.12 maxDD  -12.0R lrun  9 | @0.80:    +1.5R PF 1.02
+  longs: Y1 n30 +1.2R Y2 n31 +7.2R
+  shorts: Y1 n46 -1.6R Y2 n34 +2.2R
+  exits: {'stop': 65, 'time': 39, 'target': 37}
+--- O1 NY ORB 08:00-09:00, 1R
+  Y1: n 220 win 53.2% total    +5.8R avg +0.026R PF 1.07 maxDD  -14.5R lrun  7 | @0.80:    -1.5R PF 0.98
+  Y2: n 171 win 49.1% total    -1.8R avg -0.010R PF 0.98 maxDD  -13.8R lrun  9 | @0.80:    -4.5R PF 0.94
+  ALL: n 391 win 51.4% total    +4.0R avg +0.010R PF 1.03 maxDD  -14.5R lrun  9 | @0.80:    -6.0R PF 0.96
+  longs: Y1 n115 +4.6R Y2 n93 -13.6R
+  shorts: Y1 n105 +1.3R Y2 n78 +11.8R
+  exits: {'target': 152, 'stop': 137, 'time': 102}
+--- O2 NY ORB 09:30-10:00, 1R
+  Y1: n 208 win 49.0% total    +5.6R avg +0.027R PF 1.08 maxDD  -10.8R lrun  5 | @0.80:    -2.0R PF 0.97
+  Y2: n 164 win 49.4% total   +10.2R avg +0.062R PF 1.18 maxDD   -5.6R lrun  5 | @0.80:    +7.7R PF 1.13
+  ALL: n 372 win 49.2% total   +15.8R avg +0.043R PF 1.12 maxDD  -10.8R lrun  5 | @0.80:    +5.7R PF 1.04
+  longs: Y1 n111 +7.2R Y2 n93 -5.8R
+  shorts: Y1 n97 -1.6R Y2 n71 +16.0R
+  exits: {'time': 146, 'target': 130, 'stop': 96}

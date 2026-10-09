@@ -1,0 +1,28 @@
+=== Level behaviour (share of complete days)
+Y1 (n=230): PDH traded 59%, PDL traded 39%, both 11% | after PDH traded, day closes above PDH 55% | after PDL traded, closes below PDL 51%
+     Asia (00-07 London) high taken 07:00 London-12:00 NY 67%, low 55%, both 27% | first break: back to Asia middle 55%, reaches opposite side 32%, day closes beyond broken side 56%
+     first Asia break hour (NY) distribution: {2.0: 46.0, 3.0: 22.0, 4.0: 10.0, 5.0: 5.0, 6.0: 3.0, 7.0: 2.0, 8.0: 5.0, 9.0: 4.0, 10.0: 2.0, 11.0: 1.0}
+Y2 (n=177): PDH traded 49%, PDL traded 44%, both 8% | after PDH traded, day closes above PDH 51% | after PDL traded, closes below PDL 50%
+     Asia (00-07 London) high taken 07:00 London-12:00 NY 63%, low 49%, both 19% | first break: back to Asia middle 49%, reaches opposite side 25%, day closes beyond broken side 54%
+     first Asia break hour (NY) distribution: {2.0: 36.0, 3.0: 17.0, 4.0: 13.0, 5.0: 7.0, 6.0: 5.0, 7.0: 5.0, 8.0: 5.0, 9.0: 4.0, 10.0: 6.0, 11.0: 2.0}
+
+=== Does an earlier move predict a later one? corr | follow rate | avg follow-through in $ and x ATR (sign of earlier move x later move)
+prev day (open->close) -> today day           | Y1: n230 r=-0.01 follow 47% avg +0.78$ +0.025xATR | Y2: n177 r=+0.04 follow 48% avg +4.16$ +0.065xATR
+overnight 18:00->08:00 NY -> 08:00-12:00      | Y1: n230 r=+0.07 follow 52% avg +0.81$ +0.022xATR | Y2: n177 r=+0.06 follow 52% avg +1.43$ -0.005xATR
+overnight 18:00->08:00 NY -> 08:00-16:00      | Y1: n230 r=+0.08 follow 54% avg +1.52$ +0.039xATR | Y2: n177 r=+0.18 follow 56% avg +6.96$ +0.045xATR
+Asia 18:00->03:00 NY -> London 03:00-08:00    | Y1: n230 r=+0.13 follow 58% avg +1.53$ +0.036xATR | Y2: n177 r=-0.14 follow 50% avg -0.71$ -0.002xATR
+London 03:00->08:00 -> NY 08:00-12:00         | Y1: n230 r=-0.02 follow 51% avg +1.13$ +0.022xATR | Y2: n177 r=+0.08 follow 50% avg +2.64$ +0.017xATR
+08:00->08:30 -> 08:30-12:00                   | Y1: n230 r=-0.01 follow 50% avg -0.32$ -0.018xATR | Y2: n177 r=+0.09 follow 48% avg -1.05$ +0.007xATR
+08:30->09:00 (data reaction) -> 09:00-12:00   | Y1: n230 r=+0.18 follow 55% avg +1.46$ +0.032xATR | Y2: n177 r=-0.05 follow 44% avg -1.85$ -0.012xATR
+08:00->09:30 -> 09:30-12:00                   | Y1: n230 r=+0.10 follow 54% avg +0.73$ +0.015xATR | Y2: n177 r=+0.02 follow 50% avg -1.47$ -0.015xATR
+09:30->10:00 -> 10:00-12:00                   | Y1: n229 r=-0.01 follow 52% avg +0.66$ +0.017xATR | Y2: n177 r=+0.07 follow 54% avg +3.39$ +0.020xATR
+08:00->10:00 -> 10:00-16:00                   | Y1: n230 r=+0.09 follow 53% avg +0.64$ +0.022xATR | Y2: n177 r=+0.09 follow 53% avg +6.33$ +0.047xATR
+day open->10:00 -> 10:00-16:00                | Y1: n230 r=+0.08 follow 55% avg +1.56$ +0.033xATR | Y2: n176 r=+0.21 follow 53% avg +7.10$ +0.055xATR
+day open->12:00 -> 12:00-16:00                | Y1: n230 r=+0.08 follow 55% avg +1.46$ +0.029xATR | Y2: n177 r=+0.14 follow 53% avg +1.84$ +0.013xATR
+08:00->12:00 -> 12:00-16:00                   | Y1: n230 r=+0.09 follow 50% avg +0.56$ +0.009xATR | Y2: n177 r=-0.05 follow 51% avg +1.88$ +0.016xATR
+day open->13:00 -> 13:00-16:00                | Y1: n230 r=+0.15 follow 50% avg +1.20$ +0.021xATR | Y2: n177 r=+0.05 follow 48% avg +1.45$ +0.011xATR
+day open->15:00 -> 15:00-16:00                | Y1: n230 r=+0.06 follow 57% avg +0.42$ +0.012xATR | Y2: n177 r=+0.33 follow 54% avg +3.10$ +0.024xATR
+
+=== Around the US clock times: median range of the 30 min after, x ATR
+Y1 08:00 0.162 | 08:30 0.189 | 09:30 0.221 | 10:00 0.209
+Y2 08:00 0.151 | 08:30 0.153 | 09:30 0.223 | 10:00 0.198

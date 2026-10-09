@@ -1,0 +1,41 @@
+=== Date check: 5-min range at release vs median of same weekday/minute on non-event days of the same design year (in x ATR, so the price level does not matter)
+49 of 73 events show a jump >= 2x normal.
+         tday   event     ratio                            status
+0  2024-10-04     NFP       NaN  day not usable (holiday/gap/ATR)
+7  2025-05-02     NFP  1.205161                          DOUBTFUL
+17 2026-04-03     NFP       NaN  day not usable (holiday/gap/ATR)
+20 2024-10-10  US CPI       NaN  day not usable (holiday/gap/ATR)
+26 2025-04-10  US CPI  1.579141                          DOUBTFUL
+27 2025-05-13  US CPI  1.093443                          DOUBTFUL
+35 2026-02-13  US CPI  1.626412                          DOUBTFUL
+36 2026-03-11  US CPI  1.964200                          DOUBTFUL
+37 2026-04-10  US CPI  1.603057                          DOUBTFUL
+38 2026-05-12  US CPI  1.602248                          DOUBTFUL
+40 2024-10-11  US PPI       NaN  day not usable (holiday/gap/ATR)
+41 2024-11-14  US PPI  0.989158                          DOUBTFUL
+42 2024-12-12  US PPI  1.209134                          DOUBTFUL
+45 2025-03-13  US PPI  1.133627                          DOUBTFUL
+46 2025-04-11  US PPI  0.923833                          DOUBTFUL
+47 2025-05-15  US PPI  0.612404                          DOUBTFUL
+48 2025-06-12  US PPI  0.877204                          DOUBTFUL
+49 2025-07-16  US PPI  1.613922                          DOUBTFUL
+52 2025-11-25  US PPI  1.227559                          DOUBTFUL
+53 2026-01-14  US PPI  1.696652                          DOUBTFUL
+55 2026-02-27  US PPI  1.782085                          DOUBTFUL
+56 2026-04-14  US PPI  0.813571                          DOUBTFUL
+57 2026-05-13  US PPI  1.813986                          DOUBTFUL
+58 2026-06-11  US PPI  1.579365                          DOUBTFUL
+
+=== Reaction per event (ALL usable scheduled dates, incl. weak-reaction ones), medians. x = share of ATR14
+NFP     Y1: n11 | 5-min jump $ 13.40 (0.355x) vs normal $4.06 | hour before 0.18x | 4h after 0.76x | day 1.07x | first-15-min move continues to +4h: 7/11 (avg +0.099x)
+NFP     Y2: n 7 | 5-min jump $ 22.94 (0.240x) vs normal $7.39 | hour before 0.21x | 4h after 0.67x | day 0.78x | first-15-min move continues to +4h: 4/7 (avg +0.227x)
+US CPI  Y1: n11 | 5-min jump $ 10.21 (0.250x) vs normal $3.92 | hour before 0.22x | 4h after 0.68x | day 0.96x | first-15-min move continues to +4h: 6/11 (avg -0.088x)
+US CPI  Y2: n 8 | 5-min jump $ 19.11 (0.133x) vs normal $7.66 | hour before 0.14x | 4h after 0.53x | day 0.74x | first-15-min move continues to +4h: 3/8 (avg -0.040x)
+US PPI  Y1: n11 | 5-min jump $  5.90 (0.134x) vs normal $4.63 | hour before 0.17x | 4h after 0.50x | day 1.06x | first-15-min move continues to +4h: 8/11 (avg +0.157x)
+US PPI  Y2: n 7 | 5-min jump $ 11.64 (0.111x) vs normal $9.04 | hour before 0.31x | 4h after 0.42x | day 0.69x | first-15-min move continues to +4h: 3/7 (avg -0.133x)
+FOMC    Y1: n 8 | 5-min jump $  8.76 (0.203x) vs normal $1.72 | hour before 0.12x | 4h after 0.61x | day 1.06x | first-15-min move continues to +4h: 3/8 (avg -0.049x)
+FOMC    Y2: n 6 | 5-min jump $ 22.88 (0.225x) vs normal $6.05 | hour before 0.14x | 4h after 0.82x | day 1.23x | first-15-min move continues to +4h: 5/6 (avg +0.404x)
+Y1: day range median, event days 1.03x vs non-event days 0.94x
+Y2: day range median, event days 0.84x vs non-event days 0.94x
+Y1: normal 07:30-08:30 NY range 0.20x ; normal 13:00-14:00 NY range 0.13x
+Y2: normal 07:30-08:30 NY range 0.19x ; normal 13:00-14:00 NY range 0.15x
