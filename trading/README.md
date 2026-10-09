@@ -44,6 +44,10 @@ Mar to Jul 2023; the main Nasdaq file has a few days, e.g. 24 and 28 Oct 2024, w
   (and the day after, if levels come from that day), and report how many days were skipped and why.
 - A normal day has ~1,380 bars for FX and ~1,320 for gold and Nasdaq (they have a daily 1-hour break).
 
+**Bid-only rollover warning:** around the 17:00 NY daily rollover, brokers widen the spread and the bid dips, then
+recovers. On bid-only data this makes 17:00–19:00 NY look like a "rise" and makes exits near 16:59 NY flatter shorts.
+Close same-day trades by 15:59 NY (or earlier) and do not read anything into 17:00–19:00 NY price moves.
+
 ## Time zones (all reports must show Doha AND New York time)
 - Doha = UTC+3 all year. New York = UTC−5 (winter) / UTC−4 (summer, 2nd Sunday of March → 1st Sunday of November).
 - Convert with pandas: `ts.dt.tz_localize("UTC").dt.tz_convert("Asia/Qatar")` and `"America/New_York"`.

@@ -1,0 +1,41 @@
+days studied: 187
+Asia range (00:00-07:00 London): avg 25.4 median 22.2 pips; 25-75%: 17.1-30.6
+
+== Asia range raids ==
+Asia high taken 07:00-12:00 London: 103/187 = 55%
+Asia low  taken 07:00-12:00 London: 109/187 = 58%
+At least one side taken 07-12 London: 171/187 = 91%
+Both sides taken 07-12 London: 41/187 = 22%
+Both sides taken by 17:00 NY: 91/187 = 49%
+Neither side taken all day: 0/187 = 0%
+
+First break side: {'low': 95, 'high': 92}
+First break time (London clock): 07-08: 0.58  08-09: 0.21  09-12: 0.13  after 12: 0.09
+
+After the FIRST Asia break (n=187):
+  extension beyond level reached >= 5 pips before any return to Asia mid: 66%
+  extension beyond level reached >= 10 pips before any return to Asia mid: 52%
+  extension beyond level reached >= 15 pips before any return to Asia mid: 42%
+  extension beyond level reached >= 20 pips before any return to Asia mid: 35%
+  extension beyond level reached >= 30 pips before any return to Asia mid: 25%
+  returned to Asia mid later in the day: 129/187 = 69%
+  reached the OPPOSITE Asia side later in the day: 91/187 = 49%
+  day closed beyond the broken level (true breakout): 96/187 = 51%
+  median max extension in the day beyond broken level: 20.9
+  'shallow break' (<10 pips beyond before returning to mid): 89/187 = 48%; of those reached opposite side: 73%
+
+== Previous day high/low ==
+PDH taken: 79/187 = 42% | of those, day closed back below PDH: 39/79 = 49%
+PDL taken: 97/187 = 52% | of those, day closed back above PDL: 43/97 = 44%
+Both PDH and PDL taken (outside day): 21/187 = 11%
+Neither (inside day): 32/187 = 17%
+
+== London morning vs New York ==
+NY session (08:00 NY->17:00 NY) continued London's direction (08:00 London->08:00 NY): 97/187 = 52%
+  when London moved >= 30 pips: continued 7/18 = 39% | avg NY move in London's direction -0.8 pips
+
+== London first hour (08-09 London) vs rest of day ==
+Rest of day continued the first-hour direction: 99/187 = 53%
+  when first hour moved >= 15 pips: 5/14 = 36%
+
+London 08:00 open price traded again after 10:00 London: 154/187 = 82%

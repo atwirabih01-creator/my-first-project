@@ -1,0 +1,36 @@
+=== V0 GBPUSD v1 replica (PDH/PDL NY false break)
+  cost 1.2 Y1: n= 92 win=40% tot=  -9.5R avg=-0.103R PF=0.83 DD=-10.2 run=7 w/o best3=-15.3
+        long : n= 45 win=42% tot=  -4.4R avg=-0.099R PF=0.83 DD= -9.4 run=5 w/o best3=-10.2
+        short: n= 47 win=38% tot=  -5.0R avg=-0.107R PF=0.83 DD=-11.3 run=5 w/o best3=-10.8
+  cost 1.2 Y2: n= 74 win=36% tot= -11.3R avg=-0.153R PF=0.78 DD=-18.4 run=9 w/o best3=-17.1
+        long : n= 47 win=30% tot= -16.6R avg=-0.352R PF=0.55 DD=-15.9 run=7 w/o best3=-22.2
+        short: n= 27 win=48% tot=  +5.2R avg=+0.193R PF=1.36 DD= -7.6 run=5 w/o best3=-0.5
+  cost 2.4 Y1: n= 92 win=40% tot= -21.9R avg=-0.238R PF=0.66 DD=-22.3 run=7 w/o best3=-27.5
+  cost 2.4 Y2: n= 74 win=36% tot= -25.9R avg=-0.350R PF=0.58 DD=-28.5 run=9 w/o best3=-31.4
+  exits: {'stop': {'size': 86, 'sum': -102.9}, 'target': {'size': 36, 'sum': 64.1}, 'time': {'size': 44, 'sum': 17.9}} | median stop pips 12.1
+=== V1 Wed+Fri NY-afternoon short, stop 0.25 ADR20
+  cost 1.2 Y1: n= 87 win=49% tot=  +4.2R avg=+0.049R PF=1.13 DD= -8.7 run=5 w/o best3=-5.0
+        short: n= 87 win=49% tot=  +4.2R avg=+0.049R PF=1.13 DD= -8.7 run=5 w/o best3=-5.0
+  cost 1.2 Y2: n= 57 win=47% tot=  +8.6R avg=+0.151R PF=1.55 DD= -5.9 run=7 w/o best3=+0.3
+        short: n= 57 win=47% tot=  +8.6R avg=+0.151R PF=1.55 DD= -5.9 run=7 w/o best3=+0.3
+  cost 2.4 Y1: n= 87 win=49% tot=  -0.6R avg=-0.007R PF=0.98 DD= -9.9 run=5 w/o best3=-9.7
+  cost 2.4 Y2: n= 57 win=44% tot=  +4.6R avg=+0.080R PF=1.25 DD= -6.6 run=7 w/o best3=-3.6
+  exits: {'stop': {'size': 30, 'sum': -31.9}, 'time': {'size': 114, 'sum': 44.8}} | median stop pips 20.5
+=== V2 Wed+Fri NY-afternoon short, stop 0.40 ADR20
+  cost 1.2 Y1: n= 87 win=52% tot=  +5.3R avg=+0.061R PF=1.26 DD= -5.1 run=5 w/o best3=-2.4
+        short: n= 87 win=52% tot=  +5.3R avg=+0.061R PF=1.26 DD= -5.1 run=5 w/o best3=-2.4
+  cost 1.2 Y2: n= 57 win=47% tot=  +6.5R avg=+0.115R PF=1.76 DD= -3.4 run=7 w/o best3=+1.3
+        short: n= 57 win=47% tot=  +6.5R avg=+0.115R PF=1.76 DD= -3.4 run=7 w/o best3=+1.3
+  cost 2.4 Y1: n= 87 win=52% tot=  +2.3R avg=+0.026R PF=1.10 DD= -6.0 run=5 w/o best3=-5.3
+  cost 2.4 Y2: n= 57 win=44% tot=  +4.0R avg=+0.070R PF=1.40 DD= -3.7 run=7 w/o best3=-1.1
+  exits: {'stop': {'size': 9, 'sum': -9.4}, 'time': {'size': 135, 'sum': 21.2}} | median stop pips 32.9
+=== V3 PDH/PDL breakout continuation (NY 08-11, 15-min close beyond), 2R
+  cost 1.2 Y1: n=129 win=44% tot=  -4.0R avg=-0.031R PF=0.94 DD=-10.7 run=7 w/o best3=-9.9
+        long : n= 65 win=46% tot=  +2.8R avg=+0.043R PF=1.09 DD= -6.4 run=6 w/o best3=-3.1
+        short: n= 64 win=42% tot=  -6.8R avg=-0.106R PF=0.80 DD=-10.0 run=6 w/o best3=-12.7
+  cost 1.2 Y2: n= 86 win=41% tot=  -7.1R avg=-0.083R PF=0.85 DD=-16.5 run=6 w/o best3=-12.9
+        long : n= 40 win=45% tot=  +3.5R avg=+0.087R PF=1.19 DD= -6.9 run=5 w/o best3=-2.3
+        short: n= 46 win=37% tot= -10.6R avg=-0.230R PF=0.63 DD=-13.0 run=6 w/o best3=-16.4
+  cost 2.4 Y1: n=129 win=43% tot= -11.3R avg=-0.087R PF=0.84 DD=-15.3 run=7 w/o best3=-17.1
+  cost 2.4 Y2: n= 86 win=40% tot= -13.3R avg=-0.154R PF=0.74 DD=-19.3 run=6 w/o best3=-18.9
+  exits: {'stop': {'size': 96, 'sum': -102.1}, 'target': {'size': 33, 'sum': 63.8}, 'time': {'size': 86, 'sum': 27.2}} | median stop pips 20.6
