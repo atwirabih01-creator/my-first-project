@@ -1,0 +1,7 @@
+Asia H/L, London window                                 n=163 win=41% avgR=+0.009 totR=  +1.4 PF=1.01 maxDD=-22.4R | half1 -2.1R (n=84) half2 +3.5R (n=79) | news +8.7R n=28 | med stop 10.0p
+Prev-day H/L, London window                             n= 82 win=39% avgR=-0.045 totR=  -3.7 PF=0.93 maxDD=-11.6R | half1 +4.4R (n=44) half2 -8.1R (n=38) | news +3.6R n=13 | med stop 13.3p
+Asia AND prev-day (outer level), London window          n= 82 win=33% avgR=-0.252 totR= -20.6 PF=0.68 maxDD=-24.9R | half1 -13.2R (n=47) half2 -7.4R (n=35) | news +3.4R n=15 | med stop 11.1p
+London H/L, NY window 08-11 NY                          n=130 win=35% avgR=-0.187 totR= -24.3 PF=0.74 maxDD=-35.6R | half1 -13.7R (n=70) half2 -10.6R (n=60) | news -1.8R n=24 | med stop 10.2p
+Prev-day H/L, NY window 08-11 NY                        n= 66 win=48% avgR=+0.191 totR= +12.6 PF=1.38 maxDD=-3.9R | half1 +7.9R (n=34) half2 +4.7R (n=32) | news +5.8R n=14 | med stop 15.5p
+
+variants tried in this script: 5

@@ -1,0 +1,7 @@
+A sweep-reversal M15, TP opposite Asia side             n=161 win=35% avgR=-0.046 totR=  -7.5 PF=0.94 maxDD=-26.0R | half1 +6.0R (n=84) half2 -13.4R (n=77) | news +11.7R n=27 | med stop 9.8p
+A sweep-reversal M15, TP 2R                             n=161 win=40% avgR=-0.005 totR=  -0.8 PF=0.99 maxDD=-22.4R | half1 -2.1R (n=84) half2 +1.3R (n=77) | news +6.8R n=27 | med stop 9.8p
+A sweep-reversal M5, TP opposite Asia side              n=167 win=28% avgR=-0.117 totR= -19.5 PF=0.87 maxDD=-47.7R | half1 +4.4R (n=86) half2 -23.9R (n=81) | news +11.1R n=29 | med stop 7.2p
+A sweep-reversal M15, TP opposite, min stop 10p         n=161 win=37% avgR=-0.100 totR= -16.0 PF=0.86 maxDD=-22.6R | half1 -2.2R (n=84) half2 -13.8R (n=77) | news +5.8R n=27 | med stop 10.0p
+A exits: {'stop': 103, 'target': 53, 'time': 5} | planned RR median 2.42
+B Asia breakout M15, stop Asia mid, TP 2R               n=172 win=33% avgR=-0.188 totR= -32.3 PF=0.73 maxDD=-40.4R | half1 -37.2R (n=89) half2 +5.0R (n=83) | news -5.2R n=32 | med stop 16.8p
+B Asia breakout M15, stop Asia mid, TP 1R               n=172 win=44% avgR=-0.213 totR= -36.7 PF=0.64 maxDD=-38.3R | half1 -28.6R (n=89) half2 -8.1R (n=83) | news -7.1R n=32 | med stop 16.8p

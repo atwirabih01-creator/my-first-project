@@ -28,6 +28,9 @@ def load():
     df["tday"] = shifted.dt.tz_localize(None).dt.normalize()
     df["ldn_min"] = df["ldn"].dt.hour * 60 + df["ldn"].dt.minute
     df["ny_min"] = df["ny"].dt.hour * 60 + df["ny"].dt.minute
+    # True once London's calendar date equals the trading day (i.e. from London midnight on).
+    # The first ~2 hours of each trading day (17:00 NY -> London midnight) are still "yesterday" in London.
+    df["ldn_today"] = df["ldn"].dt.tz_localize(None).dt.normalize() == df["tday"]
     df = df.reset_index(drop=True)
     # drop weekend stubs (Sunday-evening open belongs to Monday tday already)
     df = df[df.tday.dt.dayofweek < 5]

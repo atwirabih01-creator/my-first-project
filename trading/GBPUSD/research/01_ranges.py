@@ -5,7 +5,6 @@ df = complete(load())
 
 # ---------- hourly (by New York local clock hour) ----------
 df["nyh"] = df.ny.dt.hour
-df["dst"] = df.ny.apply(lambda t: t.utcoffset().total_seconds() == -4 * 3600) if False else (df.ny.dt.strftime("%z") == "-0400")
 h = df.groupby(["tday", "nyh"]).agg(o=("open", "first"), hi=("high", "max"), lo=("low", "min"), c=("close", "last")).reset_index()
 h["rng"] = (h.hi - h.lo) / PIP
 h["net"] = (h.c - h.o).abs() / PIP

@@ -1,0 +1,5 @@
+# GBPUSD changelog (Agent 1)
+
+| Version | Date | Change | Reason | Result |
+|---|---|---|---|---|
+| v1 | 2026-10-09 | First version: "New York false break of yesterday's high/low" (15-min close back across PDH/PDL between 08:00 and 11:00 NY; stop beyond the window's extreme + 2 pips; target 2R; forced close 16:00 NY; max 1 trade/day; no news filter). | Research (Oct 2025–Jun 2026): breaks of obvious levels fail about half the time or more; the NY morning is when most big moves start (29%); simple direction-following showed no edge; Asia breakouts lost money (-32 R). This was the only one of ~11 tried ideas/settings that was positive in both halves of the period. | Quick check on development data only: 66 trades, +12.6 R, PF 1.38, max DD -3.9 R. Weak-to-moderate evidence. Waiting for Agent 2's backtest. |
