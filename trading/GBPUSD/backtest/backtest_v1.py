@@ -100,10 +100,16 @@ def spike_ratio(m1, d, hhmm, tz):
 
 
 # ---------------------------------------------------------------- load
-def load(path=DATA, fix_clock=False):
+# The data file now holds Oct 2023 - Sep 2026; each run uses only its own 12-month slice.
+MAIN_SLICE = ("2025-10-01 04:00", "2026-10-01 04:00")   # Oct 2025 - Sep 2026 (dev + hidden B)
+PRIOR_SLICE = ("2024-09-29 21:00", "2025-10-01 04:00")  # Oct 2024 - Sep 2025 (extra check year)
+
+
+def load(path=DATA, fix_clock=False, window=MAIN_SLICE):
     # The data files themselves are now clock-corrected (see trading/tools/fetch_histdata.py),
     # so fix_clock must stay False; True would shift the mismatch weeks a second time.
     df = pd.read_csv(path, parse_dates=["time_utc"])
+    df = df[(df.time_utc >= window[0]) & (df.time_utc < window[1])]
     if fix_clock:
         u = df["time_utc"].dt.tz_localize("UTC")
         ny_summer = u.dt.tz_convert(NY).apply(lambda x: x.utcoffset()) == pd.Timedelta(hours=-4)
@@ -123,7 +129,7 @@ def load(path=DATA, fix_clock=False):
 
 
 def run(path=DATA, fix_clock=False, label_news=True):
-    m1 = load(path, fix_clock)
+    m1 = load(path, fix_clock, MAIN_SLICE if label_news else PRIOR_SLICE)
     news = dev_news_dates() if label_news else {}
     hidden_news_check = []
     for d, hhmm, tz, lab in (HIDDEN_CANDIDATES if label_news else []):
@@ -290,7 +296,7 @@ def brk(t, col):
 
 def main(tag=""):
     if tag == "prior":
-        t, skipped, hn, tdays = run(ROOT / "data" / "extra" / "GBPUSD_M1_2024-10_2025-09.csv.gz", False, False)
+        t, skipped, hn, tdays = run(DATA, False, False)
     else:
         t, skipped, hn, tdays = run(DATA, False, True)
     sfx = f"_{tag}" if tag else ""

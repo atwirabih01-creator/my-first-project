@@ -56,7 +56,7 @@ fixed, because it affects all four markets.
 | **Extra check: Oct 2024 – Sep 2025** | 94 | **30.9%** | +1.54 / −1.02 R | **−21.89 R** | **0.67** | **−26.21 R (−23.4%)** | **9** | 10 |
 | All 24 months | 190 | 39.5% | +1.44 / −1.01 R | −7.67 R | 0.93 | −26.21 R (−23.4%) | 9 | 15 |
 
-The extra year is the same free HistData source, downloaded with the project tool into `trading/data/extra/` (separate
+The extra year is the same free HistData source, downloaded with the project tool into the main data file, now 3 years (originally a separate
 file, main data untouched). I checked it before trusting it: same number of bars per day, similar daily ranges, and the
 US jobs-report spike sits at 08:30 NY. Without my clock fix it gives the same answer (−21.8 R), so the loss is not caused
 by the fix.
@@ -107,7 +107,7 @@ luck. On 32 trades, a ±0.3 R swing in the average is normal chance. To trust an
 ### 7. Suggestions (most important first)
 1. **Re-do the research on at least 2 years, with the corrected clock.** The 9 design months were one sideways market
    (your own research says so), and a fade-the-break idea fits that kind of market and fails when it changes. The data for
-   Oct 2024 – Sep 2025 is now in `trading/data/extra/`, so you can use it as design data. I have already shown v1's
+   Oct 2024 – Sep 2025 is now in the main data file, so you can use it as design data. I have already shown v1's
    result on it, so it no longer counts as a hidden check.
 2. **If you rebuild this idea, design a market-mood switch on purpose rather than fitting one to the losses.** Look at
    whether failed breaks work only when the previous days were range-bound, using a measure that is known before the
