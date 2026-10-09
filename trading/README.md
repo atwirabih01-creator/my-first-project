@@ -34,6 +34,13 @@ Agent 1 must filter out everything outside the design period immediately after l
 (GBPUSD v1 was built on Oct 2025–Jun 2026 only and was dropped; see `GBPUSD/feedback.md`.)
 - Load: `pd.read_csv(path, parse_dates=["time_utc"])`.
 
+## Data quality (check before trusting any result)
+HistData sometimes has **missing hours**. Gold's Oct 2022 – Sep 2023 file is missing hours on most days from
+Mar to Jul 2023; the main Nasdaq file has a few days, e.g. 24 and 28 Oct 2024, with gaps inside the New York session.
+- Every backtest must **skip any day that has a gap of more than 15 minutes inside the hours the strategy uses**
+  (and the day after, if levels come from that day), and report how many days were skipped and why.
+- A normal day has ~1,380 bars for FX and ~1,320 for gold and Nasdaq (they have a daily 1-hour break).
+
 ## Time zones (all reports must show Doha AND New York time)
 - Doha = UTC+3 all year. New York = UTC−5 (winter) / UTC−4 (summer, 2nd Sunday of March → 1st Sunday of November).
 - Convert with pandas: `ts.dt.tz_localize("UTC").dt.tz_convert("Asia/Qatar")` and `"America/New_York"`.
