@@ -31,6 +31,9 @@ Agent 1 must filter out everything outside the design period immediately after l
 - **XAUUSD from v2 on:** all of Oct 2023 – Sep 2026 is design data (hidden A and B were opened by Agent 2 for v1).
   The new hidden test is `data/hidden/XAUUSD_M1_2022-10_2023-09.csv.gz` (Oct 2022 – Sep 2023, clock checked
   against the NFP 08:30 NY spike). **Agent 2 only, after v2 is frozen. Agent 1 must never open `data/hidden/`.**
+- **NASDAQ v1 extra check:** `data/hidden/NSXUSD_M1_2021-10_2023-09.csv.gz` (Oct 2021 – Sep 2023, includes the 2022
+  bear market). Clock verified in every month (09:30 NY open). **Feb/Mar – Jul 2023 is gappy on almost every day**
+  (same HistData problem as gold), so it is effectively Oct 2021 – Jan 2023 plus Aug – Sep 2023. Agent 2 only.
 (GBPUSD v1 was built on Oct 2025–Jun 2026 only and was dropped; see `GBPUSD/feedback.md`.)
 - Load: `pd.read_csv(path, parse_dates=["time_utc"])`.
 
