@@ -204,3 +204,28 @@ Gold differs from GBPUSD: it **continues** more than it reverses. The best-suppo
 It passes the quick-check bar (positive both years, positive at double cost, 375 trades), with two weak points: **Y1 at double cost is barely positive (+4.2 R, PF 1.04)**,
 and the **longest losing run is 7** in Y1 (above the ideal 6; with a 55% win rate, runs of 7 are normal over 375 trades).
 The edge is small (+0.06 to +0.10 R per trade). Hidden test A (Oct 2023 – Sep 2024) is the real check.
+
+---
+
+## 8. Round 2 (v2), 9 Oct 2026: all of Oct 2023 – Sep 2026 is now design data
+After Agent 2 opened hidden tests A (Oct 2023 – Sep 2024) and B (Jul – Sep 2026) for v1, they became design data (README). The new hidden year
+(Oct 2022 – Sep 2023, `data/hidden/`) was **not** opened. Sections 1–7 above are still the round-1 numbers (Y1/Y2 only); I did not redo them for A and B.
+Agent 2's per-period v1 numbers are in `feedback.md`. The splits there (news, hour, weekday) flip between periods, so no filter is added.
+
+**What the v1 test showed about costs:** before costs v1 made A +15.9 R, Y1 +20.6, Y2 +18.1, B +7.5 R (my replica). The median stop was 6.1 USD in A, 11.2 in Y1,
+30.9 in Y2 and 26.4 in B. At 0.40 USD that is 0.07 R per trade in A, the whole edge. Shorts lost −18.8 R in A (gold up from ~1,850 to ~2,650).
+
+**Round-2 variants** (`research/10_v2_check.py`, declared together before running; 0.40 USD / 0.80 USD cost):
+| # | Variant | A | Y1 | Y2 | B | All @0.80 | Longest losing run | Trades A/Y1/Y2/B |
+|---|---|---|---|---|---|---|---|---|
+| V0 | v1 replica | −1.1 R | +12.3 | +15.8 | +6.5 | +5.0 R | 7 | 232/220/157/59 |
+| V43 | v1 + minimum stop 8 USD (20 × cost) | +2.7 (+0.3 @0.80) | +22.6 | +15.8 | +6.5 | +37.0 R | 5 | 66/167/157/59 |
+| V44 | V43 + 50-day trend rule (longs only above, shorts only below) | +3.4 | +18.0 | +15.8 | +2.1 | +34.0 R | 6 | 26/86/91/28 |
+| **V45** | **stop at opposite Asia side, 1R, min stop 8 USD (v2)** | **+15.9 (+10.5)** | **+10.8 (+6.4)** | **+10.8 (+9.6)** | **+8.4 (+7.9)** | **+34.4 R** | **5** | **176/217/157/59** |
+
+- V43 works only by skipping most of A (66 trades) and is flat there at double cost. V44 trades too little (26 trades in A) and lowers B.
+- V45 is positive in every period at both costs. Bootstrap chance the average is ≤ 0: A 7%, Y1 18%, Y2 12%, B 7%, all 36 months 1%.
+  Without the best 3 trades every period stays positive. Positive months: 25 of 36. Cost share of risk: 0.03 R (A), 0.02 (Y1), 0.01 (Y2/B).
+- The wider stop also fixed most of the short-side problem without a direction filter: shorts A −0.3 R, Y1 −1.3, Y2 +7.6, B +3.0. Longs +16.2 / +12.1 / +3.2 / +5.4.
+- Weak points: 46% of trades end at the 16:00 NY forced close (average +0.04 R), so v2 is partly a "hold the break into the afternoon" trade.
+  Y1 is the weakest period (+0.05 R per trade, PF 1.16). Stops under 15 USD lost in Y1 (−3.6 R) but won in A (+8.4 R): no stable stop-size pattern.

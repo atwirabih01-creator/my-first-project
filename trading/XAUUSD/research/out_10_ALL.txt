@@ -1,0 +1,36 @@
+--- V0 v1 replica
+  A  : n 232 win 54.3% total   -1.1R PF 0.99 maxDD   -9.2R lrun  5 | @0.80  -18.2R PF 0.85 | gross  +15.9R | median stop   6.1$
+  Y1 : n 220 win 54.1% total  +12.3R PF 1.13 maxDD   -8.6R lrun  7 | @0.80   +3.9R PF 1.04 | gross  +20.6R | median stop  11.2$
+  Y2 : n 157 win 56.7% total  +15.8R PF 1.27 maxDD  -10.3R lrun  5 | @0.80  +13.6R PF 1.23 | gross  +18.1R | median stop  30.9$
+  B  : n  59 win 55.9% total   +6.5R PF 1.29 maxDD   -3.2R lrun  3 | @0.80   +5.6R PF 1.24 | gross   +7.5R | median stop  26.4$
+  ALL: n 668 win 54.9% total  +33.5R PF 1.12 maxDD  -15.3R lrun  7 | @0.80   +5.0R PF 1.02 | gross  +62.1R | median stop  12.1$
+  longs : A +17.6R(n126) Y1 +6.9R(n126) Y2 +5.4R(n92) B +1.4R(n30)
+  shorts: A -18.8R(n106) Y1 +5.4R(n94) Y2 +10.4R(n65) B +5.1R(n29)
+  exits: {'target': 322, 'stop': 263, 'time': 83}
+--- V43 v1 + min stop 8 USD
+  A  : n  66 win 56.1% total   +2.7R PF 1.10 maxDD   -4.8R lrun  4 | @0.80   +0.3R PF 1.01 | gross   +5.0R | median stop  10.7$
+  Y1 : n 167 win 57.5% total  +22.6R PF 1.35 maxDD   -5.6R lrun  4 | @0.80  +17.6R PF 1.26 | gross  +27.6R | median stop  13.3$
+  Y2 : n 157 win 56.7% total  +15.8R PF 1.27 maxDD  -10.3R lrun  5 | @0.80  +13.6R PF 1.23 | gross  +18.1R | median stop  30.9$
+  B  : n  59 win 55.9% total   +6.5R PF 1.29 maxDD   -3.2R lrun  3 | @0.80   +5.6R PF 1.24 | gross   +7.5R | median stop  26.4$
+  ALL: n 449 win 56.8% total  +47.6R PF 1.27 maxDD  -10.3R lrun  5 | @0.80  +37.0R PF 1.21 | gross  +58.2R | median stop  19.7$
+  longs : A +7.9R(n29) Y1 +10.8R(n96) Y2 +5.4R(n92) B +1.4R(n30)
+  shorts: A -5.2R(n37) Y1 +11.8R(n71) Y2 +10.4R(n65) B +5.1R(n29)
+  exits: {'target': 212, 'stop': 156, 'time': 81}
+--- V44 V43 + 50-day trend rule (both directions)
+  A  : n  26 win 61.5% total   +3.4R PF 1.35 maxDD   -3.5R lrun  4 | @0.80   +2.4R PF 1.24 | gross   +4.4R | median stop   9.9$
+  Y1 : n  86 win 61.6% total  +18.0R PF 1.59 maxDD   -6.2R lrun  6 | @0.80  +15.4R PF 1.49 | gross  +20.7R | median stop  13.2$
+  Y2 : n  91 win 62.6% total  +15.8R PF 1.51 maxDD   -5.9R lrun  4 | @0.80  +14.5R PF 1.46 | gross  +17.2R | median stop  30.0$
+  B  : n  28 win 57.1% total   +2.1R PF 1.18 maxDD   -4.1R lrun  4 | @0.80   +1.6R PF 1.14 | gross   +2.5R | median stop  26.7$
+  ALL: n 231 win 61.5% total  +39.4R PF 1.48 maxDD   -6.2R lrun  6 | @0.80  +34.0R PF 1.40 | gross  +44.8R | median stop  20.1$
+  longs : A +5.5R(n24) Y1 +15.7R(n77) Y2 +3.8R(n61) B -0.9R(n15)
+  shorts: A -2.1R(n2) Y1 +2.3R(n9) Y2 +12.1R(n30) B +3.0R(n13)
+  exits: {'target': 115, 'stop': 77, 'time': 39}
+--- V45 stop at opposite Asia side, 1R, min stop 8 USD
+  A  : n 176 win 55.7% total  +15.9R PF 1.27 maxDD   -6.7R lrun  5 | @0.80  +10.5R PF 1.17 | gross  +21.4R | median stop  12.7$
+  Y1 : n 217 win 55.8% total  +10.8R PF 1.16 maxDD  -10.7R lrun  5 | @0.80   +6.4R PF 1.09 | gross  +15.2R | median stop  20.7$
+  Y2 : n 157 win 54.8% total  +10.8R PF 1.25 maxDD  -11.9R lrun  5 | @0.80   +9.6R PF 1.22 | gross  +12.0R | median stop  57.7$
+  B  : n  59 win 54.2% total   +8.4R PF 1.57 maxDD   -2.5R lrun  2 | @0.80   +7.9R PF 1.53 | gross   +8.9R | median stop  47.8$
+  ALL: n 609 win 55.3% total  +45.9R PF 1.25 maxDD  -11.9R lrun  5 | @0.80  +34.4R PF 1.18 | gross  +57.5R | median stop  24.7$
+  longs : A +16.2R(n93) Y1 +12.1R(n124) Y2 +3.2R(n92) B +5.4R(n30)
+  shorts: A -0.3R(n83) Y1 -1.3R(n93) Y2 +7.6R(n65) B +3.0R(n29)
+  exits: {'time': 280, 'target': 186, 'stop': 143}

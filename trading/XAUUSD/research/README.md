@@ -1,6 +1,6 @@
 # XAUUSD research scripts (Agent 1)
 
-Design data only: **2024-10-01 .. 2026-06-30**. `common.py` drops every row outside the design period while reading
+Design data: **2023-10-01 .. 2026-09-30** from v2 on (README data rule). Scripts 01-09 were run in round 1 on 2024-10-01..2026-06-30 (`XAU_V1_WINDOW=1` reproduces that). NEVER open `trading/data/hidden/`.
 (hidden test A: Oct 2023–Sep 2024; hidden test B: Jul 2026 on) and asserts nothing leaked. A filtered copy is cached in the
 session scratchpad (`XAU_CACHE`) to speed up re-runs; it contains design rows only. No clock fix (the file is already UTC).
 Y1 = Oct 2024–Sep 2025, Y2 = Oct 2025–Jun 2026; every script reports both.
@@ -15,5 +15,6 @@ python3 06_momentum_robustness.py > out_06_ALL.txt  # 32-cell momentum grid, M2 
 #        out_07_size_split.txt: overnight-move size split (inline script, descriptive only)
 python3 08_asia_break_variants.py > out_08_ALL.txt  # A1 baseline + A1a/A1b/A1c
 python3 09_v1_check.py      > out_09_ALL.txt   # v1 rules exactly as in strategy.md (writes out_09_trades.csv)
+python3 10_v2_check.py      > out_10_ALL.txt   # round 2: V0 (v1 replica), V43, V44, V45 (= v2) per period A/Y1/Y2/B; writes out_10_V*.csv
 ```
 Helpers: `common.py` (loader), `levels.py` (daily levels, ATR14), `news_calendar.py` (release dates), `sim.py` (quick-check engine, fill model).

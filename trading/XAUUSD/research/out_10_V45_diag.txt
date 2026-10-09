@@ -1,0 +1,15 @@
+A: avg +0.091R  P(avg<=0)  7.2%  without best 3: +13.0R  months + 7/12  best month +5.3R  avg win +0.77 avg loss -0.76  cost share 0.031R  exits {'target': 69, 'time': 58, 'stop': 49}
+Y1: avg +0.050R  P(avg<=0) 17.9%  without best 3: +7.8R  months + 8/12  best month +6.2R  avg win +0.66 avg loss -0.72  cost share 0.020R  exits {'time': 103, 'target': 58, 'stop': 56}
+Y2: avg +0.069R  P(avg<=0) 11.7%  without best 3: +7.8R  months + 7/9  best month +4.6R  avg win +0.62 avg loss -0.60  cost share 0.008R  exits {'time': 88, 'target': 41, 'stop': 28}
+B: avg +0.143R  P(avg<=0)  6.8%  without best 3: +5.4R  months + 3/3  best month +3.7R  avg win +0.72 avg loss -0.54  cost share 0.009R  exits {'time': 31, 'target': 18, 'stop': 10}
+ALL: avg +0.075R  P(avg<=0)  1.0%  without best 3: +42.9R  months + 25/36  best month +6.2R  avg win +0.69 avg loss -0.69  cost share 0.019R  exits {'time': 280, 'target': 186, 'stop': 143}
+by stop size (R): per           A    B   Y1   Y2
+sb                            
+(0, 15]     8.4  NaN -3.6  NaN
+(15, 30]    8.0  1.9  9.0 -3.2
+(30, 60]   -0.4  7.4  4.4  4.1
+(60, 1000]  NaN -0.9  1.0  9.9
+max DD all 36 months: -11.9 R
+max DD %: -11.4
+max DD % @0.80: -11.8
+time exits avg R: 0.038  slippage stops beyond 1R: 0
