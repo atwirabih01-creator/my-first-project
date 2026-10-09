@@ -1,0 +1,23 @@
+Big day = range >= 1.24 x ATR14 (top 25% of days over 21 months)
+
+--- Y1: big days 52 of 230; up 52%; trend ratio big 0.64 vs other 0.46
+  starting extreme (low of up day / high of down day) set in: {'evening 18-24 NY': 39, 'London 03-08 NY': 7, 'Asia late 00-03 NY': 3, 'NY morning 08-12': 2, 'NY afternoon 12-17': 1}
+  previous day xATR: big 1.15 vs other 1.00
+  Asia range xATR:   big 0.70 vs other 0.44
+  weekday of big days: {0: 16, 1: 7, 2: 12, 3: 9, 4: 8} (0=Mon)
+
+--- Y2: big days 50 of 177; up 42%; trend ratio big 0.58 vs other 0.41
+  starting extreme (low of up day / high of down day) set in: {'evening 18-24 NY': 36, 'Asia late 00-03 NY': 7, 'NY morning 08-12': 4, 'NY afternoon 12-17': 3}
+  previous day xATR: big 1.37 vs other 0.98
+  Asia range xATR:   big 0.82 vs other 0.45
+  weekday of big days: {0: 13, 1: 9, 2: 11, 3: 10, 4: 7} (0=Mon)
+
+=== All intraday swings >= 0.5 x ATR (zigzag, reversal 0.25 x ATR)
+Y1: 457 swings, median 0.66 x ATR, median 284 min, up 51%
+   start window share: {'evening 18-24 NY': 40.0, 'NY morning 08-12': 25.0, 'London 03-08 NY': 21.0, 'Asia late 00-03 NY': 10.0, 'NY afternoon 12-17': 3.0}
+   start NY hour top: {18: 16.6, 9: 9.8, 20: 7.4, 8: 7.4, 21: 6.6, 10: 6.3, 3: 4.8, 2: 4.6}
+   started after taking PDH (down swings) / PDL (up swings) earlier that day: 37%
+Y2: 422 swings, median 0.69 x ATR, median 176 min, up 50%
+   start window share: {'evening 18-24 NY': 41.0, 'NY morning 08-12': 27.0, 'London 03-08 NY': 15.0, 'Asia late 00-03 NY': 9.0, 'NY afternoon 12-17': 8.0}
+   start NY hour top: {18: 14.5, 10: 9.0, 9: 8.1, 20: 8.1, 21: 7.8, 8: 6.2, 19: 5.2, 2: 3.8}
+   started after taking PDH (down swings) / PDL (up swings) earlier that day: 36%
