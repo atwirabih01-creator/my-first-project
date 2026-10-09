@@ -24,7 +24,7 @@ between you through the files described below. Always write your output to those
 
 ## Fixed facts (do not change these)
 - **Day trading only.** Every trade opens and closes the same day. No trade is held overnight.
-- **Markets, in this order, one at a time:** EURUSD → GBPUSD → XAUUSD (gold) → NASDAQ 100.
+- **Markets, in this order, one at a time:** GBPUSD → XAUUSD (gold) → NASDAQ 100 → EURUSD.
   Finish one market completely before starting the next, unless the owner changes the order.
 - **Risk:** 1% of the account per trade, from any starting balance.
 - **History:** at least the most recent **6 months** of intraday price data per market.
@@ -42,7 +42,8 @@ between you through the files described below. Always write your output to those
 4. Backtest (Agent 2).
 5. Validate (Agent 2 has the final call).
 6. Provide to the owner (only after Agent 2 confirms).
-7. Live.
+7. Live: done by the owner. The owner runs their own backtest of the final strategy,
+   then decides to trade it live. The agents never trade live.
 
 Go step by step. Never jump to rules before the research supports them.
 
@@ -104,7 +105,7 @@ When Agent 2 sends results and feedback:
 Repeat until Agent 2 confirms the strategy works. Then move to the next market.
 
 ## Files you own
-Keep everything under `trading/<market>/` (for example `trading/EURUSD/`):
+Keep everything under `trading/<market>/` (for example `trading/GBPUSD/`):
 - `research.md`: findings with numbers, by session, including news-day behaviour.
 - `strategy.md`: the current rules, with a version number (v1, v2, ...).
 - `changelog.md`: every rule change, the date, the reason, and the result it led to.

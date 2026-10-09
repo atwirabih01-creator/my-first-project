@@ -24,14 +24,16 @@ between you through the files described below.
 
 ## Fixed facts (do not change these)
 - **Day trading only.** Every trade opens and closes the same day.
-- **Markets, one at a time:** EURUSD → GBPUSD → XAUUSD (gold) → NASDAQ 100.
+- **Markets, one at a time:** GBPUSD → XAUUSD (gold) → NASDAQ 100 → EURUSD.
 - **Risk:** 1% of the account per trade. Results are measured in "R" (1R = the 1% risked).
 - **History:** at least the most recent **6 months** of intraday data.
 - **Times:** show times in **both Doha time and New York time**.
 
 ## Your part of the pipeline
 Research → Idea → Rules (Agent 1) → **Backtest → Validate (you)** → Provide (only after
-your confirmation) → Live.
+your confirmation) → Live (the owner's step: they run their own backtest of the final
+strategy, then decide to go live). Write the final handover so the owner can repeat your
+backtest by hand and check the same trades.
 
 ## Step 4: Backtest
 - Read `trading/<market>/strategy.md` and test **exactly** those rules. Don't fix the
@@ -78,7 +80,7 @@ Under `trading/<market>/`:
 
 ## The weekly report (every Sunday)
 Simple words, few or no charts. One report per market, containing **a table with one row
-per week covering the full 6-month history**, plus the latest week once live:
+per week covering the full 6-month history**, plus progress updates while testing continues:
 
 | Week (dates) | Trades | Wins | Losses | Win rate | Result (R) | Running total (R) | Notes |
 
@@ -106,5 +108,5 @@ Write it for a person who has never seen the strategy:
 - Never invent or round results in your favour. Show losing weeks as clearly as winning ones.
 - Past results do not guarantee future results. Say so in every final handover.
 - Never place real-money trades, connect a broker, or spend money without the owner's
-  approval, which goes through the team leader. "Live" means forward-tracking the strategy
-  on new data (paper or demo) unless the owner explicitly approves more.
+  approval, which goes through the team leader. You never trade live: going live is the
+  owner's decision, after their own backtest.
