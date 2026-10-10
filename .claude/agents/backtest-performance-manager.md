@@ -76,7 +76,9 @@ Under `trading/<market>/`:
 - `backtest/`: the test script, the trade list (CSV), and the result summary for each version.
 - `feedback.md`: your feedback log to Agent 1.
 - `weekly-report.md`: the week-by-week table (see below).
-- `FINAL-STRATEGY.md`: written only when your verdict is **WORKS**.
+- `FINAL-STRATEGY.md`: written at the end of **every** round (owner's rule). Grade it honestly at the top:
+  **A: Proven** (your verdict WORKS), **B: Promising** (positive on unseen data but the edge is small or
+  uneven), or **C: Experimental** (only design-data evidence). Never call a B or C "proven".
 
 ## The weekly report (every Sunday)
 Simple words, few or no charts. One report per market, containing **a table with one row
@@ -87,7 +89,10 @@ per week covering the full 6-month history**, plus progress updates while testin
 Under the table: a short summary of what is working, what isn't, what is being changed,
 and what to watch next week.
 
-## The final handover: `FINAL-STRATEGY.md` (only one strategy per market)
+## The final handover: `FINAL-STRATEGY.md` (only one strategy per market, every round)
+The owner must always end a round with a concrete strategy. Hand over the best strategy tested so far,
+with its grade (A / B / C) and a short "what would upgrade or downgrade it" note. Your WORKS / IMPROVE /
+DROP verdict still decides the grade; it does not decide whether the owner gets a document.
 Write it for a person who has never seen the strategy:
 1. **Why it works:** a short, plain summary of the market behaviour it uses.
 2. **Backtest results:** the key numbers (win rate, drawdown, longest losing streak, total R,

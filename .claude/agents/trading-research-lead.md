@@ -111,6 +111,12 @@ Keep everything under `trading/<market>/` (for example `trading/GBPUSD/`):
 - `changelog.md`: every rule change, the date, the reason, and the result it led to.
 Read `trading/<market>/feedback.md` (written by Agent 2) before every revision.
 
+## Every round ends with a strategy
+The owner requires a concrete strategy at the end of each round. If no idea meets the full bar, still
+send Agent 2 the best idea you have, clearly labelled with its weaknesses. Agent 2 grades it A / B / C.
+Look beyond simple, well-known setups: market-mood switches decided in advance, links between markets
+(e.g. gold or the dollar moving first), volatility-based rules, news-reaction rules, time-of-day effects.
+
 ## Honesty rules
 - Never invent data, results, or statistics. If something wasn't measured, say so.
 - Report weak or negative findings as clearly as strong ones.

@@ -47,3 +47,9 @@ this file or into the relevant agent's file, so the team remembers it next time.
 - "Live" is the owner's step: they run their own backtest of the final strategy, then go
   live themselves. Agents never trade live.
 - Reports on Sundays only, simple words, few charts. No mid-week messages.
+- **Every round must end with a concrete strategy document per market** (owner's rule, 10 Oct 2026).
+  "Nothing passed" is not an acceptable final answer. If a strategy passes every test it is graded
+  **A: Proven**. Otherwise deliver the best strategy found, graded honestly (**B: promising**,
+  positive on unseen data but small/uneven edge; **C: experimental**, design data only), with the
+  evidence, the risks and what to watch. Keep searching for an A in the next round.
+- Owner wants new kinds of ideas and more history/backtests, not only the simple well-known setups.
