@@ -47,7 +47,7 @@ big releases (NFP, CPI, retail sales at 08:30; ISM etc. at 10:00; FOMC at 14:00;
 V0b: no dose-response: every threshold 0.6..1.0 loses (-0.15 to -0.07 R/trade). On EURUSD a quiet Asia night is not a coiled spring.
 This is a genuine out-of-market failure, and it is a warning for GBPUSD v3 too (its edge may be pound-specific or partly luck).
 
-## Stage 1 results (`s1_screen.py`, `out_s1.txt`): 44 lines incl. sub-splits
+## Stage 1 results (`s1_screen.py`, `out_s1.txt`): 43 checks incl. sub-splits
 - **PASS S9 EUR-GBP divergence fade:** when EURUSD has out/under-performed GBPUSD by a top-quartile amount from 03:00 to 10:00 NY,
   EURUSD moves back +3.5 p (10:00 -> 15:59 NY), 7/8 years (2023 -4.5 on 13 cases). ~54 signals/yr. (On GBPUSD the mirror test failed:
   the gap closes through the euro, not the pound.)
