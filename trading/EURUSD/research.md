@@ -1,3 +1,30 @@
+# EURUSD research (Agent 1)
+
+## ROUND 3 (10 Oct 2026): 8 years of design data (Jan 2019 - Sep 2026), judged per calendar year
+Full test register with every pre-declared check and its numbers: `round3/TESTS_DECLARED.md` (110 checks); outputs `round3/out_*.txt`.
+Data: HistData 1-minute bid, UTC clock (no fix), gappy days skipped (gap > 15 min inside the hours used or < 1,300 bars; Feb-Jul 2023 mostly lost).
+Cost 1.2 pips (2.4 stress). `data/hidden/` never opened. News days were found by price shocks at the release minute (> 3 x the usual move), not from a calendar.
+Pass mark for screening: same sign in >= 6 of 8 years and >= 2 pips per signal before cost.
+
+| Family | Main checks | Result |
+|---|---|---|
+| Squeeze | GBPUSD v3 unchanged; quiet Asia, quiet pre-NY, quiet previous day, EUR+GBP both quiet | **GBPUSD v3 fails on EURUSD (-41.5 R, 3/8 years).** Quiet pre-NY box breakout works only 2022-2026 (regime) |
+| Mood switch | ER10 trend/range, ATR5/ATR60 vol | Both halves lose; London's Asia-box break has no follow-through on EURUSD (+0.3 p, 4/8) |
+| Cross-market | GBP, gold, Nasdaq leading; GBP breaking first; **EUR-GBP gap** | Leaders < 1 p. **EUR-GBP gap 03:00-10:00 NY, top quartile, fade 10:00-15:59 NY: +3.5 p, 7/8 years** |
+| News (shocks) | 08:30, 10:00, 14:00 NY; 14:15 Frankfurt (ECB time) | Follow/fade flips by year; 14:15 Frankfurt fade +5.5 p 6/8 but ~23 a year, and ECB Thursdays are no better than other days |
+| Calendar / time | 4pm fix, month-end, NY lunch, Wed+Fri afternoon, Monday/Wednesday, intraday momentum | All fail. "Monday up" = bid-only Sunday-reopen artefact |
+
+**Facts behind v3 (the euro-only move fade):**
+- Dose-response: below the 75th percentile of the gap nothing happens (-0.4 p); above it +3.3 to +3.6 p. Trade tests: the edge per trade rises steadily
+  from the 60th to the 75th percentile.
+- Control: fading EURUSD's own big 03:00-10:00 move without the pound comparison fails (+0.8 p, 3/8). With the gap AND a big euro move: +6.4 p, 7/8.
+- The give-back is not EURGBP closing the gap (+1.2, 4/8); GBPUSD also drifts the same way afterwards. About 2/3 of it comes 10:00-12:00 NY (London's last hours).
+- The same check at 08:00 NY or 12:00 NY fails. On GBPUSD the mirror test (fade the pound's extra move) failed: it is a euro-side effect.
+- Signals where EURUSD is still at its morning extreme at 10:00 NY lose (129 trades, -16.4 R, 2/8 years): wait for the move to stall.
+- Side asymmetry: after the euro under-performed (buy EURUSD) +5.7 p, 7/8; after it out-performed (sell) +1.4 p, 5/8.
+
+---
+
 # EURUSD research (Agent 1), round 1
 
 **Data used:** HistData 1-minute bid prices, correct UTC clock (no clock fix), **design period only: 1 Oct 2024 to 30 Jun 2026**.

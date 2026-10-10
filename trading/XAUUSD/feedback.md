@@ -2,6 +2,90 @@
 
 ---
 
+## v3 "Follow London's break of an ACTIVE Asia box" (round 3): tested 10 Oct 2026
+
+### Verdict: **IMPROVE** (not WORKS). Owner's document grade: **B: Promising, at the very bottom of B**
+On the hidden years 2016-2018, which nobody had seen, v3 made **+1.9 R over 81 trades (+0.02 R per trade)**. That is positive,
+but it is noise-sized: about a **40% chance the true average is zero or less**, it turns **negative at double cost (-1.3 R)**, and it is
+**-7.2 R without its 5 best trades**. Only 22 of the 81 hidden trades came in 2017-2018 (gold was too cheap for the 8 USD box).
+The hidden test neither confirmed nor rejected v3; the evidence for it is still almost all design data (2019-2026, +90.3 R).
+
+### 1. Consistency check (my code vs. your quick check): **exact match**
+`backtest/backtest_v3.py` is new, written from the rules text only (nothing from `round3/` imported or copied).
+- Design data 2019 - Sep 2026: **973 of 973 trades match** (same days, directions, exit types: 639 forced closes, 333 stops, 1 stop gap).
+  Entry, stop and exit prices differ only by rounding (your CSV has 2 decimals, the data has 3); R differs by at most 0.002 per trade.
+  Total **+90.28 R (mine) vs +90.28 R (yours)**. Your per-year table reproduces exactly.
+- Skipped days also match: 627 small-box days 2019-2026 in both (mine: 202+82+101+116+76+43+7+0 = 627).
+
+### 2. Data problem found in the hidden file (team leader: please note for every 2016-2018 file)
+The hidden gold file is **one hour late in the weeks when the US and UK clocks differ** (mid-March and late Oct / early Nov). Proof: the jobs
+report (NFP) spike is at 08:30 NY on 31 first-Fridays, but at **09:30 NY on 4 Nov 2016, 3 Nov 2017 and 2 Nov 2018**, and in those weeks the
+daily break shows at 18:00-19:00 NY instead of 17:00-18:00 NY. Cause: in 2016-2018 HistData's raw clock seems to be New York time, not
+"London minus 5 hours". My script fixes it (60,511 bars, mismatch weeks only); after the fix every NFP spike is at 08:30 NY.
+The design file does not have this problem (checked NFP/CPI/FOMC in mismatch weeks 2019-2025: all on time).
+Effect on v3 is small: without the fix the hidden years give +2.7 R on 76 trades; with it +1.9 R on 81. **The audit tool missed this**
+(it checks the whole year, not the mismatch weeks). The GBPUSD, EURUSD and NASDAQ 2016-2018 hidden files probably have the same issue.
+
+### 3. Key numbers (0.40 USD cost)
+| Period | Trades | Win rate | Avg win / loss | Total R | R per trade | PF | Max drop | Longest losing run |
+|---|---|---|---|---|---|---|---|---|
+| **2016 (hidden)** | 59 | 49% | +0.79 / -0.62 | **+4.2** | +0.072 | 1.23 | -3.9 | 4 |
+| **2017 (hidden)** | 11 | 45% | +0.28 / -0.70 | **-2.8** | -0.251 | 0.34 | -2.8 | 2 |
+| **2018 (hidden)** | 11 | 45% | +0.79 / -0.60 | **+0.4** | +0.035 | 1.11 | -2.3 | 3 |
+| **Hidden 2016-18** | **81** | 48% | +0.73 / -0.63 | **+1.9** | **+0.023** | 1.07 | -8.5 (-8.2%) | 4 |
+| Design 2019-26 | 973 | 47% | +1.07 / -0.79 | +90.3 | +0.093 | 1.22 | -18.0 (-17.1%) | 8 |
+| All 2016-26 | 1054 | 48% | +1.04 / -0.78 | +92.2 | +0.087 | 1.21 | -18.0 (-17.1%) | 8 |
+Design years as in your table (2019 -1.5, 2020 +18.1, 2021 +9.5, 2022 +2.5, 2023 +8.2, 2024 +31.4, 2025 -2.3, 2026 +24.4).
+**Oct 2022 - Sep 2023: -7.2 R on 60 trades** (37% won; -9.4 R at 0.80 USD), same as yours.
+
+**Cost stress, same trades:** hidden +1.9 / **-1.3** / -4.5 R at 0.40 / 0.80 / 1.20 USD. Design +90.3 / +63.1 / +35.9 R.
+With the box floor scaled to 20x cost (16 USD at 0.80), the hidden years have only 5 trades: cannot be judged.
+**Long / short:** hidden longs -3.9 R (43 trades, 37% won), shorts +5.8 R (38). Design longs +41.1, shorts +49.2.
+**Weekday (the Mon/Thu question):** design Mon +36.9, Thu +46.5, the other three days +6.8 R together (578 trades). In the hidden years
+**Thursday was the worst day (-4.0 R, 20 trades, 30% won)** and Monday the best (+4.3 R, 15 trades). All 11 years without Mon and Thu: +8.3 R
+on 624 trades (+0.01 R per trade). So the profit leans on two weekdays, and one of them did not repeat on the unseen years.
+**Best trades:** hidden best 5 are all under +2 R (+1.92 ... +1.71); without them -7.2 R, without best 10 -13.8 R. The design years have
+big +5 R to +6.7 R days; the hidden years had none. Avg win was +0.73 R vs +1.07 R in design.
+**News-shock days** (hindsight label): design +87.3 R on 301 trades vs +3.0 R on 672 other trades. Hidden: news days -0.7 R (25),
+other days +2.6 R (56). The "big US news day pays for everything" pattern did not show up in 2016-2018.
+**Exits:** hidden 66 forced closes +17.5 R, 15 stops -15.6 R. Design 639 forced closes +434.8 R, 334 stops -344.5 R.
+**Bootstrap (chance true average <= 0):** hidden 40% (57% at 0.80 USD), design 0.6%, all 0.8% (before allowing for your 82 checks).
+**Skipped days 2016-2018:** 621 of 773 for a box under 8 USD (2016: 161, 2017: 227, 2018: 233); median box 6.8 / 4.4 / 4.5 USD.
+Also 7 days with holes and 22 thin days. 42 days had no break.
+**Flat stretches:** design 2019-26: 774 days without a new equity high (4 Apr 2022 -> 17 May 2024); recent: 397 days (11 Jun 2025 -> 13 Jul 2026).
+
+### 4. Against the team leader's bar for A (WORKS)
+| Requirement | Result | Pass? |
+|---|---|---|
+| Hidden years positive in total | +1.9 R | Yes, barely |
+| Positive in >= 2 of 3 hidden years | 2016 +4.2, 2017 -2.8, 2018 +0.4 (11 trades) | Yes on paper; 2018 is a coin toss |
+| Positive at double cost over the hidden years | -1.3 R | **No** |
+| Longest losing run <= 9 | 4 hidden, 8 overall | Yes |
+| Not reliant on a few trades | hidden -7.2 R without best 5; design +61.6 R | **No** (hidden) |
+| Not reliant on one weekday | Mon + Thu = +84 of +92 R (all years); Thu worst day in hidden | **No** |
+| Adequate hidden sample | 81 trades, only 22 in 2017-18 | **No** |
+
+### 5. Rule wording (no trade changed, but a person could read them differently)
+- **Rule 4 vs 6:** entries need price *beyond* the level (strictly), but the stop is hit when price *touches* it. I used: entry strictly beyond,
+  stop on touch (same as your trades). Please say so in the rule text.
+- **Rule 11, "hole of more than 15 minutes":** I counted the edges (18:00 NY and 16:00 NY) as well, so a day whose first bar comes at 18:16 NY or later
+  is skipped. Please confirm.
+- **Rule 3:** the 8 USD floor is on the **box**, but the risk can be bigger if the entry gaps past the edge (3 trades in 11 years). Fine, just note it.
+
+### 6. What this means, and suggestions
+- **Do not tune v3 further on 2019-2026.** All three gold hidden periods (2022-23, 2023-24/2026, 2016-18) are now used.
+- The edge looks real on 2019-2026 but is **concentrated**: big US-news days, Mondays/Thursdays, and gold's high-volatility years. On cheap,
+  quiet gold (2016-2018, 2019, and Oct 2022 - Sep 2023) it is about zero or negative. The 8 USD floor ties it to the gold price rather than to
+  how active gold is. If you rework it, a floor relative to gold's own recent range (e.g. box vs 20-day average daily range) would be the
+  honest next idea, but it can only be judged on **new data from now on** (forward/demo test), not on any file we have.
+- The only clean judge left is a **forward test**: the owner's own backtest by hand, then demo trading for 3-6 months.
+- My recommendation to the team leader: hand v3 to the owner as **grade B (bottom of B)**, demo only, and move on to the next market.
+
+*Past results do not guarantee future results.*
+
+
+---
+
 ## v2 "Go with London's break of the Asia range, wide stop" (1R, 8 USD minimum stop): tested 9 Oct 2026
 
 ### Verdict: **DROP**

@@ -44,8 +44,10 @@ DATA = os.path.join(HERE, "..", "..", "data", "XAUUSD_M1.csv.gz")
 HID = os.path.join(HERE, "..", "..", "data", "hidden", "XAUUSD_M1_2016-2018.csv.gz")
 MIN_BOX = 8.0
 COSTS = {"R": 0.40, "R_2x": 0.80, "R_3x": 1.20}
-CLOCKFIX = "--no-clockfix" not in sys.argv
-SUF = "" if CLOCKFIX else "_noclockfix"
+# The hidden file itself was clock-corrected by the team leader on 10 Oct 2026, so the in-script fix is now OFF
+# by default (it would shift the mismatch weeks twice). "--clockfix" re-enables it only for the old raw file.
+CLOCKFIX = "--clockfix" in sys.argv
+SUF = "_scriptfix" if CLOCKFIX else ""
 
 
 def load():

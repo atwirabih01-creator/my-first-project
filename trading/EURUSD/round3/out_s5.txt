@@ -1,0 +1,34 @@
+== W1 quantile
+W1 q 0.6                                     n= 371 ( 48/yr) totR= +44.5 perTr=+0.120 yrs+=6/8 worstYr=-5.7 L/S=+30.6/+13.9 x2cost=+22.8 noBest5=+21.8 lrun=9
+W1 q 0.65                                    n= 316 ( 41/yr) totR= +44.2 perTr=+0.140 yrs+=6/8 worstYr=-2.5 L/S=+32.3/+11.9 x2cost=+26.2 noBest5=+22.7 lrun=8
+W1 q 0.7                                     n= 281 ( 36/yr) totR= +45.6 perTr=+0.162 yrs+=7/8 worstYr=-1.6 L/S=+31.1/+14.5 x2cost=+29.8 noBest5=+24.1 lrun=7
+W1 q 0.75                                    n= 228 ( 29/yr) totR= +41.9 perTr=+0.184 yrs+=6/8 worstYr=-4.2 L/S=+30.4/+11.6 x2cost=+29.5 noBest5=+20.4 lrun=6
+W1 q 0.8                                     n= 188 ( 24/yr) totR= +32.4 perTr=+0.172 yrs+=5/8 worstYr=-3.2 L/S=+20.2/+12.2 x2cost=+22.2 noBest5=+11.1 lrun=5
+W1 q 0.85                                    n= 134 ( 17/yr) totR= +20.8 perTr=+0.156 yrs+=5/8 worstYr=-1.9 L/S=+12.2/+8.6 x2cost=+13.6 noBest5=+0.3 lrun=6
+== W2 stall lower bound x upper bound
+W2 lo 0.1 hi 0.5                             n= 246 ( 32/yr) totR= +47.1 perTr=+0.192 yrs+=5/8 worstYr=-3.3 L/S=+48.9/-1.8 x2cost=+27.6 noBest5=+17.7 lrun=5
+W2 lo 0.1 hi 0.6                             n= 286 ( 37/yr) totR= +52.8 perTr=+0.185 yrs+=5/8 worstYr=-2.5 L/S=+52.3/+0.5 x2cost=+32.1 noBest5=+23.3 lrun=6
+W2 lo 0.1 hi 0.8                             n= 322 ( 42/yr) totR= +48.7 perTr=+0.151 yrs+=6/8 worstYr=-3.7 L/S=+50.4/-1.6 x2cost=+27.0 noBest5=+19.2 lrun=6
+W2 lo 0.1 hi 99                              n= 348 ( 45/yr) totR= +53.1 perTr=+0.153 yrs+=6/8 worstYr=-2.7 L/S=+49.7/+3.4 x2cost=+31.0 noBest5=+23.6 lrun=6
+W2 lo 0.15 hi 0.5                            n= 188 ( 24/yr) totR= +36.3 perTr=+0.193 yrs+=7/8 worstYr=-4.9 L/S=+27.0/+9.2 x2cost=+25.0 noBest5=+14.7 lrun=5
+W2 lo 0.15 hi 0.6                            n= 228 ( 29/yr) totR= +41.9 perTr=+0.184 yrs+=6/8 worstYr=-4.2 L/S=+30.4/+11.6 x2cost=+29.5 noBest5=+20.4 lrun=6
+W2 lo 0.15 hi 0.8                            n= 264 ( 34/yr) totR= +37.9 perTr=+0.143 yrs+=6/8 worstYr=-5.4 L/S=+28.5/+9.4 x2cost=+24.4 noBest5=+16.3 lrun=7
+W2 lo 0.15 hi 99                             n= 290 ( 37/yr) totR= +42.3 perTr=+0.146 yrs+=6/8 worstYr=-3.7 L/S=+27.8/+14.4 x2cost=+28.3 noBest5=+20.7 lrun=7
+W2 lo 0.2 hi 0.5                             n= 151 ( 19/yr) totR= +19.0 perTr=+0.126 yrs+=6/8 worstYr=-5.8 L/S=+18.5/+0.5 x2cost=+11.2 noBest5=+0.5 lrun=8
+W2 lo 0.2 hi 0.6                             n= 191 ( 25/yr) totR= +24.7 perTr=+0.129 yrs+=6/8 worstYr=-5.0 L/S=+21.8/+2.9 x2cost=+15.6 noBest5=+6.2 lrun=7
+W2 lo 0.2 hi 0.8                             n= 227 ( 29/yr) totR= +20.6 perTr=+0.091 yrs+=6/8 worstYr=-6.3 L/S=+19.9/+0.7 x2cost=+10.6 noBest5=+2.1 lrun=7
+W2 lo 0.2 hi 99                              n= 253 ( 33/yr) totR= +25.0 perTr=+0.099 yrs+=6/8 worstYr=-4.6 L/S=+19.3/+5.7 x2cost=+14.5 noBest5=+6.5 lrun=7
+W2 lo 0.25 hi 0.5                            n= 120 ( 15/yr) totR=  +9.4 perTr=+0.078 yrs+=6/8 worstYr=-4.2 L/S=+8.4/+1.0 x2cost=+3.6 noBest5=-3.8 lrun=7
+W2 lo 0.25 hi 0.6                            n= 160 ( 21/yr) totR= +15.0 perTr=+0.094 yrs+=5/8 worstYr=-3.4 L/S=+11.7/+3.3 x2cost=+8.0 noBest5=+1.3 lrun=8
+W2 lo 0.25 hi 0.8                            n= 196 ( 25/yr) totR= +11.0 perTr=+0.056 yrs+=5/8 worstYr=-4.6 L/S=+9.8/+1.1 x2cost=+3.0 noBest5=-2.8 lrun=8
+W2 lo 0.25 hi 99                             n= 222 ( 29/yr) totR= +15.4 perTr=+0.069 yrs+=5/8 worstYr=-3.0 L/S=+9.2/+6.2 x2cost=+6.9 noBest5=+1.6 lrun=8
+== W3-W5 checkpoints
+W3 02->08, enter 08:00                       n= 231 ( 30/yr) totR=  -0.1 perTr=-0.000 yrs+=4/8 worstYr=-11.9 L/S=+10.6/-10.7 x2cost=-14.9 noBest5=-26.3 lrun=7
+W4 08:00 + 10:00 checkpoints                 n= 378 ( 49/yr) totR= +27.6 perTr=+0.073 yrs+=6/8 worstYr=-9.5 L/S=+37.5/-9.9 x2cost=+4.6 noBest5=+1.4 lrun=7
+W5 03->12, enter 12:00                       n= 224 ( 29/yr) totR= -13.3 perTr=-0.059 yrs+=2/8 worstYr=-5.6 L/S=-2.0/-11.3 x2cost=-25.9 noBest5=-26.8 lrun=8
+== W6 targets
+W6 target 1.0R                               n= 228 ( 29/yr) totR= +16.6 perTr=+0.073 yrs+=5/8 worstYr=-3.3 L/S=+16.1/+0.5 x2cost=+4.1 noBest5=+11.7 lrun=5
+W6 target 2.0R                               n= 228 ( 29/yr) totR= +37.8 perTr=+0.166 yrs+=7/8 worstYr=-0.2 L/S=+26.1/+11.7 x2cost=+25.3 noBest5=+27.9 lrun=6
+== W7 weekday / news (T2 trades)
+by weekday:      size   sum | dow             | 0      36   9.6 | 1      40  -0.3 | 2      51   2.8 | 3      59  16.9 | 4      42  13.0
+by US-shock day (08:30 or 10:00 NY):        size     sum   mean | news                       | False   169  35.813  0.212 | True     59   6.109  0.104

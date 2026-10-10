@@ -1,265 +1,629 @@
-# XAUUSD (gold) weekly report: strategy v2 ("Go with London's break of the Asia range, wide stop", 1R)
+# XAUUSD (gold) weekly report: strategy v3 ("Follow London's break of an active Asia box")
 
-**Written by:** Agent 2 (Backtest & Performance Manager). **Report date:** Friday 9 Oct 2026 (a re-run of 4 years of history, not a live week).
-**Status of v2:** tested. **Verdict: DROP.** It lost money in the new hidden year (Oct 2022 – Sep 2023), the one test that decides.
-Details are at the bottom and in `feedback.md`. (v1 was tested earlier the same day: IMPROVE; see `feedback.md`.)
+**Written by:** Agent 2 (Backtest & Performance Manager). **Report date:** Sunday report for the week ending 10 Oct 2026
+(a re-run of 11 years of history, not a live week). This replaces the v2 report.
+**Status of v3:** tested. **Verdict: IMPROVE. Grade for the owner: B: Promising (bottom of B), not proven.**
 
 **How to read this:**
-- **R** = the amount risked on one trade (1% of the account). +1 R = won the amount risked; −1 R = lost it.
+- **R** = the amount risked on one trade (1% of the account). +1 R = won the amount risked; -1 R = lost it.
 - Results already have the trading cost taken off (0.40 USD per trade). A "win" is any trade that ended above zero.
-- **Periods:** **C** = Oct 2022 – Sep 2023, the new hidden year, opened only after v2 was frozen. **This is the judge.**
-  **A, Y1, Y2, B** = Oct 2023 – Sep 2026, which Agent 1 had already seen when writing v2, so they flatter it.
-- **Data gap in C:** the free price file is missing whole hours on almost every day from **20 Feb to 28 Jul 2023**. The rules
-  skip such days ("thin days"), so C has trades in only about 7 of its 12 months (Oct 2022 – mid-Feb 2023 and Aug – Sep 2023).
-- **When the trades happen:** signals come between 07:00 London and 12:00 New York, which is **09:00–19:00 Doha in summer**
-  and **10:00–20:00 Doha in winter**. Any open trade is closed at 16:00 New York = **23:00 Doha (US summer) / 00:00 Doha (US winter)**.
-- The full trade list, with Doha and New York times, is in `backtest/trades_v2.csv`.
+- **Data column:** **hidden** = Jan 2016 - Dec 2018, opened only after v3 was frozen. **This is the judge.**
+  **design** = Jan 2019 - Sep 2026, which Agent 1 used to build v3, so it flatters the strategy.
+- **Why so many empty weeks in 2016-2019:** gold cost 1,050-1,400 USD then, and the night box was usually under 8 USD, so the rules say
+  "no trade". In 2016-2018, 621 of 773 days were skipped for this reason. Since 2025, almost every day qualifies.
+- **When the trades happen:** orders are live 07:00-11:59 London = **09:00-13:59 Doha (UK summer) / 10:00-14:59 Doha (UK winter)**.
+  Every open trade is closed at 16:00 New York = **23:00 Doha (US summer) / 00:00 midnight Doha (US winter)**.
+- Full trade list with Doha and New York times: `backtest/trades_v3.csv`. Every day and why it was or was not traded: `backtest/days_v3.csv`.
+- "news-shock days" in the notes = days with a big US news price jump at 08:30, 10:00 or 14:00 NY (found afterwards; not a filter).
 
-## Key numbers per period (0.40 USD cost, 8 USD minimum stop)
+## Key numbers per year (0.40 USD cost)
 
-| Period | Trades | Win rate | Total | Profit factor | Worst drop | Longest losing run | Losing weeks (of weeks with trades) | At 0.80 USD cost |
+| Year | Data | Trades | Win rate | Total R | R per trade | Profit factor | Worst drop | Longest losing run | At 0.80 USD |
+|---|---|---|---|---|---|---|---|---|---|
+| 2016 | hidden | 59 | 49% | +4.2 | +0.07 | 1.23 | -3.9 R | 4 | +2.0 |
+| 2017 | hidden | 11 | 45% | -2.8 | -0.25 | 0.34 | -2.8 R | 2 | -3.2 |
+| 2018 | hidden | 11 | 45% | +0.4 | +0.04 | 1.11 | -2.3 R | 3 | -0.1 |
+| **2016-2018** | **hidden** | **81** | **48%** | **+1.9** | **+0.02** | **1.07** | **-8.5 R (-8.2%)** | **4** | **-1.3** |
+| 2019 | design | 31 | 48% | -1.5 | -0.05 | 0.87 | -4.8 R | 4 | -2.7 |
+| 2020 | design | 141 | 46% | +18.1 | +0.13 | 1.30 | -8.2 R | 6 | +13.6 |
+| 2021 | design | 129 | 41% | +9.5 | +0.07 | 1.15 | -9.5 R | 7 | +4.6 |
+| 2022 | design | 121 | 47% | +2.5 | +0.02 | 1.04 | -12.8 R | 5 | -1.9 |
+| 2023 (Feb-Jul data holes) | design | 53 | 40% | +8.2 | +0.16 | 1.38 | -10.6 R | 8 | +6.2 |
+| 2024 | design | 174 | 51% | +31.4 | +0.18 | 1.43 | -6.4 R | 7 | +25.9 |
+| 2025 | design | 192 | 47% | -2.3 | -0.01 | 0.97 | -14.0 R | 5 | -5.8 |
+| 2026 (Jan-Sep) | design | 132 | 55% | +24.4 | +0.19 | 1.65 | -6.2 R | 5 | +23.2 |
+| **2019-2026** | **design** | **973** | **47%** | **+90.3** | **+0.09** | **1.22** | **-18.0 R (-17.1%)** | **8** | **+63.1** |
+| **All 11 years** | | **1,054** | **48%** | **+92.2** | **+0.09** | **1.21** | **-18.0 R (-17.1%)** | **8** | **+61.8** |
+
+Weeks with trades: hidden 53 (24 winning, 29 losing); design 324 (165 winning, 159 losing).
+
+## Week by week, Jan 2016 - Sep 2026 (one row per Monday-Friday week)
+
+| Week (Mon to Fri) | Data | Trades | Wins | Losses | Win rate | Result (R) | Running total (R) | Notes |
 |---|---|---|---|---|---|---|---|---|
-| **C: hidden, Oct 2022 – Sep 2023 (the judge)** | 74 | 43.2% | **−9.1 R** | 0.72 | −13.9 R (−13.2%) | 5 | 17 of 26 | **−11.7 R** |
-| A: Oct 2023 – Sep 2024 (seen) | 177 | 55.9% | +16.9 R | 1.28 | −6.7 R (−6.6%) | 5 | 22 of 51 | +11.5 R |
-| Y1: Oct 2024 – Sep 2025 (seen) | 217 | 55.8% | +10.8 R | 1.16 | −10.7 R (−10.3%) | 5 | 26 of 53 | +6.4 R |
-| Y2: Oct 2025 – Jun 2026 (seen) | 157 | 54.8% | +10.8 R | 1.25 | −11.9 R (−11.4%) | 5 | 16 of 40 | +9.6 R |
-| B: Jul – Sep 2026 (seen) | 59 | 54.2% | +8.4 R | 1.57 | −2.5 R (−2.5%) | 2 | 6 of 14 | +7.9 R |
-| All 4 years | 684 | 54.1% | +37.8 R | 1.17 | −14.1 R (−13.5%) | 5 | 86 of 181 | +23.6 R |
+| 2016-01-04 to 2016-01-08 | hidden | 1 | 0 | 1 | 0% | -0.27 | -0.27 | 3 small-box days |
+| 2016-01-11 to 2016-01-15 | hidden | 0 | 0 | 0 | - | +0.00 | -0.27 | all days box < 8 USD |
+| 2016-01-18 to 2016-01-22 | hidden | 0 | 0 | 0 | - | +0.00 | -0.27 | 4 small-box days; 1 thin/gappy days skipped |
+| 2016-01-25 to 2016-01-29 | hidden | 0 | 0 | 0 | - | +0.00 | -0.27 | 4 small-box days |
+| 2016-02-01 to 2016-02-05 | hidden | 0 | 0 | 0 | - | +0.00 | -0.27 | all days box < 8 USD |
+| 2016-02-08 to 2016-02-12 | hidden | 1 | 1 | 0 | 100% | +1.86 | +1.58 | 3 small-box days; news-shock days +1.9R |
+| 2016-02-15 to 2016-02-19 | hidden | 2 | 0 | 2 | 0% | -0.69 | +0.89 | 2 small-box days; 1 thin/gappy days skipped |
+| 2016-02-22 to 2016-02-26 | hidden | 2 | 1 | 1 | 50% | +0.15 | +1.04 | 2 small-box days |
+| 2016-02-29 to 2016-03-04 | hidden | 1 | 1 | 0 | 100% | +1.33 | +2.37 | 2 small-box days; news-shock days +1.3R |
+| 2016-03-07 to 2016-03-11 | hidden | 4 | 2 | 2 | 50% | -0.05 | +2.32 | 1 small-box days; news-shock days -0.2R |
+| 2016-03-14 to 2016-03-18 | hidden | 1 | 1 | 0 | 100% | +0.46 | +2.78 | 3 small-box days |
+| 2016-03-21 to 2016-03-25 | hidden | 2 | 1 | 1 | 50% | -0.40 | +2.38 | 1 small-box days |
+| 2016-03-28 to 2016-04-01 | hidden | 1 | 0 | 1 | 0% | -1.05 | +1.33 | 4 small-box days |
+| 2016-04-04 to 2016-04-08 | hidden | 2 | 2 | 0 | 100% | +1.23 | +2.56 | 3 small-box days |
+| 2016-04-11 to 2016-04-15 | hidden | 3 | 2 | 1 | 67% | -0.19 | +2.37 | 2 small-box days; news-shock days +0.5R |
+| 2016-04-18 to 2016-04-22 | hidden | 2 | 1 | 1 | 50% | -0.44 | +1.93 | 2 small-box days; news-shock days -0.5R |
+| 2016-04-25 to 2016-04-29 | hidden | 1 | 1 | 0 | 100% | +0.73 | +2.67 | 3 small-box days |
+| 2016-05-02 to 2016-05-06 | hidden | 1 | 0 | 1 | 0% | -1.05 | +1.62 | 4 small-box days; news-shock days -1.0R |
+| 2016-05-09 to 2016-05-13 | hidden | 3 | 2 | 1 | 67% | +1.32 | +2.94 | 2 small-box days |
+| 2016-05-16 to 2016-05-20 | hidden | 1 | 0 | 1 | 0% | -0.27 | +2.67 | 4 small-box days |
+| 2016-05-23 to 2016-05-27 | hidden | 2 | 1 | 1 | 50% | +0.89 | +3.55 | 2 small-box days; news-shock days -1.0R |
+| 2016-05-30 to 2016-06-03 | hidden | 0 | 0 | 0 | - | +0.00 | +3.55 | 4 small-box days; 1 thin/gappy days skipped |
+| 2016-06-06 to 2016-06-10 | hidden | 1 | 0 | 1 | 0% | -0.60 | +2.95 | 4 small-box days |
+| 2016-06-13 to 2016-06-17 | hidden | 3 | 2 | 1 | 67% | +0.18 | +3.13 | 2 small-box days; news-shock days -1.0R |
+| 2016-06-20 to 2016-06-24 | hidden | 2 | 1 | 1 | 50% | +0.67 | +3.80 | 1 small-box days; news-shock days +1.5R |
+| 2016-06-27 to 2016-07-01 | hidden | 3 | 2 | 1 | 67% | +0.05 | +3.85 | 1 small-box days |
+| 2016-07-04 to 2016-07-08 | hidden | 1 | 0 | 1 | 0% | -0.62 | +3.23 | 2 small-box days; 1 thin/gappy days skipped |
+| 2016-07-11 to 2016-07-15 | hidden | 3 | 2 | 1 | 67% | +0.95 | +4.18 | 1 small-box days |
+| 2016-07-18 to 2016-07-22 | hidden | 3 | 3 | 0 | 100% | +3.51 | +7.69 | 1 small-box days; news-shock days +1.7R |
+| 2016-07-25 to 2016-07-29 | hidden | 1 | 0 | 1 | 0% | -0.34 | +7.35 | 2 small-box days |
+| 2016-08-01 to 2016-08-05 | hidden | 1 | 0 | 1 | 0% | -1.04 | +6.31 | 4 small-box days |
+| 2016-08-08 to 2016-08-12 | hidden | 1 | 0 | 1 | 0% | -0.56 | +5.74 | 4 small-box days |
+| 2016-08-15 to 2016-08-19 | hidden | 0 | 0 | 0 | - | +0.00 | +5.74 | 4 small-box days; 1 thin/gappy days skipped |
+| 2016-08-22 to 2016-08-26 | hidden | 0 | 0 | 0 | - | +0.00 | +5.74 | 4 small-box days |
+| 2016-08-29 to 2016-09-02 | hidden | 0 | 0 | 0 | - | +0.00 | +5.74 | all days box < 8 USD |
+| 2016-09-05 to 2016-09-09 | hidden | 0 | 0 | 0 | - | +0.00 | +5.74 | 4 small-box days; 1 thin/gappy days skipped |
+| 2016-09-12 to 2016-09-16 | hidden | 1 | 0 | 1 | 0% | -0.04 | +5.71 | 4 small-box days |
+| 2016-09-19 to 2016-09-23 | hidden | 1 | 1 | 0 | 100% | +1.10 | +6.81 | 4 small-box days; news-shock days +1.1R |
+| 2016-09-26 to 2016-09-30 | hidden | 0 | 0 | 0 | - | +0.00 | +6.81 | all days box < 8 USD |
+| 2016-10-03 to 2016-10-07 | hidden | 0 | 0 | 0 | - | +0.00 | +6.81 | 3 small-box days |
+| 2016-10-10 to 2016-10-14 | hidden | 0 | 0 | 0 | - | +0.00 | +6.81 | 3 small-box days; 1 thin/gappy days skipped |
+| 2016-10-17 to 2016-10-21 | hidden | 0 | 0 | 0 | - | +0.00 | +6.81 | all days box < 8 USD |
+| 2016-10-24 to 2016-10-28 | hidden | 0 | 0 | 0 | - | +0.00 | +6.81 | all days box < 8 USD |
+| 2016-10-31 to 2016-11-04 | hidden | 1 | 0 | 1 | 0% | -0.69 | +6.12 | 3 small-box days; 1 thin/gappy days skipped |
+| 2016-11-07 to 2016-11-11 | hidden | 1 | 0 | 1 | 0% | -1.03 | +5.09 | 2 small-box days; news-shock days -1.0R |
+| 2016-11-14 to 2016-11-18 | hidden | 2 | 0 | 2 | 0% | -1.32 | +3.77 | 2 small-box days; news-shock days -1.3R |
+| 2016-11-21 to 2016-11-25 | hidden | 0 | 0 | 0 | - | +0.00 | +3.77 | 3 small-box days; 2 thin/gappy days skipped |
+| 2016-11-28 to 2016-12-02 | hidden | 0 | 0 | 0 | - | +0.00 | +3.77 | 3 small-box days |
+| 2016-12-05 to 2016-12-09 | hidden | 1 | 1 | 0 | 100% | +0.12 | +3.89 | 4 small-box days; news-shock days +0.1R |
+| 2016-12-12 to 2016-12-16 | hidden | 2 | 1 | 1 | 50% | +0.56 | +4.45 | 3 small-box days |
+| 2016-12-19 to 2016-12-23 | hidden | 0 | 0 | 0 | - | +0.00 | +4.45 | all days box < 8 USD |
+| 2016-12-26 to 2016-12-30 | hidden | 1 | 0 | 1 | 0% | -0.20 | +4.25 | 3 small-box days |
+| 2017-01-02 to 2017-01-06 | hidden | 3 | 1 | 2 | 33% | -1.97 | +2.28 | 1 small-box days; news-shock days -2.0R |
+| 2017-01-09 to 2017-01-13 | hidden | 1 | 0 | 1 | 0% | -0.74 | +1.54 | 4 small-box days |
+| 2017-01-16 to 2017-01-20 | hidden | 1 | 1 | 0 | 100% | +0.24 | +1.78 | 3 small-box days; 1 thin/gappy days skipped |
+| 2017-01-23 to 2017-01-27 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | 4 small-box days; 1 thin/gappy days skipped |
+| 2017-01-30 to 2017-02-03 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | all days box < 8 USD |
+| 2017-02-06 to 2017-02-10 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | all days box < 8 USD |
+| 2017-02-13 to 2017-02-17 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | all days box < 8 USD |
+| 2017-02-20 to 2017-02-24 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | 4 small-box days; 1 thin/gappy days skipped |
+| 2017-02-27 to 2017-03-03 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | all days box < 8 USD |
+| 2017-03-06 to 2017-03-10 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | all days box < 8 USD |
+| 2017-03-13 to 2017-03-17 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | 4 small-box days; 1 thin/gappy days skipped |
+| 2017-03-20 to 2017-03-24 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | 4 small-box days |
+| 2017-03-27 to 2017-03-31 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | all days box < 8 USD |
+| 2017-04-03 to 2017-04-07 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | 4 small-box days |
+| 2017-04-10 to 2017-04-14 | hidden | 0 | 0 | 0 | - | +0.00 | +1.78 | all days box < 8 USD |
+| 2017-04-17 to 2017-04-21 | hidden | 1 | 1 | 0 | 100% | +0.36 | +2.14 | 4 small-box days; news-shock days +0.4R |
+| 2017-04-24 to 2017-04-28 | hidden | 0 | 0 | 0 | - | +0.00 | +2.14 | 4 small-box days |
+| 2017-05-01 to 2017-05-05 | hidden | 2 | 1 | 1 | 50% | -0.59 | +1.55 | 3 small-box days; news-shock days +0.5R |
+| 2017-05-08 to 2017-05-12 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-05-15 to 2017-05-19 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-05-22 to 2017-05-26 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-05-29 to 2017-06-02 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | 4 small-box days; 1 thin/gappy days skipped |
+| 2017-06-05 to 2017-06-09 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | 4 small-box days; 1 thin/gappy days skipped |
+| 2017-06-12 to 2017-06-16 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-06-19 to 2017-06-23 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | 4 small-box days |
+| 2017-06-26 to 2017-06-30 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | 4 small-box days; 1 thin/gappy days skipped |
+| 2017-07-03 to 2017-07-07 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | 4 small-box days; 1 thin/gappy days skipped |
+| 2017-07-10 to 2017-07-14 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-07-17 to 2017-07-21 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-07-24 to 2017-07-28 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-07-31 to 2017-08-04 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | 4 small-box days |
+| 2017-08-07 to 2017-08-11 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-08-14 to 2017-08-18 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | 4 small-box days |
+| 2017-08-21 to 2017-08-25 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-08-28 to 2017-09-01 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | 4 small-box days |
+| 2017-09-04 to 2017-09-08 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | 3 small-box days; 1 thin/gappy days skipped |
+| 2017-09-11 to 2017-09-15 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-09-18 to 2017-09-22 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-09-25 to 2017-09-29 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-10-02 to 2017-10-06 | hidden | 0 | 0 | 0 | - | +0.00 | +1.55 | all days box < 8 USD |
+| 2017-10-09 to 2017-10-13 | hidden | 1 | 0 | 1 | 0% | -0.06 | +1.49 | 4 small-box days |
+| 2017-10-16 to 2017-10-20 | hidden | 1 | 1 | 0 | 100% | +0.24 | +1.73 | 4 small-box days |
+| 2017-10-23 to 2017-10-27 | hidden | 0 | 0 | 0 | - | +0.00 | +1.73 | all days box < 8 USD |
+| 2017-10-30 to 2017-11-03 | hidden | 1 | 0 | 1 | 0% | -0.24 | +1.49 | 4 small-box days; news-shock days -0.2R |
+| 2017-11-06 to 2017-11-10 | hidden | 0 | 0 | 0 | - | +0.00 | +1.49 | all days box < 8 USD |
+| 2017-11-13 to 2017-11-17 | hidden | 0 | 0 | 0 | - | +0.00 | +1.49 | all days box < 8 USD |
+| 2017-11-20 to 2017-11-24 | hidden | 0 | 0 | 0 | - | +0.00 | +1.49 | 3 small-box days; 2 thin/gappy days skipped |
+| 2017-11-27 to 2017-12-01 | hidden | 0 | 0 | 0 | - | +0.00 | +1.49 | all days box < 8 USD |
+| 2017-12-04 to 2017-12-08 | hidden | 0 | 0 | 0 | - | +0.00 | +1.49 | all days box < 8 USD |
+| 2017-12-11 to 2017-12-15 | hidden | 0 | 0 | 0 | - | +0.00 | +1.49 | all days box < 8 USD |
+| 2017-12-18 to 2017-12-22 | hidden | 0 | 0 | 0 | - | +0.00 | +1.49 | all days box < 8 USD |
+| 2017-12-25 to 2017-12-29 | hidden | 0 | 0 | 0 | - | +0.00 | +1.49 | all days box < 8 USD |
+| 2018-01-01 to 2018-01-05 | hidden | 1 | 0 | 1 | 0% | -0.38 | +1.11 | 3 small-box days; news-shock days -0.4R |
+| 2018-01-08 to 2018-01-12 | hidden | 0 | 0 | 0 | - | +0.00 | +1.11 | all days box < 8 USD |
+| 2018-01-15 to 2018-01-19 | hidden | 1 | 1 | 0 | 100% | +0.33 | +1.45 | 3 small-box days; 1 thin/gappy days skipped; news-shock days +0.3R |
+| 2018-01-22 to 2018-01-26 | hidden | 1 | 0 | 1 | 0% | -0.63 | +0.81 | 3 small-box days |
+| 2018-01-29 to 2018-02-02 | hidden | 0 | 0 | 0 | - | +0.00 | +0.81 | 4 small-box days |
+| 2018-02-05 to 2018-02-09 | hidden | 1 | 0 | 1 | 0% | -1.04 | -0.23 | 3 small-box days; news-shock days -1.0R |
+| 2018-02-12 to 2018-02-16 | hidden | 0 | 0 | 0 | - | +0.00 | -0.23 | 4 small-box days |
+| 2018-02-19 to 2018-02-23 | hidden | 0 | 0 | 0 | - | +0.00 | -0.23 | 4 small-box days; 1 thin/gappy days skipped |
+| 2018-02-26 to 2018-03-02 | hidden | 1 | 0 | 1 | 0% | -0.55 | -0.78 | 4 small-box days |
+| 2018-03-05 to 2018-03-09 | hidden | 1 | 1 | 0 | 100% | +0.79 | +0.01 | 4 small-box days |
+| 2018-03-12 to 2018-03-16 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-03-19 to 2018-03-23 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | 4 small-box days |
+| 2018-03-26 to 2018-03-30 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-04-02 to 2018-04-06 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-04-09 to 2018-04-13 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-04-16 to 2018-04-20 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-04-23 to 2018-04-27 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-04-30 to 2018-05-04 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-05-07 to 2018-05-11 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-05-14 to 2018-05-18 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-05-21 to 2018-05-25 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-05-28 to 2018-06-01 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | 4 small-box days; 1 thin/gappy days skipped |
+| 2018-06-04 to 2018-06-08 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-06-11 to 2018-06-15 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-06-18 to 2018-06-22 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-06-25 to 2018-06-29 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-07-02 to 2018-07-06 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | 4 small-box days; 1 thin/gappy days skipped |
+| 2018-07-09 to 2018-07-13 | hidden | 0 | 0 | 0 | - | +0.00 | +0.01 | all days box < 8 USD |
+| 2018-07-16 to 2018-07-20 | hidden | 1 | 1 | 0 | 100% | +0.74 | +0.75 | 4 small-box days |
+| 2018-07-23 to 2018-07-27 | hidden | 0 | 0 | 0 | - | +0.00 | +0.75 | all days box < 8 USD |
+| 2018-07-30 to 2018-08-03 | hidden | 0 | 0 | 0 | - | +0.00 | +0.75 | all days box < 8 USD |
+| 2018-08-06 to 2018-08-10 | hidden | 0 | 0 | 0 | - | +0.00 | +0.75 | all days box < 8 USD |
+| 2018-08-13 to 2018-08-17 | hidden | 2 | 1 | 1 | 50% | +1.12 | +1.87 | 3 small-box days; news-shock days -0.3R |
+| 2018-08-20 to 2018-08-24 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | all days box < 8 USD |
+| 2018-08-27 to 2018-08-31 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | all days box < 8 USD |
+| 2018-09-03 to 2018-09-07 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | 4 small-box days; 1 thin/gappy days skipped |
+| 2018-09-10 to 2018-09-14 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | all days box < 8 USD |
+| 2018-09-17 to 2018-09-21 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | all days box < 8 USD |
+| 2018-09-24 to 2018-09-28 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | all days box < 8 USD |
+| 2018-10-01 to 2018-10-05 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | all days box < 8 USD |
+| 2018-10-08 to 2018-10-12 | hidden | 1 | 1 | 0 | 100% | +0.69 | +2.56 | 4 small-box days |
+| 2018-10-15 to 2018-10-19 | hidden | 0 | 0 | 0 | - | +0.00 | +2.56 | all days box < 8 USD |
+| 2018-10-22 to 2018-10-26 | hidden | 0 | 0 | 0 | - | +0.00 | +2.56 | all days box < 8 USD |
+| 2018-10-29 to 2018-11-02 | hidden | 0 | 0 | 0 | - | +0.00 | +2.56 | all days box < 8 USD |
+| 2018-11-05 to 2018-11-09 | hidden | 1 | 0 | 1 | 0% | -0.69 | +1.87 | 4 small-box days |
+| 2018-11-12 to 2018-11-16 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | all days box < 8 USD |
+| 2018-11-19 to 2018-11-23 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | 3 small-box days; 2 thin/gappy days skipped |
+| 2018-11-26 to 2018-11-30 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | all days box < 8 USD |
+| 2018-12-03 to 2018-12-07 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | all days box < 8 USD |
+| 2018-12-10 to 2018-12-14 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | all days box < 8 USD |
+| 2018-12-17 to 2018-12-21 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | all days box < 8 USD |
+| 2018-12-24 to 2018-12-28 | hidden | 0 | 0 | 0 | - | +0.00 | +1.87 | 2 small-box days; 1 thin/gappy days skipped |
+| 2018-12-31 to 2019-01-04 | design | 1 | 0 | 1 | 0% | -1.05 | +0.83 | 3 small-box days; news-shock days -1.0R |
+| 2019-01-07 to 2019-01-11 | design | 2 | 0 | 2 | 0% | -0.84 | -0.02 | 3 small-box days |
+| 2019-01-14 to 2019-01-18 | design | 0 | 0 | 0 | - | +0.00 | -0.02 | all days box < 8 USD |
+| 2019-01-21 to 2019-01-25 | design | 0 | 0 | 0 | - | +0.00 | -0.02 | 4 small-box days; 1 thin/gappy days skipped |
+| 2019-01-28 to 2019-02-01 | design | 0 | 0 | 0 | - | +0.00 | -0.02 | all days box < 8 USD |
+| 2019-02-04 to 2019-02-08 | design | 0 | 0 | 0 | - | +0.00 | -0.02 | all days box < 8 USD |
+| 2019-02-11 to 2019-02-15 | design | 0 | 0 | 0 | - | +0.00 | -0.02 | all days box < 8 USD |
+| 2019-02-18 to 2019-02-22 | design | 0 | 0 | 0 | - | +0.00 | -0.02 | 4 small-box days; 1 thin/gappy days skipped |
+| 2019-02-25 to 2019-03-01 | design | 0 | 0 | 0 | - | +0.00 | -0.02 | 4 small-box days; 1 thin/gappy days skipped |
+| 2019-03-04 to 2019-03-08 | design | 1 | 1 | 0 | 100% | +0.77 | +0.75 | 4 small-box days; news-shock days +0.8R |
+| 2019-03-11 to 2019-03-15 | design | 1 | 0 | 1 | 0% | -0.08 | +0.66 | 4 small-box days |
+| 2019-03-18 to 2019-03-22 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | all days box < 8 USD |
+| 2019-03-25 to 2019-03-29 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | all days box < 8 USD |
+| 2019-04-01 to 2019-04-05 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | 4 small-box days; 1 thin/gappy days skipped |
+| 2019-04-08 to 2019-04-12 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | all days box < 8 USD |
+| 2019-04-15 to 2019-04-19 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | all days box < 8 USD |
+| 2019-04-22 to 2019-04-26 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | all days box < 8 USD |
+| 2019-04-29 to 2019-05-03 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | all days box < 8 USD |
+| 2019-05-06 to 2019-05-10 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | all days box < 8 USD |
+| 2019-05-13 to 2019-05-17 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | all days box < 8 USD |
+| 2019-05-20 to 2019-05-24 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | all days box < 8 USD |
+| 2019-05-27 to 2019-05-31 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | 4 small-box days; 1 thin/gappy days skipped |
+| 2019-06-03 to 2019-06-07 | design | 0 | 0 | 0 | - | +0.00 | +0.66 | all days box < 8 USD |
+| 2019-06-10 to 2019-06-14 | design | 2 | 0 | 2 | 0% | -0.45 | +0.22 | 3 small-box days; news-shock days -0.4R |
+| 2019-06-17 to 2019-06-21 | design | 1 | 0 | 1 | 0% | -0.47 | -0.25 | 3 small-box days; news-shock days -0.5R |
+| 2019-06-24 to 2019-06-28 | design | 0 | 0 | 0 | - | +0.00 | -0.25 | 1 small-box days |
+| 2019-07-01 to 2019-07-05 | design | 3 | 3 | 0 | 100% | +3.69 | +3.44 | 1 thin/gappy days skipped; news-shock days +1.6R |
+| 2019-07-08 to 2019-07-12 | design | 1 | 0 | 1 | 0% | -1.04 | +2.40 | 3 small-box days |
+| 2019-07-15 to 2019-07-19 | design | 1 | 0 | 1 | 0% | -1.04 | +1.36 | 3 small-box days; news-shock days -1.0R |
+| 2019-07-22 to 2019-07-26 | design | 0 | 0 | 0 | - | +0.00 | +1.36 | 4 small-box days |
+| 2019-07-29 to 2019-08-02 | design | 1 | 0 | 1 | 0% | -1.04 | +0.32 | 3 small-box days |
+| 2019-08-05 to 2019-08-09 | design | 3 | 2 | 1 | 67% | -0.52 | -0.20 | news-shock days -0.8R |
+| 2019-08-12 to 2019-08-16 | design | 4 | 2 | 2 | 50% | -0.91 | -1.11 | 1 small-box days; news-shock days -1.0R |
+| 2019-08-19 to 2019-08-23 | design | 0 | 0 | 0 | - | +0.00 | -1.11 | all days box < 8 USD |
+| 2019-08-26 to 2019-08-30 | design | 1 | 1 | 0 | 100% | +0.79 | -0.31 | 3 small-box days |
+| 2019-09-02 to 2019-09-06 | design | 2 | 1 | 1 | 50% | +1.01 | +0.70 | 2 small-box days; 1 thin/gappy days skipped; news-shock days +2.1R |
+| 2019-09-09 to 2019-09-13 | design | 2 | 2 | 0 | 100% | +0.10 | +0.81 | 2 small-box days; news-shock days +0.0R |
+| 2019-09-16 to 2019-09-20 | design | 2 | 2 | 0 | 100% | +0.29 | +1.10 | 3 small-box days |
+| 2019-09-23 to 2019-09-27 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | all days box < 8 USD |
+| 2019-09-30 to 2019-10-04 | design | 1 | 0 | 1 | 0% | -1.03 | +0.07 | 4 small-box days; news-shock days -1.0R |
+| 2019-10-07 to 2019-10-11 | design | 1 | 1 | 0 | 100% | +1.04 | +1.10 | 4 small-box days; news-shock days +1.0R |
+| 2019-10-14 to 2019-10-18 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | all days box < 8 USD |
+| 2019-10-21 to 2019-10-25 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | all days box < 8 USD |
+| 2019-10-28 to 2019-11-01 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | all days box < 8 USD |
+| 2019-11-04 to 2019-11-08 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | all days box < 8 USD |
+| 2019-11-11 to 2019-11-15 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | 4 small-box days |
+| 2019-11-18 to 2019-11-22 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | all days box < 8 USD |
+| 2019-11-25 to 2019-11-29 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | 3 small-box days; 2 thin/gappy days skipped |
+| 2019-12-02 to 2019-12-06 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | all days box < 8 USD |
+| 2019-12-09 to 2019-12-13 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | all days box < 8 USD |
+| 2019-12-16 to 2019-12-20 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | all days box < 8 USD |
+| 2019-12-23 to 2019-12-27 | design | 0 | 0 | 0 | - | +0.00 | +1.10 | 3 small-box days; 1 thin/gappy days skipped |
+| 2019-12-30 to 2020-01-03 | design | 2 | 1 | 1 | 50% | -0.41 | +0.70 | 2 small-box days; news-shock days +0.3R |
+| 2020-01-06 to 2020-01-10 | design | 2 | 2 | 0 | 100% | +0.99 | +1.69 | 1 small-box days; news-shock days +1.0R |
+| 2020-01-13 to 2020-01-17 | design | 1 | 1 | 0 | 100% | +0.14 | +1.83 | 4 small-box days; news-shock days +0.1R |
+| 2020-01-20 to 2020-01-24 | design | 2 | 1 | 1 | 50% | -0.89 | +0.94 | 2 small-box days; 1 thin/gappy days skipped |
+| 2020-01-27 to 2020-01-31 | design | 0 | 0 | 0 | - | +0.00 | +0.94 | all days box < 8 USD |
+| 2020-02-03 to 2020-02-07 | design | 3 | 2 | 1 | 67% | +0.83 | +1.77 | 2 small-box days |
+| 2020-02-10 to 2020-02-14 | design | 0 | 0 | 0 | - | +0.00 | +1.77 | all days box < 8 USD |
+| 2020-02-17 to 2020-02-21 | design | 1 | 1 | 0 | 100% | +0.88 | +2.65 | 3 small-box days; 1 thin/gappy days skipped; news-shock days +0.9R |
+| 2020-02-24 to 2020-02-28 | design | 4 | 1 | 3 | 25% | -0.90 | +1.75 | news-shock days +1.2R |
+| 2020-03-02 to 2020-03-06 | design | 3 | 1 | 2 | 33% | +1.10 | +2.85 | 2 small-box days; news-shock days +1.1R |
+| 2020-03-09 to 2020-03-13 | design | 2 | 0 | 2 | 0% | -2.04 | +0.81 | news-shock days -2.0R |
+| 2020-03-16 to 2020-03-20 | design | 4 | 2 | 2 | 50% | -0.83 | -0.02 | news-shock days -0.4R |
+| 2020-03-23 to 2020-03-27 | design | 4 | 2 | 2 | 50% | +1.21 | +1.18 |  |
+| 2020-03-30 to 2020-04-03 | design | 2 | 1 | 1 | 50% | +0.34 | +1.53 | 2 small-box days; 1 thin/gappy days skipped |
+| 2020-04-06 to 2020-04-10 | design | 3 | 1 | 2 | 33% | +3.66 | +5.19 | 1 small-box days; big winner +4.3R |
+| 2020-04-13 to 2020-04-17 | design | 4 | 2 | 2 | 50% | +1.14 | +6.32 | 1 small-box days; news-shock days +2.4R |
+| 2020-04-20 to 2020-04-24 | design | 4 | 3 | 1 | 75% | +3.16 | +9.48 | 1 small-box days; news-shock days -1.0R |
+| 2020-04-27 to 2020-05-01 | design | 3 | 0 | 3 | 0% | -3.09 | +6.39 | 2 small-box days |
+| 2020-05-04 to 2020-05-08 | design | 2 | 1 | 1 | 50% | -0.79 | +5.60 | 3 small-box days; news-shock days -0.8R |
+| 2020-05-11 to 2020-05-15 | design | 2 | 1 | 1 | 50% | +0.33 | +5.93 | 2 small-box days |
+| 2020-05-18 to 2020-05-22 | design | 2 | 1 | 1 | 50% | +0.09 | +6.02 | 3 small-box days |
+| 2020-05-25 to 2020-05-29 | design | 4 | 2 | 2 | 50% | +1.32 | +7.33 | 1 thin/gappy days skipped |
+| 2020-06-01 to 2020-06-05 | design | 2 | 2 | 0 | 100% | +4.75 | +12.09 | 2 small-box days; news-shock days +4.8R |
+| 2020-06-08 to 2020-06-12 | design | 3 | 2 | 1 | 67% | -0.50 | +11.59 | 1 small-box days; news-shock days -1.0R |
+| 2020-06-15 to 2020-06-19 | design | 2 | 0 | 2 | 0% | -1.47 | +10.12 | 3 small-box days; news-shock days -0.4R |
+| 2020-06-22 to 2020-06-26 | design | 3 | 0 | 3 | 0% | -3.11 | +7.01 | 2 small-box days |
+| 2020-06-29 to 2020-07-03 | design | 0 | 0 | 0 | - | +0.00 | +7.01 | 4 small-box days; 1 thin/gappy days skipped |
+| 2020-07-06 to 2020-07-10 | design | 1 | 0 | 1 | 0% | -1.05 | +5.96 | 4 small-box days |
+| 2020-07-13 to 2020-07-17 | design | 0 | 0 | 0 | - | +0.00 | +5.96 | all days box < 8 USD |
+| 2020-07-20 to 2020-07-24 | design | 2 | 2 | 0 | 100% | +2.08 | +8.05 | 2 small-box days; news-shock days +0.7R |
+| 2020-07-27 to 2020-07-31 | design | 4 | 0 | 4 | 0% | -0.71 | +7.34 | news-shock days -0.6R |
+| 2020-08-03 to 2020-08-07 | design | 3 | 2 | 1 | 67% | +0.55 | +7.89 | 1 small-box days |
+| 2020-08-10 to 2020-08-14 | design | 2 | 2 | 0 | 100% | +3.64 | +11.53 | 1 thin/gappy days skipped; news-shock days +3.6R; big winner +3.6R |
+| 2020-08-17 to 2020-08-21 | design | 5 | 3 | 2 | 60% | +1.91 | +13.44 | news-shock days +2.0R |
+| 2020-08-24 to 2020-08-28 | design | 4 | 1 | 3 | 25% | -1.54 | +11.90 | 1 small-box days; news-shock days -1.0R |
+| 2020-08-31 to 2020-09-04 | design | 4 | 2 | 2 | 50% | -0.10 | +11.80 |  |
+| 2020-09-07 to 2020-09-11 | design | 2 | 0 | 2 | 0% | -2.08 | +9.72 | 1 small-box days; 1 thin/gappy days skipped |
+| 2020-09-14 to 2020-09-18 | design | 4 | 0 | 4 | 0% | -2.92 | +6.80 |  |
+| 2020-09-21 to 2020-09-25 | design | 5 | 3 | 2 | 60% | +3.20 | +10.00 | news-shock days +2.9R; big winner +4.1R |
+| 2020-09-28 to 2020-10-02 | design | 4 | 1 | 3 | 25% | -1.75 | +8.25 |  |
+| 2020-10-05 to 2020-10-09 | design | 3 | 1 | 2 | 33% | -0.20 | +8.05 | 2 small-box days |
+| 2020-10-12 to 2020-10-16 | design | 3 | 1 | 2 | 33% | -1.18 | +6.88 | 1 small-box days |
+| 2020-10-19 to 2020-10-23 | design | 3 | 2 | 1 | 67% | +0.20 | +7.08 | 1 small-box days |
+| 2020-10-26 to 2020-10-30 | design | 4 | 2 | 2 | 50% | +2.54 | +9.63 | 1 small-box days; news-shock days +3.0R |
+| 2020-11-02 to 2020-11-06 | design | 4 | 3 | 1 | 75% | +4.82 | +14.45 | news-shock days +3.7R; big winner +4.7R |
+| 2020-11-09 to 2020-11-13 | design | 4 | 3 | 1 | 75% | +7.47 | +21.92 | 1 small-box days; news-shock days +8.2R; big winner +6.7R |
+| 2020-11-16 to 2020-11-20 | design | 4 | 0 | 4 | 0% | -2.73 | +19.19 | 1 small-box days; news-shock days -0.6R |
+| 2020-11-23 to 2020-11-27 | design | 2 | 1 | 1 | 50% | +0.34 | +19.53 | 1 small-box days; 2 thin/gappy days skipped |
+| 2020-11-30 to 2020-12-04 | design | 1 | 0 | 1 | 0% | -1.04 | +18.50 | 2 small-box days; 2 thin/gappy days skipped |
+| 2020-12-07 to 2020-12-11 | design | 3 | 1 | 2 | 33% | -0.93 | +17.57 | 2 small-box days; news-shock days +1.2R |
+| 2020-12-14 to 2020-12-18 | design | 3 | 2 | 1 | 67% | +1.16 | +18.73 | 2 small-box days; news-shock days +1.4R |
+| 2020-12-21 to 2020-12-25 | design | 2 | 2 | 0 | 100% | +0.67 | +19.40 | 1 small-box days; 1 thin/gappy days skipped |
+| 2020-12-28 to 2021-01-01 | design | 2 | 1 | 1 | 50% | -0.90 | +18.50 | 1 small-box days |
+| 2021-01-04 to 2021-01-08 | design | 5 | 4 | 1 | 80% | +6.06 | +24.56 | news-shock days +5.4R; big winner +5.4R |
+| 2021-01-11 to 2021-01-15 | design | 4 | 1 | 3 | 25% | -1.57 | +22.99 | news-shock days -1.0R |
+| 2021-01-18 to 2021-01-22 | design | 3 | 1 | 2 | 33% | -1.12 | +21.87 | 1 small-box days; 1 thin/gappy days skipped |
+| 2021-01-25 to 2021-01-29 | design | 4 | 1 | 3 | 25% | -2.77 | +19.10 | 1 small-box days |
+| 2021-02-01 to 2021-02-05 | design | 4 | 3 | 1 | 75% | +2.52 | +21.62 | 1 small-box days |
+| 2021-02-08 to 2021-02-12 | design | 5 | 0 | 5 | 0% | -3.99 | +17.63 | news-shock days -0.3R |
+| 2021-02-15 to 2021-02-19 | design | 3 | 2 | 1 | 67% | +2.99 | +20.62 | 1 thin/gappy days skipped; news-shock days +2.7R |
+| 2021-02-22 to 2021-02-26 | design | 5 | 5 | 0 | 100% | +5.08 | +25.70 |  |
+| 2021-03-01 to 2021-03-05 | design | 4 | 1 | 3 | 25% | -2.88 | +22.81 | 1 small-box days; news-shock days -0.8R |
+| 2021-03-08 to 2021-03-12 | design | 5 | 2 | 3 | 40% | +0.85 | +23.66 |  |
+| 2021-03-15 to 2021-03-19 | design | 3 | 1 | 2 | 33% | +0.40 | +24.06 | 1 small-box days; news-shock days -1.0R |
+| 2021-03-22 to 2021-03-26 | design | 3 | 0 | 3 | 0% | -1.97 | +22.08 | 2 small-box days |
+| 2021-03-29 to 2021-04-02 | design | 3 | 3 | 0 | 100% | +6.19 | +28.28 | 1 thin/gappy days skipped; news-shock days +4.7R |
+| 2021-04-05 to 2021-04-09 | design | 2 | 2 | 0 | 100% | +1.25 | +29.53 | 2 small-box days |
+| 2021-04-12 to 2021-04-16 | design | 2 | 1 | 1 | 50% | +1.43 | +30.95 | 1 small-box days; news-shock days +1.4R |
+| 2021-04-19 to 2021-04-23 | design | 3 | 1 | 2 | 33% | -1.19 | +29.76 | 2 small-box days; news-shock days -1.0R |
+| 2021-04-26 to 2021-04-30 | design | 1 | 0 | 1 | 0% | -1.04 | +28.72 | 1 small-box days; news-shock days -1.0R |
+| 2021-05-03 to 2021-05-07 | design | 4 | 3 | 1 | 75% | +4.01 | +32.73 | 1 small-box days; news-shock days +1.0R |
+| 2021-05-10 to 2021-05-14 | design | 2 | 0 | 2 | 0% | -1.21 | +31.52 | 2 small-box days; news-shock days -1.0R |
+| 2021-05-17 to 2021-05-21 | design | 0 | 0 | 0 | - | +0.00 | +31.52 | 2 small-box days |
+| 2021-05-24 to 2021-05-28 | design | 4 | 1 | 3 | 25% | -0.85 | +30.67 | 1 small-box days; news-shock days +1.2R |
+| 2021-05-31 to 2021-06-04 | design | 2 | 2 | 0 | 100% | +4.30 | +34.97 | 1 small-box days; 2 thin/gappy days skipped; news-shock days +1.2R; big winner +3.1R |
+| 2021-06-07 to 2021-06-11 | design | 2 | 0 | 2 | 0% | -2.10 | +32.87 | 3 small-box days |
+| 2021-06-14 to 2021-06-18 | design | 4 | 1 | 3 | 25% | +1.35 | +34.23 | 1 small-box days; news-shock days +3.8R; big winner +3.8R |
+| 2021-06-21 to 2021-06-25 | design | 2 | 2 | 0 | 100% | +0.81 | +35.03 | 3 small-box days |
+| 2021-06-28 to 2021-07-02 | design | 3 | 0 | 3 | 0% | -1.64 | +33.40 | 2 small-box days |
+| 2021-07-05 to 2021-07-09 | design | 4 | 1 | 3 | 25% | -3.10 | +30.30 | 1 thin/gappy days skipped; news-shock days +0.0R |
+| 2021-07-12 to 2021-07-16 | design | 2 | 1 | 1 | 50% | +0.79 | +31.08 | 3 small-box days |
+| 2021-07-19 to 2021-07-23 | design | 0 | 0 | 0 | - | +0.00 | +31.08 | 4 small-box days |
+| 2021-07-26 to 2021-07-30 | design | 2 | 1 | 1 | 50% | +0.00 | +31.08 | 2 small-box days |
+| 2021-08-02 to 2021-08-06 | design | 1 | 0 | 1 | 0% | -1.05 | +30.04 | 4 small-box days |
+| 2021-08-09 to 2021-08-13 | design | 2 | 1 | 1 | 50% | +1.27 | +31.30 | 3 small-box days; news-shock days +1.6R |
+| 2021-08-16 to 2021-08-20 | design | 4 | 0 | 4 | 0% | -3.71 | +27.59 | 1 small-box days; news-shock days -1.6R |
+| 2021-08-23 to 2021-08-27 | design | 2 | 1 | 1 | 50% | +0.17 | +27.75 | 2 small-box days; news-shock days +0.2R |
+| 2021-08-30 to 2021-09-03 | design | 1 | 1 | 0 | 100% | +0.24 | +28.00 | 4 small-box days |
+| 2021-09-06 to 2021-09-10 | design | 1 | 1 | 0 | 100% | +2.23 | +30.23 | 2 small-box days; 1 thin/gappy days skipped; news-shock days +2.2R |
+| 2021-09-13 to 2021-09-17 | design | 3 | 1 | 2 | 33% | +1.93 | +32.16 | 2 small-box days; big winner +3.0R |
+| 2021-09-20 to 2021-09-24 | design | 2 | 1 | 1 | 50% | -0.40 | +31.76 | 3 small-box days; news-shock days -1.0R |
+| 2021-09-27 to 2021-10-01 | design | 2 | 0 | 2 | 0% | -1.25 | +30.51 | 3 small-box days; news-shock days -1.0R |
+| 2021-10-04 to 2021-10-08 | design | 2 | 0 | 2 | 0% | -1.38 | +29.13 | 3 small-box days |
+| 2021-10-11 to 2021-10-15 | design | 1 | 0 | 1 | 0% | -0.10 | +29.03 | 4 small-box days |
+| 2021-10-18 to 2021-10-22 | design | 3 | 1 | 2 | 33% | -0.17 | +28.86 | 2 small-box days |
+| 2021-10-25 to 2021-10-29 | design | 3 | 1 | 2 | 33% | -1.49 | +27.37 | 2 small-box days |
+| 2021-11-01 to 2021-11-05 | design | 0 | 0 | 0 | - | +0.00 | +27.37 | 4 small-box days |
+| 2021-11-08 to 2021-11-12 | design | 2 | 1 | 1 | 50% | -0.53 | +26.83 | 3 small-box days |
+| 2021-11-15 to 2021-11-19 | design | 2 | 1 | 1 | 50% | -0.87 | +25.97 | 3 small-box days; news-shock days +0.2R |
+| 2021-11-22 to 2021-11-26 | design | 2 | 2 | 0 | 100% | +5.79 | +31.76 | 1 small-box days; 2 thin/gappy days skipped; news-shock days +4.4R; big winner +4.4R |
+| 2021-11-29 to 2021-12-03 | design | 2 | 0 | 2 | 0% | -2.08 | +29.68 | 2 small-box days |
+| 2021-12-06 to 2021-12-10 | design | 1 | 0 | 1 | 0% | -1.05 | +28.63 | 4 small-box days |
+| 2021-12-13 to 2021-12-17 | design | 2 | 1 | 1 | 50% | +0.43 | +29.06 | 3 small-box days |
+| 2021-12-20 to 2021-12-24 | design | 0 | 0 | 0 | - | +0.00 | +29.06 | all days box < 8 USD |
+| 2021-12-27 to 2021-12-31 | design | 1 | 0 | 1 | 0% | -1.05 | +28.01 | 4 small-box days |
+| 2022-01-03 to 2022-01-07 | design | 1 | 1 | 0 | 100% | +0.92 | +28.93 | 4 small-box days |
+| 2022-01-10 to 2022-01-14 | design | 2 | 1 | 1 | 50% | +0.44 | +29.37 | 3 small-box days |
+| 2022-01-17 to 2022-01-21 | design | 0 | 0 | 0 | - | +0.00 | +29.37 | 4 small-box days; 1 thin/gappy days skipped |
+| 2022-01-24 to 2022-01-28 | design | 1 | 1 | 0 | 100% | +1.21 | +30.58 | 4 small-box days |
+| 2022-01-31 to 2022-02-04 | design | 0 | 0 | 0 | - | +0.00 | +30.58 | all days box < 8 USD |
+| 2022-02-07 to 2022-02-11 | design | 0 | 0 | 0 | - | +0.00 | +30.58 | all days box < 8 USD |
+| 2022-02-14 to 2022-02-18 | design | 4 | 2 | 2 | 50% | +2.31 | +32.89 | 1 small-box days; news-shock days +2.3R |
+| 2022-02-21 to 2022-02-25 | design | 3 | 2 | 1 | 67% | +0.27 | +33.16 | 1 small-box days; 1 thin/gappy days skipped; news-shock days -0.3R |
+| 2022-02-28 to 2022-03-04 | design | 3 | 1 | 2 | 33% | -0.79 | +32.37 | 1 small-box days; news-shock days -1.0R |
+| 2022-03-07 to 2022-03-11 | design | 5 | 3 | 2 | 60% | +1.79 | +34.16 | news-shock days -1.0R |
+| 2022-03-14 to 2022-03-18 | design | 4 | 2 | 2 | 50% | +1.10 | +35.26 | news-shock days +0.3R |
+| 2022-03-21 to 2022-03-25 | design | 4 | 4 | 0 | 100% | +4.50 | +39.76 |  |
+| 2022-03-28 to 2022-04-01 | design | 2 | 2 | 0 | 100% | +0.75 | +40.51 | 1 small-box days; 1 thin/gappy days skipped; news-shock days +0.2R |
+| 2022-04-04 to 2022-04-08 | design | 2 | 1 | 1 | 50% | -0.59 | +39.92 | 3 small-box days |
+| 2022-04-11 to 2022-04-15 | design | 3 | 2 | 1 | 67% | -0.63 | +39.29 | 1 small-box days; news-shock days -1.0R |
+| 2022-04-18 to 2022-04-22 | design | 2 | 0 | 2 | 0% | -2.07 | +37.21 | 3 small-box days |
+| 2022-04-25 to 2022-04-29 | design | 5 | 2 | 3 | 40% | -1.49 | +35.72 | news-shock days +0.6R |
+| 2022-05-02 to 2022-05-06 | design | 3 | 2 | 1 | 67% | +0.38 | +36.10 | 1 small-box days; news-shock days +0.2R |
+| 2022-05-09 to 2022-05-13 | design | 5 | 3 | 2 | 60% | +2.92 | +39.02 | news-shock days +0.5R |
+| 2022-05-16 to 2022-05-20 | design | 3 | 0 | 3 | 0% | -3.12 | +35.91 | 2 small-box days |
+| 2022-05-23 to 2022-05-27 | design | 3 | 1 | 2 | 33% | -0.47 | +35.43 | 1 small-box days; news-shock days +0.4R |
+| 2022-05-30 to 2022-06-03 | design | 2 | 0 | 2 | 0% | -2.09 | +33.34 | 2 small-box days; 1 thin/gappy days skipped; news-shock days -1.0R |
+| 2022-06-06 to 2022-06-10 | design | 0 | 0 | 0 | - | +0.00 | +33.34 | all days box < 8 USD |
+| 2022-06-13 to 2022-06-17 | design | 4 | 2 | 2 | 50% | +1.08 | +34.42 | 1 small-box days; news-shock days +1.1R |
+| 2022-06-20 to 2022-06-24 | design | 1 | 0 | 1 | 0% | -1.05 | +33.37 | 3 small-box days; 1 thin/gappy days skipped |
+| 2022-06-27 to 2022-07-01 | design | 2 | 0 | 2 | 0% | -2.08 | +31.29 | 3 small-box days; news-shock days -1.0R |
+| 2022-07-04 to 2022-07-08 | design | 1 | 1 | 0 | 100% | +2.38 | +33.67 | 2 small-box days; 1 thin/gappy days skipped; news-shock days +2.4R |
+| 2022-07-11 to 2022-07-15 | design | 2 | 2 | 0 | 100% | +1.96 | +35.64 | 2 small-box days |
+| 2022-07-18 to 2022-07-22 | design | 1 | 0 | 1 | 0% | -1.04 | +34.60 | 4 small-box days |
+| 2022-07-25 to 2022-07-29 | design | 3 | 1 | 2 | 33% | -2.05 | +32.55 | 2 small-box days |
+| 2022-08-01 to 2022-08-05 | design | 2 | 1 | 1 | 50% | +0.60 | +33.14 | 2 small-box days; news-shock days +0.6R |
+| 2022-08-08 to 2022-08-12 | design | 0 | 0 | 0 | - | +0.00 | +33.14 | 4 small-box days |
+| 2022-08-15 to 2022-08-19 | design | 1 | 1 | 0 | 100% | +1.32 | +34.47 | 4 small-box days |
+| 2022-08-22 to 2022-08-26 | design | 1 | 0 | 1 | 0% | -0.20 | +34.26 | 4 small-box days |
+| 2022-08-29 to 2022-09-02 | design | 2 | 1 | 1 | 50% | -0.23 | +34.03 | 3 small-box days; news-shock days +0.8R |
+| 2022-09-05 to 2022-09-09 | design | 3 | 2 | 1 | 67% | +1.35 | +35.38 | 1 small-box days; 1 thin/gappy days skipped |
+| 2022-09-12 to 2022-09-16 | design | 1 | 1 | 0 | 100% | +1.78 | +37.17 | 4 small-box days |
+| 2022-09-19 to 2022-09-23 | design | 3 | 1 | 2 | 33% | -1.10 | +36.07 | 2 small-box days; news-shock days -1.0R |
+| 2022-09-26 to 2022-09-30 | design | 4 | 0 | 4 | 0% | -3.73 | +32.33 | 1 small-box days; news-shock days -1.0R |
+| 2022-10-03 to 2022-10-07 | design | 3 | 1 | 2 | 33% | +0.19 | +32.52 | 2 small-box days |
+| 2022-10-10 to 2022-10-14 | design | 4 | 2 | 2 | 50% | -0.63 | +31.89 | 1 small-box days; news-shock days -0.8R |
+| 2022-10-17 to 2022-10-21 | design | 5 | 1 | 4 | 20% | -1.11 | +30.78 | news-shock days -0.7R |
+| 2022-10-24 to 2022-10-28 | design | 3 | 2 | 1 | 67% | +0.39 | +31.17 | 2 small-box days; news-shock days +0.3R |
+| 2022-10-31 to 2022-11-04 | design | 3 | 3 | 0 | 100% | +1.71 | +32.87 | 2 small-box days; news-shock days +1.5R |
+| 2022-11-07 to 2022-11-11 | design | 2 | 1 | 1 | 50% | -0.87 | +32.01 | 3 small-box days; news-shock days -1.0R |
+| 2022-11-14 to 2022-11-18 | design | 2 | 0 | 2 | 0% | -1.73 | +30.28 | 2 small-box days |
+| 2022-11-21 to 2022-11-25 | design | 2 | 1 | 1 | 50% | -0.58 | +29.70 | 1 small-box days; 2 thin/gappy days skipped; news-shock days -0.6R |
+| 2022-11-28 to 2022-12-02 | design | 2 | 0 | 2 | 0% | -1.51 | +28.19 | 2 small-box days; news-shock days -1.0R |
+| 2022-12-05 to 2022-12-09 | design | 3 | 1 | 2 | 33% | +1.91 | +30.10 | 2 small-box days; news-shock days +2.4R |
+| 2022-12-12 to 2022-12-16 | design | 3 | 1 | 2 | 33% | -1.42 | +28.68 | 2 small-box days; news-shock days -0.4R |
+| 2022-12-19 to 2022-12-23 | design | 1 | 1 | 0 | 100% | +1.81 | +30.49 | 4 small-box days; news-shock days +1.8R |
+| 2022-12-26 to 2022-12-30 | design | 0 | 0 | 0 | - | +0.00 | +30.49 | all days box < 8 USD |
+| 2023-01-02 to 2023-01-06 | design | 3 | 2 | 1 | 67% | +2.01 | +32.50 | news-shock days +0.5R |
+| 2023-01-09 to 2023-01-13 | design | 5 | 2 | 3 | 40% | -0.35 | +32.15 | news-shock days -1.0R |
+| 2023-01-16 to 2023-01-20 | design | 4 | 1 | 3 | 25% | +0.38 | +32.52 | 1 thin/gappy days skipped |
+| 2023-01-23 to 2023-01-27 | design | 2 | 0 | 2 | 0% | -2.07 | +30.45 | 1 small-box days; 1 thin/gappy days skipped; news-shock days -1.0R |
+| 2023-01-30 to 2023-02-03 | design | 1 | 0 | 1 | 0% | -1.03 | +29.43 | 3 small-box days; 1 thin/gappy days skipped |
+| 2023-02-06 to 2023-02-10 | design | 4 | 0 | 4 | 0% | -3.25 | +26.18 | 1 small-box days; news-shock days -2.1R |
+| 2023-02-13 to 2023-02-17 | design | 5 | 2 | 3 | 40% | -2.66 | +23.52 | news-shock days -2.1R |
+| 2023-02-20 to 2023-02-24 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-02-27 to 2023-03-03 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-03-06 to 2023-03-10 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-03-13 to 2023-03-17 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-03-20 to 2023-03-24 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-03-27 to 2023-03-31 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-04-03 to 2023-04-07 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 4 thin/gappy days skipped |
+| 2023-04-10 to 2023-04-14 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-04-17 to 2023-04-21 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-04-24 to 2023-04-28 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-05-01 to 2023-05-05 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-05-08 to 2023-05-12 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-05-15 to 2023-05-19 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-05-22 to 2023-05-26 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-05-29 to 2023-06-02 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-06-05 to 2023-06-09 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-06-12 to 2023-06-16 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-06-19 to 2023-06-23 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-06-26 to 2023-06-30 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-07-03 to 2023-07-07 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-07-10 to 2023-07-14 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-07-17 to 2023-07-21 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-07-24 to 2023-07-28 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | 5 thin/gappy days skipped |
+| 2023-07-31 to 2023-08-04 | design | 0 | 0 | 0 | - | +0.00 | +23.52 | all days box < 8 USD |
+| 2023-08-07 to 2023-08-11 | design | 1 | 0 | 1 | 0% | -0.10 | +23.42 | 4 small-box days |
+| 2023-08-14 to 2023-08-18 | design | 0 | 0 | 0 | - | +0.00 | +23.42 | all days box < 8 USD |
+| 2023-08-21 to 2023-08-25 | design | 0 | 0 | 0 | - | +0.00 | +23.42 | 4 small-box days |
+| 2023-08-28 to 2023-09-01 | design | 0 | 0 | 0 | - | +0.00 | +23.42 | all days box < 8 USD |
+| 2023-09-04 to 2023-09-08 | design | 0 | 0 | 0 | - | +0.00 | +23.42 | 4 small-box days; 1 thin/gappy days skipped |
+| 2023-09-11 to 2023-09-15 | design | 1 | 0 | 1 | 0% | -0.50 | +22.92 | 4 small-box days |
+| 2023-09-18 to 2023-09-22 | design | 0 | 0 | 0 | - | +0.00 | +22.92 | 4 small-box days |
+| 2023-09-25 to 2023-09-29 | design | 1 | 1 | 0 | 100% | +2.24 | +25.15 | 3 small-box days; 1 thin/gappy days skipped; news-shock days +2.2R |
+| 2023-10-02 to 2023-10-06 | design | 2 | 1 | 1 | 50% | +0.62 | +25.77 | 3 small-box days; news-shock days +1.0R |
+| 2023-10-09 to 2023-10-13 | design | 1 | 1 | 0 | 100% | +5.92 | +31.70 | 4 small-box days; news-shock days +5.9R; big winner +5.9R |
+| 2023-10-16 to 2023-10-20 | design | 5 | 3 | 2 | 60% | +2.25 | +33.95 | news-shock days +2.6R |
+| 2023-10-23 to 2023-10-27 | design | 3 | 0 | 3 | 0% | -1.62 | +32.33 | 2 small-box days |
+| 2023-10-30 to 2023-11-03 | design | 2 | 0 | 2 | 0% | -1.16 | +31.18 | 3 small-box days |
+| 2023-11-06 to 2023-11-10 | design | 0 | 0 | 0 | - | +0.00 | +31.18 | 4 small-box days |
+| 2023-11-13 to 2023-11-17 | design | 2 | 1 | 1 | 50% | +0.15 | +31.33 | 3 small-box days; news-shock days +0.2R |
+| 2023-11-20 to 2023-11-24 | design | 2 | 1 | 1 | 50% | -0.09 | +31.24 | 1 small-box days; 2 thin/gappy days skipped |
+| 2023-11-27 to 2023-12-01 | design | 1 | 0 | 1 | 0% | -0.24 | +31.00 | 3 small-box days |
+| 2023-12-04 to 2023-12-08 | design | 3 | 2 | 1 | 67% | +1.90 | +32.90 | 2 small-box days |
+| 2023-12-11 to 2023-12-15 | design | 3 | 2 | 1 | 67% | +4.32 | +37.22 | 2 small-box days; news-shock days +4.3R; big winner +4.3R |
+| 2023-12-18 to 2023-12-22 | design | 1 | 1 | 0 | 100% | +0.15 | +37.37 | 4 small-box days |
+| 2023-12-25 to 2023-12-29 | design | 1 | 1 | 0 | 100% | +1.33 | +38.70 | 2 small-box days |
+| 2024-01-01 to 2024-01-05 | design | 2 | 0 | 2 | 0% | -2.07 | +36.62 | 2 small-box days; news-shock days -1.0R |
+| 2024-01-08 to 2024-01-12 | design | 3 | 0 | 3 | 0% | -2.12 | +34.51 | 1 small-box days; 1 thin/gappy days skipped; news-shock days -1.0R |
+| 2024-01-15 to 2024-01-19 | design | 0 | 0 | 0 | - | +0.00 | +34.51 | 3 small-box days; 1 thin/gappy days skipped |
+| 2024-01-22 to 2024-01-26 | design | 2 | 0 | 2 | 0% | -0.57 | +33.94 | 3 small-box days |
+| 2024-01-29 to 2024-02-02 | design | 2 | 1 | 1 | 50% | -0.70 | +33.23 | 3 small-box days; news-shock days -1.0R |
+| 2024-02-05 to 2024-02-09 | design | 1 | 1 | 0 | 100% | +0.11 | +33.34 | 4 small-box days |
+| 2024-02-12 to 2024-02-16 | design | 0 | 0 | 0 | - | +0.00 | +33.34 | all days box < 8 USD |
+| 2024-02-19 to 2024-02-23 | design | 1 | 0 | 1 | 0% | -1.04 | +32.30 | 2 small-box days; 1 thin/gappy days skipped |
+| 2024-02-26 to 2024-03-01 | design | 0 | 0 | 0 | - | +0.00 | +32.30 | all days box < 8 USD |
+| 2024-03-04 to 2024-03-08 | design | 2 | 2 | 0 | 100% | +2.41 | +34.71 | 2 small-box days; news-shock days +2.4R |
+| 2024-03-11 to 2024-03-15 | design | 4 | 2 | 2 | 50% | +0.37 | +35.09 | 1 small-box days; news-shock days +1.4R |
+| 2024-03-18 to 2024-03-22 | design | 3 | 2 | 1 | 67% | +0.07 | +35.15 | 1 small-box days; news-shock days -0.5R |
+| 2024-03-25 to 2024-03-29 | design | 3 | 2 | 1 | 67% | +1.87 | +37.03 | 1 small-box days |
+| 2024-04-01 to 2024-04-05 | design | 4 | 2 | 2 | 50% | +0.57 | +37.60 | 1 thin/gappy days skipped; news-shock days +1.3R |
+| 2024-04-08 to 2024-04-12 | design | 3 | 1 | 2 | 33% | -1.83 | +35.77 | news-shock days -1.0R |
+| 2024-04-15 to 2024-04-19 | design | 4 | 1 | 3 | 25% | -2.90 | +32.87 | news-shock days -2.9R |
+| 2024-04-22 to 2024-04-26 | design | 5 | 3 | 2 | 60% | +0.12 | +33.00 | news-shock days +1.2R |
+| 2024-04-29 to 2024-05-03 | design | 5 | 3 | 2 | 60% | +3.09 | +36.09 | news-shock days +1.4R |
+| 2024-05-06 to 2024-05-10 | design | 5 | 3 | 2 | 60% | +0.04 | +36.12 |  |
+| 2024-05-13 to 2024-05-17 | design | 4 | 4 | 0 | 100% | +6.66 | +42.78 | 1 small-box days; big winner +4.0R |
+| 2024-05-20 to 2024-05-24 | design | 3 | 2 | 1 | 67% | +2.71 | +45.49 | news-shock days +2.7R |
+| 2024-05-27 to 2024-05-31 | design | 1 | 1 | 0 | 100% | +0.07 | +45.56 | 2 small-box days; 1 thin/gappy days skipped; news-shock days +0.1R |
+| 2024-06-03 to 2024-06-07 | design | 3 | 2 | 1 | 67% | +5.00 | +50.56 | news-shock days +3.4R; big winner +4.4R |
+| 2024-06-10 to 2024-06-14 | design | 2 | 1 | 1 | 50% | +0.99 | +51.56 | 1 small-box days |
+| 2024-06-17 to 2024-06-21 | design | 3 | 1 | 2 | 33% | -0.48 | +51.08 | 1 small-box days; 1 thin/gappy days skipped |
+| 2024-06-24 to 2024-06-28 | design | 4 | 2 | 2 | 50% | -0.15 | +50.93 | 1 small-box days |
+| 2024-07-01 to 2024-07-05 | design | 4 | 2 | 2 | 50% | +0.15 | +51.07 | 1 thin/gappy days skipped; news-shock days +1.0R |
+| 2024-07-08 to 2024-07-12 | design | 4 | 2 | 2 | 50% | +2.62 | +53.69 | 1 small-box days; news-shock days +0.6R |
+| 2024-07-15 to 2024-07-19 | design | 5 | 2 | 3 | 40% | +0.53 | +54.22 | news-shock days +1.7R |
+| 2024-07-22 to 2024-07-26 | design | 4 | 2 | 2 | 50% | -1.58 | +52.64 |  |
+| 2024-07-29 to 2024-08-02 | design | 5 | 3 | 2 | 60% | +1.10 | +53.75 | news-shock days -0.5R |
+| 2024-08-05 to 2024-08-09 | design | 5 | 3 | 2 | 60% | +0.93 | +54.68 |  |
+| 2024-08-12 to 2024-08-16 | design | 4 | 2 | 2 | 50% | +6.12 | +60.79 | news-shock days -1.0R; big winner +5.1R |
+| 2024-08-19 to 2024-08-23 | design | 4 | 1 | 3 | 25% | -0.85 | +59.95 | news-shock days +1.2R |
+| 2024-08-26 to 2024-08-30 | design | 5 | 1 | 4 | 20% | -3.12 | +56.82 | news-shock days -1.0R |
+| 2024-09-02 to 2024-09-06 | design | 2 | 1 | 1 | 50% | +0.39 | +57.22 | 1 small-box days; 1 thin/gappy days skipped |
+| 2024-09-09 to 2024-09-13 | design | 3 | 2 | 1 | 67% | +4.11 | +61.33 | 2 small-box days; news-shock days +4.3R; big winner +4.3R |
+| 2024-09-16 to 2024-09-20 | design | 5 | 2 | 3 | 40% | -0.07 | +61.26 | news-shock days -2.5R |
+| 2024-09-23 to 2024-09-27 | design | 5 | 0 | 5 | 0% | -4.49 | +56.77 | news-shock days -1.0R |
+| 2024-09-30 to 2024-10-04 | design | 3 | 2 | 1 | 67% | +1.63 | +58.40 | news-shock days +1.6R |
+| 2024-10-07 to 2024-10-11 | design | 4 | 2 | 2 | 50% | -0.96 | +57.44 | 1 thin/gappy days skipped |
+| 2024-10-14 to 2024-10-18 | design | 4 | 2 | 2 | 50% | -0.61 | +56.82 |  |
+| 2024-10-21 to 2024-10-25 | design | 5 | 2 | 3 | 40% | -1.75 | +55.08 | news-shock days -3.1R |
+| 2024-10-28 to 2024-11-01 | design | 2 | 1 | 1 | 50% | +2.13 | +57.20 | news-shock days -1.0R; big winner +3.2R |
+| 2024-11-04 to 2024-11-08 | design | 5 | 4 | 1 | 80% | +1.98 | +59.18 | news-shock days +1.1R |
+| 2024-11-11 to 2024-11-15 | design | 4 | 2 | 2 | 50% | +0.79 | +59.97 | news-shock days +1.4R |
+| 2024-11-18 to 2024-11-22 | design | 5 | 4 | 1 | 80% | +1.11 | +61.08 |  |
+| 2024-11-25 to 2024-11-29 | design | 2 | 0 | 2 | 0% | -0.58 | +60.50 | 2 thin/gappy days skipped; news-shock days -0.6R |
+| 2024-12-02 to 2024-12-06 | design | 3 | 1 | 2 | 33% | -0.24 | +60.26 | news-shock days -1.0R |
+| 2024-12-09 to 2024-12-13 | design | 3 | 3 | 0 | 100% | +3.60 | +63.86 |  |
+| 2024-12-16 to 2024-12-20 | design | 5 | 3 | 2 | 60% | +5.56 | +69.42 | news-shock days +6.6R; big winner +5.6R |
+| 2024-12-23 to 2024-12-27 | design | 3 | 1 | 2 | 33% | -1.65 | +67.77 | 1 thin/gappy days skipped |
+| 2024-12-30 to 2025-01-03 | design | 4 | 4 | 0 | 100% | +5.79 | +73.56 | news-shock days +1.0R |
+| 2025-01-06 to 2025-01-10 | design | 4 | 2 | 2 | 50% | -1.61 | +71.95 | 1 small-box days; news-shock days -0.8R |
+| 2025-01-13 to 2025-01-17 | design | 4 | 3 | 1 | 75% | +2.13 | +74.08 | 1 small-box days |
+| 2025-01-20 to 2025-01-24 | design | 3 | 1 | 2 | 33% | +0.01 | +74.08 | 1 small-box days; 1 thin/gappy days skipped |
+| 2025-01-27 to 2025-01-31 | design | 1 | 1 | 0 | 100% | +0.40 | +74.49 | 4 small-box days; news-shock days +0.4R |
+| 2025-02-03 to 2025-02-07 | design | 5 | 3 | 2 | 60% | -1.07 | +73.42 |  |
+| 2025-02-10 to 2025-02-14 | design | 4 | 2 | 2 | 50% | -1.31 | +72.11 | news-shock days -2.1R |
+| 2025-02-17 to 2025-02-21 | design | 3 | 0 | 3 | 0% | -2.48 | +69.63 | 1 thin/gappy days skipped |
+| 2025-02-24 to 2025-02-28 | design | 5 | 4 | 1 | 80% | +1.40 | +71.02 |  |
+| 2025-03-03 to 2025-03-07 | design | 5 | 2 | 3 | 40% | -0.10 | +70.92 | news-shock days -1.3R |
+| 2025-03-10 to 2025-03-14 | design | 5 | 2 | 3 | 40% | -0.61 | +70.32 | news-shock days -1.0R |
+| 2025-03-17 to 2025-03-21 | design | 4 | 2 | 2 | 50% | +0.55 | +70.87 | news-shock days -1.0R |
+| 2025-03-24 to 2025-03-28 | design | 5 | 1 | 4 | 20% | -1.27 | +69.60 | news-shock days -1.0R |
+| 2025-03-31 to 2025-04-04 | design | 2 | 1 | 1 | 50% | -0.65 | +68.95 | 1 thin/gappy days skipped; news-shock days -0.6R |
+| 2025-04-07 to 2025-04-11 | design | 3 | 2 | 1 | 67% | +0.69 | +69.65 | news-shock days +1.4R |
+| 2025-04-14 to 2025-04-18 | design | 3 | 2 | 1 | 67% | +0.89 | +70.54 |  |
+| 2025-04-21 to 2025-04-25 | design | 3 | 2 | 1 | 67% | +0.17 | +70.70 | news-shock days +0.2R |
+| 2025-04-28 to 2025-05-02 | design | 3 | 1 | 2 | 33% | -0.95 | +69.75 |  |
+| 2025-05-05 to 2025-05-09 | design | 3 | 2 | 1 | 67% | +2.43 | +72.18 | news-shock days -0.0R |
+| 2025-05-12 to 2025-05-16 | design | 4 | 2 | 2 | 50% | -0.23 | +71.95 | news-shock days -1.0R |
+| 2025-05-19 to 2025-05-23 | design | 4 | 3 | 1 | 75% | +3.96 | +75.91 | news-shock days +3.1R |
+| 2025-05-26 to 2025-05-30 | design | 4 | 2 | 2 | 50% | -0.17 | +75.74 | 1 thin/gappy days skipped |
+| 2025-06-02 to 2025-06-06 | design | 4 | 3 | 1 | 75% | +3.57 | +79.31 | news-shock days +2.2R |
+| 2025-06-09 to 2025-06-13 | design | 4 | 3 | 1 | 75% | -0.56 | +78.74 | news-shock days +0.1R |
+| 2025-06-16 to 2025-06-20 | design | 2 | 1 | 1 | 50% | -0.02 | +78.72 | 1 thin/gappy days skipped |
+| 2025-06-23 to 2025-06-27 | design | 4 | 2 | 2 | 50% | -1.44 | +77.28 | news-shock days -0.5R |
+| 2025-06-30 to 2025-07-04 | design | 4 | 2 | 2 | 50% | -1.29 | +75.98 | 1 thin/gappy days skipped; news-shock days -1.0R |
+| 2025-07-07 to 2025-07-11 | design | 5 | 2 | 3 | 40% | -0.43 | +75.55 |  |
+| 2025-07-14 to 2025-07-18 | design | 5 | 0 | 5 | 0% | -4.40 | +71.15 | news-shock days -0.3R |
+| 2025-07-21 to 2025-07-25 | design | 4 | 3 | 1 | 75% | +1.31 | +72.46 |  |
+| 2025-07-28 to 2025-08-01 | design | 5 | 2 | 3 | 40% | +0.79 | +73.25 | news-shock days +3.0R; big winner +3.0R |
+| 2025-08-04 to 2025-08-08 | design | 5 | 2 | 3 | 40% | -0.58 | +72.67 | news-shock days -1.1R |
+| 2025-08-11 to 2025-08-15 | design | 4 | 3 | 1 | 75% | +0.63 | +73.30 | news-shock days -0.5R |
+| 2025-08-18 to 2025-08-22 | design | 4 | 1 | 3 | 25% | -0.25 | +73.05 | news-shock days -1.0R |
+| 2025-08-25 to 2025-08-29 | design | 3 | 1 | 2 | 33% | -0.54 | +72.51 |  |
+| 2025-09-01 to 2025-09-05 | design | 1 | 0 | 1 | 0% | -1.01 | +71.49 | 1 thin/gappy days skipped |
+| 2025-09-08 to 2025-09-12 | design | 3 | 1 | 2 | 33% | +1.56 | +73.05 | news-shock days -0.5R |
+| 2025-09-15 to 2025-09-19 | design | 3 | 0 | 3 | 0% | -2.05 | +71.01 |  |
+| 2025-09-22 to 2025-09-26 | design | 5 | 3 | 2 | 60% | +2.05 | +73.06 | news-shock days -1.3R; big winner +3.2R |
+| 2025-09-29 to 2025-10-03 | design | 5 | 2 | 3 | 40% | -1.93 | +71.13 | news-shock days -0.2R |
+| 2025-10-06 to 2025-10-10 | design | 5 | 3 | 2 | 60% | -1.25 | +69.88 | news-shock days -1.5R |
+| 2025-10-13 to 2025-10-17 | design | 4 | 3 | 1 | 75% | +2.18 | +72.06 | news-shock days +1.6R |
+| 2025-10-20 to 2025-10-24 | design | 3 | 2 | 1 | 67% | +3.89 | +75.95 | 1 thin/gappy days skipped; news-shock days +3.7R; big winner +3.8R |
+| 2025-10-27 to 2025-10-31 | design | 4 | 2 | 2 | 50% | +0.75 | +76.70 | news-shock days -1.0R |
+| 2025-11-03 to 2025-11-07 | design | 5 | 1 | 4 | 20% | -2.52 | +74.18 |  |
+| 2025-11-10 to 2025-11-14 | design | 3 | 2 | 1 | 67% | +1.45 | +75.63 |  |
+| 2025-11-17 to 2025-11-21 | design | 4 | 0 | 4 | 0% | -3.08 | +72.55 | news-shock days -1.0R |
+| 2025-11-24 to 2025-11-28 | design | 3 | 1 | 2 | 33% | +0.39 | +72.94 | 2 thin/gappy days skipped; news-shock days -0.2R |
+| 2025-12-01 to 2025-12-05 | design | 3 | 0 | 3 | 0% | -2.50 | +70.44 | 1 thin/gappy days skipped |
+| 2025-12-08 to 2025-12-12 | design | 3 | 1 | 2 | 33% | -1.59 | +68.84 | 1 thin/gappy days skipped; news-shock days -1.0R |
+| 2025-12-15 to 2025-12-19 | design | 3 | 0 | 3 | 0% | -3.04 | +65.80 | news-shock days -1.0R |
+| 2025-12-22 to 2025-12-26 | design | 1 | 1 | 0 | 100% | +0.28 | +66.08 | 1 thin/gappy days skipped |
+| 2025-12-29 to 2026-01-02 | design | 3 | 1 | 2 | 33% | +0.69 | +66.77 | news-shock days +0.7R |
+| 2026-01-05 to 2026-01-09 | design | 3 | 3 | 0 | 100% | +1.95 | +68.72 | news-shock days +1.5R |
+| 2026-01-12 to 2026-01-16 | design | 2 | 0 | 2 | 0% | -1.36 | +67.36 |  |
+| 2026-01-19 to 2026-01-23 | design | 3 | 2 | 1 | 67% | +1.20 | +68.56 | 1 thin/gappy days skipped; news-shock days +0.5R |
+| 2026-01-26 to 2026-01-30 | design | 3 | 3 | 0 | 100% | +2.72 | +71.28 | news-shock days +1.7R |
+| 2026-02-02 to 2026-02-06 | design | 2 | 1 | 1 | 50% | -0.67 | +70.61 | news-shock days -0.7R |
+| 2026-02-09 to 2026-02-13 | design | 3 | 0 | 3 | 0% | -3.03 | +67.58 | news-shock days -1.0R |
+| 2026-02-16 to 2026-02-20 | design | 3 | 2 | 1 | 67% | +1.61 | +69.19 | 1 thin/gappy days skipped; news-shock days +1.4R |
+| 2026-02-23 to 2026-02-27 | design | 1 | 0 | 1 | 0% | -1.01 | +68.18 |  |
+| 2026-03-02 to 2026-03-06 | design | 4 | 1 | 3 | 25% | -0.88 | +67.30 | news-shock days +0.8R |
+| 2026-03-09 to 2026-03-13 | design | 3 | 2 | 1 | 67% | -0.73 | +66.56 | 1 thin/gappy days skipped |
+| 2026-03-16 to 2026-03-20 | design | 5 | 3 | 2 | 60% | +5.15 | +71.72 | news-shock days +6.3R; big winner +4.0R |
+| 2026-03-23 to 2026-03-27 | design | 3 | 2 | 1 | 67% | -0.58 | +71.13 | news-shock days -1.0R |
+| 2026-03-30 to 2026-04-03 | design | 2 | 1 | 1 | 50% | +0.32 | +71.45 | 1 thin/gappy days skipped |
+| 2026-04-06 to 2026-04-10 | design | 5 | 2 | 3 | 40% | -0.46 | +70.99 | news-shock days +1.0R |
+| 2026-04-13 to 2026-04-17 | design | 4 | 3 | 1 | 75% | -0.20 | +70.78 |  |
+| 2026-04-20 to 2026-04-24 | design | 3 | 1 | 2 | 33% | +1.47 | +72.25 |  |
+| 2026-04-27 to 2026-05-01 | design | 4 | 3 | 1 | 75% | +1.01 | +73.26 | news-shock days -0.2R |
+| 2026-05-04 to 2026-05-08 | design | 5 | 3 | 2 | 60% | +2.11 | +75.37 |  |
+| 2026-05-11 to 2026-05-15 | design | 4 | 1 | 3 | 25% | -1.04 | +74.34 |  |
+| 2026-05-18 to 2026-05-22 | design | 3 | 2 | 1 | 67% | +0.41 | +74.75 | news-shock days +0.1R |
+| 2026-05-25 to 2026-05-29 | design | 3 | 3 | 0 | 100% | +2.08 | +76.83 | 1 thin/gappy days skipped |
+| 2026-06-01 to 2026-06-05 | design | 4 | 2 | 2 | 50% | -0.60 | +76.23 | news-shock days -1.0R |
+| 2026-06-08 to 2026-06-12 | design | 2 | 1 | 1 | 50% | +0.66 | +76.89 | news-shock days +1.2R |
+| 2026-06-15 to 2026-06-19 | design | 4 | 2 | 2 | 50% | -0.55 | +76.33 | 1 thin/gappy days skipped; news-shock days -1.0R |
+| 2026-06-22 to 2026-06-26 | design | 2 | 2 | 0 | 100% | +0.89 | +77.22 |  |
+| 2026-06-29 to 2026-07-03 | design | 4 | 2 | 2 | 50% | +0.61 | +77.83 | 1 thin/gappy days skipped; news-shock days +1.7R |
+| 2026-07-06 to 2026-07-10 | design | 4 | 2 | 2 | 50% | +0.94 | +78.78 | news-shock days +0.4R |
+| 2026-07-13 to 2026-07-17 | design | 3 | 2 | 1 | 67% | +1.32 | +80.10 | news-shock days +0.1R |
+| 2026-07-20 to 2026-07-24 | design | 4 | 3 | 1 | 75% | +1.97 | +82.06 |  |
+| 2026-07-27 to 2026-07-31 | design | 3 | 2 | 1 | 67% | -0.31 | +81.75 | news-shock days -1.0R |
+| 2026-08-03 to 2026-08-07 | design | 4 | 3 | 1 | 75% | +2.10 | +83.85 | news-shock days +1.9R |
+| 2026-08-10 to 2026-08-14 | design | 4 | 2 | 2 | 50% | +1.26 | +85.11 |  |
+| 2026-08-17 to 2026-08-21 | design | 2 | 2 | 0 | 100% | +5.20 | +90.30 | news-shock days +3.9R; big winner +3.9R |
+| 2026-08-24 to 2026-08-28 | design | 4 | 1 | 3 | 25% | -0.51 | +89.79 | news-shock days -1.0R |
+| 2026-08-31 to 2026-09-04 | design | 3 | 2 | 1 | 67% | +2.10 | +91.89 | news-shock days -0.4R |
+| 2026-09-07 to 2026-09-11 | design | 4 | 1 | 3 | 25% | -0.79 | +91.11 | 1 thin/gappy days skipped; news-shock days -2.0R |
+| 2026-09-14 to 2026-09-18 | design | 5 | 2 | 3 | 40% | +0.10 | +91.21 | news-shock days -0.6R |
+| 2026-09-21 to 2026-09-25 | design | 4 | 2 | 2 | 50% | +0.32 | +91.53 | 1 thin/gappy days skipped |
+| 2026-09-28 to 2026-10-02 | design | 3 | 2 | 1 | 67% | +0.62 | +92.15 | 1 thin/gappy days skipped; news-shock days +0.6R |
 
-## Week by week, Oct 2022 – Sep 2026 (one row per Monday–Friday week)
+## Summary
 
-| Week (Mon–Fri) | Period | Trades | Wins | Losses | Win rate | Result (R) | Running total (R) | Notes |
-|---|---|---|---|---|---|---|---|---|
-| 03 Oct 2022 – 07 Oct 2022 | C | 4 | 3 | 1 | 75% | +0.99 | +0.99 | 1 closed at 16:00 NY |
-| 10 Oct 2022 – 14 Oct 2022 | C | 4 | 2 | 2 | 50% | **-0.92** | +0.07 | news: PPI +0.2; 1 closed at 16:00 NY |
-| 17 Oct 2022 – 21 Oct 2022 | C | 5 | 2 | 3 | 40% | **-0.17** | -0.10 | 2 closed at 16:00 NY |
-| 24 Oct 2022 – 28 Oct 2022 | C | 4 | 2 | 2 | 50% | **-0.98** | -1.08 | 3 closed at 16:00 NY |
-| 31 Oct 2022 – 04 Nov 2022 | C | 4 | 2 | 2 | 50% | +0.80 | -0.28 | news: FOMC -1.0, NFP +1.0; 1 closed at 16:00 NY |
-| 07 Nov 2022 – 11 Nov 2022 | C | 2 | 1 | 1 | 50% | **-0.93** | -1.21 | 1 closed at 16:00 NY |
-| 14 Nov 2022 – 18 Nov 2022 | C | 4 | 1 | 3 | 25% | **-1.72** | -2.93 | news: PPI +0.1; 3 closed at 16:00 NY |
-| 21 Nov 2022 – 25 Nov 2022 | C | 2 | 1 | 1 | 50% | **-0.08** | -3.01 |  |
-| 28 Nov 2022 – 02 Dec 2022 | C | 4 | 2 | 2 | 50% | +0.70 | -2.30 | news: NFP -0.8; 2 closed at 16:00 NY |
-| 05 Dec 2022 – 09 Dec 2022 | C | 3 | 1 | 2 | 33% | **-0.06** | -2.37 | news: PPI -0.4; 2 closed at 16:00 NY |
-| 12 Dec 2022 – 16 Dec 2022 | C | 3 | 1 | 2 | 33% | **-1.47** | -3.84 | 1 closed at 16:00 NY |
-| 19 Dec 2022 – 23 Dec 2022 | C | 1 | 1 | 0 | 100% | +0.97 | -2.87 |  |
-| 26 Dec 2022 – 30 Dec 2022 | C | 0 | 0 | 0 | – | +0.00 | -2.87 | no trade (holiday, thin days or stops under 8 USD) |
-| 02 Jan 2023 – 06 Jan 2023 | C | 4 | 3 | 1 | 75% | +1.73 | -1.15 | news: NFP +1.0; 2 closed at 16:00 NY |
-| 09 Jan 2023 – 13 Jan 2023 | C | 4 | 2 | 2 | 50% | **-0.93** | -2.08 | news: CPI -1.0; 1 closed at 16:00 NY |
-| 16 Jan 2023 – 20 Jan 2023 | C | 3 | 1 | 2 | 33% | **-0.65** | -2.73 | news: PPI -0.6; 1 closed at 16:00 NY |
-| 23 Jan 2023 – 27 Jan 2023 | C | 4 | 1 | 3 | 25% | **-1.85** | -4.58 | 1 closed at 16:00 NY |
-| 30 Jan 2023 – 03 Feb 2023 | C | 1 | 0 | 1 | 0% | **-1.05** | -5.62 |  |
-| 06 Feb 2023 – 10 Feb 2023 | C | 4 | 0 | 4 | 0% | **-3.28** | -8.91 | 1 closed at 16:00 NY |
-| 13 Feb 2023 – 17 Feb 2023 | C | 5 | 1 | 4 | 20% | **-3.05** | -11.96 | news: CPI -1.0, PPI -1.0; 2 closed at 16:00 NY |
-| 20 Feb 2023 – 24 Feb 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 27 Feb 2023 – 03 Mar 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 06 Mar 2023 – 10 Mar 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 13 Mar 2023 – 17 Mar 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 20 Mar 2023 – 24 Mar 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 27 Mar 2023 – 31 Mar 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 03 Apr 2023 – 07 Apr 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 10 Apr 2023 – 14 Apr 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 17 Apr 2023 – 21 Apr 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 24 Apr 2023 – 28 Apr 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 01 May 2023 – 05 May 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 08 May 2023 – 12 May 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 15 May 2023 – 19 May 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 22 May 2023 – 26 May 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 29 May 2023 – 02 Jun 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 05 Jun 2023 – 09 Jun 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 12 Jun 2023 – 16 Jun 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 19 Jun 2023 – 23 Jun 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 26 Jun 2023 – 30 Jun 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 03 Jul 2023 – 07 Jul 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 10 Jul 2023 – 14 Jul 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 17 Jul 2023 – 21 Jul 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 24 Jul 2023 – 28 Jul 2023 | C | 0 | 0 | 0 | – | +0.00 | -11.96 | data gap in the price file (hours missing), no trade possible |
-| 31 Jul 2023 – 04 Aug 2023 | C | 2 | 2 | 0 | 100% | +1.91 | -10.05 |  |
-| 07 Aug 2023 – 11 Aug 2023 | C | 2 | 1 | 1 | 50% | +0.84 | -9.21 | 1 closed at 16:00 NY |
-| 14 Aug 2023 – 18 Aug 2023 | C | 0 | 0 | 0 | – | +0.00 | -9.21 | no trade (holiday, thin days or stops under 8 USD) |
-| 21 Aug 2023 – 25 Aug 2023 | C | 1 | 0 | 1 | 0% | **-0.23** | -9.44 | 1 closed at 16:00 NY |
-| 28 Aug 2023 – 01 Sep 2023 | C | 0 | 0 | 0 | – | +0.00 | -9.44 | no trade (holiday, thin days or stops under 8 USD) |
-| 04 Sep 2023 – 08 Sep 2023 | C | 1 | 0 | 1 | 0% | **-1.04** | -10.48 |  |
-| 11 Sep 2023 – 15 Sep 2023 | C | 1 | 0 | 1 | 0% | **-0.51** | -10.99 | 1 closed at 16:00 NY |
-| 18 Sep 2023 – 22 Sep 2023 | C | 1 | 1 | 0 | 100% | +0.95 | -10.04 |  |
-| 25 Sep 2023 – 29 Sep 2023 | C | 1 | 1 | 0 | 100% | +0.95 | -9.09 |  |
-| 02 Oct 2023 – 06 Oct 2023 | A | 2 | 1 | 1 | 50% | +0.57 | -8.52 | 1 closed at 16:00 NY |
-| 09 Oct 2023 – 13 Oct 2023 | A | 1 | 1 | 0 | 100% | +0.96 | -7.56 |  |
-| 16 Oct 2023 – 20 Oct 2023 | A | 5 | 3 | 2 | 60% | +1.60 | -5.97 | 3 closed at 16:00 NY |
-| 23 Oct 2023 – 27 Oct 2023 | A | 5 | 1 | 4 | 20% | **-2.59** | -8.55 | 1 closed at 16:00 NY |
-| 30 Oct 2023 – 03 Nov 2023 | A | 2 | 0 | 2 | 0% | **-1.24** | -9.80 | news: FOMC -1.0; 1 closed at 16:00 NY |
-| 06 Nov 2023 – 10 Nov 2023 | A | 2 | 2 | 0 | 100% | +1.21 | -8.59 | 1 closed at 16:00 NY |
-| 13 Nov 2023 – 17 Nov 2023 | A | 4 | 2 | 2 | 50% | **-0.15** | -8.74 | news: CPI +1.0, PPI -1.0 |
-| 20 Nov 2023 – 24 Nov 2023 | A | 2 | 1 | 1 | 50% | **-0.19** | -8.92 | 2 closed at 16:00 NY |
-| 27 Nov 2023 – 01 Dec 2023 | A | 1 | 0 | 1 | 0% | **-0.33** | -9.25 | 1 closed at 16:00 NY |
-| 04 Dec 2023 – 08 Dec 2023 | A | 3 | 2 | 1 | 67% | +1.58 | -7.67 | 2 closed at 16:00 NY |
-| 11 Dec 2023 – 15 Dec 2023 | A | 4 | 2 | 2 | 50% | **-0.15** | -7.82 | news: CPI -1.0, PPI+FOMC +1.0 |
-| 18 Dec 2023 – 22 Dec 2023 | A | 2 | 1 | 1 | 50% | +0.04 | -7.78 | 2 closed at 16:00 NY |
-| 25 Dec 2023 – 29 Dec 2023 | A | 2 | 1 | 1 | 50% | **-0.08** | -7.86 |  |
-| 01 Jan 2024 – 05 Jan 2024 | A | 3 | 1 | 2 | 33% | **-1.11** | -8.98 | news: NFP +1.0 |
-| 08 Jan 2024 – 12 Jan 2024 | A | 3 | 0 | 3 | 0% | **-2.17** | -11.15 | news: CPI -1.0; 1 closed at 16:00 NY |
-| 15 Jan 2024 – 19 Jan 2024 | A | 1 | 1 | 0 | 100% | +0.27 | -10.87 | 1 closed at 16:00 NY |
-| 22 Jan 2024 – 26 Jan 2024 | A | 2 | 0 | 2 | 0% | **-1.26** | -12.14 | 1 closed at 16:00 NY |
-| 29 Jan 2024 – 02 Feb 2024 | A | 4 | 3 | 1 | 75% | +0.16 | -11.97 | news: NFP +0.1; 2 closed at 16:00 NY |
-| 05 Feb 2024 – 09 Feb 2024 | A | 2 | 1 | 1 | 50% | +0.92 | -11.05 | 1 closed at 16:00 NY |
-| 12 Feb 2024 – 16 Feb 2024 | A | 0 | 0 | 0 | – | +0.00 | -11.05 | no trade (holiday, thin days or stops under 8 USD) |
-| 19 Feb 2024 – 23 Feb 2024 | A | 1 | 0 | 1 | 0% | **-1.04** | -12.09 |  |
-| 26 Feb 2024 – 01 Mar 2024 | A | 0 | 0 | 0 | – | +0.00 | -12.09 | no trade (holiday, thin days or stops under 8 USD) |
-| 04 Mar 2024 – 08 Mar 2024 | A | 2 | 2 | 0 | 100% | +1.92 | -10.17 | news: NFP +1.0 |
-| 11 Mar 2024 – 15 Mar 2024 | A | 4 | 2 | 2 | 50% | +0.48 | -9.69 | news: CPI +1.0, PPI +1.0; 1 closed at 16:00 NY |
-| 18 Mar 2024 – 22 Mar 2024 | A | 4 | 3 | 1 | 75% | +0.74 | -8.95 | 3 closed at 16:00 NY |
-| 25 Mar 2024 – 29 Mar 2024 | A | 4 | 3 | 1 | 75% | +1.64 | -7.31 | 2 closed at 16:00 NY |
-| 01 Apr 2024 – 05 Apr 2024 | A | 5 | 3 | 2 | 60% | +1.60 | -5.70 | news: NFP +1.0; 1 closed at 16:00 NY |
-| 08 Apr 2024 – 12 Apr 2024 | A | 4 | 2 | 2 | 50% | +0.09 | -5.61 | news: CPI +0.4, PPI -1.0; 2 closed at 16:00 NY |
-| 15 Apr 2024 – 19 Apr 2024 | A | 4 | 2 | 2 | 50% | **-1.03** | -6.64 | 1 closed at 16:00 NY |
-| 22 Apr 2024 – 26 Apr 2024 | A | 5 | 3 | 2 | 60% | +1.21 | -5.43 | 1 closed at 16:00 NY |
-| 29 Apr 2024 – 03 May 2024 | A | 5 | 3 | 2 | 60% | +1.77 | -3.66 | news: FOMC +1.0, NFP -1.0; 1 closed at 16:00 NY |
-| 06 May 2024 – 10 May 2024 | A | 5 | 3 | 2 | 60% | +0.52 | -3.14 | 3 closed at 16:00 NY |
-| 13 May 2024 – 17 May 2024 | A | 4 | 4 | 0 | 100% | +3.86 | +0.73 | news: PPI +1.0 |
-| 20 May 2024 – 24 May 2024 | A | 4 | 2 | 2 | 50% | +0.96 | +1.69 | 3 closed at 16:00 NY |
-| 27 May 2024 – 31 May 2024 | A | 2 | 1 | 1 | 50% | **-1.00** | +0.69 | 1 closed at 16:00 NY |
-| 03 Jun 2024 – 07 Jun 2024 | A | 5 | 4 | 1 | 80% | +3.41 | +4.10 | news: NFP +1.0; 2 closed at 16:00 NY |
-| 10 Jun 2024 – 14 Jun 2024 | A | 5 | 2 | 3 | 40% | **-1.52** | +2.57 | news: CPI+FOMC -0.5, PPI -1.0; 2 closed at 16:00 NY |
-| 17 Jun 2024 – 21 Jun 2024 | A | 2 | 0 | 2 | 0% | **-1.34** | +1.24 | 1 closed at 16:00 NY |
-| 24 Jun 2024 – 28 Jun 2024 | A | 4 | 3 | 1 | 75% | +0.90 | +2.13 | 2 closed at 16:00 NY |
-| 01 Jul 2024 – 05 Jul 2024 | A | 3 | 2 | 1 | 67% | +0.08 | +2.21 | 1 closed at 16:00 NY |
-| 08 Jul 2024 – 12 Jul 2024 | A | 5 | 4 | 1 | 80% | +2.80 | +5.02 | news: CPI +1.0, PPI +1.0 |
-| 15 Jul 2024 – 19 Jul 2024 | A | 5 | 2 | 3 | 40% | **-1.51** | +3.50 | 1 closed at 16:00 NY |
-| 22 Jul 2024 – 26 Jul 2024 | A | 5 | 3 | 2 | 60% | **-0.92** | +2.58 | 2 closed at 16:00 NY |
-| 29 Jul 2024 – 02 Aug 2024 | A | 5 | 3 | 2 | 60% | +0.89 | +3.47 | news: FOMC +1.0, NFP -1.0 |
-| 05 Aug 2024 – 09 Aug 2024 | A | 5 | 3 | 2 | 60% | +0.65 | +4.12 | 4 closed at 16:00 NY |
-| 12 Aug 2024 – 16 Aug 2024 | A | 4 | 3 | 1 | 75% | +1.87 | +6.00 | news: CPI -1.0 |
-| 19 Aug 2024 – 23 Aug 2024 | A | 5 | 3 | 2 | 60% | +0.84 | +6.84 |  |
-| 26 Aug 2024 – 30 Aug 2024 | A | 5 | 1 | 4 | 20% | **-2.27** | +4.57 | 1 closed at 16:00 NY |
-| 02 Sep 2024 – 06 Sep 2024 | A | 2 | 1 | 1 | 50% | **-0.07** | +4.50 | news: NFP -1.0 |
-| 09 Sep 2024 – 13 Sep 2024 | A | 4 | 2 | 2 | 50% | **-0.14** | +4.36 | news: CPI -1.0, PPI +1.0 |
-| 16 Sep 2024 – 20 Sep 2024 | A | 4 | 4 | 0 | 100% | +3.31 | +7.67 | news: FOMC +1.0; 1 closed at 16:00 NY |
-| 23 Sep 2024 – 27 Sep 2024 | A | 5 | 2 | 3 | 40% | **-0.50** | +7.17 | 1 closed at 16:00 NY |
-| 30 Sep 2024 – 04 Oct 2024 | A/Y1 | 5 | 2 | 3 | 40% | **-0.92** | +6.24 | news: NFP -1.0; 3 closed at 16:00 NY |
-| 07 Oct 2024 – 11 Oct 2024 | Y1 | 5 | 2 | 3 | 40% | **-2.44** | +3.80 | news: CPI -1.0, PPI +0.4; 2 closed at 16:00 NY |
-| 14 Oct 2024 – 18 Oct 2024 | Y1 | 5 | 3 | 2 | 60% | **-0.90** | +2.90 | 4 closed at 16:00 NY |
-| 21 Oct 2024 – 25 Oct 2024 | Y1 | 5 | 2 | 3 | 40% | **-1.94** | +0.96 | 2 closed at 16:00 NY |
-| 28 Oct 2024 – 01 Nov 2024 | Y1 | 4 | 2 | 2 | 50% | **-0.45** | +0.51 | news: NFP -1.0; 1 closed at 16:00 NY |
-| 04 Nov 2024 – 08 Nov 2024 | Y1 | 5 | 3 | 2 | 60% | +0.74 | +1.25 | news: FOMC +1.0; 3 closed at 16:00 NY |
-| 11 Nov 2024 – 15 Nov 2024 | Y1 | 5 | 1 | 4 | 20% | **-1.74** | -0.49 | news: CPI -1.0, PPI -1.0; 2 closed at 16:00 NY |
-| 18 Nov 2024 – 22 Nov 2024 | Y1 | 5 | 4 | 1 | 80% | +0.52 | +0.03 | 4 closed at 16:00 NY |
-| 25 Nov 2024 – 29 Nov 2024 | Y1 | 3 | 1 | 2 | 33% | **-0.35** | -0.32 | 3 closed at 16:00 NY |
-| 02 Dec 2024 – 06 Dec 2024 | Y1 | 3 | 1 | 2 | 33% | **-0.65** | -0.97 | 1 closed at 16:00 NY |
-| 09 Dec 2024 – 13 Dec 2024 | Y1 | 5 | 5 | 0 | 100% | +3.11 | +2.14 | news: CPI +0.3, PPI +0.6; 3 closed at 16:00 NY |
-| 16 Dec 2024 – 20 Dec 2024 | Y1 | 5 | 3 | 2 | 60% | +0.54 | +2.68 | news: FOMC +1.0; 2 closed at 16:00 NY |
-| 23 Dec 2024 – 27 Dec 2024 | Y1 | 2 | 2 | 0 | 100% | +1.26 | +3.94 | 1 closed at 16:00 NY |
-| 30 Dec 2024 – 03 Jan 2025 | Y1 | 4 | 4 | 0 | 100% | +3.87 | +7.81 |  |
-| 06 Jan 2025 – 10 Jan 2025 | Y1 | 5 | 3 | 2 | 60% | **-0.05** | +7.75 | news: NFP -1.0; 1 closed at 16:00 NY |
-| 13 Jan 2025 – 17 Jan 2025 | Y1 | 5 | 4 | 1 | 80% | +2.24 | +9.99 | news: PPI -1.0, CPI +0.9; 2 closed at 16:00 NY |
-| 20 Jan 2025 – 24 Jan 2025 | Y1 | 3 | 0 | 3 | 0% | **-1.64** | +8.34 | 2 closed at 16:00 NY |
-| 27 Jan 2025 – 31 Jan 2025 | Y1 | 2 | 1 | 1 | 50% | **-0.76** | +7.58 | 1 closed at 16:00 NY |
-| 03 Feb 2025 – 07 Feb 2025 | Y1 | 5 | 2 | 3 | 40% | **-0.17** | +7.41 | news: NFP -1.0; 1 closed at 16:00 NY |
-| 10 Feb 2025 – 14 Feb 2025 | Y1 | 4 | 2 | 2 | 50% | **-1.33** | +6.08 | news: CPI -1.0; 2 closed at 16:00 NY |
-| 17 Feb 2025 – 21 Feb 2025 | Y1 | 3 | 0 | 3 | 0% | **-2.48** | +3.60 | 1 closed at 16:00 NY |
-| 24 Feb 2025 – 28 Feb 2025 | Y1 | 5 | 4 | 1 | 80% | +1.02 | +4.63 | 4 closed at 16:00 NY |
-| 03 Mar 2025 – 07 Mar 2025 | Y1 | 5 | 3 | 2 | 60% | +1.61 | +6.23 | news: NFP -0.3; 1 closed at 16:00 NY |
-| 10 Mar 2025 – 14 Mar 2025 | Y1 | 5 | 2 | 3 | 40% | **-1.56** | +4.67 | news: CPI -1.0, PPI -1.0; 1 closed at 16:00 NY |
-| 17 Mar 2025 – 21 Mar 2025 | Y1 | 5 | 3 | 2 | 60% | +1.10 | +5.77 | news: FOMC -1.0; 2 closed at 16:00 NY |
-| 24 Mar 2025 – 28 Mar 2025 | Y1 | 4 | 2 | 2 | 50% | **-0.11** | +5.66 |  |
-| 31 Mar 2025 – 04 Apr 2025 | Y1 | 4 | 1 | 3 | 25% | **-0.19** | +5.47 | news: NFP -1.0; 2 closed at 16:00 NY |
-| 07 Apr 2025 – 11 Apr 2025 | Y1 | 4 | 3 | 1 | 75% | +0.88 | +6.35 | news: CPI +0.7, PPI +0.2; 2 closed at 16:00 NY |
-| 14 Apr 2025 – 18 Apr 2025 | Y1 | 3 | 1 | 2 | 33% | +0.45 | +6.81 | 3 closed at 16:00 NY |
-| 21 Apr 2025 – 25 Apr 2025 | Y1 | 4 | 2 | 2 | 50% | **-0.22** | +6.58 | 3 closed at 16:00 NY |
-| 28 Apr 2025 – 02 May 2025 | Y1 | 4 | 1 | 3 | 25% | **-1.07** | +5.51 | news: NFP -1.0; 3 closed at 16:00 NY |
-| 05 May 2025 – 09 May 2025 | Y1 | 4 | 3 | 1 | 75% | +1.97 | +7.48 | 3 closed at 16:00 NY |
-| 12 May 2025 – 16 May 2025 | Y1 | 5 | 4 | 1 | 80% | +1.53 | +9.02 | news: CPI -0.3, PPI +0.5; 4 closed at 16:00 NY |
-| 19 May 2025 – 23 May 2025 | Y1 | 4 | 3 | 1 | 75% | +2.68 | +11.70 | 2 closed at 16:00 NY |
-| 26 May 2025 – 30 May 2025 | Y1 | 3 | 1 | 2 | 33% | **-0.55** | +11.15 | 2 closed at 16:00 NY |
-| 02 Jun 2025 – 06 Jun 2025 | Y1 | 5 | 3 | 2 | 60% | +0.75 | +11.90 | news: NFP +1.0; 2 closed at 16:00 NY |
-| 09 Jun 2025 – 13 Jun 2025 | Y1 | 4 | 2 | 2 | 50% | **-0.70** | +11.20 | news: CPI +0.0, PPI -1.0; 3 closed at 16:00 NY |
-| 16 Jun 2025 – 20 Jun 2025 | Y1 | 1 | 1 | 0 | 100% | +0.89 | +12.09 | 1 closed at 16:00 NY |
-| 23 Jun 2025 – 27 Jun 2025 | Y1 | 5 | 2 | 3 | 40% | **-1.68** | +10.41 | 3 closed at 16:00 NY |
-| 30 Jun 2025 – 04 Jul 2025 | Y1 | 4 | 3 | 1 | 75% | +0.69 | +11.09 | news: NFP -0.3; 4 closed at 16:00 NY |
-| 07 Jul 2025 – 11 Jul 2025 | Y1 | 4 | 3 | 1 | 75% | +1.10 | +12.19 | 1 closed at 16:00 NY |
-| 14 Jul 2025 – 18 Jul 2025 | Y1 | 5 | 3 | 2 | 60% | +0.31 | +12.50 | news: CPI +0.4, PPI -1.0; 1 closed at 16:00 NY |
-| 21 Jul 2025 – 25 Jul 2025 | Y1 | 5 | 4 | 1 | 80% | +1.97 | +14.47 | 1 closed at 16:00 NY |
-| 28 Jul 2025 – 01 Aug 2025 | Y1 | 5 | 4 | 1 | 80% | +1.95 | +16.42 | news: FOMC +1.0, NFP +1.0; 3 closed at 16:00 NY |
-| 04 Aug 2025 – 08 Aug 2025 | Y1 | 4 | 3 | 1 | 75% | +2.52 | +18.94 | 2 closed at 16:00 NY |
-| 11 Aug 2025 – 15 Aug 2025 | Y1 | 4 | 3 | 1 | 75% | +1.39 | +20.34 | news: CPI -1.0, PPI +1.0; 1 closed at 16:00 NY |
-| 18 Aug 2025 – 22 Aug 2025 | Y1 | 4 | 1 | 3 | 25% | **-1.39** | +18.94 | 1 closed at 16:00 NY |
-| 25 Aug 2025 – 29 Aug 2025 | Y1 | 3 | 1 | 2 | 33% | **-0.68** | +18.26 | 1 closed at 16:00 NY |
-| 01 Sep 2025 – 05 Sep 2025 | Y1 | 2 | 2 | 0 | 100% | +1.23 | +19.49 | news: NFP +0.2; 1 closed at 16:00 NY |
-| 08 Sep 2025 – 12 Sep 2025 | Y1 | 4 | 1 | 3 | 25% | **-0.83** | +18.66 | news: PPI -0.2, CPI -0.6; 2 closed at 16:00 NY |
-| 15 Sep 2025 – 19 Sep 2025 | Y1 | 5 | 2 | 3 | 40% | **-0.42** | +18.24 | news: FOMC -1.0; 2 closed at 16:00 NY |
-| 22 Sep 2025 – 26 Sep 2025 | Y1 | 5 | 3 | 2 | 60% | +0.90 | +19.14 |  |
-| 29 Sep 2025 – 03 Oct 2025 | Y1/Y2 | 5 | 3 | 2 | 60% | +0.40 | +19.54 | 2 closed at 16:00 NY |
-| 06 Oct 2025 – 10 Oct 2025 | Y2 | 5 | 3 | 2 | 60% | **-1.48** | +18.07 | 3 closed at 16:00 NY |
-| 13 Oct 2025 – 17 Oct 2025 | Y2 | 5 | 4 | 1 | 80% | +1.78 | +19.85 | 4 closed at 16:00 NY |
-| 20 Oct 2025 – 24 Oct 2025 | Y2 | 5 | 2 | 3 | 40% | +1.09 | +20.94 | news: CPI -0.3; 3 closed at 16:00 NY |
-| 27 Oct 2025 – 31 Oct 2025 | Y2 | 4 | 2 | 2 | 50% | **-0.15** | +20.79 | news: FOMC -1.0; 2 closed at 16:00 NY |
-| 03 Nov 2025 – 07 Nov 2025 | Y2 | 5 | 1 | 4 | 20% | **-2.69** | +18.10 | 3 closed at 16:00 NY |
-| 10 Nov 2025 – 14 Nov 2025 | Y2 | 5 | 3 | 2 | 60% | +0.40 | +18.50 | 3 closed at 16:00 NY |
-| 17 Nov 2025 – 21 Nov 2025 | Y2 | 3 | 0 | 3 | 0% | **-2.12** | +16.38 | 2 closed at 16:00 NY |
-| 24 Nov 2025 – 28 Nov 2025 | Y2 | 3 | 1 | 2 | 33% | **-0.21** | +16.16 | news: PPI -1.0; 1 closed at 16:00 NY |
-| 01 Dec 2025 – 05 Dec 2025 | Y2 | 2 | 0 | 2 | 0% | **-2.03** | +14.14 |  |
-| 08 Dec 2025 – 12 Dec 2025 | Y2 | 4 | 3 | 1 | 75% | +0.63 | +14.76 | news: FOMC -1.0; 2 closed at 16:00 NY |
-| 15 Dec 2025 – 19 Dec 2025 | Y2 | 5 | 0 | 5 | 0% | **-2.47** | +12.29 | news: NFP -0.3, CPI -1.0; 3 closed at 16:00 NY |
-| 22 Dec 2025 – 26 Dec 2025 | Y2 | 2 | 1 | 1 | 50% | **-0.82** | +11.46 | 1 closed at 16:00 NY |
-| 29 Dec 2025 – 02 Jan 2026 | Y2 | 3 | 1 | 2 | 33% | **-0.73** | +10.74 | 1 closed at 16:00 NY |
-| 05 Jan 2026 – 09 Jan 2026 | Y2 | 5 | 3 | 2 | 60% | **-0.13** | +10.61 | news: NFP +0.6; 4 closed at 16:00 NY |
-| 12 Jan 2026 – 16 Jan 2026 | Y2 | 4 | 1 | 3 | 25% | **-0.59** | +10.02 | news: CPI +1.0; 2 closed at 16:00 NY |
-| 19 Jan 2026 – 23 Jan 2026 | Y2 | 2 | 1 | 1 | 50% | **-0.01** | +10.01 |  |
-| 26 Jan 2026 – 30 Jan 2026 | Y2 | 4 | 4 | 0 | 100% | +3.91 | +13.91 | news: FOMC +1.0, PPI +1.0; 1 closed at 16:00 NY |
-| 02 Feb 2026 – 06 Feb 2026 | Y2 | 3 | 3 | 0 | 100% | +0.49 | +14.40 | 3 closed at 16:00 NY |
-| 09 Feb 2026 – 13 Feb 2026 | Y2 | 5 | 4 | 1 | 80% | +1.63 | +16.04 | news: NFP +1.0, CPI +0.4; 2 closed at 16:00 NY |
-| 16 Feb 2026 – 20 Feb 2026 | Y2 | 2 | 2 | 0 | 100% | +1.48 | +17.52 | 1 closed at 16:00 NY |
-| 23 Feb 2026 – 27 Feb 2026 | Y2 | 5 | 1 | 4 | 20% | **-2.09** | +15.43 | news: PPI +1.0; 3 closed at 16:00 NY |
-| 02 Mar 2026 – 06 Mar 2026 | Y2 | 5 | 3 | 2 | 60% | **-0.11** | +15.32 | news: NFP +0.0; 3 closed at 16:00 NY |
-| 09 Mar 2026 – 13 Mar 2026 | Y2 | 4 | 3 | 1 | 75% | +0.15 | +15.47 | news: CPI +0.0; 2 closed at 16:00 NY |
-| 16 Mar 2026 – 20 Mar 2026 | Y2 | 5 | 3 | 2 | 60% | +1.71 | +17.17 | news: FOMC +1.0; 1 closed at 16:00 NY |
-| 23 Mar 2026 – 27 Mar 2026 | Y2 | 2 | 1 | 1 | 50% | **-0.97** | +16.20 | 1 closed at 16:00 NY |
-| 30 Mar 2026 – 03 Apr 2026 | Y2 | 4 | 2 | 2 | 50% | +0.40 | +16.61 | 4 closed at 16:00 NY |
-| 06 Apr 2026 – 10 Apr 2026 | Y2 | 5 | 2 | 3 | 40% | +0.13 | +16.74 | news: CPI -0.5; 2 closed at 16:00 NY |
-| 13 Apr 2026 – 17 Apr 2026 | Y2 | 5 | 4 | 1 | 80% | +1.33 | +18.07 | news: PPI -1.0; 2 closed at 16:00 NY |
-| 20 Apr 2026 – 24 Apr 2026 | Y2 | 4 | 2 | 2 | 50% | +0.87 | +18.94 | 3 closed at 16:00 NY |
-| 27 Apr 2026 – 01 May 2026 | Y2 | 5 | 4 | 1 | 80% | +3.08 | +22.02 | news: FOMC +1.0; 2 closed at 16:00 NY |
-| 04 May 2026 – 08 May 2026 | Y2 | 5 | 3 | 2 | 60% | +0.34 | +22.36 | news: NFP -0.2; 4 closed at 16:00 NY |
-| 11 May 2026 – 15 May 2026 | Y2 | 4 | 2 | 2 | 50% | +0.02 | +22.38 | news: CPI -0.2, PPI -0.1; 4 closed at 16:00 NY |
-| 18 May 2026 – 22 May 2026 | Y2 | 5 | 2 | 3 | 40% | +0.55 | +22.93 | 4 closed at 16:00 NY |
-| 25 May 2026 – 29 May 2026 | Y2 | 3 | 3 | 0 | 100% | +2.32 | +25.26 | 1 closed at 16:00 NY |
-| 01 Jun 2026 – 05 Jun 2026 | Y2 | 5 | 3 | 2 | 60% | +1.44 | +26.69 | news: NFP +1.0; 3 closed at 16:00 NY |
-| 08 Jun 2026 – 12 Jun 2026 | Y2 | 2 | 2 | 0 | 100% | +1.39 | +28.08 | news: CPI +1.0; 1 closed at 16:00 NY |
-| 15 Jun 2026 – 19 Jun 2026 | Y2 | 4 | 1 | 3 | 25% | **-0.88** | +27.20 | news: FOMC -1.0; 3 closed at 16:00 NY |
-| 22 Jun 2026 – 26 Jun 2026 | Y2 | 4 | 3 | 1 | 75% | +1.94 | +29.13 | 2 closed at 16:00 NY |
-| 29 Jun 2026 – 03 Jul 2026 | Y2/B | 4 | 2 | 2 | 50% | +0.22 | +29.35 | news: NFP +1.0; 2 closed at 16:00 NY |
-| 06 Jul 2026 – 10 Jul 2026 | B | 4 | 3 | 1 | 75% | +1.96 | +31.31 |  |
-| 13 Jul 2026 – 17 Jul 2026 | B | 5 | 2 | 3 | 40% | **-0.99** | +30.32 | news: CPI -0.3, PPI -1.0; 2 closed at 16:00 NY |
-| 20 Jul 2026 – 24 Jul 2026 | B | 5 | 3 | 2 | 60% | +0.51 | +30.83 | 4 closed at 16:00 NY |
-| 27 Jul 2026 – 31 Jul 2026 | B | 5 | 2 | 3 | 40% | **-0.07** | +30.76 | news: FOMC -1.0; 3 closed at 16:00 NY |
-| 03 Aug 2026 – 07 Aug 2026 | B | 5 | 3 | 2 | 60% | +2.28 | +33.04 | news: NFP +1.0; 3 closed at 16:00 NY |
-| 10 Aug 2026 – 14 Aug 2026 | B | 5 | 3 | 2 | 60% | +1.08 | +34.13 | news: CPI -0.0, PPI +0.3; 5 closed at 16:00 NY |
-| 17 Aug 2026 – 21 Aug 2026 | B | 5 | 4 | 1 | 80% | +1.59 | +35.72 | 2 closed at 16:00 NY |
-| 24 Aug 2026 – 28 Aug 2026 | B | 5 | 1 | 4 | 20% | **-1.31** | +34.42 | 4 closed at 16:00 NY |
-| 31 Aug 2026 – 04 Sep 2026 | B | 4 | 3 | 1 | 75% | +1.96 | +36.38 | news: NFP -1.0 |
-| 07 Sep 2026 – 11 Sep 2026 | B | 3 | 1 | 2 | 33% | **-0.07** | +36.31 | news: PPI +1.0, CPI -1.0; 1 closed at 16:00 NY |
-| 14 Sep 2026 – 18 Sep 2026 | B | 5 | 2 | 3 | 40% | **-0.38** | +35.93 | news: FOMC -1.0; 3 closed at 16:00 NY |
-| 21 Sep 2026 – 25 Sep 2026 | B | 4 | 2 | 2 | 50% | **-0.02** | +35.92 | 3 closed at 16:00 NY |
-| 28 Sep 2026 – 02 Oct 2026 | B | 2 | 2 | 0 | 100% | +1.88 | +37.80 | 1 closed at 16:00 NY |
+**What is working**
+- On the design years 2019-2026 the strategy made +90.3 R over 973 trades, and my independent test matched Agent 1's trade for trade.
+- At today's gold prices (box usually 25-60 USD) the cost hardly matters: 2026 still made +22.1 R even at three times the cost.
+- Losing runs stay short for a 47%-win strategy: never more than 8 in a row in 11 years.
 
-## Summary in plain words
+**What is not working**
+- **The hidden years 2016-2018 were roughly break-even: +1.9 R over 81 trades**, negative at double cost (-1.3 R), and negative without the 5 best trades (-7.2 R).
+  Only 22 trades in 2017-2018 because gold was cheap and quiet. This test could not prove the strategy, and it did not clearly reject it either.
+- **Oct 2022 - Sep 2023 lost 7.2 R** (60 trades, 37% won).
+- The profit leans on **Mondays and Thursdays** (+84 of +92 R). In the hidden years, Thursday was the worst day.
+- The profit leans on **big US news days** (+87 R of +90 R in 2019-2026). Those days cannot be known in advance. In 2016-2018 they did not help.
+- **Long flat stretches:** from Apr 2022 to May 2024 (over 2 years) the account made no new high; again from Jun 2025 to Jul 2026 (13 months).
 
-**What is working:**
-- On the three years Agent 1 had already seen (Oct 2023 – Sep 2026), v2 looks good: +46.9 R over 610 trades, losing runs of 5 or
-  fewer, and positive in every one of those periods even at double or triple cost.
-- The wider stop and the 8 USD minimum did fix v1's cost problem on those years.
+**What is being changed**
+- Nothing in the rules (frozen). I fixed a clock error in the 2016-2018 hidden file (one hour late in the March and Oct/Nov weeks when the US and UK
+  clocks differ). It barely changes the result (+2.7 R without the fix, +1.9 R with it).
 
-**What is not working:**
-- **In the one year nobody had seen (C), v2 lost 9.1 R over 74 trades.** Only 43% of trades won. 5 of the 7 months with trades lost.
-  At 0.80 USD cost it lost 11.7 R.
-- **The losses are not caused by costs.** Even with zero costs, C lost 6.5 R. The basic idea ("gold keeps going after London
-  breaks the Asia range") went the wrong way that year: trading every break, before costs, lost 21.7 R over 130 days.
-- So the idea worked during gold's huge rise (2023–2026, from about 1,800 to over 5,000 USD) but not in the choppier 2022–23 market.
-  That is the same pattern that sank GBPUSD: it works in one kind of market and fails in another.
-- February 2023 was the worst stretch: 10 trades, 1 win, −7.4 R. But C is negative even without it (−1.7 R over 64 trades).
+**What to watch next week**
+- v3 goes to the owner as grade **B (bottom of B)**: demo trading only. Watch the first 50-100 demo trades. A loss bigger than 18 R from a peak, or
+  10 losses in a row, would downgrade it.
 
-**What is being changed:** v2 is dropped. Nothing goes to the owner. The team leader and Agent 1 decide whether gold gets a genuinely
-different idea or the team moves on to the next market (NASDAQ 100).
-
-**What to watch next week:** nothing to trade. A test on more history (the missing Feb – Jul 2023 hours from another source, or older
-years) would only matter for a new idea. It would not rescue this one, because it already failed on clean data.
-
-*Past results do not guarantee future results. This is a test on historical prices, not trading advice.*
+*Past results do not guarantee future results.*

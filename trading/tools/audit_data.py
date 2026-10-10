@@ -4,6 +4,9 @@ Usage: python3 trading/tools/audit_data.py <file.csv.gz> [<file2> ...]
 - Clock: the 09:30 New York stock open (Nasdaq) and the 08:30 New York US-data releases (all markets)
   must show up at exactly those minutes. Reports, per year, the minute with the biggest jump
   in activity among 07:30 / 08:30 / 09:30 / 10:30 New York.
+- Mismatch weeks: the same clock check, only for the 2-3 weeks a year when New York is on summer time and
+  London is not (mid-March, late Oct / early Nov). A wrong clock often shows up ONLY there (found 10 Oct 2026:
+  HistData 2016-2018 files were 1 hour late in those weeks). Nasdaq must show 09:30, FX and gold usually 08:30.
 - Gaps: counts weekdays per month with a hole of more than 15 minutes between 03:00 and 16:00 New York
   (London + New York sessions), the hours our strategies use.
 """
@@ -26,6 +29,15 @@ def audit(path):
                 for h in (7, 8, 9, 10)}
         best = max(jump, key=jump.get)
         print(f"  {yr}: biggest activity jump at {best} NY ({jump[best]:.1f}x)")
+    u = df.time_utc.dt.tz_localize("UTC")
+    mism = ((u.dt.tz_convert("America/New_York").apply(lambda x: x.utcoffset().total_seconds()) == -4 * 3600)
+            & (u.dt.tz_convert("Europe/London").apply(lambda x: x.utcoffset().total_seconds()) == 0))
+    for yr, x in df[mism].groupby("yr"):
+        g = x.groupby("mins").r.mean()
+        jump = {f"{h:02d}:30": g.loc[h * 60 + 30:h * 60 + 34].mean() / g.loc[h * 60 + 20:h * 60 + 29].mean()
+                for h in (7, 8, 9, 10)}
+        best = max(jump, key=jump.get)
+        print(f"  {yr} mismatch weeks: biggest activity jump at {best} NY ({jump[best]:.1f}x)")
     s = df[(df.mins >= 180) & (df.mins < 960) & (ny.dt.dayofweek < 5)]
     gap = s.groupby("d").time_utc.apply(lambda t: t.diff().max() > pd.Timedelta(minutes=15))
     bad = gap[gap]

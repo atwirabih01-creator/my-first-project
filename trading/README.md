@@ -26,7 +26,9 @@ Markets, in order: GBPUSD → XAUUSD → NASDAQ 100 → EURUSD. One market at a 
 | 2016-01-01 → 2018-12-31 (`data/hidden/<SYMBOL>_M1_2016-2018.csv.gz`) | **Hidden test**: never seen by anyone; clean (almost no missing hours) | **Agent 2 only**, after the rules are frozen |
 - Agent 1 must never open anything in `data/hidden/`.
 - Known holes in the design data: Feb – Jul 2023 (all markets, most days) and Mar 2020 (Nasdaq). Skip gappy days (rule below).
-- Check any new data file with `python3 trading/tools/audit_data.py <file>` (clock + missing hours).
+- Check any new data file with `python3 trading/tools/audit_data.py <file>` (clock, clock in the US/UK mismatch weeks, missing hours).
+- The 2016-2018 hidden files were 1 hour late in the US/UK mismatch weeks (HistData's older yearly files use New York
+  local time there). Fixed in the files on 10 Oct 2026 and re-verified; apply NO clock fix in scripts.
 - Design years for reporting: report results **per calendar year 2019 … 2026**; an idea must hold in most years, not on average.
 
 ## Data periods used in rounds 1–2 (history)

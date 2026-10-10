@@ -1,0 +1,46 @@
+--- v3 euro-only move fade  (cost 1.2 pips)
+period   n win  totR  perTr   PF  maxDD  lrun
+  2019  23 52%   9.7  0.424 2.69   -1.7     2
+  2020  39 44%  13.2  0.338 1.89   -5.2     6
+  2021  20 50%   0.9  0.044 1.12   -3.8     4
+  2022  63 54%   5.1  0.081 1.21   -6.5     5
+  2023   7 43%  -0.5 -0.075 0.81   -1.3     2
+  2024  27 67%   9.6  0.354 2.58   -3.0     3
+  2025  32 41%  -4.2 -0.130 0.72   -8.4     5
+  2026  17 47%   8.2  0.479 2.03   -3.4     3
+   ALL 228 50%  41.9  0.184 1.50   -8.4     6
+longs 112 +30.4R (+0.271/tr) | shorts 116 +11.6R (+0.100/tr) | without best 5: +20.4R | median risk 24.4 p | min risk 7.2 p
+--- v3 euro-only move fade  (cost 2.4 pips)
+period   n win  totR  perTr   PF  maxDD  lrun
+  2019  23 52%   8.2  0.356 2.26   -1.8     2
+  2020  39 41%  11.1  0.284 1.70   -5.6     6
+  2021  20 45%  -0.6 -0.031 0.92   -4.5     7
+  2022  63 52%   2.5  0.040 1.10   -7.2     5
+  2023   7 43%  -0.9 -0.129 0.69   -1.5     2
+  2024  27 67%   7.9  0.293 2.21   -3.3     3
+  2025  32 41%  -5.6 -0.175 0.65   -9.2     5
+  2026  17 47%   6.9  0.408 1.81   -3.8     3
+   ALL 228 49%  29.5  0.129 1.33   -9.2     7
+longs 112 +24.1R (+0.215/tr) | shorts 116 +5.4R (+0.047/tr) | without best 5: +8.3R | median risk 24.4 p | min risk 7.2 p
+v3 euro-only move fade                       n= 228 ( 29/yr) totR= +41.9 perTr=+0.184 yrs+=6/8 worstYr=-4.2 L/S=+30.4/+11.6 x2cost=+29.5 noBest5=+20.4 lrun=6
+skips: {'no_signal': 1454, 'gap': 4, 'still_at_extreme': 129, 'already_reversed': 62}
+exits {'close': 165, 'stop': 63}; avg win +1.09R avg loss -0.74R; PF 1.50
+median stop pips by year: {2019: 19.9, 2020: 25.7, 2021: 18.4, 2022: 32.2, 2023: 24.7, 2024: 19.3, 2025: 28.3, 2026: 22.8}
+trades by year: {2019: 23, 2020: 39, 2021: 20, 2022: 63, 2023: 7, 2024: 27, 2025: 32, 2026: 17}
+X1 entry 1 minute late (checks at that price) n= 235 ( 30/yr) totR= +37.4 perTr=+0.159 yrs+=5/8 worstYr=-4.3 L/S=+31.6/+5.8 x2cost=+24.0 noBest5=+13.5 lrun=6
+X1 in pips per trade after 1.2 cost: on time +4.61 p, 1 min late +3.34 p
+X2 halves positive 9/15: {'2019a': -0.7, '2019b': 10.5, '2020a': 8.1, '2020b': 5.1, '2021a': 2.5, '2021b': -1.6, '2022a': 6.1, '2022b': -1.0, '2023b': -0.5, '2024a': 1.1, '2024b': 8.5, '2025a': 4.1, '2025b': -8.3, '2026a': 10.3, '2026b': -2.2}
+max drawdown (trade by trade) -8.4 R
+X3 bootstrap chance true average <= 0: 0.8%
+X4 threshold (gap, % ) median by year: {2019: 0.347, 2020: 0.445, 2021: 0.328, 2022: 0.284, 2023: 0.382, 2024: 0.189, 2025: 0.224, 2026: 0.182}
+longs/shorts by year:
+side   -1    1
+y             
+2019  0.4  9.4
+2020  5.2  8.0
+2021 -0.5  1.4
+2022  3.5  1.6
+2023 -0.6  0.0
+2024  0.4  9.2
+2025 -3.3 -0.9
+2026  6.5  1.7
