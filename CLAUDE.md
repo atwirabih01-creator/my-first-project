@@ -53,3 +53,5 @@ this file or into the relevant agent's file, so the team remembers it next time.
   positive on unseen data but small/uneven edge; **C: experimental**, design data only), with the
   evidence, the risks and what to watch. Keep searching for an A in the next round.
 - Owner wants new kinds of ideas and more history/backtests, not only the simple well-known setups.
+- **Do not ask the owner about their broker** (owner's rule, 11 Oct 2026). Report results both before costs
+  and with standard typical costs (Nasdaq 2.0 points, gold 0.40 USD, GBPUSD 1.5 pips, EURUSD 1.2 pips).

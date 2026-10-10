@@ -10,16 +10,18 @@ Prepared by the team leader, 11 Oct 2026 (Doha). Research by Agent 1 (Trading Re
 
 1 R = the 1% of your account risked on one trade. **Unseen** = years nobody looked at when the rules were written (the real judge). **Study** = years the rules were built on.
 
-| Market | Strategy | Grade | Unseen years | Study years | Longest losing run |
+Results are shown **before costs** (the pure strategy) and **with standard costs** (a typical spread on every trade; no particular broker).
+
+| Market | Strategy | Grade | Unseen years: before costs / with costs | Study years: before costs / with costs | Longest losing run |
 |---|---|---|---|---|---|
-| **NASDAQ** | Fade the big opening gap (v1) | **B: Promising** | 250 trades, +11.0 R (+0.044 per trade) | 128 trades, +17.8 R (+0.139 per trade) | 6 |
-| **GOLD** | Follow London's break of the Asia box (v3) | **B: Promising (bottom of B)** | 81 trades, +1.9 R (+0.023 per trade) | 973 trades, +90.3 R (+0.093 per trade) | 8 |
-| **GBPUSD** | Quiet-Asia breakout (v3) | **C: Experimental (demo only)** | 136 trades, -6.3 R (-0.046 per trade) | 296 trades, +39.4 R (+0.133 per trade) | 8 |
-| **EURUSD** | Euro-only move fade (v3) | **C: Experimental (demo only)** | 63 trades, -2.4 R (-0.038 per trade) | 226 trades, +41.9 R (+0.185 per trade) | 8 |
+| **NASDAQ** | Fade the big opening gap (v1) | **B: Promising** | 250 trades: **+15.4 R / +11.0 R** | 128 trades: +18.9 R / +17.8 R | 6 |
+| **GOLD** | Follow London's break of the Asia box (v3) | **B: Promising (bottom of B)** | 81 trades: **+5.1 R / +1.9 R** | 973 trades: +117.5 R / +90.3 R | 8 |
+| **GBPUSD** | Quiet-Asia breakout (v3) | **C: Experimental (demo only)** | 136 trades: **+4.8 R / -6.3 R** | 296 trades: +65.3 R / +39.4 R | 8 |
+| **EURUSD** | Euro-only move fade (v3) | **C: Experimental (demo only)** | 63 trades: **+1.4 R / -2.4 R** | 226 trades: +54.2 R / +41.9 R | 8 |
 
 **Grades:** A = proven on unseen data. B = made money on unseen data, but the edge is small or uneven: practise it first. C = lost money on unseen data: practice account only, never real money.
 
-### Results per year
+### Results per year (with standard costs)
 
 **NASDAQ:** 2016 -0.1 (unseen), 2017 -2.5 (unseen), 2018 +6.9 (unseen), 2021 +4.6 (unseen), 2022 -2.7 (unseen), 2023 +1.4 (unseen), 2024 +1.5 (part unseen), 2025 +17.6, 2026 +2.1 (part unseen)
 
@@ -33,9 +35,9 @@ Prepared by the team leader, 11 Oct 2026 (Doha). Research by Agent 1 (Trading Re
 
 ## 2. What to do next
 
-1. **Nasdaq and gold (grade B):** check about 20 trades from the `Trades` sheets on your broker's chart, then follow the live practice journal (below) or practise them yourself on a demo account for at least 3 months. Each strategy's grade box says exactly what upgrades it to A and when to stop using it.
+1. **Nasdaq and gold (grade B):** check about 20 trades from the `Trades` sheets on any price chart, then follow the live practice journal (below) or practise them yourself on a demo account for at least 3 months. Each strategy's grade box says exactly what upgrades it to A and when to stop using it.
 2. **GBPUSD and EURUSD (grade C):** practice account only. They lost money on unseen years.
-3. **Tell us your broker and its costs.** All four results depend on real trading costs; gold and the currency pairs especially.
+3. **Costs:** the 'with costs' numbers assume a typical spread. With lower costs, results move toward the 'before costs' numbers; with higher costs, below the 'with costs' numbers.
 4. **Going live is your decision**, after your own backtest and practice.
 
 ## 3. Live practice trading (running now)

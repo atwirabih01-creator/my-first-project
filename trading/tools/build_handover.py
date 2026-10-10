@@ -34,6 +34,13 @@ def load(folder, files, rcol, pcol, unseen):
     df["date"] = pd.to_datetime(df["date"])
     df = df.drop_duplicates("date").sort_values("date")
     df["R"] = df[rcol].astype(float)
+    # result before any trading cost (the pure strategy), from each trade list's gross column
+    if "r_0" in df:
+        df["R0"] = df["r_0"].astype(float)
+    elif "gross_usd" in df:
+        df["R0"] = df["gross_usd"] / df["risk"]
+    else:
+        df["R0"] = df["gross_p"] / df["risk_p"]
     df["data"] = df[pcol].astype(str).map(lambda p: "Unseen test" if p in unseen else "Study data")
     return df
 
@@ -51,7 +58,8 @@ def weekly(df, key=""):
         rows.append({"Week (Mon - Fri)": f"{w:%d %b %Y} - {w + pd.Timedelta(days=4):%d %b %Y}", "Data": data,
                      "Trades": len(g), "Wins": int((g.R > 0).sum()), "Losses": int((g.R <= 0).sum()),
                      "Win rate": f"{(g.R > 0).mean() * 100:.0f}%" if len(g) else "-",
-                     "Result (R)": round(g.R.sum(), 2), "Running total (R)": round(run, 2)})
+                     "Result before costs (R)": round(g.R0.sum(), 2),
+                     "Result with standard costs (R)": round(g.R.sum(), 2), "Running total with costs (R)": round(run, 2)})
     return pd.DataFrame(rows)
 
 
@@ -65,7 +73,8 @@ def stats(x):
         streak = streak + 1 if r <= 0 else 0
         longest = max(longest, streak)
     wins, losses = x.R[x.R > 0].sum(), -x.R[x.R <= 0].sum()
-    return {"Trades": len(x), "Win rate": f"{(x.R > 0).mean() * 100:.0f}%", "Total (R)": round(x.R.sum(), 1),
+    return {"Trades": len(x), "Win rate": f"{(x.R > 0).mean() * 100:.0f}%",
+            "Total before costs (R)": round(x.R0.sum(), 1), "Total (R)": round(x.R.sum(), 1),
             "Per trade (R)": round(x.R.mean(), 3), "Profit factor": round(wins / losses, 2) if losses else None,
             "Biggest drop (R)": round(dd, 1), "Longest losing run": longest}
 
@@ -116,9 +125,11 @@ def main():
         un, st = stats(df[df.data == "Unseen test"]), stats(df[df.data == "Study data"])
         summary.append({"Market": k, "Strategy": name, "Grade": grade,
                         "Years tested": f"{df.date.min():%b %Y} - {df.date.max():%b %Y}",
-                        "Unseen trades": un["Trades"], "Unseen total (R)": un.get("Total (R)"),
+                        "Unseen trades": un["Trades"], "Unseen before costs (R)": un.get("Total before costs (R)"),
+                        "Unseen total (R)": un.get("Total (R)"),
                         "Unseen per trade (R)": un.get("Per trade (R)"),
-                        "Study trades": st["Trades"], "Study total (R)": st.get("Total (R)"),
+                        "Study trades": st["Trades"], "Study before costs (R)": st.get("Total before costs (R)"),
+                        "Study total (R)": st.get("Total (R)"),
                         "Study per trade (R)": st.get("Per trade (R)"),
                         "Longest losing run (all)": stats(df)["Longest losing run"],
                         "Strategy document": f"trading/{folder}/FINAL-STRATEGY.md"})
@@ -130,7 +141,7 @@ def main():
             "Day-trading research results, prepared by the team (Agent 1 research, Agent 2 testing). 1 R = the 1% of the account risked per trade.",
             "'Unseen test' = years nobody looked at when the rules were written (the real judge). 'Study data' = years the rules were built on.",
             "Grades: A = proven on unseen data; B = made money on unseen data but the edge is small or uneven; C = lost on unseen data (practice only).",
-            "Costs included: Nasdaq 2.0 points, gold 0.40 USD, GBPUSD 1.5 pips, EURUSD 1.2 pips per trade. Your broker's real costs may differ.",
+            "Results are shown two ways: BEFORE COSTS (the pure strategy, no broker needed) and WITH STANDARD COSTS (typical spread: Nasdaq 2.0 points, gold 0.40 USD, GBPUSD 1.5 pips, EURUSD 1.2 pips per trade).",
             "Prices: HistData.com 1-minute data, clock checked. Gaps (e.g. Feb-Jul 2023) were skipped, so some weeks show no trades.",
             "Sheets: Summary; per market a Weekly sheet (every week), a Yearly sheet and a Trades sheet (every trade); Paper = live practice journal.",
             "Past results do not guarantee future results. Trading carries a real risk of loss. This is not financial advice."]})
@@ -166,14 +177,17 @@ def main():
          "## 1. Results at a glance", "",
          "1 R = the 1% of your account risked on one trade. **Unseen** = years nobody looked at when the rules were written "
          "(the real judge). **Study** = years the rules were built on.", "",
-         "| Market | Strategy | Grade | Unseen years | Study years | Longest losing run |", "|---|---|---|---|---|---|"]
+         "Results are shown **before costs** (the pure strategy) and **with standard costs** (a typical spread on every trade; "
+         "no particular broker).", "",
+         "| Market | Strategy | Grade | Unseen years: before costs / with costs | Study years: before costs / with costs | Longest losing run |",
+         "|---|---|---|---|---|---|"]
     for _, s in summary.iterrows():
-        L.append(f"| **{s.Market}** | {s.Strategy} | **{s.Grade}** | {s['Unseen trades']} trades, {s['Unseen total (R)']:+.1f} R "
-                 f"({s['Unseen per trade (R)']:+.3f} per trade) | {s['Study trades']} trades, {s['Study total (R)']:+.1f} R "
-                 f"({s['Study per trade (R)']:+.3f} per trade) | {s['Longest losing run (all)']} |")
+        L.append(f"| **{s.Market}** | {s.Strategy} | **{s.Grade}** | {s['Unseen trades']} trades: "
+                 f"**{s['Unseen before costs (R)']:+.1f} R / {s['Unseen total (R)']:+.1f} R** | {s['Study trades']} trades: "
+                 f"{s['Study before costs (R)']:+.1f} R / {s['Study total (R)']:+.1f} R | {s['Longest losing run (all)']} |")
     L += ["", "**Grades:** A = proven on unseen data. B = made money on unseen data, but the edge is small or uneven: "
           "practise it first. C = lost money on unseen data: practice account only, never real money.", "",
-          "### Results per year", ""]
+          "### Results per year (with standard costs)", ""]
     for k, *_ in MARKETS:
         y = yearly(data[k])
         y = y[~y.Year.astype(str).str.startswith("ALL")]
@@ -183,12 +197,12 @@ def main():
         L.append("")
     L += ["(Nasdaq was not simulated for 2019 - Sep 2021. Partial years: 2023 has a data gap Feb - Jul; 2026 ends in Sep.)", "",
           "## 2. What to do next", "",
-          "1. **Nasdaq and gold (grade B):** check about 20 trades from the `Trades` sheets on your broker's chart, then follow "
+          "1. **Nasdaq and gold (grade B):** check about 20 trades from the `Trades` sheets on any price chart, then follow "
           "the live practice journal (below) or practise them yourself on a demo account for at least 3 months. Each strategy's "
           "grade box says exactly what upgrades it to A and when to stop using it.",
           "2. **GBPUSD and EURUSD (grade C):** practice account only. They lost money on unseen years.",
-          "3. **Tell us your broker and its costs.** All four results depend on real trading costs; gold and the currency pairs "
-          "especially.",
+          "3. **Costs:** the 'with costs' numbers assume a typical spread. With lower costs, results move toward the "
+          "'before costs' numbers; with higher costs, below the 'with costs' numbers.",
           "4. **Going live is your decision**, after your own backtest and practice.", "",
           "## 3. Live practice trading (running now)", "",
           "Every weekday after the US close (23:20 Doha in US summer, 00:20 in winter) a routine reads that day's live 1-minute "
