@@ -1,0 +1,5 @@
+market,date_ny,status,reason,direction,entry_time_ny,entry_time_doha,entry,stop,target,risk,exit_time_ny,exit_time_doha,exit,exit_type,R,R_after_est_fees,notes
+GOLD,2026-10-08,no trade,no breakout by 11:59 London,,,,,,,,,,,,,,box 4108.00-4144.20 (36.20 USD)
+NASDAQ,2026-10-08,no trade,gap not bigger than 0.5 x ATR,,,,,,,,,,,,,,"PC 31148.0, open 30999.0, gap -149.0, ATR 314.5 (1.01%)"
+GOLD,2026-10-09,no trade,no breakout by 11:59 London,,,,,,,,,,,,,,box 4137.60-4207.10 (69.50 USD)
+NASDAQ,2026-10-09,trade,,SHORT,09:35,16:35,30910.0,31161.66,30727.0,251.66,16:00,23:00,30880.0,15:59 close,0.111,-0.004,"PC 30727.0, open 30931.0, gap +204.0, ATR 335.5 (1.08%)"
