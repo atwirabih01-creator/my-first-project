@@ -1,3 +1,19 @@
+# ROUND 3 research (10 Oct 2026), 8 years of design data (Jan 2019 – Sep 2026)
+Full register of the 82 pre-declared checks with results: `round3/TESTS_DECLARED.md` (code and outputs in `round3/`). Key facts, per calendar year:
+- **Scale:** median daily range 13.5 USD in 2019 (0.96% of price) → 103 USD in 2026 (2.29%). The 0.40 USD cost is 3.0% of a day's range in 2019, 0.4% in 2026.
+- **When gold moves:** 08:00–11:00 NY is the busiest block every year (each hour ≈ 0.30–0.40 of the day's range); 18:00–19:00 and 23:00–00:00 NY are the quietest.
+  No hour has a direction that holds every year (the 18:00 NY "rise" is the bid-only reopen spread).
+- **London's first break of the Asia box (00:00–06:59 London) is followed through** by +3.7% of ATR on average (break to 16:00 NY), positive in 6 of 8 years,
+  longs and shorts both positive. Fading it loses in every mood measure tried.
+- **Unlike GBPUSD, a quiet Asia night is NOT a good sign on gold:** boxes < 0.7× normal gave +2.0% ATR with 2019 at −11%; boxes > 1.3× normal gave +9.4% (7/8 years).
+- **News days:** price-defined 08:30 NY shocks: follow/fade flips by year; 10:00 NY shocks continue to 16:00 NY in 7/8 years (+3.6% ATR, ~24 a year);
+  14:00 NY (FOMC) shocks partly reverse by 16:00 (6/8 years, +2.4% ATR). The direction of a US news shock is unrelated to London's earlier break (49.5% same way).
+- **Cross-market:** the dollar (EURUSD) and the Nasdaq do not lead gold intraday in any stable way (all < 1% ATR or flipping by year).
+- **Fixes, COMEX open, Shanghai, month-end:** nothing stable and large enough (all |edge| < 1% ATR or < 6/8 years).
+- **Bad conditions:** Oct 2022 – Feb 2023 and 2022 generally (falling, choppier gold); the break follow-through was weakest there.
+
+---
+
 # XAUUSD (gold) research (Agent 1), round 1
 
 **Data used:** HistData 1-minute bid prices (UTC, already correct; no clock fix applied), **design period only: 1 Oct 2024 to 30 Jun 2026 (21 months)**.

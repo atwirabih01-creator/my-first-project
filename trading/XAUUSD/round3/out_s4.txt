@@ -1,0 +1,68 @@
+--- T1 base (cost 0.4)
+period   n win  totR  perTr   PF  maxDD  lrun
+  2019  28 54%   0.4  0.014 1.04   -4.8     4
+  2020 141 46%  18.1  0.129 1.30   -8.2     6
+  2021 129 41%   9.5  0.074 1.15   -9.5     7
+  2022 121 47%   2.5  0.020 1.04  -12.8     5
+  2023  52 40%   8.3  0.160 1.38  -10.5     8
+  2024 174 51%  31.4  0.180 1.43   -6.4     7
+  2025 192 47%  -2.3 -0.012 0.97  -14.0     5
+  2026 132 55%  24.4  0.185 1.65   -6.2     5
+   ALL 969 48%  92.3  0.095 1.23  -17.9     8
+longs 518 +42.5R | shorts 451 +49.8R | without best5 +63.6R | double cost +65.3R (+0.067/tr) | yrs+ 7/8 worst -2.3 | trades/yr 125
+== U1 by Asia range / ATR20
+U1 0-0.3: n=152 R/tr +0.100 tot +15.3 | by year: 20:-0.4(26) 21:-0.7(8) 22:+5.1(14) 23:-2.1(4) 24:+18.1(49) 25:-4.8(28) 26:-0.1(23)
+U1 0.3-0.45: n=416 R/tr +0.044 tot +18.2 | by year: 19:-1.4(9) 20:+3.2(50) 21:+3.8(74) 22:-15.5(63) 23:+6.8(24) 24:+5.6(66) 25:-0.6(76) 26:+16.3(54)
+U1 0.45-0.6: n=221 R/tr +0.104 tot +23.0 | by year: 19:+2.2(10) 20:+10.7(36) 21:+4.4(34) 22:+6.9(20) 23:+0.6(16) 24:+3.0(37) 25:-2.7(44) 26:-2.1(24)
+U1 0.6-9: n=180 R/tr +0.199 tot +35.8 | by year: 19:-0.4(9) 20:+4.6(29) 21:+2.0(13) 22:+5.9(24) 23:+2.9(8) 24:+4.7(22) 25:+5.9(44) 26:+10.2(31)
+== U2 floors
+--- U2 floor 12 (cost 0.4)
+longs 316 +9.6R | shorts 266 +30.5R | without best5 +17.4R | double cost +29.3R (+0.050/tr) | yrs+ 5/8 worst -5.6 | trades/yr 75
+   ALL: {'period': 'ALL', 'n': 582, 'win': '49%', 'totR': 40.2, 'perTr': 0.069, 'PF': 1.19, 'maxDD': -11.9, 'lrun': 8}
+--- U2 floor 16 (cost 0.4)
+longs 208 +11.1R | shorts 185 +37.4R | without best5 +28.8R | double cost +43.1R (+0.110/tr) | yrs+ 8/8 worst +0.1 | trades/yr 51
+   ALL: {'period': 'ALL', 'n': 393, 'win': '54%', 'totR': 48.4, 'perTr': 0.123, 'PF': 1.38, 'maxDD': -11.9, 'lrun': 6}
+== U3 targets
+--- U3 target 1R (cost 0.4)
+longs 518 +22.2R | shorts 451 +21.1R | without best5 +38.4R | double cost +16.3R (+0.017/tr) | yrs+ 6/8 worst -14.8 | trades/yr 125
+   ALL: {'period': 'ALL', 'n': 969, 'win': '53%', 'totR': 43.3, 'perTr': 0.045, 'PF': 1.12, 'maxDD': -30.4, 'lrun': 8}
+--- U3 target 2R (cost 0.4)
+longs 518 +32.8R | shorts 451 +32.0R | without best5 +54.8R | double cost +37.7R (+0.039/tr) | yrs+ 7/8 worst -3.3 | trades/yr 125
+   ALL: {'period': 'ALL', 'n': 969, 'win': '48%', 'totR': 64.7, 'perTr': 0.067, 'PF': 1.16, 'maxDD': -19.3, 'lrun': 8}
+--- U3 target 3R (cost 0.4)
+longs 518 +39.0R | shorts 451 +44.6R | without best5 +68.7R | double cost +56.6R (+0.058/tr) | yrs+ 8/8 worst +2.7 | trades/yr 125
+   ALL: {'period': 'ALL', 'n': 969, 'win': '48%', 'totR': 83.6, 'perTr': 0.086, 'PF': 1.21, 'maxDD': -16.2, 'lrun': 8}
+== U4 Oct2022-Sep2023
+U4 n=59 totR -7.1 R/tr -0.120 win 37%; at 0.80: -9.3; longs -9.8 shorts +2.7
+   by month: 22-10:-1.2(15) 22-11:-3.0(11) 22-12:+2.3(7) 23-01:-1.1(15) 23-02:-5.9(9) 23-09:+1.7(2)
+== U5
+--- U5 T1 + ATR5/ATR20<1 (cost 0.4)
+longs 260 +28.0R | shorts 231 +28.7R | without best5 +31.4R | double cost +42.6R (+0.087/tr) | yrs+ 6/8 worst -1.8 | trades/yr 63
+   ALL: {'period': 'ALL', 'n': 491, 'win': '49%', 'totR': 56.6, 'perTr': 0.115, 'PF': 1.28, 'maxDD': -12.4, 'lrun': 8}
+== U6
+--- U6 double cost floor 16 (cost 0.8)
+longs 208 +8.2R | shorts 185 +34.9R | without best5 +23.5R | double cost +32.5R (+0.083/tr) | yrs+ 7/8 worst -0.0 | trades/yr 51
+   ALL: {'period': 'ALL', 'n': 393, 'win': '53%', 'totR': 43.1, 'perTr': 0.11, 'PF': 1.33, 'maxDD': -13.2, 'lrun': 6}
+== U7
+--- U7 exit 11:59 NY (cost 0.4)
+longs 518 +30.1R | shorts 451 +48.5R | without best5 +51.6R | double cost +51.6R (+0.053/tr) | yrs+ 6/8 worst -3.8 | trades/yr 125
+   ALL: {'period': 'ALL', 'n': 969, 'win': '48%', 'totR': 78.6, 'perTr': 0.081, 'PF': 1.21, 'maxDD': -18.3, 'lrun': 9}
+== U8 news / weekday / side by year
+U8 news-shock day=True: n=296 tot +85.2 R/tr +0.288 yrs+ 6/8
+U8 news-shock day=False: n=673 tot +7.1 R/tr +0.010 yrs+ 4/8
+U8 weekday: Fri:-1.4(180) Mon:+37.4(198) Thu:+46.5(195) Tue:+6.7(207) Wed:+3.0(189)
+U8 LONG by year: 19:+0.3(14) 20:+9.8(69) 21:-5.0(72) 22:-9.4(61) 23:+5.1(32) 24:+29.9(94) 25:+7.5(110) 26:+4.2(66)
+U8 SHORT by year: 19:+0.0(14) 20:+8.3(72) 21:+14.6(57) 22:+11.9(60) 23:+3.2(20) 24:+1.5(80) 25:-9.8(82) 26:+20.1(66)
+== U9
+--- U9 Asia >= 0.3 ATR20 and >= 8 USD (cost 0.4)
+period   n win  totR  perTr   PF  maxDD  lrun
+  2019  28 54%   0.4  0.014 1.04   -4.8     4
+  2020 115 50%  18.5  0.161 1.42   -6.6     6
+  2021 121 40%  10.2  0.085 1.17   -9.5     7
+  2022 107 45%  -2.7 -0.025 0.95  -11.2     5
+  2023  48 42%  10.4  0.216 1.53   -9.5     8
+  2024 125 50%  13.2  0.106 1.26   -8.2     7
+  2025 164 49%   2.5  0.015 1.04   -9.0     5
+  2026 109 59%  24.4  0.224 1.93   -3.6     5
+   ALL 817 48%  77.0  0.094 1.24  -16.3     8
+longs 440 +24.5R | shorts 377 +52.5R | without best5 +49.9R | double cost +55.4R (+0.068/tr) | yrs+ 7/8 worst -2.7 | trades/yr 105

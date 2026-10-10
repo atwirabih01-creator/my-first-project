@@ -1,5 +1,116 @@
 # XAUUSD (gold) strategy
 
+# ROUND 3 (10 Oct 2026): v3 "Follow London's break of an ACTIVE Asia box" - CURRENT VERSION, sent to Agent 2
+
+**Version:** v3 (2026-10-10). Author: Agent 1. Status: **proposed, frozen for Agent 2's backtest and the 2016-2018 hidden test.**
+Built on design data Jan 2019 - Sep 2026 only (hidden 2016-2018 never opened). Every test of this round, declared before it was run, with its
+result: `round3/TESTS_DECLARED.md` (82 checks). Quick-check code `round3/v3_check.py`; trades `round3/v3_trades.csv`; summary `round3/out_v3.txt`.
+Not financial advice. Trading carries real risk of loss.
+
+## Honest label
+This is **not a brand-new idea**: it is a rebuilt version of the round-1/2 "follow London's break of the Asia range", which failed the
+Oct 2022 - Sep 2023 hidden year. The new families (quiet-night squeeze, mood switches, the dollar or Nasdaq moving first, news reactions,
+the London fixes, the COMEX open, Shanghai hours, month-end) were all tested on 8 years and **none beat it**; most failed outright (see below).
+v3 meets most of the bar on 8 years, but **it still loses in Oct 2022 - Sep 2023 (-7.2 R on 60 trades)**. Expect a grade of B at best.
+
+## The idea in plain words
+Gold, unlike the pound, has a real Asian market (Shanghai, India, Tokyo). When gold moves a lot during the Asian night, it is usually reacting to
+real buying or selling or to news, and when London opens, the big banks tend to carry that move further. We do not guess the direction: we put an
+order on **both** sides of the night's box and let London's first break decide. The stop is the other side of the box, so if price crosses the
+whole night's range against us, the idea was wrong. There is **no profit target**: winners are held to the end of the New York morning/afternoon,
+because the few large trending days pay for the many small losses.
+Small boxes (under 8 USD) are skipped: there the 0.40 USD cost would eat too much of the risk, and on gold a quiet night does **not** lead to a good
+London move (the opposite of GBPUSD: the bigger the Asia box compared with normal, the better the trade; boxes bigger than 0.6 x the daily ATR earned +0.20 R per trade).
+
+## Clocks (rules use London's and New York's own clocks)
+| Step | London | New York | Doha |
+|---|---|---|---|
+| Trading day starts (gold reopens) | - | 18:00 (previous evening) | 01:00 (US summer) / 02:00 (US winter) |
+| Mark the Asia box | 00:00-06:59 | 19:00-01:59 | 02:00-08:59 (UK summer) / 03:00-09:59 (UK winter) |
+| Orders live | 07:00-11:59 | 02:00-06:59 | 09:00-13:59 (UK summer) / 10:00-14:59 (UK winter) |
+| Forced close | - | 16:00 (= close of the 15:59 bar) | 23:00 (US summer) / 00:00 midnight (US winter) |
+UK summer time: last Sunday of March to last Sunday of October. US summer time: 2nd Sunday of March to 1st Sunday of November.
+In the 2-3 mismatch weeks a year (mid-March, late Oct / early Nov) London is 4 hours ahead of New York, so the London steps fall one hour later on the
+New York clock (box 20:00-02:59 NY, orders 03:00-07:59 NY). Always use the London clock for the box and the order window.
+
+## Rules (1-minute chart; at most one trade a day)
+1. **Trading day** = 18:00 New York to 17:00 New York the next day. Sunday-evening bars belong to Monday.
+2. **Mark the Asia box:** **Asia High** = highest high and **Asia Low** = lowest low of the 1-minute bars from 00:00 to 06:59 London time.
+   Box size = Asia High - Asia Low. Use the price feed you trade on (the test used bid prices).
+3. **Setup (box size test):** trade only if the box is **at least 8 USD** (= 20 x the 0.40 USD round-trip cost). Otherwise, no trade today.
+   If your broker's round-trip cost is higher, use 20 x your cost.
+4. **Orders at 07:00 London:** a **buy stop** at Asia High and a **sell stop** at Asia Low. An order fills when price trades **beyond** the level;
+   if price jumps past the level, the fill is the first price available (in the test: the open of that minute). Buys fill at the ask (chart price + spread).
+5. **Confirmation = the fill.** The first order filled is the trade; **cancel the other order at once.** If both levels break inside the same 1-minute bar, no trade
+   (never happened in 2019-2026).
+6. **Stop loss:** the other side of the box (long: Asia Low; short: Asia High). Risk = fill price to stop. If price jumps past the stop, the loss can be more than 1R.
+7. **Take profit:** none. **No partial profits, no break-even move, the stop is never moved.**
+8. **Order expiry:** if neither order has filled by the end of the 11:59 London bar, cancel both. No trade today.
+9. **Forced close:** any open trade is closed at **16:00 New York** (test price: the close of the 15:59 NY 1-minute bar). Nothing is held overnight.
+10. **Size:** risk 1% of the account: ounces = (1% of balance) / (risk in USD). Round down to the broker's lot step.
+11. **No-trade days:** a day with a hole of more than 15 minutes in the data/platform between 18:00 NY (previous evening) and 16:00 NY, or with fewer than
+    1,300 one-minute bars (holidays, early closes). Also skip if the box period has fewer than 300 one-minute bars.
+    **News days are traded** (CPI, NFP, FOMC etc.); the owner decides whether to skip them.
+12. **Daily limit:** 1 trade. After it ends (stop or 16:00 NY), stop for the day.
+
+## Agent 1 quick check (design data Jan 2019 - Sep 2026, 0.40 USD cost; stop first if stop and fill fall in the same minute)
+| Year | Trades | Win rate | Total R | R per trade | Biggest drop | Longest losing run |
+|---|---|---|---|---|---|---|
+| 2019 | 31 | 48% | -1.5 | -0.05 | -4.8 | 4 |
+| 2020 | 141 | 46% | +18.1 | +0.13 | -8.2 | 6 |
+| 2021 | 129 | 41% | +9.5 | +0.07 | -9.5 | 7 |
+| 2022 | 121 | 47% | +2.5 | +0.02 | -12.8 | 5 |
+| 2023 (Feb-Jul data holes) | 53 | 40% | +8.2 | +0.16 | -10.6 | 8 |
+| 2024 | 174 | 51% | +31.4 | +0.18 | -6.4 | 7 |
+| 2025 | 192 | 47% | -2.3 | -0.01 | -14.0 | 5 |
+| 2026 (Jan-Sep) | 132 | 55% | +24.4 | +0.19 | -6.2 | 5 |
+| **All** | **973** | **47%** | **+90.3** | **+0.093** | **-18.0** | **8** |
+Profit factor 1.22. Avg win +1.07 R, avg loss -0.79 R (most trades end at 16:00 NY: 639 forced closes, 334 stops).
+**Longs 520 trades +41.1 R; shorts 453 trades +49.2 R.** Without the best 5 trades: +61.6 R. At 0.80 USD cost: +63.1 R (+0.065 R/trade, 5 of 8 years positive).
+Bootstrap chance the true average is zero or less: 0.8% (before allowing for the 82 checks made this round).
+Gold up years and down years: 2021 (gold -6%) +9.5 R, 2026 (gold -4% so far) +24.4 R, 2025 (gold +62%) -2.3 R. Longs lost in 2021-22, shorts lost in 2025;
+the other side covered it each time. **Oct 2022 - Sep 2023: -7.2 R (60 trades), the same weak spot as round 2.**
+Median stop by year: 2019 9.8, 2022 10.7, 2024 12.6, 2025 24.0, 2026 47.9 USD. 627 days skipped for a box under 8 USD (mostly 2019-2023).
+
+## Target bar: what it meets and misses (honest)
+| Point | Result | Met? |
+|---|---|---|
+| Positive in >= 6 of 8 years | 6 of 8 (2019 -1.5 R, 2025 -2.3 R) | Yes |
+| No year worse than -8 R | worst -2.3 R | Yes |
+| Positive at double cost (0.80 USD) | +63.1 R, but only 5 of 8 years positive | Yes (total), thinner by year |
+| Longs and shorts both positive | +41.1 / +49.2 R | Yes |
+| Longest losing run <= 8 | 8 | Yes (at the limit) |
+| >= +0.08 R per trade | +0.093 R | Yes, thinly |
+| Positive without the best 5 trades | +61.6 R | Yes |
+| >= 40 trades a year | 126 a year on average, but **2019: 31** (cheap gold, small boxes) | **No in 2019** |
+
+## Known weaknesses and doubts
+- **Same family as the idea that failed in round 2, and it still loses in Oct 2022 - Sep 2023 (-7.2 R).** Two quieter, falling-gold stretches (2022, and
+  Oct 2022 - Feb 2023) are where it struggles. 2022 as a calendar year is only +2.5 R.
+- **The profit comes from big days.** On days with a large US news reaction (08:30 / 10:00 / 14:00 NY) the trades made +85 R; on all other days about +7 R.
+  The news does NOT tend to go the same way as London's break (49.5%, a coin flip); it is simply that a trade with no target wins big on big days.
+  If gold goes quiet for months, expect a long flat or losing stretch.
+- The 8 USD floor makes the number of trades depend on the gold price: ~30 a year when gold was ~1,400 USD, ~190 a year at 3,000+.
+  **The 2016-2018 hidden test (gold ~1,050-1,370) will have few trades**, so it will be a weak judge.
+- Biggest drop -18 R (about 17% of the account at 1% risk). Win rate 47%: losing runs of 6-8 are normal.
+- Monday (+37 R) and Thursday (+47 R) carry most of the profit; Friday is -1 R. Not filtered (that would be fitting), but noted.
+- It was chosen as the best of 82 checks. Some of its edge may be luck from looking at many ideas.
+
+## What failed this round (8 years, per year; details in `round3/TESTS_DECLARED.md`)
+- **GBPUSD's quiet-Asia squeeze does NOT hold on gold** (2019 -11% ATR; the dose-response runs the other way).
+- Mood switches that fade the break in some moods: the fade half loses in most years in every version (ER10, 20-day trend, ATR5/ATR60).
+- Cross-market: EURUSD leading gold, gold-vs-dollar divergence, Nasdaq risk-off, EURUSD shock catch-up: all fail (|edge| < 1% ATR or unstable).
+- News: 08:30 and 14:00 NY shock follow/fade flip by year. 10:00 NY shock follow is positive in 7/8 years but only ~24 trades a year and +2.9 R without the best 5.
+- London AM/PM fix reversals, COMEX-open momentum, Shanghai morning, month-end: all too small or unstable.
+- "Quieter recent days" filters (ATR5/ATR20 < 1 etc.) make the years steadier but cut the edge to +0.06-0.07 R per trade.
+
+## Backup ideas (not ready)
+1. v3 with only the bigger boxes (box > 1.3x its 20-day median): +0.19 R/trade, 48 a year, 7/8 years, but found after looking (post-hoc).
+2. Follow a 10:00 NY news shock (+0.07 R/trade, 7/8 years, ~24 trades a year).
+
+---
+
+
 # v2 "Go with London's break of the Asia range, wide stop" (1R)
 
 **Version:** v2 (2026-10-09). Author: Agent 1 (Trading Research Lead). Status: **sent to Agent 2 for backtest (new hidden test: Oct 2022 – Sep 2023).**
