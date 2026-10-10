@@ -11,7 +11,7 @@ Markets, in order: GBPUSD → XAUUSD → NASDAQ 100 → EURUSD. One market at a 
 | `NSXUSD_M1.csv.gz` | Nasdaq 100 index (CFD) | bid |
 | `EURUSD_M1.csv.gz` | EUR/USD | bid |
 
-- One row per minute: `time_utc, open, high, low, close`. Period: 1 Oct 2023 → 30 Sep 2026 (3 years).
+- One row per minute: `time_utc, open, high, low, close`. Period: **1 Jan 2019 → 30 Sep 2026** (about 7.75 years).
 - Source: HistData.com (free). Refresh/extend with `python3 trading/tools/fetch_histdata.py GBPUSD 2023-10 2026-09`.
 - **Times are UTC** and verified. HistData's raw clock is "London time minus 5 hours" (not EST, not New
   York time); the downloader converts it. Checked against Dukascopy's UTC prices (exact match in
@@ -19,7 +19,17 @@ Markets, in order: GBPUSD → XAUUSD → NASDAQ 100 → EURUSD. One market at a 
   lands at 09:30 New York time in winter, in the mismatch weeks, and in summer.
   Do NOT apply any extra clock correction in your own scripts.
 
-## Data periods (who may look at what)
+## Data periods from ROUND 3 on (10 Oct 2026); these replace the table below for new work
+| Period | Use | Who may load it |
+|---|---|---|
+| 2019-01-01 → 2026-09-30 (`data/<SYMBOL>_M1.csv.gz`) | **Design**: research, ideas, rules | Agent 1 and Agent 2 |
+| 2016-01-01 → 2018-12-31 (`data/hidden/<SYMBOL>_M1_2016-2018.csv.gz`) | **Hidden test**: never seen by anyone; clean (almost no missing hours) | **Agent 2 only**, after the rules are frozen |
+- Agent 1 must never open anything in `data/hidden/`.
+- Known holes in the design data: Feb – Jul 2023 (all markets, most days) and Mar 2020 (Nasdaq). Skip gappy days (rule below).
+- Check any new data file with `python3 trading/tools/audit_data.py <file>` (clock + missing hours).
+- Design years for reporting: report results **per calendar year 2019 … 2026**; an idea must hold in most years, not on average.
+
+## Data periods used in rounds 1–2 (history)
 | Period | Use | Who may load it |
 |---|---|---|
 | 2024-10-01 → 2026-06-30 (21 months) | **Design**: research, ideas, rules | Agent 1 and Agent 2 |
