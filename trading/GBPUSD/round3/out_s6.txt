@@ -1,0 +1,13 @@
+touches: round 2060, control 2188
+S=10 T=1    round: -0.220R/tr gross -0.70p yrs+=0/8 | control: -0.316R gross -1.66p | round>control yrs 7/8 | -0.24 -0.21 -0.26 -0.18 -0.21 -0.24 -0.21 -0.26
+S=10 T=2    round: -0.197R/tr gross -0.47p yrs+=0/8 | control: -0.343R gross -1.93p | round>control yrs 6/8 | -0.21 -0.20 -0.20 -0.15 -0.22 -0.29 -0.20 -0.14
+S=10 T=None round: -0.145R/tr gross +0.05p yrs+=1/8 | control: -0.233R gross -0.83p | round>control yrs 5/8 | -0.31 -0.20 -0.19 +0.03 -0.04 -0.33 -0.09 -0.07
+S=15 T=1    round: -0.131R/tr gross -0.47p yrs+=0/8 | control: -0.213R gross -1.70p | round>control yrs 7/8 | -0.15 -0.06 -0.22 -0.08 -0.10 -0.17 -0.18 -0.24
+S=15 T=2    round: -0.123R/tr gross -0.34p yrs+=0/8 | control: -0.211R gross -1.66p | round>control yrs 6/8 | -0.14 -0.04 -0.10 -0.11 -0.03 -0.28 -0.18 -0.21
+S=15 T=None round: -0.120R/tr gross -0.30p yrs+=1/8 | control: -0.163R gross -0.95p | round>control yrs 5/8 | -0.21 -0.16 -0.16 -0.04 +0.11 -0.30 -0.03 -0.15
+S=20 T=1    round: -0.073R/tr gross +0.04p yrs+=0/8 | control: -0.156R gross -1.63p | round>control yrs 7/8 | -0.08 -0.02 -0.08 -0.05 -0.04 -0.12 -0.12 -0.18
+S=20 T=2    round: -0.084R/tr gross -0.17p yrs+=1/8 | control: -0.170R gross -1.90p | round>control yrs 7/8 | -0.04 -0.01 -0.11 -0.12 +0.02 -0.17 -0.11 -0.20
+S=20 T=None round: -0.065R/tr gross +0.20p yrs+=2/8 | control: -0.140R gross -1.30p | round>control yrs 6/8 | -0.08 -0.04 -0.13 +0.01 +0.08 -0.24 -0.08 -0.15
+S=25 T=1    round: -0.048R/tr gross +0.29p yrs+=1/8 | control: -0.129R gross -1.73p | round>control yrs 5/8 | -0.03 +0.02 -0.06 -0.00 -0.07 -0.17 -0.12 -0.10
+S=25 T=2    round: -0.061R/tr gross -0.03p yrs+=1/8 | control: -0.106R gross -1.16p | round>control yrs 7/8 | -0.03 -0.02 -0.09 -0.05 +0.01 -0.19 -0.09 -0.10
+S=25 T=None round: -0.035R/tr gross +0.63p yrs+=3/8 | control: -0.098R gross -0.94p | round>control yrs 5/8 | -0.06 +0.01 -0.10 +0.07 +0.06 -0.25 -0.10 -0.04

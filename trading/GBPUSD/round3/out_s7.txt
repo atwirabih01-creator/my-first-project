@@ -1,0 +1,10 @@
+08:00 NY R1 London 08:00 open   N= 777 reach-ref-first 49.8%  yrs>53%: 1/8  50% 49% 46% 51% 56% 49% 49% 50%
+08:00 NY R2 NY midnight open    N= 807 reach-ref-first 46.8%  yrs>53%: 0/8  49% 50% 42% 46% 51% 50% 44% 43%
+08:00 NY R3 day open 17:00 NY   N= 696 reach-ref-first 49.3%  yrs>53%: 2/8  51% 46% 43% 57% 62% 49% 46% 39%
+08:00 NY R4 Asia middle         N= 811 reach-ref-first 47.8%  yrs>53%: 1/8  46% 50% 47% 50% 57% 45% 50% 39%
+08:00 NY R5 previous close      N= 783 reach-ref-first 49.0%  yrs>53%: 1/8  49% 48% 46% 53% 59% 47% 49% 46%
+10:00 NY R1 London 08:00 open   N= 663 reach-ref-first 49.9%  yrs>53%: 2/8  52% 47% 41% 51% 60% 50% 54% 47%
+10:00 NY R2 NY midnight open    N= 613 reach-ref-first 46.0%  yrs>53%: 0/8  46% 49% 39% 52% 50% 46% 46% 39%
+10:00 NY R3 day open 17:00 NY   N= 535 reach-ref-first 51.0%  yrs>53%: 3/8  50% 56% 47% 54% 64% 46% 51% 43%
+10:00 NY R4 Asia middle         N= 610 reach-ref-first 49.3%  yrs>53%: 4/8  49% 56% 42% 54% 56% 46% 55% 34%
+10:00 NY R5 previous close      N= 567 reach-ref-first 51.7%  yrs>53%: 4/8  47% 53% 51% 58% 58% 44% 55% 47%

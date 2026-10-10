@@ -1,0 +1,28 @@
+--- v3 quiet-Asia breakout  (cost 1.5 pips)
+period   n win  totR  perTr   PF  maxDD  lrun
+  2019  46 33%  -5.8 -0.126 0.83   -7.8     5
+  2020  47 38%   5.2  0.111 1.19   -7.7     9
+  2021  36 42%   5.2  0.144 1.24   -5.5     5
+  2022  36 50%  15.5  0.430 1.86   -3.3     4
+  2023  17 47%   5.5  0.326 1.57   -5.3     5
+  2024  42 45%   8.8  0.210 1.34   -7.8     7
+  2025  42 45%  10.6  0.252 1.43   -4.5     4
+  2026  34 35%  -1.5 -0.043 0.94   -5.7     4
+   ALL 300 41%  43.5  0.145 1.23  -11.8     9
+longs 152 +21.9R (+0.144/tr) | shorts 148 +21.7R (+0.146/tr) | without best 5: +33.7R | median risk 17.7 p | min risk 8.1 p
+--- v3 quiet-Asia breakout  (cost 3.0 pips)
+period   n win  totR  perTr   PF  maxDD  lrun
+  2019  46 33% -11.0 -0.239 0.70  -11.0     5
+  2020  47 38%   2.2  0.046 1.07   -8.3     9
+  2021  36 42%   2.1  0.060 1.09   -6.1     5
+  2022  36 50%  13.3  0.369 1.70   -3.5     4
+  2023  17 47%   4.1  0.239 1.39   -5.6     5
+  2024  42 45%   3.9  0.092 1.14   -8.6     7
+  2025  42 45%   7.4  0.177 1.28   -5.0     4
+  2026  34 35%  -4.7 -0.137 0.82   -6.5     4
+   ALL 300 41%  17.3  0.058 1.09  -17.4     9
+longs 152 +8.5R (+0.056/tr) | shorts 148 +8.8R (+0.060/tr) | without best 5: +7.6R | median risk 17.7 p | min risk 8.1 p
+skipped days: {'gap': 139, 'not_quiet': 1573, 'no_break': 1, 'both_same_minute': 3, 'small_stop': 0}
+exits: {'stop': 167, 'target': 117, 'close': 16}
+avg win +1.85R, avg loss -1.05R, trades/yr 39
+bootstrap: chance true average <= 0: 4.0%

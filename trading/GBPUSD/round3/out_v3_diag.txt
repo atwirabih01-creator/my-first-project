@@ -1,0 +1,30 @@
+                         size     sum   mean  win%
+trend                                             
+ranging                   167  19.326  0.116    41
+trending (ER10>=median)   133  24.212  0.182    42
+
+                           size     sum   mean  win%
+vol                                                 
+vol falling                 201  11.549  0.057    38
+vol rising (ATR5>=ATR100)    99  31.989  0.323    47
+
+                   size     sum   mean  win%
+news                                        
+no shock            200  14.962  0.075    39
+release-shock day   100  28.576  0.286    46
+
+     size     sum   mean  win%
+wd                            
+Fri    65   1.269  0.020    35
+Mon    46   1.227  0.027    37
+Thu    62  11.198  0.181    44
+Tue    68   2.604  0.038    38
+Wed    59  27.239  0.462    53
+
+          size     sum   mean  win%
+hour                               
+02:00 NY   246  26.189  0.106    40
+03:00 NY    46  15.423  0.335    48
+04:00 NY     6   3.199  0.533    50
+05:00 NY     1  -0.214 -0.214     0
+06:00 NY     1  -1.059 -1.059     0
