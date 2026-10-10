@@ -2,6 +2,60 @@
 
 ---
 
+## v1 "Fade the big opening gap": hidden years 2016-2018 (period H), round 3, 10 Oct 2026
+
+### Verdict: still **DROP** for the research pipeline; owner's document stays **grade B: Promising** (not upgraded)
+The unchanged v1 made **+4.34 R on 81 trades (+0.054 R per trade, PF 1.18)** on 2016-2018, which nobody had opened for Nasdaq.
+Positive, but only 2018 made money (+6.9 R); 2016 (-0.1 R) and 2017 (-2.5 R) were slightly negative. Over **all unseen data
+(H + C + A + B): 250 trades, +11.0 R, +0.044 R per trade**, bootstrap 18% chance of no edge, shorts +1.3 R (+0.010 R per trade,
+-1.0 R at 4.0 points). That is below the A bar (about +0.08 R per trade, both directions clearly not negative), and H is not
+negative, so the grade stays B.
+
+### 1. How it was run
+- `backtest/run_hidden_H.py`: imports `backtest_v1.py` and runs its `main()` **unchanged**. It only points it at
+  `data/hidden/NSXUSD_M1_2016-2018.csv.gz`, adds the 2016-2018 US holidays (incl. 5 Dec 2018, national day of mourning) and early
+  closes (25 Nov 2016, 3 Jul 2017, 24 Nov 2017, 3 Jul 2018, 23 Nov 2018, 24 Dec 2018), and writes to `backtest/hidden_H/`.
+  No clock fix. Analysis: `backtest/analyze_H.py` -> `backtest/summary_v1_H.txt`, `backtest/weekly_v1_H_table.md`.
+- H is run on its own (the ATR warm-up restarts in Jan 2016). News days are not labelled for 2016-2018.
+- **Days (H):** 770 trading days in the file. Traded 81; gap too small 539; **stop under 40 points 85** (2016: 40, 2017: 42, 2018: 3);
+  US holiday 20, early close 6, day after a holiday/early close 21, data holes 4 (+4 days after), ATR warm-up 9, first day 1.
+
+### 2. Key numbers (2.0 points cost)
+| Period | Trades | Win | Avg win / loss | Total | R per trade | PF | Max drop | Longest losing run | Chance avg <= 0 | Without best 3 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| H 2016 | 11 | 54.5% | +0.57 / -0.70 | -0.10 R | -0.009 | 0.97 | -2.0 R | 3 | 51% | -2.46 R |
+| H 2017 | 14 | 35.7% | +0.57 / -0.59 | -2.46 R | -0.175 | 0.54 | -3.4 R | 5 | 85% | -4.56 R |
+| H 2018 | 56 | 58.9% | +0.68 / -0.67 | +6.89 R | +0.123 | 1.45 | -3.4 R | 3 | 11% | +3.38 R |
+| **H all** | **81** | **54.3%** | +0.65 / -0.65 | **+4.34 R** | **+0.054** | 1.18 | -5.6 R (-5.5%) | 5 | 25% | +0.83 R |
+| C + A + B (before) | 169 | 50.9% | +0.71 / -0.66 | +6.67 R | +0.039 | 1.12 | -8.2 R (-7.9%) | 5 | 26% | +2.19 R |
+| **All unseen H + C + A + B** | **250** | 52.0% | +0.69 / -0.66 | **+11.01 R** | **+0.044** | 1.14 | -8.2 R (-7.9%) | 5 | 18% | +6.53 R |
+| Design Y1 + Y2 | 128 | 59.4% | +0.68 / -0.65 | +17.81 R | +0.139 | 1.53 | -8.3 R (-8.0%) | 6 | 2% | +11.74 R |
+| Everything | 378 | 54.5% | +0.68 / -0.65 | +28.82 R | +0.076 | 1.26 | -8.3 R (-8.0%) | 6 | 3% | +22.75 R |
+
+- **Costs, H total R at 0 / 2 / 4 / 6 points:** +6.97 / +4.34 / +1.71 / **-0.93**. All unseen: +15.44 / +11.01 / +6.57 / +2.14.
+  Costs matter more in 2016-18 because the stops were small (median 61 points vs 150-320 now).
+- **Long vs short, H:** longs 36 trades, 69% won, **+9.60 R**; shorts 45 trades, 42% won, **-5.26 R** (2016 -1.5, 2017 -3.7, 2018 -0.1).
+  All unseen: longs 120 trades +9.70 R (+0.081), shorts 130 trades +1.31 R (+0.010; -1.04 R at 4.0 points).
+  Note the flip: in C (2022 bear market) the longs lost and the shorts carried it; in H (rising market) the shorts lost and the longs carried it.
+- **Exit types, H:** target 28 (35%) +21.4 R; stop 14 (17%) -14.5 R; 16:00 close 39 (48%) -2.6 R. Worst stop-out -1.05 R.
+- **H weekday:** Mon 18 +1.04, Tue 16 +2.71, Wed 15 +0.16, Thu 16 -1.00, Fri 16 +1.44 (no weekday dependence).
+- **H by quarter:** 2016Q1 +0.16 (10 tr), 2016Q3 -0.26 (1), 2017Q2 -0.56 (3), 2017Q3 -1.80 (7), 2017Q4 -0.10 (4), 2018Q1 -0.30 (13),
+  2018Q2 +2.62 (13), 2018Q3 +3.51 (16), 2018Q4 +1.06 (14). Best 3 trades are small (+1.21, +1.15, +1.15): it does not rely on a few trades.
+
+### 3. What this means
+- Good: H is positive, not dependent on a few trades, and the longest losing run stays 5. Every unseen period is now positive at 2.0 points.
+- Not good enough: the all-unseen edge is still about +0.04 R per trade, roughly a third of the design years. Each direction works only in
+  some market moods (shorts fail in rising markets, longs fail in falling markets), so one of the two is always weak.
+- **Rule issue for Agent 1:** the 40-point minimum stop is a fixed number of points. At 2016-17 prices it blocked 82 of the days with a
+  big enough gap; it should be written as a % of price (e.g. 20 x cost as a fraction of price) if this idea is ever revisited.
+
+### Grade
+**B: Promising (unchanged).** Not A: all-unseen +0.044 R per trade is well below +0.08, and shorts are about zero (negative at double cost).
+Not C: H is positive (+4.3 R).
+
+---
+
+
 ## v1 "Fade the big opening gap": hidden year C (Oct 2021 – Sep 2023) and FINAL verdict, 9 Oct 2026
 
 ### Final verdict: **DROP**

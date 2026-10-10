@@ -1,23 +1,25 @@
 # NASDAQ 100: Final strategy for this round, "Fade the big opening gap" (v1)
 
-Prepared by Agent 2 (Backtest & Performance Manager), 10 Oct 2026. Written for someone who has never seen the strategy.
+Prepared by Agent 2 (Backtest & Performance Manager), 10 Oct 2026; updated the same day with the hidden 2016-2018 test (round 3). Written for someone who has never seen the strategy.
 
-> ## Grade: **B: Promising** (not proven)
+> ## Grade: **B: Promising** (not proven) — re-checked on 3 more hidden years (2016-2018) on 10 Oct 2026, grade unchanged
 > **What B means:** it made money on price data that nobody used to build the rules, but the edge is small and uneven.
 > It is **not** a proven strategy (that would be grade A). My test verdict was **DROP**, so it must not be traded with real money
 > before your own checks.
 >
-> **The evidence in four lines:**
-> - Tested on 5 years (Oct 2021 – Sep 2026), 297 trades. **Every period made money, at every cost level tested**, and the longest
->   losing run was 6 trades. Worst drop from a peak: 8.3 R (about 8% of the account).
-> - On the 3 years nobody had seen when the rules were written (C, A, B): 169 trades, **+6.7 R, only +0.04 R per trade**.
-> - That is so small that there is roughly **a 1 in 4 chance the real edge is zero**. Each of those periods would be negative without its 3 best trades.
-> - The two years the rules were built on (+0.14 R per trade) were the best two of the five, not typical ones.
+> **The evidence in five lines:**
+> - Tested on about 8 years (Jan 2016 – Dec 2018 and Oct 2021 – Sep 2026), 378 trades, **+28.8 R**. Every period made money at the
+>   normal cost. Longest losing run 6 trades; worst drop from a peak 8.3 R (about 8% of the account).
+> - **New this round:** on 2016-2018, which nobody had seen, the unchanged rules made **+4.3 R on 81 trades (+0.05 R per trade)**.
+>   But 2016 (−0.1 R) and 2017 (−2.5 R) were slightly negative; all of the profit came in 2018 (+6.9 R).
+> - On **all unseen data together (2016-18, Oct 21 – Sep 24, Jul – Sep 26): 250 trades, +11.0 R, only +0.04 R per trade**, roughly
+>   **a 1 in 5 chance the real edge is zero**. Selling gap-ups is close to zero there (+1.3 R on 130 trades; −1.0 R at double cost).
+> - The two years the rules were built on (+0.14 R per trade) are still the best of all, not typical ones.
 >
 > **What would upgrade it to A:** at least 6 more months of new data (your own backtest and demo trading from now on) that is
 > clearly positive, at more than +0.10 R per trade over 50+ trades, with both longs and shorts positive.
 > **What would downgrade it (stop using it):** any calendar quarter on new data that loses more than **−4.8 R**, the worst quarter
-> seen in 5 years (Apr – Jun 2026), or a losing run longer than 8 trades.
+> seen in 8 years (Apr – Jun 2026), or a losing run longer than 8 trades.
 
 *Past results do not guarantee future results. Trading carries a real risk of loss. This is not financial advice.*
 
@@ -41,46 +43,231 @@ bigger and a little more common than the stop-outs.
 ## 2. Backtest results
 
 **How it was tested:** a computer program walked through every minute of Nasdaq 100 price data (1-minute candles, from HistData)
-from Oct 2021 to Sep 2026, following the rules below exactly. Every trade has a **cost of 2.0 index points** taken off (spread and
+from Jan 2016 to Dec 2018 and from Oct 2021 to Sep 2026, following the rules below exactly (the same program for both). Every trade has a **cost of 2.0 index points** taken off (spread and
 slippage). If the stop and the target were both touched in the same minute, the test counted the stop. 1 R = the 1% of the account
-risked on each trade. The trade list is in `backtest/trades_v1_withC.csv`, so you can check any trade by hand.
+risked on each trade. The trade lists are `backtest/hidden_H/trades_v1.csv` (2016-2018) and `backtest/trades_v1_withC.csv` (Oct 2021 – Sep 2026),
+so you can check any trade by hand.
 
-**Periods:** C, A and B were **not** used to build the rules (hidden tests). Y1 and Y2 were used to build them.
+**Periods:** H, C, A and B were **not** used to build the rules (hidden tests). Y1 and Y2 were used to build them.
+H (2016-2018) was opened for the first time on 10 Oct 2026, with the rules unchanged.
 
 | Period | Trades | Win rate | Avg win / avg loss | Total | Per trade | Profit factor* | Biggest drop | Longest losing run |
 |---|---|---|---|---|---|---|---|---|
+| **H 2016** (hidden) | 11 | 54.5% | +0.57 / −0.70 R | **−0.1 R** | −0.01 R | 0.97 | −2.0 R (−2.0%) | 3 |
+| **H 2017** (hidden) | 14 | 35.7% | +0.57 / −0.59 R | **−2.5 R** | −0.18 R | 0.54 | −3.4 R (−3.3%) | 5 |
+| **H 2018** (hidden) | 56 | 58.9% | +0.68 / −0.67 R | **+6.9 R** | +0.12 R | 1.45 | −3.4 R (−3.4%) | 3 |
+| **H all, Jan 2016 – Dec 2018** (hidden) | 81 | 54.3% | +0.65 / −0.65 R | **+4.3 R** | +0.05 R | 1.18 | −5.6 R (−5.5%) | 5 |
 | **C** Oct 2021 – Sep 2023 (hidden; 2022 bear market) | 80 | 48.8% | +0.78 / −0.67 R | **+3.1 R** | +0.04 R | 1.11 | −8.2 R (−7.9%) | 5 |
 | **A** Oct 2023 – Sep 2024 (hidden) | 63 | 52.4% | +0.67 / −0.67 R | **+1.9 R** | +0.03 R | 1.10 | −4.6 R (−4.5%) | 4 |
 | Y1 Oct 2024 – Sep 2025 (design) | 64 | 59.4% | +0.73 / −0.62 R | +11.8 R | +0.18 R | 1.74 | −3.6 R (−3.5%) | 4 |
 | Y2 Oct 2025 – Jun 2026 (design) | 64 | 59.4% | +0.62 / −0.67 R | +6.0 R | +0.09 R | 1.34 | −8.3 R (−8.0%) | 6 |
 | **B** Jul – Sep 2026 (hidden) | 26 | 53.8% | +0.62 / −0.58 R | **+1.6 R** | +0.06 R | 1.23 | −1.4 R (−1.4%) | 4 |
-| **All hidden (C + A + B)** | 169 | 50.9% | +0.71 / −0.66 R | **+6.7 R** | **+0.04 R** | 1.12 | −8.2 R (−7.9%) | 5 |
-| All 5 years | 297 | 54.5% | +0.69 / −0.65 R | +24.5 R | +0.08 R | 1.28 | −8.3 R (−8.0%) | 6 |
+| All hidden before this round (C + A + B) | 169 | 50.9% | +0.71 / −0.66 R | +6.7 R | +0.04 R | 1.12 | −8.2 R (−7.9%) | 5 |
+| **All hidden (H + C + A + B)** | 250 | 52.0% | +0.69 / −0.66 R | **+11.0 R** | **+0.04 R** | 1.14 | −8.2 R (−7.9%) | 5 |
+| Design (Y1 + Y2) | 128 | 59.4% | +0.68 / −0.65 R | +17.8 R | +0.14 R | 1.53 | −8.3 R (−8.0%) | 6 |
+| All periods (about 8 years) | 378 | 54.5% | +0.68 / −0.65 R | +28.8 R | +0.08 R | 1.26 | −8.3 R (−8.0%) | 6 |
+
+Without its 3 best trades: H +0.8 R, all hidden +6.5 R. Chance the true average is zero or less (a statistics reshuffle check):
+H 25%, all hidden 18%, design 2%.
 
 *Profit factor = money won ÷ money lost. Above 1 means profit; 1.1 is thin, 1.5 or more is solid.
 
-**With higher costs** (total R for C / A / Y1 / Y2 / B):
-- 2.0 points (the test): +3.1 / +1.9 / +11.8 / +6.0 / +1.6
-- 4.0 points: +2.3 / +1.1 / +11.2 / +5.5 / +1.5
-- 6.0 points: +1.5 / +0.3 / +10.6 / +5.0 / +1.3
+**With higher costs** (total R for H / C / A / Y1 / Y2 / B; and all hidden H + C + A + B):
+- 2.0 points (the test): +4.3 / +3.1 / +1.9 / +11.8 / +6.0 / +1.6; all hidden +11.0
+- 4.0 points: +1.7 / +2.3 / +1.1 / +11.2 / +5.5 / +1.5; all hidden +6.6
+- 6.0 points: −0.9 / +1.5 / +0.3 / +10.6 / +5.0 / +1.3; all hidden +2.1
 
-Costs matter little, because the stops are large (typically 150–320 points).
+Costs matter little since 2021, because the stops are large (typically 150–320 points). In 2016-2018 the index was 4,000–7,700
+points and the stops were much smaller (median 61 points), so costs mattered more: at 6 points H turns slightly negative.
 
 **Buying vs selling:**
-- Longs (buying after a gap down): 134 trades, +9.6 R in total. But on hidden data: 84 trades, +0.1 R, which is **no edge**.
+- **2016-2018 (H):** longs 36 trades, +9.6 R (69% won); **shorts 45 trades, −5.3 R** (2016 −1.5, 2017 −3.7, 2018 −0.1: a rising market).
+- All hidden data together (H + C + A + B): longs 120 trades +9.7 R, shorts 130 trades +1.3 R (−1.0 R at 4.0 points).
+- Longs (buying after a gap down), Oct 2021 – Sep 2026: 134 trades, +9.6 R in total. But on hidden data: 84 trades, +0.1 R, which is **no edge**.
   In the 2022 bear market the longs lost 2.9 R.
-- Shorts (selling after a gap up): 163 trades, +14.9 R in total, and +6.6 R on hidden data. But they lost 4.8 R in Apr – Jun 2026
+- Shorts (selling after a gap up), Oct 2021 – Sep 2026: 163 trades, +14.9 R in total, and +6.6 R on hidden data. But they lost 4.8 R in Apr – Jun 2026
   and 1.1 R in Jul – Sep 2026, both during strong rallies.
 
-**How trades ended (5 years):** target reached 92 trades (31%), +83.0 R; stop hit 54 (18%), −54.6 R;
+**How trades ended, H (2016-2018):** target 28 (35%) +21.4 R; stop 14 (17%) −14.5 R; closed at 16:00 39 (48%) −2.6 R.
+**How trades ended (Oct 2021 – Sep 2026):** target reached 92 trades (31%), +83.0 R; stop hit 54 (18%), −54.6 R;
 closed at 16:00 New York 151 (51%), −3.9 R.
 
 **Quarters:** worst Apr – Jun 2026 −4.8 R, Apr – Jun 2022 −3.6 R, Jul – Sep 2022 −2.6 R. Best Oct – Dec 2025 +5.6 R.
 
 **Missing data:** the price file has holes on almost every day from March to July 2023, so those days were skipped (109 days).
 Other skipped days were US holidays, half days, a few days with missing data, and the day after any of those.
+**2016-2018:** clean data (4 days with a hole). But the rule "no trade if the stop is under 40 points" skipped **85 days** with a big
+enough gap (40 in 2016, 42 in 2017, 3 in 2018), because the index was low (about 4,000–6,500) and its daily range in points was small.
+That is why 2016 and 2017 have only 11 and 14 trades.
 
-### Week-by-week table, Oct 2021 – Sep 2026
+### Week-by-week table, Jan 2016 – Dec 2018 (hidden period H, opened 10 Oct 2026)
+One row per week. The running total starts at 0 in Jan 2016 and ends at +4.34 R. Notes show each trade as weekday + L (long) or
+S (short) + result in R + how it ended (target, stop, or close = 16:00 close). News days are not labelled for 2016-2018. Weeks with
+0 trades had no big enough gap, a stop under 40 points, or a holiday.
+
+| Week | Period | Trades | Wins | Losses | Win rate | Result (R) | Running total H (R) | Notes |
+|---|---|---|---|---|---|---|---|---|
+| 04 Jan 2016 - 08 Jan | H | 0 | 0 | 0 | - | 0 | +0.00 |  |
+| 11 Jan 2016 - 15 Jan | H | 0 | 0 | 0 | - | 0 | +0.00 |  |
+| 18 Jan 2016 - 22 Jan | H | 2 | 0 | 2 | 0% | -1.53 | -1.53 | WedL-1.03(stop) FriS-0.51(close) |
+| 25 Jan 2016 - 29 Jan | H | 1 | 1 | 0 | 100% | +0.75 | -0.78 | ThuS+0.75(target) |
+| 01 Feb 2016 - 05 Feb | H | 0 | 0 | 0 | - | 0 | -0.78 |  |
+| 08 Feb 2016 - 12 Feb | H | 4 | 4 | 0 | 100% | +1.71 | +0.93 | MonL+0.25(close) TueL+0.66(target) WedS+0.24(close) ThuL+0.56(target) |
+| 15 Feb 2016 - 19 Feb | H | 0 | 0 | 0 | - | 0 | +0.93 |  |
+| 22 Feb 2016 - 26 Feb | H | 1 | 1 | 0 | 100% | +0.95 | +1.88 | WedL+0.95(target) |
+| 29 Feb 2016 - 04 Mar | H | 1 | 0 | 1 | 0% | -1.04 | +0.84 | TueS-1.04(stop) |
+| 07 Mar 2016 - 11 Mar | H | 1 | 0 | 1 | 0% | -0.68 | +0.16 | FriS-0.68(close) |
+| 14 Mar 2016 - 18 Mar | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 21 Mar 2016 - 25 Mar | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 28 Mar 2016 - 01 Apr | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 04 Apr 2016 - 08 Apr | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 11 Apr 2016 - 15 Apr | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 18 Apr 2016 - 22 Apr | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 25 Apr 2016 - 29 Apr | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 02 May 2016 - 06 May | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 09 May 2016 - 13 May | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 16 May 2016 - 20 May | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 23 May 2016 - 27 May | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 30 May 2016 - 03 Jun | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 06 Jun 2016 - 10 Jun | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 13 Jun 2016 - 17 Jun | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 20 Jun 2016 - 24 Jun | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 27 Jun 2016 - 01 Jul | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 04 Jul 2016 - 08 Jul | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 11 Jul 2016 - 15 Jul | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 18 Jul 2016 - 22 Jul | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 25 Jul 2016 - 29 Jul | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 01 Aug 2016 - 05 Aug | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 08 Aug 2016 - 12 Aug | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 15 Aug 2016 - 19 Aug | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 22 Aug 2016 - 26 Aug | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 29 Aug 2016 - 02 Sep | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 05 Sep 2016 - 09 Sep | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 12 Sep 2016 - 16 Sep | H | 0 | 0 | 0 | - | 0 | +0.16 |  |
+| 19 Sep 2016 - 23 Sep | H | 1 | 0 | 1 | 0% | -0.26 | -0.10 | ThuS-0.26(close) |
+| 26 Sep 2016 - 30 Sep | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 03 Oct 2016 - 07 Oct | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 10 Oct 2016 - 14 Oct | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 17 Oct 2016 - 21 Oct | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 24 Oct 2016 - 28 Oct | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 31 Oct 2016 - 04 Nov | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 07 Nov 2016 - 11 Nov | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 14 Nov 2016 - 18 Nov | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 21 Nov 2016 - 25 Nov | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 28 Nov 2016 - 02 Dec | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 05 Dec 2016 - 09 Dec | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 12 Dec 2016 - 16 Dec | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 19 Dec 2016 - 23 Dec | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 26 Dec 2016 - 30 Dec | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 02 Jan 2017 - 06 Jan | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 09 Jan 2017 - 13 Jan | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 16 Jan 2017 - 20 Jan | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 23 Jan 2017 - 27 Jan | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 30 Jan 2017 - 03 Feb | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 06 Feb 2017 - 10 Feb | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 13 Feb 2017 - 17 Feb | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 20 Feb 2017 - 24 Feb | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 27 Feb 2017 - 03 Mar | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 06 Mar 2017 - 10 Mar | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 13 Mar 2017 - 17 Mar | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 20 Mar 2017 - 24 Mar | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 27 Mar 2017 - 31 Mar | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 03 Apr 2017 - 07 Apr | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 10 Apr 2017 - 14 Apr | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 17 Apr 2017 - 21 Apr | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 24 Apr 2017 - 28 Apr | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 01 May 2017 - 05 May | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 08 May 2017 - 12 May | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 15 May 2017 - 19 May | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 22 May 2017 - 26 May | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 29 May 2017 - 02 Jun | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 05 Jun 2017 - 09 Jun | H | 0 | 0 | 0 | - | 0 | -0.10 |  |
+| 12 Jun 2017 - 16 Jun | H | 2 | 1 | 1 | 50% | +0.49 | +0.39 | TueS-0.22(close) ThuL+0.70(close) |
+| 19 Jun 2017 - 23 Jun | H | 1 | 0 | 1 | 0% | -1.04 | -0.65 | MonS-1.04(stop) |
+| 26 Jun 2017 - 30 Jun | H | 0 | 0 | 0 | - | 0 | -0.65 |  |
+| 03 Jul 2017 - 07 Jul | H | 1 | 0 | 1 | 0% | -0.36 | -1.01 | ThuL-0.36(close) |
+| 10 Jul 2017 - 14 Jul | H | 1 | 0 | 1 | 0% | -0.43 | -1.44 | WedS-0.43(close) |
+| 17 Jul 2017 - 21 Jul | H | 0 | 0 | 0 | - | 0 | -1.44 |  |
+| 24 Jul 2017 - 28 Jul | H | 0 | 0 | 0 | - | 0 | -1.44 |  |
+| 31 Jul 2017 - 04 Aug | H | 0 | 0 | 0 | - | 0 | -1.44 |  |
+| 07 Aug 2017 - 11 Aug | H | 0 | 0 | 0 | - | 0 | -1.44 |  |
+| 14 Aug 2017 - 18 Aug | H | 1 | 0 | 1 | 0% | -0.52 | -1.96 | MonS-0.52(close) |
+| 21 Aug 2017 - 25 Aug | H | 2 | 1 | 1 | 50% | -0.85 | -2.81 | TueS-1.05(stop) WedL+0.20(close) |
+| 28 Aug 2017 - 01 Sep | H | 1 | 1 | 0 | 100% | +0.73 | -2.08 | TueL+0.73(target) |
+| 04 Sep 2017 - 08 Sep | H | 0 | 0 | 0 | - | 0 | -2.08 |  |
+| 11 Sep 2017 - 15 Sep | H | 1 | 0 | 1 | 0% | -0.38 | -2.46 | MonS-0.38(close) |
+| 18 Sep 2017 - 22 Sep | H | 0 | 0 | 0 | - | 0 | -2.46 |  |
+| 25 Sep 2017 - 29 Sep | H | 0 | 0 | 0 | - | 0 | -2.46 |  |
+| 02 Oct 2017 - 06 Oct | H | 0 | 0 | 0 | - | 0 | -2.46 |  |
+| 09 Oct 2017 - 13 Oct | H | 0 | 0 | 0 | - | 0 | -2.46 |  |
+| 16 Oct 2017 - 20 Oct | H | 0 | 0 | 0 | - | 0 | -2.46 |  |
+| 23 Oct 2017 - 27 Oct | H | 0 | 0 | 0 | - | 0 | -2.46 |  |
+| 30 Oct 2017 - 03 Nov | H | 0 | 0 | 0 | - | 0 | -2.46 |  |
+| 06 Nov 2017 - 10 Nov | H | 0 | 0 | 0 | - | 0 | -2.46 |  |
+| 13 Nov 2017 - 17 Nov | H | 0 | 0 | 0 | - | 0 | -2.46 |  |
+| 20 Nov 2017 - 24 Nov | H | 0 | 0 | 0 | - | 0 | -2.46 |  |
+| 27 Nov 2017 - 01 Dec | H | 0 | 0 | 0 | - | 0 | -2.46 |  |
+| 04 Dec 2017 - 08 Dec | H | 2 | 2 | 0 | 100% | +1.23 | -1.23 | MonS+0.67(target) FriS+0.55(close) |
+| 11 Dec 2017 - 15 Dec | H | 1 | 0 | 1 | 0% | -1.04 | -2.27 | FriS-1.04(stop) |
+| 18 Dec 2017 - 22 Dec | H | 1 | 0 | 1 | 0% | -0.28 | -2.55 | MonS-0.28(close) |
+| 25 Dec 2017 - 29 Dec | H | 0 | 0 | 0 | - | 0 | -2.55 |  |
+| 01 Jan 2018 - 05 Jan | H | 0 | 0 | 0 | - | 0 | -2.55 |  |
+| 08 Jan 2018 - 12 Jan | H | 0 | 0 | 0 | - | 0 | -2.55 |  |
+| 15 Jan 2018 - 19 Jan | H | 1 | 0 | 1 | 0% | -1.05 | -3.60 | WedS-1.05(stop) |
+| 22 Jan 2018 - 26 Jan | H | 2 | 1 | 1 | 50% | -0.17 | -3.77 | ThuS+0.87(target) FriS-1.04(stop) |
+| 29 Jan 2018 - 02 Feb | H | 3 | 3 | 0 | 100% | +1.26 | -2.51 | TueL+0.01(close) WedS+0.76(target) ThuL+0.49(target) |
+| 05 Feb 2018 - 09 Feb | H | 3 | 3 | 0 | 100% | +2.07 | -0.44 | MonL+0.79(target) TueL+0.27(target) FriS+1.00(target) |
+| 12 Feb 2018 - 16 Feb | H | 0 | 0 | 0 | - | 0 | -0.44 |  |
+| 19 Feb 2018 - 23 Feb | H | 0 | 0 | 0 | - | 0 | -0.44 |  |
+| 26 Feb 2018 - 02 Mar | H | 1 | 1 | 0 | 100% | +0.67 | +0.23 | FriL+0.67(target) |
+| 05 Mar 2018 - 09 Mar | H | 0 | 0 | 0 | - | 0 | +0.23 |  |
+| 12 Mar 2018 - 16 Mar | H | 0 | 0 | 0 | - | 0 | +0.23 |  |
+| 19 Mar 2018 - 23 Mar | H | 2 | 0 | 2 | 0% | -2.05 | -1.83 | MonL-1.03(stop) ThuL-1.03(stop) |
+| 26 Mar 2018 - 30 Mar | H | 1 | 0 | 1 | 0% | -1.03 | -2.86 | MonS-1.03(stop) |
+| 02 Apr 2018 - 06 Apr | H | 1 | 1 | 0 | 100% | +0.75 | -2.11 | WedL+0.75(target) |
+| 09 Apr 2018 - 13 Apr | H | 1 | 0 | 1 | 0% | -0.42 | -2.53 | TueS-0.42(close) |
+| 16 Apr 2018 - 20 Apr | H | 0 | 0 | 0 | - | 0 | -2.53 |  |
+| 23 Apr 2018 - 27 Apr | H | 2 | 1 | 1 | 50% | +0.28 | -2.25 | ThuS-0.66(close) FriS+0.94(target) |
+| 30 Apr 2018 - 04 May | H | 0 | 0 | 0 | - | 0 | -2.25 |  |
+| 07 May 2018 - 11 May | H | 0 | 0 | 0 | - | 0 | -2.25 |  |
+| 14 May 2018 - 18 May | H | 1 | 0 | 1 | 0% | -0.06 | -2.31 | TueL-0.06(close) |
+| 21 May 2018 - 25 May | H | 2 | 2 | 0 | 100% | +1.25 | -1.06 | MonS+0.47(close) WedL+0.78(target) |
+| 28 May 2018 - 01 Jun | H | 0 | 0 | 0 | - | 0 | -1.06 |  |
+| 04 Jun 2018 - 08 Jun | H | 1 | 1 | 0 | 100% | +0.68 | -0.38 | FriL+0.68(target) |
+| 11 Jun 2018 - 15 Jun | H | 1 | 0 | 1 | 0% | -0.70 | -1.08 | ThuS-0.70(close) |
+| 18 Jun 2018 - 22 Jun | H | 3 | 2 | 1 | 67% | +1.89 | +0.81 | MonL+1.21(close) TueL+1.01(close) WedS-0.33(close) |
+| 25 Jun 2018 - 29 Jun | H | 1 | 0 | 1 | 0% | -1.04 | -0.23 | MonL-1.04(stop) |
+| 02 Jul 2018 - 06 Jul | H | 1 | 1 | 0 | 100% | +0.97 | +0.73 | MonL+0.97(target) |
+| 09 Jul 2018 - 13 Jul | H | 1 | 0 | 1 | 0% | -0.03 | +0.70 | WedL-0.03(close) |
+| 16 Jul 2018 - 20 Jul | H | 1 | 1 | 0 | 100% | +0.91 | +1.61 | TueL+0.91(target) |
+| 23 Jul 2018 - 27 Jul | H | 3 | 2 | 1 | 67% | +1.02 | +2.63 | TueS+0.86(close) ThuL-0.40(close) FriS+0.56(target) |
+| 30 Jul 2018 - 03 Aug | H | 1 | 1 | 0 | 100% | +0.59 | +3.23 | ThuL+0.59(target) |
+| 06 Aug 2018 - 10 Aug | H | 1 | 0 | 1 | 0% | -0.27 | +2.95 | FriL-0.27(close) |
+| 13 Aug 2018 - 17 Aug | H | 2 | 1 | 1 | 50% | -0.53 | +2.43 | WedL-1.03(stop) ThuS+0.51(close) |
+| 20 Aug 2018 - 24 Aug | H | 0 | 0 | 0 | - | 0 | +2.43 |  |
+| 27 Aug 2018 - 31 Aug | H | 1 | 0 | 1 | 0% | -0.72 | +1.70 | MonS-0.72(close) |
+| 03 Sep 2018 - 07 Sep | H | 1 | 1 | 0 | 100% | +0.70 | +2.40 | FriL+0.70(target) |
+| 10 Sep 2018 - 14 Sep | H | 1 | 0 | 1 | 0% | -0.31 | +2.09 | ThuS-0.31(close) |
+| 17 Sep 2018 - 21 Sep | H | 2 | 1 | 1 | 50% | +0.03 | +2.13 | ThuS-0.75(close) FriS+0.79(target) |
+| 24 Sep 2018 - 28 Sep | H | 1 | 1 | 0 | 100% | +1.15 | +3.28 | MonL+1.15(target) |
+| 01 Oct 2018 - 05 Oct | H | 1 | 1 | 0 | 100% | +0.84 | +4.12 | MonS+0.84(target) |
+| 08 Oct 2018 - 12 Oct | H | 1 | 0 | 1 | 0% | -0.49 | +3.63 | FriS-0.49(close) |
+| 15 Oct 2018 - 19 Oct | H | 1 | 0 | 1 | 0% | -1.02 | +2.61 | TueS-1.02(stop) |
+| 22 Oct 2018 - 26 Oct | H | 3 | 2 | 1 | 67% | +0.43 | +3.03 | TueL+1.15(target) ThuS-1.02(stop) FriL+0.29(close) |
+| 29 Oct 2018 - 02 Nov | H | 2 | 1 | 1 | 50% | +0.36 | +3.40 | MonS+0.61(target) WedS-0.24(close) |
+| 05 Nov 2018 - 09 Nov | H | 0 | 0 | 0 | - | 0 | +3.40 |  |
+| 12 Nov 2018 - 16 Nov | H | 0 | 0 | 0 | - | 0 | +3.40 |  |
+| 19 Nov 2018 - 23 Nov | H | 2 | 2 | 0 | 100% | +0.55 | +3.94 | TueL+0.13(close) WedS+0.41(close) |
+| 26 Nov 2018 - 30 Nov | H | 0 | 0 | 0 | - | 0 | +3.94 |  |
+| 03 Dec 2018 - 07 Dec | H | 1 | 1 | 0 | 100% | +0.11 | +4.05 | MonS+0.11(close) |
+| 10 Dec 2018 - 14 Dec | H | 3 | 2 | 1 | 67% | +0.29 | +4.34 | TueS+0.79(target) WedS+0.22(close) FriL-0.72(close) |
+| 17 Dec 2018 - 21 Dec | H | 0 | 0 | 0 | - | 0 | +4.34 |  |
+| 24 Dec 2018 - 28 Dec | H | 0 | 0 | 0 | - | 0 | +4.34 |  |
+| 31 Dec 2018 - 04 Jan | H | 0 | 0 | 0 | - | 0 | +4.34 |  |
+
+
+
+### Week-by-week table, Oct 2021 – Sep 2026 (running total starts at 0 again in Oct 2021)
 How to read it: one row per week, Monday to Friday. "Result" is after costs. "16:00 close" means the trade was closed at the end of
 the session without hitting stop or target. Labels in brackets: NFP = US jobs report, CPI = US inflation, PPI = producer prices,
 FOMC = US interest-rate decision, EARN = the day after Nvidia, Apple, Microsoft or Alphabet reported results. In period C only
@@ -403,7 +590,7 @@ Chart: **Nasdaq 100 (US100 / NAS100 / USTEC at your broker), 1-minute candles.**
 
 ### 3.5 Wait for the first 5-minute candle (09:30:00 – 09:34:59 New York)
 Do nothing for 5 minutes. **Skip the day** if, during these 5 minutes, price already touched PC (for a short: the low reached PC;
-for a long: the high reached PC). This never happened in 5 years, but check it anyway.
+for a long: the high reached PC). This never happened in the 8 tested years, but check it anyway.
 There is no other confirmation signal. The big gap itself is the signal.
 
 ### 3.6 Entry at 09:35 New York (16:35 Doha summer / 17:35 Doha winter)
@@ -411,7 +598,8 @@ Enter with a **market order** at the close of the 09:34 1-minute candle (that is
 
 ### 3.7 Stop loss and take profit (place both immediately)
 - **Stop loss** = **0.75 × ATR in points** away from your entry: **above** the entry for a short, **below** it for a long.
-  Example: 0.75 × 460 = 345 points. If this distance is under 40 points, do not trade (it never was in the test).
+  Example: 0.75 × 460 = 345 points. If this distance is under 40 points, do not trade. (This never happened from 2021 on, but it skipped 85 days in 2016-2018,
+  when the index was much lower. At today's prices it does not matter.)
 - **Take profit** = **PC exactly** (yesterday's 15:59 close).
 - **Position size**, so the stop costs exactly 1% of the account:
   size = (1% of your balance) ÷ (stop distance in points × value of 1 point per lot at your broker).
@@ -450,9 +638,10 @@ Enter with a **market order** at the close of the 09:34 1-minute candle (that is
 ---
 
 ## 4. Known weaknesses (read these before trading it)
-1. **The edge is thin.** On hidden data it is about +0.04 R per trade: on a 10,000 USD account risking 100 USD per trade, that is
-   about +4 USD per trade on average, with large swings around it. Roughly a 1 in 4 chance it is zero.
-2. **Shorts lose in strong rallies.** Selling gap-ups lost 4.8 R in Apr – Jun 2026 (May 2026 was the worst month in 5 years, −4.6 R)
+1. **The edge is thin.** On all hidden data (250 trades, about 6 years) it is about +0.04 R per trade: on a 10,000 USD account risking
+   100 USD per trade, that is about +4 USD per trade on average, with large swings around it. Roughly a 1 in 5 chance it is zero.
+   2016 and 2017 were slightly negative; only 2018 made money in the newest hidden test.
+2. **Shorts lose in strong rallies.** In 2016-2018 (a mostly rising market) selling gap-ups lost 5.3 R on 45 trades. Selling gap-ups lost 4.8 R in Apr – Jun 2026 (May 2026 was the worst month in 5 years, −4.6 R)
    and lost again in Jul – Sep 2026 (−1.1 R). When the index keeps making new highs, gap-ups tend to keep going.
 3. **Longs lose in bear markets.** Buying gap-downs lost 2.9 R in Oct 2021 – Dec 2022 (the 2022 bear market) and made nothing on all
    hidden data together (84 trades, +0.1 R). When the market keeps falling, gap-downs tend to keep going.
@@ -461,13 +650,15 @@ Enter with a **market order** at the close of the 09:34 1-minute candle (that is
 5. **Small sample.** It trades only about 60 – 65 days a year. One good or bad month changes a year's result a lot: hidden year A was
    −1.1 R without April 2024. Losing stretches of several months are normal (e.g. Apr – Sep 2022: −6.2 R).
 6. **Evening hours in Doha.** Entry is 16:35 or 17:35 Doha, and the forced close is 23:00 or midnight Doha.
-7. **Data:** the test used one free data source (HistData bid prices). Your broker's prices, spread and session times may differ
+7. **Fixed 40-point minimum stop.** The rule is written in points, not in %. When the index was low (2016-2017) it blocked most trades.
+   At today's prices (about 20,000+) it never blocks a trade, but it shows the rules were written for today's price level.
+8. **Data:** the test used one free data source (HistData bid prices). Your broker's prices, spread and session times may differ
    slightly, which can change individual trades.
 
 ---
 
 ## 5. Before you use it: your own checks
-1. **Repeat the backtest by hand** on at least 20 trades from the list (`backtest/trades_v1_withC.csv`): same dates, same direction,
+1. **Repeat the backtest by hand** on at least 20 trades from the lists (`backtest/trades_v1_withC.csv` and `backtest/hidden_H/trades_v1.csv`): same dates, same direction,
    similar entry, stop and target on your broker's chart. Note any differences.
 2. **Demo-trade it** (a practice account, no real money) for at least 3 months, following the checklist exactly. Compare with the test:
    about 1 trade in 4 days, roughly half the trades closing at 16:00, wins around +0.7 R and losses around −0.65 R.

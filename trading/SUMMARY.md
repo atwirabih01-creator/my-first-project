@@ -1,18 +1,24 @@
-# Day-trading project: where we stand (9 Oct 2026)
+# Day-trading project: where we stand (10 Oct 2026, after round 3)
 
-## In one sentence
-All four markets were studied and tested properly, and **none of the strategies is proven yet**, so nothing has been
-handed over to trade. This is the process working: each strategy looked good on its design data and was caught by the
-hidden-data test before it could cost real money.
+## Your strategy documents (one per market, graded honestly)
+| Market | Strategy | Grade | Where |
+|---|---|---|---|
+| **Nasdaq 100** | Fade the big opening gap | **B: Promising** | `NASDAQ/FINAL-STRATEGY.md` |
+| **Gold** | Follow London's break of the Asia box (v3) | **B: Promising** (bottom of B) | `XAUUSD/FINAL-STRATEGY.md` |
+| GBPUSD | Quiet-Asia breakout (v3) | C: Experimental (demo only) | `GBPUSD/FINAL-STRATEGY.md` |
+| EURUSD | Euro-only move fade (v3) | C: Experimental (demo only) | `EURUSD/FINAL-STRATEGY.md` |
 
-## Results by market
-| Market | Best strategy found | Design years | Unseen data | Verdict |
-|---|---|---|---|---|
-| GBPUSD | "New York false break" of yesterday's high/low | profit in one year, loss in the other | loss (−22 R in 2024–25) | Dropped |
-| Gold | "Follow London's break of the Asia range" (v1, v2) | profit both years | v1 flat, v2 loss in 2022–23 | Dropped |
-| Nasdaq 100 | "Fade the big opening gap" | profit both years (+0.14 R per trade) | small profit (+0.04 R per trade), carried by a few trades | Dropped |
-| EURUSD | no idea good enough to test | — | not used (still available) | Paused |
-(R = the amount risked on one trade, 1% of the account.)
+Grades: **A** = proven on unseen data; **B** = made money on unseen data but the edge is small/uneven;
+**C** = only worked on the data it was built on (lost on unseen data).
+
+- **Nasdaq gap fade:** made money in **every** unseen period (2016–18, 2021–23, 2023–24, Jul–Sep 2026): 250 unseen trades,
+  +11.0 R, but only +0.04 R per trade; still positive at double cost. Closest thing to an A.
+- **Gold v3:** +90 R on 2019–26 (6 of 8 years), but only +1.9 R on 81 unseen 2016–18 trades; profit relies on big US news days.
+- **GBPUSD v3 / EURUSD v3:** positive 2019–26, but lost on the unseen 2016–18 years.
+
+## Data
+Jan 2016 – Sep 2026 per market (minute prices, clock checked including the US/UK mismatch weeks).
+All hidden (unseen) data has now been used for all four markets; further proof must come from new data (demo / forward test).
 
 ## What we learned
 - Each edge belonged to one **market mood**: sideways (GBPUSD), rising (gold), trending (Nasdaq's winning side flipped).
