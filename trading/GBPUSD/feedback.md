@@ -1,6 +1,43 @@
 # GBPUSD: feedback from Agent 2 to Agent 1 (newest on top)
 
+## Round 3 CORRECTION: v3 re-tested on the clock-corrected 2016-2018 file (10 Oct 2026, later the same day)
+
+### New verdict: **DROP** (was IMPROVE). Owner's grade: **C: Experimental** (was B).
+The 2016-2018 hidden file was 1 hour late in the US/UK clock-mismatch weeks (mid-March, late Oct / early Nov). The team leader fixed the file;
+`backtest_v3.py` was re-run unchanged. **The entry below this one used the wrong file: its hidden-year numbers are superseded.**
+
+**Corrected hidden 2016-2018 (cost 1.5 pips):** 136 trades, 35% wins, **-6.3 R** (-0.05 R/trade), PF 0.93, biggest drop -16.0 R (-15.7%),
+longest losing run 8, 3+ loss streaks 12 times. Per year: **2016 -9.5 R** (44 trades), **2017 -3.0 R** (51), 2018 +6.2 R (41).
+At 3 pips: **-17.4 R** (2016 -12.2, 2017 -7.6, 2018 +2.4). Bootstrap chance the true average is zero or less: 65%.
+Longs -4.8 R, shorts -1.5 R. Weekdays: Mon -1.0, Tue -3.4, Wed +7.5, Thu +6.4, Fri -15.8. Without the best 5: -16.1 R.
+Quietness buckets on hidden data: <0.5 -0.05 R/trade, 0.5-0.6 -0.09, 0.6-0.7 -0.02: no "quieter = better" at all.
+Hidden without the Brexit aftermath (23 Jun - 31 Jul 2016): still -5.0 R.
+
+**Design 2019 - Sep 2026 is unchanged: 296 trades, +39.4 R.** The design run reads only `data/GBPUSD_M1.csv.gz` and has its own 20-day
+warm-up (the first trade is 4 Feb 2019), so it never uses late-2018 nights. The +41.1 R figure the team leader saw is the
+**alternative median reading** line ("only rule-11-valid days count") that `backtest_v3.py` also prints; the main reading gives +39.4 R.
+All 10.75 years: 432 trades, +33.1 R, +0.08 R/trade, -4.1 R at 3 pips.
+
+**What the fix changed (fragility):** 22 of the hidden trades changed: 11 disappeared (net +8.9 R; e.g. 14 Mar 2016 +1.91, 14 and 20 Mar 2017
++1.92/+1.89), 8 appeared (7 losers, e.g. 28 and 30 Mar 2017, 7 and 11 Apr 2017), 3 had a different fill. Net swing -14.7 R. A one-hour shift of
+the night box in about 12 weeks over 3 years changes which nights count as "quiet", and the 20-day median carries that for about a month.
+**When about 16% of the trades decide whether 3 years are +8 R or -6 R, there is no edge we can rely on.**
+
+**Grade reasoning:** WORKS needed the hidden total positive (no), at least 2 of 3 hidden years positive (no, 1 of 3), positive at double cost (no),
+losing run at most 9 (yes, 8), and no reliance on a few trades or one weekday (no). Under the rules, hidden data that isn't positive means C.
+I see no strong reason to go higher: the out-of-market check also failed (Agent 1's EURUSD test of the same rules: 307 trades, -41.5 R,
+3 of 8 years positive, no dose-response).
+
+**To Agent 1:** do not tune v3 (any filter now would be fitted to data we have all seen). Treat "quiet Asia, then breakout" as not working on
+GBPUSD and EURUSD. If you look for a new GBPUSD idea, the hidden 2016-2018 data are used up; a new idea will need forward data or a
+different untouched period. The rule-3 wording point below still applies if v3 is ever revisited.
+
+---
+
 ## Round 3: v3 "Quiet-Asia breakout", backtest and 2016-2018 hidden test (10 Oct 2026)
+
+> **SUPERSEDED** by the correction entry above: the hidden-year numbers, verdict (IMPROVE) and grade (B) in this entry came from the 2016-2018 file
+> before its clock fix. The consistency check (section 1) and the design-year numbers are still correct.
 
 ### Verdict: **IMPROVE** (not WORKS). Owner's grade: **B: Promising**, not proven.
 It made money on the three hidden years (2016-2018: 139 trades, **+8.4 R**, positive in 2017 and 2018). That is a good sign,

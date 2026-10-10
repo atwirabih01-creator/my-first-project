@@ -1,0 +1,2797 @@
+tday,period,status,bars_eur,bars_gbp,threshold_pct,gap_pct,atr_pips
+2016-01-04,H,warm-up: fewer than 100 past gap values,1438,1439,,-0.41828,
+2016-01-05,H,warm-up: fewer than 100 past gap values,1439,1440,,-0.33959,
+2016-01-06,H,warm-up: fewer than 100 past gap values,1440,1439,,0.25811,
+2016-01-07,H,warm-up: fewer than 100 past gap values,1440,1440,,0.56177,
+2016-01-08,H,warm-up: fewer than 100 past gap values,1440,1440,,0.1644,
+2016-01-11,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.32761,
+2016-01-12,H,warm-up: fewer than 100 past gap values,1440,1440,,0.45287,
+2016-01-13,H,warm-up: fewer than 100 past gap values,1440,1440,,0.35889,
+2016-01-14,H,warm-up: fewer than 100 past gap values,1440,1440,,0.43022,
+2016-01-15,H,warm-up: fewer than 100 past gap values,1439,1438,,1.0553,
+2016-01-18,H,warm-up: fewer than 100 past gap values,1436,1440,,-0.056501,
+2016-01-19,H,warm-up: fewer than 100 past gap values,1435,1440,,1.1099,
+2016-01-20,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.55557,
+2016-01-21,H,warm-up: fewer than 100 past gap values,1440,1439,,-0.25159,
+2016-01-22,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.9377,
+2016-01-25,H,warm-up: fewer than 100 past gap values,1439,1437,,0.259,
+2016-01-26,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.72559,
+2016-01-27,H,warm-up: fewer than 100 past gap values,1439,1440,,0.49241,
+2016-01-28,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.16015,
+2016-01-29,H,warm-up: fewer than 100 past gap values,1440,1439,,0.30218,
+2016-02-01,H,warm-up: fewer than 100 past gap values,1440,1440,,0.065437,104.59
+2016-02-02,H,warm-up: fewer than 100 past gap values,1440,1440,,0.14896,101.21
+2016-02-03,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.26312,97.61
+2016-02-04,H,warm-up: fewer than 100 past gap values,1440,1440,,0.92988,105.65
+2016-02-05,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.40364,105.68
+2016-02-08,H,warm-up: fewer than 100 past gap values,1437,1435,,0.84781,105.97
+2016-02-09,H,warm-up: fewer than 100 past gap values,1440,1440,,0.89549,106.35
+2016-02-10,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.54012,111.12
+2016-02-11,H,warm-up: fewer than 100 past gap values,1440,1440,,0.79874,114.53
+2016-02-12,H,warm-up: fewer than 100 past gap values,1439,1439,,-0.0051321,114.24
+2016-02-15,H,warm-up: fewer than 100 past gap values,1440,1430,,-0.29466,113.71
+2016-02-16,H,warm-up: fewer than 100 past gap values,1440,1439,,0.96053,116.88
+2016-02-17,H,warm-up: fewer than 100 past gap values,1439,1439,,-0.32012,116.35
+2016-02-18,H,warm-up: fewer than 100 past gap values,1440,1439,,-0.79405,115.07
+2016-02-19,H,warm-up: fewer than 100 past gap values,1440,1440,,0.16772,111.84
+2016-02-22,H,warm-up: fewer than 100 past gap values,1440,1440,,0.034459,111.11
+2016-02-23,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.10908,113.75
+2016-02-24,H,warm-up: fewer than 100 past gap values,1440,1440,,0.439,114.08
+2016-02-25,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.097369,115.25
+2016-02-26,H,warm-up: fewer than 100 past gap values,1440,1439,,-0.33926,113.52
+2016-02-29,H,warm-up: fewer than 100 past gap values,1438,1440,,-0.5095,114.42
+2016-03-01,H,warm-up: fewer than 100 past gap values,1439,1440,,0.0015883,114.69
+2016-03-02,H,warm-up: fewer than 100 past gap values,1440,1439,,-0.52169,114.85
+2016-03-03,H,warm-up: fewer than 100 past gap values,1439,1440,,0.31762,105.54
+2016-03-04,H,warm-up: fewer than 100 past gap values,1440,1439,,0.20749,103.03
+2016-03-07,H,warm-up: fewer than 100 past gap values,1437,1438,,-0.019052,103.24
+2016-03-08,H,warm-up: fewer than 100 past gap values,1438,1438,,0.54791,101.06
+2016-03-09,H,warm-up: fewer than 100 past gap values,1439,1437,,-0.2265,95.49
+2016-03-10,H,warm-up: fewer than 100 past gap values,1440,1440,,0.58486,92.37
+2016-03-11,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.60401,107.03
+2016-03-14,H,warm-up: fewer than 100 past gap values,1425,1431,,-0.098066,107.51
+2016-03-15,H,warm-up: fewer than 100 past gap values,1440,1439,,0.73613,106.31
+2016-03-16,H,warm-up: fewer than 100 past gap values,1440,1440,,0.033765,105.51
+2016-03-17,H,warm-up: fewer than 100 past gap values,1440,1439,,-0.80936,111.1
+2016-03-18,H,warm-up: fewer than 100 past gap values,1440,1439,,-0.33116,114.01
+2016-03-21,H,warm-up: fewer than 100 past gap values,1434,1439,,0.13633,114.42
+2016-03-22,H,warm-up: fewer than 100 past gap values,1440,1439,,1.0036,110.88
+2016-03-23,H,warm-up: fewer than 100 past gap values,1438,1438,,0.42446,111.35
+2016-03-24,H,warm-up: fewer than 100 past gap values,1439,1440,,-0.22476,110.1
+2016-03-25,H,warm-up: fewer than 100 past gap values,1395,1350,,-0.053786,109.1
+2016-03-28,H,warm-up: fewer than 100 past gap values,1427,1417,,-0.48937,102.63
+2016-03-29,H,warm-up: fewer than 100 past gap values,1439,1438,,-0.23085,100.83
+2016-03-30,H,warm-up: fewer than 100 past gap values,1439,1439,,0.1432,104.58
+2016-03-31,H,warm-up: fewer than 100 past gap values,1438,1439,,0.53897,105.89
+2016-04-01,H,warm-up: fewer than 100 past gap values,1439,1437,,1.2033,105.01
+2016-04-04,H,warm-up: fewer than 100 past gap values,1439,1440,,-0.322,103.15
+2016-04-05,H,warm-up: fewer than 100 past gap values,1437,1439,,0.33994,101.62
+2016-04-06,H,warm-up: fewer than 100 past gap values,1439,1438,,0.67356,101.86
+2016-04-07,H,warm-up: fewer than 100 past gap values,1438,1440,,-0.73753,102.66
+2016-04-08,H,warm-up: fewer than 100 past gap values,1438,1440,,-0.095598,88.685
+2016-04-11,H,warm-up: fewer than 100 past gap values,1437,1434,,-0.74989,85.74
+2016-04-12,H,warm-up: fewer than 100 past gap values,1439,1440,,-0.24147,84.6
+2016-04-13,H,warm-up: fewer than 100 past gap values,1438,1440,,-0.50649,87.91
+2016-04-14,H,warm-up: fewer than 100 past gap values,1438,1438,,0.092862,84.82
+2016-04-15,H,warm-up: fewer than 100 past gap values,1440,1439,,0.24317,81.015
+2016-04-18,H,warm-up: fewer than 100 past gap values,1439,1438,,-0.3333,80.53
+2016-04-19,H,warm-up: fewer than 100 past gap values,1438,1437,,-0.21439,80.93
+2016-04-20,H,warm-up: fewer than 100 past gap values,1440,1440,,-0.3551,81.385
+2016-04-21,H,warm-up: fewer than 100 past gap values,1438,1438,,0.048326,83.04
+2016-04-22,H,warm-up: fewer than 100 past gap values,1435,1437,,-0.68437,87.33
+2016-04-25,H,warm-up: fewer than 100 past gap values,1437,1440,,-0.23581,90.525
+2016-04-26,H,warm-up: fewer than 100 past gap values,1440,1439,,-0.37643,90.185
+2016-04-27,H,warm-up: fewer than 100 past gap values,1438,1439,,0.087225,87.635
+2016-04-28,H,warm-up: fewer than 100 past gap values,1439,1440,,-0.0021789,88.03
+2016-04-29,H,warm-up: fewer than 100 past gap values,1439,1438,,0.43281,86.535
+2016-05-02,H,warm-up: fewer than 100 past gap values,1438,1439,,0.1475,86.985
+2016-05-03,H,warm-up: fewer than 100 past gap values,1439,1440,,0.7773,88.6
+2016-05-04,H,warm-up: fewer than 100 past gap values,1440,1440,,0.38707,91.165
+2016-05-05,H,warm-up: fewer than 100 past gap values,1440,1437,,-0.47848,89.065
+2016-05-06,H,warm-up: fewer than 100 past gap values,1440,1439,,0.15252,88.635
+2016-05-09,H,warm-up: fewer than 100 past gap values,1436,1437,,-0.17253,89.72
+2016-05-10,H,warm-up: fewer than 100 past gap values,1440,1439,,-0.2144,88.19
+2016-05-11,H,warm-up: fewer than 100 past gap values,1437,1438,,0.30091,84.795
+2016-05-12,H,warm-up: fewer than 100 past gap values,1438,1440,,-0.67371,82.51
+2016-05-13,H,warm-up: fewer than 100 past gap values,1440,1435,,-0.078549,82.405
+2016-05-16,H,warm-up: fewer than 100 past gap values,1438,1424,,0.02049,83.675
+2016-05-17,H,warm-up: fewer than 100 past gap values,1433,1438,,0.4432,82.77
+2016-05-18,H,warm-up: fewer than 100 past gap values,1432,1438,,-1.1312,81.03
+2016-05-19,H,warm-up: fewer than 100 past gap values,1435,1435,,-0.26926,81.265
+2016-05-20,H,warm-up: fewer than 100 past gap values,1437,1438,,0.24003,77.305
+2016-05-23,H,gap not above threshold,1437,1427,0.54983,-0.020251,74.785
+2016-05-24,H,not stalled (stop < 0.15 x ATR),1437,1439,0.54791,-1.1486,74.53
+2016-05-25,H,TRADE,1438,1440,0.55366,-0.69375,75.07
+2016-05-26,H,gap not above threshold,1439,1436,0.55867,0.51089,72.485
+2016-05-27,H,gap not above threshold,1439,1440,0.55712,-0.23333,72.25
+2016-05-30,H,gap not above threshold,1425,1436,0.55557,0.13835,71.16
+2016-05-31,H,gap not above threshold,1435,1437,0.55366,0.27161,69.13
+2016-06-01,H,not stalled (stop < 0.15 x ATR),1438,1440,0.55174,0.81704,65.665
+2016-06-02,H,gap not above threshold,1439,1440,0.55712,-0.31971,66.515
+2016-06-03,H,not stalled (stop < 0.15 x ATR),1437,1435,0.55557,0.60027,64.885
+2016-06-06,H,gap not above threshold,1440,1439,0.56022,-0.30691,72.13
+2016-06-07,H,gap not above threshold,1440,1438,0.55867,-0.44211,73.245
+2016-06-08,H,gap not above threshold,1437,1437,0.55712,0.16116,72.765
+2016-06-09,H,gap not above threshold,1440,1439,0.55557,-0.32959,71.71
+2016-06-10,H,TRADE,1438,1438,0.55366,0.61825,74.27
+2016-06-13,H,TRADE,1438,1439,0.55867,-0.57118,73.24
+2016-06-14,H,gap not above threshold,1439,1439,0.56413,-0.31626,74.76
+2016-06-15,H,gap not above threshold,1438,1439,0.56177,-0.12378,77.91
+2016-06-16,H,TRADE,1440,1439,0.56022,-0.73803,78.25
+2016-06-17,H,gap not above threshold,1440,1440,0.56648,0.019614,83.955
+2016-06-20,H,gap not above threshold,1439,1436,0.56413,-0.53871,85.66
+2016-06-21,H,gap not above threshold,1439,1436,0.56177,-0.52113,86.92
+2016-06-22,H,gap not above threshold,1440,1439,0.56022,0.03932,87.695
+2016-06-23,H,gap not above threshold,1440,1440,0.55867,-0.036262,90.845
+2016-06-24,H,TRADE,1439,1436,0.55712,-0.99244,93.86
+2016-06-27,H,already given back (stop > 0.6 x ATR),1439,1440,0.56177,1.4246,115.18
+2016-06-28,H,not stalled (stop < 0.15 x ATR),1439,1439,0.56883,-0.62329,118.48
+2016-06-29,H,TRADE,1438,1436,0.57802,-0.90436,120.99
+2016-06-30,H,gap not above threshold,1439,1439,0.58871,0.096342,121.07
+2016-07-01,H,gap not above threshold,1440,1437,0.58486,0.30933,123.81
+2016-07-04,H,gap not above threshold,1427,1420,0.58144,0.15957,116.84
+2016-07-05,H,TRADE,1437,1435,0.57802,0.89328,116.58
+2016-07-06,H,gap not above threshold,1439,1439,0.58871,0.13406,120.65
+2016-07-07,H,gap not above threshold,1438,1439,0.58486,-0.032693,121.97
+2016-07-08,H,gap not above threshold,1438,1435,0.58144,-0.49416,119.2
+2016-07-11,H,gap not above threshold,1437,1431,0.57802,-0.071477,121.32
+2016-07-12,H,gap not above threshold,1431,1432,0.5746,-0.56042,120.73
+2016-07-13,H,not stalled (stop < 0.15 x ATR),1437,1438,0.57118,0.59444,118.95
+2016-07-14,H,gap not above threshold,1436,1439,0.58144,-0.58098,117.42
+2016-07-15,H,gap not above threshold,1437,1436,0.58292,0.35312,113.09
+2016-07-18,H,gap not above threshold,1439,1435,0.58195,-0.11984,115.59
+2016-07-19,H,gap not above threshold,1436,1437,0.58098,0.29784,113.9
+2016-07-20,H,gap not above threshold,1437,1438,0.57853,-0.48409,112.43
+2016-07-21,H,gap not above threshold,1437,1439,0.57608,0.22643,109.79
+2016-07-22,H,TRADE,1440,1439,0.57363,1.0675,107.41
+2016-07-25,H,gap not above threshold,1421,1430,0.58098,0.17756,85.84
+2016-07-26,H,TRADE,1436,1435,0.57853,-0.59561,82.535
+2016-07-27,H,gap not above threshold,1437,1438,0.58292,-0.091662,80.035
+2016-07-28,H,gap not above threshold,1440,1439,0.58195,0.43317,81.16
+2016-07-29,H,not stalled (stop < 0.15 x ATR),1438,1434,0.58098,0.59757,78.04
+2016-08-01,H,gap not above threshold,1437,1435,0.58389,0.40216,79.415
+2016-08-02,H,gap not above threshold,1439,1435,0.58292,-0.23251,77.74
+2016-08-03,H,gap not above threshold,1439,1435,0.58195,-0.25602,75.405
+2016-08-04,H,not stalled (stop < 0.15 x ATR),1436,1429,0.58098,1.3758,75.58
+2016-08-05,H,gap not above threshold,1435,1432,0.58389,-0.14896,74.955
+2016-08-08,H,gap not above threshold,1433,1426,0.58292,-0.083054,74.81
+2016-08-09,H,gap not above threshold,1437,1438,0.58195,0.25474,73.51
+2016-08-10,H,gap not above threshold,1439,1434,0.58098,0.34938,72.425
+2016-08-11,H,gap not above threshold,1437,1435,0.57853,0.26052,72.415
+2016-08-12,H,gap not above threshold,1439,1434,0.57608,0.36583,71.38
+2016-08-15,H,not stalled (stop < 0.15 x ATR),1431,1432,0.57363,0.68307,69.645
+2016-08-16,H,gap not above threshold,1430,1436,0.58098,-0.35506,69.825
+2016-08-17,H,gap not above threshold,1437,1435,0.57853,0.24255,73.06
+2016-08-18,H,TRADE,1434,1437,0.57608,-0.6117,74.415
+2016-08-19,H,TRADE,1436,1439,0.58195,0.61703,74.495
+2016-08-22,H,gap not above threshold,1433,1429,0.58486,-0.11441,73.005
+2016-08-23,H,gap not above threshold,1438,1438,0.58389,-0.25147,73.645
+2016-08-24,H,not stalled (stop < 0.15 x ATR),1438,1436,0.58292,-0.94113,73.66
+2016-08-25,H,gap not above threshold,1434,1429,0.58725,0.34523,71.78
+2016-08-26,H,gap not above threshold,1434,1436,0.58486,0.030265,70.31
+2016-08-29,H,gap not above threshold,1436,1439,0.58389,-0.044199,72.075
+2016-08-30,H,gap not above threshold,1434,1438,0.58292,-0.55229,73.15
+2016-08-31,H,gap not above threshold,1437,1437,0.58195,0.024392,72.345
+2016-09-01,H,not stalled (stop < 0.15 x ATR),1436,1437,0.58098,-1.0104,70.16
+2016-09-02,H,gap not above threshold,1432,1432,0.58389,-0.37479,71.92
+2016-09-05,H,gap not above threshold,1402,1428,0.58292,-0.41124,71.245
+2016-09-06,H,gap not above threshold,1434,1434,0.58195,-0.21494,71.75
+2016-09-07,H,gap not above threshold,1437,1439,0.58098,0.25854,75.26
+2016-09-08,H,gap not above threshold,1435,1436,0.57853,0.54646,73.49
+2016-09-09,H,gap not above threshold,1438,1435,0.57608,-0.096779,75.28
+2016-09-12,H,gap not above threshold,1433,1429,0.57363,-0.44293,75.11
+2016-09-13,H,TRADE,1439,1438,0.57118,0.91177,75.48
+2016-09-14,H,gap not above threshold,1437,1438,0.57853,0.57395,71.045
+2016-09-15,H,gap not above threshold,1438,1437,0.57746,0.13094,70.495
+2016-09-16,H,gap not above threshold,1436,1437,0.5757,0.36204,69.655
+2016-09-19,H,gap not above threshold,1437,1435,0.57395,-0.15942,71.905
+2016-09-20,H,gap not above threshold,1436,1437,0.57326,0.55861,71.305
+2016-09-21,H,gap not above threshold,1439,1438,0.57256,-0.061481,71.92
+2016-09-22,H,gap not above threshold,1440,1440,0.57187,-0.17708,72.29
+2016-09-23,H,TRADE,1437,1433,0.57118,0.75829,74.005
+2016-09-26,H,gap not above threshold,1431,1426,0.57326,0.215,68.315
+2016-09-27,H,gap not above threshold,1432,1426,0.57256,-0.30894,68.725
+2016-09-28,H,gap not above threshold,1439,1435,0.57187,0.23558,69.1
+2016-09-29,H,gap not above threshold,1436,1438,0.57118,0.14751,69.74
+2016-09-30,H,gap not above threshold,1440,1438,0.56883,-0.24092,68.515
+2016-10-03,H,gap not above threshold,1440,1437,0.56648,0.41645,68.29
+2016-10-04,H,gap not above threshold,1439,1439,0.56413,-0.049017,68.045
+2016-10-05,H,gap not above threshold,1437,1439,0.56177,-0.50278,66.97
+2016-10-06,H,gap not above threshold,1435,1436,0.56143,0.43267,67.025
+2016-10-07,H,TRADE,1439,1432,0.5611,0.93101,66.025
+2016-10-10,H,gap not above threshold,1434,1432,0.56413,-0.23634,66.735
+2016-10-11,H,gap not above threshold,1435,1433,0.56177,-0.26631,67.42
+2016-10-12,H,gap not above threshold,1439,1438,0.56143,0.075874,69.265
+2016-10-13,H,gap not above threshold,1440,1438,0.5611,-0.084657,69.22
+2016-10-14,H,gap not above threshold,1437,1436,0.56076,-0.070739,69.59
+2016-10-17,H,gap not above threshold,1434,1439,0.56042,0.24271,69.04
+2016-10-18,H,not stalled (stop < 0.15 x ATR),1429,1437,0.55996,-0.77622,68.86
+2016-10-19,H,gap not above threshold,1432,1435,0.5611,-0.3336,68.46
+2016-10-20,H,gap not above threshold,1437,1437,0.56076,0.24956,67.27
+2016-10-21,H,gap not above threshold,1431,1431,0.56042,0.10241,69.825
+2016-10-24,H,gap not above threshold,1431,1425,0.55996,0.024517,71.01
+2016-10-25,H,TRADE,1439,1437,0.55951,0.72245,70.115
+2016-10-26,H,gap not above threshold,1437,1436,0.56076,-0.24605,69.435
+2016-10-27,H,gap not above threshold,1440,1436,0.56042,0.16106,70.305
+2016-10-28,H,gap not above threshold,1431,1437,0.55996,0.069851,70.635
+2016-10-31,H,gap not above threshold,1438,1438,0.55951,0.11391,70.695
+2016-11-01,H,gap not above threshold,1439,1434,0.55906,0.46493,71.54
+2016-11-02,H,gap not above threshold,1438,1437,0.55861,-0.39842,71.955
+2016-11-03,H,TRADE,1440,1435,0.55785,-1.2697,73.445
+2016-11-04,H,gap not above threshold,1438,1438,0.55951,-0.39357,73.13
+2016-11-07,H,gap not above threshold,1440,1439,0.55906,0.045445,71.16
+2016-11-08,H,gap not above threshold,1439,1439,0.55861,0.37846,71.73
+2016-11-09,H,not stalled (stop < 0.15 x ATR),1440,1440,0.55785,-1.3676,69.97
+2016-11-10,H,not stalled (stop < 0.15 x ATR),1440,1437,0.55951,-0.89432,86.42
+2016-11-11,H,TRADE,1440,1438,0.56076,-0.70035,87.245
+2016-11-14,H,gap not above threshold,1430,1439,0.56177,-0.46381,87.425
+2016-11-15,H,gap not above threshold,1440,1440,0.56143,0.30938,91.755
+2016-11-16,H,gap not above threshold,1438,1439,0.5611,0.20552,94.07
+2016-11-17,H,gap not above threshold,1439,1436,0.56076,-0.18442,96.24
+2016-11-18,H,gap not above threshold,1440,1440,0.56042,0.37115,96.34
+2016-11-21,H,not stalled (stop < 0.15 x ATR),1439,1434,0.55996,-1.1388,96.535
+2016-11-22,H,gap not above threshold,1440,1439,0.5611,0.40095,98.065
+2016-11-23,H,gap not above threshold,1437,1434,0.56076,-0.50498,99.085
+2016-11-24,H,gap not above threshold,1435,1439,0.56042,-0.16197,101.33
+2016-11-25,H,gap not above threshold,1437,1433,0.55996,0.15956,101.71
+2016-11-28,H,gap not above threshold,1436,1423,0.55951,0.012291,101.23
+2016-11-29,H,TRADE,1439,1436,0.55906,-0.76119,104.57
+2016-11-30,H,gap not above threshold,1440,1440,0.56042,-0.046615,103.58
+2016-12-01,H,not stalled (stop < 0.15 x ATR),1438,1439,0.55996,-0.81133,105.6
+2016-12-02,H,gap not above threshold,1436,1440,0.5611,-0.39814,106.5
+2016-12-05,H,not stalled (stop < 0.15 x ATR),1440,1435,0.56076,1.0514,106.67
+2016-12-06,H,gap not above threshold,1439,1436,0.56177,0.013925,117.1
+2016-12-07,H,not stalled (stop < 0.15 x ATR),1438,1438,0.56143,0.63252,118.55
+2016-12-08,H,not stalled (stop < 0.15 x ATR),1439,1438,0.56648,-0.91249,101.86
+2016-12-09,H,not stalled (stop < 0.15 x ATR),1440,1438,0.57187,-0.79302,111.23
+2016-12-12,H,gap not above threshold,1438,1431,0.57395,-0.054532,111.52
+2016-12-13,H,gap not above threshold,1440,1438,0.57326,-0.41291,111.32
+2016-12-14,H,gap not above threshold,1439,1440,0.57256,-0.36187,109.36
+2016-12-15,H,gap not above threshold,1439,1439,0.57187,-0.056661,113.39
+2016-12-16,H,gap not above threshold,1440,1436,0.57118,-0.05737,115.75
+2016-12-19,H,gap not above threshold,1439,1436,0.56883,0.49115,115.7
+2016-12-20,H,gap not above threshold,1440,1439,0.56883,0.25289,116.51
+2016-12-21,H,gap not above threshold,1438,1438,0.56883,0.13378,116.07
+2016-12-22,H,gap not above threshold,1440,1438,0.56883,0.53159,113.63
+2016-12-23,H,gap not above threshold,1435,1435,0.56849,0.26824,114.14
+2016-12-26,H,"thin day (< 1,300 bars)",472,452,0.56849,,111.8
+2016-12-27,H,gap not above threshold,1374,1375,0.57118,0.17386,111.8
+2016-12-28,H,gap not above threshold,1436,1432,0.57118,-0.094064,107.25
+2016-12-29,H,gap not above threshold,1439,1435,0.57118,0.26447,108.18
+2016-12-30,H,gap not above threshold,1439,1435,0.57118,-0.5026,106.8
+2017-01-02,H,"thin day (< 1,300 bars)",864,882,0.56042,0.033136,111.09
+2017-01-03,H,gap not above threshold,1437,1435,0.56042,-0.37562,111.09
+2017-01-04,H,gap not above threshold,1439,1440,0.55861,0.24581,115.33
+2017-01-05,H,gap not above threshold,1440,1439,0.55861,-0.17562,106.24
+2017-01-06,H,gap not above threshold,1439,1438,0.55861,0.20436,108.62
+2017-01-09,H,gap not above threshold,1436,1436,0.55229,0.30101,110.51
+2017-01-10,H,gap not above threshold,1440,1440,0.55229,-0.14085,100.31
+2017-01-11,H,gap not above threshold,1440,1439,0.54791,-0.26016,99.18
+2017-01-12,H,gap not above threshold,1438,1439,0.54791,0.10712,101.31
+2017-01-13,H,gap not above threshold,1440,1439,0.54791,0.025944,103.81
+2017-01-16,H,gap not above threshold,1435,1440,0.54791,-0.33346,99.14
+2017-01-17,H,already given back (stop > 0.6 x ATR),1440,1439,0.54791,-1.6501,93.33
+2017-01-18,H,gap not above threshold,1440,1440,0.55229,0.19841,95.84
+2017-01-19,H,not stalled (stop < 0.15 x ATR),1440,1440,0.55229,-0.63284,95.9
+2017-01-20,H,gap not above threshold,1440,1439,0.55229,0.068452,96.985
+2017-01-23,H,gap not above threshold,1440,1438,0.55229,-0.15559,97.77
+2017-01-24,H,gap not above threshold,1439,1440,0.54791,0.1237,97.68
+2017-01-25,H,gap not above threshold,1439,1440,0.54646,-0.51051,98.29
+2017-01-26,H,gap not above threshold,1440,1439,0.54646,0.0017539,99.67
+2017-01-27,H,gap not above threshold,1439,1440,0.53897,0.21538,99.67
+2017-01-30,H,gap not above threshold,1438,1439,0.53897,-0.084708,98.695
+2017-01-31,H,gap not above threshold,1439,1439,0.53897,0.4842,96.2
+2017-02-01,H,not stalled (stop < 0.15 x ATR),1438,1439,0.53871,-0.84405,95.095
+2017-02-02,H,not stalled (stop < 0.15 x ATR),1440,1437,0.53897,1.0803,93.385
+2017-02-03,H,gap not above threshold,1440,1440,0.53897,0.36568,90.305
+2017-02-06,H,gap not above threshold,1438,1433,0.53897,-0.015853,90.015
+2017-02-07,H,gap not above threshold,1439,1435,0.53897,0.27686,90.695
+2017-02-08,H,gap not above threshold,1439,1439,0.53897,0.11049,91.58
+2017-02-09,H,gap not above threshold,1439,1439,0.53897,-0.36939,86.78
+2017-02-10,H,gap not above threshold,1439,1435,0.53897,0.028043,84.05
+2017-02-13,H,gap not above threshold,1440,1431,0.53897,-0.24616,83.03
+2017-02-14,H,gap not above threshold,1438,1438,0.53897,0.50992,83.52
+2017-02-15,H,gap not above threshold,1438,1439,0.53897,0.20246,80.98
+2017-02-16,H,gap not above threshold,1440,1439,0.53897,0.30419,80.98
+2017-02-17,H,gap not above threshold,1439,1438,0.53897,0.43833,81.03
+2017-02-20,H,gap not above threshold,1439,1438,0.53897,-0.29368,80.375
+2017-02-21,H,gap not above threshold,1439,1438,0.53897,-0.42616,78.09
+2017-02-22,H,gap not above threshold,1440,1440,0.53871,0.18113,79.85
+2017-02-23,H,gap not above threshold,1440,1436,0.53871,-0.2164,80.935
+2017-02-24,H,gap not above threshold,1438,1435,0.53159,0.062582,78.425
+2017-02-27,H,gap not above threshold,1438,1439,0.52113,0.12024,78.155
+2017-02-28,H,gap not above threshold,1440,1437,0.52113,0.060657,76.11
+2017-03-01,H,TRADE,1438,1440,0.51089,0.52934,72.79
+2017-03-02,H,gap not above threshold,1439,1439,0.52113,-0.12439,72.755
+2017-03-03,H,TRADE,1439,1440,0.51089,0.53512,71.94
+2017-03-06,H,gap not above threshold,1440,1436,0.52113,0.069567,73.5
+2017-03-07,H,gap not above threshold,1438,1437,0.52113,0.091405,72.475
+2017-03-08,H,gap not above threshold,1437,1436,0.51089,0.030641,70
+2017-03-09,H,gap not above threshold,1439,1439,0.51089,0.36895,68.31
+2017-03-10,H,gap not above threshold,1440,1440,0.51089,0.32128,69.87
+2017-03-13,H,TRADE,1434,1433,0.51089,-0.54179,73.235
+2017-03-14,H,gap not above threshold,1439,1437,0.52113,-0.031737,73.03
+2017-03-15,H,gap not above threshold,1437,1437,0.52113,0.064844,72.525
+2017-03-16,H,gap not above threshold,1440,1440,0.52113,-0.50966,74.975
+2017-03-17,H,gap not above threshold,1438,1435,0.51089,-0.35734,73.785
+2017-03-20,H,gap not above threshold,1436,1435,0.51051,-0.075753,72.97
+2017-03-21,H,gap not above threshold,1439,1436,0.51051,-0.37326,74.105
+2017-03-22,H,gap not above threshold,1440,1439,0.51051,0.30068,74.63
+2017-03-23,H,gap not above threshold,1436,1437,0.50992,-0.22567,73.065
+2017-03-24,H,gap not above threshold,1439,1440,0.50966,0.35259,72.025
+2017-03-27,H,gap not above threshold,1439,1439,0.50966,-0.22556,71.84
+2017-03-28,H,gap not above threshold,1436,1439,0.50649,0.18921,71.84
+2017-03-29,H,TRADE,1439,1437,0.50649,-0.58481,72.47
+2017-03-30,H,TRADE,1439,1438,0.50966,-0.87479,73.05
+2017-03-31,H,gap not above threshold,1438,1440,0.50992,-0.041338,75.095
+2017-04-03,H,gap not above threshold,1437,1439,0.50992,0.16315,71.58
+2017-04-04,H,gap not above threshold,1436,1434,0.50992,-0.14984,70.265
+2017-04-05,H,gap not above threshold,1438,1439,0.50992,-0.49117,70.11
+2017-04-06,H,gap not above threshold,1439,1439,0.50992,-0.10114,70.845
+2017-04-07,H,gap not above threshold,1438,1437,0.50992,0.43195,69.105
+2017-04-10,H,gap not above threshold,1437,1433,0.50966,-0.066565,67.03
+2017-04-11,H,gap not above threshold,1438,1438,0.50966,0.0043354,65.765
+2017-04-12,H,gap not above threshold,1438,1434,0.50966,-0.1212,65.215
+2017-04-13,H,gap not above threshold,1440,1439,0.50966,-0.11134,62.67
+2017-04-14,H,gap not above threshold,1431,1421,0.50966,-0.067007,62.875
+2017-04-17,H,gap not above threshold,1434,1426,0.50966,0.040824,61.32
+2017-04-18,H,already given back (stop > 0.6 x ATR),1439,1436,0.50966,-0.88543,62.105
+2017-04-19,H,gap not above threshold,1440,1439,0.50966,-0.13336,62.045
+2017-04-20,H,gap not above threshold,1437,1439,0.50966,0.3469,61.435
+2017-04-21,H,gap not above threshold,1435,1439,0.50966,-0.073728,63.05
+2017-04-24,H,gap not above threshold,1440,1440,0.50966,0.25466,62.955
+2017-04-25,H,gap not above threshold,1439,1431,0.50966,0.10129,63.87
+2017-04-26,H,gap not above threshold,1440,1437,0.50966,-0.39084,65.135
+2017-04-27,H,gap not above threshold,1439,1438,0.50966,-0.39523,65.55
+2017-04-28,H,gap not above threshold,1434,1437,0.50498,0.088107,64.725
+2017-05-01,H,gap not above threshold,1430,1438,0.50498,0.11237,66.66
+2017-05-02,H,gap not above threshold,1437,1437,0.50498,-0.42054,66.71
+2017-05-03,H,gap not above threshold,1433,1437,0.50498,-0.093751,66.91
+2017-05-04,H,gap not above threshold,1438,1438,0.50278,0.023291,66.925
+2017-05-05,H,gap not above threshold,1440,1438,0.50278,0.026648,69.78
+2017-05-08,H,gap not above threshold,1440,1440,0.50278,-0.03508,68.255
+2017-05-09,H,gap not above threshold,1439,1440,0.50278,-0.050857,71.655
+2017-05-10,H,gap not above threshold,1438,1439,0.5026,0.11151,72.58
+2017-05-11,H,gap not above threshold,1439,1440,0.49416,0.41685,70.51
+2017-05-12,H,not stalled (stop < 0.15 x ATR),1435,1435,0.49117,0.49938,69.77
+2017-05-15,H,TRADE,1436,1434,0.49416,0.49502,72.5
+2017-05-16,H,TRADE,1438,1438,0.49502,0.71271,72.445
+2017-05-17,H,gap not above threshold,1440,1440,0.49938,-0.12454,73.745
+2017-05-18,H,not stalled (stop < 0.15 x ATR),1440,1440,0.49502,-0.69359,76.055
+2017-05-19,H,gap not above threshold,1438,1439,0.49938,0.023307,77.4
+2017-05-22,H,not stalled (stop < 0.15 x ATR),1439,1437,0.49502,0.50681,80.39
+2017-05-23,H,gap not above threshold,1439,1438,0.49938,-0.18445,80.61
+2017-05-24,H,gap not above threshold,1436,1438,0.49938,0.20347,80.325
+2017-05-25,H,gap not above threshold,1439,1440,0.49938,0.11836,78.155
+2017-05-26,H,gap not above threshold,1438,1439,0.49938,0.18791,76.93
+2017-05-29,H,gap not above threshold,1422,1433,0.49502,-0.016801,76.11
+2017-05-30,H,gap not above threshold,1436,1435,0.49416,0.23348,75.53
+2017-05-31,H,gap not above threshold,1438,1440,0.49416,-0.0046273,78.035
+2017-06-01,H,gap not above threshold,1440,1439,0.49416,-0.44223,79.695
+2017-06-02,H,gap not above threshold,1433,1434,0.49117,0.46978,76.81
+2017-06-05,H,TRADE,1435,1438,0.49117,-0.62707,78.055
+2017-06-06,H,gap not above threshold,1438,1429,0.49117,0.25611,75.29
+2017-06-07,H,gap not above threshold,1436,1437,0.49115,-0.38867,73.955
+2017-06-08,H,gap not above threshold,1438,1438,0.49115,0.12919,75.63
+2017-06-09,H,not stalled (stop < 0.15 x ATR),1440,1440,0.49115,-0.63988,76.655
+2017-06-12,H,TRADE,1434,1432,0.49115,0.62271,76.265
+2017-06-13,H,gap not above threshold,1438,1439,0.49115,-0.2768,74.925
+2017-06-14,H,not stalled (stop < 0.15 x ATR),1438,1438,0.4842,0.51718,70.665
+2017-06-15,H,not stalled (stop < 0.15 x ATR),1439,1438,0.4842,-0.6623,71.65
+2017-06-16,H,gap not above threshold,1440,1436,0.49115,0.16414,71.68
+2017-06-19,H,gap not above threshold,1431,1439,0.49115,-0.088024,69.055
+2017-06-20,H,TRADE,1440,1431,0.49115,0.83256,67.445
+2017-06-21,H,gap not above threshold,1438,1430,0.49115,-0.45293,65.1
+2017-06-22,H,gap not above threshold,1436,1436,0.49115,0.083437,64.595
+2017-06-23,H,gap not above threshold,1430,1429,0.49115,0.20765,63.695
+2017-06-26,H,gap not above threshold,1435,1423,0.4842,0.15635,63.185
+2017-06-27,H,TRADE,1437,1435,0.4842,0.51694,64.175
+2017-06-28,H,already given back (stop > 0.6 x ATR),1440,1440,0.4842,-0.93921,67.925
+2017-06-29,H,gap not above threshold,1440,1436,0.4842,-0.17235,68.505
+2017-06-30,H,gap not above threshold,1439,1438,0.48409,0.1949,69.335
+2017-07-03,H,gap not above threshold,1438,1429,0.48409,0.036239,67.975
+2017-07-04,H,gap not above threshold,1437,1433,0.48409,-0.023705,69.065
+2017-07-05,H,gap not above threshold,1435,1438,0.48409,-0.18869,68.935
+2017-07-06,H,not stalled (stop < 0.15 x ATR),1438,1430,0.46978,0.55179,67.84
+2017-07-07,H,gap not above threshold,1440,1432,0.4842,0.40768,68.86
+2017-07-10,H,gap not above threshold,1437,1436,0.46978,0.15519,68.34
+2017-07-11,H,gap not above threshold,1438,1431,0.46978,0.28299,68.145
+2017-07-12,H,not stalled (stop < 0.15 x ATR),1439,1437,0.46493,-0.72849,71.01
+2017-07-13,H,gap not above threshold,1438,1438,0.46978,-0.30321,70.765
+2017-07-14,H,gap not above threshold,1436,1424,0.46978,-0.3631,70.205
+2017-07-17,H,gap not above threshold,1437,1434,0.46493,0.33221,71.06
+2017-07-18,H,not stalled (stop < 0.15 x ATR),1439,1436,0.46493,0.97275,70.195
+2017-07-19,H,gap not above threshold,1438,1432,0.46978,0.085916,73.465
+2017-07-20,H,TRADE,1438,1439,0.46978,0.71487,73.7
+2017-07-21,H,gap not above threshold,1438,1429,0.46978,0.045002,80.71
+2017-07-24,H,gap not above threshold,1435,1430,0.46978,-0.3675,80.725
+2017-07-25,H,gap not above threshold,1438,1436,0.46978,0.055003,81.23
+2017-07-26,H,gap not above threshold,1437,1433,0.46978,-0.16377,76.775
+2017-07-27,H,gap not above threshold,1440,1439,0.46978,-0.075075,78.165
+2017-07-28,H,gap not above threshold,1438,1430,0.46978,0.20415,80.935
+2017-07-31,H,gap not above threshold,1439,1431,0.46978,-0.036818,82.93
+2017-08-01,H,gap not above threshold,1440,1434,0.46493,-0.096742,85.485
+2017-08-02,H,gap not above threshold,1439,1438,0.46493,-0.14058,86.41
+2017-08-03,H,TRADE,1438,1438,0.46493,0.83212,89.425
+2017-08-04,H,gap not above threshold,1439,1436,0.46493,-0.12836,87.82
+2017-08-07,H,gap not above threshold,1436,1421,0.46381,0.18665,92.85
+2017-08-08,H,gap not above threshold,1439,1433,0.46381,0.28409,93.255
+2017-08-09,H,gap not above threshold,1440,1438,0.46381,-0.068789,93.835
+2017-08-10,H,gap not above threshold,1439,1432,0.45293,-0.15161,92.7
+2017-08-11,H,gap not above threshold,1437,1432,0.45293,0.40329,92.47
+2017-08-14,H,gap not above threshold,1438,1405,0.45293,-0.041085,93.37
+2017-08-15,H,gap not above threshold,1435,1435,0.45293,0.43773,94.16
+2017-08-16,H,gap not above threshold,1439,1433,0.44293,-0.33171,93.86
+2017-08-17,H,gap not above threshold,1439,1434,0.44293,-0.33058,96.4
+2017-08-18,H,gap not above threshold,1440,1434,0.44223,0.069753,93.845
+2017-08-21,H,gap not above threshold,1431,1422,0.44223,0.16573,93.95
+2017-08-22,H,gap not above threshold,1438,1435,0.44223,0.075407,95.875
+2017-08-23,H,not stalled (stop < 0.15 x ATR),1438,1435,0.44223,0.61874,95.765
+2017-08-24,H,gap not above threshold,1439,1437,0.44293,-0.082709,93.58
+2017-08-25,H,gap not above threshold,1438,1437,0.44223,-0.067042,88.935
+2017-08-28,H,gap not above threshold,1437,1436,0.44223,-0.16895,92.695
+2017-08-29,H,gap not above threshold,1439,1434,0.43833,0.1898,89.91
+2017-08-30,H,gap not above threshold,1440,1439,0.43773,-0.41389,93.155
+2017-08-31,H,gap not above threshold,1440,1440,0.43267,0.068327,92.515
+2017-09-01,H,not stalled (stop < 0.15 x ATR),1436,1438,0.43267,-0.52884,93.855
+2017-09-04,H,gap not above threshold,1428,1433,0.43773,0.087944,92.305
+2017-09-05,H,TRADE,1424,1429,0.43773,-0.54854,92.535
+2017-09-06,H,gap not above threshold,1438,1438,0.43773,-0.22034,90.725
+2017-09-07,H,gap not above threshold,1438,1436,0.43773,0.28766,89.345
+2017-09-08,H,not stalled (stop < 0.15 x ATR),1438,1438,0.43773,-0.76161,92.565
+2017-09-11,H,gap not above threshold,1437,1432,0.43773,-0.24314,91.53
+2017-09-12,H,TRADE,1433,1435,0.43773,-0.73228,92.2
+2017-09-13,H,gap not above threshold,1436,1439,0.43833,0.1851,89.515
+2017-09-14,H,TRADE,1438,1431,0.43833,-1.1107,90.75
+2017-09-15,H,already given back (stop > 0.6 x ATR),1440,1436,0.44223,-0.70975,88.57
+2017-09-18,H,gap not above threshold,1426,1432,0.45293,0.29195,89.58
+2017-09-19,H,gap not above threshold,1439,1433,0.45293,0.081268,87.455
+2017-09-20,H,gap not above threshold,1437,1438,0.45293,-0.32532,86.39
+2017-09-21,H,gap not above threshold,1439,1436,0.44223,0.22339,90.815
+2017-09-22,H,TRADE,1434,1434,0.44223,0.5016,93.54
+2017-09-25,H,gap not above threshold,1438,1432,0.44223,-0.087183,88.56
+2017-09-26,H,gap not above threshold,1439,1432,0.44223,-0.089994,90.435
+2017-09-27,H,gap not above threshold,1439,1438,0.44223,-0.35273,89.44
+2017-09-28,H,gap not above threshold,1438,1438,0.44223,0.021231,88.145
+2017-09-29,H,gap not above threshold,1437,1432,0.44223,0.36781,87.82
+2017-10-02,H,TRADE,1435,1432,0.44223,0.45256,84.32
+2017-10-03,H,gap not above threshold,1437,1435,0.45256,0.37634,86.105
+2017-10-04,H,gap not above threshold,1438,1435,0.44223,-0.023173,86.355
+2017-10-05,H,gap not above threshold,1437,1425,0.44223,0.40186,86.63
+2017-10-06,H,gap not above threshold,1439,1432,0.44223,0.26027,83.355
+2017-10-09,H,gap not above threshold,1426,1439,0.44223,-0.27645,82.955
+2017-10-10,H,gap not above threshold,1431,1437,0.44223,0.025706,80.69
+2017-10-11,H,gap not above threshold,1439,1437,0.43833,0.15253,82.485
+2017-10-12,H,TRADE,1438,1440,0.43833,0.54083,80.105
+2017-10-13,H,gap not above threshold,1439,1436,0.44223,0.15216,78.535
+2017-10-16,H,gap not above threshold,1435,1432,0.44223,0.16086,77.69
+2017-10-17,H,TRADE,1435,1436,0.44223,0.47769,76.935
+2017-10-18,H,gap not above threshold,1432,1434,0.44223,0.19741,77.24
+2017-10-19,H,gap not above threshold,1439,1438,0.44223,0.34877,72.415
+2017-10-20,H,not stalled (stop < 0.15 x ATR),1438,1438,0.43833,-0.5276,72.51
+2017-10-23,H,gap not above threshold,1431,1429,0.44223,0.0043834,73.86
+2017-10-24,H,TRADE,1435,1436,0.44223,0.4658,71.265
+2017-10-25,H,already given back (stop > 0.6 x ATR),1430,1435,0.45256,-0.66658,68.55
+2017-10-26,H,gap not above threshold,1432,1437,0.45256,-0.39227,67.895
+2017-10-27,H,gap not above threshold,1438,1433,0.44223,-0.19514,73.555
+2017-10-30,H,gap not above threshold,1427,1419,0.43833,-0.34293,74.685
+2017-10-31,H,gap not above threshold,1437,1424,0.43773,-0.24766,73.65
+2017-11-01,H,gap not above threshold,1438,1438,0.43773,-0.25915,71.59
+2017-11-02,H,TRADE,1439,1438,0.43773,1.3117,71.485
+2017-11-03,H,gap not above threshold,1434,1436,0.43833,-0.41706,71.22
+2017-11-06,H,gap not above threshold,1438,1438,0.43833,-0.41689,72.305
+2017-11-07,H,gap not above threshold,1434,1434,0.43773,0.077057,72.665
+2017-11-08,H,gap not above threshold,1437,1437,0.43773,0.4026,71.335
+2017-11-09,H,TRADE,1438,1439,0.43195,0.52978,69.235
+2017-11-10,H,gap not above threshold,1435,1434,0.43773,-0.34124,70.055
+2017-11-13,H,gap not above threshold,1426,1437,0.43773,0.20046,69.33
+2017-11-14,H,TRADE,1433,1434,0.43773,0.47035,69.26
+2017-11-15,H,gap not above threshold,1440,1436,0.43773,0.13694,73.24
+2017-11-16,H,gap not above threshold,1438,1438,0.43773,-0.33263,73.27
+2017-11-17,H,TRADE,1435,1437,0.43195,0.43658,70.955
+2017-11-20,H,gap not above threshold,1435,1434,0.43658,-0.0028898,69
+2017-11-21,H,gap not above threshold,1431,1429,0.43195,0.099839,70.7
+2017-11-22,H,gap not above threshold,1435,1434,0.43195,-0.033833,70.43
+2017-11-23,H,gap not above threshold,1433,1429,0.42616,0.20581,71.96
+2017-11-24,H,gap not above threshold,1431,1433,0.42054,0.22442,64.295
+2017-11-27,H,gap not above threshold,1438,1435,0.41706,-0.13768,65.54
+2017-11-28,H,gap not above threshold,1436,1433,0.41706,0.33727,65.62
+2017-11-29,H,gap not above threshold,1439,1438,0.41706,-0.23687,68.46
+2017-11-30,H,gap not above threshold,1439,1438,0.41706,0.077485,69.215
+2017-12-01,H,gap not above threshold,1438,1436,0.41706,-0.0072754,71.62
+2017-12-04,H,not stalled (stop < 0.15 x ATR),1437,1432,0.41706,-0.60856,71.53
+2017-12-05,H,gap not above threshold,1440,1432,0.41706,-0.38349,71.825
+2017-12-06,H,gap not above threshold,1439,1433,0.41706,0.0047751,72.565
+2017-12-07,H,gap not above threshold,1439,1437,0.41706,-0.35908,74.33
+2017-12-08,H,TRADE,1439,1439,0.41689,0.58879,73.015
+2017-12-11,H,gap not above threshold,1439,1431,0.41706,0.32829,72.6
+2017-12-12,H,gap not above threshold,1439,1435,0.41702,-0.19634,73.18
+2017-12-13,H,gap not above threshold,1430,1424,0.41702,-0.215,69.76
+2017-12-14,H,gap not above threshold,1438,1436,0.41702,0.049757,71.075
+2017-12-15,H,TRADE,1438,1431,0.41702,0.67106,73.48
+2017-12-18,H,gap not above threshold,1436,1436,0.41702,-0.21264,73.92
+2017-12-19,H,gap not above threshold,1437,1435,0.41702,0.29742,74.445
+2017-12-20,H,gap not above threshold,1431,1426,0.41702,-0.0019922,75.83
+2017-12-21,H,gap not above threshold,1437,1437,0.41702,0.011405,74.705
+2017-12-22,H,gap not above threshold,1438,1434,0.41702,0.064223,74.565
+2017-12-26,H,gap not above threshold,1409,1421,0.41702,0.16689,72.08
+2017-12-27,H,gap not above threshold,1438,1417,0.41702,0.13152,70.41
+2017-12-28,H,gap not above threshold,1438,1427,0.41702,0.087443,68.54
+2017-12-29,H,gap not above threshold,1428,1425,0.41702,-0.015294,68.89
+2018-01-02,H,gap not above threshold,1437,1417,0.41702,-0.0775,67.265
+2018-01-03,H,gap not above threshold,1439,1424,0.41702,0.26301,66.77
+2018-01-04,H,gap not above threshold,1440,1437,0.41702,0.24264,67.53
+2018-01-05,H,gap not above threshold,1436,1433,0.41688,-0.21959,67.955
+2018-01-08,H,gap not above threshold,1434,1435,0.41688,-0.31853,67.7
+2018-01-09,H,gap not above threshold,1438,1431,0.41611,-0.0089944,70.385
+2018-01-10,H,gap not above threshold,1437,1437,0.41611,0.38439,71.055
+2018-01-11,H,not stalled (stop < 0.15 x ATR),1440,1440,0.41611,0.48748,73.32
+2018-01-12,H,gap not above threshold,1439,1439,0.41688,-0.31032,76.045
+2018-01-15,H,gap not above threshold,1439,1439,0.41611,0.080017,80.37
+2018-01-16,H,gap not above threshold,1437,1438,0.41611,-0.067856,81.225
+2018-01-17,H,gap not above threshold,1440,1439,0.41611,-0.25471,82.355
+2018-01-18,H,gap not above threshold,1440,1440,0.41611,0.054837,84.815
+2018-01-19,H,gap not above threshold,1440,1439,0.41234,0.12611,86.21
+2018-01-22,H,gap not above threshold,1439,1437,0.40658,-0.25579,86.59
+2018-01-23,H,gap not above threshold,1438,1436,0.40312,0.0098374,87.42
+2018-01-24,H,already given back (stop > 0.6 x ATR),1440,1439,0.40312,-0.65478,88.69
+2018-01-25,H,gap not above threshold,1440,1439,0.40658,0.27407,93.245
+2018-01-26,H,gap not above threshold,1439,1440,0.40658,-0.072266,99.15
+2018-01-29,H,gap not above threshold,1439,1439,0.40658,-0.10533,101.73
+2018-01-30,H,gap not above threshold,1437,1440,0.40658,-0.28102,102.02
+2018-01-31,H,gap not above threshold,1439,1439,0.40658,0.18238,103.97
+2018-02-01,H,gap not above threshold,1440,1440,0.40658,0.24904,105.13
+2018-02-02,H,gap not above threshold,1440,1440,0.40312,0.10714,107.76
+2018-02-05,H,already given back (stop > 0.6 x ATR),1440,1440,0.40312,0.4365,110.12
+2018-02-06,H,gap not above threshold,1439,1440,0.40658,0.11633,110.9
+2018-02-07,H,gap not above threshold,1439,1440,0.40312,-0.20524,113.94
+2018-02-08,H,TRADE,1439,1440,0.40312,-1.0758,117.21
+2018-02-09,H,TRADE,1440,1439,0.40312,0.95812,114.87
+2018-02-12,H,gap not above threshold,1429,1431,0.40658,-0.03401,109.51
+2018-02-13,H,gap not above threshold,1439,1437,0.40658,0.080583,107.17
+2018-02-14,H,gap not above threshold,1439,1437,0.40658,0.020937,107.12
+2018-02-15,H,gap not above threshold,1439,1436,0.40658,-0.29627,109.27
+2018-02-16,H,gap not above threshold,1440,1438,0.40658,-0.1204,107.38
+2018-02-19,H,gap not above threshold,1429,1432,0.40312,-0.010242,111.45
+2018-02-20,H,gap not above threshold,1428,1436,0.40312,-0.37028,111.92
+2018-02-21,H,gap not above threshold,1440,1438,0.40241,0.31493,112.37
+2018-02-22,H,gap not above threshold,1440,1439,0.40241,0.11576,110.14
+2018-02-23,H,gap not above threshold,1439,1438,0.40241,-0.23763,106.06
+2018-02-26,H,gap not above threshold,1437,1439,0.40241,0.3328,102.68
+2018-02-27,H,gap not above threshold,1440,1439,0.40241,0.089819,101.74
+2018-02-28,H,TRADE,1437,1435,0.40241,0.50144,102.05
+2018-03-01,H,gap not above threshold,1438,1437,0.40241,-0.15631,100.35
+2018-03-02,H,gap not above threshold,1440,1438,0.40241,0.40236,99.405
+2018-03-05,H,gap not above threshold,1439,1439,0.40254,-0.033775,98.17
+2018-03-06,H,gap not above threshold,1438,1438,0.40223,-0.026337,97.29
+2018-03-07,H,gap not above threshold,1440,1440,0.40223,-0.060499,95.845
+2018-03-08,H,gap not above threshold,1437,1437,0.40223,-0.17554,90.84
+2018-03-09,H,gap not above threshold,1440,1438,0.40223,-0.32701,94.09
+2018-03-12,H,gap not above threshold,1427,1426,0.40223,-0.39404,93.085
+2018-03-13,H,gap not above threshold,1433,1437,0.40223,-0.22408,92.725
+2018-03-14,H,gap not above threshold,1437,1437,0.40223,-0.28694,93.04
+2018-03-15,H,gap not above threshold,1436,1436,0.40223,-0.14608,86.85
+2018-03-16,H,gap not above threshold,1437,1434,0.40223,-0.17001,87.895
+2018-03-19,H,already given back (stop > 0.6 x ATR),1427,1428,0.4002,-0.6109,83.6
+2018-03-20,H,gap not above threshold,1437,1437,0.4002,-0.22764,85.33
+2018-03-21,H,gap not above threshold,1437,1435,0.4002,-0.24943,86.465
+2018-03-22,H,gap not above threshold,1440,1433,0.4002,-0.071132,88.055
+2018-03-23,H,gap not above threshold,1440,1434,0.4002,-0.30112,88.595
+2018-03-26,H,gap not above threshold,1431,1424,0.39493,0.2946,89.42
+2018-03-27,H,gap not above threshold,1439,1429,0.39493,0.034937,91.21
+2018-03-28,H,gap not above threshold,1439,1438,0.3936,0.12193,90.18
+2018-03-29,H,gap not above threshold,1438,1437,0.3936,0.1181,93.565
+2018-03-30,H,gap not above threshold,1399,1422,0.3936,0.043781,90.225
+2018-04-02,H,gap not above threshold,1398,1419,0.3936,0.022491,87.87
+2018-04-03,H,gap not above threshold,1435,1435,0.3936,-0.27915,86.275
+2018-04-04,H,gap not above threshold,1431,1434,0.3936,0.16093,85.82
+2018-04-05,H,gap not above threshold,1434,1437,0.3936,0.16177,85.7
+2018-04-06,H,gap not above threshold,1438,1433,0.39191,-0.2953,81.89
+2018-04-09,H,gap not above threshold,1430,1431,0.39191,0.047058,82.605
+2018-04-10,H,gap not above threshold,1433,1435,0.39191,0.1838,83.35
+2018-04-11,H,gap not above threshold,1438,1431,0.39191,0.06422,82.425
+2018-04-12,H,not stalled (stop < 0.15 x ATR),1437,1433,0.39191,-0.56309,81.615
+2018-04-13,H,gap not above threshold,1433,1425,0.3936,-0.021726,81.45
+2018-04-16,H,gap not above threshold,1431,1430,0.3936,-0.14434,79.6
+2018-04-17,H,gap not above threshold,1435,1435,0.39137,0.013466,78.2
+2018-04-18,H,TRADE,1434,1431,0.39137,0.59431,76.335
+2018-04-19,H,gap not above threshold,1439,1424,0.3936,-0.2485,73.565
+2018-04-20,H,gap not above threshold,1437,1437,0.39137,-0.22583,71.975
+2018-04-23,H,gap not above threshold,1428,1433,0.39137,0.13851,73.46
+2018-04-24,H,gap not above threshold,1436,1430,0.39137,-0.083576,72.42
+2018-04-25,H,gap not above threshold,1430,1432,0.39137,-0.10839,70.36
+2018-04-26,H,gap not above threshold,1437,1438,0.39137,-0.32584,68.23
+2018-04-27,H,TRADE,1436,1433,0.39137,0.94047,71.33
+2018-04-30,H,gap not above threshold,1430,1429,0.3936,-0.37422,73.33
+2018-05-01,H,already given back (stop > 0.6 x ATR),1431,1438,0.39137,0.47098,73.92
+2018-05-02,H,gap not above threshold,1431,1434,0.39137,-0.27071,74.91
+2018-05-03,H,gap not above threshold,1437,1434,0.3876,-0.0042309,76.705
+2018-05-04,H,gap not above threshold,1436,1435,0.38416,0.087642,76.18
+2018-05-07,H,gap not above threshold,1433,1430,0.38416,-0.18853,76.67
+2018-05-08,H,gap not above threshold,1426,1430,0.3817,-0.052324,77.175
+2018-05-09,H,gap not above threshold,1434,1438,0.3817,-0.17353,78.485
+2018-05-10,H,TRADE,1437,1435,0.37581,0.811,79.74
+2018-05-11,H,gap not above threshold,1433,1435,0.3817,0.13129,80.925
+2018-05-14,H,gap not above threshold,1430,1428,0.3817,-0.060545,82.81
+2018-05-15,H,gap not above threshold,1438,1435,0.3817,-0.14891,82.675
+2018-05-16,H,gap not above threshold,1437,1435,0.3817,-0.28582,84.695
+2018-05-17,H,gap not above threshold,1437,1433,0.3817,0.19538,86.445
+2018-05-18,H,gap not above threshold,1439,1436,0.3817,-0.098625,85.925
+2018-05-21,H,gap not above threshold,1431,1434,0.3817,0.22378,84.39
+2018-05-22,H,gap not above threshold,1434,1433,0.37581,0.0056837,83.735
+2018-05-23,H,gap not above threshold,1436,1431,0.37324,-0.1388,84.255
+2018-05-24,H,gap not above threshold,1440,1439,0.36967,-0.10735,85.99
+2018-05-25,H,gap not above threshold,1434,1433,0.36967,-0.11519,83.305
+2018-05-28,H,not stalled (stop < 0.15 x ATR),1428,1438,0.36774,-0.55993,83.835
+2018-05-29,H,gap not above threshold,1439,1439,0.36967,-0.00564,86.165
+2018-05-30,H,gap not above threshold,1440,1440,0.36774,0.1501,87.51
+2018-05-31,H,gap not above threshold,1439,1437,0.3664,-0.1492,90.695
+2018-06-01,H,TRADE,1439,1438,0.3664,-0.43669,91.79
+2018-06-04,H,gap not above threshold,1433,1422,0.3664,0.27892,92.57
+2018-06-05,H,not stalled (stop < 0.15 x ATR),1438,1427,0.3621,-0.53574,92.995
+2018-06-06,H,gap not above threshold,1440,1430,0.3664,0.32311,91.94
+2018-06-07,H,TRADE,1439,1436,0.3664,0.42325,92.48
+2018-06-08,H,gap not above threshold,1436,1434,0.3664,0.089279,90.7
+2018-06-11,H,gap not above threshold,1434,1418,0.3621,0.2897,91.035
+2018-06-12,H,gap not above threshold,1429,1437,0.3621,0.1402,90.015
+2018-06-13,H,gap not above threshold,1439,1434,0.3621,0.27894,87.905
+2018-06-14,H,not stalled (stop < 0.15 x ATR),1440,1435,0.3621,-0.78891,87.175
+2018-06-15,H,gap not above threshold,1440,1439,0.3621,0.095965,98.575
+2018-06-18,H,gap not above threshold,1438,1439,0.35749,0.29468,99.135
+2018-06-19,H,gap not above threshold,1438,1434,0.35749,0.14905,98.14
+2018-06-20,H,gap not above threshold,1439,1436,0.35749,-0.14182,100.14
+2018-06-21,H,already given back (stop > 0.6 x ATR),1438,1435,0.35749,-0.50871,97.62
+2018-06-22,H,gap not above threshold,1438,1436,0.3621,0.19912,100.88
+2018-06-25,H,gap not above threshold,1437,1439,0.3621,0.14161,100.33
+2018-06-26,H,gap not above threshold,1439,1433,0.35749,-0.023739,98.505
+2018-06-27,H,gap not above threshold,1440,1438,0.35174,0.068892,96.295
+2018-06-28,H,gap not above threshold,1439,1439,0.35174,0.19022,95
+2018-06-29,H,gap not above threshold,1439,1440,0.35174,-0.3144,94.525
+2018-07-02,H,gap not above threshold,1440,1438,0.34731,0.13231,96.085
+2018-07-03,H,gap not above threshold,1435,1438,0.34731,-0.14356,96.57
+2018-07-04,H,gap not above threshold,1435,1435,0.34251,-0.24915,95.225
+2018-07-05,H,gap not above threshold,1430,1438,0.34251,0.20161,93.535
+2018-07-06,H,gap not above threshold,1438,1437,0.34025,0.091037,93.64
+2018-07-09,H,gap not above threshold,1437,1440,0.34025,-0.0057228,93.84
+2018-07-10,H,TRADE,1437,1439,0.33615,-0.38857,94.265
+2018-07-11,H,gap not above threshold,1439,1439,0.34025,0.12791,94.09
+2018-07-12,H,gap not above threshold,1439,1439,0.33615,-0.1321,94.94
+2018-07-13,H,gap not above threshold,1437,1437,0.33615,-0.12509,82.79
+2018-07-16,H,gap not above threshold,1435,1430,0.33615,0.066356,82.31
+2018-07-17,H,already given back (stop > 0.6 x ATR),1438,1439,0.33615,0.34008,81.84
+2018-07-18,H,not stalled (stop < 0.15 x ATR),1438,1440,0.33938,0.41426,80.92
+2018-07-19,H,gap not above threshold,1439,1437,0.34095,0.28266,80.91
+2018-07-20,H,gap not above threshold,1440,1440,0.34095,-0.10784,79.84
+2018-07-23,H,gap not above threshold,1434,1436,0.34095,0.031817,81.615
+2018-07-24,H,gap not above threshold,1438,1439,0.33938,-0.11449,80.705
+2018-07-25,H,gap not above threshold,1439,1431,0.33938,0.11738,79.56
+2018-07-26,H,gap not above threshold,1438,1439,0.33938,0.0071728,76.72
+2018-07-27,H,gap not above threshold,1437,1434,0.33938,-0.093497,78.21
+2018-07-30,H,gap not above threshold,1422,1433,0.33938,0.28675,73.81
+2018-07-31,H,gap not above threshold,1435,1429,0.33938,-0.091239,72.435
+2018-08-01,H,gap not above threshold,1440,1433,0.33615,-0.060652,72.915
+2018-08-02,H,gap not above threshold,1429,1430,0.33615,0.16767,72.465
+2018-08-03,H,gap not above threshold,1438,1434,0.33276,0.0042278,73.255
+2018-08-06,H,TRADE,1432,1428,0.33276,0.36954,71.405
+2018-08-07,H,not stalled (stop < 0.15 x ATR),1428,1438,0.33615,0.37578,70.515
+2018-08-08,H,gap not above threshold,1437,1437,0.33938,0.25145,69.86
+2018-08-09,H,gap not above threshold,1435,1435,0.33938,-0.14996,67.98
+2018-08-10,H,gap not above threshold,1439,1439,0.33938,-0.010205,70.37
+2018-08-13,H,gap not above threshold,1435,1440,0.33615,0.0081042,74.085
+2018-08-14,H,gap not above threshold,1434,1436,0.33615,-0.17066,74.98
+2018-08-15,H,gap not above threshold,1439,1435,0.33615,0.067164,75.195
+2018-08-16,H,gap not above threshold,1439,1438,0.33615,0.067554,74.745
+2018-08-17,H,gap not above threshold,1437,1429,0.33615,0.28525,73.22
+2018-08-20,H,gap not above threshold,1427,1422,0.33276,-0.10944,71.52
+2018-08-21,H,gap not above threshold,1440,1439,0.33276,-0.17049,72.74
+2018-08-22,H,gap not above threshold,1439,1438,0.33155,0.1588,75.745
+2018-08-23,H,gap not above threshold,1440,1440,0.33155,0.24763,75.505
+2018-08-24,H,gap not above threshold,1438,1435,0.32797,0.053695,73.85
+2018-08-27,H,gap not above threshold,1430,1429,0.32797,0.073014,76.89
+2018-08-28,H,gap not above threshold,1438,1437,0.32797,0.089872,78.305
+2018-08-29,H,TRADE,1439,1439,0.32672,-0.71743,78.73
+2018-08-30,H,gap not above threshold,1439,1439,0.32797,-0.18536,79.515
+2018-08-31,H,gap not above threshold,1440,1435,0.32672,0.030179,79.035
+2018-09-03,H,TRADE,1414,1408,0.32672,0.3732,81.8
+2018-09-04,H,gap not above threshold,1439,1431,0.32672,-0.19004,81.745
+2018-09-05,H,already given back (stop > 0.6 x ATR),1437,1437,0.32571,-0.5144,83.28
+2018-09-06,H,gap not above threshold,1440,1436,0.32672,-0.12541,85.4
+2018-09-07,H,TRADE,1436,1437,0.32672,-0.70234,83.415
+2018-09-10,H,gap not above threshold,1439,1432,0.32797,-0.26988,80.94
+2018-09-11,H,gap not above threshold,1437,1440,0.32797,0.10262,82.045
+2018-09-12,H,gap not above threshold,1436,1437,0.32672,0.16977,80.995
+2018-09-13,H,gap not above threshold,1432,1435,0.32672,0.01159,82.275
+2018-09-14,H,gap not above threshold,1439,1432,0.32672,-0.1238,83.205
+2018-09-17,H,gap not above threshold,1434,1426,0.32516,-0.020839,84.36
+2018-09-18,H,gap not above threshold,1438,1436,0.32516,-0.10727,83.835
+2018-09-19,H,gap not above threshold,1438,1440,0.32197,-0.0041107,81.33
+2018-09-20,H,gap not above threshold,1439,1438,0.31763,-0.29664,81.08
+2018-09-21,H,already given back (stop > 0.6 x ATR),1431,1438,0.3148,0.97852,83.36
+2018-09-24,H,gap not above threshold,1437,1433,0.31763,0.052092,81.615
+2018-09-25,H,gap not above threshold,1439,1437,0.3148,-0.12085,81.205
+2018-09-26,H,gap not above threshold,1439,1436,0.3148,-0.1029,80.745
+2018-09-27,H,gap not above threshold,1439,1440,0.3148,-0.15334,81.435
+2018-09-28,H,gap not above threshold,1438,1426,0.3148,0.051766,83.52
+2018-10-01,H,gap not above threshold,1439,1432,0.3148,-0.11402,82.295
+2018-10-02,H,gap not above threshold,1439,1438,0.31338,0.2845,83.4
+2018-10-03,H,not stalled (stop < 0.15 x ATR),1436,1438,0.31338,-0.4067,82.645
+2018-10-04,H,gap not above threshold,1440,1439,0.3148,-0.20183,84.235
+2018-10-05,H,gap not above threshold,1440,1437,0.31338,-0.068694,85.505
+2018-10-08,H,gap not above threshold,1435,1432,0.31338,0.011124,83.835
+2018-10-09,H,gap not above threshold,1439,1437,0.30802,-0.039086,82.825
+2018-10-10,H,gap not above threshold,1437,1434,0.30019,0.079289,82.45
+2018-10-11,H,gap not above threshold,1440,1440,0.30019,-0.020573,81.745
+2018-10-12,H,gap not above threshold,1438,1436,0.29722,0.054379,81.185
+2018-10-15,H,gap not above threshold,1434,1438,0.29655,0.020356,79.9
+2018-10-16,H,gap not above threshold,1439,1438,0.29603,-0.2134,79.26
+2018-10-17,H,gap not above threshold,1438,1437,0.29603,0.15763,78.395
+2018-10-18,H,gap not above threshold,1440,1437,0.29515,-0.013616,79.39
+2018-10-19,H,gap not above threshold,1436,1439,0.29515,0.12928,77.495
+2018-10-22,H,already given back (stop > 0.6 x ATR),1437,1431,0.29515,0.31701,79.06
+2018-10-23,H,gap not above threshold,1436,1440,0.29515,-0.18543,79.235
+2018-10-24,H,gap not above threshold,1437,1438,0.29466,-0.17604,78.865
+2018-10-25,H,gap not above threshold,1437,1430,0.29338,0.23179,80.145
+2018-10-26,H,gap not above threshold,1436,1440,0.29338,-0.092346,78.05
+2018-10-29,H,gap not above threshold,1435,1435,0.28901,-0.087912,78.25
+2018-10-30,H,gap not above threshold,1439,1436,0.28689,0.20165,77.98
+2018-10-31,H,not stalled (stop < 0.15 x ATR),1436,1438,0.28651,-0.53583,76.615
+2018-11-01,H,gap not above threshold,1437,1433,0.28689,0.032255,73.06
+2018-11-02,H,gap not above threshold,1438,1433,0.28651,0.011055,75.04
+2018-11-05,H,gap not above threshold,1436,1439,0.28651,-0.006264,75.96
+2018-11-06,H,gap not above threshold,1439,1440,0.28568,0.065535,76.015
+2018-11-07,H,gap not above threshold,1434,1435,0.28506,0.15412,74.79
+2018-11-08,H,gap not above threshold,1438,1440,0.28506,0.25488,76.765
+2018-11-09,H,gap not above threshold,1438,1435,0.28506,-0.13243,77.49
+2018-11-12,H,TRADE,1438,1440,0.28506,-0.32263,76.325
+2018-11-13,H,gap not above threshold,1440,1440,0.28568,-0.22498,78.7
+2018-11-14,H,TRADE,1440,1440,0.28568,0.28855,79.82
+2018-11-15,H,already given back (stop > 0.6 x ATR),1440,1439,0.28651,1.1477,79.79
+2018-11-16,H,gap not above threshold,1439,1432,0.28651,-0.07122,80.485
+2018-11-19,H,not stalled (stop < 0.15 x ATR),1432,1435,0.28651,0.39617,80.355
+2018-11-20,H,not stalled (stop < 0.15 x ATR),1439,1435,0.28689,-0.31048,79.17
+2018-11-21,H,gap not above threshold,1432,1437,0.28815,0.16425,82.155
+2018-11-22,H,not stalled (stop < 0.15 x ATR),1436,1421,0.28689,-0.64902,80.41
+2018-11-23,H,not stalled (stop < 0.15 x ATR),1429,1435,0.28689,-0.29154,79.315
+2018-11-26,H,gap not above threshold,1428,1431,0.28815,-0.26621,79.755
+2018-11-27,H,gap not above threshold,1435,1427,0.28689,0.0025243,79.9
+2018-11-28,H,not stalled (stop < 0.15 x ATR),1439,1438,0.28651,-0.28757,80.86
+2018-11-29,H,TRADE,1433,1433,0.28651,0.37315,83.95
+2018-11-30,H,gap not above threshold,1437,1435,0.28689,-0.1163,80.655
+2018-12-03,H,TRADE,1438,1439,0.28689,0.53842,81.21
+2018-12-04,H,gap not above threshold,1439,1439,0.28741,-0.046079,80.7
+2018-12-05,H,gap not above threshold,1435,1437,0.28689,-0.13908,83.39
+2018-12-06,H,gap not above threshold,1440,1437,0.28689,0.024512,80.665
+2018-12-07,H,gap not above threshold,1439,1437,0.28651,0.18451,80.48
+2018-12-10,H,TRADE,1437,1438,0.28651,0.50065,81.01
+2018-12-11,H,gap not above threshold,1439,1440,0.28689,-0.25295,79.875
+2018-12-12,H,already given back (stop > 0.6 x ATR),1438,1439,0.28689,-0.59903,80.69
+2018-12-13,H,gap not above threshold,1438,1440,0.28741,-0.14327,80.125
+2018-12-14,H,gap not above threshold,1439,1436,0.28741,-0.003538,78.645
+2018-12-17,H,gap not above threshold,1440,1439,0.28741,0.044872,78.475
+2018-12-18,H,gap not above threshold,1440,1436,0.28741,0.080178,77.995
+2018-12-19,H,not stalled (stop < 0.15 x ATR),1440,1437,0.28741,0.30453,75.585
+2018-12-20,H,gap not above threshold,1440,1440,0.2883,0.23707,76.47
+2018-12-21,H,not stalled (stop < 0.15 x ATR),1439,1439,0.2883,-0.35486,79.53
+2018-12-24,H,gap not above threshold,1438,1423,0.28941,0.017337,80.735
+2018-12-25,H,"thin day (< 1,300 bars)",578,526,0.2883,,81.7
+2018-12-26,H,gap not above threshold,1439,1435,0.28855,0.076769,81.7
+2018-12-27,H,not stalled (stop < 0.15 x ATR),1440,1440,0.28757,0.53445,82.22
+2018-12-28,H,gap not above threshold,1439,1440,0.28757,-0.23865,81.405
+2018-12-31,H,not stalled (stop < 0.15 x ATR),1438,1435,0.28694,-0.51239,81.16
+2019-01-02,D,warm-up: fewer than 100 past gap values,1438,1429,,0.12881,
+2019-01-03,D,warm-up: fewer than 100 past gap values,1440,1438,,-0.2465,
+2019-01-04,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.30674,
+2019-01-07,D,warm-up: fewer than 100 past gap values,1440,1435,,0.064253,
+2019-01-08,D,warm-up: fewer than 100 past gap values,1440,1440,,0.23742,
+2019-01-09,D,warm-up: fewer than 100 past gap values,1439,1440,,0.12099,
+2019-01-10,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.096609,
+2019-01-11,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.78541,
+2019-01-14,D,warm-up: fewer than 100 past gap values,1438,1440,,-0.17483,
+2019-01-15,D,warm-up: fewer than 100 past gap values,1440,1440,,0.2079,
+2019-01-16,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.18756,
+2019-01-17,D,warm-up: fewer than 100 past gap values,1439,1440,,-0.44411,
+2019-01-18,D,warm-up: fewer than 100 past gap values,1440,1440,,0.20919,
+2019-01-21,D,warm-up: fewer than 100 past gap values,1439,1440,,-0.16442,
+2019-01-22,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.45699,
+2019-01-23,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.69375,
+2019-01-24,D,warm-up: fewer than 100 past gap values,1440,1440,,0.024905,
+2019-01-25,D,warm-up: fewer than 100 past gap values,1434,1433,,0.29248,
+2019-01-28,D,warm-up: fewer than 100 past gap values,1440,1440,,0.12515,
+2019-01-29,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.3646,
+2019-01-30,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.15746,74.575
+2019-01-31,D,warm-up: fewer than 100 past gap values,1440,1438,,0.041708,70.76
+2019-02-01,D,warm-up: fewer than 100 past gap values,1439,1439,,0.48018,69.595
+2019-02-04,D,warm-up: fewer than 100 past gap values,1440,1438,,0.067072,68.635
+2019-02-05,D,warm-up: fewer than 100 past gap values,1440,1438,,0.53868,66.07
+2019-02-06,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.29309,64.925
+2019-02-07,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.51904,61.315
+2019-02-08,D,warm-up: fewer than 100 past gap values,1440,1440,,0.0050989,59.245
+2019-02-11,D,warm-up: fewer than 100 past gap values,1440,1434,,0.01838,56.635
+2019-02-12,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.041113,58.195
+2019-02-13,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.18451,56.905
+2019-02-14,D,warm-up: fewer than 100 past gap values,1440,1440,,0.67211,58.615
+2019-02-15,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.19037,59.86
+2019-02-18,D,warm-up: fewer than 100 past gap values,1439,1440,,-0.048072,60.61
+2019-02-19,D,warm-up: fewer than 100 past gap values,1438,1439,,-0.46409,61.14
+2019-02-20,D,warm-up: fewer than 100 past gap values,1440,1440,,0.084029,63.345
+2019-02-21,D,warm-up: fewer than 100 past gap values,1438,1440,,-0.05125,63.47
+2019-02-22,D,warm-up: fewer than 100 past gap values,1439,1438,,0.027046,60.67
+2019-02-25,D,warm-up: fewer than 100 past gap values,1438,1439,,0.098604,56.785
+2019-02-26,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.14956,56.075
+2019-02-27,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.48134,57.01
+2019-02-28,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.077895,54.31
+2019-03-01,D,warm-up: fewer than 100 past gap values,1440,1439,,0.10104,53.395
+2019-03-04,D,warm-up: fewer than 100 past gap values,1438,1440,,0.064724,53.45
+2019-03-05,D,warm-up: fewer than 100 past gap values,1440,1440,,0.23894,55.335
+2019-03-06,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.015873,55.935
+2019-03-07,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.13615,55.455
+2019-03-08,D,warm-up: fewer than 100 past gap values,1440,1440,,0.34626,60.45
+2019-03-11,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.70397,61.99
+2019-03-12,D,warm-up: fewer than 100 past gap values,1440,1440,,0.61001,60.69
+2019-03-13,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.44016,59.67
+2019-03-14,D,warm-up: fewer than 100 past gap values,1440,1440,,0.018218,58.665
+2019-03-15,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.10337,57.8
+2019-03-18,D,warm-up: fewer than 100 past gap values,1438,1440,,0.44487,56.53
+2019-03-19,D,warm-up: fewer than 100 past gap values,1440,1440,,0.12611,56.285
+2019-03-20,D,warm-up: fewer than 100 past gap values,1439,1440,,0.61813,53.79
+2019-03-21,D,warm-up: fewer than 100 past gap values,1440,1440,,0.12635,57.11
+2019-03-22,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.96788,59.545
+2019-03-25,D,warm-up: fewer than 100 past gap values,1435,1440,,-0.24542,63.435
+2019-03-26,D,warm-up: fewer than 100 past gap values,1440,1436,,-0.37085,63.62
+2019-03-27,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.32134,63.87
+2019-03-28,D,warm-up: fewer than 100 past gap values,1440,1440,,0.52319,63.97
+2019-03-29,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.03251,63.345
+2019-04-01,D,EURUSD data hole 19:00-16:00 NY,1379,1379,,-0.30084,62.425
+2019-04-02,D,warm-up: fewer than 100 past gap values,1440,1440,,0.015956,61.04
+2019-04-03,D,warm-up: fewer than 100 past gap values,1440,1440,,0.46247,60.095
+2019-04-04,D,warm-up: fewer than 100 past gap values,1440,1440,,0.34965,60.88
+2019-04-05,D,warm-up: fewer than 100 past gap values,1440,1440,,0.48558,55.77
+2019-04-08,D,warm-up: fewer than 100 past gap values,1440,1440,,0.47816,54.59
+2019-04-09,D,warm-up: fewer than 100 past gap values,1440,1439,,0.34,55.89
+2019-04-10,D,warm-up: fewer than 100 past gap values,1440,1435,,-0.2177,54.28
+2019-04-11,D,warm-up: fewer than 100 past gap values,1439,1436,,-0.039747,54.13
+2019-04-12,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.17699,53.83
+2019-04-15,D,warm-up: fewer than 100 past gap values,1437,1436,,-0.24893,55.135
+2019-04-16,D,warm-up: fewer than 100 past gap values,1440,1434,,0.076421,54.305
+2019-04-17,D,warm-up: fewer than 100 past gap values,1440,1440,,0.029756,54.415
+2019-04-18,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.26133,51.03
+2019-04-19,D,warm-up: fewer than 100 past gap values,1437,1435,,0.0095658,50.18
+2019-04-22,D,warm-up: fewer than 100 past gap values,1436,1435,,0.15373,45.38
+2019-04-23,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.15664,44.54
+2019-04-24,D,warm-up: fewer than 100 past gap values,1439,1440,,-0.34545,44.86
+2019-04-25,D,warm-up: fewer than 100 past gap values,1440,1440,,-0.078178,46.985
+2019-04-26,D,warm-up: fewer than 100 past gap values,1440,1440,,0.019535,46.825
+2019-04-29,D,warm-up: fewer than 100 past gap values,1439,1433,,0.15212,48.125
+2019-04-30,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.35107,47.97
+2019-05-01,D,warm-up: fewer than 100 past gap values,1439,1439,,-0.13362,49.015
+2019-05-02,D,warm-up: fewer than 100 past gap values,1440,1440,,0.11956,50.165
+2019-05-03,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.13805,50.5
+2019-05-06,D,warm-up: fewer than 100 past gap values,1439,1437,,0.22025,52.12
+2019-05-07,D,warm-up: fewer than 100 past gap values,1440,1437,,0.30969,51.09
+2019-05-08,D,warm-up: fewer than 100 past gap values,1440,1439,,0.27705,52.185
+2019-05-09,D,warm-up: fewer than 100 past gap values,1440,1438,,0.48931,50.82
+2019-05-10,D,warm-up: fewer than 100 past gap values,1440,1439,,-0.012322,52.82
+2019-05-13,D,warm-up: fewer than 100 past gap values,1439,1440,,0.13095,51.285
+2019-05-14,D,warm-up: fewer than 100 past gap values,1440,1440,,0.030777,52.21
+2019-05-15,D,warm-up: fewer than 100 past gap values,1440,1440,,0.35602,52.64
+2019-05-16,D,warm-up: fewer than 100 past gap values,1440,1440,,0.17098,52.725
+2019-05-17,D,warm-up: fewer than 100 past gap values,1440,1440,,0.23042,51.715
+2019-05-20,D,warm-up: fewer than 100 past gap values,1439,1435,,0.082903,52.1
+2019-05-21,D,warm-up: fewer than 100 past gap values,1440,1437,,-0.17049,51.995
+2019-05-22,D,TRADE,1439,1439,0.35001,0.40583,50.845
+2019-05-23,D,gap not above threshold,1439,1436,0.35107,-0.31237,48.135
+2019-05-24,D,gap not above threshold,1439,1440,0.35071,0.10629,49.935
+2019-05-27,D,"thin day (< 1,300 bars)",717,720,0.35036,,48.735
+2019-05-28,D,gap not above threshold,1440,1440,0.35036,0.050969,48.735
+2019-05-29,D,gap not above threshold,1439,1440,0.35001,-0.11757,48.55
+2019-05-30,D,gap not above threshold,1440,1440,0.34965,0.13161,48.29
+2019-05-31,D,TRADE,1440,1439,0.34881,0.36318,45.77
+2019-06-03,D,gap not above threshold,1438,1439,0.35036,0.33337,46.085
+2019-06-04,D,gap not above threshold,1439,1439,0.35001,-0.22447,47.69
+2019-06-05,D,gap not above threshold,1440,1440,0.34965,-0.070433,48.125
+2019-06-06,D,gap not above threshold,1440,1440,0.34881,0.029775,49.89
+2019-06-07,D,gap not above threshold,1440,1438,0.34796,0.22319,53.755
+2019-06-10,D,gap not above threshold,1439,1433,0.34711,0.22511,54.705
+2019-06-11,D,gap not above threshold,1439,1440,0.34626,-0.32008,54.63
+2019-06-12,D,gap not above threshold,1438,1440,0.34606,-0.23434,54.34
+2019-06-13,D,gap not above threshold,1440,1439,0.34585,-0.28342,55.25
+2019-06-14,D,gap not above threshold,1440,1434,0.34565,0.020867,54.69
+2019-06-17,D,gap not above threshold,1440,1439,0.34545,0.21231,56.145
+2019-06-18,D,gap not above threshold,1439,1440,0.34408,-0.24523,56.86
+2019-06-19,D,gap not above threshold,1438,1440,0.34272,-0.3346,58.725
+2019-06-20,D,gap not above threshold,1440,1440,0.34136,0.26046,59.775
+2019-06-21,D,not stalled (stop < 0.15 x ATR),1440,1439,0.34,0.48223,62.78
+2019-06-24,D,gap not above threshold,1440,1439,0.34408,0.31147,63.49
+2019-06-25,D,gap not above threshold,1440,1439,0.34272,0.34032,63.435
+2019-06-26,D,gap not above threshold,1440,1438,0.3416,-0.1614,64.865
+2019-06-27,D,gap not above threshold,1439,1440,0.34032,0.044971,64.655
+2019-06-28,D,gap not above threshold,1439,1438,0.34024,-0.26098,64.975
+2019-07-01,D,gap not above threshold,1440,1440,0.34016,0.17685,64.38
+2019-07-02,D,gap not above threshold,1440,1440,0.34008,0.071549,63.79
+2019-07-03,D,gap not above threshold,1440,1438,0.34,-0.063341,63.575
+2019-07-04,D,gap not above threshold,1435,1435,0.33865,-0.043698,61.435
+2019-07-05,D,gap not above threshold,1439,1440,0.3373,0.14032,57.125
+2019-07-08,D,gap not above threshold,1439,1439,0.33595,0.10705,56.32
+2019-07-09,D,gap not above threshold,1440,1439,0.3346,0.09949,55.665
+2019-07-10,D,gap not above threshold,1440,1440,0.33429,-0.17162,55.13
+2019-07-11,D,gap not above threshold,1440,1438,0.33399,-0.28079,55.205
+2019-07-12,D,gap not above threshold,1440,1440,0.33368,-0.19307,55.465
+2019-07-15,D,gap not above threshold,1440,1433,0.33337,0.21755,52.965
+2019-07-16,D,gap not above threshold,1440,1440,0.33036,0.24574,52.33
+2019-07-17,D,gap not above threshold,1440,1440,0.32735,-0.13882,52.335
+2019-07-18,D,TRADE,1440,1440,0.32434,-0.50356,50.67
+2019-07-19,D,gap not above threshold,1440,1440,0.33337,-0.32296,49.845
+2019-07-22,D,gap not above threshold,1440,1431,0.33077,0.19969,49.045
+2019-07-23,D,gap not above threshold,1440,1439,0.32816,-0.18851,48.115
+2019-07-24,D,TRADE,1437,1440,0.32556,-0.34146,47.925
+2019-07-25,D,gap not above threshold,1439,1436,0.33337,0.29523,47.175
+2019-07-26,D,gap not above threshold,1439,1432,0.33077,0.062156,49.81
+2019-07-29,D,not stalled (stop < 0.15 x ATR),1437,1437,0.32816,0.89696,49.62
+2019-07-30,D,gap not above threshold,1439,1440,0.33368,-0.12449,47.025
+2019-07-31,D,not stalled (stop < 0.15 x ATR),1439,1440,0.33337,-0.67572,46.15
+2019-08-01,D,gap not above threshold,1440,1437,0.33429,0.18051,49.065
+2019-08-02,D,gap not above threshold,1440,1436,0.33399,-0.06113,51.415
+2019-08-05,D,gap not above threshold,1440,1433,0.33368,0.12714,49.735
+2019-08-06,D,not stalled (stop < 0.15 x ATR),1440,1439,0.33337,-0.47206,53.845
+2019-08-07,D,gap not above threshold,1440,1440,0.33429,0.25133,56.685
+2019-08-08,D,gap not above threshold,1440,1440,0.33399,0.21852,56.69
+2019-08-09,D,TRADE,1440,1436,0.33368,0.58312,57.43
+2019-08-12,D,gap not above threshold,1438,1437,0.3346,-0.31275,57.84
+2019-08-13,D,gap not above threshold,1440,1438,0.33429,-0.33216,59.745
+2019-08-14,D,gap not above threshold,1440,1440,0.33399,-0.28948,59.585
+2019-08-15,D,not stalled (stop < 0.15 x ATR),1439,1440,0.33368,-0.75623,60.91
+2019-08-16,D,TRADE,1440,1438,0.3346,-0.53347,60.495
+2019-08-19,D,TRADE,1436,1432,0.33865,0.39289,58.855
+2019-08-20,D,gap not above threshold,1440,1440,0.34016,-0.22537,59.785
+2019-08-21,D,gap not above threshold,1439,1439,0.34008,0.0524,58.645
+2019-08-22,D,TRADE,1440,1439,0.34,-0.93107,58.53
+2019-08-23,D,gap not above threshold,1440,1440,0.34024,-0.24592,56.685
+2019-08-26,D,gap not above threshold,1440,1439,0.34016,0.21626,59.82
+2019-08-27,D,not stalled (stop < 0.15 x ATR),1439,1440,0.34008,-0.63101,61.4
+2019-08-28,D,TRADE,1439,1440,0.34032,0.39196,61.475
+2019-08-29,D,gap not above threshold,1440,1440,0.34118,-0.16925,57.6
+2019-08-30,D,gap not above threshold,1437,1439,0.34089,-0.24903,56.705
+2019-09-02,D,TRADE,1431,1434,0.34061,0.61757,59.22
+2019-09-03,D,gap not above threshold,1428,1434,0.34146,-0.25737,55.645
+2019-09-04,D,gap not above threshold,1440,1434,0.34118,-0.098879,54.165
+2019-09-05,D,already given back (stop > 0.6 x ATR),1440,1440,0.34089,-0.48745,54.53
+2019-09-06,D,gap not above threshold,1440,1436,0.34246,0.14538,55.165
+2019-09-09,D,already given back (stop > 0.6 x ATR),1433,1436,0.34146,-0.59884,54.775
+2019-09-10,D,gap not above threshold,1440,1438,0.34445,-0.12209,53.975
+2019-09-11,D,gap not above threshold,1440,1438,0.34345,-0.23072,52.505
+2019-09-12,D,gap not above threshold,1440,1438,0.34246,0.065245,53.01
+2019-09-13,D,not stalled (stop < 0.15 x ATR),1439,1440,0.34146,-0.61205,57.675
+2019-09-16,D,not stalled (stop < 0.15 x ATR),1439,1436,0.34445,-0.36219,58.08
+2019-09-17,D,gap not above threshold,1439,1440,0.34585,0.17142,60.85
+2019-09-18,D,gap not above threshold,1440,1438,0.34565,0.048871,63.01
+2019-09-19,D,gap not above threshold,1439,1439,0.34545,0.0051655,64.775
+2019-09-20,D,already given back (stop > 0.6 x ATR),1440,1440,0.34445,0.36195,64.83
+2019-09-23,D,gap not above threshold,1431,1437,0.34585,0.02923,63.325
+2019-09-24,D,TRADE,1439,1440,0.34565,-0.36816,62.8
+2019-09-25,D,TRADE,1440,1435,0.34626,0.59588,63.295
+2019-09-26,D,gap not above threshold,1440,1440,0.34881,0.029747,66.34
+2019-09-27,D,gap not above threshold,1439,1435,0.34796,0.19219,66.71
+2019-09-30,D,TRADE,1439,1436,0.34711,-0.56546,64.555
+2019-10-01,D,TRADE,1440,1438,0.34965,0.65843,65.8
+2019-10-02,D,gap not above threshold,1440,1437,0.35071,-0.024286,66.36
+2019-10-03,D,TRADE,1438,1439,0.35036,-0.63179,65.845
+2019-10-04,D,TRADE,1439,1440,0.3523,0.50622,65.36
+2019-10-07,D,gap not above threshold,1440,1435,0.35602,0.044678,65.605
+2019-10-08,D,TRADE,1440,1437,0.35478,0.44389,64.895
+2019-10-09,D,gap not above threshold,1439,1438,0.35899,-0.00098619,66.19
+2019-10-10,D,gap not above threshold,1440,1440,0.3575,0.15818,64.635
+2019-10-11,D,already given back (stop > 0.6 x ATR),1440,1436,0.35602,-1.5107,59.81
+2019-10-14,D,gap not above threshold,1435,1440,0.36047,-0.13252,60.205
+2019-10-15,D,gap not above threshold,1437,1440,0.35899,-0.18096,57.04
+2019-10-16,D,TRADE,1440,1439,0.3575,-0.70392,55.56
+2019-10-17,D,gap not above threshold,1439,1440,0.36195,-0.012024,55.625
+2019-10-18,D,gap not above threshold,1439,1440,0.36047,0.037864,56.835
+2019-10-21,D,not stalled (stop < 0.15 x ATR),1440,1440,0.35899,-0.45974,56.13
+2019-10-22,D,gap not above threshold,1439,1440,0.36201,0.19246,55.205
+2019-10-23,D,gap not above threshold,1440,1438,0.36195,-0.11757,55.15
+2019-10-24,D,already given back (stop > 0.6 x ATR),1440,1440,0.36047,0.44003,52.6
+2019-10-25,D,gap not above threshold,1440,1440,0.36207,0.13944,53.16
+2019-10-28,D,gap not above threshold,1435,1440,0.36201,-0.10322,52.96
+2019-10-29,D,gap not above threshold,1440,1438,0.36195,-0.080267,51.33
+2019-10-30,D,gap not above threshold,1439,1440,0.36047,-0.075652,50.38
+2019-10-31,D,gap not above threshold,1440,1440,0.35899,-0.35824,50.975
+2019-11-01,D,gap not above threshold,1439,1440,0.35917,-0.030777,50.26
+2019-11-04,D,gap not above threshold,1436,1439,0.35824,0.037783,50.345
+2019-11-05,D,gap not above threshold,1440,1439,0.35769,-0.35353,50.95
+2019-11-06,D,gap not above threshold,1439,1439,0.35713,0.09681,52.035
+2019-11-07,D,gap not above threshold,1438,1440,0.35657,0.068394,51.455
+2019-11-08,D,gap not above threshold,1440,1434,0.35602,-0.20153,51.035
+2019-11-11,D,TRADE,1436,1440,0.3554,-0.54734,49.875
+2019-11-12,D,gap not above threshold,1439,1439,0.35713,-0.091154,49.72
+2019-11-13,D,gap not above threshold,1440,1440,0.35657,0.28439,48.785
+2019-11-14,D,gap not above threshold,1440,1440,0.35602,-0.071487,46.875
+2019-11-15,D,gap not above threshold,1438,1440,0.3554,0.027339,45.055
+2019-11-18,D,gap not above threshold,1436,1440,0.35477,-0.022322,44.305
+2019-11-19,D,gap not above threshold,1436,1440,0.35415,0.15736,44.33
+2019-11-20,D,gap not above threshold,1439,1440,0.35353,0.052015,43.435
+2019-11-21,D,gap not above threshold,1440,1438,0.35292,-0.037674,43.13
+2019-11-22,D,already given back (stop > 0.6 x ATR),1440,1438,0.3523,0.36911,41.88
+2019-11-25,D,gap not above threshold,1438,1440,0.35415,-0.30916,43.025
+2019-11-26,D,gap not above threshold,1440,1440,0.35353,0.20744,42.93
+2019-11-27,D,not stalled (stop < 0.15 x ATR),1440,1440,0.35292,-0.4125,41.615
+2019-11-28,D,gap not above threshold,1437,1440,0.35477,0.23936,39.66
+2019-11-29,D,gap not above threshold,1438,1440,0.35415,0.007577,38.42
+2019-12-02,D,gap not above threshold,1435,1437,0.35353,0.19424,38.59
+2019-12-03,D,gap not above threshold,1440,1440,0.35292,-0.18301,40.45
+2019-12-04,D,already given back (stop > 0.6 x ATR),1436,1438,0.3523,-0.53757,37.99
+2019-12-05,D,gap not above threshold,1439,1440,0.35415,0.071168,39.08
+2019-12-06,D,gap not above threshold,1437,1439,0.35353,-0.20493,37.85
+2019-12-09,D,gap not above threshold,1439,1440,0.35292,0.24354,39.41
+2019-12-10,D,gap not above threshold,1440,1440,0.3523,-0.18535,39.305
+2019-12-11,D,TRADE,1440,1440,0.35168,-0.44646,39.26
+2019-12-12,D,already given back (stop > 0.6 x ATR),1439,1440,0.35353,0.42529,41.745
+2019-12-13,D,already given back (stop > 0.6 x ATR),1440,1440,0.3554,0.53102,42.385
+2019-12-16,D,not stalled (stop < 0.15 x ATR),1440,1440,0.35713,0.38586,45.08
+2019-12-17,D,TRADE,1440,1439,0.35917,0.78105,44.8
+2019-12-18,D,gap not above threshold,1439,1440,0.36195,0.0088576,46
+2019-12-19,D,TRADE,1438,1440,0.36195,0.53739,46.765
+2019-12-20,D,not stalled (stop < 0.15 x ATR),1440,1440,0.36219,-0.48538,46.38
+2019-12-23,D,not stalled (stop < 0.15 x ATR),1437,1440,0.36318,0.67926,45.665
+2019-12-24,D,gap not above threshold,1440,1440,0.3646,-0.26109,45.53
+2019-12-25,D,"thin day (< 1,300 bars)",518,495,0.3646,,45.845
+2019-12-26,D,gap not above threshold,1437,1435,0.36549,0.011569,45.845
+2019-12-27,D,gap not above threshold,1435,1437,0.36549,-0.25231,45.56
+2019-12-30,D,gap not above threshold,1437,1440,0.36354,-0.077583,49.19
+2019-12-31,D,TRADE,1439,1439,0.36354,-0.44206,49.28
+2020-01-02,D,gap not above threshold,1440,1438,0.36549,0.22694,46.975
+2020-01-03,D,gap not above threshold,1435,1440,0.36549,0.15756,48.655
+2020-01-06,D,gap not above threshold,1437,1439,0.36354,-0.3185,48.925
+2020-01-07,D,gap not above threshold,1439,1440,0.36354,0.054643,49.805
+2020-01-08,D,gap not above threshold,1439,1440,0.36354,-0.030211,49.51
+2020-01-09,D,TRADE,1440,1440,0.36244,0.42963,51.61
+2020-01-10,D,gap not above threshold,1439,1440,0.36244,-0.096539,51.255
+2020-01-13,D,gap not above threshold,1440,1440,0.36244,0.060916,49.725
+2020-01-14,D,TRADE,1440,1440,0.36244,-0.3653,48.885
+2020-01-15,D,gap not above threshold,1439,1439,0.36354,0.12861,46.065
+2020-01-16,D,gap not above threshold,1440,1439,0.36244,-0.15533,46.53
+2020-01-17,D,gap not above threshold,1438,1440,0.36244,0.05617,46.505
+2020-01-20,D,gap not above threshold,1436,1440,0.36244,-0.27424,47.14
+2020-01-21,D,gap not above threshold,1437,1440,0.36201,-0.31999,46.575
+2020-01-22,D,not stalled (stop < 0.15 x ATR),1440,1440,0.36201,-0.66823,45.495
+2020-01-23,D,gap not above threshold,1440,1440,0.36201,0.030356,45.62
+2020-01-24,D,gap not above threshold,1440,1440,0.36201,0.022437,48.005
+2020-01-27,D,gap not above threshold,1438,1439,0.35917,0.0062048,48.78
+2020-01-28,D,gap not above threshold,1438,1439,0.35917,0.09217,45.58
+2020-01-29,D,gap not above threshold,1439,1438,0.35917,-0.078913,44.505
+2020-01-30,D,TRADE,1440,1438,0.35917,-0.4966,44.185
+2020-01-31,D,gap not above threshold,1439,1440,0.36201,0.16899,42.755
+2020-02-03,D,already given back (stop > 0.6 x ATR),1438,1439,0.35917,0.63214,43.94
+2020-02-04,D,not stalled (stop < 0.15 x ATR),1435,1440,0.36201,-0.64344,44.435
+2020-02-05,D,gap not above threshold,1433,1440,0.36244,0.26297,42.8
+2020-02-06,D,gap not above threshold,1434,1440,0.36201,0.079019,42.18
+2020-02-07,D,gap not above threshold,1433,1440,0.36201,-0.097232,43.25
+2020-02-10,D,not stalled (stop < 0.15 x ATR),1435,1440,0.36201,-0.6848,43.195
+2020-02-11,D,already given back (stop > 0.6 x ATR),1415,1427,0.36244,-0.3952,43.965
+2020-02-12,D,gap not above threshold,1429,1433,0.36371,-0.068723,43.645
+2020-02-13,D,TRADE,1440,1440,0.36371,-0.72207,44.405
+2020-02-14,D,not stalled (stop < 0.15 x ATR),1440,1439,0.36371,0.41362,44.9
+2020-02-17,D,gap not above threshold,1431,1440,0.36602,0.20846,43.785
+2020-02-18,D,TRADE,1439,1440,0.36602,-0.4442,43.59
+2020-02-19,D,gap not above threshold,1433,1440,0.3684,0.22897,44.335
+2020-02-20,D,not stalled (stop < 0.15 x ATR),1437,1438,0.3684,0.46701,44.38
+2020-02-21,D,gap not above threshold,1436,1440,0.36954,-0.053161,42.92
+2020-02-24,D,not stalled (stop < 0.15 x ATR),1439,1439,0.36954,0.45795,44.77
+2020-02-25,D,not stalled (stop < 0.15 x ATR),1438,1440,0.37461,-0.38342,46.725
+2020-02-26,D,gap not above threshold,1440,1440,0.37399,0.36583,48.365
+2020-02-27,D,TRADE,1440,1440,0.36954,0.81141,49.285
+2020-02-28,D,gap not above threshold,1440,1440,0.36954,0.048902,54.14
+2020-03-02,D,already given back (stop > 0.6 x ATR),1440,1439,0.36954,0.81966,55.315
+2020-03-03,D,gap not above threshold,1440,1440,0.37399,0.18697,59.815
+2020-03-04,D,TRADE,1437,1440,0.36954,-0.61812,64.155
+2020-03-05,D,gap not above threshold,1436,1440,0.37399,0.27852,66.045
+2020-03-06,D,not stalled (stop < 0.15 x ATR),1440,1438,0.36954,0.59994,69.835
+2020-03-09,D,gap not above threshold,1438,1440,0.37399,-0.029042,74.855
+2020-03-10,D,gap not above threshold,1437,1436,0.36954,0.23445,80.385
+2020-03-11,D,gap not above threshold,1440,1439,0.36954,-0.20022,87.855
+2020-03-12,D,already given back (stop > 0.6 x ATR),1440,1435,0.3684,0.8805,90.32
+2020-03-13,D,gap not above threshold,1440,1437,0.37269,-0.28111,101.52
+2020-03-16,D,already given back (stop > 0.6 x ATR),1440,1438,0.3684,0.6114,108.13
+2020-03-17,D,gap not above threshold,1440,1438,0.37269,-0.041559,115.35
+2020-03-18,D,already given back (stop > 0.6 x ATR),1440,1440,0.37269,1.6527,124.46
+2020-03-19,D,TRADE,1440,1431,0.38403,-1.3546,135.17
+2020-03-20,D,not stalled (stop < 0.15 x ATR),1440,1432,0.38403,-1.0611,149.34
+2020-03-23,D,not stalled (stop < 0.15 x ATR),1432,1439,0.38739,0.79669,155.05
+2020-03-24,D,TRADE,1439,1413,0.38739,-1.0061,161.31
+2020-03-25,D,TRADE,1439,1433,0.38739,0.40714,166.68
+2020-03-26,D,TRADE,1440,1438,0.39219,-1.0164,170.69
+2020-03-27,D,TRADE,1440,1437,0.39347,-0.69428,173.66
+2020-03-30,D,EURUSD data hole 19:00-16:00 NY,1373,1333,0.39786,-0.42622,178.25
+2020-03-31,D,TRADE,1435,1435,0.40616,-1.1879,177.25
+2020-04-01,D,not stalled (stop < 0.15 x ATR),1439,1435,0.40848,-1.1469,177.75
+2020-04-02,D,not stalled (stop < 0.15 x ATR),1440,1439,0.41278,-0.52017,179.97
+2020-04-03,D,TRADE,1440,1438,0.41654,0.54593,181.1
+2020-04-06,D,TRADE,1440,1434,0.42552,-0.44183,178.52
+2020-04-07,D,gap not above threshold,1440,1440,0.42707,0.030555,173.85
+2020-04-08,D,TRADE,1437,1440,0.42707,-0.4599,171.85
+2020-04-09,D,gap not above threshold,1440,1436,0.43223,-0.054795,169.98
+2020-04-10,D,gap not above threshold,1437,1437,0.43223,-0.084944,161.58
+2020-04-13,D,gap not above threshold,1425,1429,0.43223,-0.29457,154.93
+2020-04-14,D,gap not above threshold,1437,1436,0.43223,0.0091586,150.38
+2020-04-15,D,gap not above threshold,1436,1437,0.43223,-0.027466,142.89
+2020-04-16,D,gap not above threshold,1438,1440,0.43223,-0.10929,137.43
+2020-04-17,D,gap not above threshold,1440,1440,0.43223,0.20609,125.81
+2020-04-20,D,gap not above threshold,1431,1435,0.43223,0.25445,120.18
+2020-04-21,D,not stalled (stop < 0.15 x ATR),1435,1439,0.43223,0.96661,113.35
+2020-04-22,D,gap not above threshold,1440,1437,0.44048,-0.25196,108.16
+2020-04-23,D,gap not above threshold,1437,1440,0.44048,-0.11341,105.56
+2020-04-24,D,not stalled (stop < 0.15 x ATR),1439,1439,0.44048,0.47731,100.65
+2020-04-27,D,gap not above threshold,1430,1436,0.44048,0.13738,96.06
+2020-04-28,D,gap not above threshold,1437,1440,0.44048,-0.078548,92.095
+2020-04-29,D,gap not above threshold,1440,1439,0.44048,0.24301,89.63
+2020-04-30,D,TRADE,1437,1440,0.44048,-0.51738,86.175
+2020-05-01,D,gap not above threshold,1438,1440,0.44189,0.43244,85.765
+2020-05-04,D,gap not above threshold,1423,1436,0.44189,0.16608,85.39
+2020-05-05,D,gap not above threshold,1438,1439,0.44189,-0.34685,85.935
+2020-05-06,D,gap not above threshold,1439,1439,0.44189,0.3089,83.795
+2020-05-07,D,TRADE,1439,1440,0.44189,0.60557,83.38
+2020-05-08,D,gap not above threshold,1437,1435,0.44252,-0.058378,81.215
+2020-05-11,D,TRADE,1435,1391,0.44252,0.48974,82.58
+2020-05-12,D,not stalled (stop < 0.15 x ATR),1437,1439,0.44397,0.45345,81.315
+2020-05-13,D,gap not above threshold,1436,1439,0.4442,0.31962,82.145
+2020-05-14,D,gap not above threshold,1438,1440,0.4442,-0.19504,79.675
+2020-05-15,D,TRADE,1439,1440,0.4442,0.67455,77.405
+2020-05-18,D,gap not above threshold,1433,1440,0.44646,-0.35962,76.475
+2020-05-19,D,gap not above threshold,1437,1440,0.44646,-0.066796,80.05
+2020-05-20,D,gap not above threshold,1438,1440,0.44646,0.026092,80.555
+2020-05-21,D,gap not above threshold,1438,1435,0.44646,-0.11835,80.47
+2020-05-22,D,gap not above threshold,1439,1439,0.44646,-0.049674,79.5
+2020-05-25,D,gap not above threshold,1424,1440,0.44646,-0.028235,77.8
+2020-05-26,D,gap not above threshold,1438,1438,0.44646,-0.13333,77.54
+2020-05-27,D,TRADE,1440,1440,0.44646,0.72658,78.795
+2020-05-28,D,gap not above threshold,1440,1439,0.45345,0.0255,80.265
+2020-05-29,D,gap not above threshold,1440,1440,0.45345,0.13807,78.375
+2020-06-01,D,gap not above threshold,1438,1440,0.45345,-0.40028,77.925
+2020-06-02,D,gap not above threshold,1439,1440,0.45345,0.36821,76.705
+2020-06-03,D,gap not above threshold,1436,1440,0.45345,0.24387,75.745
+2020-06-04,D,gap not above threshold,1439,1439,0.45345,0.27589,77.11
+2020-06-05,D,TRADE,1438,1440,0.45345,-0.84876,82.12
+2020-06-08,D,gap not above threshold,1437,1434,0.45795,0.079708,84.355
+2020-06-09,D,not stalled (stop < 0.15 x ATR),1437,1439,0.45345,0.68213,84.44
+2020-06-10,D,gap not above threshold,1434,1440,0.45795,0.17624,85.545
+2020-06-11,D,gap not above threshold,1431,1440,0.45795,0.34981,86.325
+2020-06-12,D,gap not above threshold,1436,1440,0.45795,-0.12824,89.625
+2020-06-15,D,gap not above threshold,1435,1440,0.45795,-0.44146,92.92
+2020-06-16,D,not stalled (stop < 0.15 x ATR),1439,1438,0.45795,-0.47786,91.875
+2020-06-17,D,gap not above threshold,1434,1440,0.45974,-0.3347,94.455
+2020-06-18,D,TRADE,1432,1438,0.45974,0.62491,94.795
+2020-06-19,D,TRADE,1433,1440,0.4599,0.58685,95.03
+2020-06-22,D,gap not above threshold,1434,1438,0.46701,0.075487,95.925
+2020-06-23,D,gap not above threshold,1436,1440,0.46701,0.43933,98.805
+2020-06-24,D,gap not above threshold,1433,1440,0.46701,-0.068417,99.395
+2020-06-25,D,gap not above threshold,1438,1440,0.46701,-0.14862,98.435
+2020-06-26,D,gap not above threshold,1439,1438,0.46701,0.39195,96.815
+2020-06-29,D,TRADE,1436,1433,0.46701,0.62374,95.26
+2020-06-30,D,gap not above threshold,1434,1437,0.47206,-0.27591,96.23
+2020-07-01,D,gap not above threshold,1435,1437,0.47206,-0.30372,95.735
+2020-07-02,D,gap not above threshold,1432,1440,0.47206,-0.080614,95.7
+2020-07-03,D,gap not above threshold,1435,1437,0.47206,0.08133,91.285
+2020-07-06,D,gap not above threshold,1431,1439,0.46701,0.29078,87.655
+2020-07-07,D,TRADE,1429,1438,0.46701,-0.63807,90.29
+2020-07-08,D,gap not above threshold,1432,1438,0.47206,0.15639,87.83
+2020-07-09,D,gap not above threshold,1426,1440,0.47206,-0.3662,87.28
+2020-07-10,D,gap not above threshold,1432,1439,0.47206,-0.062428,86.05
+2020-07-13,D,not stalled (stop < 0.15 x ATR),1433,1423,0.47206,0.54288,83.15
+2020-07-14,D,not stalled (stop < 0.15 x ATR),1440,1439,0.47731,0.63036,81.54
+2020-07-15,D,gap not above threshold,1437,1440,0.47731,0.07216,79.445
+2020-07-16,D,gap not above threshold,1435,1440,0.47731,-0.092328,78.14
+2020-07-17,D,not stalled (stop < 0.15 x ATR),1438,1440,0.47206,0.56954,77.91
+2020-07-20,D,TRADE,1435,1429,0.47731,-0.94239,77
+2020-07-21,D,gap not above threshold,1434,1440,0.47786,-0.051448,75.2
+2020-07-22,D,gap not above threshold,1438,1440,0.47786,0.45412,75.27
+2020-07-23,D,gap not above threshold,1432,1438,0.47786,0.12995,76.12
+2020-07-24,D,gap not above threshold,1425,1439,0.47786,-0.12641,76.975
+2020-07-27,D,gap not above threshold,1438,1440,0.47786,0.015523,78.605
+2020-07-28,D,gap not above threshold,1433,1438,0.47731,-0.37704,81.955
+2020-07-29,D,gap not above threshold,1427,1440,0.47731,-0.32099,82.155
+2020-07-30,D,gap not above threshold,1438,1436,0.47731,-0.42069,82.355
+2020-07-31,D,TRADE,1430,1440,0.47731,-0.82815,84.26
+2020-08-03,D,gap not above threshold,1436,1436,0.47731,0.14535,89.98
+2020-08-04,D,gap not above threshold,1428,1440,0.46701,0.085563,89.8
+2020-08-05,D,gap not above threshold,1438,1440,0.46701,0.1316,90.355
+2020-08-06,D,gap not above threshold,1435,1440,0.46701,-0.20953,91.475
+2020-08-07,D,gap not above threshold,1433,1440,0.46701,0.043966,91.855
+2020-08-10,D,gap not above threshold,1427,1433,0.4599,-0.15288,94.74
+2020-08-11,D,gap not above threshold,1435,1440,0.4599,0.046247,94.275
+2020-08-12,D,TRADE,1432,1440,0.4599,0.55854,94.405
+2020-08-13,D,gap not above threshold,1429,1440,0.4599,-0.11002,96.655
+2020-08-14,D,gap not above threshold,1436,1439,0.4599,-0.29404,97.315
+2020-08-17,D,gap not above threshold,1429,1436,0.4599,0.14926,97.345
+2020-08-18,D,gap not above threshold,1431,1438,0.4599,0.027413,96.69
+2020-08-19,D,gap not above threshold,1434,1437,0.45974,0.29972,95.83
+2020-08-20,D,gap not above threshold,1435,1440,0.45974,-0.25641,97.225
+2020-08-21,D,gap not above threshold,1437,1440,0.45974,0.18285,96.235
+2020-08-24,D,gap not above threshold,1438,1429,0.45795,0.33023,98.83
+2020-08-25,D,gap not above threshold,1426,1438,0.45795,-0.1129,95.1
+2020-08-26,D,gap not above threshold,1422,1438,0.45412,-0.30456,94.325
+2020-08-27,D,gap not above threshold,1429,1431,0.45412,-0.1848,92.96
+2020-08-28,D,gap not above threshold,1425,1432,0.45412,-0.1254,94.065
+2020-08-31,D,gap not above threshold,1431,1437,0.45412,0.28325,92.155
+2020-09-01,D,gap not above threshold,1426,1439,0.45345,-0.26618,91.22
+2020-09-02,D,gap not above threshold,1430,1436,0.45345,-0.14747,92.48
+2020-09-03,D,gap not above threshold,1433,1438,0.45345,0.3325,92.215
+2020-09-04,D,gap not above threshold,1426,1435,0.45345,0.1444,91.095
+2020-09-07,D,gap not above threshold,1434,1435,0.45345,0.25567,88.935
+2020-09-08,D,TRADE,1435,1436,0.45345,0.54759,87.545
+2020-09-09,D,gap not above threshold,1436,1440,0.45412,-0.12683,86.335
+2020-09-10,D,TRADE,1419,1434,0.45412,1.1339,85.095
+2020-09-11,D,gap not above threshold,1423,1440,0.45412,0.30278,86.725
+2020-09-14,D,gap not above threshold,1420,1428,0.45412,-0.23783,86.35
+2020-09-15,D,gap not above threshold,1425,1439,0.45412,-0.42123,86.54
+2020-09-16,D,not stalled (stop < 0.15 x ATR),1419,1437,0.45345,-0.67954,84.6
+2020-09-17,D,not stalled (stop < 0.15 x ATR),1436,1438,0.45345,0.68885,83.225
+2020-09-18,D,gap not above threshold,1432,1440,0.45412,-0.083266,85.645
+2020-09-21,D,gap not above threshold,1425,1430,0.45345,0.14173,81.435
+2020-09-22,D,gap not above threshold,1433,1439,0.44646,0.041982,85.165
+2020-09-23,D,gap not above threshold,1427,1435,0.44646,-0.41877,86.29
+2020-09-24,D,gap not above threshold,1432,1440,0.44646,-0.43853,86.315
+2020-09-25,D,gap not above threshold,1425,1434,0.44646,0.11534,82.36
+2020-09-28,D,gap not above threshold,1435,1437,0.44646,-0.31531,80.565
+2020-09-29,D,gap not above threshold,1427,1438,0.4442,0.40409,79.71
+2020-09-30,D,TRADE,1424,1434,0.4442,-0.44634,78.415
+2020-10-01,D,gap not above threshold,1424,1439,0.44634,0.43097,76.59
+2020-10-02,D,TRADE,1437,1419,0.4442,-0.605,75.43
+2020-10-05,D,gap not above threshold,1435,1432,0.44634,0.081353,73.87
+2020-10-06,D,gap not above threshold,1417,1438,0.44634,0.21547,76.635
+2020-10-07,D,gap not above threshold,1436,1440,0.4442,0.30347,77.34
+2020-10-08,D,gap not above threshold,1436,1424,0.4442,-0.14873,76.125
+2020-10-09,D,gap not above threshold,1423,1437,0.4442,0.13575,72.72
+2020-10-12,D,gap not above threshold,1436,1437,0.4442,0.042513,73.375
+2020-10-13,D,gap not above threshold,1430,1439,0.4442,0.23918,72.565
+2020-10-14,D,TRADE,1430,1435,0.4442,-0.96576,73.77
+2020-10-15,D,gap not above threshold,1431,1440,0.44634,0.11529,71.58
+2020-10-16,D,gap not above threshold,1437,1438,0.44634,0.30214,69.295
+2020-10-19,D,gap not above threshold,1432,1434,0.44634,0.2379,69.685
+2020-10-20,D,gap not above threshold,1428,1438,0.44634,0.22042,67.21
+2020-10-21,D,TRADE,1429,1438,0.44634,-0.91828,67.16
+2020-10-22,D,gap not above threshold,1437,1437,0.44646,0.029939,66.775
+2020-10-23,D,gap not above threshold,1438,1440,0.44646,0.26106,66.525
+2020-10-26,D,gap not above threshold,1438,1434,0.44646,-0.11601,66.79
+2020-10-27,D,gap not above threshold,1418,1440,0.44646,0.0067848,66.41
+2020-10-28,D,gap not above threshold,1440,1440,0.44634,0.43782,64.505
+2020-10-29,D,gap not above threshold,1431,1439,0.44634,0.048874,65
+2020-10-30,D,gap not above threshold,1435,1440,0.44634,-0.40061,67.805
+2020-11-02,D,gap not above threshold,1437,1439,0.44634,0.0023922,68.35
+2020-11-03,D,gap not above threshold,1432,1438,0.44634,-0.27227,65.42
+2020-11-04,D,gap not above threshold,1434,1440,0.44634,0.088284,67.015
+2020-11-05,D,gap not above threshold,1439,1440,0.44634,0.1928,72.56
+2020-11-06,D,TRADE,1437,1439,0.44634,0.46634,77.555
+2020-11-09,D,gap not above threshold,1439,1440,0.44646,-0.094988,78.625
+2020-11-10,D,TRADE,1436,1440,0.44646,-0.66632,82.865
+2020-11-11,D,gap not above threshold,1438,1440,0.45345,0.030044,81.775
+2020-11-12,D,gap not above threshold,1434,1439,0.45345,0.35583,83.585
+2020-11-13,D,gap not above threshold,1427,1440,0.45345,0.035227,83.345
+2020-11-16,D,gap not above threshold,1437,1438,0.45345,0.063813,82.655
+2020-11-17,D,gap not above threshold,1435,1440,0.45345,-0.21685,80.87
+2020-11-18,D,gap not above threshold,1434,1440,0.45345,-0.26851,79.385
+2020-11-19,D,gap not above threshold,1429,1440,0.45345,-0.010767,78.48
+2020-11-20,D,gap not above threshold,1433,1439,0.44646,-0.18969,79.03
+2020-11-23,D,gap not above threshold,1438,1439,0.44646,-0.17651,77.17
+2020-11-24,D,gap not above threshold,1430,1435,0.44646,0.23597,79.62
+2020-11-25,D,gap not above threshold,1435,1438,0.44646,0.063565,80.32
+2020-11-26,D,gap not above threshold,1430,1437,0.44646,0.066036,78.715
+2020-11-27,D,gap not above threshold,1424,1439,0.44634,0.30218,76.07
+2020-11-30,D,"thin day (< 1,300 bars)",417,420,0.44634,,75.725
+2020-12-01,D,not stalled (stop < 0.15 x ATR),1320,1320,0.44473,0.45562,75.725
+2020-12-02,D,not stalled (stop < 0.15 x ATR),1431,1436,0.44812,0.64193,81.105
+2020-12-03,D,gap not above threshold,1439,1440,0.44812,-0.14427,79.63
+2020-12-04,D,TRADE,1426,1440,0.44812,-0.5428,74.92
+2020-12-07,D,TRADE,1439,1436,0.44812,0.7062,70.835
+2020-12-08,D,gap not above threshold,1431,1440,0.44812,0.36589,70.445
+2020-12-09,D,not stalled (stop < 0.15 x ATR),1432,1439,0.44473,-0.58609,66.14
+2020-12-10,D,not stalled (stop < 0.15 x ATR),1436,1440,0.44812,0.55953,67.415
+2020-12-11,D,gap not above threshold,1420,1438,0.45345,0.41362,67.25
+2020-12-14,D,gap not above threshold,1440,1437,0.45345,0.096489,66.9
+2020-12-15,D,gap not above threshold,1428,1434,0.45345,-0.25404,68.035
+2020-12-16,D,gap not above threshold,1427,1437,0.45345,0.15598,67.69
+2020-12-17,D,gap not above threshold,1437,1438,0.45345,-0.079444,69.485
+2020-12-18,D,gap not above threshold,1434,1439,0.45345,0.15574,71.54
+2020-12-21,D,gap not above threshold,1436,1440,0.45345,0.15818,70.535
+2020-12-22,D,already given back (stop > 0.6 x ATR),1432,1439,0.45345,0.54606,74.65
+2020-12-23,D,already given back (stop > 0.6 x ATR),1434,1437,0.45412,-0.56093,74.585
+2020-12-24,D,gap not above threshold,1426,1440,0.45562,-0.26575,74.945
+2020-12-25,D,"thin day (< 1,300 bars)",536,443,0.45562,,74.465
+2020-12-28,D,gap not above threshold,1429,1433,0.4562,0.35385,74.465
+2020-12-29,D,gap not above threshold,1425,1438,0.4562,0.25531,75.135
+2020-12-30,D,gap not above threshold,1422,1436,0.4562,-0.28797,75.655
+2020-12-31,D,gap not above threshold,1436,1439,0.4562,-0.25921,71.835
+2021-01-04,D,TRADE,1435,1440,0.4562,0.7895,72.92
+2021-01-05,D,gap not above threshold,1438,1439,0.45843,-0.17444,73.24
+2021-01-06,D,gap not above threshold,1433,1438,0.45843,0.33823,73
+2021-01-07,D,gap not above threshold,1433,1439,0.45843,-0.30391,72.805
+2021-01-08,D,gap not above threshold,1434,1430,0.4562,0.041347,75.84
+2021-01-11,D,gap not above threshold,1437,1434,0.4562,-0.13485,75.98
+2021-01-12,D,gap not above threshold,1434,1439,0.4562,-0.44857,76.595
+2021-01-13,D,gap not above threshold,1434,1439,0.4562,-0.077085,77.345
+2021-01-14,D,gap not above threshold,1439,1438,0.4562,-0.17539,78.425
+2021-01-15,D,gap not above threshold,1430,1432,0.4562,0.14925,79.4
+2021-01-18,D,gap not above threshold,1432,1438,0.4545,-0.059733,79.43
+2021-01-19,D,gap not above threshold,1416,1437,0.4545,0.09878,76.95
+2021-01-20,D,gap not above threshold,1437,1440,0.45362,-0.38162,78.18
+2021-01-21,D,gap not above threshold,1425,1438,0.44979,0.032535,76.085
+2021-01-22,D,gap not above threshold,1433,1435,0.44979,0.19133,74.325
+2021-01-25,D,gap not above threshold,1436,1438,0.44979,-0.035956,72.86
+2021-01-26,D,gap not above threshold,1431,1438,0.44979,-0.42943,74.315
+2021-01-27,D,gap not above threshold,1427,1440,0.44689,-0.16288,74.27
+2021-01-28,D,gap not above threshold,1435,1440,0.44689,-0.078326,76.44
+2021-01-29,D,gap not above threshold,1437,1439,0.44689,0.16404,76.285
+2021-02-01,D,gap not above threshold,1438,1438,0.44473,0.099104,74.36
+2021-02-02,D,gap not above threshold,1435,1438,0.44473,0.071203,74.375
+2021-02-03,D,gap not above threshold,1438,1439,0.44473,-0.051782,75.065
+2021-02-04,D,not stalled (stop < 0.15 x ATR),1433,1438,0.44296,-0.83143,73.17
+2021-02-05,D,gap not above threshold,1425,1435,0.44689,0.20791,72.47
+2021-02-08,D,gap not above threshold,1436,1438,0.44296,0.19145,72.77
+2021-02-09,D,gap not above threshold,1413,1433,0.44296,0.034262,70.275
+2021-02-10,D,gap not above threshold,1435,1434,0.44155,-0.15824,70.39
+2021-02-11,D,gap not above threshold,1427,1436,0.44155,0.28634,68.01
+2021-02-12,D,gap not above threshold,1421,1436,0.44155,-0.39223,66.44
+2021-02-15,D,gap not above threshold,1428,1433,0.43986,-0.060617,64.73
+2021-02-16,D,gap not above threshold,1420,1437,0.43986,0.024222,64.49
+2021-02-17,D,gap not above threshold,1436,1438,0.43873,-0.10417,64.665
+2021-02-18,D,TRADE,1435,1431,0.43873,-0.47701,64.885
+2021-02-19,D,gap not above threshold,1427,1431,0.43873,-0.13123,64.47
+2021-02-22,D,gap not above threshold,1431,1439,0.43873,-0.09619,65.68
+2021-02-23,D,gap not above threshold,1431,1433,0.438,-0.1186,66.22
+2021-02-24,D,gap not above threshold,1430,1432,0.438,0.25179,65.05
+2021-02-25,D,gap not above threshold,1437,1440,0.438,0.32152,62.76
+2021-02-26,D,gap not above threshold,1437,1439,0.438,-0.25296,64.045
+2021-03-01,D,gap not above threshold,1438,1437,0.43378,0.037013,67.065
+2021-03-02,D,gap not above threshold,1430,1440,0.43378,-0.082737,66.725
+2021-03-03,D,gap not above threshold,1437,1437,0.43134,-0.10628,68.05
+2021-03-04,D,gap not above threshold,1428,1437,0.43134,-0.28313,69.275
+2021-03-05,D,gap not above threshold,1435,1437,0.42982,0.10935,70.265
+2021-03-08,D,gap not above threshold,1432,1438,0.42702,-0.13561,69.61
+2021-03-09,D,gap not above threshold,1430,1439,0.42248,-0.076265,71.685
+2021-03-10,D,gap not above threshold,1435,1435,0.42083,0.036703,71.945
+2021-03-11,D,gap not above threshold,1435,1437,0.41925,-0.086563,73.225
+2021-03-12,D,gap not above threshold,1428,1436,0.41925,0.26687,75.14
+2021-03-15,D,gap not above threshold,1435,1435,0.4149,-0.056939,76.39
+2021-03-16,D,gap not above threshold,1435,1438,0.40647,-0.36041,77.79
+2021-03-17,D,gap not above threshold,1432,1436,0.40148,0.041729,77.565
+2021-03-18,D,gap not above threshold,1429,1440,0.40037,0.06571,78.245
+2021-03-19,D,gap not above threshold,1432,1439,0.39424,0.22548,79.305
+2021-03-22,D,TRADE,1438,1434,0.39202,0.45135,79.365
+2021-03-23,D,gap not above threshold,1434,1437,0.39202,-0.014649,79.255
+2021-03-24,D,gap not above threshold,1431,1435,0.3842,-0.13418,81.945
+2021-03-25,D,gap not above threshold,1431,1432,0.3842,-0.31517,80.855
+2021-03-26,D,gap not above threshold,1429,1421,0.37818,-0.27881,79.785
+2021-03-29,D,EURUSD data hole 19:00-16:00 NY,1358,1371,0.37818,-0.3169,75.765
+2021-03-30,D,gap not above threshold,1428,1433,0.37818,0.0083779,73.755
+2021-03-31,D,gap not above threshold,1432,1435,0.37818,-0.14544,71.745
+2021-04-01,D,gap not above threshold,1429,1437,0.37818,-0.19771,71.01
+2021-04-02,D,gap not above threshold,1415,1406,0.37818,0.031066,69.125
+2021-04-05,D,gap not above threshold,1414,1422,0.37818,-0.044951,66.78
+2021-04-06,D,not stalled (stop < 0.15 x ATR),1422,1433,0.37818,0.60302,66.46
+2021-04-07,D,not stalled (stop < 0.15 x ATR),1428,1433,0.3842,0.47265,66.58
+2021-04-08,D,gap not above threshold,1425,1428,0.3842,0.23358,66.235
+2021-04-09,D,TRADE,1413,1429,0.3842,-0.44186,65.845
+2021-04-12,D,gap not above threshold,1436,1424,0.39202,-0.10901,64.58
+2021-04-13,D,not stalled (stop < 0.15 x ATR),1422,1426,0.3842,0.3953,64.16
+2021-04-14,D,gap not above threshold,1429,1428,0.39202,0.047689,64.57
+2021-04-15,D,gap not above threshold,1407,1423,0.39202,-0.056579,61.61
+2021-04-16,D,gap not above threshold,1407,1438,0.39202,-0.37038,59.335
+2021-04-19,D,gap not above threshold,1433,1440,0.3842,-0.37845,58.385
+2021-04-20,D,gap not above threshold,1432,1428,0.37924,0.11927,59.865
+2021-04-21,D,gap not above threshold,1395,1427,0.37924,0.082188,57.8
+2021-04-22,D,already given back (stop > 0.6 x ATR),1412,1424,0.37924,0.56509,57.88
+2021-04-23,D,gap not above threshold,1424,1431,0.3842,0.22719,58.37
+2021-04-26,D,gap not above threshold,1431,1428,0.37924,-0.085885,60.65
+2021-04-27,D,gap not above threshold,1410,1430,0.37924,0.018094,61.78
+2021-04-28,D,gap not above threshold,1432,1425,0.37739,-0.08692,60.45
+2021-04-29,D,gap not above threshold,1424,1427,0.37204,0.016065,61.595
+2021-04-30,D,gap not above threshold,1418,1432,0.37204,0.12279,60.61
+2021-05-03,D,TRADE,1423,1421,0.37204,-0.40108,64.23
+2021-05-04,D,gap not above threshold,1388,1427,0.37204,0.15734,63.305
+2021-05-05,D,gap not above threshold,1415,1417,0.37204,0.043357,62.48
+2021-05-06,D,TRADE,1404,1418,0.37204,0.45836,61.815
+2021-05-07,D,gap not above threshold,1428,1420,0.37739,0.27917,62.425
+2021-05-10,D,gap not above threshold,1436,1433,0.37739,-0.34581,65.695
+2021-05-11,D,gap not above threshold,1416,1413,0.37739,0.032896,65.825
+2021-05-12,D,gap not above threshold,1429,1432,0.37739,-0.17299,64.845
+2021-05-13,D,gap not above threshold,1427,1431,0.37739,0.010938,67.16
+2021-05-14,D,gap not above threshold,1422,1427,0.37204,-0.024821,68.03
+2021-05-17,D,gap not above threshold,1428,1411,0.37204,0.12814,69.66
+2021-05-18,D,gap not above threshold,1414,1432,0.37204,0.15567,66.52
+2021-05-19,D,gap not above threshold,1425,1427,0.36876,0.01352,67.905
+2021-05-20,D,gap not above threshold,1419,1432,0.36724,0.051518,69.915
+2021-05-21,D,gap not above threshold,1427,1427,0.36724,-0.28034,69.13
+2021-05-24,D,gap not above threshold,1430,1418,0.36724,0.18642,68.715
+2021-05-25,D,TRADE,1434,1430,0.36596,0.51143,68.8
+2021-05-26,D,gap not above threshold,1431,1431,0.36724,-0.032905,69.76
+2021-05-27,D,TRADE,1433,1430,0.36596,-0.43244,69.87
+2021-05-28,D,gap not above threshold,1429,1438,0.36724,0.14508,69.475
+2021-05-31,D,"thin day (< 1,300 bars)",412,393,0.36724,,67.59
+2021-06-01,D,"thin day (< 1,300 bars)",1256,1257,0.36829,0.45111,67.59
+2021-06-02,D,gap not above threshold,1413,1416,0.36829,-0.19821,67.59
+2021-06-03,D,gap not above threshold,1409,1414,0.36604,-0.041951,67.565
+2021-06-04,D,gap not above threshold,1427,1412,0.36604,-0.013027,69.065
+2021-06-07,D,gap not above threshold,1410,1435,0.36315,-0.12304,71.12
+2021-06-08,D,gap not above threshold,1420,1421,0.35812,0.26018,70.03
+2021-06-09,D,not stalled (stop < 0.15 x ATR),1416,1406,0.35812,0.51769,65.595
+2021-06-10,D,gap not above threshold,1412,1410,0.35812,-0.17979,65.405
+2021-06-11,D,gap not above threshold,1419,1421,0.35812,-0.17019,65.04
+2021-06-14,D,gap not above threshold,1413,1418,0.35812,0.10181,65.735
+2021-06-15,D,gap not above threshold,1405,1437,0.35484,0.1931,64.82
+2021-06-16,D,gap not above threshold,1424,1434,0.34983,-0.11128,63.275
+2021-06-17,D,gap not above threshold,1439,1440,0.34983,-0.10713,68.175
+2021-06-18,D,gap not above threshold,1438,1431,0.34983,-0.047931,69.655
+2021-06-21,D,gap not above threshold,1437,1433,0.34983,-0.272,69.275
+2021-06-22,D,gap not above threshold,1437,1436,0.34983,0.10352,69.955
+2021-06-23,D,gap not above threshold,1431,1428,0.34983,0.088438,69.6
+2021-06-24,D,not stalled (stop < 0.15 x ATR),1427,1428,0.34202,0.36807,69.655
+2021-06-25,D,gap not above threshold,1427,1420,0.34983,0.21704,68.83
+2021-06-28,D,gap not above threshold,1423,1418,0.34202,0.038776,67.235
+2021-06-29,D,gap not above threshold,1431,1416,0.34202,0.025848,67.355
+2021-06-30,D,gap not above threshold,1429,1433,0.33536,-0.26245,66.34
+2021-07-01,D,gap not above threshold,1424,1425,0.33136,0.23539,66.415
+2021-07-02,D,gap not above threshold,1424,1435,0.33136,-0.12757,63.96
+2021-07-05,D,gap not above threshold,1418,1417,0.33136,0.0066257,63.23
+2021-07-06,D,gap not above threshold,1431,1407,0.32587,-0.05204,61.84
+2021-07-07,D,gap not above threshold,1434,1423,0.32126,-0.19531,64.76
+2021-07-08,D,not stalled (stop < 0.15 x ATR),1434,1426,0.32126,0.41761,65.165
+2021-07-09,D,already given back (stop > 0.6 x ATR),1426,1434,0.32126,-0.33364,66.825
+2021-07-12,D,gap not above threshold,1424,1418,0.32587,0.10029,64.61
+2021-07-13,D,gap not above threshold,1423,1421,0.32587,0.0078596,65.005
+2021-07-14,D,gap not above threshold,1432,1430,0.32587,0.016369,67.855
+2021-07-15,D,gap not above threshold,1435,1440,0.32126,-0.098349,64.165
+2021-07-16,D,gap not above threshold,1435,1428,0.31921,0.0024865,61.155
+2021-07-19,D,not stalled (stop < 0.15 x ATR),1423,1424,0.31611,0.43052,58.77
+2021-07-20,D,gap not above threshold,1421,1431,0.31611,0.038187,58.125
+2021-07-21,D,gap not above threshold,1426,1432,0.31611,-0.25134,56.88
+2021-07-22,D,gap not above threshold,1414,1426,0.31611,-0.041316,56.585
+2021-07-23,D,gap not above threshold,1427,1417,0.31611,-0.079588,58.315
+2021-07-26,D,gap not above threshold,1414,1431,0.31611,-0.19947,57.47
+2021-07-27,D,gap not above threshold,1433,1421,0.31611,0.18587,58.06
+2021-07-28,D,gap not above threshold,1427,1415,0.31611,0.020931,59.015
+2021-07-29,D,gap not above threshold,1434,1426,0.31611,-0.077117,59.68
+2021-07-30,D,gap not above threshold,1430,1423,0.31524,-0.079962,59.94
+2021-08-02,D,gap not above threshold,1418,1412,0.31524,0.034316,59.435
+2021-08-03,D,gap not above threshold,1422,1435,0.31524,0.05146,59.885
+2021-08-04,D,gap not above threshold,1420,1430,0.31524,0.062972,57.455
+2021-08-05,D,gap not above threshold,1415,1417,0.31524,-0.086684,58.06
+2021-08-06,D,gap not above threshold,1407,1419,0.31524,-0.16268,55.3
+2021-08-09,D,gap not above threshold,1418,1429,0.31524,0.10287,56.565
+2021-08-10,D,gap not above threshold,1407,1422,0.31524,-0.14258,56.06
+2021-08-11,D,gap not above threshold,1416,1421,0.30986,-0.0046052,52.57
+2021-08-12,D,gap not above threshold,1411,1431,0.30986,0.094502,51.63
+2021-08-13,D,gap not above threshold,1413,1427,0.30954,0.025141,50.135
+2021-08-16,D,gap not above threshold,1396,1407,0.30954,0.00094288,52.445
+2021-08-17,D,gap not above threshold,1406,1426,0.30954,0.11542,51.08
+2021-08-18,D,gap not above threshold,1432,1424,0.30954,-0.18293,52.57
+2021-08-19,D,not stalled (stop < 0.15 x ATR),1428,1421,0.30954,0.32063,52.385
+2021-08-20,D,gap not above threshold,1418,1430,0.31524,-0.11183,51.275
+2021-08-23,D,gap not above threshold,1410,1411,0.30954,-0.18999,51.7
+2021-08-24,D,gap not above threshold,1392,1413,0.30954,0.1821,51.88
+2021-08-25,D,gap not above threshold,1405,1421,0.30954,0.10181,50.215
+2021-08-26,D,gap not above threshold,1423,1428,0.30369,0.15884,48.775
+2021-08-27,D,gap not above threshold,1415,1415,0.30369,-0.27535,47.825
+2021-08-30,D,gap not above threshold,1427,1411,0.30313,0.078538,48.345
+2021-08-31,D,gap not above threshold,1403,1422,0.30283,0.009453,47.79
+2021-09-01,D,gap not above threshold,1420,1435,0.30283,0.043539,48.375
+2021-09-02,D,gap not above threshold,1406,1422,0.30216,-0.16424,48.205
+2021-09-03,D,gap not above threshold,1410,1426,0.29505,-0.079732,48.835
+2021-09-06,D,gap not above threshold,1428,1429,0.28715,0.052018,46.94
+2021-09-07,D,gap not above threshold,1420,1420,0.28715,0.11163,46.76
+2021-09-08,D,gap not above threshold,1424,1415,0.28715,-0.14684,47.485
+2021-09-09,D,TRADE,1427,1433,0.28715,-0.53099,47.535
+2021-09-10,D,gap not above threshold,1424,1434,0.28715,-0.021552,48.115
+2021-09-13,D,gap not above threshold,1418,1417,0.28473,-0.086746,46.395
+2021-09-14,D,gap not above threshold,1405,1423,0.28473,-0.093572,47.065
+2021-09-15,D,gap not above threshold,1406,1427,0.28173,-0.071851,45.52
+2021-09-16,D,gap not above threshold,1421,1421,0.27975,-0.031125,44.7
+2021-09-17,D,gap not above threshold,1424,1432,0.27899,-0.0015509,45.65
+2021-09-20,D,gap not above threshold,1415,1427,0.27708,0.087225,46.885
+2021-09-21,D,gap not above threshold,1431,1436,0.27381,0.02037,45.82
+2021-09-22,D,gap not above threshold,1427,1437,0.27381,0.1606,45.625
+2021-09-23,D,already given back (stop > 0.6 x ATR),1430,1436,0.27381,-0.39752,46.76
+2021-09-24,D,gap not above threshold,1426,1428,0.27381,0.033237,48.435
+2021-09-27,D,TRADE,1429,1432,0.27381,-0.39105,47.42
+2021-09-28,D,TRADE,1414,1421,0.27708,1.0716,48.145
+2021-09-29,D,already given back (stop > 0.6 x ATR),1428,1436,0.27899,0.31211,47.32
+2021-09-30,D,TRADE,1431,1433,0.27975,-0.39159,49.17
+2021-10-01,D,already given back (stop > 0.6 x ATR),1431,1436,0.27975,-0.67247,49.44
+2021-10-04,D,already given back (stop > 0.6 x ATR),1433,1432,0.28173,-0.33359,49.485
+2021-10-05,D,gap not above threshold,1428,1433,0.28173,-0.20248,50.58
+2021-10-06,D,gap not above threshold,1421,1436,0.28173,-0.046687,50.265
+2021-10-07,D,gap not above threshold,1424,1426,0.28173,-0.14577,51.49
+2021-10-08,D,gap not above threshold,1422,1429,0.27975,-0.082167,50.915
+2021-10-11,D,gap not above threshold,1437,1436,0.27975,0.097228,51.065
+2021-10-12,D,gap not above threshold,1419,1432,0.27975,-0.12519,50.61
+2021-10-13,D,gap not above threshold,1412,1430,0.27975,-0.045696,50.625
+2021-10-14,D,gap not above threshold,1418,1422,0.27975,-0.1404,52.415
+2021-10-15,D,not stalled (stop < 0.15 x ATR),1422,1432,0.27899,-0.59082,50.93
+2021-10-18,D,gap not above threshold,1428,1432,0.27975,0.25614,49.185
+2021-10-19,D,gap not above threshold,1422,1426,0.27899,-0.25946,49.9
+2021-10-20,D,gap not above threshold,1425,1430,0.27899,0.054243,51.28
+2021-10-21,D,gap not above threshold,1420,1436,0.27899,-0.091861,49.81
+2021-10-22,D,gap not above threshold,1420,1430,0.27899,0.11872,48.88
+2021-10-25,D,gap not above threshold,1423,1426,0.27899,-0.20522,48.315
+2021-10-26,D,gap not above threshold,1403,1416,0.27708,-0.065589,49.95
+2021-10-27,D,TRADE,1427,1422,0.27708,0.3218,50.25
+2021-10-28,D,gap not above threshold,1422,1427,0.27708,0.2742,47.27
+2021-10-29,D,gap not above threshold,1430,1434,0.27708,-0.1802,50.41
+2021-11-01,D,gap not above threshold,1435,1419,0.27478,0.097038,55.935
+2021-11-02,D,gap not above threshold,1425,1431,0.27478,0.034597,56.465
+2021-11-03,D,gap not above threshold,1422,1429,0.27478,-0.19992,56.305
+2021-11-04,D,TRADE,1432,1423,0.27478,0.70275,55.32
+2021-11-05,D,gap not above threshold,1431,1425,0.27708,-0.037247,58.5
+2021-11-08,D,TRADE,1428,1437,0.27708,-0.39878,59.255
+2021-11-09,D,gap not above threshold,1432,1437,0.27899,0.13316,59.595
+2021-11-10,D,gap not above threshold,1433,1423,0.27899,0.17102,59.235
+2021-11-11,D,gap not above threshold,1435,1439,0.27899,0.020411,61.775
+2021-11-12,D,gap not above threshold,1430,1439,0.27899,-0.083299,61.995
+2021-11-15,D,gap not above threshold,1432,1434,0.27899,-0.11947,61.935
+2021-11-16,D,gap not above threshold,1437,1436,0.27708,-0.023171,64.785
+2021-11-17,D,gap not above threshold,1439,1436,0.27621,-0.0066796,65.545
+2021-11-18,D,not stalled (stop < 0.15 x ATR),1439,1435,0.27449,0.34261,66.885
+2021-11-19,D,gap not above threshold,1430,1433,0.27449,-0.031198,67.5
+2021-11-22,D,gap not above threshold,1436,1436,0.27449,0.037976,71.84
+2021-11-23,D,gap not above threshold,1438,1422,0.27255,0.14238,71.135
+2021-11-24,D,gap not above threshold,1433,1421,0.26815,-0.13032,71.545
+2021-11-25,D,TRADE,1425,1412,0.26603,0.29084,72.96
+2021-11-26,D,not stalled (stop < 0.15 x ATR),1434,1428,0.26603,0.27325,69.22
+2021-11-29,D,gap not above threshold,1440,1438,0.26603,0.18629,67.695
+2021-11-30,D,gap not above threshold,1437,1439,0.26328,0.21376,67.3
+2021-12-01,D,gap not above threshold,1440,1427,0.26328,-0.066006,72.785
+2021-12-02,D,gap not above threshold,1436,1435,0.26328,-0.0073776,72.94
+2021-12-03,D,gap not above threshold,1437,1428,0.26328,0.21558,71.145
+2021-12-06,D,gap not above threshold,1438,1424,0.26328,0.040373,71.49
+2021-12-07,D,gap not above threshold,1431,1417,0.26328,-0.020155,71.59
+2021-12-08,D,TRADE,1432,1430,0.26328,0.45727,73.19
+2021-12-09,D,gap not above threshold,1432,1440,0.26328,-0.14323,71.805
+2021-12-10,D,gap not above threshold,1434,1434,0.26075,-0.021518,72.93
+2021-12-13,D,gap not above threshold,1415,1436,0.25964,-0.24459,74.41
+2021-12-14,D,gap not above threshold,1432,1425,0.25946,-0.021805,71.99
+2021-12-15,D,gap not above threshold,1421,1439,0.25921,0.2055,71.67
+2021-12-16,D,TRADE,1439,1428,0.25921,-0.28186,72.12
+2021-12-17,D,gap not above threshold,1437,1431,0.25921,0.099763,73.065
+2021-12-20,D,not stalled (stop < 0.15 x ATR),1432,1436,0.25614,0.29495,72.625
+2021-12-21,D,not stalled (stop < 0.15 x ATR),1429,1426,0.25614,-0.31631,73.085
+2021-12-22,D,gap not above threshold,1433,1427,0.25946,-0.042624,72.725
+2021-12-23,D,TRADE,1425,1427,0.25614,-0.45575,73.155
+2021-12-24,D,gap not above threshold,1428,1434,0.25614,-0.011453,74.005
+2021-12-27,D,gap not above threshold,1414,1431,0.25614,-0.10365,69.795
+2021-12-28,D,gap not above threshold,1417,1426,0.25614,-0.20589,68.62
+2021-12-29,D,gap not above threshold,1420,1426,0.25296,0.036832,63.405
+2021-12-30,D,gap not above threshold,1426,1431,0.25296,-0.13849,65.305
+2021-12-31,D,TRADE,1417,1424,0.25296,0.28502,65.76
+2022-01-03,D,gap not above threshold,1421,1424,0.25614,-0.033066,66.575
+2022-01-04,D,TRADE,1438,1433,0.25614,-0.26707,69.17
+2022-01-05,D,gap not above threshold,1433,1425,0.25946,0.24635,68.14
+2022-01-06,D,gap not above threshold,1437,1423,0.25614,0.025501,67.03
+2022-01-07,D,gap not above threshold,1425,1432,0.25614,0.04373,66.035
+2022-01-10,D,gap not above threshold,1432,1426,0.25614,0.065854,66.835
+2022-01-11,D,gap not above threshold,1427,1431,0.25614,0.0089794,67.65
+2022-01-12,D,gap not above threshold,1429,1432,0.25296,0.09066,67.245
+2022-01-13,D,gap not above threshold,1432,1433,0.25296,-0.024909,68.26
+2022-01-14,D,gap not above threshold,1436,1432,0.25296,0.029804,66.6
+2022-01-17,D,gap not above threshold,1408,1425,0.25296,0.042474,65.125
+2022-01-18,D,gap not above threshold,1435,1426,0.25296,0.1349,63.795
+2022-01-19,D,TRADE,1433,1432,0.25296,-0.27852,67.04
+2022-01-20,D,TRADE,1439,1439,0.25614,-0.30216,65.065
+2022-01-21,D,gap not above threshold,1439,1434,0.25614,0.24386,65.74
+2022-01-24,D,TRADE,1434,1431,0.25614,0.27175,66.665
+2022-01-25,D,gap not above threshold,1429,1435,0.25946,-0.14422,67.815
+2022-01-26,D,gap not above threshold,1434,1436,0.25946,-0.077534,68.925
+2022-01-27,D,gap not above threshold,1435,1425,0.25946,-0.24719,67.935
+2022-01-28,D,gap not above threshold,1436,1433,0.25614,-0.049526,70.465
+2022-01-31,D,gap not above threshold,1432,1438,0.25296,0.2195,68.92
+2022-02-01,D,gap not above threshold,1428,1428,0.25296,-0.17191,69.485
+2022-02-02,D,gap not above threshold,1417,1426,0.25296,0.05463,69.855
+2022-02-03,D,TRADE,1430,1440,0.25296,0.57481,69.56
+2022-02-04,D,gap not above threshold,1439,1422,0.25296,-0.07326,76.405
+2022-02-07,D,gap not above threshold,1440,1435,0.25296,0.16089,76.275
+2022-02-08,D,gap not above threshold,1434,1434,0.25296,-0.04713,74.975
+2022-02-09,D,gap not above threshold,1434,1433,0.25296,0.15958,74.495
+2022-02-10,D,TRADE,1433,1423,0.25296,-0.28677,71.865
+2022-02-11,D,gap not above threshold,1438,1439,0.25296,-0.2237,75.565
+2022-02-14,D,gap not above threshold,1440,1440,0.25134,-0.13393,76.36
+2022-02-15,D,TRADE,1431,1439,0.25134,0.38803,78.68
+2022-02-16,D,gap not above threshold,1430,1432,0.25614,-0.20163,76.84
+2022-02-17,D,TRADE,1436,1430,0.25614,-0.2838,77.46
+2022-02-18,D,gap not above threshold,1436,1440,0.25614,-0.076639,77.325
+2022-02-21,D,gap not above threshold,1438,1437,0.25614,-0.18792,77.535
+2022-02-22,D,TRADE,1437,1436,0.25614,0.61716,79.01
+2022-02-23,D,gap not above threshold,1434,1429,0.25946,0.18167,79.655
+2022-02-24,D,gap not above threshold,1437,1434,0.25946,0.21353,78.775
+2022-02-25,D,TRADE,1433,1438,0.25946,0.54711,83.3
+2022-02-28,D,gap not above threshold,1439,1438,0.25946,0.016022,86.09
+2022-03-01,D,not stalled (stop < 0.15 x ATR),1433,1439,0.25946,-0.47526,86.795
+2022-03-02,D,TRADE,1436,1416,0.25946,-0.35198,91.075
+2022-03-03,D,gap not above threshold,1437,1438,0.26018,0.063468,92.22
+2022-03-04,D,gap not above threshold,1437,1435,0.26018,-0.16887,87.415
+2022-03-07,D,TRADE,1438,1440,0.26018,0.54334,92.91
+2022-03-08,D,gap not above threshold,1440,1439,0.26018,0.13635,96.765
+2022-03-09,D,TRADE,1436,1434,0.26018,0.63656,99.6
+2022-03-10,D,gap not above threshold,1437,1429,0.26245,0.025244,107.59
+2022-03-11,D,gap not above threshold,1439,1438,0.26018,-0.10207,108.85
+2022-03-14,D,gap not above threshold,1438,1437,0.25946,0.017318,110.93
+2022-03-15,D,gap not above threshold,1439,1437,0.25614,-0.094739,111.14
+2022-03-16,D,gap not above threshold,1440,1437,0.25614,0.013632,112.32
+2022-03-17,D,not stalled (stop < 0.15 x ATR),1439,1438,0.25614,0.68192,114.71
+2022-03-18,D,TRADE,1439,1437,0.25946,-0.30412,118.05
+2022-03-21,D,gap not above threshold,1438,1427,0.26018,-0.21991,120.69
+2022-03-22,D,already given back (stop > 0.6 x ATR),1434,1435,0.26018,-0.43543,119.48
+2022-03-23,D,gap not above threshold,1438,1435,0.26018,0.1645,119.79
+2022-03-24,D,gap not above threshold,1437,1428,0.25946,-0.036751,120.89
+2022-03-25,D,gap not above threshold,1430,1427,0.25946,0.04384,113.15
+2022-03-28,D,EURUSD data hole 19:00-16:00 NY,1374,1379,0.25614,0.68466,110.64
+2022-03-29,D,not stalled (stop < 0.15 x ATR),1431,1433,0.25946,0.96733,107.19
+2022-03-30,D,gap not above threshold,1436,1432,0.25946,0.083902,108.43
+2022-03-31,D,TRADE,1434,1431,0.25946,-0.66816,108.75
+2022-04-01,D,gap not above threshold,1427,1440,0.26018,-0.081077,110.54
+2022-04-04,D,not stalled (stop < 0.15 x ATR),1437,1438,0.25946,-0.35067,103.84
+2022-04-05,D,gap not above threshold,1430,1415,0.25946,-0.2523,102.22
+2022-04-06,D,gap not above threshold,1433,1433,0.25946,0.061896,101.18
+2022-04-07,D,gap not above threshold,1432,1415,0.25946,0.097395,94.095
+2022-04-08,D,gap not above threshold,1428,1432,0.25614,0.24325,90.53
+2022-04-11,D,not stalled (stop < 0.15 x ATR),1440,1434,0.25614,-0.27785,86.21
+2022-04-12,D,gap not above threshold,1436,1432,0.25946,-0.089736,84.57
+2022-04-13,D,not stalled (stop < 0.15 x ATR),1430,1427,0.25946,-0.2602,84.015
+2022-04-14,D,TRADE,1438,1435,0.26018,-0.54882,83.355
+2022-04-15,D,gap not above threshold,1434,1435,0.2602,0.01766,85.15
+2022-04-18,D,gap not above threshold,1434,1437,0.2602,0.0070986,81.045
+2022-04-19,D,gap not above threshold,1435,1433,0.26018,0.253,80.64
+2022-04-20,D,gap not above threshold,1439,1433,0.26018,0.044731,79.07
+2022-04-21,D,gap not above threshold,1439,1436,0.26018,-0.13787,79.245
+2022-04-22,D,TRADE,1439,1438,0.25946,0.5372,82.5
+2022-04-25,D,gap not above threshold,1434,1429,0.25946,0.067699,83.645
+2022-04-26,D,gap not above threshold,1433,1440,0.25614,0.15674,86.835
+2022-04-27,D,TRADE,1437,1439,0.25614,-0.59168,83.585
+2022-04-28,D,already given back (stop > 0.6 x ATR),1435,1435,0.25946,0.66552,85.95
+2022-04-29,D,gap not above threshold,1426,1438,0.26018,-0.23908,84.435
+2022-05-02,D,gap not above threshold,1434,1430,0.26018,-0.053887,87.115
+2022-05-03,D,TRADE,1434,1433,0.26018,0.34933,86.315
+2022-05-04,D,gap not above threshold,1429,1438,0.2602,0.18747,86.16
+2022-05-05,D,TRADE,1432,1440,0.2602,0.8337,89.24
+2022-05-06,D,TRADE,1436,1431,0.26245,0.46261,93.005
+2022-05-09,D,gap not above threshold,1433,1439,0.26245,-0.093234,96.05
+2022-05-10,D,gap not above threshold,1438,1438,0.26245,0.023442,97.89
+2022-05-11,D,gap not above threshold,1431,1421,0.2602,-0.1976,96.76
+2022-05-12,D,not stalled (stop < 0.15 x ATR),1438,1440,0.2602,-1.0156,96.26
+2022-05-13,D,gap not above threshold,1432,1427,0.2602,0.082814,96.735
+2022-05-16,D,gap not above threshold,1434,1435,0.2602,-0.11693,98.555
+2022-05-17,D,gap not above threshold,1429,1435,0.26019,0.05203,98.67
+2022-05-18,D,TRADE,1423,1431,0.26,0.35072,102.36
+2022-05-19,D,already given back (stop > 0.6 x ATR),1431,1439,0.26019,-0.39247,103.39
+2022-05-20,D,gap not above threshold,1433,1438,0.26189,-0.24818,105.07
+2022-05-23,D,TRADE,1437,1431,0.26189,0.44081,104.34
+2022-05-24,D,not stalled (stop < 0.15 x ATR),1430,1437,0.26592,1.0104,105.51
+2022-05-25,D,gap not above threshold,1430,1438,0.27058,-0.087915,104.75
+2022-05-26,D,not stalled (stop < 0.15 x ATR),1433,1438,0.26592,0.30605,102.58
+2022-05-27,D,gap not above threshold,1432,1436,0.27058,-0.17057,101.35
+2022-05-30,D,gap not above threshold,1439,1423,0.27058,0.16548,99.67
+2022-05-31,D,gap not above threshold,1428,1438,0.27058,-0.16337,98.795
+2022-06-01,D,TRADE,1434,1435,0.27058,0.31497,99.525
+2022-06-02,D,gap not above threshold,1430,1428,0.27194,0.11797,98.885
+2022-06-03,D,gap not above threshold,1434,1419,0.27194,-0.080514,96.705
+2022-06-06,D,gap not above threshold,1427,1427,0.27194,-0.22341,93.91
+2022-06-07,D,TRADE,1438,1435,0.27058,-0.43636,92.445
+2022-06-08,D,not stalled (stop < 0.15 x ATR),1432,1426,0.27288,0.66131,92.565
+2022-06-09,D,not stalled (stop < 0.15 x ATR),1436,1437,0.27396,-0.56193,92.65
+2022-06-10,D,gap not above threshold,1438,1429,0.27396,-0.076516,92.025
+2022-06-13,D,TRADE,1431,1434,0.27396,0.35502,95.355
+2022-06-14,D,TRADE,1435,1432,0.27506,0.91706,98.67
+2022-06-15,D,TRADE,1436,1432,0.27722,-0.81886,96.69
+2022-06-16,D,already given back (stop > 0.6 x ATR),1427,1431,0.27835,-0.68583,98.93
+2022-06-17,D,gap not above threshold,1436,1430,0.28103,0.12519,102.64
+2022-06-20,D,gap not above threshold,1435,1431,0.28103,-0.024452,105.13
+2022-06-21,D,gap not above threshold,1430,1433,0.28103,0.17436,101.67
+2022-06-22,D,not stalled (stop < 0.15 x ATR),1425,1433,0.28103,0.28526,101.08
+2022-06-23,D,already given back (stop > 0.6 x ATR),1429,1432,0.28331,-0.70161,103.1
+2022-06-24,D,gap not above threshold,1436,1432,0.28331,0.019016,104.56
+2022-06-27,D,gap not above threshold,1435,1421,0.28103,0.19189,104.11
+2022-06-28,D,gap not above threshold,1439,1436,0.28103,-0.0080045,104.55
+2022-06-29,D,TRADE,1429,1437,0.28103,0.50395,104.69
+2022-06-30,D,TRADE,1433,1431,0.28331,-0.33676,104.09
+2022-07-01,D,already given back (stop > 0.6 x ATR),1436,1437,0.28471,0.36883,104.13
+2022-07-04,D,gap not above threshold,1431,1428,0.2852,-0.10796,107.08
+2022-07-05,D,not stalled (stop < 0.15 x ATR),1435,1431,0.28471,-0.34252,106.11
+2022-07-06,D,not stalled (stop < 0.15 x ATR),1437,1438,0.2852,-0.5251,113.67
+2022-07-07,D,TRADE,1433,1435,0.28639,-0.5983,115.57
+2022-07-08,D,gap not above threshold,1427,1435,0.28982,-0.031093,111.28
+2022-07-11,D,gap not above threshold,1427,1434,0.28982,0.034237,110.41
+2022-07-12,D,gap not above threshold,1437,1440,0.28982,0.16502,111.89
+2022-07-13,D,gap not above threshold,1438,1439,0.28982,0.26983,111.2
+2022-07-14,D,gap not above threshold,1438,1438,0.28982,0.06782,109.98
+2022-07-15,D,gap not above threshold,1433,1438,0.28982,0.17411,104.33
+2022-07-18,D,gap not above threshold,1437,1438,0.28982,-0.28668,103.08
+2022-07-19,D,TRADE,1438,1440,0.28982,0.34689,105.57
+2022-07-20,D,gap not above threshold,1436,1434,0.29392,-0.10882,109.25
+2022-07-21,D,already given back (stop > 0.6 x ATR),1438,1434,0.29392,0.51629,108.27
+2022-07-22,D,gap not above threshold,1439,1436,0.30036,-0.16291,109.6
+2022-07-25,D,gap not above threshold,1424,1435,0.30036,-0.15339,112.92
+2022-07-26,D,TRADE,1434,1439,0.30036,-0.45777,113.43
+2022-07-27,D,gap not above threshold,1437,1439,0.30363,-0.024211,115.41
+2022-07-28,D,TRADE,1435,1437,0.30363,-0.34851,116.6
+2022-07-29,D,already given back (stop > 0.6 x ATR),1435,1439,0.30557,0.5283,117.31
+2022-08-01,D,TRADE,1436,1420,0.31059,-0.35409,116.75
+2022-08-02,D,gap not above threshold,1434,1430,0.31425,-0.2668,117.81
+2022-08-03,D,gap not above threshold,1430,1438,0.31425,0.26789,113.67
+2022-08-04,D,not stalled (stop < 0.15 x ATR),1440,1439,0.31425,0.5795,112.3
+2022-08-05,D,TRADE,1439,1434,0.31425,0.34116,113.42
+2022-08-08,D,gap not above threshold,1437,1438,0.31597,-0.09736,112.98
+2022-08-09,D,gap not above threshold,1435,1438,0.31597,0.089847,108.63
+2022-08-10,D,gap not above threshold,1438,1436,0.31597,-0.16658,107.87
+2022-08-11,D,gap not above threshold,1436,1435,0.31597,0.30245,109.98
+2022-08-12,D,gap not above threshold,1437,1432,0.31597,0.20495,109.05
+2022-08-15,D,gap not above threshold,1436,1413,0.31597,-0.23065,108.96
+2022-08-16,D,gap not above threshold,1440,1434,0.31597,-0.24208,108.52
+2022-08-17,D,TRADE,1429,1436,0.31597,0.37951,104.66
+2022-08-18,D,gap not above threshold,1436,1433,0.32043,-0.30908,101.66
+2022-08-19,D,TRADE,1436,1434,0.32043,0.39104,101.08
+2022-08-22,D,gap not above threshold,1436,1422,0.33064,-0.24745,97.985
+2022-08-23,D,gap not above threshold,1438,1437,0.33064,-0.05879,100.05
+2022-08-24,D,gap not above threshold,1438,1431,0.33064,0.1123,98.81
+2022-08-25,D,gap not above threshold,1439,1425,0.33064,-0.11912,97.08
+2022-08-26,D,not stalled (stop < 0.15 x ATR),1439,1423,0.32043,0.43485,95.275
+2022-08-29,D,gap not above threshold,1436,1435,0.33064,0.29608,97.04
+2022-08-30,D,TRADE,1439,1432,0.33064,0.53688,99.3
+2022-08-31,D,TRADE,1430,1430,0.33597,0.49581,96.415
+2022-09-01,D,gap not above threshold,1438,1428,0.34006,-0.10918,97.425
+2022-09-02,D,TRADE,1438,1435,0.34006,0.42595,99.7
+2022-09-05,D,gap not above threshold,1439,1439,0.34218,-0.15441,98.715
+2022-09-06,D,gap not above threshold,1434,1427,0.34218,-0.22513,98.92
+2022-09-07,D,TRADE,1440,1438,0.34218,0.65844,102.11
+2022-09-08,D,gap not above threshold,1436,1439,0.34259,-0.17752,100.54
+2022-09-09,D,gap not above threshold,1434,1432,0.34218,-0.0029125,101.05
+2022-09-12,D,TRADE,1438,1436,0.34218,-0.46778,102.49
+2022-09-13,D,gap not above threshold,1434,1437,0.34218,0.2066,103.7
+2022-09-14,D,TRADE,1435,1436,0.34006,-0.476,111.13
+2022-09-15,D,TRADE,1437,1435,0.34218,0.4483,111.65
+2022-09-16,D,gap not above threshold,1432,1433,0.34218,0.022033,109.08
+2022-09-19,D,gap not above threshold,1417,1422,0.34006,0.23658,110.47
+2022-09-20,D,gap not above threshold,1434,1432,0.34006,-0.10562,107.61
+2022-09-21,D,gap not above threshold,1440,1439,0.34006,0.10092,106.49
+2022-09-22,D,gap not above threshold,1439,1437,0.34006,-0.073032,110.13
+2022-09-23,D,already given back (stop > 0.6 x ATR),1434,1438,0.34006,1.0197,110.88
+2022-09-26,D,TRADE,1440,1439,0.34218,-1.6591,112.89
+2022-09-27,D,gap not above threshold,1439,1439,0.34259,-0.28098,115.11
+2022-09-28,D,TRADE,1440,1434,0.34259,0.40238,116.56
+2022-09-29,D,already given back (stop > 0.6 x ATR),1438,1426,0.34582,-0.75414,121.92
+2022-09-30,D,gap not above threshold,1440,1440,0.34811,-0.20394,123.7
+2022-10-03,D,not stalled (stop < 0.15 x ATR),1433,1429,0.34582,-0.60806,125.11
+2022-10-04,D,not stalled (stop < 0.15 x ATR),1425,1423,0.34811,0.61231,126.37
+2022-10-05,D,already given back (stop > 0.6 x ATR),1435,1433,0.34913,0.51934,129.93
+2022-10-06,D,gap not above threshold,1437,1437,0.35033,0.099351,131.17
+2022-10-07,D,gap not above threshold,1439,1440,0.35033,-0.10835,133.14
+2022-10-10,D,gap not above threshold,1422,1424,0.35033,-0.047031,131.77
+2022-10-11,D,not stalled (stop < 0.15 x ATR),1435,1435,0.35033,-0.37931,128.44
+2022-10-12,D,not stalled (stop < 0.15 x ATR),1439,1436,0.3507,-0.73993,122.64
+2022-10-13,D,TRADE,1437,1437,0.35167,-1.2624,122.58
+2022-10-14,D,TRADE,1440,1436,0.35357,0.63144,128.19
+2022-10-17,D,gap not above threshold,1425,1433,0.35479,-0.23012,128.69
+2022-10-18,D,gap not above threshold,1430,1433,0.35479,0.23897,132.21
+2022-10-19,D,gap not above threshold,1429,1434,0.35479,-0.19477,130.59
+2022-10-20,D,gap not above threshold,1435,1437,0.35479,-0.27331,128.24
+2022-10-21,D,gap not above threshold,1435,1437,0.35357,0.32908,127.82
+2022-10-24,D,not stalled (stop < 0.15 x ATR),1438,1437,0.35357,0.52767,126.84
+2022-10-25,D,already given back (stop > 0.6 x ATR),1433,1437,0.35357,-0.64182,123.48
+2022-10-26,D,TRADE,1434,1437,0.35479,-0.41526,124.81
+2022-10-27,D,TRADE,1438,1436,0.36538,-0.48421,121.31
+2022-10-28,D,gap not above threshold,1415,1418,0.37669,-0.215,119.08
+2022-10-31,D,TRADE,1428,1424,0.37669,0.4529,116.7
+2022-11-01,D,gap not above threshold,1439,1437,0.37946,-0.022343,116.74
+2022-11-02,D,gap not above threshold,1437,1435,0.37946,0.16956,112.12
+2022-11-03,D,already given back (stop > 0.6 x ATR),1430,1438,0.37946,1.1476,112.26
+2022-11-04,D,not stalled (stop < 0.15 x ATR),1431,1435,0.3859,0.44571,110.81
+2022-11-07,D,TRADE,1440,1438,0.39029,-0.72006,117.47
+2022-11-08,D,gap not above threshold,1438,1437,0.39211,0.11478,120.59
+2022-11-09,D,TRADE,1438,1439,0.39211,0.67607,121.59
+2022-11-10,D,already given back (stop > 0.6 x ATR),1438,1435,0.39991,-0.75179,123.01
+2022-11-11,D,TRADE,1439,1438,0.41204,0.51206,128.62
+2022-11-14,D,gap not above threshold,1438,1437,0.42328,0.33497,133.59
+2022-11-15,D,TRADE,1434,1435,0.42328,-0.85075,131.26
+2022-11-16,D,gap not above threshold,1437,1440,0.43263,0.21368,138.15
+2022-11-17,D,TRADE,1434,1438,0.43263,0.66835,137.79
+2022-11-18,D,gap not above threshold,1439,1440,0.43528,-0.12078,138.31
+2022-11-21,D,gap not above threshold,1439,1440,0.43528,0.0086473,134.23
+2022-11-22,D,gap not above threshold,1438,1430,0.43528,-0.19298,135.13
+2022-11-23,D,TRADE,1439,1439,0.43528,-0.73993,132.24
+2022-11-24,D,TRADE,1437,1438,0.43528,-0.46441,130.41
+2022-11-25,D,gap not above threshold,1425,1437,0.43613,-0.19128,126.96
+2022-11-28,D,TRADE,1432,1440,0.43613,0.66346,127.11
+2022-11-29,D,gap not above threshold,1436,1440,0.43969,0.13261,130.8
+2022-11-30,D,gap not above threshold,1439,1438,0.43969,0.0051793,129.47
+2022-12-01,D,already given back (stop > 0.6 x ATR),1439,1438,0.43969,-0.63151,128.25
+2022-12-02,D,gap not above threshold,1438,1437,0.44448,-0.15323,129.81
+2022-12-05,D,TRADE,1440,1435,0.44448,0.49682,124.45
+2022-12-06,D,gap not above threshold,1436,1437,0.44765,0.25731,123.5
+2022-12-07,D,gap not above threshold,1433,1430,0.44765,-0.062589,120.93
+2022-12-08,D,gap not above threshold,1440,1434,0.44765,-0.10693,121.49
+2022-12-09,D,gap not above threshold,1436,1435,0.44448,-0.38867,110.93
+2022-12-12,D,gap not above threshold,1439,1434,0.44448,0.16495,105.15
+2022-12-13,D,"thin day (< 1,300 bars)",1430,1298,0.44448,-0.21135,104.51
+2022-12-14,D,gap not above threshold,1435,1438,0.44448,-0.051733,101.73
+2022-12-15,D,TRADE,1433,1432,0.44448,1.1821,100.16
+2022-12-16,D,gap not above threshold,1432,1437,0.44765,-0.22021,102.29
+2022-12-19,D,gap not above threshold,1439,1437,0.44765,-0.064069,102.12
+2022-12-20,D,gap not above threshold,1435,1431,0.44765,0.092323,100.71
+2022-12-21,D,gap not above threshold,1438,1433,0.44765,0.44034,101.16
+2022-12-22,D,TRADE,1437,1440,0.44765,0.64511,98.5
+2022-12-23,D,gap not above threshold,1433,1427,0.45175,0.038405,99.475
+2022-12-26,D,gap not above threshold,1364,1300,0.45175,-0.19969,98.055
+2022-12-27,D,gap not above threshold,1410,1436,0.45175,0.40426,91.63
+2022-12-28,D,gap not above threshold,1435,1433,0.45175,-0.41826,90.81
+2022-12-29,D,gap not above threshold,1435,1439,0.45175,0.13059,87.27
+2022-12-30,D,gap not above threshold,1429,1436,0.45175,0.27905,84.285
+2023-01-02,D,gap not above threshold,1402,1350,0.45175,0.026297,82.175
+2023-01-03,D,already given back (stop > 0.6 x ATR),1427,1434,0.45175,-0.47531,79.375
+2023-01-04,D,gap not above threshold,1429,1432,0.45655,-0.064997,83.895
+2023-01-05,D,gap not above threshold,1433,1433,0.45655,0.21287,83.325
+2023-01-06,D,gap not above threshold,1428,1425,0.45655,-0.081893,85.395
+2023-01-09,D,gap not above threshold,1432,1432,0.45655,0.11979,89.41
+2023-01-10,D,gap not above threshold,1436,1430,0.45655,0.031793,91.815
+2023-01-11,D,gap not above threshold,1425,1428,0.45655,0.28147,86.915
+2023-01-12,D,gap not above threshold,1436,1434,0.45655,0.31574,85.64
+2023-01-13,D,gap not above threshold,1434,1431,0.45655,-0.17479,85.295
+2023-01-16,D,gap not above threshold,1427,1428,0.45655,0.16383,85.72
+2023-01-17,D,gap not above threshold,1429,1433,0.45655,-0.29416,85.255
+2023-01-18,D,gap not above threshold,1440,1437,0.45655,-0.42878,86.02
+2023-01-19,D,gap not above threshold,1437,1436,0.45655,-0.13324,89.31
+2023-01-20,D,gap not above threshold,1433,1435,0.45175,-0.15438,87.88
+2023-01-23,D,gap not above threshold,1434,1431,0.45175,0.07616,88.4
+2023-01-24,D,already given back (stop > 0.6 x ATR),1427,1436,0.45175,0.69837,90.52
+2023-01-25,D,gap not above threshold,1433,1440,0.45655,-0.20804,90.76
+2023-01-26,D,gap not above threshold,1421,1439,0.45655,-0.026739,90.7
+2023-01-27,D,EURUSD data hole 19:00-16:00 NY,1373,1440,0.45655,-0.13209,90.59
+2023-01-30,D,gap not above threshold,1436,1434,0.45655,0.32019,89.98
+2023-01-31,D,gap not above threshold,1433,1439,0.45655,0.29256,90.78
+2023-02-01,D,gap not above threshold,1437,1440,0.45655,0.051153,86.225
+2023-02-02,D,gap not above threshold,1433,1436,0.45655,0.01167,88.915
+2023-02-03,D,gap not above threshold,1415,1440,0.45655,0.20759,90.465
+2023-02-06,D,gap not above threshold,1440,1440,0.45655,-0.29872,89.555
+2023-02-07,D,gap not above threshold,1433,1435,0.45655,-0.0097573,87.91
+2023-02-08,D,gap not above threshold,1435,1380,0.45175,-0.05547,90.415
+2023-02-09,D,gap not above threshold,1437,1438,0.45175,-0.22954,90.45
+2023-02-10,D,gap not above threshold,1438,1440,0.45175,-0.32898,87.665
+2023-02-13,D,gap not above threshold,1433,1422,0.44765,-0.22419,87.605
+2023-02-14,D,gap not above threshold,1432,1439,0.44765,-0.187,87.685
+2023-02-15,D,gap not above threshold,1434,1440,0.44448,0.39814,87.83
+2023-02-16,D,gap not above threshold,1435,1434,0.44448,0.10889,85.965
+2023-02-17,D,gap not above threshold,1439,1438,0.44448,-0.30419,86.47
+2023-02-20,D,"thin day (< 1,300 bars)",1006,1008,0.44448,,87.925
+2023-02-21,D,"thin day (< 1,300 bars)",1001,1020,0.44081,,87.925
+2023-02-22,D,"thin day (< 1,300 bars)",1019,1019,0.44203,,87.925
+2023-02-23,D,"thin day (< 1,300 bars)",1011,1017,0.44057,-0.058089,87.925
+2023-02-24,D,"thin day (< 1,300 bars)",1019,1019,0.44057,0.25551,87.925
+2023-02-27,D,"thin day (< 1,300 bars)",1017,1020,0.44057,,87.925
+2023-02-28,D,"thin day (< 1,300 bars)",1015,1020,0.44069,,87.925
+2023-03-01,D,"thin day (< 1,300 bars)",1019,1020,0.44081,,87.925
+2023-03-02,D,"thin day (< 1,300 bars)",1019,1020,0.44203,,87.925
+2023-03-03,D,"thin day (< 1,300 bars)",1005,1019,0.44057,-0.15045,87.925
+2023-03-06,D,"thin day (< 1,300 bars)",1019,1020,0.44057,,87.925
+2023-03-07,D,"thin day (< 1,300 bars)",1018,1020,0.44069,0.22899,87.925
+2023-03-08,D,"thin day (< 1,300 bars)",995,1014,0.44069,,87.925
+2023-03-09,D,"thin day (< 1,300 bars)",986,1015,0.44081,-0.38411,87.925
+2023-03-10,D,"thin day (< 1,300 bars)",1020,1008,0.44081,-0.36918,87.925
+2023-03-13,D,"thin day (< 1,300 bars)",1018,960,0.44081,,87.925
+2023-03-14,D,"thin day (< 1,300 bars)",960,1020,0.44046,0.10754,87.925
+2023-03-15,D,"thin day (< 1,300 bars)",1001,1077,0.43735,,87.925
+2023-03-16,D,"thin day (< 1,300 bars)",1047,960,0.43835,,87.925
+2023-03-17,D,"thin day (< 1,300 bars)",1020,1020,0.43598,,87.925
+2023-03-20,D,"thin day (< 1,300 bars)",1020,1020,0.43636,,87.925
+2023-03-21,D,"thin day (< 1,300 bars)",1020,1078,0.43735,,87.925
+2023-03-22,D,"thin day (< 1,300 bars)",960,960,0.43835,0.076836,87.925
+2023-03-23,D,"thin day (< 1,300 bars)",1078,960,0.43835,,87.925
+2023-03-24,D,"thin day (< 1,300 bars)",960,960,0.43935,,87.925
+2023-03-27,D,"thin day (< 1,300 bars)",1006,1078,0.44034,,87.925
+2023-03-28,D,"thin day (< 1,300 bars)",999,960,0.44046,,87.925
+2023-03-29,D,"thin day (< 1,300 bars)",1017,1080,0.44057,0.21191,87.925
+2023-03-30,D,"thin day (< 1,300 bars)",1011,1019,0.44057,0.32102,87.925
+2023-03-31,D,"thin day (< 1,300 bars)",1067,1019,0.43835,,87.925
+2023-04-03,D,"thin day (< 1,300 bars)",1069,999,0.43935,,87.925
+2023-04-04,D,"thin day (< 1,300 bars)",1020,1080,0.44034,,87.925
+2023-04-05,D,"thin day (< 1,300 bars)",1019,960,0.44046,-0.037698,87.925
+2023-04-06,D,"thin day (< 1,300 bars)",1378,1076,0.44046,,87.925
+2023-04-07,D,"thin day (< 1,300 bars)",153,60,0.44057,,86.545
+2023-04-10,D,"thin day (< 1,300 bars)",1014,1019,0.43935,,86.545
+2023-04-11,D,"thin day (< 1,300 bars)",1071,956,0.44034,,86.545
+2023-04-12,D,"thin day (< 1,300 bars)",1017,1080,0.44046,,86.545
+2023-04-13,D,"thin day (< 1,300 bars)",959,1019,0.43835,,86.545
+2023-04-14,D,"thin day (< 1,300 bars)",1064,1019,0.43598,0.18824,86.545
+2023-04-17,D,"thin day (< 1,300 bars)",953,1016,0.43598,,86.545
+2023-04-18,D,"thin day (< 1,300 bars)",1077,958,0.43636,,86.545
+2023-04-19,D,"thin day (< 1,300 bars)",1020,1079,0.43735,,86.545
+2023-04-20,D,"thin day (< 1,300 bars)",1020,1020,0.43835,,86.545
+2023-04-21,D,"thin day (< 1,300 bars)",1019,960,0.43598,0.28188,86.545
+2023-04-24,D,"thin day (< 1,300 bars)",959,1072,0.43334,,86.545
+2023-04-25,D,"thin day (< 1,300 bars)",1007,1017,0.43485,,86.545
+2023-04-26,D,"thin day (< 1,300 bars)",1074,1018,0.43523,,86.545
+2023-04-27,D,"thin day (< 1,300 bars)",1020,959,0.43561,-0.28439,86.545
+2023-04-28,D,"thin day (< 1,300 bars)",960,1078,0.43182,,86.545
+2023-05-01,D,"thin day (< 1,300 bars)",960,1010,0.43334,,86.545
+2023-05-02,D,"thin day (< 1,300 bars)",995,1079,0.43485,,86.545
+2023-05-03,D,"thin day (< 1,300 bars)",1071,1020,0.43523,,86.545
+2023-05-04,D,"thin day (< 1,300 bars)",959,1020,0.43561,,86.545
+2023-05-05,D,"thin day (< 1,300 bars)",1069,1020,0.43598,,86.545
+2023-05-08,D,"thin day (< 1,300 bars)",1019,1020,0.43636,,86.545
+2023-05-09,D,"thin day (< 1,300 bars)",1020,1080,0.43523,,86.545
+2023-05-10,D,"thin day (< 1,300 bars)",1019,1018,0.43182,,86.545
+2023-05-11,D,"thin day (< 1,300 bars)",960,959,0.43334,,86.545
+2023-05-12,D,"thin day (< 1,300 bars)",1068,960,0.43485,,86.545
+2023-05-15,D,"thin day (< 1,300 bars)",1009,958,0.43523,,86.545
+2023-05-16,D,"thin day (< 1,300 bars)",1075,1020,0.43561,-0.29297,86.545
+2023-05-17,D,"thin day (< 1,300 bars)",999,1075,0.43561,,86.545
+2023-05-18,D,"thin day (< 1,300 bars)",1003,1018,0.43598,,86.545
+2023-05-19,D,"thin day (< 1,300 bars)",1076,1020,0.43636,,86.545
+2023-05-22,D,"thin day (< 1,300 bars)",959,1020,0.43735,,86.545
+2023-05-23,D,"thin day (< 1,300 bars)",1076,960,0.43835,,86.545
+2023-05-24,D,"thin day (< 1,300 bars)",1007,1076,0.43897,,86.545
+2023-05-25,D,"thin day (< 1,300 bars)",1018,1020,0.43485,,86.545
+2023-05-26,D,"thin day (< 1,300 bars)",960,960,0.4303,,86.545
+2023-05-29,D,"thin day (< 1,300 bars)",956,950,0.43182,,86.545
+2023-05-30,D,"thin day (< 1,300 bars)",1073,1077,0.43334,,86.545
+2023-05-31,D,"thin day (< 1,300 bars)",959,1020,0.42878,-0.10767,86.545
+2023-06-01,D,"thin day (< 1,300 bars)",1064,1018,0.42595,,86.545
+2023-06-02,D,"thin day (< 1,300 bars)",1018,959,0.42018,-0.11254,86.545
+2023-06-05,D,"thin day (< 1,300 bars)",1011,959,0.42018,0.094714,86.545
+2023-06-06,D,"thin day (< 1,300 bars)",1012,1013,0.42018,,86.545
+2023-06-07,D,"thin day (< 1,300 bars)",1001,1079,0.4221,,86.545
+2023-06-08,D,"thin day (< 1,300 bars)",1018,958,0.42403,,86.545
+2023-06-09,D,"thin day (< 1,300 bars)",1013,1015,0.41826,,86.545
+2023-06-12,D,"thin day (< 1,300 bars)",958,1071,0.42018,,86.545
+2023-06-13,D,"thin day (< 1,300 bars)",1069,960,0.4221,,86.545
+2023-06-14,D,"thin day (< 1,300 bars)",1019,1079,0.42403,,86.545
+2023-06-15,D,"thin day (< 1,300 bars)",1019,960,0.41826,,86.545
+2023-06-16,D,"thin day (< 1,300 bars)",960,1080,0.42018,,86.545
+2023-06-19,D,"thin day (< 1,300 bars)",955,955,0.4221,0.056815,86.545
+2023-06-20,D,"thin day (< 1,300 bars)",996,1017,0.4221,,86.545
+2023-06-21,D,"thin day (< 1,300 bars)",1008,1079,0.42403,,86.545
+2023-06-22,D,"thin day (< 1,300 bars)",959,960,0.41826,,86.545
+2023-06-23,D,"thin day (< 1,300 bars)",1017,959,0.41601,,86.545
+2023-06-26,D,"thin day (< 1,300 bars)",1068,1015,0.41676,0.13967,86.545
+2023-06-27,D,"thin day (< 1,300 bars)",958,1078,0.41676,,86.545
+2023-06-28,D,"thin day (< 1,300 bars)",1018,1020,0.41751,,86.545
+2023-06-29,D,"thin day (< 1,300 bars)",957,1016,0.41826,,86.545
+2023-06-30,D,"thin day (< 1,300 bars)",1079,959,0.42018,-0.15888,86.545
+2023-07-03,D,"thin day (< 1,300 bars)",1019,959,0.42018,0.14709,86.545
+2023-07-04,D,"thin day (< 1,300 bars)",952,1016,0.42018,,86.545
+2023-07-05,D,"thin day (< 1,300 bars)",1019,1078,0.4221,,86.545
+2023-07-06,D,"thin day (< 1,300 bars)",1014,1011,0.42403,0.0081733,86.545
+2023-07-07,D,"thin day (< 1,300 bars)",1007,1020,0.41751,,86.545
+2023-07-10,D,"thin day (< 1,300 bars)",1072,960,0.41826,,86.545
+2023-07-11,D,"thin day (< 1,300 bars)",955,1013,0.42018,-0.3849,86.545
+2023-07-12,D,"thin day (< 1,300 bars)",1012,1013,0.41601,,86.545
+2023-07-13,D,"thin day (< 1,300 bars)",1076,960,0.41676,-0.35157,86.545
+2023-07-14,D,"thin day (< 1,300 bars)",960,1019,0.41676,0.064024,86.545
+2023-07-17,D,"thin day (< 1,300 bars)",958,960,0.40976,,86.545
+2023-07-18,D,"thin day (< 1,300 bars)",1079,1020,0.41251,-0.15206,86.545
+2023-07-19,D,"thin day (< 1,300 bars)",956,1019,0.41251,0.47582,86.545
+2023-07-20,D,"thin day (< 1,300 bars)",1079,1079,0.41751,,86.545
+2023-07-21,D,"thin day (< 1,300 bars)",960,1017,0.41526,,86.545
+2023-07-24,D,"thin day (< 1,300 bars)",1063,1019,0.41601,,86.545
+2023-07-25,D,"thin day (< 1,300 bars)",1020,960,0.41676,-0.17032,86.545
+2023-07-26,D,"thin day (< 1,300 bars)",1019,1019,0.41676,,86.545
+2023-07-27,D,"thin day (< 1,300 bars)",1016,1020,0.41751,-0.050599,86.545
+2023-07-28,D,"thin day (< 1,300 bars)",1019,1079,0.41751,,86.545
+2023-07-31,D,gap not above threshold,1434,1432,0.41826,0.25105,86.545
+2023-08-01,D,gap not above threshold,1433,1435,0.41826,0.23335,86.02
+2023-08-02,D,gap not above threshold,1438,1440,0.41826,0.20895,85.22
+2023-08-03,D,gap not above threshold,1434,1438,0.41826,0.22209,86.35
+2023-08-04,D,gap not above threshold,1435,1436,0.41826,0.19137,85.76
+2023-08-07,D,gap not above threshold,1433,1424,0.41826,-0.20201,87.37
+2023-08-08,D,gap not above threshold,1435,1433,0.41826,-0.049259,86.215
+2023-08-09,D,gap not above threshold,1439,1439,0.41826,0.36284,82.875
+2023-08-10,D,gap not above threshold,1434,1439,0.41826,0.11358,77.665
+2023-08-11,D,gap not above threshold,1435,1436,0.41826,-0.25434,75.175
+2023-08-14,D,gap not above threshold,1429,1437,0.41526,-0.084327,73.8
+2023-08-15,D,gap not above threshold,1433,1438,0.41526,0.02924,73.195
+2023-08-16,D,gap not above threshold,1437,1437,0.40426,-0.20381,73.395
+2023-08-17,D,gap not above threshold,1430,1437,0.40238,-0.03366,72.48
+2023-08-18,D,gap not above threshold,1437,1436,0.40238,-0.25805,71.245
+2023-08-21,D,gap not above threshold,1433,1435,0.39814,-0.0027512,69.965
+2023-08-22,D,gap not above threshold,1431,1436,0.39814,-0.21893,67.435
+2023-08-23,D,gap not above threshold,1427,1440,0.39814,0.36459,68.11
+2023-08-24,D,gap not above threshold,1438,1438,0.38867,0.31947,68.16
+2023-08-25,D,gap not above threshold,1437,1438,0.38867,-0.05839,67.45
+2023-08-28,D,gap not above threshold,1434,1435,0.38867,0.024818,68.595
+2023-08-29,D,gap not above threshold,1433,1440,0.3849,0.24473,67.415
+2023-08-30,D,gap not above threshold,1436,1436,0.3849,-0.16519,70.375
+2023-08-31,D,gap not above threshold,1436,1439,0.38411,-0.32221,69.82
+2023-09-01,D,gap not above threshold,1432,1432,0.37931,-0.095355,72.505
+2023-09-04,D,gap not above threshold,1394,1407,0.37931,-0.034367,72.67
+2023-09-05,D,gap not above threshold,1426,1420,0.37931,-0.16963,72.04
+2023-09-06,D,gap not above threshold,1430,1431,0.37931,0.36701,72.535
+2023-09-07,D,gap not above threshold,1427,1436,0.37931,-0.025763,72.68
+2023-09-08,D,gap not above threshold,1430,1433,0.37931,0.0015851,70.075
+2023-09-11,D,gap not above threshold,1435,1437,0.36918,-0.066049,69.46
+2023-09-12,D,gap not above threshold,1428,1437,0.36701,0.20138,67.785
+2023-09-13,D,TRADE,1426,1436,0.36701,-0.37794,68.195
+2023-09-14,D,gap not above threshold,1419,1419,0.36701,-0.15713,67.73
+2023-09-15,D,gap not above threshold,1432,1435,0.36459,0.28258,70.66
+2023-09-18,D,gap not above threshold,1426,1415,0.36459,0.12674,70.945
+2023-09-19,D,gap not above threshold,1433,1439,0.36284,-0.056664,70.785
+2023-09-20,D,gap not above threshold,1430,1429,0.35157,0.0194,68.065
+2023-09-21,D,TRADE,1437,1438,0.33497,0.43892,68.96
+2023-09-22,D,gap not above threshold,1437,1438,0.35157,0.090237,68.225
+2023-09-25,D,EURUSD data hole 19:00-16:00 NY,1376,1382,0.35157,-0.17924,67.26
+2023-09-26,D,gap not above threshold,1423,1434,0.35157,0.1108,69.83
+2023-09-27,D,not stalled (stop < 0.15 x ATR),1435,1436,0.33497,-0.36405,66.695
+2023-09-28,D,gap not above threshold,1437,1438,0.33497,-0.010531,66.48
+2023-09-29,D,gap not above threshold,1436,1437,0.32908,0.13598,65.655
+2023-10-02,D,gap not above threshold,1436,1435,0.32898,-0.035758,63.09
+2023-10-03,D,gap not above threshold,1436,1437,0.32898,-0.02457,66.985
+2023-10-04,D,already given back (stop > 0.6 x ATR),1432,1436,0.32898,-0.33656,64.635
+2023-10-05,D,gap not above threshold,1436,1437,0.32908,0.055412,66.355
+2023-10-06,D,gap not above threshold,1431,1437,0.32908,-0.069347,66.665
+2023-10-09,D,gap not above threshold,1438,1433,0.32898,-0.10843,70.055
+2023-10-10,D,gap not above threshold,1439,1439,0.32221,0.056077,70.205
+2023-10-11,D,gap not above threshold,1431,1435,0.32102,-0.18244,70.3
+2023-10-12,D,gap not above threshold,1436,1438,0.32019,-0.073541,70.31
+2023-10-13,D,gap not above threshold,1439,1437,0.31947,0.033145,69.995
+2023-10-16,D,gap not above threshold,1436,1436,0.31947,0.020052,70.42
+2023-10-17,D,gap not above threshold,1435,1438,0.31574,0.28494,71.23
+2023-10-18,D,gap not above threshold,1438,1437,0.31574,-0.046901,72.18
+2023-10-19,D,gap not above threshold,1436,1439,0.31574,0.23716,71.395
+2023-10-20,D,gap not above threshold,1436,1436,0.30419,-0.24422,72.965
+2023-10-23,D,gap not above threshold,1435,1430,0.29872,0.087836,72.065
+2023-10-24,D,gap not above threshold,1437,1438,0.29416,0.10441,73.38
+2023-10-25,D,gap not above threshold,1435,1438,0.29416,0.11662,76.59
+2023-10-26,D,TRADE,1438,1440,0.29297,-0.29944,74.36
+2023-10-27,D,gap not above threshold,1436,1435,0.29297,0.026052,72.32
+2023-10-30,D,not stalled (stop < 0.15 x ATR),1433,1432,0.29256,0.35855,72.45
+2023-10-31,D,gap not above threshold,1435,1437,0.29256,0.04518,70.595
+2023-11-01,D,gap not above threshold,1438,1438,0.28494,-0.084057,74.215
+2023-11-02,D,TRADE,1437,1440,0.28494,0.29002,73.375
+2023-11-03,D,gap not above threshold,1436,1438,0.28494,-0.23815,75.825
+2023-11-06,D,gap not above threshold,1436,1437,0.28494,-0.016223,76.555
+2023-11-07,D,gap not above threshold,1436,1439,0.28494,-0.056402,75.82
+2023-11-08,D,gap not above threshold,1435,1440,0.28494,0.023674,75.445
+2023-11-09,D,gap not above threshold,1436,1434,0.28439,0.12037,75.58
+2023-11-10,D,TRADE,1437,1438,0.28258,0.30034,73.145
+2023-11-13,D,gap not above threshold,1431,1434,0.28439,-0.16329,71.83
+2023-11-14,D,gap not above threshold,1432,1435,0.28258,-0.14499,70.875
+2023-11-15,D,gap not above threshold,1439,1438,0.28258,0.15085,77.51
+2023-11-16,D,gap not above threshold,1430,1436,0.28258,-0.098695,76.675
+2023-11-17,D,gap not above threshold,1437,1432,0.28188,0.010442,75.545
+2023-11-20,D,gap not above threshold,1440,1437,0.28188,0.076025,78.12
+2023-11-21,D,gap not above threshold,1439,1440,0.28147,-0.1727,75.51
+2023-11-22,D,gap not above threshold,1437,1439,0.28147,-0.023322,73.2
+2023-11-23,D,gap not above threshold,1405,1408,0.28147,-0.2787,74.665
+2023-11-24,D,gap not above threshold,1431,1432,0.28147,-0.26022,74.66
+2023-11-27,D,gap not above threshold,1437,1437,0.27905,-0.15581,74.265
+2023-11-28,D,gap not above threshold,1436,1439,0.27905,0.063344,72.075
+2023-11-29,D,gap not above threshold,1436,1434,0.27905,-0.071132,69.925
+2023-11-30,D,gap not above threshold,1440,1437,0.27905,0.14937,69.58
+2023-12-01,D,not stalled (stop < 0.15 x ATR),1438,1431,0.2787,-0.33793,69.76
+2023-12-04,D,gap not above threshold,1439,1440,0.27905,0.11791,67.355
+2023-12-05,D,gap not above threshold,1433,1439,0.27905,0.01692,69.89
+2023-12-06,D,gap not above threshold,1436,1438,0.27905,0.1513,70.45
+2023-12-07,D,gap not above threshold,1438,1440,0.2787,0.14994,69.92
+2023-12-08,D,gap not above threshold,1440,1439,0.26022,0.029574,69.77
+2023-12-11,D,gap not above threshold,1434,1435,0.26022,-0.23563,71.78
+2023-12-12,D,already given back (stop > 0.6 x ATR),1435,1437,0.26022,0.2676,71.595
+2023-12-13,D,gap not above threshold,1434,1439,0.26022,0.11448,65.325
+2023-12-14,D,gap not above threshold,1440,1440,0.25805,0.017119,68.78
+2023-12-15,D,gap not above threshold,1440,1439,0.25805,-0.22222,72.43
+2023-12-18,D,not stalled (stop < 0.15 x ATR),1435,1436,0.25551,0.25687,73.68
+2023-12-19,D,gap not above threshold,1439,1435,0.25687,-0.1454,72.92
+2023-12-20,D,gap not above threshold,1434,1438,0.25551,-0.10088,73.295
+2023-12-21,D,gap not above threshold,1439,1439,0.25551,0.1668,72.485
+2023-12-22,D,gap not above threshold,1436,1439,0.25551,0.037181,74.005
+2023-12-25,D,"thin day (< 1,300 bars)",335,235,0.25551,,73.635
+2023-12-26,D,gap not above threshold,1417,1425,0.25585,-0.064539,73.635
+2023-12-27,D,gap not above threshold,1431,1438,0.25585,0.21183,74.135
+2023-12-28,D,gap not above threshold,1439,1438,0.25463,0.23749,75.115
+2023-12-29,D,gap not above threshold,1437,1438,0.25187,0.13043,76.475
+2024-01-02,D,already given back (stop > 0.6 x ATR),1435,1433,0.25187,0.34374,73.77
+2024-01-03,D,not stalled (stop < 0.15 x ATR),1435,1440,0.25463,-0.29699,74.89
+2024-01-04,D,gap not above threshold,1436,1435,0.25463,0.18319,73.975
+2024-01-05,D,gap not above threshold,1434,1431,0.25187,0.061221,73.315
+2024-01-08,D,gap not above threshold,1431,1430,0.25187,-0.025591,77.095
+2024-01-09,D,gap not above threshold,1433,1434,0.25187,0.11757,76.79
+2024-01-10,D,gap not above threshold,1439,1436,0.25187,-0.066526,75.745
+2024-01-11,D,gap not above threshold,1437,1438,0.24631,0.090087,76.38
+2024-01-12,D,gap not above threshold,1437,1440,0.24631,-0.013448,76.405
+2024-01-15,D,EURUSD data hole 19:00-16:00 NY,1359,1415,0.24631,0.11352,72.78
+2024-01-16,D,EURUSD data hole 19:00-16:00 NY,1319,1439,0.24631,-0.23192,67.555
+2024-01-17,D,gap not above threshold,1320,1438,0.24435,-0.078221,66.25
+2024-01-18,D,gap not above threshold,1438,1440,0.23967,-0.058831,66.29
+2024-01-19,D,gap not above threshold,1440,1379,0.23967,0.10655,65.67
+2024-01-22,D,gap not above threshold,1437,1431,0.23967,-0.21904,64.58
+2024-01-23,D,gap not above threshold,1436,1438,0.23967,-0.028753,62.185
+2024-01-24,D,gap not above threshold,1435,1435,0.23766,-0.035803,64.605
+2024-01-25,D,gap not above threshold,1439,1437,0.23766,-0.18386,66.785
+2024-01-26,D,gap not above threshold,1435,1439,0.23766,0.024301,66.095
+2024-01-29,D,gap not above threshold,1440,1437,0.23766,-0.0071072,65.515
+2024-01-30,D,not stalled (stop < 0.15 x ATR),1438,1438,0.23724,0.40047,65.71
+2024-01-31,D,gap not above threshold,1436,1440,0.23766,0.085849,62.66
+2024-02-01,D,gap not above threshold,1434,1435,0.23766,0.22792,63.66
+2024-02-02,D,gap not above threshold,1434,1433,0.23724,0.032895,65.6
+2024-02-05,D,gap not above threshold,1439,1435,0.23724,0.14183,65.365
+2024-02-06,D,TRADE,1438,1439,0.23601,-0.2575,65.705
+2024-02-07,D,gap not above threshold,1434,1437,0.23716,-0.054694,64.895
+2024-02-08,D,gap not above threshold,1440,1438,0.23678,0.012495,64.12
+2024-02-09,D,gap not above threshold,1436,1432,0.23639,0.014706,62.995
+2024-02-12,D,gap not above threshold,1432,1435,0.23639,-0.0923,62.1
+2024-02-13,D,gap not above threshold,1437,1439,0.23449,0.0070668,62.88
+2024-02-14,D,gap not above threshold,1438,1433,0.23392,0.18047,63.33
+2024-02-15,D,gap not above threshold,1437,1438,0.23335,0.10663,63.31
+2024-02-16,D,gap not above threshold,1438,1440,0.23299,0.12176,63.31
+2024-02-19,D,gap not above threshold,1420,1411,0.23263,0.052482,64.45
+2024-02-20,D,gap not above threshold,1436,1435,0.23263,0.076299,64.345
+2024-02-21,D,gap not above threshold,1437,1432,0.23228,0.070499,63.47
+2024-02-22,D,gap not above threshold,1439,1435,0.23228,0.017456,60.805
+2024-02-23,D,gap not above threshold,1434,1437,0.23192,-0.19861,61.075
+2024-02-26,D,gap not above threshold,1435,1430,0.22792,0.10058,58.835
+2024-02-27,D,gap not above threshold,1429,1433,0.22222,0.009425,58.48
+2024-02-28,D,gap not above threshold,1437,1438,0.22219,0.14011,57.855
+2024-02-29,D,gap not above threshold,1437,1434,0.22219,0.057687,55.725
+2024-03-01,D,gap not above threshold,1435,1440,0.22216,0.12889,53.98
+2024-03-04,D,gap not above threshold,1432,1429,0.22212,-0.055146,50.385
+2024-03-05,D,gap not above threshold,1428,1434,0.22209,-0.16542,48.82
+2024-03-06,D,gap not above threshold,1437,1434,0.22133,0.13182,48.615
+2024-03-07,D,gap not above threshold,1439,1431,0.22056,-0.055079,50.545
+2024-03-08,D,already given back (stop > 0.6 x ATR),1435,1439,0.22056,-0.36615,52.245
+2024-03-11,D,gap not above threshold,1437,1434,0.22212,0.029317,53.74
+2024-03-12,D,gap not above threshold,1431,1436,0.22209,0.18671,52.935
+2024-03-13,D,gap not above threshold,1435,1438,0.22133,0.09109,50.11
+2024-03-14,D,gap not above threshold,1431,1436,0.22056,-0.084378,50.32
+2024-03-15,D,gap not above threshold,1431,1434,0.22056,0.031217,51.02
+2024-03-18,D,gap not above threshold,1432,1435,0.21899,0.0065486,49.575
+2024-03-19,D,gap not above threshold,1429,1438,0.21896,-0.035969,50.21
+2024-03-20,D,gap not above threshold,1433,1435,0.21893,-0.13482,48.44
+2024-03-21,D,gap not above threshold,1437,1438,0.21716,0.18908,51.04
+2024-03-22,D,gap not above threshold,1437,1438,0.21716,0.037098,51.12
+2024-03-25,D,gap not above threshold,1430,1421,0.21538,-0.14099,53.04
+2024-03-26,D,gap not above threshold,1420,1434,0.21361,0.11563,52.7
+2024-03-27,D,gap not above threshold,1428,1432,0.21183,-0.11893,53.06
+2024-03-28,D,gap not above threshold,1436,1439,0.21111,-0.18546,51.975
+2024-03-29,D,gap not above threshold,1429,1391,0.21039,0.0035493,51.59
+2024-04-01,D,EURUSD data hole 19:00-16:00 NY,1375,1375,0.20967,0.077345,51.2
+2024-04-02,D,not stalled (stop < 0.15 x ATR),1423,1437,0.20967,0.2386,53.005
+2024-04-03,D,gap not above threshold,1426,1430,0.21183,0.19088,53.94
+2024-04-04,D,gap not above threshold,1433,1438,0.21111,0.12805,53.92
+2024-04-05,D,gap not above threshold,1440,1439,0.21039,-0.062156,52.12
+2024-04-08,D,gap not above threshold,1438,1437,0.20967,0.052543,51.805
+2024-04-09,D,gap not above threshold,1429,1439,0.20509,-0.095487,52.195
+2024-04-10,D,gap not above threshold,1428,1428,0.20381,-0.019726,51.985
+2024-04-11,D,gap not above threshold,1436,1433,0.20336,-0.061609,56.685
+2024-04-12,D,gap not above threshold,1434,1427,0.20291,0.12387,55.84
+2024-04-15,D,gap not above threshold,1439,1436,0.20169,-0.1418,59.845
+2024-04-16,D,gap not above threshold,1434,1439,0.20154,0.021673,60.09
+2024-04-17,D,gap not above threshold,1439,1439,0.20138,0.19247,60.625
+2024-04-18,D,gap not above threshold,1434,1434,0.20069,-0.13632,59.985
+2024-04-19,D,gap not above threshold,1427,1433,0.19999,-0.018321,58.06
+2024-04-22,D,already given back (stop > 0.6 x ATR),1433,1429,0.1993,0.26524,58.105
+2024-04-23,D,already given back (stop > 0.6 x ATR),1429,1422,0.20138,-0.24263,58.425
+2024-04-24,D,gap not above threshold,1434,1436,0.20185,0.0025725,60.055
+2024-04-25,D,gap not above threshold,1435,1435,0.20169,0.030373,60.46
+2024-04-26,D,gap not above threshold,1429,1433,0.20154,-0.19714,60.94
+2024-04-29,D,gap not above threshold,1421,1427,0.20138,-0.13721,63.02
+2024-04-30,D,gap not above threshold,1435,1436,0.20069,0.10642,61.825
+2024-05-01,D,gap not above threshold,1436,1429,0.19999,0.14582,62.635
+2024-05-02,D,gap not above threshold,1439,1438,0.19788,-0.054064,63.155
+2024-05-03,D,TRADE,1439,1435,0.19751,0.22278,63.69
+2024-05-06,D,gap not above threshold,1423,1434,0.19861,-0.0029332,65.345
+2024-05-07,D,gap not above threshold,1422,1429,0.19824,0.062424,65.05
+2024-05-08,D,gap not above threshold,1432,1417,0.19788,0.14927,65.16
+2024-05-09,D,gap not above threshold,1421,1427,0.19751,0.10057,59.395
+2024-05-10,D,gap not above threshold,1430,1431,0.19714,0.11472,59.56
+2024-05-13,D,gap not above threshold,1427,1421,0.19597,0.0012485,55.71
+2024-05-14,D,gap not above threshold,1427,1412,0.19481,0.089485,55.515
+2024-05-15,D,gap not above threshold,1429,1428,0.19364,-0.1624,55.825
+2024-05-16,D,gap not above threshold,1434,1432,0.19247,0.036469,55.795
+2024-05-17,D,gap not above threshold,1423,1423,0.19247,-0.16592,55.385
+2024-05-20,D,gap not above threshold,1419,1401,0.1922,-0.14864,54.17
+2024-05-21,D,gap not above threshold,1425,1413,0.1922,-0.11428,53.355
+2024-05-22,D,gap not above threshold,1436,1411,0.1922,-0.11225,51.33
+2024-05-23,D,gap not above threshold,1434,1433,0.19192,0.16552,51.81
+2024-05-24,D,gap not above threshold,1432,1416,0.19165,0.058448,51.525
+2024-05-27,D,gap not above threshold,1386,1388,0.19137,-0.17137,50.2
+2024-05-28,D,not stalled (stop < 0.15 x ATR),1425,1420,0.19125,-0.20806,49.35
+2024-05-29,D,gap not above threshold,1435,1434,0.19192,0.075024,47.665
+2024-05-30,D,gap not above threshold,1434,1435,0.19165,-0.039697,46.53
+2024-05-31,D,gap not above threshold,1429,1434,0.19137,0.076614,46.57
+2024-06-03,D,gap not above threshold,1438,1422,0.19125,-0.10076,45.635
+2024-06-04,D,gap not above threshold,1436,1433,0.19113,-0.030694,47.7
+2024-06-05,D,gap not above threshold,1421,1422,0.19113,-0.061085,48.575
+2024-06-06,D,gap not above threshold,1430,1434,0.191,0.11481,49.31
+2024-06-07,D,gap not above threshold,1421,1427,0.19088,-0.13,48.29
+2024-06-10,D,gap not above threshold,1434,1426,0.19043,-0.093084,51.93
+2024-06-11,D,not stalled (stop < 0.15 x ATR),1421,1423,0.18998,-0.36173,52.315
+2024-06-12,D,gap not above threshold,1423,1415,0.19113,0.11929,52.08
+2024-06-13,D,gap not above threshold,1438,1437,0.191,-0.13139,54.305
+2024-06-14,D,gap not above threshold,1439,1438,0.19088,0.044471,56.455
+2024-06-17,D,gap not above threshold,1428,1434,0.19043,0.12227,58.18
+2024-06-18,D,gap not above threshold,1434,1430,0.19043,0.043346,59.235
+2024-06-19,D,gap not above threshold,1368,1389,0.19043,0.1437,60.205
+2024-06-20,D,gap not above threshold,1428,1429,0.18998,0.15798,59.335
+2024-06-21,D,gap not above threshold,1429,1427,0.18953,-0.064112,58.88
+2024-06-24,D,gap not above threshold,1434,1435,0.18953,0.075782,58.735
+2024-06-25,D,not stalled (stop < 0.15 x ATR),1414,1430,0.18908,-0.23834,60.52
+2024-06-26,D,gap not above threshold,1431,1427,0.19043,0.11945,61.35
+2024-06-27,D,gap not above threshold,1436,1432,0.18849,0.10517,60.92
+2024-06-28,D,gap not above threshold,1433,1429,0.1879,0.068608,60.55
+2024-07-01,D,gap not above threshold,1436,1433,0.18609,-0.11878,58.97
+2024-07-02,D,TRADE,1437,1433,0.18609,-0.20816,57.965
+2024-07-03,D,gap not above threshold,1420,1403,0.18731,-0.023787,56.97
+2024-07-04,D,gap not above threshold,1362,1390,0.18731,0.026064,59.14
+2024-07-05,D,TRADE,1429,1424,0.18578,-0.22881,58.66
+2024-07-08,D,gap not above threshold,1439,1434,0.18671,-0.12288,55.7
+2024-07-09,D,gap not above threshold,1402,1416,0.1864,-0.093944,55.525
+2024-07-10,D,TRADE,1429,1412,0.18609,-0.24374,54.22
+2024-07-11,D,gap not above threshold,1428,1420,0.1879,-0.045013,49.33
+2024-07-12,D,already given back (stop > 0.6 x ATR),1436,1433,0.18731,-0.26533,48.88
+2024-07-15,D,gap not above threshold,1435,1437,0.18953,0.054819,47.51
+2024-07-16,D,gap not above threshold,1432,1438,0.18908,-0.041102,46.955
+2024-07-17,D,gap not above threshold,1433,1431,0.18671,0.033722,46.07
+2024-07-18,D,gap not above threshold,1431,1434,0.18546,-0.061202,47.295
+2024-07-19,D,gap not above threshold,1435,1433,0.18386,0.069753,47.315
+2024-07-22,D,gap not above threshold,1425,1435,0.18319,-0.0030469,46.145
+2024-07-23,D,not stalled (stop < 0.15 x ATR),1430,1423,0.18244,-0.27998,44.5
+2024-07-24,D,already given back (stop > 0.6 x ATR),1428,1437,0.18244,-0.19019,44.47
+2024-07-25,D,gap not above threshold,1438,1434,0.18319,0.10411,43.915
+2024-07-26,D,gap not above threshold,1438,1439,0.18244,0.056655,43.53
+2024-07-29,D,not stalled (stop < 0.15 x ATR),1434,1437,0.18244,-0.21192,42.865
+2024-07-30,D,gap not above threshold,1426,1432,0.18244,-0.024185,43.395
+2024-07-31,D,gap not above threshold,1439,1439,0.18244,0.16959,43.41
+2024-08-01,D,already given back (stop > 0.6 x ATR),1439,1435,0.18244,-0.23307,41.755
+2024-08-02,D,not stalled (stop < 0.15 x ATR),1440,1438,0.18244,0.18544,43.13
+2024-08-05,D,already given back (stop > 0.6 x ATR),1440,1437,0.18319,0.40465,48.2
+2024-08-06,D,TRADE,1437,1439,0.18319,0.26013,51.765
+2024-08-07,D,gap not above threshold,1440,1439,0.18386,0.0095144,53.34
+2024-08-08,D,TRADE,1439,1439,0.18319,-0.39346,53.92
+2024-08-09,D,gap not above threshold,1433,1437,0.18319,0.15236,53.38
+2024-08-12,D,gap not above threshold,1431,1436,0.18244,0.038193,52
+2024-08-13,D,gap not above threshold,1433,1434,0.18244,0.11971,51.445
+2024-08-14,D,not stalled (stop < 0.15 x ATR),1437,1435,0.18244,0.20794,54.045
+2024-08-15,D,TRADE,1430,1426,0.18244,-0.28536,54.99
+2024-08-16,D,gap not above threshold,1437,1427,0.18319,-0.034021,55.91
+2024-08-19,D,gap not above threshold,1437,1433,0.18244,0.018515,57.57
+2024-08-20,D,gap not above threshold,1431,1427,0.18244,-0.057514,59.265
+2024-08-21,D,not stalled (stop < 0.15 x ATR),1435,1438,0.18244,-0.26628,59.545
+2024-08-22,D,not stalled (stop < 0.15 x ATR),1438,1434,0.18319,-0.37222,61.245
+2024-08-23,D,gap not above threshold,1433,1412,0.18319,-0.12948,62.49
+2024-08-26,D,gap not above threshold,1434,1431,0.18319,-0.095586,65.95
+2024-08-27,D,TRADE,1433,1436,0.18319,-0.21249,65.165
+2024-08-28,D,gap not above threshold,1431,1433,0.18386,-0.06527,65.315
+2024-08-29,D,gap not above threshold,1430,1436,0.18319,0.029187,66.955
+2024-08-30,D,gap not above threshold,1437,1429,0.18244,0.13526,68.27
+2024-09-02,D,gap not above threshold,1388,1366,0.18244,0.01365,63.595
+2024-09-03,D,gap not above threshold,1431,1432,0.18047,-0.055169,59.54
+2024-09-04,D,gap not above threshold,1438,1439,0.18047,-0.16741,58.89
+2024-09-05,D,gap not above threshold,1437,1435,0.18047,-0.046454,60.265
+2024-09-06,D,TRADE,1436,1437,0.18047,-0.18238,59.335
+2024-09-09,D,gap not above threshold,1438,1435,0.18047,-0.094051,62.72
+2024-09-10,D,gap not above threshold,1425,1435,0.18047,0.07198,64.13
+2024-09-11,D,gap not above threshold,1438,1428,0.18047,0.1141,61.56
+2024-09-12,D,gap not above threshold,1435,1432,0.18047,0.15506,60.615
+2024-09-13,D,gap not above threshold,1427,1425,0.1727,0.016417,60.795
+2024-09-16,D,gap not above threshold,1437,1410,0.1727,-0.13855,59.4
+2024-09-17,D,gap not above threshold,1432,1432,0.1727,0.059217,59.375
+2024-09-18,D,TRADE,1435,1433,0.1727,-0.25805,58.21
+2024-09-19,D,gap not above threshold,1439,1439,0.18047,-0.043802,59.095
+2024-09-20,D,gap not above threshold,1431,1434,0.1727,0.12703,61.285
+2024-09-23,D,already given back (stop > 0.6 x ATR),1433,1430,0.1727,-0.47719,58.81
+2024-09-24,D,gap not above threshold,1436,1432,0.18047,0.0075528,60.44
+2024-09-25,D,gap not above threshold,1430,1420,0.18047,0.052449,62.3
+2024-09-26,D,TRADE,1436,1433,0.18047,-0.26955,62.915
+2024-09-27,D,TRADE,1437,1436,0.18047,0.19332,61.88
+2024-09-30,D,gap not above threshold,1434,1424,0.18238,0.0059713,63.23
+2024-10-01,D,gap not above threshold,1435,1434,0.18238,-0.10528,66.225
+2024-10-02,D,gap not above threshold,1438,1438,0.18238,0.0094526,68.81
+2024-10-03,D,TRADE,1435,1435,0.18047,0.40796,68.385
+2024-10-04,D,gap not above threshold,1439,1419,0.18238,-0.1588,68.17
+2024-10-07,D,not stalled (stop < 0.15 x ATR),1434,1435,0.18047,0.39531,68.085
+2024-10-08,D,not stalled (stop < 0.15 x ATR),1436,1435,0.18047,-0.27001,66.84
+2024-10-09,D,gap not above threshold,1437,1436,0.18238,-0.097659,66.93
+2024-10-10,D,gap not above threshold,1438,1436,0.18238,0.1543,66.515
+2024-10-11,D,gap not above threshold,1430,1425,0.18238,-0.17186,65.78
+2024-10-14,D,gap not above threshold,1428,1432,0.18047,0.05469,66.315
+2024-10-15,D,gap not above threshold,1436,1434,0.18047,-0.15063,65.585
+2024-10-16,D,gap not above threshold,1434,1437,0.1727,-0.15776,65.565
+2024-10-17,D,TRADE,1432,1437,0.1727,-0.27775,63.35
+2024-10-18,D,not stalled (stop < 0.15 x ATR),1437,1436,0.18047,0.20118,60.965
+2024-10-21,D,gap not above threshold,1425,1437,0.18047,-0.0058521,60.885
+2024-10-22,D,TRADE,1434,1437,0.1727,0.18707,59.71
+2024-10-23,D,gap not above threshold,1437,1437,0.18047,-0.016117,58.1
+2024-10-24,D,gap not above threshold,1438,1436,0.18047,-0.13415,55.745
+2024-10-25,D,gap not above threshold,1432,1429,0.18047,-0.047293,55.525
+2024-10-28,D,gap not above threshold,1380,1437,0.18047,0.015054,53.925
+2024-10-29,D,TRADE,1438,1436,0.1727,-0.27843,51.445
+2024-10-30,D,TRADE,1438,1440,0.18047,0.28763,49.415
+2024-10-31,D,TRADE,1436,1436,0.18238,0.36309,50.07
+2024-11-01,D,TRADE,1436,1374,0.18319,-0.57666,50.23
+2024-11-04,D,gap not above threshold,1438,1440,0.18386,0.028698,49.515
+2024-11-05,D,gap not above threshold,1437,1435,0.18386,-0.08665,50.125
+2024-11-06,D,gap not above threshold,1433,1438,0.18386,-0.10488,51.515
+2024-11-07,D,"thin day (< 1,300 bars)",1439,1255,0.18386,0.054017,62.005
+2024-11-08,D,gap not above threshold,1439,1379,0.18386,-0.049946,64.855
+2024-11-11,D,TRADE,1439,1438,0.18319,-0.22843,68.65
+2024-11-12,D,gap not above threshold,1439,1440,0.18319,0.048417,71.18
+2024-11-13,D,gap not above threshold,1440,1440,0.18319,0.041304,72.84
+2024-11-14,D,gap not above threshold,1439,1440,0.18319,-0.011476,75.35
+2024-11-15,D,gap not above threshold,1439,1432,0.18319,0.011083,76.54
+2024-11-18,D,gap not above threshold,1439,1433,0.18319,0.16076,78.165
+2024-11-19,D,TRADE,1440,1439,0.18238,0.21944,79.09
+2024-11-20,D,gap not above threshold,1440,1435,0.18319,-0.086529,80.705
+2024-11-21,D,gap not above threshold,1440,1435,0.18319,0.079376,83.58
+2024-11-22,D,already given back (stop > 0.6 x ATR),1439,1439,0.18319,-0.34339,85.25
+2024-11-25,D,TRADE,1440,1440,0.18386,0.43742,91.22
+2024-11-26,D,gap not above threshold,1438,1437,0.18544,0.054622,93
+2024-11-27,D,gap not above threshold,1440,1440,0.18386,0.083126,96.11
+2024-11-28,D,gap not above threshold,1421,1412,0.18319,-0.11903,98.6
+2024-11-29,D,gap not above threshold,1437,1440,0.18319,0.017865,98.485
+2024-12-02,D,gap not above threshold,1438,1436,0.18319,0.081077,97.57
+2024-12-03,D,not stalled (stop < 0.15 x ATR),1436,1432,0.18238,0.19358,100.96
+2024-12-04,D,gap not above threshold,1439,1439,0.18238,-0.069996,100.47
+2024-12-05,D,gap not above threshold,1438,1432,0.18238,0.14573,91.325
+2024-12-06,D,gap not above threshold,1437,1434,0.18238,-0.012447,89.83
+2024-12-09,D,gap not above threshold,1440,1439,0.18238,0.014042,88.305
+2024-12-10,D,not stalled (stop < 0.15 x ATR),1439,1439,0.18238,-0.29643,86.47
+2024-12-11,D,gap not above threshold,1431,1438,0.18299,-0.078464,86.55
+2024-12-12,D,not stalled (stop < 0.15 x ATR),1403,1401,0.18299,0.26516,84.585
+2024-12-13,D,TRADE,1439,1437,0.18299,0.22022,83.615
+2024-12-16,D,not stalled (stop < 0.15 x ATR),1436,1437,0.18299,-0.34053,83.33
+2024-12-17,D,gap not above threshold,1437,1437,0.18369,0.12011,81.885
+2024-12-18,D,gap not above threshold,1433,1436,0.18299,-0.073937,80.765
+2024-12-19,D,TRADE,1437,1436,0.1819,0.27136,84.06
+2024-12-20,D,TRADE,1438,1437,0.1819,-0.24903,83.18
+2024-12-23,D,gap not above threshold,1440,1440,0.18349,0.0548,80.125
+2024-12-24,D,gap not above threshold,1430,1437,0.18349,-0.10639,79.11
+2024-12-25,D,"thin day (< 1,300 bars)",277,208,0.18349,,74.44
+2024-12-26,D,not stalled (stop < 0.15 x ATR),1436,1437,0.18386,0.23099,74.44
+2024-12-27,D,TRADE,1434,1437,0.18544,-0.2767,70.76
+2024-12-30,D,gap not above threshold,1439,1437,0.18546,-0.0082619,70.63
+2024-12-31,D,gap not above threshold,1437,1431,0.18546,-0.072703,72.175
+2025-01-02,D,already given back (stop > 0.6 x ATR),1437,1438,0.18544,0.41474,70.56
+2025-01-03,D,gap not above threshold,1437,1438,0.18546,0.098542,75.44
+2025-01-06,D,gap not above threshold,1438,1438,0.18546,0.1577,74.295
+2025-01-07,D,gap not above threshold,1439,1435,0.18546,-0.025616,77.375
+2025-01-08,D,already given back (stop > 0.6 x ATR),1440,1433,0.18544,0.73887,77.745
+2025-01-09,D,TRADE,1430,1438,0.18546,-0.29176,78.845
+2025-01-10,D,gap not above threshold,1438,1438,0.18671,-0.048591,77.255
+2025-01-13,D,gap not above threshold,1437,1433,0.18671,-0.17099,79.255
+2025-01-14,D,not stalled (stop < 0.15 x ATR),1440,1435,0.18671,0.5775,79.535
+2025-01-15,D,gap not above threshold,1429,1437,0.18707,-0.065521,79.56
+2025-01-16,D,gap not above threshold,1433,1437,0.18671,-0.0051768,81.82
+2025-01-17,D,gap not above threshold,1434,1437,0.18671,-0.021435,81.78
+2025-01-20,D,TRADE,1435,1435,0.18546,0.2051,76.61
+2025-01-21,D,gap not above threshold,1436,1433,0.18671,0.016678,81.255
+2025-01-22,D,gap not above threshold,1440,1432,0.18671,-0.01765,80.695
+2025-01-23,D,gap not above threshold,1431,1435,0.18546,-0.11398,80.905
+2025-01-24,D,gap not above threshold,1438,1436,0.18546,-0.11973,82.885
+2025-01-27,D,gap not above threshold,1440,1438,0.18546,-0.072867,86.395
+2025-01-28,D,gap not above threshold,1440,1436,0.18546,0.042623,88.395
+2025-01-29,D,TRADE,1437,1434,0.18546,0.19,88.04
+2025-01-30,D,gap not above threshold,1435,1433,0.18671,-0.048539,87.085
+2025-01-31,D,gap not above threshold,1439,1435,0.18671,-0.008438,83.57
+2025-02-03,D,TRADE,1439,1439,0.18671,-0.31053,85.355
+2025-02-04,D,not stalled (stop < 0.15 x ATR),1439,1436,0.18707,0.20601,85.15
+2025-02-05,D,gap not above threshold,1439,1436,0.18908,0.0774,86.17
+2025-02-06,D,TRADE,1437,1425,0.18908,0.48014,85.59
+2025-02-07,D,gap not above threshold,1438,1437,0.19,-0.18705,86.375
+2025-02-10,D,gap not above threshold,1436,1437,0.19,0.18684,86.795
+2025-02-11,D,TRADE,1438,1439,0.18908,-0.26379,85.78
+2025-02-12,D,gap not above threshold,1438,1433,0.19,0.17858,86.675
+2025-02-13,D,gap not above threshold,1434,1437,0.19,-0.032433,87.555
+2025-02-14,D,gap not above threshold,1434,1435,0.19,-0.085787,89.535
+2025-02-17,D,gap not above threshold,1424,1412,0.19,-0.043243,89.615
+2025-02-18,D,gap not above threshold,1435,1436,0.19,-0.042826,83.195
+2025-02-19,D,gap not above threshold,1438,1438,0.19,0.040226,81.09
+2025-02-20,D,gap not above threshold,1435,1434,0.19,-0.00054026,80.85
+2025-02-21,D,gap not above threshold,1439,1437,0.19,-0.0009807,81.905
+2025-02-24,D,gap not above threshold,1438,1427,0.19,-0.085259,79.225
+2025-02-25,D,gap not above threshold,1438,1438,0.18908,-0.027247,79.045
+2025-02-26,D,gap not above threshold,1440,1438,0.18908,-0.17143,78.225
+2025-02-27,D,not stalled (stop < 0.15 x ATR),1436,1436,0.18908,-0.22775,77.865
+2025-02-28,D,gap not above threshold,1435,1434,0.19,0.016133,78.565
+2025-03-03,D,gap not above threshold,1440,1425,0.19,0.03829,77.35
+2025-03-04,D,TRADE,1439,1427,0.19,0.22675,76.145
+2025-03-05,D,not stalled (stop < 0.15 x ATR),1439,1434,0.19019,0.51728,78.2
+2025-03-06,D,not stalled (stop < 0.15 x ATR),1439,1435,0.19088,0.39992,84.295
+2025-03-07,D,gap not above threshold,1431,1426,0.19247,0.10058,86.015
+2025-03-10,D,gap not above threshold,1439,1435,0.19247,-0.10256,86.275
+2025-03-11,D,not stalled (stop < 0.15 x ATR),1440,1439,0.19247,0.29625,87.12
+2025-03-12,D,not stalled (stop < 0.15 x ATR),1440,1437,0.19332,-0.23688,88.54
+2025-03-13,D,gap not above threshold,1437,1437,0.19358,-0.14357,85.685
+2025-03-14,D,TRADE,1435,1433,0.19358,0.33635,84.72
+2025-03-17,D,gap not above threshold,1436,1433,0.19714,-0.14224,85.475
+2025-03-18,D,gap not above threshold,1440,1433,0.19714,0.021987,86.56
+2025-03-19,D,gap not above threshold,1437,1425,0.19714,-0.15529,87.105
+2025-03-20,D,not stalled (stop < 0.15 x ATR),1439,1434,0.19358,-0.36886,88.395
+2025-03-21,D,gap not above threshold,1437,1430,0.19714,-0.033299,89.175
+2025-03-24,D,not stalled (stop < 0.15 x ATR),1429,1436,0.19714,-0.23629,89.57
+2025-03-25,D,gap not above threshold,1434,1432,0.20118,-0.032523,89.625
+2025-03-26,D,TRADE,1433,1429,0.20118,0.32909,89.135
+2025-03-27,D,gap not above threshold,1440,1434,0.2051,0.0097183,89.375
+2025-03-28,D,gap not above threshold,1434,1435,0.2051,0.13753,89.005
+2025-03-31,D,EURUSD data hole 19:00-16:00 NY,1379,1377,0.2051,0.008053,90.015
+2025-04-01,D,gap not above threshold,1427,1438,0.2051,0.10039,87.52
+2025-04-02,D,gap not above threshold,1439,1439,0.2051,0.12176,82.285
+2025-04-03,D,already given back (stop > 0.6 x ATR),1435,1431,0.2051,0.62803,79.76
+2025-04-04,D,gap not above threshold,1436,1435,0.20601,0.16149,92.44
+2025-04-07,D,already given back (stop > 0.6 x ATR),1440,1429,0.20601,0.22544,95.975
+2025-04-08,D,TRADE,1434,1433,0.20794,-0.40064,101.04
+2025-04-09,D,TRADE,1436,1413,0.20794,0.23784,100.3
+2025-04-10,D,not stalled (stop < 0.15 x ATR),1437,1430,0.20794,0.87332,106.58
+2025-04-11,D,gap not above threshold,1437,1427,0.20806,0.064441,117.78
+2025-04-14,D,TRADE,1434,1429,0.20806,-0.70042,127.91
+2025-04-15,D,not stalled (stop < 0.15 x ATR),1438,1429,0.20816,-0.35972,131.29
+2025-04-16,D,gap not above threshold,1434,1427,0.21192,0.054196,133.94
+2025-04-17,D,gap not above threshold,1439,1431,0.21192,-0.20038,136.31
+2025-04-18,D,gap not above threshold,1434,1427,0.21192,0.095988,134.89
+2025-04-21,D,gap not above threshold,1440,1432,0.21192,-0.11769,133.65
+2025-04-22,D,gap not above threshold,1440,1432,0.20816,-0.1184,138.84
+2025-04-23,D,gap not above threshold,1440,1436,0.20816,-0.17046,142.67
+2025-04-24,D,gap not above threshold,1436,1433,0.20816,-0.079758,146.34
+2025-04-25,D,gap not above threshold,1438,1435,0.20816,0.092869,146.26
+2025-04-28,D,TRADE,1429,1429,0.20816,-0.23184,146.09
+2025-04-29,D,gap not above threshold,1439,1434,0.21192,0.1251,147.6
+2025-04-30,D,TRADE,1440,1438,0.21192,0.40426,147.6
+2025-05-01,D,gap not above threshold,1439,1432,0.21249,-0.092785,144.51
+2025-05-02,D,not stalled (stop < 0.15 x ATR),1440,1426,0.21249,0.35074,131.2
+2025-05-05,D,gap not above threshold,1435,1418,0.21944,-0.059404,127.37
+2025-05-06,D,TRADE,1439,1432,0.21944,-0.38773,122.54
+2025-05-07,D,gap not above threshold,1439,1435,0.22022,-0.058683,122.45
+2025-05-08,D,gap not above threshold,1438,1438,0.22022,-0.18466,117.68
+2025-05-09,D,gap not above threshold,1438,1432,0.22022,-0.1764,108.96
+2025-05-12,D,TRADE,1440,1436,0.22022,-0.24763,99.545
+2025-05-13,D,gap not above threshold,1440,1435,0.22544,0.00094959,101.98
+2025-05-14,D,gap not above threshold,1439,1431,0.22544,0.15204,101.79
+2025-05-15,D,gap not above threshold,1438,1430,0.22544,-0.15068,100.16
+2025-05-16,D,gap not above threshold,1439,1439,0.22544,0.11995,99.505
+2025-05-19,D,gap not above threshold,1440,1421,0.22544,0.037912,101.97
+2025-05-20,D,gap not above threshold,1440,1437,0.22544,-0.01506,98.79
+2025-05-21,D,gap not above threshold,1439,1436,0.22544,0.12631,95.7
+2025-05-22,D,not stalled (stop < 0.15 x ATR),1436,1427,0.22544,-0.32637,93.24
+2025-05-23,D,gap not above threshold,1438,1433,0.22675,-0.22388,93.36
+2025-05-26,D,gap not above threshold,1427,1424,0.22675,-0.19241,94.445
+2025-05-27,D,gap not above threshold,1437,1434,0.22675,-0.026161,92.665
+2025-05-28,D,gap not above threshold,1439,1434,0.22675,0.12262,94.28
+2025-05-29,D,not stalled (stop < 0.15 x ATR),1440,1425,0.22544,0.44299,93.245
+2025-05-30,D,gap not above threshold,1434,1425,0.22675,-0.054656,98.185
+2025-06-02,D,gap not above threshold,1426,1430,0.22675,0.18508,96.715
+2025-06-03,D,gap not above threshold,1439,1436,0.22675,-0.20725,98.325
+2025-06-04,D,gap not above threshold,1438,1428,0.22675,0.10916,97.795
+2025-06-05,D,gap not above threshold,1436,1428,0.22675,0.21687,97.36
+2025-06-06,D,gap not above threshold,1437,1438,0.22675,-0.18272,95.66
+2025-06-09,D,gap not above threshold,1439,1424,0.22675,0.018728,95.125
+2025-06-10,D,gap not above threshold,1433,1433,0.22675,0.04486,88.885
+2025-06-11,D,gap not above threshold,1438,1432,0.22675,0.14607,87.05
+2025-06-12,D,TRADE,1438,1428,0.22544,0.31328,86.71
+2025-06-13,D,gap not above threshold,1434,1430,0.22675,-0.1863,91.03
+2025-06-16,D,gap not above threshold,1437,1426,0.22675,0.04931,92.86
+2025-06-17,D,gap not above threshold,1436,1437,0.22675,0.10822,91.565
+2025-06-18,D,gap not above threshold,1435,1434,0.22675,-0.024989,93.42
+2025-06-19,D,gap not above threshold,1438,1439,0.22675,-0.16548,92.73
+2025-06-20,D,gap not above threshold,1438,1437,0.22675,-0.13437,90.97
+2025-06-23,D,gap not above threshold,1437,1433,0.22675,-0.056203,88.665
+2025-06-24,D,not stalled (stop < 0.15 x ATR),1440,1421,0.22544,-0.2431,92.07
+2025-06-25,D,gap not above threshold,1435,1422,0.22675,0.069754,91.25
+2025-06-26,D,gap not above threshold,1438,1437,0.22675,-0.0084697,91.925
+2025-06-27,D,TRADE,1439,1434,0.22544,0.27928,87.805
+2025-06-30,D,gap not above threshold,1437,1435,0.22675,0.16882,87.6
+2025-07-01,D,gap not above threshold,1438,1435,0.22544,0.22352,86.315
+2025-07-02,D,TRADE,1440,1434,0.22544,0.85093,85.225
+2025-07-03,D,already given back (stop > 0.6 x ATR),1432,1438,0.22675,-0.3024,84.5
+2025-07-04,D,gap not above threshold,1434,1438,0.22775,0.17861,84.64
+2025-07-07,D,TRADE,1438,1436,0.22775,-0.28469,82.1
+2025-07-08,D,already given back (stop > 0.6 x ATR),1439,1437,0.22843,0.23329,84.63
+2025-07-09,D,gap not above threshold,1434,1435,0.23099,-0.069848,85.025
+2025-07-10,D,gap not above threshold,1433,1433,0.22843,0.086436,82.295
+2025-07-11,D,TRADE,1439,1432,0.22843,0.40649,79.28
+2025-07-14,D,gap not above threshold,1435,1436,0.23099,-0.033344,75.48
+2025-07-15,D,gap not above threshold,1432,1433,0.23099,-0.070976,73.12
+2025-07-16,D,not stalled (stop < 0.15 x ATR),1438,1436,0.23099,-0.23373,72.855
+2025-07-17,D,gap not above threshold,1438,1433,0.23184,-0.090948,77.34
+2025-07-18,D,gap not above threshold,1437,1437,0.23184,0.13928,78.94
+2025-07-21,D,gap not above threshold,1435,1433,0.23099,0.010177,80.39
+2025-07-22,D,gap not above threshold,1438,1428,0.23099,0.015779,79.09
+2025-07-23,D,gap not above threshold,1435,1431,0.22843,-0.22368,79.8
+2025-07-24,D,gap not above threshold,1439,1432,0.22775,0.19735,79.25
+2025-07-25,D,gap not above threshold,1437,1439,0.22775,0.16764,77.59
+2025-07-28,D,not stalled (stop < 0.15 x ATR),1440,1436,0.22675,-0.70693,76.83
+2025-07-29,D,gap not above threshold,1438,1434,0.22775,0.11542,82.05
+2025-07-30,D,gap not above threshold,1430,1426,0.22775,-0.13403,82.62
+2025-07-31,D,TRADE,1440,1435,0.22775,0.26162,88.05
+2025-08-01,D,TRADE,1438,1439,0.22843,0.66197,86.355
+2025-08-04,D,gap not above threshold,1440,1431,0.22843,-0.096304,94.88
+2025-08-05,D,gap not above threshold,1438,1436,0.22843,-0.10121,92.045
+2025-08-06,D,not stalled (stop < 0.15 x ATR),1436,1433,0.22843,0.31434,90.915
+2025-08-07,D,not stalled (stop < 0.15 x ATR),1438,1436,0.23099,-0.65362,94.14
+2025-08-08,D,gap not above threshold,1435,1433,0.23099,0.00012477,94.175
+2025-08-11,D,gap not above threshold,1433,1420,0.22843,-0.032884,94.235
+2025-08-12,D,gap not above threshold,1431,1427,0.22843,-0.032434,96.32
+2025-08-13,D,not stalled (stop < 0.15 x ATR),1432,1421,0.22843,-0.32445,96.255
+2025-08-14,D,gap not above threshold,1437,1424,0.23099,0.026214,91.37
+2025-08-15,D,gap not above threshold,1432,1415,0.23099,0.1682,91.285
+2025-08-18,D,gap not above threshold,1439,1432,0.23099,-0.10967,90.675
+2025-08-19,D,gap not above threshold,1433,1427,0.23099,0.041551,88.55
+2025-08-20,D,TRADE,1432,1430,0.23099,0.30113,87.145
+2025-08-21,D,gap not above threshold,1434,1429,0.23184,0.06667,86.51
+2025-08-22,D,gap not above threshold,1427,1435,0.23184,-0.057065,86.67
+2025-08-25,D,gap not above threshold,1439,1436,0.23184,-0.021695,91.75
+2025-08-26,D,gap not above threshold,1439,1429,0.23184,0.08884,88.655
+2025-08-27,D,gap not above threshold,1439,1433,0.23184,-0.073768,87.805
+2025-08-28,D,TRADE,1438,1430,0.23184,0.23525,82.895
+2025-08-29,D,gap not above threshold,1434,1431,0.23329,0.17656,83.35
+2025-09-01,D,gap not above threshold,1417,1427,0.23329,-0.18598,75.99
+2025-09-02,D,already given back (stop > 0.6 x ATR),1434,1423,0.23329,0.58258,76.245
+2025-09-03,D,gap not above threshold,1429,1430,0.23373,-0.16202,78.515
+2025-09-04,D,gap not above threshold,1433,1430,0.23373,-0.060676,77.005
+2025-09-05,D,gap not above threshold,1435,1432,0.23329,-0.0051882,74.595
+2025-09-08,D,gap not above threshold,1438,1439,0.23329,0.012667,77.73
+2025-09-09,D,gap not above threshold,1437,1432,0.23329,-0.10517,76.55
+2025-09-10,D,gap not above threshold,1435,1428,0.23184,-0.024391,75.44
+2025-09-11,D,gap not above threshold,1435,1426,0.23184,0.14283,74.79
+2025-09-12,D,gap not above threshold,1437,1433,0.23184,-0.15243,74.94
+2025-09-15,D,gap not above threshold,1429,1418,0.23099,0.044219,73.785
+2025-09-16,D,gap not above threshold,1438,1427,0.23099,0.10677,73.725
+2025-09-17,D,gap not above threshold,1439,1433,0.23099,-0.21821,77.09
+2025-09-18,D,gap not above threshold,1438,1435,0.23099,0.092073,80.06
+2025-09-19,D,gap not above threshold,1433,1439,0.23099,0.065158,81.89
+2025-09-22,D,gap not above threshold,1433,1425,0.22843,0.043853,77.1
+2025-09-23,D,gap not above threshold,1436,1423,0.22843,0.02579,74.805
+2025-09-24,D,gap not above threshold,1436,1432,0.22775,0.040012,73.71
+2025-09-25,D,gap not above threshold,1439,1430,0.22675,0.18795,74.585
+2025-09-26,D,gap not above threshold,1436,1431,0.22675,-0.12514,76.59
+2025-09-29,D,gap not above threshold,1422,1422,0.22675,0.17792,76.2
+2025-09-30,D,gap not above threshold,1429,1426,0.22675,-0.078455,76.405
+2025-10-01,D,TRADE,1434,1436,0.22675,-0.49314,73.62
+2025-10-02,D,TRADE,1434,1428,0.22775,0.26218,73.08
+2025-10-03,D,gap not above threshold,1435,1423,0.22843,-0.067413,74.87
+2025-10-06,D,gap not above threshold,1437,1435,0.22775,-0.099196,71.515
+2025-10-07,D,gap not above threshold,1437,1435,0.22775,0.032784,72.38
+2025-10-08,D,gap not above threshold,1434,1430,0.22775,-0.075694,71.915
+2025-10-09,D,gap not above threshold,1436,1434,0.22775,-0.14387,72.64
+2025-10-10,D,gap not above threshold,1429,1428,0.22775,0.13035,73.585
+2025-10-13,D,gap not above threshold,1439,1436,0.22775,-0.21893,75.045
+2025-10-14,D,gap not above threshold,1435,1439,0.22775,0.0194,75.74
+2025-10-15,D,gap not above threshold,1432,1436,0.22775,0.040446,73.31
+2025-10-16,D,gap not above threshold,1436,1437,0.22675,-0.042931,70.06
+2025-10-17,D,gap not above threshold,1439,1437,0.22544,0.040327,67.765
+2025-10-20,D,gap not above threshold,1436,1429,0.22388,0.01105,68.505
+2025-10-21,D,gap not above threshold,1430,1432,0.22368,-0.065101,66.5
+2025-10-22,D,gap not above threshold,1439,1424,0.22368,-0.17826,67.315
+2025-10-23,D,not stalled (stop < 0.15 x ATR),1429,1424,0.22368,0.27366,65.05
+2025-10-24,D,gap not above threshold,1433,1420,0.22388,0.074436,61.365
+2025-10-27,D,gap not above threshold,1434,1421,0.22388,-0.0016007,61.255
+2025-10-28,D,TRADE,1438,1435,0.22388,0.58661,60.185
+2025-10-29,D,gap not above threshold,1435,1430,0.22388,0.21432,59.86
+2025-10-30,D,gap not above threshold,1435,1433,0.22388,-0.00015894,61.14
+2025-10-31,D,gap not above threshold,1439,1428,0.22388,0.0097548,61.89
+2025-11-03,D,gap not above threshold,1439,1431,0.22388,-0.068917,62.39
+2025-11-04,D,gap not above threshold,1434,1431,0.22388,0.15622,60.25
+2025-11-05,D,gap not above threshold,1433,1428,0.22388,-0.038485,59.925
+2025-11-06,D,gap not above threshold,1433,1428,0.22388,-0.05082,58.245
+2025-11-07,D,gap not above threshold,1436,1433,0.22388,0.16953,56.03
+2025-11-10,D,gap not above threshold,1430,1434,0.22388,-0.094342,55.34
+2025-11-11,D,gap not above threshold,1435,1435,0.22368,-0.067924,53.825
+2025-11-12,D,TRADE,1437,1424,0.22352,0.28036,53.145
+2025-11-13,D,gap not above threshold,1433,1436,0.22368,-0.16286,52.6
+2025-11-14,D,gap not above threshold,1436,1436,0.22368,-0.17665,53.835
+2025-11-17,D,gap not above threshold,1436,1431,0.22368,-0.15569,52.28
+2025-11-18,D,gap not above threshold,1438,1423,0.22368,0.019648,52.555
+2025-11-19,D,gap not above threshold,1437,1433,0.22368,0.028226,51.495
+2025-11-20,D,gap not above threshold,1437,1437,0.22368,-0.19019,53.175
+2025-11-21,D,TRADE,1436,1437,0.22368,-0.30183,53.87
+2025-11-24,D,gap not above threshold,1430,1439,0.22388,0.11731,54.535
+2025-11-25,D,gap not above threshold,1438,1435,0.22388,-0.047314,55.24
+2025-11-26,D,gap not above threshold,1436,1435,0.22388,-0.15163,56.81
+2025-11-27,D,gap not above threshold,1410,1414,0.22368,0.065267,55.065
+2025-11-28,D,gap not above threshold,1425,1424,0.22368,-0.078672,52.39
+2025-12-01,D,gap not above threshold,1430,1430,0.22352,-0.0099233,52.21
+2025-12-02,D,gap not above threshold,1431,1425,0.22352,0.076561,53.54
+2025-12-03,D,TRADE,1433,1425,0.21893,-0.34885,52.255
+2025-12-04,D,gap not above threshold,1436,1430,0.22352,-0.21004,53.655
+2025-12-05,D,gap not above threshold,1437,1424,0.22352,-0.067173,52.62
+2025-12-08,D,gap not above threshold,1439,1432,0.21893,-0.16641,51.73
+2025-12-09,D,gap not above threshold,1433,1427,0.21821,0.078638,52.405
+2025-12-10,D,gap not above threshold,1437,1434,0.21821,-0.087207,51.57
+2025-12-11,D,gap not above threshold,1440,1440,0.21821,0.023463,53.735
+2025-12-12,D,gap not above threshold,1438,1430,0.21787,0.12714,53.915
+2025-12-15,D,gap not above threshold,1437,1428,0.21623,0.055539,53.045
+2025-12-16,D,gap not above threshold,1435,1433,0.21325,-0.10114,53.035
+2025-12-17,D,gap not above threshold,1438,1424,0.21325,-0.057978,54.67
+2025-12-18,D,TRADE,1429,1428,0.21325,-0.36267,53.455
+2025-12-19,D,gap not above threshold,1433,1427,0.21325,0.12178,53.545
+2025-12-22,D,gap not above threshold,1440,1430,0.21325,-0.007062,52.25
+2025-12-23,D,gap not above threshold,1438,1432,0.21325,0.047807,53
+2025-12-24,D,gap not above threshold,1434,1434,0.21325,0.029194,51.7
+2025-12-25,D,"thin day (< 1,300 bars)",205,261,0.20935,,50.775
+2025-12-26,D,gap not above threshold,1434,1436,0.20725,-0.15292,50.775
+2025-12-29,D,gap not above threshold,1431,1433,0.20725,-0.064738,50.685
+2025-12-30,D,gap not above threshold,1432,1426,0.20725,0.15747,50.045
+2025-12-31,D,gap not above threshold,1424,1419,0.20601,0.10768,48.73
+2026-01-02,D,gap not above threshold,1435,1436,0.20601,-0.057291,48.955
+2026-01-05,D,TRADE,1438,1438,0.20601,-0.37373,48.685
+2026-01-06,D,gap not above threshold,1438,1436,0.20725,0.017044,50.125
+2026-01-07,D,gap not above threshold,1437,1429,0.20725,0.05267,50.89
+2026-01-08,D,gap not above threshold,1429,1434,0.20725,-0.038141,49.6
+2026-01-09,D,gap not above threshold,1432,1428,0.20725,0.0044841,49.505
+2026-01-12,D,not stalled (stop < 0.15 x ATR),1437,1429,0.20725,-0.28641,47.8
+2026-01-13,D,gap not above threshold,1434,1435,0.21004,0.056206,47.61
+2026-01-14,D,gap not above threshold,1438,1435,0.21004,-0.037022,48.28
+2026-01-15,D,already given back (stop > 0.6 x ATR),1437,1438,0.21004,0.23498,47.465
+2026-01-16,D,gap not above threshold,1431,1431,0.21432,-0.0018704,46.705
+2026-01-19,D,gap not above threshold,1424,1422,0.21432,-0.11657,46.105
+2026-01-20,D,already given back (stop > 0.6 x ATR),1435,1426,0.21432,0.38339,47.135
+2026-01-21,D,gap not above threshold,1440,1436,0.21432,0.0022651,52.175
+2026-01-22,D,gap not above threshold,1439,1436,0.21432,0.13627,52.335
+2026-01-23,D,TRADE,1434,1433,0.21432,-0.23453,54.24
+2026-01-26,D,gap not above threshold,1439,1438,0.21432,0.015056,57.74
+2026-01-27,D,gap not above threshold,1439,1438,0.21432,-0.030778,59.595
+2026-01-28,D,gap not above threshold,1438,1436,0.21432,-0.13232,69.21
+2026-01-29,D,gap not above threshold,1438,1437,0.21004,0.0036912,74.845
+2026-01-30,D,gap not above threshold,1437,1436,0.21004,-0.039125,77.405
+2026-02-02,D,gap not above threshold,1437,1430,0.21004,-0.18528,81.055
+2026-02-03,D,gap not above threshold,1437,1438,0.21004,0.0056746,82.51
+2026-02-04,D,gap not above threshold,1438,1436,0.21004,0.059276,81.995
+2026-02-05,D,TRADE,1440,1438,0.21004,0.6068,82.89
+2026-02-06,D,gap not above threshold,1438,1437,0.21432,-0.060146,83.22
+2026-02-09,D,not stalled (stop < 0.15 x ATR),1437,1425,0.21432,0.23387,84.04
+2026-02-10,D,gap not above threshold,1438,1436,0.21687,0.012349,86.045
+2026-02-11,D,TRADE,1433,1426,0.21687,-0.34886,85.96
+2026-02-12,D,gap not above threshold,1439,1437,0.21821,-0.14432,89.36
+2026-02-13,D,gap not above threshold,1438,1436,0.21821,-0.07941,88.555
+2026-02-16,D,gap not above threshold,1416,1418,0.21687,0.005417,88.29
+2026-02-17,D,TRADE,1426,1429,0.21687,0.23435,86.205
+2026-02-18,D,gap not above threshold,1437,1430,0.21821,0.013573,81.895
+2026-02-19,D,gap not above threshold,1435,1436,0.21687,0.067369,82.335
+2026-02-20,D,gap not above threshold,1437,1436,0.21432,-0.089402,81.29
+2026-02-23,D,gap not above threshold,1433,1439,0.21004,-0.10999,79.235
+2026-02-24,D,gap not above threshold,1434,1434,0.21004,-0.20367,78.635
+2026-02-25,D,gap not above threshold,1436,1434,0.21004,-0.053214,68.55
+2026-02-26,D,gap not above threshold,1438,1440,0.20725,-0.018638,63.25
+2026-02-27,D,gap not above threshold,1436,1433,0.20367,0.12886,61.48
+2026-03-02,D,TRADE,1438,1440,0.20367,-0.36983,57.15
+2026-03-03,D,not stalled (stop < 0.15 x ATR),1440,1438,0.20367,-0.26846,58.41
+2026-03-04,D,gap not above threshold,1440,1435,0.20725,0.059927,64.805
+2026-03-05,D,gap not above threshold,1437,1434,0.20725,-0.037584,66.43
+2026-03-06,D,gap not above threshold,1432,1435,0.20725,-0.15114,68.515
+2026-03-09,D,gap not above threshold,1440,1436,0.20367,-0.19024,69.265
+2026-03-10,D,gap not above threshold,1440,1439,0.20367,0.017379,69.94
+2026-03-11,D,gap not above threshold,1435,1432,0.20038,-0.13081,70.92
+2026-03-12,D,gap not above threshold,1437,1436,0.20038,-0.095127,70.445
+2026-03-13,D,TRADE,1439,1439,0.19735,0.22778,71.77
+2026-03-16,D,gap not above threshold,1437,1432,0.20038,0.16462,75.825
+2026-03-17,D,gap not above threshold,1436,1433,0.20038,0.0030314,79.905
+2026-03-18,D,gap not above threshold,1439,1439,0.20038,0.0527,81.46
+2026-03-19,D,gap not above threshold,1440,1438,0.20038,-0.17327,82.96
+2026-03-20,D,TRADE,1439,1437,0.20038,0.2294,88.335
+2026-03-23,D,already given back (stop > 0.6 x ATR),1436,1436,0.20038,-0.3413,88.64
+2026-03-24,D,gap not above threshold,1439,1436,0.20367,0.13674,93.4
+2026-03-25,D,gap not above threshold,1439,1438,0.20038,-0.11735,95.45
+2026-03-26,D,gap not above threshold,1437,1437,0.19735,-0.13964,97.05
+2026-03-27,D,not stalled (stop < 0.15 x ATR),1439,1437,0.19241,0.19705,96.925
+2026-03-30,D,EURUSD data hole 19:00-16:00 NY,1366,1369,0.19241,0.20124,97.31
+2026-03-31,D,gap not above threshold,1440,1435,0.19705,0.10307,95.01
+2026-04-01,D,gap not above threshold,1434,1434,0.19241,-0.017402,91.99
+2026-04-02,D,gap not above threshold,1437,1437,0.19024,0.00088265,91.875
+2026-04-03,D,gap not above threshold,1409,1406,0.19024,0.088598,92.27
+2026-04-06,D,gap not above threshold,1425,1434,0.19019,-0.053471,90.41
+2026-04-07,D,not stalled (stop < 0.15 x ATR),1438,1431,0.19019,0.20017,87.215
+2026-04-08,D,gap not above threshold,1437,1436,0.19024,-0.14719,88.195
+2026-04-09,D,gap not above threshold,1436,1436,0.19024,-0.044075,90.665
+2026-04-10,D,gap not above threshold,1437,1428,0.19024,0.03444,91.185
+2026-04-13,D,gap not above threshold,1440,1440,0.19024,-0.1353,88.34
+2026-04-14,D,TRADE,1437,1434,0.19024,-0.26434,87.87
+2026-04-15,D,gap not above threshold,1436,1434,0.19024,0.048361,86.835
+2026-04-16,D,gap not above threshold,1419,1411,0.19024,-0.0090255,83.365
+2026-04-17,D,gap not above threshold,1436,1431,0.19019,-0.011039,77.555
+2026-04-20,D,gap not above threshold,1437,1435,0.19019,-0.1147,78.49
+2026-04-21,D,gap not above threshold,1438,1435,0.18795,-0.11638,73.78
+2026-04-22,D,gap not above threshold,1437,1433,0.18795,-0.081334,73.8
+2026-04-23,D,gap not above threshold,1429,1433,0.1863,-0.15476,73.02
+2026-04-24,D,gap not above threshold,1436,1432,0.1863,-0.00077107,72.755
+2026-04-27,D,gap not above threshold,1435,1431,0.1863,0.018365,72.975
+2026-04-28,D,gap not above threshold,1437,1434,0.1863,0.14867,72.17
+2026-04-29,D,gap not above threshold,1425,1424,0.18598,0.070538,68.83
+2026-04-30,D,gap not above threshold,1435,1431,0.18598,-0.14481,67.905
+2026-05-01,D,gap not above threshold,1435,1430,0.18598,0.034545,67.405
+2026-05-04,D,gap not above threshold,1438,1434,0.18598,0.035386,68.975
+2026-05-05,D,gap not above threshold,1428,1424,0.18598,-0.056558,69.05
+2026-05-06,D,gap not above threshold,1421,1437,0.18598,0.016142,66.855
+2026-05-07,D,gap not above threshold,1429,1431,0.18598,0.037115,65.44
+2026-05-08,D,gap not above threshold,1437,1434,0.18598,0.0048364,64.505
+2026-05-11,D,gap not above threshold,1439,1440,0.18528,-0.029749,64.675
+2026-05-12,D,"thin day (< 1,300 bars)",1251,1429,0.18508,,61.755
+2026-05-13,D,gap not above threshold,1434,1418,0.18331,0.019247,61.755
+2026-05-14,D,gap not above threshold,1436,1431,0.18331,-0.040543,61.04
+2026-05-15,D,gap not above threshold,1434,1437,0.18331,-0.026933,62.015
+2026-05-18,D,"thin day (< 1,300 bars)",1433,897,0.17964,-0.13432,61.98
+2026-05-19,D,TRADE,1434,1318,0.17964,-0.21344,60.16
+2026-05-20,D,gap not above threshold,1434,1435,0.17964,-0.094607,60.585
+2026-05-21,D,gap not above threshold,1433,1431,0.17835,-0.010392,60.12
+2026-05-22,D,"thin day (< 1,300 bars)",1069,1430,0.17835,-0.15259,60.085
+2026-05-25,D,gap not above threshold,1428,1416,0.178,-0.07416,60.085
+2026-05-26,D,gap not above threshold,1436,1428,0.17697,0.025079,58.875
+2026-05-27,D,gap not above threshold,1431,1424,0.17697,0.0077933,57.805
+2026-05-28,D,gap not above threshold,1436,1431,0.17697,0.10822,56.67
+2026-05-29,D,gap not above threshold,1433,1429,0.17697,-0.02854,57.94
+2026-06-01,D,gap not above threshold,1429,1429,0.17658,-0.031761,58.02
+2026-06-02,D,gap not above threshold,1429,1432,0.17409,-0.0014694,56.6
+2026-06-03,D,gap not above threshold,1434,1433,0.17409,0.072124,55.215
+2026-06-04,D,gap not above threshold,1434,1432,0.17409,0.043521,53.755
+2026-06-05,D,gap not above threshold,1435,1430,0.17409,-0.15899,54.425
+2026-06-08,D,gap not above threshold,1436,1425,0.17409,0.012102,55.455
+2026-06-09,D,gap not above threshold,1428,1434,0.17409,-0.064255,55.39
+2026-06-10,D,gap not above threshold,1434,1437,0.17409,-0.078639,54.68
+2026-06-11,D,gap not above threshold,1429,1435,0.17046,0.075949,54.53
+2026-06-12,D,gap not above threshold,1430,1435,0.17046,0.018634,56.555
+2026-06-15,D,gap not above threshold,1438,1438,0.17046,0.14838,55.4
+2026-06-16,D,gap not above threshold,1433,1436,0.169,0.0090703,55.04
+2026-06-17,D,gap not above threshold,1437,1434,0.16853,-0.029907,54.65
+2026-06-18,D,gap not above threshold,1433,1438,0.16778,0.14654,58.105
+2026-06-19,D,gap not above threshold,1433,1434,0.16672,0.014456,58.835
+2026-06-22,D,not stalled (stop < 0.15 x ATR),1433,1436,0.16507,-0.49103,59.025
+2026-06-23,D,gap not above threshold,1434,1426,0.16507,-0.13447,60.6
+2026-06-24,D,gap not above threshold,1433,1428,0.1633,0.050105,62.335
+2026-06-25,D,gap not above threshold,1434,1431,0.16223,-0.026452,63.325
+2026-06-26,D,TRADE,1434,1437,0.16223,0.22008,62.31
+2026-06-29,D,gap not above threshold,1421,1433,0.1633,-0.10333,63.255
+2026-06-30,D,gap not above threshold,1434,1437,0.16223,0.089384,62.89
+2026-07-01,D,TRADE,1436,1432,0.16223,-0.22472,63.49
+2026-07-02,D,gap not above threshold,1422,1424,0.1633,-0.036652,64.6
+2026-07-03,D,gap not above threshold,1438,1436,0.16223,0.017414,66.96
+2026-07-06,D,not stalled (stop < 0.15 x ATR),1430,1426,0.16223,-0.17817,62.74
+2026-07-07,D,gap not above threshold,1422,1437,0.1633,0.12911,61.845
+2026-07-08,D,gap not above threshold,1438,1434,0.1633,-0.15121,61.285
+2026-07-09,D,gap not above threshold,1430,1436,0.1633,0.15641,61.305
+2026-07-10,D,gap not above threshold,1429,1425,0.16223,-0.031985,58.83
+2026-07-13,D,gap not above threshold,1436,1429,0.15975,0.069207,59.665
+2026-07-14,D,gap not above threshold,1437,1434,0.15785,0.12714,60.615
+2026-07-15,D,TRADE,1432,1437,0.15667,-0.18131,62.73
+2026-07-16,D,gap not above threshold,1431,1436,0.15785,0.070196,59.62
+2026-07-17,D,gap not above threshold,1428,1428,0.15785,0.057724,58.03
+2026-07-20,D,gap not above threshold,1429,1435,0.15667,-0.12783,56.28
+2026-07-21,D,TRADE,1430,1428,0.15627,0.40561,55.91
+2026-07-22,D,gap not above threshold,1431,1436,0.15667,-0.042423,54.315
+2026-07-23,D,gap not above threshold,1433,1431,0.15667,-0.099068,52.725
+2026-07-24,D,gap not above threshold,1430,1425,0.15627,-0.08921,53.59
+2026-07-27,D,gap not above threshold,1438,1430,0.15582,-0.0077612,51.415
+2026-07-28,D,gap not above threshold,1437,1438,0.15582,0.019011,51.44
+2026-07-29,D,gap not above threshold,1438,1435,0.15582,0.022436,51.34
+2026-07-30,D,gap not above threshold,1437,1436,0.15582,0.026339,53.115
+2026-07-31,D,gap not above threshold,1437,1436,0.15499,-0.11719,53.36
+2026-08-03,D,gap not above threshold,1440,1436,0.15499,0.062531,55.87
+2026-08-04,D,gap not above threshold,1435,1436,0.15338,0.0036298,56.96
+2026-08-05,D,gap not above threshold,1434,1438,0.15338,0.012006,56.555
+2026-08-06,D,gap not above threshold,1437,1437,0.15338,-0.14722,56.17
+2026-08-07,D,gap not above threshold,1433,1432,0.15268,0.041511,56.55
+2026-08-10,D,not stalled (stop < 0.15 x ATR),1428,1437,0.15268,-0.15768,57.25
+2026-08-11,D,gap not above threshold,1435,1435,0.15338,0.096216,55.13
+2026-08-12,D,gap not above threshold,1430,1434,0.15338,0.0090974,51.7
+2026-08-13,D,gap not above threshold,1428,1435,0.15338,0.023585,50.025
+2026-08-14,D,gap not above threshold,1430,1437,0.15338,-0.034714,49.45
+2026-08-17,D,gap not above threshold,1429,1430,0.15268,-0.019563,51.14
+2026-08-18,D,gap not above threshold,1430,1436,0.15247,-0.032515,51.415
+2026-08-19,D,gap not above threshold,1437,1438,0.15183,0.043995,50.92
+2026-08-20,D,not stalled (stop < 0.15 x ATR),1433,1431,0.15131,-0.23277,55.005
+2026-08-21,D,gap not above threshold,1427,1436,0.15131,-0.087443,53.475
+2026-08-24,D,gap not above threshold,1430,1429,0.15131,-0.089452,53.8
+2026-08-25,D,gap not above threshold,1426,1433,0.15131,0.070021,52.83
+2026-08-26,D,gap not above threshold,1435,1432,0.15131,0.099699,51.65
+2026-08-27,D,gap not above threshold,1433,1426,0.15131,-0.018276,48.57
+2026-08-28,D,gap not above threshold,1434,1429,0.15131,0.062884,44.605
+2026-08-31,D,gap not above threshold,1436,1428,0.15131,0.10132,44.06
+2026-09-01,D,gap not above threshold,1435,1435,0.15116,-0.060193,43.375
+2026-09-02,D,not stalled (stop < 0.15 x ATR),1430,1431,0.15116,0.16829,43.77
+2026-09-03,D,gap not above threshold,1437,1436,0.15131,0.007487,44.275
+2026-09-04,D,gap not above threshold,1435,1436,0.15116,0.11793,44.915
+2026-09-07,D,gap not above threshold,1393,1401,0.15116,0.031325,44.175
+2026-09-08,D,gap not above threshold,1430,1435,0.15116,-0.10356,44.43
+2026-09-09,D,gap not above threshold,1436,1435,0.15116,0.08876,44.905
+2026-09-10,D,gap not above threshold,1433,1437,0.15116,0.060163,44.46
+2026-09-11,D,gap not above threshold,1436,1437,0.15116,-0.031086,45.26
+2026-09-14,D,gap not above threshold,1432,1439,0.14929,-0.06311,44.585
+2026-09-15,D,gap not above threshold,1433,1435,0.14929,-0.045659,45.66
+2026-09-16,D,gap not above threshold,1438,1434,0.14845,0.09784,45.82
+2026-09-17,D,TRADE,1435,1434,0.14845,0.26387,45.16
+2026-09-18,D,gap not above threshold,1435,1437,0.14845,0.011915,45.235
+2026-09-21,D,gap not above threshold,1433,1429,0.14751,-0.040352,44.95
+2026-09-22,D,gap not above threshold,1427,1426,0.14751,0.013476,45.045
+2026-09-23,D,already given back (stop > 0.6 x ATR),1429,1428,0.14751,0.18505,46.06
+2026-09-24,D,gap not above threshold,1437,1436,0.14845,0.053795,48.3
+2026-09-25,D,"thin day (< 1,300 bars)",178,179,0.14845,,49.135
+2026-09-28,D,TRADE,1429,1428,0.14852,-0.28946,49.135
+2026-09-29,D,gap not above threshold,1436,1436,0.1499,-0.066017,46.98
+2026-09-30,D,TRADE,1436,1439,0.14852,-0.15839,47.85
+2026-10-01,D,"thin day (< 1,300 bars)",418,414,0.1499,,48.77
