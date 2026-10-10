@@ -1,0 +1,216 @@
+
+=== Per year and per period, cost 1.5 pips (normal) ===
+                                n  win%  avgW   avgL    totR    R/tr    PF  maxDD    DD% lrun 3+runs
+2016 hidden                    48  35.4 +1.83  -1.06   -1.78  -0.037  0.95  -8.24   -8.2    6      4
+2017 hidden                    48  39.6 +1.84  -1.10   +3.19  +0.066  1.10  -9.84   -9.5    4      5
+2018 hidden                    43  41.9 +1.91  -1.09   +7.03  +0.163  1.26  -5.36   -5.4    4      2
+2019 design                    45  31.1 +1.89  -1.08   -7.15  -0.159  0.79  -9.20   -8.9    5      7
+2020 design                    46  39.1 +1.86  -0.97   +6.25  +0.136  1.23  -6.70   -6.5    8      3
+2021 design                    36  41.7 +1.80  -1.04   +5.18  +0.144  1.24  -5.53   -5.4    5      3
+2022 design                    36  50.0 +1.86  -1.00  +15.47  +0.430  1.86  -3.27   -3.2    4      2
+2023 design                    17  47.1 +1.90  -1.08   +5.54  +0.326  1.57  -5.31   -5.2    5      1
+2024 design                    41  43.9 +1.81  -1.12   +6.88  +0.168  1.27  -7.78   -7.5    7      3
+2025 design                    42  45.2 +1.86  -1.08  +10.57  +0.252  1.43  -4.52   -4.5    4      4
+2026 design                    33  33.3 +1.84  -1.08   -3.40  -0.103  0.86  -6.21   -6.2    4      3
+HIDDEN 2016-2018              139  38.8 +1.86  -1.08   +8.44  +0.061  1.09 -10.50  -10.3    6     11
+DESIGN 2019-Sep 2026          296  40.9 +1.85  -1.05  +39.35  +0.133  1.21 -11.39  -11.2    8     26
+ALL 2016-Sep 2026             435  40.2 +1.85  -1.06  +47.79  +0.110  1.17 -12.28  -12.6    8     37
+
+=== Per year and per period, cost 3.0 pips (double) ===
+                                n  win%  avgW   avgL    totR    R/tr    PF  maxDD    DD% lrun 3+runs
+2016 hidden                    48  35.4 +1.77  -1.13   -4.73  -0.099  0.86 -10.65  -10.4    6      4
+2017 hidden                    48  39.6 +1.75  -1.19   -1.27  -0.027  0.96 -11.68  -11.2    4      5
+2018 hidden                    43  41.9 +1.81  -1.18   +3.06  +0.071  1.10  -6.73   -6.6    4      2
+2019 design                    45  31.1 +1.77  -1.20  -12.31  -0.274  0.67 -12.31  -12.0    5      7
+2020 design                    46  39.1 +1.79  -1.04   +3.22  +0.070  1.11  -7.26   -7.0    8      3
+2021 design                    36  41.7 +1.71  -1.12   +2.15  +0.060  1.09  -6.07   -5.9    5      3
+2022 design                    36  50.0 +1.80  -1.06  +13.30  +0.369  1.70  -3.45   -3.4    4      2
+2023 design                    17  47.1 +1.81  -1.16   +4.07  +0.239  1.39  -5.63   -5.5    5      1
+2024 design                    41  43.9 +1.69  -1.24   +2.02  +0.049  1.07  -8.56   -8.3    7      3
+2025 design                    42  45.2 +1.78  -1.15   +7.44  +0.177  1.28  -5.04   -5.0    4      4
+2026 design                    33  33.3 +1.75  -1.17   -6.51  -0.197  0.75  -8.30   -8.3    4      3
+HIDDEN 2016-2018              139  38.8 +1.78  -1.16   -2.95  -0.021  0.97 -16.09  -15.8    6     11
+DESIGN 2019-Sep 2026          296  40.9 +1.76  -1.14  +13.38  +0.045  1.07 -17.66  -16.6    8     26
+ALL 2016-Sep 2026             435  40.2 +1.77  -1.15  +10.43  +0.024  1.03 -26.52  -24.7    8     37
+
+=== Long vs short ===
+                                n  win%  avgW   avgL    totR    R/tr    PF  maxDD    DD% lrun 3+runs
+hidden LONG                    67  35.8 +1.86  -1.09   -2.08  -0.031  0.96 -11.43  -11.1    6      6
+hidden LONG @3pips             67  35.8 +1.77  -1.17   -7.80  -0.116  0.85 -14.50  -13.8    6      6
+hidden SHORT                   72  41.7 +1.86  -1.08  +10.52  +0.146  1.23  -7.22   -7.1    5      7
+hidden SHORT @3pips            72  41.7 +1.78  -1.16   +4.86  +0.067  1.10  -8.44   -8.2    5      7
+design LONG                   151  41.1 +1.83  -1.05  +19.94  +0.132  1.21  -9.58   -9.5    8     10
+design LONG @3pips            151  41.1 +1.74  -1.14   +6.63  +0.044  1.07 -13.39  -12.9    8     10
+design SHORT                  145  40.7 +1.87  -1.06  +19.41  +0.134  1.21  -6.85   -6.7    6     12
+design SHORT @3pips           145  40.7 +1.78  -1.15   +6.74  +0.047  1.07  -8.40   -8.3    6     12
+all LONG                      218  39.4 +1.84  -1.06  +17.86  +0.082  1.13 -14.22  -14.1    8     16
+all LONG @3pips               218  39.4 +1.75  -1.15   -1.17  -0.005  0.99 -23.33  -21.6    8     16
+all SHORT                     217  41.0 +1.87  -1.06  +29.93  +0.138  1.22  -7.22   -7.1    6     19
+all SHORT @3pips              217  41.0 +1.78  -1.15  +11.60  +0.053  1.08 -12.30  -12.2    6     19
+
+=== By weekday ===
+                                n  win%  avgW   avgL    totR    R/tr    PF  maxDD    DD% lrun 3+runs
+hidden Mon                     28  39.3 +1.84  -1.07   +1.93  +0.069  1.11  -7.63   -7.4    7      2
+hidden Tue                     28  39.3 +1.91  -1.09   +2.55  +0.091  1.14  -6.75   -6.7    5      3
+hidden Wed                     30  46.7 +1.92  -1.09   +9.46  +0.315  1.54  -5.43   -5.3    5      2
+hidden Thu                     20  55.0 +1.84  -1.08  +10.49  +0.525  2.08  -2.18   -2.2    2      0
+hidden Fri                     33  21.2 +1.74  -1.08  -16.00  -0.485  0.43 -18.82  -17.3   10      2
+hidden all except Wed         109  36.7 +1.84  -1.08   -1.02  -0.009  0.99 -10.93  -10.6    7     10
+design Mon                     46  37.0 +1.82  -1.03   +1.23  +0.027  1.04  -9.29   -9.0    6      5
+design Tue                     67  37.3 +1.88  -1.09   +1.24  +0.018  1.03 -12.50  -12.0    7      9
+design Wed                     59  52.5 +1.82  -1.05  +27.24  +0.462  1.93  -5.10   -5.0    5      4
+design Thu                     61  44.3 +1.82  -1.08  +12.23  +0.200  1.33  -6.50   -6.3    6      4
+design Fri                     63  33.3 +1.91  -1.02   -2.58  -0.041  0.94 -12.99  -12.4    8      5
+design all except Wed         237  38.0 +1.86  -1.06  +12.11  +0.051  1.08 -13.22  -12.7    7     23
+all Mon                        74  37.8 +1.83  -1.04   +3.16  +0.043  1.07  -9.29   -9.0    7      7
+all Tue                        95  37.9 +1.89  -1.09   +3.79  +0.040  1.06 -13.39  -13.0    7     12
+all Wed                        89  50.6 +1.85  -1.06  +36.70  +0.412  1.79  -5.43   -5.3    5      6
+all Thu                        81  46.9 +1.82  -1.08  +22.72  +0.280  1.49  -6.50   -6.3    6      4
+all Fri                        96  29.2 +1.87  -1.04  -18.58  -0.194  0.74 -24.76  -22.2   10      8
+all all except Wed            346  37.6 +1.85  -1.06  +11.09  +0.032  1.05 -16.07  -16.2    7     33
+hidden per year, Wednesday vs other days (total R):
+  2016: Wed +2.47 (9 tr), other days -4.25
+  2017: Wed -0.41 (14 tr), other days +3.60
+  2018: Wed +7.40 (7 tr), other days -0.37
+
+=== Without the best trades ===
+hidden: total +8.44 | without best 5 -1.35 | without best 10 -11.05 | best 5 = +1.97, +1.97, +1.96, +1.95, +1.94
+design: total +39.35 | without best 5 +29.52 | without best 10 +19.74 | best 5 = +1.97, +1.97, +1.97, +1.96, +1.96
+all: total +47.79 | without best 5 +37.94 | without best 10 +28.14 | best 5 = +1.97, +1.97, +1.97, +1.97, +1.97
+  2016: total -1.78, without best 3 -7.68, without best 5 -11.57
+  2017: total +3.19, without best 3 -2.59, without best 5 -6.43
+  2018: total +7.03, without best 3 +1.24, without best 5 -2.59
+
+=== Bootstrap (10,000 resamples of the trades): chance the true average is zero or less ===
+hidden R : mean +0.061, 90% range -0.143 .. +0.264, P(mean<=0) = 31.1%
+hidden R3: mean -0.021, 90% range -0.221 .. +0.184, P(mean<=0) = 57.2%
+design R : mean +0.133, 90% range -0.006 .. +0.273, P(mean<=0) = 5.9%
+design R3: mean +0.045, 90% range -0.093 .. +0.188, P(mean<=0) = 29.9%
+all R : mean +0.110, 90% range -0.005 .. +0.223, P(mean<=0) = 5.9%
+all R3: mean +0.024, 90% range -0.091 .. +0.138, P(mean<=0) = 36.8%
+
+=== Exit types ===
+hidden:
+                size    sum  mean
+exit_type                        
+15:59 NY close     3   2.71  0.90
+stop              85 -92.04 -1.08
+target            51  97.76  1.92
+design:
+                size     sum  mean
+exit_type                         
+15:59 NY close    15    0.37  0.02
+stop             166 -180.87 -1.09
+target           115  219.85  1.91
+all:
+                size     sum  mean
+exit_type                         
+15:59 NY close    18    3.08  0.17
+stop             251 -272.91 -1.09
+target           166  317.62  1.91
+
+=== Fill times (London clock) and gapped fills ===
+hidden:
+               size   sum  mean
+fill_hour_ldn                  
+07:00 London    118  9.33  0.08
+08:00 London     17 -1.37 -0.08
+09:00 London      4  0.48  0.12
+  share filled 07:00-07:14 London: 41%; first-minute (07:00) fills: 4; gapped fills (worse than the level): 1
+design:
+               size    sum  mean
+fill_hour_ldn                   
+07:00 London    256  27.37  0.11
+08:00 London     33  11.97  0.36
+09:00 London      5   1.28  0.26
+10:00 London      1  -0.21 -0.21
+11:00 London      1  -1.06 -1.06
+  share filled 07:00-07:14 London: 51%; first-minute (07:00) fills: 49; gapped fills (worse than the level): 3
+all:
+               size    sum  mean
+fill_hour_ldn                   
+07:00 London    374  36.70  0.10
+08:00 London     50  10.60  0.21
+09:00 London      9   1.76  0.20
+10:00 London      1  -0.21 -0.21
+11:00 London      1  -1.06 -1.06
+  share filled 07:00-07:14 London: 48%; first-minute (07:00) fills: 53; gapped fills (worse than the level): 4
+
+=== Risk (stop distance) in pips ===
+hidden: median 17.7, min 5.9, max 49.9; cost share at 1.5 pips = 0.082 R per trade
+design: median 17.6, min 8.1, max 54.5; cost share at 1.5 pips = 0.088 R per trade
+
+=== Quietness (Asia range / median) buckets: does 'quieter = better' hold on hidden data? ===
+hidden:
+         size     sum   mean
+qb                          
+<0.5       24  -3.118 -0.130
+0.5-0.6    41  -0.280 -0.007
+0.6-0.7    74  11.836  0.160
+design:
+         size     sum   mean
+qb                          
+<0.5       42  11.607  0.276
+0.5-0.6    97  22.921  0.236
+0.6-0.7   157   4.824  0.031
+
+=== News days (NFP = US jobs report, FOMC = US rate decision; rule-based dates, approximate) ===
+hidden NFP/FOMC days           14  28.6 +1.92  -1.08   -3.14  -0.224  0.71  -6.72   -6.6    6      1
+hidden normal days            125  40.0 +1.86  -1.08  +11.57  +0.093  1.14 -14.08  -13.4    8     11
+design NFP/FOMC days           33  39.4 +1.92  -1.04   +4.08  +0.124  1.20  -4.74   -4.7    4      2
+design normal days            263  41.1 +1.84  -1.06  +35.27  +0.134  1.22 -12.95  -12.6    7     23
+all NFP/FOMC days              47  36.2 +1.92  -1.06   +0.94  +0.020  1.03  -6.72   -6.6    6      3
+all normal days               388  40.7 +1.85  -1.06  +46.85  +0.121  1.19 -17.16  -16.6    8     34
+
+=== Brexit vote (23 Jun 2016, result overnight into 24 Jun) ===
+       day weekday  asia_range_p  median20_p                   status
+2016-06-20     Mon         145.4       34.35 no setup: Asia not quiet
+2016-06-21     Tue          84.3       35.30 no setup: Asia not quiet
+2016-06-22     Wed          34.6       40.00 no setup: Asia not quiet
+2016-06-23     Thu          51.3       40.00 no setup: Asia not quiet
+2016-06-24     Fri        1653.9       42.10 no setup: Asia not quiet
+2016-06-27     Mon         117.4       47.30 no setup: Asia not quiet
+2016-06-28     Tue         116.7       56.50 no setup: Asia not quiet
+2016-06-29     Wed          69.2       56.50 no setup: Asia not quiet
+2016-06-30     Thu          86.8       65.30 no setup: Asia not quiet
+2016-07-01     Fri          52.9       69.05 no setup: Asia not quiet
+Trades 23 Jun - 31 Jul 2016:
+      date weekday direction fill_london  risk_p exit_type       R
+2016-07-04     Mon     SHORT       07:59    36.8      stop -1.0408
+2016-07-05     Tue     SHORT       07:05    45.4    target  1.9670
+2016-07-11     Mon      LONG       07:05    43.8      stop -1.0342
+2016-07-20     Wed      LONG       09:31    49.9    target  1.9699
+2016-07-22     Fri      LONG       07:08    35.9      stop -1.0418
+2016-07-25     Mon      LONG       07:03    33.5      stop -1.0448
+2016-07-26     Tue     SHORT       07:31    42.1      stop -1.0356
+Hidden without 23 Jun - 31 Jul 2016: +9.70 R (132 trades)
+Hidden 2016 without 23 Jun - 31 Jul 2016: -0.52 R
+Pound flash crash (7 Oct 2016, during Asia):
+       day  asia_range_p  median20_p                   status
+2016-10-06          50.1       30.55 no setup: Asia not quiet
+2016-10-07         583.7       34.70 no setup: Asia not quiet
+2016-10-10          51.6       34.70 no setup: Asia not quiet
+
+=== Months and quarters ===
+hidden: months positive 14 of 33 (months with trades); worst month 2016-11 -3.37; best 2017-03 +5.42
+hidden: quarters positive 9 of 12; worst 3 quarters: 2016Q4 -7.84, 2017Q4 -3.27, 2017Q3 -0.85
+design: months positive 41 of 83 (months with trades); worst month 2021-08 -5.53; best 2022-10 +9.49
+design: quarters positive 19 of 30; worst 3 quarters: 2019Q4 -6.23, 2019Q1 -4.72, 2023Q1 -3.40
+Hidden by quarter: 2016Q1 +0.6, 2016Q2 +3.4, 2016Q3 +2.0, 2016Q4 -7.8, 2017Q1 +7.1, 2017Q2 +0.2, 2017Q3 -0.9, 2017Q4 -3.3, 2018Q1 +0.1, 2018Q2 +1.1, 2018Q3 +5.1, 2018Q4 +0.7
+
+=== Losing runs (all trades in date order) ===
+hidden: run lengths {1: np.int64(18), 2: np.int64(12), 3: np.int64(5), 4: np.int64(3), 5: np.int64(2), 6: np.int64(1)}
+design: run lengths {1: np.int64(25), 2: np.int64(21), 3: np.int64(11), 4: np.int64(8), 5: np.int64(2), 6: np.int64(3), 7: np.int64(1), 8: np.int64(1)}
+all: run lengths {1: np.int64(43), 2: np.int64(33), 3: np.int64(16), 4: np.int64(11), 5: np.int64(4), 6: np.int64(4), 7: np.int64(1), 8: np.int64(1)}
+
+=== Consistency with Agent 1 (design, round3/v3_trades.csv) ===
+Agent 1: 300 trades +43.54 R | Agent 2: 296 trades +39.35 R
+Same days: 296; same direction: 296; largest R difference on same days: 0.00005
+Only Agent 1: 2019-04-16 (+1.37), 2020-04-09 (-1.03), 2024-01-12 (+1.92), 2026-04-24 (+1.92)
+Only Agent 2: 
+Alternative median reading (only rule-11-valid days count): hidden 139 trades +8.44 R
+Alternative median reading (only rule-11-valid days count): design 296 trades +41.15 R
+
+Weeks with trades: 280; positive 133, negative 147; worst week -5.49, best +5.82
+  hidden: weeks with trades 93, positive 44, negative 49
+  design: weeks with trades 186, positive 88, negative 98
