@@ -1,0 +1,33 @@
+--- V0 = GBPUSD v3 unchanged on EURUSD  (cost 1.2 pips)
+period   n win  totR  perTr   PF  maxDD  lrun
+  2019  43 35%  -6.1 -0.142 0.81  -14.4    11
+  2020  55 31%  -9.8 -0.178 0.75  -14.2     6
+  2021  36 44%   4.7  0.130 1.21   -7.9     5
+  2022  31 35%   0.0  0.001 1.00   -6.6     6
+  2023  20 20%  -9.8 -0.490 0.44  -12.0    11
+  2024  35 20% -19.6 -0.559 0.38  -20.4    13
+  2025  46 30%  -6.2 -0.136 0.81  -12.1     7
+  2026  41 44%   5.3  0.130 1.22   -5.3     4
+   ALL 307 33% -41.5 -0.135 0.81  -60.9    15
+longs 138 -26.2R (-0.190/tr) | shorts 169 -15.3R (-0.090/tr) | without best 5: -51.3R | median risk 13.7 p | min risk 4.6 p
+--- V0 = GBPUSD v3 unchanged on EURUSD  (cost 2.4 pips)
+period   n win  totR  perTr   PF  maxDD  lrun
+  2019  43 35% -12.0 -0.279 0.67  -16.8    11
+  2020  55 31% -14.0 -0.254 0.67  -16.5     6
+  2021  36 42%   1.2  0.034 1.05   -9.2     5
+  2022  31 35%  -1.9 -0.063 0.91   -7.3     6
+  2023  20 20% -11.6 -0.581 0.38  -13.1    11
+  2024  35 20% -23.9 -0.682 0.32  -24.5    13
+  2025  46 30%  -9.3 -0.203 0.73  -13.7     7
+  2026  41 41%   1.5  0.037 1.06   -6.3     5
+   ALL 307 33% -70.0 -0.228 0.71  -80.7    15
+longs 138 -39.1R (-0.283/tr) | shorts 169 -30.9R (-0.183/tr) | without best 5: -79.6R | median risk 13.7 p | min risk 4.6 p
+skipped: {'gap': 137, 'not_quiet': 1572, 'no_break': 0, 'both': 0, 'small': 0}; exits {'stop': 198, 'target': 88, 'close': 21}; trades/yr 40
+
+V0b dose-response (descriptive): threshold -> trades, total R, R/trade, years positive
+  <0.6: n=129 totR=-19.1 perTr=-0.148 yrs+=5/8
+  <0.7: n=307 totR=-41.5 perTr=-0.135 yrs+=3/8
+  <0.8: n=515 totR=-56.6 perTr=-0.110 yrs+=2/8
+  <0.9: n=745 totR=-51.3 perTr=-0.069 yrs+=4/8
+  <1.0: n=951 totR=-72.6 perTr=-0.076 yrs+=3/8
+  <99: n=1793 totR=-90.9 perTr=-0.051 yrs+=3/8

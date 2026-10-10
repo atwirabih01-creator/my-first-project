@@ -1,24 +1,109 @@
-# GBPUSD weekly report: strategy v3 ("Quiet-Asia breakout"), round 3
+# GBPUSD: Final strategy for this round, "Quiet-Asia breakout" (v3)
 
-Prepared by Agent 2 (Backtest & Performance Manager), Sunday report for 10 Oct 2026. Replaces the v1 report.
-Grade for the owner: **B: Promising** (not proven). Details: `FINAL-STRATEGY.md`. Feedback to Agent 1: `feedback.md`.
+Prepared by Agent 2 (Backtest & Performance Manager), 10 Oct 2026. Written for someone who has never seen the strategy.
 
-**How to read the table.** One row per Monday-Friday week, Jan 2016 to Sep 2026. "Period" says whether the week was **hidden**
-(2016-2018: nobody saw these prices while the rules were written; this is the real test) or **design** (2019-2026: the rules
-were built on these prices, so they flatter the strategy). Results are after a cost of 1.5 pips per trade. 1 R = the 1% of the
-account risked per trade. "Target" = take profit reached (about +1.9 R), "stop" = stop loss hit (about -1.1 R), "15:59 close" =
-closed at the end of the New York day. The strategy trades on about 1 day in 6 (only after an unusually quiet night), so many weeks
-have no trade. "Skipped" = days the rules did not allow: warm-up (the first 20 days of each data file, needed for the 20-day median),
-holiday/short day, or a hole in the price data. Feb-Jul 2023 has many holes in the price data, so few trades there.
+> ## Grade: **B: Promising** (not proven)
+> **What B means:** it made money on price data that nobody used to build the rules, but the edge is small and uneven.
+> It is **not** a proven strategy (that would be grade A). My test verdict was **IMPROVE**, so it must not be traded with real money
+> before your own checks.
+>
+> **The evidence in four lines:**
+> - On the 3 years nobody had seen when the rules were written (2016-2018): 139 trades, **+8.4 R** (about +8% of the account),
+>   2 of 3 years positive (2016 -1.8 R, 2017 +3.2 R, 2018 +7.0 R). Longest losing run: 6. Worst drop from a peak: 10.5 R (about 10%).
+> - But that is only **+0.06 R per trade**. If your costs are double the test's (3 pips instead of 1.5), those 3 years **lose 3.0 R**.
+>   Without the 5 best hidden trades, they **lose 1.4 R**. There is roughly **a 1 in 3 chance the real edge is zero**.
+> - On the 7.75 years the rules were built on (2019 - Sep 2026) it made +39.4 R (+0.13 R per trade), but it was picked as the best of 47
+>   ideas tested on those years, so that number flatters it.
+> - All 10.75 years together: 435 trades, +47.8 R, 8 of 11 years positive, longest losing run 8.
+>
+> **What would upgrade it to A:** at least 50 new trades (about 15 months at this strategy's pace) from your own demo trading from now on,
+> at your real broker cost, clearly positive at more than +0.10 R per trade, with no losing run longer than 8.
+> **What would downgrade it (stop using it):** a losing run of **9 or more** trades (never happened in 10.75 years), or any calendar quarter
+> worse than **-7.8 R** (the worst quarter seen, Oct-Dec 2016), or an all-in broker cost above 1.5 pips per trade at 07:00 London.
 
-## Totals
-| Period | Trades | Win rate | Total (R) | Per trade (R) | Biggest drop | Longest losing run |
-|---|---|---|---|---|---|---|
-| **Hidden 2016-2018** | 139 | 39% | **+8.4** | +0.06 | -10.5 R (-10.3%) | 6 |
-| Design 2019 - Sep 2026 | 296 | 41% | +39.4 | +0.13 | -11.4 R (-11.2%) | 8 |
-| All | 435 | 40% | +47.8 | +0.11 | -12.3 R (-12.6%) | 8 |
+*Past results do not guarantee future results. Trading carries a real risk of loss. This is not financial advice.*
 
-## Week by week, Jan 2016 - Sep 2026
+---
+
+## 1. Why it works (the idea in plain words)
+During the Asian night the pound usually moves in a box of about 25-40 pips. Some nights it is unusually quiet, with a box much smaller
+than normal. When London opens (07:00 London time), the big banks and funds arrive, and after a quiet night the price often breaks out of
+the night's box and keeps going.
+
+The strategy does not guess the direction. It places two waiting orders: one to **buy** if price rises above the night's high, and one to
+**sell** if price falls below the night's low. Whichever is triggered first is the trade, and the other order is cancelled. The stop loss
+is the other side of the box, so it is small; the take profit is twice the stop distance.
+
+Honest note: it wins only about **4 trades in 10**. It makes money because each win (about +1.9 R) is almost twice the size of each loss
+(about -1.1 R). Because the stop is small (typically 18 pips), the trading cost (1.5 pips) takes about 0.08 R from every trade, which is
+more than the whole edge seen on the hidden years. **Your broker's cost decides whether this strategy makes money.**
+
+---
+
+## 2. Backtest results
+
+**How it was tested:** a computer program walked through every minute of GBPUSD price data (1-minute candles, HistData bid prices) from
+Jan 2016 to Sep 2026, following the rules below exactly. Every trade has a **cost of 1.5 pips** (spread and slippage) taken off. If the stop
+and the target were both touched in the same minute, the test counted the stop. 1 R = the 1% of the account risked per trade. The trade
+list is in `backtest/trades_v3.csv` (date, Doha / New York / London time, direction, entry, stop, target, exit, result), so you can check
+any trade by hand. The test program was written independently of the researcher's; on the 296 days both programs trade, every trade matches.
+
+**Periods:** **hidden** = 2016-2018, not used to build the rules (the real test). **design** = 2019 - Sep 2026, used to build the rules.
+
+| Period | Trades | Win rate | Avg win / avg loss | Total | Per trade | Profit factor* | Biggest drop | Longest losing run | Total at 3-pip cost |
+|---|---|---|---|---|---|---|---|---|---|
+| 2016 (hidden) | 48 | 35% | +1.83 / -1.06 R | **-1.8 R** | -0.04 R | 0.95 | -8.2 R | 6 | -4.7 R |
+| 2017 (hidden) | 48 | 40% | +1.84 / -1.10 R | **+3.2 R** | +0.07 R | 1.10 | -9.8 R | 4 | -1.3 R |
+| 2018 (hidden) | 43 | 42% | +1.91 / -1.09 R | **+7.0 R** | +0.16 R | 1.26 | -5.4 R | 4 | +3.1 R |
+| 2019 (design) | 45 | 31% | +1.89 / -1.08 R | -7.2 R | -0.16 R | 0.79 | -9.2 R | 5 | -12.3 R |
+| 2020 (design) | 46 | 39% | +1.86 / -0.97 R | +6.3 R | +0.14 R | 1.23 | -6.7 R | 8 | +3.2 R |
+| 2021 (design) | 36 | 42% | +1.80 / -1.04 R | +5.2 R | +0.14 R | 1.24 | -5.5 R | 5 | +2.2 R |
+| 2022 (design) | 36 | 50% | +1.86 / -1.00 R | +15.5 R | +0.43 R | 1.86 | -3.3 R | 4 | +13.3 R |
+| 2023 (design; Feb-Jul data holes) | 17 | 47% | +1.90 / -1.08 R | +5.5 R | +0.33 R | 1.57 | -5.3 R | 5 | +4.1 R |
+| 2024 (design) | 41 | 44% | +1.81 / -1.12 R | +6.9 R | +0.17 R | 1.27 | -7.8 R | 7 | +2.0 R |
+| 2025 (design) | 42 | 45% | +1.86 / -1.08 R | +10.6 R | +0.25 R | 1.43 | -4.5 R | 4 | +7.4 R |
+| 2026 Jan-Sep (design) | 33 | 33% | +1.84 / -1.08 R | -3.4 R | -0.10 R | 0.86 | -6.2 R | 4 | -6.5 R |
+| **All hidden 2016-2018** | **139** | **39%** | +1.86 / -1.08 R | **+8.4 R** | **+0.06 R** | 1.09 | **-10.5 R (-10.3%)** | **6** | **-3.0 R** |
+| All design 2019 - Sep 2026 | 296 | 41% | +1.85 / -1.05 R | +39.4 R | +0.13 R | 1.21 | -11.4 R (-11.2%) | 8 | +13.4 R |
+| **All 10.75 years** | **435** | **40%** | +1.85 / -1.06 R | **+47.8 R** | **+0.11 R** | 1.17 | **-12.3 R (-12.6%)** | **8** | +10.4 R |
+
+*Profit factor = money won ÷ money lost. Above 1 means profit; 1.1 is thin, 1.5 or more is solid.
+
+**Losing streaks:** streaks of 3 or more losses in a row happened 11 times in the 3 hidden years and 37 times in 10.75 years. The longest
+were 8 (once, in 2020) and 7 (once, in 2024). Expect several runs of 4-6 losses every year.
+
+**Buying vs selling:** shorts (selling) made +29.9 R on 217 trades over all years and +10.5 R on the hidden years. Longs (buying) made
++17.9 R on 218 trades over all years, but **lost 2.1 R** on the hidden years (67 trades).
+
+**By weekday (all 10.75 years):** Mon +3.2 R (74 trades), Tue +3.8 R (95), **Wed +36.7 R** (89), **Thu +22.7 R** (81), **Fri -18.6 R** (96).
+On the hidden years: Mon +1.9, Tue +2.6, Wed +9.5, Thu +10.5, **Fri -16.0 R** (33 trades, only 21% wins). The rules do not skip Fridays,
+because that pattern was found after the test and cannot be proven on these data. It is your choice to watch it (see section 4).
+
+**How trades ended (all years):** target reached 166 trades (38%), +317.6 R; stop hit 251 (58%), -272.9 R; closed at 15:59 New York
+18 (4%), +3.1 R.
+
+**When the orders were filled:** 86% of trades are filled in the first London hour (07:00-07:59 London), about half in the first 15 minutes.
+Only 4 of 435 fills were at a worse price than the box edge because price jumped past it.
+
+**News days:** US jobs report (NFP) and US interest-rate decision (FOMC) days were traded like any other day. All years: 47 trades, +0.9 R
+(about zero); hidden years: 14 trades, -3.1 R. Skipping them is your choice; the rules do not require it.
+
+**Brexit vote (June 2016), reported separately:** on 23 June 2016 (vote day) and 24 June (result night, when the pound fell more than
+1,600 pips during Asia) the night was not quiet, so **no trade** either day. The 7 Oct 2016 "flash crash" night was also skipped.
+After the vote, nights stayed wild for weeks, so the 20-day "normal" was very high and July 2016 had 7 trades with wide stops (34-50 pips):
+together -2.3 R. Hidden total without 23 Jun - 31 Jul 2016: +9.7 R.
+
+**Worst stretches:** worst quarter Oct-Dec 2016 (-7.8 R), then Oct-Dec 2019 (-6.2 R); worst month Aug 2021 (-5.5 R); worst week -5.5 R.
+Fewer than half of the months with a trade were positive (55 of 116); the profit comes from a minority of strong months.
+
+**Missing data:** the 2019-2026 file has holes on most days from Feb to Jul 2023, so those days were skipped. The first 20 days of each file
+were skipped (warm-up for the 20-day median). The 2016-2018 file is clean.
+
+### Week-by-week table, Jan 2016 - Sep 2026
+How to read it: one row per week, Monday to Friday. "Result" is after costs. "15:59 close" = closed at the end of the New York day without
+hitting stop or target. Labels in brackets: NFP = US jobs report, FOMC = US interest-rate decision. "Skipped" = days the rules did not allow.
+Weeks with 0 trades and no "skipped" note simply had no quiet night (or no breakout); the strategy trades on about 1 day in 6.
+
 | Week (Mon - Fri) | Period | Trades | Wins | Losses | Win rate | Result (R) | Running total (R) | Notes |
 |---|---|---|---|---|---|---|---|---|
 | 04 Jan 16 - 08 Jan 16 | hidden | 0 | 0 | 0 | - | 0 | +0.00 | skipped: warm-up (5 d) |
@@ -583,15 +668,137 @@ holiday/short day, or a hole in the price data. Feb-Jul 2023 has many holes in t
 | 21 Sep 26 - 25 Sep 26 | design | 0 | 0 | 0 | - | 0 | +47.79 | skipped: holiday/short day (1 d) |
 | 28 Sep 26 - 02 Oct 26 | design | 0 | 0 | 0 | - | 0 | +47.79 |  |
 
-## Summary
-- **Working:** the hidden years made money in total (+8.4 R), with 2017 (+3.2 R) and 2018 (+7.0 R) positive. Losing runs stayed short
-  (longest 6 on hidden data, 8 over 10.75 years). The two big shock days of 2016 (Brexit result, flash crash) were automatically skipped.
-- **Not working:** the hidden edge is very thin (+0.06 R per trade): at a cost of 3 pips the hidden years lose (-3.0 R), and without the 5
-  best hidden trades they lose too (-1.4 R). 2016 (-1.8 R), 2019 (-7.2 R) and 2026 so far (-3.4 R) were losing years. Fridays lost in both
-  periods (all years: 96 trades, -18.6 R). Of the 93 hidden weeks with a trade, 49 lost money. Worst hidden quarter: Oct-Dec 2016 (-7.8 R).
-- **Being changed:** nothing in the rules (they are frozen). Agent 1 has been asked to tighten the wording of the 20-day median rule
-  and to study the cost problem and the Friday result, but any new filter can only be proven on new data.
-- **Watch next week:** this is a backtest only. If you start demo trading, log each trade against the checklist in `FINAL-STRATEGY.md`
-  and compare with the test: about 1 trade a week, about 4 wins in 10, wins near +1.9 R and losses near -1.1 R.
+---
 
-*Past results do not guarantee future results. This is not financial advice.*
+## 3. Step by step, A to Z
+
+### 3.1 Clocks
+The rules use **London's clock** for the night box and the order window, and **New York's clock** for the forced close.
+Doha never changes its clock, but the UK and the US do:
+- **UK summer time:** last Sunday of March to last Sunday of October (London = Doha - 2 hours). **UK winter time:** the rest (London = Doha - 3 hours).
+- **US summer time:** 2nd Sunday of March to 1st Sunday of November. **US winter time:** the rest.
+
+| Step | London | New York (normal weeks) | Doha, UK summer (late Mar - late Oct) | Doha, UK winter (late Oct - late Mar) |
+|---|---|---|---|---|
+| Night box: watch, do nothing | 00:00 - 06:59 | 19:00 (evening before) - 01:59 | 02:00 - 08:59 | 03:00 - 09:59 |
+| Place both orders | 07:00 | 02:00 | 09:00 | 10:00 |
+| Cancel any unfilled order | 12:00 (end of the 11:59 candle) | 07:00 | 14:00 | 15:00 |
+
+| Forced close (any open trade) | New York | Doha, US summer (2nd Sun Mar - 1st Sun Nov) | Doha, US winter |
+|---|---|---|---|
+| Close at the end of the 15:59 candle | 16:00 | 23:00 | 00:00 (midnight) |
+
+**The "odd" weeks (2-3 a year):** from the 2nd to the last Sunday of March, and from the last Sunday of October to the 1st Sunday of
+November, the US is on summer time but the UK is not. In those weeks London is only 4 hours ahead of New York: the box is 20:00 - 02:59
+New York, orders go in at 03:00 New York and expire at 08:00 New York. **The Doha times do not change** in those weeks: use the
+"UK winter" column (box 03:00 - 09:59, orders 10:00, expiry 15:00) and the "US summer" forced close (23:00 Doha).
+Simplest: put a London clock on your phone or chart and always follow it for the box and the orders.
+
+### 3.2 Which days to trade
+- Any Monday to Friday. **One trade per day at most.**
+- **Do not trade** on short days and holidays (Christmas Day, New Year's Day, and any day your chart shows clearly fewer candles than
+  normal), or when your chart has a hole of more than 15 minutes between 19:00 New York the evening before and 16:00 New York.
+- News days (US jobs report, US rate decision, UK data) were **traded** in the test. Skipping them is your choice.
+- **Fridays:** in the test, Friday trades lost money in both periods (all years: 96 trades, -18.6 R). The rules still trade Fridays,
+  because this was found after the test. If you want to skip Fridays, decide that **before** you start demo trading and keep to it.
+
+### 3.3 Every day: build the "normal night" list (5 minutes)
+Chart: **GBPUSD, 1-minute candles** (a 5-minute chart gives the same high and low).
+Keep a simple spreadsheet with one row per weekday: date, Asia High, Asia Low, **Asia range in pips** = (High - Low) × 10,000.
+- **Asia box** = the highest high (Asia High) and lowest low (Asia Low) of all candles from **00:00 to 06:59 London time**.
+- **Normal night** = the **median** of the Asia ranges of the **previous 20 weekdays** (not today). Median = put the 20 numbers in order and
+  take the average of the 10th and 11th. In a spreadsheet: `=MEDIAN(` the 20 cells above `)`.
+- Count every previous weekday whose box you can see in full, including holidays like Good Friday. Skip a day only if your chart has a hole
+  in it during the box. You need 20 days before the first trade.
+
+### 3.4 Before 07:00 London: is tonight quiet? (the setup)
+- **Quiet** = today's Asia range is **smaller than 0.7 × the normal night**. Example: normal night 26.8 pips → 0.7 × 26.8 = 18.8 pips.
+  Today's box is 16.7 pips → quiet → trade today. If it is 18.8 pips or more → **no trade today**, close the chart.
+
+### 3.5 At 07:00 London (09:00 Doha in UK summer / 10:00 Doha in UK winter): place two orders
+- **Buy stop** at the **Asia High**, with stop loss at the **Asia Low**, take profit at **Asia High + 2 × (Asia High - Asia Low)**.
+- **Sell stop** at the **Asia Low**, with stop loss at the **Asia High**, take profit at **Asia Low - 2 × (Asia High - Asia Low)**.
+- **Position size** for each order (so the stop costs 1% of the account):
+  size in lots = (1% of balance) ÷ (box size in pips × value of 1 pip per lot). For GBPUSD, 1 pip on 1 standard lot is about 10 USD.
+  Example: balance 10,000 USD, risk 100 USD, box 16.7 pips → 100 ÷ (16.7 × 10) = **0.60 lots**.
+- If the box is under 3 pips, do not trade (never happened in 10.75 years; the smallest was 5.9 pips).
+
+### 3.6 Wait for the confirmation: the first order to be filled
+- The confirmation **is** the fill: price trades beyond one side of the box. There is no other signal to wait for.
+- **As soon as one order fills, cancel the other one.** (Many platforms let you link them as "one cancels the other", OCO.)
+- If price jumps past the level, your fill may be a little worse than the box edge; keep the stop and target where they are calculated
+  from the actual fill price (target = fill ± 2 × distance from fill to stop).
+- If both sides are broken within the same minute, the test took no trade (happened 3 times in 10.75 years).
+- **If nothing fills by 12:00 London** (14:00 Doha UK summer / 15:00 Doha UK winter), cancel both orders. No trade today.
+
+### 3.7 Stop loss and take profit (already attached to the orders)
+- **Long (bought at Asia High):** stop = Asia Low; target = entry + 2 × (entry - Asia Low).
+- **Short (sold at Asia Low):** stop = Asia High; target = entry - 2 × (Asia High - entry).
+- A stop-out costs about -1.1 R after costs; a target is about +1.9 R.
+
+### 3.8 Managing the trade
+- **Do nothing.** No break-even move, no partial profits, no moving the stop or target. The test did none of this.
+
+### 3.9 Closing time and daily limits
+- **Close any open trade at 16:00 New York** (end of the 15:59 candle) = **23:00 Doha in US summer time, 00:00 midnight Doha in US winter time.**
+  Never hold overnight. In the test only 4% of trades were still open by then.
+- **One trade per day.** After it closes (stop, target or 16:00 New York), stop for the day.
+
+### 3.10 Worked example: Tuesday 23 June 2026 (UK and US summer time)
+- **Box (00:00 - 06:59 London = 02:00 - 08:59 Doha = 19:00 - 01:59 New York):** Asia High **1.32496**, Asia Low **1.32329**,
+  range **16.7 pips**.
+- **Normal night:** median of the previous 20 weekdays' ranges = **26.8 pips**; 0.7 × 26.8 = 18.8. 16.7 < 18.8 → **quiet, trade today**.
+- **07:00 London (09:00 Doha, 02:00 New York):** buy stop 1.32496 (stop 1.32329, target 1.32830); sell stop 1.32329 (stop 1.32496,
+  target **1.31995**). Size for 1% risk on 10,000 USD: 100 ÷ (16.7 × 10) = 0.60 lots.
+- **07:37 London (09:37 Doha, 02:37 New York):** price fell below 1.32329 → **sold at 1.32329**. Buy stop cancelled.
+- **15:36 London (17:36 Doha, 10:36 New York):** the target **1.31995** was reached. +33.4 pips - 1.5 pips cost = 31.9 pips ÷ 16.7 = **+1.91 R**.
+- For contrast, the next day (Wed 24 June 2026) was also quiet: bought at 1.32043 at 07:10 London (09:10 Doha) and stopped out at 1.31867
+  at 07:57 London (09:57 Doha): **-1.09 R**.
+
+### 3.11 Checklist before every trade (tick all)
+- [ ] Monday to Friday, not a holiday or short day, no hole in my chart from 19:00 New York yesterday to now.
+- [ ] Asia box (00:00 - 06:59 **London**) marked: High ______ Low ______ Range ______ pips.
+- [ ] Normal night (median of the previous 20 weekdays) = ______ pips. 0.7 × normal = ______.
+- [ ] Today's range is **smaller** than 0.7 × normal. (If not: no trade today.)
+- [ ] It is 07:00 London (09:00 Doha UK summer / 10:00 Doha UK winter). No trade taken yet today.
+- [ ] Buy stop at Asia High and sell stop at Asia Low placed, each with its stop (other side) and target (2 × box), linked as one-cancels-the-other.
+- [ ] Size = 1% risk on the box size. My broker's spread + commission is not more than 1.5 pips.
+- [ ] Alarm at 12:00 London to cancel unfilled orders (14:00 / 15:00 Doha).
+- [ ] Alarm at 16:00 New York to close the trade if still open (23:00 Doha US summer / 00:00 Doha US winter).
+
+---
+
+## 4. Known weaknesses (read these before trading it)
+1. **The edge is thin and very sensitive to cost.** On the hidden years it is about +0.06 R per trade: on a 10,000 USD account risking
+   100 USD, about +6 USD per trade on average, with big swings around it. At 3 pips cost the hidden years lose money. Roughly a 1 in 3
+   chance the real edge is zero.
+2. **It depends on a few good trades.** Without the 5 best hidden trades, the hidden years lose 1.4 R. Each hidden year is negative without
+   its 5 best trades.
+3. **Losing years happen:** 2016 (-1.8 R), 2019 (-7.2 R) and 2026 so far (-3.4 R). With only about 40 trades a year, a whole year can be
+   negative by chance. Fewer than half of the months with a trade are positive.
+4. **The main reason to believe in it did not repeat.** On 2019-2026, the quieter the night, the better the trade. On 2016-2018 the very
+   quietest nights (box under half of normal) lost money, and the best were the "just quiet" nights (0.6-0.7 × normal).
+5. **Buying was weak on the hidden years** (-2.1 R on 67 trades), and **Fridays lost in both periods** (all years -18.6 R).
+6. **Wednesday and Thursday carry the profit.** Over all years, Monday + Tuesday + Friday together lost 11.6 R; Wednesday + Thursday made +59.4 R.
+   There is no clear reason for this, so it may not last.
+7. **Early-morning fills:** about half the trades fill in the first 15 minutes of the London open, when spreads can be wider at some brokers.
+   The test used bid prices; on a real chart a buy stop triggers on the ask price, about one spread earlier, so a few trades may differ.
+8. **It was the best of 47 ideas tried in this round.** Picking the best of many makes it look better than it is; the hidden years
+   (+0.06 R per trade) are the honest number, not the design years (+0.13 R).
+9. **Data:** one free data source (HistData bid prices). Your broker's prices will differ slightly, which can change individual trades.
+
+---
+
+## 5. Before you use it: your own checks
+1. **Check your broker's cost** for GBPUSD at 07:00 - 08:00 London: spread plus commission per round trip. If it is more than 1.5 pips,
+   do not use this strategy: the test says it does not survive higher costs.
+2. **Repeat the backtest by hand** on at least 20 trades from the list (`backtest/trades_v3.csv`), including 23 June 2026 above: same box,
+   same "quiet" decision, same direction, similar entry, stop and target on your broker's chart. Note any differences. Also check a few
+   days the test did **not** trade (`backtest/days_v3.csv` gives the reason for every day).
+3. **Demo-trade it** (a practice account, no real money) following the checklist exactly. It trades only about once a week, so give it at
+   least **6 months** (about 20 trades) before judging, and expect losing runs of 4-6 trades. Compare with the test: about 4 wins in 10,
+   wins near +1.9 R, losses near -1.1 R.
+4. Only then decide, yourself, whether to go live, and with how much risk. Given grade B, consider risking less than 1% at first.
+
+*Past results do not guarantee future results. A strategy that made money in the past can lose money in the future.
+Trading carries a real risk of loss. This is not financial advice.*

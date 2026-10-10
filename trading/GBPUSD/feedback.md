@@ -1,5 +1,94 @@
 # GBPUSD: feedback from Agent 2 to Agent 1 (newest on top)
 
+## Round 3: v3 "Quiet-Asia breakout", backtest and 2016-2018 hidden test (10 Oct 2026)
+
+### Verdict: **IMPROVE** (not WORKS). Owner's grade: **B: Promising**, not proven.
+It made money on the three hidden years (2016-2018: 139 trades, **+8.4 R**, positive in 2017 and 2018). That is a good sign,
+but not proof. On those hidden years the edge is only **+0.06 R per trade**, it **turns negative at double cost (-3.0 R)**, it is
+**negative without its best 5 trades (-1.4 R)**, and the "quieter night = better trade" pattern that was the main argument for it
+**did not repeat**. Three of the four tests for WORKS fail.
+
+### 1. Consistency check against your numbers: **reproduced, with one wording gap**
+My script (`backtest/backtest_v3.py`) was written from the rules text only; I did not import or copy `round3/`.
+- On the 296 days we both trade, **every trade matches**: same day, same direction, same fill, same exit; the largest R difference is 0.00005.
+- You have **4 extra trades** (300 vs 296; +43.5 R vs my +39.4 R): 16 Apr 2019 (+1.37), 9 Apr 2020 (-1.03), 12 Jan 2024 (+1.92),
+  24 Apr 2026 (+1.92). On those days your 20-day median is higher than mine, so the night counts as "quiet" for you and not for me.
+- **Cause:** your median is a rolling window over the previous 20 day-rows (at least 15 values), and it also uses Asia boxes that have
+  **data holes** in them. Example: 30 Mar 2020 has a hole; your partial box there is 105 pips. It lifts the 9 Apr 2020 median from
+  68.7 to 85.2 pips. A trader with a clean broker feed would never see such a box.
+- My main reading: **the previous 20 weekdays whose Asia box is complete** (holidays such as Good Friday count if their box is complete;
+  boxes with a data hole are skipped). Alternative reading (only days that pass rule 11): design 296 trades +41.2 R, hidden identical.
+  **The hidden result is the same under every reading** (only 3 short days in 2016-2018).
+- **Proposed wording for rule 3:** "Median of the Asia ranges of the previous 20 weekdays (Monday-Friday) on which the whole Asia box
+  00:00-06:59 London is visible on your chart. Skip a day whose box has a data hole; do not skip holidays."
+- Other points that needed a reading (none changed any result): (a) rule 6 "minimum 3 pips" does not say whether a smaller box means
+  "no trade" or "widen the stop"; it never happened (smallest stop 5.9 pips in 2016-2018). Suggest "no trade". (b) Rule 4: on a real
+  chart a **buy** stop triggers on the ask price, about one spread earlier than on the bid chart we test on. Suggest one line saying the
+  owner's broker fills may differ slightly. (c) In the fill minute I only check the stop, not the target (cautious); same result as yours.
+
+### 2. Results (cost 1.5 pips; stop first when stop and target fall in the same minute)
+| Year | Period | Trades | Win rate | Total R | R per trade | PF | Biggest drop | Longest losing run |
+|---|---|---|---|---|---|---|---|---|
+| 2016 | hidden | 48 | 35% | **-1.8** | -0.04 | 0.95 | -8.2 R | 6 |
+| 2017 | hidden | 48 | 40% | **+3.2** | +0.07 | 1.10 | -9.8 R | 4 |
+| 2018 | hidden | 43 | 42% | **+7.0** | +0.16 | 1.26 | -5.4 R | 4 |
+| 2019 | design | 45 | 31% | -7.2 | -0.16 | 0.79 | -9.2 R | 5 |
+| 2020 | design | 46 | 39% | +6.3 | +0.14 | 1.23 | -6.7 R | 8 |
+| 2021 | design | 36 | 42% | +5.2 | +0.14 | 1.24 | -5.5 R | 5 |
+| 2022 | design | 36 | 50% | +15.5 | +0.43 | 1.86 | -3.3 R | 4 |
+| 2023 | design (Feb-Jul gaps) | 17 | 47% | +5.5 | +0.33 | 1.57 | -5.3 R | 5 |
+| 2024 | design | 41 | 44% | +6.9 | +0.17 | 1.27 | -7.8 R | 7 |
+| 2025 | design | 42 | 45% | +10.6 | +0.25 | 1.43 | -4.5 R | 4 |
+| 2026 (Jan-Sep) | design | 33 | 33% | -3.4 | -0.10 | 0.86 | -6.2 R | 4 |
+| **Hidden 2016-2018** | | **139** | **39%** | **+8.4** | **+0.06** | **1.09** | **-10.5 R (-10.3%)** | **6** |
+| Design 2019-Sep 2026 | | 296 | 41% | +39.4 | +0.13 | 1.21 | -11.4 R | 8 |
+| All 10.75 years | | 435 | 40% | +47.8 | +0.11 | 1.17 | -12.3 R (-12.6%) | 8 |
+
+### 3. What worked (with numbers)
+- **Hidden total positive, 2 of 3 hidden years positive** (2017 +3.2 R, 2018 +7.0 R). Over all 10.75 years, 8 of 11 years positive.
+- **Losing runs stay short:** longest 6 on hidden data, 8 over all years (your 9 included the 9 Apr 2020 trade I do not take).
+  Runs of 3+ losses: 11 times in 2016-2018.
+- **Shorts held up:** hidden shorts 72 trades +10.5 R (still +4.9 R at double cost).
+- **Thursday and Wednesday** were good on hidden data too (Thu +10.5 R on 20 trades, Wed +9.5 R on 30).
+- The big shock days are filtered out by the rule itself: the Brexit result (24 Jun 2016, Asia box 1,654 pips) and the pound flash crash
+  (7 Oct 2016, box 584 pips) were "not quiet", so no trade. 23 Jun 2016 (vote day) was not quiet either. After the vote the 20-day median
+  was inflated, so July 2016 had 7 trades with wide stops (34-50 pips): -2.3 R in total. Hidden total without 23 Jun - 31 Jul 2016: +9.7 R.
+
+### 4. What did not work (with numbers)
+- **Double cost (3 pips):** hidden **-3.0 R** (2016 -4.7, 2017 -1.3, 2018 +3.1). The stop is small (median 17.7 pips), so the 1.5-pip cost
+  alone eats about 0.08 R of every trade: more than the whole hidden edge (+0.06 R).
+- **Depends on a few trades:** hidden without the best 5 trades: **-1.4 R**; without the best 10: -11.1 R. Each hidden year is negative without its best 5.
+- **"Quieter = better" failed on hidden data.** Design: ratio <0.5 +0.28 R/trade, 0.5-0.6 +0.24, 0.6-0.7 +0.03. Hidden: <0.5 **-0.13**,
+  0.5-0.6 **-0.01**, 0.6-0.7 **+0.16**. The order is reversed. This was the main evidence that the effect is real.
+- **Long trades:** hidden longs 67 trades -2.1 R (-7.8 R at 3 pips). Design longs were +19.9 R.
+- **Wednesday check:** your "Wednesday carries +27 R" repeats only partly. Hidden Wednesday +9.5 R on 30 trades (2016 +2.5, **2017 -0.4**,
+  2018 +7.4). Hidden without Wednesdays: **-1.0 R**. So again, everything outside one or two weekdays is about zero.
+- **Friday is bad in both periods:** hidden Friday 33 trades, 21% wins, **-16.0 R**; design Friday -2.6 R; all years -18.6 R on 96 trades.
+- **News days** (US jobs report or Fed decision, rule-based dates): hidden 14 trades -3.1 R; design 33 trades +4.1 R. Mixed, small samples.
+- **Bootstrap:** chance the real hidden average is zero or less: **31%** (57% at double cost). Design alone: 6%, but chosen from 47 checks.
+- Weeks: of the 93 hidden weeks with a trade, 44 were positive and 49 negative. Worst hidden quarter: Oct-Dec 2016, -7.8 R.
+
+### 5. What to improve, look at, change (be careful: the 2016-2018 data are now used up as a judge)
+1. **Do not add filters chosen on these numbers** (for example "no Fridays" or "only 0.6-0.7"). The Friday result is striking in both periods,
+   but any filter picked now can only be proven on **new** data (the owner's demo trades from now on). If you want to propose a Friday rule,
+   write the reason first (end-of-week position closing?) and declare it before any new data come in.
+2. **The cost problem is the main weakness.** Either the stop must be larger relative to the cost, or the cost smaller. Look at whether a
+   minimum Asia range (for example at least 15 pips, so cost is at most 0.10 R) helps, as a declared test on design data only, and accept
+   that it cannot be checked on hidden data any more.
+3. **Explain the reversal of the dose-response** on 2016-2018 before building more on the "compression" story. One possible reason: in
+   2016 the post-Brexit volatility inflated the median, so "quiet" nights were not really quiet.
+4. Fix the rule-3 wording (section 1).
+5. Next GBPUSD evidence can only come from forward data (Oct 2026 onward). Record every live-chart trade with the checklist.
+
+### 6. Verdict: **IMPROVE**, grade **B** for the owner
+WORKS needed: hidden total positive (yes, +8.4 R), at least 2 of 3 hidden years positive (yes), positive at double cost on hidden data
+(**no, -3.0 R**), longest losing run at most 9 (yes, 6), no reliance on a few trades or one weekday (**no**: -1.4 R without the best 5,
+-1.0 R without Wednesdays). It is the best GBPUSD idea so far and goes to the owner as **B: Promising**, with demo trading first.
+Files: `backtest/backtest_v3.py`, `backtest/analyze_v3.py`, `backtest/trades_v3.csv`, `backtest/days_v3.csv`, `backtest/summary_v3.txt`,
+`backtest/weekly_v3_table.md`, `backtest/trades_v3_alt_median.csv`.
+
+---
+
 > **Team leader note (9 Oct 2026, after this feedback):** the clock problem in section 2 is now fixed in the data
 > files themselves. HistData's raw clock is "London time minus 5 hours", and `trading/tools/fetch_histdata.py` now
 > converts it correctly (verified against Dukascopy UTC prices, including mid-March). Do **not** apply any extra clock
