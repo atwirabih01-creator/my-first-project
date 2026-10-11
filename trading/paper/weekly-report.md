@@ -3,7 +3,7 @@
 Simulated trades only, no orders were placed. Rules exactly as in each market's FINAL-STRATEGY.md.
 Prices: Hyperliquid xyz:XYZ100 (Nasdaq 100) and xyz:GOLD, 1-minute candles. R = the 1% risked per trade.
 Costs as in the backtests (Nasdaq 2.0 points, gold 0.40 USD). 'After est. fees' assumes 0.05% of the position
-value per side (an assumption, not your broker's real fee).
+value per side (an assumption).
 
 ## NASDAQ
 
