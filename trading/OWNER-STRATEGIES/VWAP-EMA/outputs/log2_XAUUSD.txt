@@ -1,0 +1,5 @@
+XAUUSD_NY0800_P15E1 1213
+XAUUSD_NY0800_P30E 1053
+               variant  skipped_days  trades  win%  R_gross   R_net  R_net2x  R/tr_net  long_R  short_R  n_long  lose_run  R_no_best5  trades/yr  2019   2020   2021   2022   2023   2024   2025   2026  pos_years  worst_year  bar_pts         missed
+0  XAUUSD_NY0800_P15E1           190    1213  37.5   200.03  103.92     7.81      0.09   15.88    88.04     673        12       48.80     156.52 -2.45   1.08 -28.12  23.79  11.03  57.25  16.26  25.09          6      -28.12        6            2,5
+1   XAUUSD_NY0800_P30E           190    1053  40.2    58.06   -5.29   -68.64     -0.01   -4.23    -1.07     566        12      -46.59     135.87 -5.02 -19.76 -36.90   8.02  25.17   3.74  14.09   5.37          5      -36.90        1  1,2,3,4,5,6,7

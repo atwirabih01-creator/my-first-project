@@ -1,0 +1,58 @@
+
+===== XAUUSD NY0800 P15E1 =====
+variant         XAUUSD_NY0800_P15E1
+skipped_days                    190
+trades                         1213
+win%                           37.5
+R_gross                  200.032353
+R_net                    103.920282
+R_net2x                    7.808211
+R/tr_net                   0.085672
+long_R                    15.876631
+short_R                   88.043651
+n_long                          673
+lose_run                         12
+R_no_best5                 48.80368
+trades/yr                156.516129
+2019                      -2.454093
+2020                       1.075516
+2021                     -28.120683
+2022                      23.785594
+2023                      11.030435
+2024                      57.251399
+2025                      16.258247
+2026                      25.093866
+pos_years                         6
+worst_year               -28.120683
+bar_pts                           6
+missed                          2,5
+max drawdown (R): 57.6
+per year (R with costs; long/short split):
+dir    long  short  total_net  gross  net_2x  trades   win%
+year                                                       
+2019   0.03  -2.48      -2.45  21.61  -26.51     157  30.57
+2020  -6.51   7.58       1.08  14.97  -12.82     172  36.05
+2021  -4.68 -23.44     -28.12 -15.47  -40.77     154  35.06
+2022   5.14  18.64      23.79  38.54    9.03     171  40.94
+2023 -15.93  26.96      11.03  20.31    1.75      97  35.05
+2024  25.06  32.19      57.25  68.05   46.45     157  45.86
+2025  10.10   6.16      16.26  23.67    8.84     171  39.18
+2026   2.67  22.43      25.09  28.35   21.84     134  35.82
+Oct2024-Jun2026: news day (True) vs other days:
+       count     sum   mean
+news                       
+False    275  65.620  0.239
+True      34  -0.825 -0.024
+day of week:
+           count     sum   mean
+dow                            
+Friday       236  29.490  0.125
+Monday       223  42.101  0.189
+Thursday     240  24.886  0.104
+Tuesday      265   6.240  0.024
+Wednesday    249   1.203  0.005
+exit reason:
+       count     sum
+why                 
+close    579  792.49
+stop     634 -688.57

@@ -1,0 +1,58 @@
+
+===== NASDAQ NY0930 R15E =====
+variant         NASDAQ_NY0930_R15E
+skipped_days                   196
+trades                         710
+win%                          43.8
+R_gross                  86.637176
+R_net                     54.40121
+R_net2x                  22.165245
+R/tr_net                  0.076621
+long_R                   41.639181
+short_R                   12.76203
+n_long                         359
+lose_run                         8
+R_no_best5               12.308329
+trades/yr                91.612903
+2019                    -10.485389
+2020                       2.08097
+2021                     16.393988
+2022                     15.050083
+2023                      2.361808
+2024                     17.202279
+2025                       0.89341
+2026                     10.904061
+pos_years                        7
+worst_year              -10.485389
+bar_pts                          6
+missed                         2,6
+max drawdown (R): 22.4
+per year (R with costs; long/short split):
+dir    long  short  total_net  gross  net_2x  trades   win%
+year                                                       
+2019  -6.80  -3.68     -10.49   1.04  -22.01     109  40.37
+2020  11.48  -9.40       2.08   6.85   -2.68      98  44.90
+2021   0.47  15.93      16.39  20.28   12.51      87  49.43
+2022   6.22   8.83      15.05  17.82   12.28     104  46.15
+2023   1.51   0.85       2.36   4.49    0.23      56  42.86
+2024   9.52   7.68      17.20  20.14   14.27      88  42.05
+2025   7.61  -6.71       0.89   3.58   -1.79      99  38.38
+2026  11.63  -0.73      10.90  12.45    9.36      69  47.83
+Oct2024-Jun2026: news day (True) vs other days:
+       count     sum   mean
+news                       
+False    141  13.609  0.097
+True      23   7.803  0.339
+day of week:
+           count     sum   mean
+dow                            
+Friday       128  -3.750 -0.029
+Monday       134  30.282  0.226
+Thursday     159  14.855  0.093
+Tuesday      139  -7.285 -0.052
+Wednesday    150  20.298  0.135
+exit reason:
+       count     sum
+why                 
+close    417  361.98
+stop     293 -307.58

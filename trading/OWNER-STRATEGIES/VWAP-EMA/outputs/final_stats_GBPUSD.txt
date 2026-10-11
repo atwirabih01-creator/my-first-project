@@ -1,0 +1,58 @@
+
+===== GBPUSD LON0800 M15 =====
+variant         GBPUSD_LON0800_M15
+skipped_days                   133
+trades                         227
+win%                          46.7
+R_gross                  38.189206
+R_net                     0.490249
+R_net2x                 -37.208709
+R/tr_net                   0.00216
+long_R                    1.261656
+short_R                  -0.771407
+n_long                         105
+lose_run                         8
+R_no_best5               -11.93816
+trades/yr                29.290323
+2019                       9.79454
+2020                     -5.596775
+2021                     -2.878373
+2022                      0.702971
+2023                      6.174531
+2024                     -7.359172
+2025                     -1.563131
+2026                      1.215658
+pos_years                        4
+worst_year               -7.359172
+bar_pts                          2
+missed                 1,3,4,6,7,8
+max drawdown (R): 19.2
+per year (R with costs; long/short split):
+dir   long  short  total_net  gross  net_2x  trades   win%
+year                                                      
+2019  6.87   2.93       9.79  15.30    4.29      35  57.14
+2020 -3.46  -2.14      -5.60  -2.23   -8.96      28  35.71
+2021 -3.20   0.32      -2.88   1.63   -7.39      29  41.38
+2022 -2.32   3.02       0.70   5.03   -3.62      33  45.45
+2023  3.44   2.74       6.17   9.97    2.38      22  59.09
+2024 -6.55  -0.81      -7.36   1.04  -15.76      39  41.03
+2025  3.08  -4.65      -1.56   1.89   -5.01      19  47.37
+2026  3.39  -2.18       1.22   5.56   -3.13      22  50.00
+Oct2024-Jun2026: news day (True) vs other days:
+       count    sum   mean
+news                      
+False     44 -2.148 -0.049
+True       3  1.914  0.638
+day of week:
+           count    sum   mean
+dow                           
+Friday        47 -1.207 -0.026
+Monday        46  5.508  0.120
+Thursday      46  3.318  0.072
+Tuesday       45 -1.252 -0.028
+Wednesday     43 -5.877 -0.137
+exit reason:
+        count     sum
+why                  
+stop      121 -141.08
+target    106  141.57

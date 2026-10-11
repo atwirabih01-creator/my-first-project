@@ -1,0 +1,8 @@
+NASDAQ 2020-05-14 short 12:00 entry 8911.18 recalc close 8911.18 AP 8919.99 conditions OK: True
+NASDAQ 2023-11-03 long 11:00 entry 15034.54 recalc close 15034.54 AP 15016.91 conditions OK: True
+NASDAQ 2025-03-18 short 14:15 entry 19445.92 recalc close 19445.92 AP 19484.54 conditions OK: True
+NASDAQ 2019-09-16 long 11:15 entry 7859.56 recalc close 7859.56 AP 7853.2 conditions OK: True
+XAUUSD 2024-01-05 short 08:30 entry 2038.98 recalc close 2038.98 AP 2040.44 conditions OK: True
+XAUUSD 2024-11-04 long 09:00 entry 2746.62 recalc close 2746.62 AP 2743.18 conditions OK: True
+XAUUSD 2025-12-04 long 10:30 entry 4205.73 recalc close 4205.73 AP 4198.24 conditions OK: True
+XAUUSD 2024-09-10 long 11:00 entry 2508.96 recalc close 2508.96 AP 2508.34 conditions OK: True

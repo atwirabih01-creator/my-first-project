@@ -1,0 +1,5 @@
+NASDAQ_NY0930_R15E 710
+NASDAQ_NY0930_R30 317
+              variant  skipped_days  trades  win%  R_gross  R_net  R_net2x  R/tr_net  long_R  short_R  n_long  lose_run  R_no_best5  trades/yr   2019  2020   2021   2022  2023   2024  2025   2026  pos_years  worst_year  bar_pts missed
+0  NASDAQ_NY0930_R15E           196     710  43.8    86.64  54.40    22.17      0.08   41.64    12.76     359         8       12.31      91.61 -10.49  2.08  16.39  15.05  2.36  17.20  0.89  10.90          7      -10.49        6    2,6
+1   NASDAQ_NY0930_R30           196     317  50.5    25.24  12.78     0.33      0.04    2.38    10.40     170         5        2.88      40.90 -10.10  3.31   9.35   2.01  4.22   5.05 -4.01   2.95          6      -10.10        6    2,6
