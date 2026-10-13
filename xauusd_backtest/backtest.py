@@ -33,6 +33,9 @@ HERE = Path(__file__).parent
 COST = 0.30          # spread + commission in dollars per ounce, round trip
 FIB_ENTRY = 0.5      # wick must reach at least this retracement
 MIN_RALLY = 0.0      # move after the break must be at least this many box-heights before a pullback counts
+BREAK_BODY = 0.5     # break candle: body must be at least this share of the whole candle (clear full-body close)
+BREAK_DIST = 0.15    # break candle must close beyond the box by at least this share of the box height
+MIN_IMPULSE = 3      # candles after the break that push to a new low (sell) / high (buy) before a pullback counts
 
 
 def load(path):
@@ -88,7 +91,14 @@ def find_setup(d, mode, box_start, box_end, scan_from, deadline, asia_hi, asia_l
                 elif d.c[k] > box_hi:
                     direction = 1
             if direction is not None:
+                rng = d.h[k] - d.l[k]
+                body = (d.c[k] - d.o[k]) * direction
+                edge = box_lo if direction == -1 else box_hi
+                beyond = (d.c[k] - edge) * direction
+                if rng <= 0 or body < BREAK_BODY * rng or beyond < BREAK_DIST * (box_hi - box_lo):
+                    return {"reason": "break candle not a clear full-body close"}
                 brk = k
+                impulse = 0
                 s = d.idx(box_end)
                 if direction == -1:
                     anchor = min(d.h[s:k + 1].max(), box_hi)   # top of the move
@@ -98,11 +108,13 @@ def find_setup(d, mode, box_start, box_end, scan_from, deadline, asia_hi, asia_l
                     extreme = d.h[k]
             continue
         # bias is set: track the move and look for the pullback rejection
+        enough = impulse >= MIN_IMPULSE
+        impulse += (d.l[k] < extreme) if direction == -1 else (d.h[k] > extreme)
         if direction == -1:
             lvl = extreme + FIB_ENTRY * (anchor - extreme)
             if d.c[k] > anchor:
                 return {"reason": "pullback went past the start of the move"}
-            if d.h[k] >= lvl and d.c[k] < lvl and d.l[k] >= extreme and k > brk \
+            if d.h[k] >= lvl and d.c[k] < lvl and d.l[k] >= extreme and enough \
                     and anchor - extreme >= MIN_RALLY * (box_hi - box_lo):
                 return dict(entry_i=k, direction=-1, entry=d.c[k], stop=box_hi,
                             box_hi=box_hi, box_lo=box_lo, anchor=anchor,
@@ -112,7 +124,7 @@ def find_setup(d, mode, box_start, box_end, scan_from, deadline, asia_hi, asia_l
             lvl = extreme - FIB_ENTRY * (extreme - anchor)
             if d.c[k] < anchor:
                 return {"reason": "pullback went past the start of the move"}
-            if d.l[k] <= lvl and d.c[k] > lvl and d.h[k] <= extreme and k > brk \
+            if d.l[k] <= lvl and d.c[k] > lvl and d.h[k] <= extreme and enough \
                     and extreme - anchor >= MIN_RALLY * (box_hi - box_lo):
                 return dict(entry_i=k, direction=1, entry=d.c[k], stop=box_lo,
                             box_hi=box_hi, box_lo=box_lo, anchor=anchor,

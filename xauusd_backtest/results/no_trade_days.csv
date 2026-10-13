@@ -1,456 +1,645 @@
 date,session,reason
 2024-08-28,london,missing Asian data
 2024-08-29,london,box broken both sides
-2024-08-29,ny,no liquidity target at least 1R away
+2024-08-29,ny,break candle not a clear full-body close
 2024-08-30,london,box broken both sides
-2024-08-30,ny,no liquidity target at least 1R away
+2024-08-30,ny,break candle not a clear full-body close
 2024-09-02,london,no valid box break
+2024-09-02,ny,break candle not a clear full-body close
 2024-09-03,london,box broken both sides
-2024-09-03,ny,no pullback entry before deadline
+2024-09-03,ny,break candle not a clear full-body close
 2024-09-04,london,box broken both sides
-2024-09-04,ny,no liquidity target at least 1R away
+2024-09-04,ny,break candle not a clear full-body close
 2024-09-05,london,no valid box break
+2024-09-05,ny,no pullback entry before deadline
 2024-09-06,london,box broken both sides
-2024-09-10,london,target already reached at entry
-2024-09-10,ny,no pullback entry before deadline
+2024-09-06,ny,box broken both sides
+2024-09-09,london,break candle not a clear full-body close
+2024-09-09,ny,pullback went past the start of the move
+2024-09-10,london,break candle not a clear full-body close
+2024-09-10,ny,break candle not a clear full-body close
+2024-09-11,london,break candle not a clear full-body close
+2024-09-11,ny,break candle not a clear full-body close
 2024-09-12,london,box broken both sides
-2024-09-12,ny,no liquidity target at least 1R away
+2024-09-12,ny,break candle not a clear full-body close
 2024-09-13,london,no valid box break
-2024-09-13,ny,no liquidity target at least 1R away
+2024-09-13,ny,break candle not a clear full-body close
 2024-09-16,london,box broken both sides
-2024-09-16,ny,pullback went past the start of the move
+2024-09-16,ny,break candle not a clear full-body close
+2024-09-17,london,break candle not a clear full-body close
+2024-09-17,ny,break candle not a clear full-body close
 2024-09-18,london,box broken both sides
-2024-09-18,ny,box broken both sides
+2024-09-18,ny,break candle not a clear full-body close
 2024-09-19,london,no valid box break
+2024-09-19,ny,no liquidity target at least 1R away
 2024-09-20,london,box broken both sides
-2024-09-20,ny,no liquidity target at least 1R away
+2024-09-20,ny,break candle not a clear full-body close
+2024-09-23,london,break candle not a clear full-body close
+2024-09-23,ny,break candle not a clear full-body close
+2024-09-24,london,break candle not a clear full-body close
+2024-09-24,ny,break candle not a clear full-body close
+2024-09-25,london,break candle not a clear full-body close
+2024-09-25,ny,break candle not a clear full-body close
 2024-09-26,london,no valid box break
+2024-09-26,ny,break candle not a clear full-body close
 2024-09-27,london,box broken both sides
 2024-09-27,ny,no liquidity target at least 1R away
 2024-09-30,london,no valid box break
-2024-09-30,ny,pullback went past the start of the move
+2024-09-30,ny,break candle not a clear full-body close
 2024-10-01,london,no valid box break
 2024-10-01,ny,no valid box break
 2024-10-02,london,box broken both sides
-2024-10-02,ny,no liquidity target at least 1R away
+2024-10-02,ny,break candle not a clear full-body close
 2024-10-03,london,no valid box break
-2024-10-03,ny,no pullback entry before deadline
-2024-10-07,london,target already reached at entry
+2024-10-03,ny,break candle not a clear full-body close
+2024-10-07,london,pullback went past the start of the move
+2024-10-07,ny,break candle not a clear full-body close
 2024-10-08,london,box broken both sides
-2024-10-08,ny,no liquidity target at least 1R away
+2024-10-08,ny,break candle not a clear full-body close
+2024-10-09,london,break candle not a clear full-body close
 2024-10-10,london,no valid box break
-2024-10-10,ny,no pullback entry before deadline
+2024-10-10,ny,break candle not a clear full-body close
 2024-10-11,london,box broken both sides
-2024-10-11,ny,no liquidity target at least 1R away
-2024-10-15,london,target already reached at entry
-2024-10-15,ny,no liquidity target at least 1R away
+2024-10-11,ny,break candle not a clear full-body close
+2024-10-14,london,break candle not a clear full-body close
+2024-10-14,ny,break candle not a clear full-body close
+2024-10-15,london,break candle not a clear full-body close
+2024-10-15,ny,break candle not a clear full-body close
 2024-10-16,london,box broken both sides
+2024-10-16,ny,break candle not a clear full-body close
+2024-10-17,london,break candle not a clear full-body close
+2024-10-17,ny,no liquidity target at least 1R away
 2024-10-18,london,no valid box break
-2024-10-18,ny,no pullback entry before deadline
+2024-10-18,ny,break candle not a clear full-body close
 2024-10-21,london,no valid box break
+2024-10-21,ny,break candle not a clear full-body close
 2024-10-22,london,box broken both sides
-2024-10-22,ny,no liquidity target at least 1R away
+2024-10-22,ny,break candle not a clear full-body close
 2024-10-23,london,box broken both sides
 2024-10-23,ny,no liquidity target at least 1R away
 2024-10-24,london,no valid box break
-2024-10-24,ny,pullback went past the start of the move
+2024-10-24,ny,break candle not a clear full-body close
 2024-10-25,london,no valid box break
-2024-10-25,ny,no liquidity target at least 1R away
+2024-10-25,ny,break candle not a clear full-body close
+2024-10-28,london,break candle not a clear full-body close
+2024-10-28,ny,break candle not a clear full-body close
 2024-10-29,london,box broken both sides
-2024-10-29,ny,no pullback entry before deadline
+2024-10-29,ny,break candle not a clear full-body close
+2024-10-30,london,break candle not a clear full-body close
+2024-10-30,ny,break candle not a clear full-body close
 2024-10-31,london,no valid box break
-2024-10-31,ny,no liquidity target at least 1R away
+2024-10-31,ny,break candle not a clear full-body close
 2024-11-01,london,box broken both sides
-2024-11-01,ny,no liquidity target at least 1R away
+2024-11-01,ny,no pullback entry before deadline
 2024-11-04,london,no valid box break
 2024-11-04,ny,no liquidity target at least 1R away
 2024-11-05,london,no valid box break
 2024-11-05,ny,no valid box break
 2024-11-06,london,no valid box break
+2024-11-06,ny,break candle not a clear full-body close
 2024-11-07,london,no valid box break
-2024-11-07,ny,no pullback entry before deadline
+2024-11-07,ny,break candle not a clear full-body close
+2024-11-08,london,break candle not a clear full-body close
+2024-11-08,ny,break candle not a clear full-body close
 2024-11-11,london,box broken both sides
-2024-11-11,ny,no liquidity target at least 1R away
+2024-11-11,ny,break candle not a clear full-body close
 2024-11-12,london,box broken both sides
-2024-11-12,ny,no liquidity target at least 1R away
+2024-11-12,ny,break candle not a clear full-body close
 2024-11-13,london,no valid box break
 2024-11-13,ny,no pullback entry before deadline
 2024-11-14,london,box broken both sides
+2024-11-14,ny,break candle not a clear full-body close
+2024-11-15,london,break candle not a clear full-body close
+2024-11-15,ny,break candle not a clear full-body close
 2024-11-18,london,no valid box break
-2024-11-18,ny,no liquidity target at least 1R away
+2024-11-18,ny,break candle not a clear full-body close
 2024-11-19,london,no valid box break
+2024-11-19,ny,no pullback entry before deadline
+2024-11-20,london,break candle not a clear full-body close
+2024-11-20,ny,break candle not a clear full-body close
 2024-11-21,london,no valid box break
-2024-11-21,ny,no pullback entry before deadline
+2024-11-21,ny,break candle not a clear full-body close
 2024-11-22,london,box broken both sides
-2024-11-22,ny,no liquidity target at least 1R away
+2024-11-22,ny,break candle not a clear full-body close
 2024-11-25,london,box broken both sides
-2024-11-25,ny,no liquidity target at least 1R away
+2024-11-25,ny,break candle not a clear full-body close
+2024-11-26,london,break candle not a clear full-body close
+2024-11-26,ny,break candle not a clear full-body close
 2024-11-27,london,no valid box break
-2024-11-27,ny,no pullback entry before deadline
+2024-11-27,ny,break candle not a clear full-body close
 2024-11-28,london,no valid box break
 2024-11-28,ny,pullback went past the start of the move
 2024-11-29,london,no valid box break
-2024-11-29,ny,box broken both sides
+2024-11-29,ny,break candle not a clear full-body close
 2024-12-02,london,no valid box break
+2024-12-02,ny,break candle not a clear full-body close
 2024-12-03,london,box broken both sides
 2024-12-03,ny,no valid box break
 2024-12-04,london,box broken both sides
+2024-12-04,ny,break candle not a clear full-body close
 2024-12-05,london,no valid box break
 2024-12-05,ny,no pullback entry before deadline
+2024-12-06,london,break candle not a clear full-body close
+2024-12-06,ny,no valid box break
 2024-12-09,london,no valid box break
-2024-12-09,ny,no pullback entry before deadline
+2024-12-09,ny,break candle not a clear full-body close
 2024-12-10,london,no valid box break
-2024-12-10,ny,no pullback entry before deadline
+2024-12-10,ny,break candle not a clear full-body close
 2024-12-11,london,box broken both sides
-2024-12-11,ny,no liquidity target at least 1R away
+2024-12-11,ny,break candle not a clear full-body close
 2024-12-12,london,no valid box break
-2024-12-12,ny,no liquidity target at least 1R away
+2024-12-12,ny,pullback went past the start of the move
 2024-12-13,london,no valid box break
+2024-12-13,ny,break candle not a clear full-body close
 2024-12-16,london,no valid box break
-2024-12-16,ny,no liquidity target at least 1R away
+2024-12-16,ny,break candle not a clear full-body close
 2024-12-17,london,no valid box break
-2024-12-17,ny,no pullback entry before deadline
+2024-12-17,ny,break candle not a clear full-body close
 2024-12-18,london,no valid box break
-2024-12-18,ny,no liquidity target at least 1R away
+2024-12-18,ny,break candle not a clear full-body close
 2024-12-19,london,box broken both sides
-2024-12-19,ny,no liquidity target at least 1R away
-2024-12-20,london,pullback went past the start of the move
-2024-12-20,ny,no liquidity target at least 1R away
-2024-12-23,london,no pullback entry before deadline
+2024-12-19,ny,break candle not a clear full-body close
+2024-12-20,london,break candle not a clear full-body close
+2024-12-20,ny,break candle not a clear full-body close
+2024-12-23,london,break candle not a clear full-body close
+2024-12-23,ny,break candle not a clear full-body close
 2024-12-25,london,missing Asian data
 2024-12-26,london,box broken both sides
-2024-12-26,ny,pullback went past the start of the move
-2024-12-27,london,pullback went past the start of the move
-2024-12-30,london,box broken both sides
-2024-12-30,ny,no liquidity target at least 1R away
+2024-12-26,ny,break candle not a clear full-body close
+2024-12-27,london,break candle not a clear full-body close
+2024-12-27,ny,break candle not a clear full-body close
+2024-12-30,london,break candle not a clear full-body close
+2024-12-30,ny,break candle not a clear full-body close
 2025-01-01,london,missing Asian data
 2025-01-02,london,no valid box break
 2025-01-02,ny,no liquidity target at least 1R away
+2025-01-03,london,break candle not a clear full-body close
+2025-01-03,ny,break candle not a clear full-body close
+2025-01-06,london,break candle not a clear full-body close
+2025-01-06,ny,break candle not a clear full-body close
 2025-01-07,london,no valid box break
 2025-01-07,ny,no valid box break
 2025-01-08,london,box broken both sides
-2025-01-08,ny,no liquidity target at least 1R away
+2025-01-08,ny,break candle not a clear full-body close
 2025-01-09,london,no valid box break
+2025-01-09,ny,break candle not a clear full-body close
 2025-01-10,london,box broken both sides
 2025-01-10,ny,pullback went past the start of the move
 2025-01-13,london,no valid box break
 2025-01-13,ny,no liquidity target at least 1R away
 2025-01-14,london,no valid box break
+2025-01-14,ny,break candle not a clear full-body close
 2025-01-15,london,no valid box break
-2025-01-15,ny,no pullback entry before deadline
+2025-01-15,ny,break candle not a clear full-body close
 2025-01-16,london,target already reached at entry
-2025-01-16,ny,no pullback entry before deadline
+2025-01-16,ny,break candle not a clear full-body close
 2025-01-17,london,no valid box break
-2025-01-17,ny,no liquidity target at least 1R away
+2025-01-17,ny,break candle not a clear full-body close
 2025-01-20,london,no valid box break
+2025-01-20,ny,break candle not a clear full-body close
+2025-01-21,london,pullback went past the start of the move
+2025-01-21,ny,break candle not a clear full-body close
 2025-01-22,london,no valid box break
-2025-01-22,ny,no liquidity target at least 1R away
+2025-01-22,ny,no pullback entry before deadline
 2025-01-23,london,no valid box break
+2025-01-23,ny,no pullback entry before deadline
 2025-01-24,london,no valid box break
-2025-01-24,ny,no pullback entry before deadline
+2025-01-24,ny,break candle not a clear full-body close
+2025-01-27,london,break candle not a clear full-body close
+2025-01-27,ny,break candle not a clear full-body close
 2025-01-29,london,no valid box break
+2025-01-29,ny,break candle not a clear full-body close
 2025-01-30,london,no valid box break
-2025-01-30,ny,no liquidity target at least 1R away
-2025-01-31,london,no pullback entry before deadline
+2025-01-30,ny,break candle not a clear full-body close
+2025-01-31,london,break candle not a clear full-body close
 2025-01-31,ny,no pullback entry before deadline
 2025-02-03,london,no valid box break
-2025-02-03,ny,no pullback entry before deadline
-2025-02-04,london,pullback went past the start of the move
-2025-02-04,ny,pullback went past the start of the move
+2025-02-03,ny,break candle not a clear full-body close
+2025-02-04,london,break candle not a clear full-body close
+2025-02-04,ny,break candle not a clear full-body close
 2025-02-05,london,box broken both sides
-2025-02-05,ny,no liquidity target at least 1R away
+2025-02-05,ny,break candle not a clear full-body close
+2025-02-06,london,break candle not a clear full-body close
+2025-02-06,ny,no valid box break
 2025-02-07,london,box broken both sides
 2025-02-07,ny,pullback went past the start of the move
 2025-02-10,london,no valid box break
+2025-02-10,ny,break candle not a clear full-body close
 2025-02-11,london,no valid box break
+2025-02-11,ny,break candle not a clear full-body close
 2025-02-12,london,box broken both sides
+2025-02-12,ny,break candle not a clear full-body close
 2025-02-13,london,box broken both sides
-2025-02-13,ny,pullback went past the start of the move
+2025-02-13,ny,break candle not a clear full-body close
 2025-02-14,london,box broken both sides
-2025-02-14,ny,pullback went past the start of the move
+2025-02-14,ny,break candle not a clear full-body close
 2025-02-17,london,no valid box break
-2025-02-18,london,box broken both sides
-2025-02-18,ny,no liquidity target at least 1R away
+2025-02-17,ny,break candle not a clear full-body close
+2025-02-18,london,break candle not a clear full-body close
+2025-02-18,ny,no pullback entry before deadline
 2025-02-19,london,box broken both sides
 2025-02-19,ny,no pullback entry before deadline
-2025-02-24,london,box broken both sides
-2025-02-24,ny,no pullback entry before deadline
+2025-02-21,london,break candle not a clear full-body close
+2025-02-21,ny,break candle not a clear full-body close
+2025-02-24,london,break candle not a clear full-body close
+2025-02-24,ny,break candle not a clear full-body close
 2025-02-25,london,box broken both sides
-2025-02-25,ny,no liquidity target at least 1R away
+2025-02-25,ny,break candle not a clear full-body close
 2025-02-26,london,no valid box break
+2025-02-26,ny,break candle not a clear full-body close
 2025-02-27,london,box broken both sides
 2025-02-27,ny,no valid box break
-2025-03-03,london,pullback went past the start of the move
+2025-02-28,london,break candle not a clear full-body close
+2025-02-28,ny,break candle not a clear full-body close
+2025-03-03,london,break candle not a clear full-body close
 2025-03-03,ny,missing data
 2025-03-04,london,no valid box break
-2025-03-04,ny,no pullback entry before deadline
+2025-03-04,ny,break candle not a clear full-body close
+2025-03-05,london,break candle not a clear full-body close
+2025-03-05,ny,break candle not a clear full-body close
 2025-03-06,london,no valid box break
 2025-03-06,ny,no valid box break
+2025-03-07,london,break candle not a clear full-body close
+2025-03-07,ny,no pullback entry before deadline
 2025-03-10,london,no valid box break
-2025-03-10,ny,no pullback entry before deadline
+2025-03-10,ny,break candle not a clear full-body close
 2025-03-11,london,no valid box break
 2025-03-11,ny,no valid box break
 2025-03-12,london,box broken both sides
-2025-03-12,ny,no pullback entry before deadline
+2025-03-12,ny,break candle not a clear full-body close
 2025-03-14,london,target already reached at entry
+2025-03-14,ny,break candle not a clear full-body close
 2025-03-17,london,box broken both sides
-2025-03-17,ny,no liquidity target at least 1R away
+2025-03-17,ny,break candle not a clear full-body close
 2025-03-18,london,no valid box break
 2025-03-18,ny,no valid box break
 2025-03-20,london,no valid box break
-2025-03-21,london,pullback went past the start of the move
+2025-03-20,ny,break candle not a clear full-body close
+2025-03-21,london,break candle not a clear full-body close
 2025-03-21,ny,no valid box break
 2025-03-24,london,no valid box break
 2025-03-24,ny,no liquidity target at least 1R away
 2025-03-25,london,no valid box break
+2025-03-25,ny,break candle not a clear full-body close
 2025-03-26,london,box broken both sides
-2025-03-26,ny,no liquidity target at least 1R away
+2025-03-26,ny,break candle not a clear full-body close
 2025-03-27,london,no valid box break
-2025-03-27,ny,no liquidity target at least 1R away
+2025-03-27,ny,break candle not a clear full-body close
+2025-03-28,london,break candle not a clear full-body close
+2025-03-28,ny,break candle not a clear full-body close
 2025-03-31,london,box broken both sides
-2025-03-31,ny,no liquidity target at least 1R away
+2025-03-31,ny,break candle not a clear full-body close
 2025-04-01,london,no sweep of Asian range
 2025-04-01,ny,no liquidity target at least 1R away
+2025-04-02,london,break candle not a clear full-body close
+2025-04-02,ny,break candle not a clear full-body close
+2025-04-03,london,break candle not a clear full-body close
+2025-04-03,ny,break candle not a clear full-body close
 2025-04-04,london,box broken both sides
 2025-04-04,ny,no liquidity target at least 1R away
 2025-04-07,london,no sweep of Asian range
-2025-04-07,ny,no liquidity target at least 1R away
+2025-04-07,ny,break candle not a clear full-body close
+2025-04-08,london,break candle not a clear full-body close
+2025-04-08,ny,break candle not a clear full-body close
 2025-04-09,london,no valid box break
-2025-04-09,ny,box broken both sides
+2025-04-09,ny,break candle not a clear full-body close
 2025-04-10,london,box broken both sides
-2025-04-10,ny,no liquidity target at least 1R away
+2025-04-10,ny,break candle not a clear full-body close
 2025-04-11,london,no valid box break
 2025-04-11,ny,no valid box break
 2025-04-14,london,no valid box break
 2025-04-14,ny,pullback went past the start of the move
 2025-04-15,london,box broken both sides
-2025-04-15,ny,no pullback entry before deadline
+2025-04-15,ny,break candle not a clear full-body close
 2025-04-16,london,no valid box break
-2025-04-16,ny,no pullback entry before deadline
+2025-04-16,ny,break candle not a clear full-body close
+2025-04-17,london,break candle not a clear full-body close
+2025-04-17,ny,pullback went past the start of the move
 2025-04-21,london,no valid box break
 2025-04-21,ny,no valid box break
+2025-04-23,london,break candle not a clear full-body close
+2025-04-23,ny,no valid box break
 2025-04-24,london,no sweep of Asian range
+2025-04-24,ny,break candle not a clear full-body close
 2025-04-25,london,no valid box break
-2025-04-25,ny,no pullback entry before deadline
+2025-04-25,ny,break candle not a clear full-body close
 2025-04-28,london,box broken both sides
 2025-04-28,ny,no liquidity target at least 1R away
 2025-04-29,london,no valid box break
+2025-04-29,ny,break candle not a clear full-body close
 2025-04-30,london,no valid box break
+2025-04-30,ny,break candle not a clear full-body close
 2025-05-01,london,no valid box break
 2025-05-02,london,box broken both sides
-2025-05-02,ny,pullback went past the start of the move
+2025-05-02,ny,break candle not a clear full-body close
 2025-05-05,london,no valid box break
+2025-05-05,ny,break candle not a clear full-body close
 2025-05-06,london,no valid box break
 2025-05-06,ny,pullback went past the start of the move
 2025-05-07,london,no sweep of Asian range
-2025-05-07,ny,no pullback entry before deadline
-2025-05-08,london,no pullback entry before deadline
-2025-05-08,ny,no liquidity target at least 1R away
+2025-05-07,ny,break candle not a clear full-body close
+2025-05-08,london,break candle not a clear full-body close
+2025-05-08,ny,break candle not a clear full-body close
+2025-05-09,london,break candle not a clear full-body close
+2025-05-09,ny,break candle not a clear full-body close
 2025-05-12,london,no valid box break
-2025-05-14,london,pullback went past the start of the move
-2025-05-14,ny,no liquidity target at least 1R away
-2025-05-15,london,no pullback entry before deadline
+2025-05-12,ny,break candle not a clear full-body close
+2025-05-13,london,break candle not a clear full-body close
+2025-05-13,ny,break candle not a clear full-body close
+2025-05-14,london,break candle not a clear full-body close
+2025-05-14,ny,break candle not a clear full-body close
+2025-05-15,london,break candle not a clear full-body close
 2025-05-15,ny,no pullback entry before deadline
 2025-05-16,london,no valid box break
-2025-05-16,ny,pullback went past the start of the move
+2025-05-16,ny,break candle not a clear full-body close
 2025-05-19,london,no sweep of Asian range
-2025-05-19,ny,no liquidity target at least 1R away
+2025-05-19,ny,break candle not a clear full-body close
 2025-05-20,london,no valid box break
-2025-05-20,ny,no pullback entry before deadline
+2025-05-20,ny,break candle not a clear full-body close
+2025-05-21,london,break candle not a clear full-body close
+2025-05-21,ny,no liquidity target at least 1R away
 2025-05-22,london,no valid box break
 2025-05-22,ny,no valid box break
+2025-05-23,london,break candle not a clear full-body close
+2025-05-23,ny,break candle not a clear full-body close
 2025-05-26,london,no valid box break
 2025-05-26,ny,no pullback entry before deadline
 2025-05-27,london,no valid box break
-2025-05-27,ny,no pullback entry before deadline
+2025-05-27,ny,break candle not a clear full-body close
 2025-05-28,london,box broken both sides
 2025-05-29,london,no valid box break
-2025-05-29,ny,pullback went past the start of the move
+2025-05-29,ny,break candle not a clear full-body close
+2025-05-30,london,break candle not a clear full-body close
+2025-05-30,ny,no valid box break
 2025-06-02,london,no valid box break
-2025-06-02,ny,pullback went past the start of the move
+2025-06-02,ny,break candle not a clear full-body close
+2025-06-03,london,break candle not a clear full-body close
+2025-06-03,ny,no valid box break
 2025-06-04,london,no valid box break
-2025-06-04,ny,no liquidity target at least 1R away
-2025-06-05,london,no pullback entry before deadline
-2025-06-05,ny,no liquidity target at least 1R away
+2025-06-04,ny,no pullback entry before deadline
+2025-06-05,london,break candle not a clear full-body close
+2025-06-05,ny,break candle not a clear full-body close
 2025-06-06,london,pullback went past the start of the move
-2025-06-06,ny,no pullback entry before deadline
+2025-06-06,ny,break candle not a clear full-body close
 2025-06-10,london,no valid box break
-2025-06-12,london,no pullback entry before deadline
+2025-06-10,ny,break candle not a clear full-body close
+2025-06-11,london,break candle not a clear full-body close
+2025-06-11,ny,break candle not a clear full-body close
+2025-06-12,london,break candle not a clear full-body close
+2025-06-12,ny,break candle not a clear full-body close
 2025-06-13,london,no valid box break
+2025-06-13,ny,break candle not a clear full-body close
+2025-06-16,london,break candle not a clear full-body close
+2025-06-16,ny,no valid box break
 2025-06-17,london,box broken both sides
 2025-06-17,ny,pullback went past the start of the move
 2025-06-18,london,box broken both sides
-2025-06-18,ny,no pullback entry before deadline
+2025-06-18,ny,break candle not a clear full-body close
+2025-06-19,london,break candle not a clear full-body close
+2025-06-19,ny,break candle not a clear full-body close
+2025-06-20,london,break candle not a clear full-body close
+2025-06-20,ny,no valid box break
 2025-06-24,london,no valid box break
-2025-06-24,ny,no pullback entry before deadline
+2025-06-24,ny,break candle not a clear full-body close
+2025-06-25,london,break candle not a clear full-body close
+2025-06-25,ny,break candle not a clear full-body close
 2025-06-26,london,box broken both sides
-2025-06-26,ny,no pullback entry before deadline
+2025-06-26,ny,break candle not a clear full-body close
 2025-06-27,london,no valid box break
+2025-06-27,ny,break candle not a clear full-body close
 2025-07-01,london,no valid box break
-2025-07-01,ny,no pullback entry before deadline
+2025-07-01,ny,break candle not a clear full-body close
+2025-07-02,london,break candle not a clear full-body close
+2025-07-02,ny,break candle not a clear full-body close
+2025-07-03,london,break candle not a clear full-body close
+2025-07-03,ny,no valid box break
 2025-07-04,london,box broken both sides
 2025-07-04,ny,no valid box break
 2025-07-07,london,no valid box break
-2025-07-08,london,target already reached at entry
-2025-07-08,ny,no liquidity target at least 1R away
+2025-07-07,ny,break candle not a clear full-body close
+2025-07-08,london,break candle not a clear full-body close
+2025-07-08,ny,break candle not a clear full-body close
 2025-07-09,london,box broken both sides
+2025-07-09,ny,break candle not a clear full-body close
 2025-07-10,london,box broken both sides
 2025-07-10,ny,no valid box break
 2025-07-11,london,no valid box break
-2025-07-11,ny,pullback went past the start of the move
+2025-07-11,ny,break candle not a clear full-body close
+2025-07-14,london,break candle not a clear full-body close
+2025-07-14,ny,break candle not a clear full-body close
 2025-07-15,london,box broken both sides
+2025-07-15,ny,break candle not a clear full-body close
 2025-07-16,london,box broken both sides
-2025-07-16,ny,no liquidity target at least 1R away
+2025-07-16,ny,break candle not a clear full-body close
 2025-07-17,london,no valid box break
-2025-07-18,london,target already reached at entry
-2025-07-18,ny,no pullback entry before deadline
+2025-07-17,ny,break candle not a clear full-body close
+2025-07-18,london,no pullback entry before deadline
+2025-07-18,ny,break candle not a clear full-body close
+2025-07-21,london,break candle not a clear full-body close
+2025-07-21,ny,break candle not a clear full-body close
+2025-07-22,london,break candle not a clear full-body close
+2025-07-22,ny,break candle not a clear full-body close
 2025-07-23,london,box broken both sides
 2025-07-23,ny,no pullback entry before deadline
 2025-07-24,london,no valid box break
+2025-07-24,ny,break candle not a clear full-body close
 2025-07-25,london,no valid box break
-2025-07-25,ny,no liquidity target at least 1R away
-2025-07-28,london,pullback went past the start of the move
+2025-07-25,ny,break candle not a clear full-body close
+2025-07-28,london,break candle not a clear full-body close
 2025-07-28,ny,no valid box break
 2025-07-29,london,no valid box break
+2025-07-29,ny,break candle not a clear full-body close
 2025-07-30,london,box broken both sides
-2025-07-30,ny,no liquidity target at least 1R away
+2025-07-30,ny,no pullback entry before deadline
 2025-07-31,london,box broken both sides
-2025-07-31,ny,pullback went past the start of the move
+2025-07-31,ny,break candle not a clear full-body close
 2025-08-01,london,no valid box break
-2025-08-01,ny,no pullback entry before deadline
+2025-08-01,ny,break candle not a clear full-body close
 2025-08-04,london,no valid box break
+2025-08-04,ny,break candle not a clear full-body close
 2025-08-05,london,no valid box break
-2025-08-05,ny,no liquidity target at least 1R away
+2025-08-05,ny,break candle not a clear full-body close
 2025-08-06,london,no valid box break
-2025-08-06,ny,pullback went past the start of the move
+2025-08-06,ny,break candle not a clear full-body close
+2025-08-08,london,break candle not a clear full-body close
+2025-08-08,ny,break candle not a clear full-body close
 2025-08-11,london,no valid box break
-2025-08-11,ny,no liquidity target at least 1R away
+2025-08-11,ny,pullback went past the start of the move
 2025-08-12,london,no valid box break
 2025-08-12,ny,no valid box break
+2025-08-13,london,break candle not a clear full-body close
+2025-08-13,ny,break candle not a clear full-body close
 2025-08-14,london,no valid box break
-2025-08-14,ny,no liquidity target at least 1R away
+2025-08-14,ny,break candle not a clear full-body close
+2025-08-15,london,break candle not a clear full-body close
+2025-08-15,ny,break candle not a clear full-body close
 2025-08-18,london,pullback went past the start of the move
-2025-08-18,ny,no pullback entry before deadline
+2025-08-18,ny,break candle not a clear full-body close
 2025-08-19,london,box broken both sides
 2025-08-19,ny,no pullback entry before deadline
-2025-08-20,london,pullback went past the start of the move
-2025-08-20,ny,no liquidity target at least 1R away
+2025-08-20,london,break candle not a clear full-body close
+2025-08-20,ny,break candle not a clear full-body close
 2025-08-21,london,box broken both sides
 2025-08-21,ny,no valid box break
 2025-08-22,london,no valid box break
-2025-08-22,ny,no liquidity target at least 1R away
+2025-08-22,ny,break candle not a clear full-body close
 2025-08-26,london,no sweep of Asian range
-2025-08-26,ny,no liquidity target at least 1R away
+2025-08-26,ny,break candle not a clear full-body close
+2025-08-27,london,break candle not a clear full-body close
+2025-08-27,ny,no pullback entry before deadline
 2025-08-28,london,no valid box break
-2025-08-28,ny,no liquidity target at least 1R away
-2025-09-01,london,no pullback entry before deadline
-2025-09-01,ny,no pullback entry before deadline
+2025-08-28,ny,break candle not a clear full-body close
+2025-08-29,london,break candle not a clear full-body close
+2025-08-29,ny,break candle not a clear full-body close
+2025-09-01,london,break candle not a clear full-body close
+2025-09-01,ny,break candle not a clear full-body close
+2025-09-02,london,break candle not a clear full-body close
+2025-09-02,ny,no pullback entry before deadline
 2025-09-03,london,no valid box break
-2025-09-03,ny,no liquidity target at least 1R away
+2025-09-03,ny,break candle not a clear full-body close
 2025-09-04,london,no sweep of Asian range
 2025-09-04,ny,no valid box break
 2025-09-05,london,box broken both sides
-2025-09-05,ny,no liquidity target at least 1R away
+2025-09-05,ny,break candle not a clear full-body close
 2025-09-08,london,no valid box break
-2025-09-08,ny,no liquidity target at least 1R away
+2025-09-08,ny,break candle not a clear full-body close
 2025-09-09,london,no valid box break
+2025-09-09,ny,break candle not a clear full-body close
 2025-09-10,london,no valid box break
 2025-09-11,london,box broken both sides
+2025-09-11,ny,break candle not a clear full-body close
 2025-09-15,london,no valid box break
-2025-09-15,ny,no pullback entry before deadline
+2025-09-15,ny,break candle not a clear full-body close
 2025-09-16,london,no valid box break
+2025-09-16,ny,break candle not a clear full-body close
 2025-09-17,london,box broken both sides
-2025-09-17,ny,pullback went past the start of the move
-2025-09-18,london,no pullback entry before deadline
+2025-09-17,ny,break candle not a clear full-body close
+2025-09-18,london,break candle not a clear full-body close
 2025-09-18,ny,no valid box break
 2025-09-19,london,no valid box break
-2025-09-19,ny,no liquidity target at least 1R away
+2025-09-19,ny,break candle not a clear full-body close
 2025-09-22,london,no valid box break
-2025-09-22,ny,no pullback entry before deadline
+2025-09-22,ny,break candle not a clear full-body close
 2025-09-23,london,no valid box break
 2025-09-23,ny,no pullback entry before deadline
+2025-09-24,london,break candle not a clear full-body close
+2025-09-24,ny,break candle not a clear full-body close
 2025-09-25,london,box broken both sides
-2025-09-25,ny,no pullback entry before deadline
+2025-09-25,ny,break candle not a clear full-body close
 2025-09-26,london,no valid box break
 2025-09-26,ny,no valid box break
 2025-09-29,london,no valid box break
-2025-09-29,ny,no liquidity target at least 1R away
+2025-09-29,ny,break candle not a clear full-body close
 2025-09-30,london,target already reached at entry
-2025-09-30,ny,pullback went past the start of the move
+2025-09-30,ny,break candle not a clear full-body close
 2025-10-01,london,target already reached at entry
+2025-10-01,ny,break candle not a clear full-body close
 2025-10-02,london,no valid box break
-2025-10-02,ny,no liquidity target at least 1R away
+2025-10-02,ny,break candle not a clear full-body close
 2025-10-03,london,no valid box break
 2025-10-03,ny,no valid box break
 2025-10-06,london,box broken both sides
 2025-10-06,ny,no liquidity target at least 1R away
 2025-10-07,london,no pullback entry before deadline
-2025-10-07,ny,no liquidity target at least 1R away
+2025-10-07,ny,break candle not a clear full-body close
 2025-10-08,london,no valid box break
-2025-10-08,ny,pullback went past the start of the move
+2025-10-08,ny,break candle not a clear full-body close
 2025-10-09,london,no valid box break
-2025-10-09,ny,pullback went past the start of the move
-2025-10-10,london,target already reached at entry
+2025-10-09,ny,break candle not a clear full-body close
+2025-10-10,london,break candle not a clear full-body close
 2025-10-13,london,no valid box break
-2025-10-13,ny,pullback went past the start of the move
+2025-10-13,ny,break candle not a clear full-body close
+2025-10-14,london,break candle not a clear full-body close
+2025-10-14,ny,break candle not a clear full-body close
 2025-10-15,london,box broken both sides
-2025-10-15,ny,no pullback entry before deadline
-2025-10-16,london,pullback went past the start of the move
-2025-10-16,ny,pullback went past the start of the move
+2025-10-15,ny,break candle not a clear full-body close
+2025-10-16,london,break candle not a clear full-body close
+2025-10-16,ny,break candle not a clear full-body close
 2025-10-17,london,no sweep of Asian range
-2025-10-17,ny,no liquidity target at least 1R away
+2025-10-17,ny,break candle not a clear full-body close
 2025-10-20,london,no valid box break
-2025-10-20,ny,no liquidity target at least 1R away
+2025-10-20,ny,break candle not a clear full-body close
 2025-10-21,london,no valid box break
-2025-10-21,ny,pullback went past the start of the move
+2025-10-21,ny,break candle not a clear full-body close
 2025-10-23,london,no valid box break
+2025-10-23,ny,no pullback entry before deadline
 2025-10-24,london,box broken both sides
-2025-10-24,ny,no liquidity target at least 1R away
+2025-10-24,ny,break candle not a clear full-body close
 2025-10-27,london,no valid box break
-2025-10-27,ny,no liquidity target at least 1R away
+2025-10-27,ny,break candle not a clear full-body close
 2025-10-28,london,no valid box break
+2025-10-28,ny,break candle not a clear full-body close
 2025-10-29,london,no valid box break
 2025-10-29,ny,no pullback entry before deadline
 2025-10-30,london,no valid box break
-2025-10-30,ny,no pullback entry before deadline
+2025-10-30,ny,break candle not a clear full-body close
 2025-10-31,london,box broken both sides
+2025-11-04,london,break candle not a clear full-body close
+2025-11-05,london,break candle not a clear full-body close
+2025-11-05,ny,break candle not a clear full-body close
 2025-11-06,london,box broken both sides
-2025-11-06,ny,no liquidity target at least 1R away
+2025-11-06,ny,break candle not a clear full-body close
 2025-11-07,london,box broken both sides
 2025-11-07,ny,no liquidity target at least 1R away
+2025-11-10,london,break candle not a clear full-body close
+2025-11-10,ny,break candle not a clear full-body close
 2025-11-12,london,no valid box break
-2025-11-12,ny,no liquidity target at least 1R away
+2025-11-12,ny,break candle not a clear full-body close
 2025-11-13,london,box broken both sides
+2025-11-13,ny,no pullback entry before deadline
 2025-11-14,london,no valid box break
+2025-11-14,ny,break candle not a clear full-body close
 2025-11-17,london,no valid box break
+2025-11-17,ny,pullback went past the start of the move
+2025-11-18,london,break candle not a clear full-body close
+2025-11-18,ny,break candle not a clear full-body close
 2025-11-19,london,no valid box break
+2025-11-20,london,break candle not a clear full-body close
+2025-11-20,ny,break candle not a clear full-body close
+2025-11-21,london,pullback went past the start of the move
+2025-11-21,ny,break candle not a clear full-body close
 2025-11-24,london,no valid box break
-2025-11-24,ny,no liquidity target at least 1R away
-2025-11-25,london,no pullback entry before deadline
-2025-11-25,ny,no pullback entry before deadline
+2025-11-24,ny,break candle not a clear full-body close
+2025-11-25,london,break candle not a clear full-body close
+2025-11-25,ny,break candle not a clear full-body close
 2025-11-26,london,box broken both sides
-2025-11-26,ny,no liquidity target at least 1R away
+2025-11-26,ny,break candle not a clear full-body close
+2025-11-28,london,break candle not a clear full-body close
+2025-11-28,ny,break candle not a clear full-body close
 2025-12-01,london,no valid box break
 2025-12-01,ny,no valid box break
 2025-12-02,london,box broken both sides
-2025-12-02,ny,no liquidity target at least 1R away
+2025-12-02,ny,break candle not a clear full-body close
 2025-12-03,london,box broken both sides
+2025-12-03,ny,break candle not a clear full-body close
+2025-12-04,london,break candle not a clear full-body close
+2025-12-04,ny,break candle not a clear full-body close
+2025-12-05,london,pullback went past the start of the move
+2025-12-05,ny,break candle not a clear full-body close
+2025-12-08,london,break candle not a clear full-body close
+2025-12-08,ny,no valid box break
 2025-12-09,london,target already reached at entry
-2025-12-09,ny,no liquidity target at least 1R away
+2025-12-09,ny,break candle not a clear full-body close
 2025-12-10,london,no valid box break
+2025-12-10,ny,break candle not a clear full-body close
 2025-12-11,london,box broken both sides
-2025-12-11,ny,no pullback entry before deadline
+2025-12-11,ny,break candle not a clear full-body close
 2025-12-12,london,no valid box break
+2025-12-12,ny,break candle not a clear full-body close
+2025-12-15,london,break candle not a clear full-body close
 2025-12-16,london,box broken both sides
+2025-12-17,london,break candle not a clear full-body close
+2025-12-17,ny,break candle not a clear full-body close
 2025-12-18,london,box broken both sides
-2025-12-18,ny,pullback went past the start of the move
+2025-12-18,ny,break candle not a clear full-body close
 2025-12-19,london,no valid box break
+2025-12-19,ny,break candle not a clear full-body close
 2025-12-22,london,no valid box break
-2025-12-22,ny,no liquidity target at least 1R away
+2025-12-22,ny,break candle not a clear full-body close
 2025-12-23,london,box broken both sides
-2025-12-23,ny,no pullback entry before deadline
+2025-12-23,ny,break candle not a clear full-body close
 2025-12-24,london,no sweep of Asian range
-2025-12-24,ny,no liquidity target at least 1R away
+2025-12-24,ny,pullback went past the start of the move
 2025-12-25,london,missing Asian data
 2025-12-26,london,box broken both sides
 2025-12-26,ny,no liquidity target at least 1R away
@@ -458,262 +647,379 @@ date,session,reason
 2025-12-29,ny,no valid box break
 2025-12-30,london,no valid box break
 2025-12-30,ny,no pullback entry before deadline
-2025-12-31,london,pullback went past the start of the move
+2025-12-31,london,break candle not a clear full-body close
+2025-12-31,ny,break candle not a clear full-body close
 2026-01-01,london,missing Asian data
 2026-01-02,london,box broken both sides
-2026-01-02,ny,no liquidity target at least 1R away
+2026-01-02,ny,break candle not a clear full-body close
 2026-01-05,london,box broken both sides
 2026-01-05,ny,no valid box break
 2026-01-07,london,no valid box break
+2026-01-08,london,break candle not a clear full-body close
+2026-01-08,ny,break candle not a clear full-body close
 2026-01-09,london,box broken both sides
-2026-01-09,ny,no liquidity target at least 1R away
+2026-01-09,ny,break candle not a clear full-body close
 2026-01-12,london,no valid box break
-2026-01-12,ny,no liquidity target at least 1R away
+2026-01-12,ny,break candle not a clear full-body close
 2026-01-13,london,no valid box break
+2026-01-13,ny,break candle not a clear full-body close
 2026-01-14,london,no valid box break
-2026-01-14,ny,no liquidity target at least 1R away
+2026-01-14,ny,break candle not a clear full-body close
 2026-01-15,london,box broken both sides
-2026-01-16,london,pullback went past the start of the move
-2026-01-16,ny,no liquidity target at least 1R away
+2026-01-15,ny,pullback went past the start of the move
+2026-01-16,london,break candle not a clear full-body close
+2026-01-16,ny,pullback went past the start of the move
+2026-01-19,london,break candle not a clear full-body close
+2026-01-19,ny,no pullback entry before deadline
 2026-01-20,london,no valid box break
-2026-01-20,ny,no pullback entry before deadline
+2026-01-20,ny,break candle not a clear full-body close
 2026-01-21,london,box broken both sides
+2026-01-21,ny,break candle not a clear full-body close
+2026-01-22,london,break candle not a clear full-body close
+2026-01-22,ny,no liquidity target at least 1R away
 2026-01-23,london,no valid box break
-2026-01-23,ny,no liquidity target at least 1R away
+2026-01-23,ny,break candle not a clear full-body close
+2026-01-26,london,break candle not a clear full-body close
+2026-01-26,ny,break candle not a clear full-body close
 2026-01-27,london,box broken both sides
-2026-01-27,ny,no liquidity target at least 1R away
+2026-01-27,ny,break candle not a clear full-body close
+2026-01-28,london,break candle not a clear full-body close
+2026-01-28,ny,break candle not a clear full-body close
 2026-01-29,london,no valid box break
 2026-01-29,ny,no valid box break
 2026-01-30,london,no valid box break
-2026-01-30,ny,no liquidity target at least 1R away
+2026-01-30,ny,break candle not a clear full-body close
+2026-02-03,london,break candle not a clear full-body close
+2026-02-03,ny,no liquidity target at least 1R away
 2026-02-05,london,no sweep of Asian range
+2026-02-05,ny,break candle not a clear full-body close
 2026-02-06,london,no valid box break
-2026-02-06,ny,no liquidity target at least 1R away
+2026-02-06,ny,break candle not a clear full-body close
 2026-02-09,london,no sweep of Asian range
 2026-02-09,ny,no liquidity target at least 1R away
 2026-02-10,london,box broken both sides
-2026-02-10,ny,no liquidity target at least 1R away
+2026-02-10,ny,pullback went past the start of the move
 2026-02-11,london,no valid box break
+2026-02-11,ny,break candle not a clear full-body close
 2026-02-12,london,box broken both sides
-2026-02-12,ny,pullback went past the start of the move
+2026-02-12,ny,break candle not a clear full-body close
 2026-02-13,london,box broken both sides
 2026-02-13,ny,no pullback entry before deadline
 2026-02-16,london,box broken both sides
-2026-02-16,ny,no pullback entry before deadline
+2026-02-16,ny,break candle not a clear full-body close
 2026-02-17,london,box broken both sides
 2026-02-17,ny,no valid box break
+2026-02-18,london,break candle not a clear full-body close
+2026-02-18,ny,no valid box break
 2026-02-20,london,no valid box break
-2026-02-20,ny,no pullback entry before deadline
+2026-02-20,ny,break candle not a clear full-body close
+2026-02-23,london,break candle not a clear full-body close
+2026-02-23,ny,no pullback entry before deadline
 2026-02-24,london,no valid box break
-2026-02-25,london,pullback went past the start of the move
-2026-02-25,ny,no liquidity target at least 1R away
+2026-02-24,ny,break candle not a clear full-body close
+2026-02-25,london,break candle not a clear full-body close
+2026-02-25,ny,break candle not a clear full-body close
 2026-02-26,london,no valid box break
+2026-02-26,ny,break candle not a clear full-body close
 2026-02-27,london,box broken both sides
-2026-02-27,ny,no liquidity target at least 1R away
+2026-02-27,ny,break candle not a clear full-body close
+2026-03-02,london,break candle not a clear full-body close
+2026-03-02,ny,no pullback entry before deadline
 2026-03-03,london,no valid box break
 2026-03-03,ny,no valid box break
 2026-03-04,london,no valid box break
+2026-03-04,ny,break candle not a clear full-body close
 2026-03-05,london,pullback went past the start of the move
-2026-03-05,ny,no liquidity target at least 1R away
+2026-03-05,ny,break candle not a clear full-body close
 2026-03-06,london,box broken both sides
-2026-03-06,ny,no liquidity target at least 1R away
+2026-03-06,ny,break candle not a clear full-body close
 2026-03-09,london,box broken both sides
+2026-03-09,ny,break candle not a clear full-body close
 2026-03-10,london,box broken both sides
-2026-03-10,ny,no liquidity target at least 1R away
+2026-03-10,ny,break candle not a clear full-body close
 2026-03-11,london,no valid box break
 2026-03-11,ny,no valid box break
 2026-03-12,london,no valid box break
-2026-03-12,ny,no liquidity target at least 1R away
+2026-03-12,ny,break candle not a clear full-body close
 2026-03-13,london,box broken both sides
-2026-03-13,ny,no liquidity target at least 1R away
-2026-03-16,london,pullback went past the start of the move
-2026-03-16,ny,no liquidity target at least 1R away
+2026-03-13,ny,break candle not a clear full-body close
+2026-03-16,london,break candle not a clear full-body close
+2026-03-16,ny,break candle not a clear full-body close
 2026-03-17,london,no valid box break
 2026-03-17,ny,no liquidity target at least 1R away
+2026-03-18,london,target already reached at entry
+2026-03-18,ny,break candle not a clear full-body close
 2026-03-19,london,no valid box break
-2026-03-19,ny,no pullback entry before deadline
+2026-03-19,ny,break candle not a clear full-body close
 2026-03-20,london,box broken both sides
-2026-03-20,ny,pullback went past the start of the move
+2026-03-20,ny,break candle not a clear full-body close
+2026-03-23,london,break candle not a clear full-body close
+2026-03-23,ny,break candle not a clear full-body close
 2026-03-24,london,box broken both sides
+2026-03-24,ny,break candle not a clear full-body close
+2026-03-25,london,break candle not a clear full-body close
+2026-03-25,ny,no pullback entry before deadline
 2026-03-26,london,no valid box break
-2026-03-26,ny,pullback went past the start of the move
+2026-03-26,ny,break candle not a clear full-body close
+2026-03-27,london,break candle not a clear full-body close
+2026-03-27,ny,break candle not a clear full-body close
 2026-03-30,london,no valid box break
-2026-03-30,ny,no pullback entry before deadline
+2026-03-30,ny,break candle not a clear full-body close
 2026-03-31,london,box broken both sides
-2026-03-31,ny,no pullback entry before deadline
+2026-03-31,ny,break candle not a clear full-body close
 2026-04-01,london,no valid box break
-2026-04-01,ny,no liquidity target at least 1R away
+2026-04-01,ny,break candle not a clear full-body close
 2026-04-02,london,no valid box break
+2026-04-02,ny,break candle not a clear full-body close
 2026-04-06,london,no valid box break
-2026-04-06,ny,pullback went past the start of the move
+2026-04-06,ny,break candle not a clear full-body close
 2026-04-07,london,box broken both sides
-2026-04-07,ny,no pullback entry before deadline
+2026-04-07,ny,break candle not a clear full-body close
 2026-04-08,london,no valid box break
 2026-04-09,london,no valid box break
 2026-04-10,london,box broken both sides
+2026-04-10,ny,no pullback entry before deadline
+2026-04-14,london,pullback went past the start of the move
+2026-04-14,ny,break candle not a clear full-body close
+2026-04-15,london,break candle not a clear full-body close
+2026-04-15,ny,break candle not a clear full-body close
 2026-04-16,london,no valid box break
-2026-04-16,ny,no liquidity target at least 1R away
+2026-04-16,ny,break candle not a clear full-body close
 2026-04-17,london,no valid box break
-2026-04-17,ny,no pullback entry before deadline
+2026-04-17,ny,break candle not a clear full-body close
 2026-04-20,london,box broken both sides
+2026-04-20,ny,break candle not a clear full-body close
+2026-04-21,london,break candle not a clear full-body close
+2026-04-21,ny,break candle not a clear full-body close
+2026-04-22,london,break candle not a clear full-body close
 2026-04-23,london,box broken both sides
 2026-04-23,ny,no liquidity target at least 1R away
-2026-04-24,london,pullback went past the start of the move
+2026-04-24,london,break candle not a clear full-body close
 2026-04-24,ny,no valid box break
 2026-04-27,london,no sweep of Asian range
-2026-04-27,ny,pullback went past the start of the move
+2026-04-27,ny,break candle not a clear full-body close
 2026-04-28,london,no valid box break
-2026-04-28,ny,pullback went past the start of the move
+2026-04-28,ny,break candle not a clear full-body close
 2026-04-29,london,no valid box break
+2026-04-29,ny,break candle not a clear full-body close
 2026-04-30,london,no valid box break
-2026-04-30,ny,pullback went past the start of the move
+2026-04-30,ny,break candle not a clear full-body close
 2026-05-01,london,box broken both sides
 2026-05-01,ny,no valid box break
 2026-05-04,london,no valid box break
 2026-05-04,ny,no pullback entry before deadline
 2026-05-05,london,box broken both sides
-2026-05-05,ny,no pullback entry before deadline
+2026-05-05,ny,break candle not a clear full-body close
 2026-05-06,london,no valid box break
+2026-05-06,ny,break candle not a clear full-body close
+2026-05-07,london,break candle not a clear full-body close
+2026-05-07,ny,break candle not a clear full-body close
 2026-05-08,london,no valid box break
-2026-05-08,ny,no liquidity target at least 1R away
+2026-05-08,ny,break candle not a clear full-body close
 2026-05-11,london,box broken both sides
-2026-05-12,london,pullback went past the start of the move
-2026-05-12,ny,no liquidity target at least 1R away
+2026-05-11,ny,no pullback entry before deadline
+2026-05-12,london,break candle not a clear full-body close
+2026-05-12,ny,break candle not a clear full-body close
 2026-05-13,london,no valid box break
-2026-05-13,ny,no pullback entry before deadline
+2026-05-13,ny,break candle not a clear full-body close
+2026-05-14,london,break candle not a clear full-body close
+2026-05-14,ny,break candle not a clear full-body close
 2026-05-15,london,no valid box break
-2026-05-15,ny,no pullback entry before deadline
+2026-05-15,ny,break candle not a clear full-body close
+2026-05-18,london,break candle not a clear full-body close
 2026-05-19,london,no valid box break
 2026-05-19,ny,no valid box break
 2026-05-20,london,no sweep of Asian range
 2026-05-20,ny,no liquidity target at least 1R away
+2026-05-22,london,break candle not a clear full-body close
+2026-05-22,ny,no valid box break
+2026-05-25,london,break candle not a clear full-body close
+2026-05-25,ny,pullback went past the start of the move
 2026-05-26,london,no valid box break
-2026-05-26,ny,no liquidity target at least 1R away
+2026-05-26,ny,break candle not a clear full-body close
+2026-05-27,london,break candle not a clear full-body close
+2026-05-27,ny,break candle not a clear full-body close
 2026-05-28,london,box broken both sides
-2026-05-28,ny,no pullback entry before deadline
+2026-05-28,ny,break candle not a clear full-body close
 2026-05-29,london,no valid box break
-2026-05-29,ny,no liquidity target at least 1R away
+2026-05-29,ny,break candle not a clear full-body close
 2026-06-01,london,box broken both sides
-2026-06-01,ny,no pullback entry before deadline
+2026-06-01,ny,break candle not a clear full-body close
+2026-06-02,london,break candle not a clear full-body close
+2026-06-02,ny,break candle not a clear full-body close
 2026-06-03,london,no valid box break
-2026-06-03,ny,pullback went past the start of the move
+2026-06-03,ny,break candle not a clear full-body close
 2026-06-04,london,no valid box break
-2026-06-04,ny,no liquidity target at least 1R away
+2026-06-04,ny,break candle not a clear full-body close
+2026-06-05,london,break candle not a clear full-body close
+2026-06-05,ny,break candle not a clear full-body close
 2026-06-08,london,box broken both sides
 2026-06-08,ny,no valid box break
 2026-06-09,london,no valid box break
-2026-06-09,ny,no liquidity target at least 1R away
+2026-06-09,ny,break candle not a clear full-body close
 2026-06-10,london,no valid box break
-2026-06-10,ny,no liquidity target at least 1R away
+2026-06-10,ny,break candle not a clear full-body close
 2026-06-11,london,box broken both sides
+2026-06-11,ny,break candle not a clear full-body close
+2026-06-12,london,break candle not a clear full-body close
+2026-06-12,ny,break candle not a clear full-body close
 2026-06-15,london,no valid box break
+2026-06-15,ny,break candle not a clear full-body close
 2026-06-16,london,no valid box break
+2026-06-16,ny,break candle not a clear full-body close
 2026-06-17,london,box broken both sides
-2026-06-17,ny,box broken both sides
+2026-06-17,ny,break candle not a clear full-body close
 2026-06-18,london,no valid box break
-2026-06-18,ny,no pullback entry before deadline
+2026-06-18,ny,break candle not a clear full-body close
+2026-06-19,london,break candle not a clear full-body close
+2026-06-19,ny,no valid box break
 2026-06-22,london,box broken both sides
+2026-06-22,ny,break candle not a clear full-body close
 2026-06-23,london,box broken both sides
-2026-06-23,ny,no pullback entry before deadline
+2026-06-23,ny,break candle not a clear full-body close
 2026-06-24,london,no valid box break
-2026-06-24,ny,no liquidity target at least 1R away
+2026-06-24,ny,break candle not a clear full-body close
 2026-06-25,london,no valid box break
-2026-06-26,london,pullback went past the start of the move
-2026-06-26,ny,no liquidity target at least 1R away
+2026-06-26,london,break candle not a clear full-body close
+2026-06-26,ny,break candle not a clear full-body close
 2026-06-29,london,no valid box break
 2026-06-29,ny,no valid box break
 2026-06-30,london,box broken both sides
-2026-06-30,ny,no pullback entry before deadline
+2026-06-30,ny,break candle not a clear full-body close
+2026-07-01,london,no pullback entry before deadline
+2026-07-01,ny,break candle not a clear full-body close
 2026-07-02,london,box broken both sides
+2026-07-02,ny,no pullback entry before deadline
 2026-07-03,london,box broken both sides
+2026-07-03,ny,break candle not a clear full-body close
 2026-07-06,london,no valid box break
-2026-07-06,ny,pullback went past the start of the move
+2026-07-06,ny,break candle not a clear full-body close
+2026-07-07,london,box broken both sides
+2026-07-07,ny,break candle not a clear full-body close
 2026-07-08,london,target already reached at entry
 2026-07-08,ny,no liquidity target at least 1R away
 2026-07-09,london,box broken both sides
-2026-07-09,ny,no liquidity target at least 1R away
+2026-07-09,ny,break candle not a clear full-body close
 2026-07-10,london,no valid box break
+2026-07-10,ny,break candle not a clear full-body close
+2026-07-13,london,break candle not a clear full-body close
+2026-07-13,ny,break candle not a clear full-body close
+2026-07-14,london,break candle not a clear full-body close
+2026-07-14,ny,break candle not a clear full-body close
 2026-07-15,london,box broken both sides
-2026-07-15,ny,pullback went past the start of the move
+2026-07-15,ny,break candle not a clear full-body close
+2026-07-16,london,break candle not a clear full-body close
+2026-07-16,ny,break candle not a clear full-body close
 2026-07-17,london,no valid box break
 2026-07-17,ny,no liquidity target at least 1R away
 2026-07-20,london,no valid box break
+2026-07-20,ny,break candle not a clear full-body close
+2026-07-21,london,break candle not a clear full-body close
+2026-07-21,ny,break candle not a clear full-body close
 2026-07-22,london,no sweep of Asian range
-2026-07-22,ny,no liquidity target at least 1R away
+2026-07-22,ny,break candle not a clear full-body close
 2026-07-23,london,no valid box break
 2026-07-23,ny,no valid box break
-2026-07-24,london,target already reached at entry
+2026-07-24,london,break candle not a clear full-body close
+2026-07-24,ny,pullback went past the start of the move
 2026-07-27,london,no valid box break
+2026-07-27,ny,break candle not a clear full-body close
 2026-07-28,london,no valid box break
-2026-07-28,ny,no pullback entry before deadline
-2026-07-30,london,no pullback entry before deadline
+2026-07-28,ny,break candle not a clear full-body close
+2026-07-30,london,break candle not a clear full-body close
 2026-07-30,ny,no valid box break
 2026-07-31,london,no valid box break
+2026-07-31,ny,break candle not a clear full-body close
 2026-08-03,london,no valid box break
+2026-08-03,ny,break candle not a clear full-body close
 2026-08-04,london,box broken both sides
 2026-08-04,ny,box broken both sides
+2026-08-05,london,break candle not a clear full-body close
+2026-08-05,ny,break candle not a clear full-body close
 2026-08-07,london,no valid box break
 2026-08-07,ny,no valid box break
 2026-08-10,london,no pullback entry before deadline
-2026-08-10,ny,pullback went past the start of the move
-2026-08-11,london,no pullback entry before deadline
+2026-08-10,ny,break candle not a clear full-body close
+2026-08-11,london,break candle not a clear full-body close
+2026-08-11,ny,break candle not a clear full-body close
 2026-08-12,london,no valid box break
 2026-08-13,london,box broken both sides
-2026-08-13,ny,no liquidity target at least 1R away
+2026-08-13,ny,break candle not a clear full-body close
 2026-08-14,london,no valid box break
 2026-08-14,ny,pullback went past the start of the move
 2026-08-17,london,no sweep of Asian range
-2026-08-17,ny,no liquidity target at least 1R away
+2026-08-17,ny,break candle not a clear full-body close
 2026-08-18,london,no valid box break
 2026-08-18,ny,no pullback entry before deadline
 2026-08-19,london,no valid box break
-2026-08-19,ny,pullback went past the start of the move
-2026-08-20,london,pullback went past the start of the move
-2026-08-20,ny,no liquidity target at least 1R away
+2026-08-19,ny,break candle not a clear full-body close
+2026-08-20,london,break candle not a clear full-body close
+2026-08-20,ny,break candle not a clear full-body close
 2026-08-21,london,no valid box break
-2026-08-21,ny,no pullback entry before deadline
+2026-08-21,ny,break candle not a clear full-body close
+2026-08-24,london,break candle not a clear full-body close
 2026-08-25,london,box broken both sides
+2026-08-25,ny,break candle not a clear full-body close
 2026-08-26,london,no valid box break
-2026-08-26,ny,no liquidity target at least 1R away
+2026-08-26,ny,break candle not a clear full-body close
 2026-08-27,london,no valid box break
+2026-08-27,ny,break candle not a clear full-body close
 2026-08-28,london,no valid box break
-2026-08-28,ny,no pullback entry before deadline
+2026-08-28,ny,break candle not a clear full-body close
 2026-08-31,london,box broken both sides
-2026-08-31,ny,no pullback entry before deadline
+2026-08-31,ny,break candle not a clear full-body close
 2026-09-01,london,no valid box break
-2026-09-01,ny,no pullback entry before deadline
+2026-09-01,ny,break candle not a clear full-body close
 2026-09-02,london,box broken both sides
 2026-09-02,ny,no valid box break
 2026-09-03,london,no valid box break
-2026-09-03,ny,no liquidity target at least 1R away
+2026-09-03,ny,break candle not a clear full-body close
 2026-09-04,london,no valid box break
-2026-09-04,ny,pullback went past the start of the move
+2026-09-04,ny,break candle not a clear full-body close
 2026-09-08,london,box broken both sides
-2026-09-08,ny,no liquidity target at least 1R away
+2026-09-08,ny,no pullback entry before deadline
+2026-09-09,london,break candle not a clear full-body close
+2026-09-09,ny,no pullback entry before deadline
 2026-09-10,london,no pullback entry before deadline
-2026-09-10,ny,no pullback entry before deadline
+2026-09-10,ny,break candle not a clear full-body close
 2026-09-11,london,box broken both sides
-2026-09-11,ny,pullback went past the start of the move
+2026-09-11,ny,break candle not a clear full-body close
 2026-09-14,london,no valid box break
+2026-09-14,ny,break candle not a clear full-body close
 2026-09-15,london,no valid box break
+2026-09-15,ny,pullback went past the start of the move
 2026-09-16,london,box broken both sides
-2026-09-16,ny,no liquidity target at least 1R away
+2026-09-16,ny,break candle not a clear full-body close
+2026-09-17,london,break candle not a clear full-body close
+2026-09-17,ny,break candle not a clear full-body close
+2026-09-18,london,break candle not a clear full-body close
+2026-09-18,ny,break candle not a clear full-body close
+2026-09-21,london,break candle not a clear full-body close
+2026-09-21,ny,no valid box break
 2026-09-22,london,box broken both sides
+2026-09-22,ny,break candle not a clear full-body close
 2026-09-23,london,no valid box break
-2026-09-23,ny,no liquidity target at least 1R away
+2026-09-23,ny,break candle not a clear full-body close
 2026-09-24,london,no valid box break
 2026-09-24,ny,no liquidity target at least 1R away
 2026-09-25,london,no valid box break
+2026-09-25,ny,no pullback entry before deadline
 2026-09-28,london,box broken both sides
 2026-09-28,ny,no liquidity target at least 1R away
 2026-09-29,london,no valid box break
+2026-09-29,ny,break candle not a clear full-body close
+2026-09-30,london,break candle not a clear full-body close
+2026-09-30,ny,break candle not a clear full-body close
+2026-10-01,london,break candle not a clear full-body close
+2026-10-01,ny,break candle not a clear full-body close
 2026-10-02,london,box broken both sides
-2026-10-02,ny,no pullback entry before deadline
-2026-10-05,london,target already reached at entry
-2026-10-05,ny,no liquidity target at least 1R away
+2026-10-02,ny,break candle not a clear full-body close
+2026-10-05,london,break candle not a clear full-body close
+2026-10-05,ny,break candle not a clear full-body close
 2026-10-06,london,no valid box break
 2026-10-07,london,no valid box break
+2026-10-07,ny,break candle not a clear full-body close
 2026-10-08,london,box broken both sides
 2026-10-08,ny,pullback went past the start of the move
 2026-10-09,london,box broken both sides
-2026-10-09,ny,no pullback entry before deadline
+2026-10-09,ny,break candle not a clear full-body close

@@ -1,6 +1,6 @@
 label,trades,win_rate_%,avg_R,total_R,profit_factor,max_drawdown_R,longest_losing_streak,avg_planned_rr,end_balance_1.0%,max_dd_1.0%,end_balance_1.5%,max_dd_1.5%
-ALL (NY target = liquidity),244,41.4,-0.045,-10.9,0.91,19.9,8,1.8,8819,19.0,8182,27.8
-London only,135,41.5,-0.077,-10.3,0.87,19.3,7,2.01,8921,18.3,8358,26.7
-New York only (liquidity target),109,41.3,-0.006,-0.6,0.99,9.3,6,1.53,9886,9.1,9789,13.4
-ALL (NY target = fixed 2R),378,39.9,-0.048,-18.0,0.9,28.7,13,2.0,8169,26.4,7262,37.8
-New York only (2R target),243,39.1,-0.031,-7.6,0.93,14.8,9,2.0,9158,13.9,8689,20.2
+ALL (NY target = liquidity),46,43.5,-0.174,-8.0,0.65,11.1,4,1.41,9214,10.6,8831,15.6
+London only,27,40.7,-0.188,-5.1,0.63,7.8,9,1.25,9494,7.6,9242,11.2
+New York only (liquidity target),19,47.4,-0.153,-2.9,0.69,5.6,4,1.64,9705,5.5,9556,8.1
+ALL (NY target = fixed 2R),71,38.0,-0.165,-11.7,0.65,15.1,7,1.71,8865,14.2,8328,20.6
+New York only (2R target),44,36.4,-0.151,-6.7,0.67,10.4,6,2.0,9338,10.0,9012,14.7
