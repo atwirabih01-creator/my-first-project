@@ -3,7 +3,7 @@ XAUUSD London / New York box strategy backtest (5-minute candles).
 
 All times below are New York time. The data file is in UTC and is converted.
 
-Rules (as agreed with the owner, see RULES.md for the plain-language version):
+Rules (as agreed with the owner):
   London
     - Asian range = highest / lowest price 20:00-00:00 (evening before).
     - From 02:00 price must sweep (trade beyond) the Asian high or low.
@@ -14,7 +14,7 @@ Rules (as agreed with the owner, see RULES.md for the plain-language version):
     - Fibonacci from the top of the breakout move (never above the box) to the
       furthest point reached after the break. Enter when a candle wicks into
       the 0.5 level or deeper and closes back out of the zone.
-    - Stop just beyond the other side of the box. Target = other side of Asia.
+    - Stop at the other side of the box (its highest / lowest wick). Target = other side of Asia.
     - Cancelled if price closes beyond both sides of the box before entry.
     - Must enter before 09:30, otherwise move to the New York setup.
   New York (only if no London trade that day)
@@ -24,7 +24,6 @@ Rules (as agreed with the owner, see RULES.md for the plain-language version):
       previous-day high or low) that is at least 1x the risk away.
   One trade per day maximum.
 """
-import sys
 from pathlib import Path
 
 import numpy as np
@@ -33,7 +32,6 @@ import pandas as pd
 HERE = Path(__file__).parent
 COST = 0.30          # spread + commission in dollars per ounce, round trip
 FIB_ENTRY = 0.5      # wick must reach at least this retracement
-FIB_DEEP = 0.75      # deepest level of the zone (for reporting)
 MIN_RALLY = 0.0      # move after the break must be at least this many box-heights before a pullback counts
 
 
@@ -177,8 +175,6 @@ def run(df, ny_target_mode="liquidity"):
             continue
         prev = day - pd.Timedelta(days=3 if day.weekday() == 0 else 1)
         a0, a1 = d.idx(day - pd.Timedelta(hours=4)), d.idx(day)
-        if day.weekday() == 0:
-            a0 = d.idx(day - pd.Timedelta(hours=4))   # Sunday evening
         if a1 - a0 < 30:
             skipped.append((day.date(), "london", "missing Asian data"))
             continue
