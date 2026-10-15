@@ -16,11 +16,11 @@ Status labels used below:
 
 ## Plain-language summary
 
-- **No safety filter has been publicly tested on Gulf Arabic or "Arabizi" (Arabic typed in English letters and numbers, like "7abibi").** OpenAI's free filter and Microsoft's filter both work in Arabic, but neither company publishes how well. Zaki must build its own test list and measure this before children use the app.
+- **No safety filter has been publicly tested on Lebanese or Gulf Arabic, or on "Arabizi" (Arabic typed in English letters and numbers, like "7abibi").** OpenAI's free filter and Microsoft's filter both work in Arabic, but neither company publishes how well. Zaki must build its own test list and measure this before children use the app.
 - **Arabizi is a known weak spot.** A 2024 study showed that writing in Arabizi tricked big AI models into unsafe answers that plain Arabic did not. Arabizi needs extra testing and extra protection.
 - **Two filters named in the plan or commonly suggested are poor choices.** Google's "Perspective" filter is being switched off at the end of 2026. Meta's "Llama Guard" does not officially support Arabic. There is a filter built in Qatar for Arabic, called FanarGuard, that is worth testing as the second filter.
 - **Speech-to-text: Qatari Arabic is supported, but children's voices are the big unknown.** Microsoft Azure has a Qatari Arabic setting, and a Qatari voice for reading aloud, and it can run in a data centre in Qatar. The best tools still get about 1 word in 3 wrong on adult Gulf speech. The only published study of Arabic-speaking children got about 2 words in 3 wrong. Voice should be an extra, not the main way children use Zaki, until we test it with real children.
-- **Read-aloud voices exist for every Gulf country, Egypt and Jordan, but none are child voices.** They are adult voices, which is fine for a tutor character.
+- **Read-aloud voices exist for Lebanon, every Gulf country, Egypt and Jordan, but none are child voices.** They are adult voices, which is fine for a tutor character.
 - **Reading photos of pages: the AI is good at clear printed Arabic and much weaker on handwriting.** No one has published a test of Claude on Arabic text. Google's Gemini scored best in the main Arabic test, but the plan already rules it out. We need our own test with real textbook photos.
 - **Audio and photos can be handled without being stored.** Microsoft deletes live speech straight away. OpenAI can turn off storage for speech-to-text. Anthropic deletes images after use. Each of these needs the right setting or an approved agreement.
 - **For the Lebanon pilot:** Microsoft has Lebanese Arabic speech-to-text and two Lebanese read-aloud voices. However, in the one recent test that reports it, Lebanese speech was among the hardest Levantine dialects to transcribe (about 45–60% of words wrong for the systems listed). Lebanese children often mix Arabic, French and English in one sentence, which no tool has been tested on for children. Lebanese Arabizi has almost no safety research. All of this must be tested with the family first.
@@ -43,10 +43,10 @@ Status labels used below:
 | 7 | "Test Gulf dialect with real kids" (10.1, 14) | Strongly supported by the evidence. Child speech is the largest unknown (see B4). | Make voice optional at launch, with a "Did you say…?" confirm step. Plan the speech test across several dialects. |
 | 8 | "Test 50 samples" of textbook photos (14) | Reasonable, but 50 is too few to judge handwriting **and** several page types **and** dialects. Claude has **no** published Arabic text-reading results. | Use about 120 photos in clear groups (see D2). Decide pass/fail rules before testing. |
 | 9 | "Blur faces and names" in photos (8.1) | Doable. Faces can be found on the phone itself before upload. Finding names needs a text-reading step first. | Blur faces **on the phone**, before upload. Use a cropping step and an "is there a name here?" check. See C4. |
+| 10 | Note on Gemini (7) | Gemini was the best Arabic text reader in the main benchmark (KITAB-Bench, early 2025). It stays excluded because of its terms for under-18 users. Azure Document Intelligence was also strong on Arabic print. | If Claude fails the photo test, test Azure Document Intelligence as a text-reading step before Claude. This is non-Gemini and needs no change to the terms decision. |
 | 11 | Pilot location and dialect (implied Qatar throughout) | The first pilot is in **Lebanon**. Azure has ar-LB speech-to-text and two ar-LB voices. There is **no Azure data centre in Lebanon**, and Lebanon's own data-protection rules are not covered here. | Test Lebanese first (Section D). Ask the legal researcher to check Lebanese rules for children's data and audio, because Qatar's PDPPL is not the only law for this pilot. |
 | 12 | "Next.js web app that installs on the phone (PWA)" (10.1) | Now a **native App Store app**. That allows Apple's **on-device speech** and on-device face detection (Apple Vision). | Add an Apple on-device speech option to the voice test (B6). Apple's Kids Category rules (plan 8.4) now apply from day one. |
 | 13 | Languages: Arabic and English only (2) | Lebanese schools often teach maths and science in **French**. French is in Microsoft's trained-and-tested safety set and Llama Guard's supported set, so it is easier to support safely than Arabic. | Treat French as a likely **Phase 4 / v2** language. Include a few French–Arabic–English mixed items in the safety and speech tests now. |
-| 10 | Note on Gemini (7) | Gemini was the best Arabic text reader in the main benchmark (KITAB-Bench, early 2025). It stays excluded because of its terms for under-18 users. Azure Document Intelligence was also strong on Arabic print. | If Claude fails the photo test, test Azure Document Intelligence as a text-reading step before Claude. This is non-Gemini and needs no change to the terms decision. |
 
 ---
 
@@ -90,7 +90,8 @@ Status labels used below:
 - **Gulf-specific hate/offence data:** ADHAR (2024, Qatar-based authors) includes a Gulf subset, with hate detection up to ~90% F1 using trained classifiers. That is a research dataset, not a ready filter. https://pmc.ncbi.nlm.nih.gov/articles/PMC11170444/
 - **Levantine and Lebanese (pilot dialect):**
   - Levantine has more research than Gulf.
-    - L-HSAB: Levantine hate and abuse tweets, 5,846 items, Arabic script. https://arxiv.org/abs/2103.10195 (related Let-Mi); L-HSAB: https://aclanthology.org/W19-3512
+    - L-HSAB (2019): Levantine hate and abuse tweets, 5,846 items, Arabic script. https://aclanthology.org/W19-3512
+    - Let-Mi (2021): Levantine misogyny tweets, 6,550 items. https://arxiv.org/abs/2103.10195
     - ArabicDialectSafety covers Syrian and Palestinian.
     - In the AUB study, Qwen3Guard was 95% accurate on its Levantine subset, a small sample.
   - **Lebanese Arabizi:** a Lebanese American University project is building a Lebanese Arabizi dataset (sarcasm, emotion, Arabizi detection). **No offensive or harmful-content labels were confirmed.** https://laur.lau.edu.lb:8443/xmlui/handle/10725/15805
@@ -107,7 +108,7 @@ Status labels used below:
 
 ### A8. Testing approach for Zaki's Arabic test set (moderation)
 - **Size:** at least 600 items to start: about 300 harmful and 300 harmless. Grow to more than 1,000 by the pilot.
-- **Language mix:** in each category, use matching versions in English, MSA, Gulf (Qatari, Saudi Najdi and Hijazi, Emirati), Egyptian, Levantine, **Arabizi** (Gulf and Egyptian spellings, for example "3" = ع and "7" = ح), and mixed Arabic and English in one sentence.
+- **Language mix:** in each category, use matching versions in **Lebanese/Levantine (first)**, **Lebanese Arabizi**, **French–Arabic–English mixed** (Lebanese style), English, MSA, Gulf (Qatari, Saudi Najdi and Hijazi, Emirati), Gulf and Egyptian **Arabizi** (for example "3" = ع, "7" = ح, "2" = ء), Egyptian, and Arabic–English mixed. Add some **French-only** items too, because Lebanese children may type in French.
 - **Categories (matching plan 8.6):** begging for answers; adult or sexual; violence; self-harm said in a child's words; abuse disclosure ("my uncle hits me"); secrecy requests; personal-data fishing; tricks hidden in photos; and **harmless look-alikes**. Examples of look-alikes: school words that sound rude, body-part words in science lessons, religious and historical content, and family words. These measure false alarms, which frustrate kids and parents.
 - **Who writes and labels:** at least two native speakers per dialect group, ideally including a Qatari teacher or parent, labelling separately. Measure how often they agree. Never use real children's messages without consent.
 - **What to measure, for each tool and each dialect:** missed harmful items (the most important), false alarms on harmless items, and results on safety-script items ("must alert parent"). Suggested go/no-go rule, for the team to confirm: for self-harm, abuse and sexual items, the combined filters must catch at least 98% in every dialect including Arabizi, with false alarms of 5% or less on harmless school content.
@@ -195,6 +196,18 @@ Assume a child speaks 10 minutes a day and Zaki reads aloud 10 minutes a day, on
 - Read-aloud, assuming roughly 800 Arabic characters per spoken minute: ~200K characters, so Azure ~$3.00. This is unverified for Arabic speaking speed.
 - So voice adds roughly **$2–7 per child per month**, on top of the plan's $5–20 AI estimate. Plan section 10.3 should add a line for this.
 
+### B6. On-device speech on iPhone/iPad (native app) — Partly confirmed
+- Apple's newer speech system (**SpeechAnalyzer / SpeechTranscriber**, iOS 26 and later) runs transcription **on the device**, using a language model that the system downloads once.
+  - A developer blog (LoroNote, 23 Aug 2026) reports `SpeechTranscriber.supportedLocales` returning **42 locales across 22 languages, including Arabic**. It does **not** name which Arabic locales; ar-LB is unconfirmed.
+  - Where SpeechTranscriber lacks a locale, Apple offers `DictationTranscriber` as a fallback.
+  - The older `SFSpeechRecognizer` also has an on-device mode, but Apple publishes no per-language on-device list.
+  - Sources: https://developer.apple.com/videos/play/wwdc2025/277/ ; https://loronote.com/en/blog/apple-speechanalyzer-vs-whisper (I could not read Apple's own SpeechTranscriber doc page; it rendered empty).
+- **Arabic, Lebanese or child accuracy for Apple's engine: Not found.** Published comparisons are English only.
+- **Why it matters:** audio never leaves the phone, which is the strongest privacy option for children's voices. There is also no per-minute cost.
+- **Action:** in Phase 1, a developer prints `SpeechTranscriber.supportedLocales` on a real iOS 26 device and checks for `ar-LB`, `ar-SA` and `ar-AE`. If Arabic is present, add Apple on-device as a candidate in the D3 speech test.
+- **Read-aloud on device:** Apple's built-in voices (AVSpeechSynthesizer) include Arabic. The quality and dialect of the voices were **not checked**.
+- **Faces on device:** in a native app, Apple's Vision framework face detection can replace MediaPipe for blurring before upload (C4). This is a standard Apple feature, but I did not test it on worksheets.
+
 ---
 
 ## C. Reading photos of textbook pages and handwriting
@@ -234,19 +247,34 @@ Assume a child speaks 10 minutes a day and Zaki reads aloud 10 minutes a day, on
 
 ---
 
-## D. Phase 1 test protocol (small, concrete, multi-dialect)
+## D. Phase 1 test protocol (small, concrete, multi-dialect; Lebanon first)
 
 General rules: fake or consented data only; no real child data reaches any AI until legal clearance (plan Section 9). Write down pass/fail rules **before** testing. Two native-speaker reviewers score separately.
 
+**Order of testing:**
+1. **Lebanese/Levantine first:** Lebanese Arabic, Lebanese Arabizi, and French–Arabic–English mixed sentences. This is the pilot family.
+2. Then Gulf: Qatari, Saudi, Emirati.
+3. Then Egyptian and MSA.
+
+The pilot can start once the Lebanese results pass, but launching in each new country needs that country's dialect to pass too. At least one Lebanese native speaker reviewer is needed. A Lebanese parent or teacher is ideal for Arabizi spellings, for example "kifak", "2albi", "3am", "ma ba3ref".
+
 ### D1. Moderation test (weeks 1–3; no children needed)
-- Build the 600-item set described in A8: about 60 items per dialect group × 7 groups (English, MSA, Gulf, Egyptian, Levantine, Arabizi, mixed), plus harmless look-alikes.
+- **Round 1 (Lebanon pilot gate):** about 300 items:
+  - 100 Lebanese Arabic (Arabic script)
+  - 100 Lebanese Arabizi
+  - 60 French–Arabic–English mixed
+  - 40 English/French
+  - about half harmful and half harmless look-alikes
+  - written and labelled by at least two Lebanese reviewers
+- **Round 2 (before GCC launch):** about 300 more items covering Gulf, Gulf Arabizi, Egyptian and MSA.
 - Candidates: OpenAI omni-moderation; Claude Haiku policy check; FanarGuard (if the licence allows); Qwen3Guard (optional, needs hosting); Azure Content Safety (optional).
 - Report missed harmful items and false alarms **per dialect and per category**. Choose the second classifier from the results.
 
 ### D2. Photo-reading test (~120 photos; replaces "50 samples")
 | Group | Count | Notes |
 |---|---|---|
-| Printed Arabic textbook pages, grades 1–6 (Qatar MoEHE books, plus Saudi and UAE books if available) | 40 | Include diacritics, coloured boxes, two-column layouts |
+| Printed Arabic textbook pages, grades 1–6: **Lebanese curriculum first** (CRDP books and the pilot family's actual school books), then Qatar MoEHE, Saudi and UAE books | 40 | Include diacritics, coloured boxes, two-column layouts |
+| **French-language maths/science pages** (Lebanese schools) | 10 | Only to judge whether French support is worth adding later |
 | Printed English textbook pages | 15 | |
 | Maths pages: Arabic sums, Eastern digits, fractions, right-to-left working | 25 | Check every number exactly |
 | Children's handwriting (homework, from consenting families or staff writing like a child) | 25 | Mark as a separate result |
@@ -258,14 +286,24 @@ General rules: fake or consented data only; no real child data reaches any AI un
 - Also test face blur (MediaPipe) and name masking on 20 photos with fake names written in Arabic and English.
 
 ### D3. Speech test (later, with consenting families, after legal clearance)
-- **Children:** about 30, ages 6–12, in three age bands. Mix of dialects: Qatari/Gulf (≥ 12), Saudi (≥ 4), Emirati (≥ 4), Egyptian (≥ 5), Levantine (≥ 5). Parent present, with written consent. Recordings are kept only for scoring, then deleted on a stated date.
-- **Each child records:** 10 short answers (numbers, single words, yes/no); 5 reading-aloud sentences from their textbook; 3 free questions ("How do I…?"); 2 mixed Arabic–English sentences.
-- **Systems:** Azure (matching locale, e.g. ar-QA, ar-SA, ar-AE, ar-EG, ar-JO); OpenAI gpt-transcribe and gpt-4o-mini-transcribe; optionally ElevenLabs Scribe (only if retention terms work).
+- **Stage 1 (Lebanon pilot):** the founder's own children and, if possible, 5–10 more Lebanese children aged 6–12, with written parental consent and Lebanese legal check. Parent present. Recordings are kept only for scoring, then deleted on a stated date.
+- **Stage 2 (before GCC launch):** about 30 children across Qatari/Gulf (≥ 12), Saudi (≥ 4), Emirati (≥ 4), Egyptian (≥ 5) and other Levantine (≥ 5).
+- **Each child records:**
+  - 10 short answers (numbers, single words, yes/no)
+  - 5 reading-aloud sentences from their textbook
+  - 3 free questions ("How do I…?")
+  - **3 mixed sentences in the child's natural style** (for Lebanese children: Arabic with French and/or English words, e.g. maths terms in French)
+- **Systems:**
+  - Azure (matching locale: **ar-LB first**, then ar-QA, ar-SA, ar-AE, ar-EG, ar-JO)
+  - OpenAI gpt-transcribe and gpt-4o-mini-transcribe, which accept several languages at once and so may handle mixing better
+  - **Apple on-device SpeechTranscriber**, if Arabic is available on the test iPhone (B6)
+  - optionally ElevenLabs Scribe (only if retention terms work)
 - **Measure:** word error rate per age band and dialect; **"meaning kept"** (would Zaki answer correctly?); exact accuracy on short answers.
-- **Read-aloud voices:** 10 parents and 5 teachers rate ar-QA, ar-SA, ar-AE, ar-EG and ar-JO voices plus an OpenAI voice for clarity, friendliness and "sounds like us", on a 1–5 scale.
+- **Read-aloud voices:** parents and teachers rate the voices plus an OpenAI voice and an Apple on-device voice for clarity, friendliness and "sounds like us", on a 1–5 scale. Lebanon: **ar-LB** and ar-SY voices. GCC: ar-QA, ar-SA, ar-AE. Also ar-EG and ar-JO.
 - **Decision rule (suggested):** voice input ships only if short-answer accuracy is ≥ 95% after a "Did you say…?" step in the 6–8 age band. Otherwise voice is read-aloud only, and children type or tap.
 
 ### D4. What published research cannot tell us (must be tested)
+0. Everything about **Lebanese Arabizi** and **French–Arabic–English mixing**, for safety filters, speech recognition and the tutor's understanding. This is the pilot's main input, and almost no research exists.
 1. How any filter handles **Gulf** Arabic and **Gulf Arabizi**, and children's ways of saying harmful things.
 2. How any commercial speech tool handles **GCC children's** voices. Only one small Levantine Whisper study exists.
 3. Whether the "country" read-aloud voices sound like local dialect to Qatari and GCC children.
@@ -275,10 +313,25 @@ General rules: fake or consented data only; no real child data reaches any AI un
 
 ---
 
+## E. Should Zaki add French later? (Lebanon question)
+- **Why it matters:** many Lebanese schools teach maths and science in French (others in English). Children will photograph French pages and use French maths words. *Background knowledge, not verified in this research: confirm with the pilot family's school.*
+- **Tool support is better in French than in Arabic (Confirmed):**
+  - Azure Content Safety's harm classifiers are trained and tested on French.
+  - Llama Guard 3/4 list French as supported.
+  - Azure has many French speech locales and voices.
+  - Benchmarks generally test French far more than Arabic dialects.
+- **Recommendation:** do **not** build French for the first pilot, because Arabic and English are enough to learn from. But:
+  - (a) design the app so a third language can be added without rework
+  - (b) include French items in the safety test now, so French typed by a Lebanese child is not a blind spot
+  - (c) decide after the pilot, based on how often the family's homework is in French.
+
+---
+
 ## Search boundaries
 - **Searched:** web search (standard and extended), official docs (Microsoft Learn, OpenAI developer docs, Anthropic docs, ElevenLabs, Google Cloud, Hugging Face model cards), arXiv, ACL Anthology, PMC, and the Azure retail price API.
 - **Dates:** mainly 2024 to Oct 2026; older work only where it is foundational (Arabizi offence detection 2023; Hijja).
 - **Languages:** English-language sources only. Arabic-language publications were not searched, which is a gap.
 - **Excluded:** vendor marketing without numbers; vendor benchmarks are kept but flagged.
+- **Lebanon-specific searches:** Lebanese/Levantine moderation, Lebanese Arabizi, Lebanese code-switching speech, ar-LB voices, Apple on-device Arabic. Lebanese data-protection law was **not** covered; it belongs to the legal research.
 - **Not done:** no tools were signed up for or run. No numbers here come from Zaki's own testing.
 - **Could not open:** OpenAI's 2024 moderation launch post (HTTP 403), and full per-language tables for PolyGuard, Qwen3Guard and FanarGuard.
