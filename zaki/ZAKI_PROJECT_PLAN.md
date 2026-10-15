@@ -2,6 +2,7 @@
 
 Bilingual (Arabic + English) AI homework teacher for kids in grades 1–6. Built in Doha, Qatar.
 **Market (updated 2026-10-15):** not only Qatar. Target market is the Middle East, with the GCC countries as a key focus. Qatar is the home base.
+**First pilot (updated 2026-10-15):** the founder's own family in Lebanon. **App (updated 2026-10-15):** a native app on the Apple App Store (Google Play likely later), with proper tracking of usage and learning results within kids' app rules. Sections 9, 10 and 12 will be revised after the Phase 0 research.
 Founder: Rabih (not a programmer; explain everything in plain language). Plan date: 16 Oct 2026.
 
 ## 0. Instructions for Claude Code (read first)
