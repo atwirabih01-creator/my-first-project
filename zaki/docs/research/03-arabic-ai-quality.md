@@ -35,7 +35,7 @@ Status labels used below:
 | # | Plan text (section) | What research shows | Suggested change |
 |---|---|---|---|
 | 1 | "OpenAI omni-moderation-latest plus a second classifier" (8.1, 10.1) | Still the current OpenAI name, and still free. OpenAI publishes **no Arabic accuracy figures**. For images it only checks sexual, violence and self-harm content. Hate, harassment and "sexual/minors" are checked in **text only**. | Keep it as the first layer, but treat it as unproven in Arabic until Zaki's own test set passes. Run it on the text read from each photo as well as the photo itself. |
-| 2 | Second classifier (not named) | **Perspective API is shutting down** (no new users since Feb 2026, service ends 31 Dec 2026). **Llama Guard 3 and 4 do not list Arabic** as supported. **Azure Content Safety** was not trained or tested on Arabic, and its text and image checks are **not offered in any Middle East Azure region**. | Do not use Perspective. Do not rely on Llama Guard for Arabic. Shortlist for testing: (a) a Claude Haiku "policy check" written in Arabic and English, (b) **FanarGuard** (QCRI, Qatar; Arabic-native), (c) Qwen3Guard (open licence, 119 languages). Pick whichever does best on Zaki's test set. |
+| 2 | Second classifier (not named) | **Perspective API is shutting down** (no new users since Feb 2026, service ends 31 Dec 2026). **Llama Guard 3 and 4 do not list Arabic** as supported. **Azure Content Safety** was not trained or tested on Arabic. Used on its own, its text and image checks are **not offered in any Middle East Azure region**; the same checks attached to a model inside Microsoft Foundry ("Guardrails") are listed for UAE North, but not for Qatar. | Do not use Perspective. Do not rely on Llama Guard for Arabic. Shortlist for testing: (a) a Claude Haiku "policy check" written in Arabic and English, (b) **FanarGuard** (QCRI, Qatar; Arabic-native), (c) Qwen3Guard (open licence, 119 languages). Pick whichever does best on Zaki's test set. |
 | 3 | "Build and test an Arabic and Gulf-dialect test set, including Arabizi" (8.1) | Correct and essential. No public test set covers Gulf, Arabizi and children's topics together. | Widen it to cover Saudi, Emirati, Egyptian and Levantine dialects too, plus mixed Arabic and English. See the protocol in Section D. |
 | 4 | "Azure Speech (has Qatari Arabic 'ar-QA' speech-to-text)" (10.1) | **Confirmed.** ar-QA exists for speech-to-text, and two ar-QA read-aloud voices exist. A **new plus**: Azure Speech runs in the **Qatar Central** data centre for live speech-to-text and read-aloud. | Keep it. Note the Qatar hosting option for the data-law work. |
 | 5 | "OpenAI speech" (10.1) | Model names have changed. OpenAI now recommends **gpt-transcribe** for recordings and **gpt-live-transcribe** for live speech. gpt-4o-transcribe and gpt-4o-mini-transcribe still work. | Use current names when testing. |
@@ -62,6 +62,7 @@ Status labels used below:
 ### A2. Azure AI Content Safety — Confirmed (Arabic not in the trained-and-tested set)
 - Microsoft says the Hate, Sexual, Violence and Self-harm text classifiers are "trained and tested on Chinese, English, French, German, Italian, Japanese, Portuguese, and Spanish". Other languages "can" work but "performance can vary". Prompt Shields (protection against trick prompts) is "primarily trained and evaluated on English".
 - For standalone Content Safety, text and image harm checks are **not available in uaenorth**, and there is no Qatar region listed. In the Middle East and Africa table, only "content provenance" is ticked. Data would be processed in Europe, the US or Asia.
+- *Correction (fact-check 2026-10-15):* the same page has a second table for **Guardrails in Microsoft Foundry** (safety checks attached to an AI model hosted in Foundry). That table ticks content harms, Prompt Shields and blocklists in **uaenorth**. So in-region (UAE) checking is possible only if the model being checked is also deployed in Foundry in UAE North. Qatar is not listed in either table.
 - It offers custom **blocklists**, which are useful for Gulf slang and Arabizi spellings.
 - Source: https://learn.microsoft.com/en-us/azure/ai-services/content-safety/language-support (the page now serves "Region availability and service limits", dated 2026-09-18).
 
@@ -76,7 +77,7 @@ Status labels used below:
 ### A5. Arabic-specific or strong multilingual alternatives
 | Option | What it is | Evidence on Arabic / dialect / Arabizi | Status |
 |---|---|---|---|
-| **FanarGuard** (QCRI, Qatar) | Bilingual Arabic–English filter that scores both harm and **cultural fit**. Comes in sizes from a small RoBERTa up to 4B. Peer-reviewed at EACL 2026. Part of Qatar's Fanar 2.0 stack. | The authors report it matches state-of-the-art filters on safety benchmarks and agrees with human raters better than raters agree with each other. The abstract names **no dialects, no Arabizi and no competitor numbers**. Dataset is gated on Hugging Face. **Model licence not found.** | Partly confirmed. https://arxiv.org/abs/2511.18852 ; https://aclanthology.org/2026.eacl-long.368 |
+| **FanarGuard** (QCRI, Qatar) | Bilingual Arabic–English filter that scores both harm and **cultural fit**. The paper describes RoBERTa-large (~435M), Gemma-2-2B and an internal FanarGemma-4B versions. Peer-reviewed at EACL 2026 (Rabat, March 2026). The paper says it is **available through the Fanar API** (api.fanar.qa). Link to a "Fanar 2.0 stack" was **not verified**. | The authors report it matches state-of-the-art filters on safety benchmarks and agrees with human raters better than raters agree with each other. The paper names **no dialects and no Arabizi**, and its Arabic training data was **machine-translated from English (Google Translate)**, so dialect and Arabizi performance may be weak. Dataset on Hugging Face is licensed "other". **Model licence and API terms not found.** | Partly confirmed. https://arxiv.org/abs/2511.18852 ; https://aclanthology.org/2026.eacl-long.368 |
 | **Qwen3Guard** (Alibaba) | Open (Apache 2.0) safety classifier in 0.6B/4B/8B sizes. "119 languages and dialects". Can classify as text streams out. | No Arabic numbers in its report. In the AUB study, used as a judge on 300 audited answers, it was **88.7% accurate overall**: MSA 90%, Egyptian 90%, Levantine 95%, **Arabizi 77.5%**. Small sample, and no Gulf. | Partly confirmed. https://arxiv.org/abs/2510.14276 ; https://arxiv.org/html/2608.29378 |
 | **gpt-oss-safeguard** (OpenAI, open-weight 20B/120B) | Reads a safety policy you write and applies it. | A third-party review says it is weaker outside English. No Arabic numbers. | Not found (Arabic). https://openai.com/index/introducing-gpt-oss-safeguard/ |
 | **PolyGuard** (CMU et al., COLM 2025) | 17-language safety model; Arabic is one of the 17. | Claims to beat existing classifiers by 4–5.5%. I did not retrieve its per-language Arabic figure. | Partly confirmed. https://arxiv.org/abs/2504.04377 |
@@ -85,7 +86,7 @@ Status labels used below:
 
 ### A6. Known weaknesses: dialect, Arabizi, code-switching
 - **Arabizi bypasses safety training (Confirmed, peer-reviewed).** Al Ghanim et al., EMNLP 2024: AdvBench harmful prompts in standard Arabic did **not** get unsafe output from GPT-4 or Claude 3 Sonnet. The same prompts in **Arabizi and transliteration did**. https://aclanthology.org/2024.emnlp-main.1034/
-- **Dialects get weaker safety than standard Arabic (Partly confirmed).** "Dialect Safety Gap" (TrustNLP 2026) describes this and argues dialects are under-represented in safety data. ArabicDialectSafety reports lower scores on low-resource dialects. https://aclanthology.org/2026.trustnlp-main.37/
+- **Dialects get weaker safety than standard Arabic (Partly confirmed).** "Toward Dialect-Aware Safety Evaluation for Arabic LLMs" (Zaghouani, TrustNLP 2026 workshop) names this the "Dialect Safety Gap", finds safety gets worse the further a dialect is from standard Arabic, and argues dialects are under-represented in safety data. ArabicDialectSafety reports lower scores on low-resource dialects. https://aclanthology.org/2026.trustnlp-main.37/
 - **Arabizi offensive-language detection exists only for North African data** (Bensalem et al., ArabicNLP 2023; MAGHREB-HOF). **Not found** for Gulf Arabizi. https://aclanthology.org/2023.arabicnlp-1.36
 - **Gulf-specific hate/offence data:** ADHAR (2024, Qatar-based authors) includes a Gulf subset, with hate detection up to ~90% F1 using trained classifiers. That is a research dataset, not a ready filter. https://pmc.ncbi.nlm.nih.gov/articles/PMC11170444/
 - **Levantine and Lebanese (pilot dialect):**
@@ -102,9 +103,9 @@ Status labels used below:
 ### A7. Which makes a good "second classifier"? (recommendation, moderate confidence)
 1. **Do not choose by reputation. Choose by Zaki's own test results** (A8). No candidate has published Gulf or Arabizi evidence.
 2. **Most practical for a non-programmer team:** a **Claude Haiku policy check** written in Arabic and English. It needs no extra vendor, no GPU server, and Zaki's data rules already cover it. Its weakness is that it is the same model family as the tutor, so it is less independent.
-3. **Most promising Arabic-native option:** **FanarGuard**. It is Qatari-built and culturally aware. Before relying on it, confirm (a) the licence and whether it is hosted or must be self-hosted, (b) Gulf and Arabizi performance on Zaki's set.
+3. **Most promising Arabic-native option:** **FanarGuard**. It is Qatari-built and culturally aware. Before relying on it, confirm (a) the licence and the Fanar API's terms (the paper says it is offered through the Fanar API; whether children's data may be sent there, and where it is processed, is unknown), (b) Gulf, Lebanese and Arabizi performance on Zaki's set. Its Arabic training data was machine-translated, so dialect weakness is likely.
 4. **Cheap extra layer for any choice:** a **blocklist and normaliser** for Gulf slang and Arabizi spellings. Microsoft offers blocklists, or Zaki can keep its own list. One idea, **untested**: convert Arabizi into Arabic script before filtering.
-5. Drop Perspective. Use Llama Guard and Azure Content Safety only if they score well on Zaki's set, and remember that Azure's text checks are processed outside the region.
+5. Drop Perspective. Use Llama Guard and Azure Content Safety only if they score well on Zaki's set, and remember that standalone Azure text checks are processed outside the region (only the Foundry "Guardrails" version is listed for UAE North).
 
 ### A8. Testing approach for Zaki's Arabic test set (moderation)
 - **Size:** at least 600 items to start: about 300 harmful and 300 harmless. Grow to more than 1,000 by the pilot.
@@ -149,7 +150,7 @@ Status labels used below:
 ### B2. OpenAI speech — Confirmed (names and prices), Partly confirmed (Arabic quality)
 - **Current models (Confirmed):** `gpt-transcribe` (recommended for recordings; takes a `languages` list), `gpt-live-transcribe` (recommended for live audio), `gpt-4o-transcribe`, `gpt-4o-mini-transcribe`, `gpt-4o-transcribe-diarize`, `whisper-1`. TTS: `gpt-4o-mini-tts`, `tts-1`, `tts-1-hd`. https://developers.openai.com/api/docs/guides/speech-to-text
 - **Prices (Confirmed):** gpt-transcribe ~$0.0045/min; gpt-4o-transcribe $0.006/min; gpt-4o-mini-transcribe $0.003/min; gpt-live-transcribe $0.017/min. gpt-4o-mini-tts $0.60 per 1M text tokens + $12 per 1M audio tokens; tts-1 $15 per 1M characters. Regional data-residency endpoints cost +10% for newer models. https://developers.openai.com/api/docs/pricing
-- **Retention (Confirmed):** `/v1/audio/transcriptions` has **no** abuse-monitoring retention and is ZDR-eligible. `/v1/audio/speech` (TTS) and `/v1/realtime` keep data **30 days** unless ZDR is approved. ZDR needs OpenAI's prior approval. https://developers.openai.com/api/docs/guides/your-data
+- **Retention (Confirmed):** `/v1/audio/transcriptions` has **no** abuse-monitoring retention and is ZDR-eligible. `/v1/audio/speech` (TTS) and `/v1/realtime` keep data **30 days** unless ZDR is approved. ZDR needs OpenAI's prior approval. *Note (fact-check):* OpenAI describes `gpt-live-transcribe` as the "realtime path", so live transcription likely falls under the `/v1/realtime` 30-day rule, not the no-retention rule for recordings. Confirm before choosing live OpenAI transcription. https://developers.openai.com/api/docs/guides/your-data
 - OpenAI voices are not dialect-specific. How well they speak Gulf Arabic was **Not found**.
 
 ### B3. Google and ElevenLabs
@@ -199,7 +200,9 @@ Assume a child speaks 10 minutes a day and Zaki reads aloud 10 minutes a day, on
 ### B6. On-device speech on iPhone/iPad (native app) — Partly confirmed
 - Apple's newer speech system (**SpeechAnalyzer / SpeechTranscriber**, iOS 26 and later) runs transcription **on the device**, using a language model that the system downloads once.
   - A developer blog (LoroNote, 23 Aug 2026) reports `SpeechTranscriber.supportedLocales` returning **42 locales across 22 languages, including Arabic**. It does **not** name which Arabic locales; ar-LB is unconfirmed.
-  - Where SpeechTranscriber lacks a locale, Apple offers `DictationTranscriber` as a fallback.
+  - Where SpeechTranscriber lacks a locale, Apple offers `DictationTranscriber` as a fallback (confirmed in Apple's SpeechTranscriber doc).
+  - Apple's own documentation does **not** list the locales; it says to check `supportedLocales` at run time. On the iOS Simulator the list is empty, so a real device is needed.
+  - Caution: an Apple Developer Forums thread (2025, iOS 26) reports Arabic failing with "transcription.ar asset not found after attempted download". https://developer.apple.com/forums/thread/797835
   - The older `SFSpeechRecognizer` also has an on-device mode, but Apple publishes no per-language on-device list.
   - Sources: https://developer.apple.com/videos/play/wwdc2025/277/ ; https://loronote.com/en/blog/apple-speechanalyzer-vs-whisper (I could not read Apple's own SpeechTranscriber doc page; it rendered empty).
 - **Arabic, Lebanese or child accuracy for Apple's engine: Not found.** Published comparisons are English only.
@@ -216,7 +219,7 @@ Assume a child speaks 10 minutes a day and Zaki reads aloud 10 minutes a day, on
 - **KITAB-Bench** (Heakl et al., MBZUAI, ACL 2025 Findings; 8,809 samples, 9 domains; models from early 2025). On text recognition (CER = share of characters wrong):
   - Gemini-2.0-Flash CER 0.13
   - AIN-7B 0.20
-  - QARI 0.20
+  - Qaari 1.80 (corrected; it made more errors than there were characters)
   - GPT-4o 0.31
   - GPT-4o-mini 0.43
   - Azure OCR 0.52
@@ -335,3 +338,42 @@ The pilot can start once the Lebanese results pass, but launching in each new co
 - **Lebanon-specific searches:** Lebanese/Levantine moderation, Lebanese Arabizi, Lebanese code-switching speech, ar-LB voices, Apple on-device Arabic. Lebanese data-protection law was **not** covered; it belongs to the legal research.
 - **Not done:** no tools were signed up for or run. No numbers here come from Zaki's own testing.
 - **Could not open:** OpenAI's 2024 moderation launch post (HTTP 403), and full per-language tables for PolyGuard, Qwen3Guard and FanarGuard.
+
+---
+
+## Fact-check (2026-10-15)
+
+Independent re-check of the claims decisions rest on. Each source was reopened; contradicting evidence was searched for. Corrections have already been made in the text above.
+
+**Verified (official source or the paper itself says it)**
+- OpenAI `omni-moderation-latest`: the only model on the moderation guide; free; text + images, no audio. Image-capable: self-harm (3 sub-categories), sexual, violence, violence/graphic. Text only: harassment, hate, illicit (and sub-categories), sexual/minors. `/v1/moderations` has no retention and is ZDR-eligible.
+- Azure AI Content Safety: harm classifiers "trained and tested on Chinese, English, French, German, Italian, Japanese, Portuguese, and Spanish"; Prompt Shields "primarily trained and evaluated on English" (page dated 2026-09-18). Standalone text/image checks not in uaenorth; no Qatar region.
+- Perspective API: no new requests after Feb 2026; service ends 31 Dec 2026 (perspectiveapi.com).
+- Llama Guard 4 card: multilingual = Llama Guard 3 languages (French, German, Hindi, Italian, Portuguese, Spanish, Thai); recall 69% English, 43% multilingual. AUB paper (arXiv 2608.29378, 29 Aug 2026) states Llama Guard 3 "does not officially list Arabic".
+- EMNLP 2024 Arabizi study exists (Al Ghanim et al., pages 18584–18600). Standard Arabic AdvBench prompts did not jailbreak GPT-4 / Claude 3 Sonnet; transliteration and Arabizi did.
+- Qwen3Guard: Apache-2.0, 0.6B/4B/8B, "119 languages and dialects", separate Stream variant.
+- AUB study figures: Qwen3Guard as judge, n = 300, 88.7% overall; MSA 90%, Egyptian 90%, **Levantine 95%, Arabizi 77.5%**; no Gulf. Per-group sample sizes are **not reported**, so the 95% and 77.5% rest on small, unknown subgroups.
+- ArabicDialectSafety (arXiv 2608.01291): MARBERTv2 macro-F1 0.95; dialect list as stated; listed as EMNLP 2026 Findings.
+- Azure Speech: 18 Arabic STT locales including **ar-LB** and **ar-QA**; only ar-SA has post-stream refinement. Voices ar-LB-LaylaNeural / ar-LB-RamiNeural and ar-QA-AmalNeural / MoazNeural exist; all Arabic voices are Standard; no Arabic HD, multilingual or child voices.
+- Azure qatarcentral: real-time STT, batch STT and neural TTS yes; fast transcription and custom-speech training no (page dated 2026-10-08).
+- Azure prices (retail price API, qatarcentral, queried today): STT $1.00/h, batch $0.18/h, custom STT $1.20/h, neural TTS $15 per 1M characters.
+- OpenAI speech: `gpt-transcribe` (recommended for recordings; `languages` list) and `gpt-live-transcribe` (recommended realtime path) exist. Prices: $0.0045/min and $0.017/min; gpt-4o-transcribe ~$0.006/min; gpt-4o-mini-transcribe ~$0.003/min; tts-1 $15/1M chars; gpt-4o-mini-tts $0.60 text in + $12 audio out per 1M tokens; +10% for data-residency endpoints. Retention: transcriptions none; speech and realtime 30 days; ZDR needs prior approval.
+- Almieyar (arXiv 2609.35564, 28 Sep 2026, 40 authors, speakers mostly 20–30, 13.7 h): all family and country WERs in B4 match, including Lebanese 45–59%. Azure, Google, ElevenLabs not tested.
+- Arabic Little STT (arXiv 2510.23319): 355 utterances, 288 Levantine children aged 6–13, best Whisper-large-v3 WER 0.66 vs < 0.20 on adult data; Whisper only.
+- KITAB-Bench Table 6: Gemini-2.0-Flash CER 0.13, GPT-4o 0.31, GPT-4o-mini 0.43, AIN-7B 0.20, Azure 0.52, Tesseract 0.54; KHATT: Gemini 0.19, GPT-4o 0.45, Azure 0.83.
+- Portkey benchmark: 27 Sep 2024, 1,000 multilingual samples, F1 0.322, recall 0.254, no Arabic split.
+
+**Corrected**
+- KITAB-Bench: "QARI 0.20" → **Qaari CER 1.80** (0.20 belongs to AIN-7B).
+- Azure Content Safety region: "not offered in any Middle East region" → true for **standalone** Content Safety only; **Foundry Guardrails** list content harms and Prompt Shields in **UAE North**. Qatar still absent.
+- FanarGuard: sizes now stated from the paper (RoBERTa-large ~435M, Gemma-2-2B, FanarGemma-4B); added that it is offered **through the Fanar API** and that its **Arabic training data was machine-translated from English**. "Part of Fanar 2.0 stack" → not verified.
+- TrustNLP 2026 paper: real title is "Toward Dialect-Aware Safety Evaluation for Arabic Large Language Models" (Zaghouani); "Dialect Safety Gap" is the concept it introduces.
+- OpenAI retention: added that `gpt-live-transcribe` is the realtime path, so the 30-day realtime rule probably applies to live transcription.
+
+**Could not verify / weak sources (flag for the founder)**
+- **Apple SpeechTranscriber Arabic support:** Apple's documentation does not list locales. The only source that says Arabic is included is a developer blog (LoroNote, Aug 2026, not official). An Apple forum thread reports Arabic model downloads failing on iOS 26. Treat as unknown until tested on a real iPhone.
+- FanarGuard model licence and Fanar API terms (including children's data and processing location): not found.
+- Whether KITAB-Bench is ACL 2025 main or Findings: arXiv says "ACL 2025"; not resolved. The numbers are unaffected.
+- Rests only on preprints (not peer-reviewed): Almieyar, Arabic Little STT, AUB Qwen3Guard figures, QCRI OCR study, Baseer. Rests on vendor sources: Portkey benchmark, Perle AI code-switching benchmark, Typica.ai Darija benchmark.
+- Not re-checked in this pass (lower priority): Google Chirp 3 Arabic status, ElevenLabs prices and zero-retention terms, PolyGuard, gpt-oss-safeguard, Baseer figures, Azure PII language list, Claude vision resolution details.
+
