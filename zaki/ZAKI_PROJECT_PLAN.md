@@ -1,6 +1,7 @@
 # Zaki (ذكي): Full Project Plan
 
 Bilingual (Arabic + English) AI homework teacher for kids in grades 1–6. Built in Doha, Qatar.
+**Market (updated 2026-10-15):** not only Qatar. Target market is the Middle East, with the GCC countries as a key focus. Qatar is the home base.
 Founder: Rabih (not a programmer; explain everything in plain language). Plan date: 16 Oct 2026.
 
 ## 0. Instructions for Claude Code (read first)
@@ -22,6 +23,7 @@ Zaki is a friendly AI teacher that helps children in grades 1–6 understand the
 
 - **Subjects:** Math · Science · English · Arabic · Social Studies (incl. Geography)
 - **Languages:** Arabic and English (the child can use either; the app follows the child's language)
+- **Market:** Middle East, with the GCC as a key focus (not Qatar only). Examples, dialects, laws and prices must work across the region, not just Qatar.
 - **Curriculum:** not tied to one school system. Zaki teaches each topic properly and in depth. When mom uploads pages, Zaki matches the child's actual book.
 
 ## 2. Decisions already made
@@ -214,7 +216,7 @@ Nothing can promise 100% safety, but Zaki uses every reasonable layer. The safet
 - It runs on every prompt or model change. A phase cannot ship if any test fails.
 - Human review of flagged sessions during the pilot.
 
-## 9. Legal and business checklist (Qatar)
+## 9. Legal and business checklist (Qatar first; each new country needs its own check)
 
 Not legal advice. Confirm with a Qatari lawyer before real families use the app.
 
