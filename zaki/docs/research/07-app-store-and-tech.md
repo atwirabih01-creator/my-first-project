@@ -1,6 +1,6 @@
 # 07: App Store path, store rules and the right technical approach
 
-Research date: 2026-10-15. All sources were checked on 2026-10-15 unless noted.
+Research date: 2026-10-15. All sources were checked on 2026-10-15 unless noted. Independently fact-checked on 2026-10-16 (see the last section).
 Status labels: **Confirmed** (official source says it), **Partly confirmed** (official source covers part of it, or only a non-official source), **Not found** (no official source found).
 
 ---
@@ -279,3 +279,47 @@ This gives full learning tracking while staying inside Apple 1.3/5.1.4 and Googl
 - Next.js static exports: https://nextjs.org/docs/app/guides/static-exports
 - Supabase regional blocks (26 Mar 2026): https://supabase.com/blog/navigating-regional-network-blocks
 - Non-official (context only): https://developer.apple.com/forums/thread/682057 ; https://github.com/invertase/react-native-firebase/issues/4494 ; https://community.revenuecat.com/sdks-51/we-rejected-depends-on-adsupport-guideline-1-3-safety-kids-category-729
+
+---
+
+## Fact-check (2026-10-16)
+
+An independent re-check of the main claims, using the official pages (Apple, Google, Expo, Supabase) on 2026-10-16. The fixes are already made in the text above.
+
+| Claim | Result | Notes / source |
+|---|---|---|
+| Guideline 1.3 Kids Category wording | **Verified** | Matches word for word. developer.apple.com/app-store/review/guidelines/ |
+| Guideline 5.1.4 (a)/(b) wording | **Verified** | Matches word for word. |
+| Guideline 5.1.2(i) incl. "including with third-party AI" | **Verified** | Wording exact: "You must clearly disclose where personal data will be shared with third parties, including with third-party AI, and obtain explicit permission before doing so." |
+| Guidelines "Last updated June 8, 2026" | **Verified** | Page footer "Last Updated: June 8, 2026". The 8 Jun 2026 changes: intro kid/teen safety, 1.2, 4.3(a)/(b), 4.5.3. No new AI-specific guideline. |
+| New age ratings 4+/9+/13+/16+/18+; deadline 31 Jan 2026 | **Verified** | Apple news 24 Jul 2025 (id=ks775ehf) and the upcoming requirements page. |
+| Age rating questionnaire up to date | **Corrected (added)** | New social media questions are required from September 2026 (Apple news 9 Jul 2026, id=tlur8uvi). |
+| Declared Age Range API available worldwide; no App Review change; iOS 26 / 26.2 / 26.4 | **Verified** | developer.apple.com/support/age-assurance/ |
+| Utah 6 May 2026, Louisiana 1 Jul 2026 | **Verified** | Apple news 24 Feb 2026 (id=f5zj08ey). |
+| Texas SB 2420 news item | **Corrected** | Old: "3 Jun 2026, id=8jzbigf4". New: the 3 Jun 2026 item is **id=sg176nne** (in force 4 Jun 2026 for new Texas accounts). id=8jzbigf4 is the 23 Dec 2025 item where Apple *paused* its plans after the injunction. |
+| Kids Category age bands 5 and under / 6–8 / 9–11 | **Verified** | developer.apple.com/app-store/kids-apps/ |
+| TestFlight: under-13s not allowed | **Verified** | TestFlight terms: "Children under the age of 13, or equivalent minimum age in the relevant jurisdiction, are not permitted to use TestFlight." |
+| TestFlight 90 days; external testers need beta review of first build; 100 internal / 10,000 external | **Verified** | TestFlight overview and developer.apple.com/testflight/ |
+| Ad hoc: 100 devices per product family per membership year; disabling does not free a slot | **Verified** | Apple devices overview. Expo's own page words it as "at most 100 iPhones per year". |
+| Expo 24–72 h for new devices | **Corrected (clarified)** | Applies to new or recently renewed memberships, and adding a device needs a new build. |
+| EAS builds iOS without a Mac | **Verified** | docs.expo.dev/submit/ios/: "EAS Submit works on macOS, Linux, and Windows, so you don't need a Mac to ship iOS builds." iOS builds run on Expo's cloud Macs. |
+| Expo pricing: Free 15 Android + 15 iOS builds (monthly reset); Starter US$19/month with US$45 credit; iOS build US$2 | **Verified** | expo.dev/pricing; docs.expo.dev/billing/plans/ ("These limits reset monthly"). US$2 is a medium build; a large build is US$4. |
+| expo-speech silent mode | **Verified** | SDK 58 page: "On iOS physical devices, expo-speech won't produce sound if the device is in silent mode." |
+| RTL default on; switching at run time needs a reload | **Verified (with nuance)** | RTL is on by default (SDK 58). The page shows `I18nManager.forceRTL()` followed by `Updates.reloadAsync()`. It does not literally say "restart required", but the example shows a reload is needed. Run-time overrides do not work in Expo Go. |
+| Apple Developer Program US$99/year; organisation needs a legal entity, D-U-N-S, domain email, website | **Verified** | developer.apple.com/programs/enroll/ |
+| Google Play US$25 one-time | **Verified** | answer/6112435 |
+| Google organisation D-U-N-S | **Corrected (source)** | Requirement is real, but the source is answer/13628312, not 6112435. |
+| Google 12 testers / 14 days (personal accounts after 13 Nov 2023) | **Verified, still current** | answer/14151465 (no change noted on the page). |
+| Guideline 4.2 / 4.2.2 risk for wrapped websites | **Verified** | "elevate it beyond a repackaged website"; 4.2.2 lists "web clippings". |
+| Apple commission | **Corrected (was "not re-checked")** | Small Business Program: "reduced commission rate of 15%" for developers with up to US$1M proceeds and for new developers (must enrol). Otherwise auto-renewable subscriptions: developer gets 70% in a subscriber's first paid year, then 85%. The 30% standard figure is not stated as a number on the Small Business page; it follows from "70%". |
+| In-app purchase outside the US | **Verified** | 3.1.1 requires IAP to unlock features; 3.1.1(a)/3.1.3: outside the US storefront, apps may not include buttons, links or calls to action pointing to other payment methods (except via Apple's link-out entitlements where offered). |
+| Google Play commission (added) | **Verified** | In "remaining markets" (includes Lebanon/GCC): 15% on first US$1M/year, 15% on auto-renewing subscriptions. New fee rules were rolled out in the EEA/UK/US (30 Jun 2026) and Australia/Japan (30 Sep 2026); Google says global changes come later. |
+| Supabase UAE block 2025 | **Verified, wording sharpened** | Supabase blog 26 Mar 2026: from 2 Sep 2025, Etisalat and Du blocked `*.supabase.co` for about 18 days; "auth callbacks and storage object URLs remained affected". The custom-domain recommendation is our own conclusion. A custom domain is a paid add-on on a paid plan. |
+| SDK minimum | **Corrected (added)** | Xcode 26 / iOS 26 SDK since 28 Apr 2026 verified; **from April 2027 the iOS 27 SDK is required** (Apple news 9 Sep 2026). |
+
+**Still uncertain:**
+- Whether App Review would accept a Kids Category app sending lesson text to an AI service with parental consent. No official example exists, so asking App Review before launch is still the right step.
+- Texas: the appeal is still going on (press reports, June 2026). Not relevant if Zaki is offered only in Middle East storefronts.
+- Whether TestFlight and Apple enrolment card payments work smoothly from Lebanon (no official country statement).
+- Whether Google's closed-testing rule applies to organisation accounts (the page only mentions personal accounts).
+- The exact Supabase custom-domain price was not checked.
