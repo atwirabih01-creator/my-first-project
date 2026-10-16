@@ -98,7 +98,8 @@ h1{font-size:24px;margin:0 0 4px} h2{font-size:19px;margin:18px 0 8px}
 .ph.done{color:var(--teal-d);background:var(--teal-l)}
 .ph.on{color:#fff;background:var(--teal)}
 .log{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px}
-.msg{display:flex;align-items:flex-end;margin-bottom:10px;-webkit-animation:pop .25s ease-out;animation:pop .25s ease-out}
+.msg{display:flex;align-items:flex-end;margin-bottom:10px}
+.msg.new,.wm.new{-webkit-animation:pop .25s ease-out;animation:pop .25s ease-out}
 .msg.me{justify-content:flex-end}
 .av{flex-shrink:0;margin-right:6px}
 html[dir="rtl"] .av{margin-right:0;margin-left:6px}
@@ -185,7 +186,7 @@ html[dir="rtl"] .wahead .avc{margin-right:0;margin-left:10px}
 .walog{padding:10px 10px 4px;min-height:200px}
 .wday{text-align:center;margin:6px 0 10px}
 .wday span{background:#E1F2FB;color:#4B6575;font-size:12px;border-radius:8px;padding:3px 10px}
-.wm{display:flex;margin-bottom:6px;-webkit-animation:pop .2s ease-out;animation:pop .2s ease-out}
+.wm{display:flex;margin-bottom:6px}
 .wm.me{justify-content:flex-end}
 .wb{max-width:84%;background:#fff;border-radius:10px;padding:6px 9px 4px;font-size:15px;line-height:1.4;box-shadow:0 1px 0 rgba(0,0,0,.08)}
 .wm.me .wb{background:var(--wa-me)}
@@ -462,11 +463,11 @@ function freshState() {
   S = { lang: S ? S.lang : 'en', screen: 'start', startStep: 0, stars: 12, fracStatus: 'new', summarySaved: false,
         parentOpen: false, parentTab: 'settings', gateWrong: false, limit: 30, studyTime: '17',
         classView: 'list', cardIdx: 0, cardBack: false, cardAnim: false, practiceScore: null,
-        wa: { log: [], sent: false } };
+        wa: { log: [], sent: false, shown: 0 } };
   freshLesson();
 }
 function freshLesson() {
-  L = { history: [], pos: 0, pending: null, phase: 'recap', mode: 'chat', started: false, done: false,
+  L = { history: [], shown: 0, pos: 0, pending: null, phase: 'recap', mode: 'chat', started: false, done: false,
         test: { set: 0, qi: 0, score: 0 }, result: null };
 }
 
@@ -507,7 +508,7 @@ function mascot(size) {
     '<circle cx="45" cy="53" r="7" fill="#1E3A4C"/><circle cx="79" cy="53" r="7" fill="#1E3A4C"/>' +
     '<circle cx="47.5" cy="50" r="2.5" fill="#fff"/><circle cx="81.5" cy="50" r="2.5" fill="#fff"/>' +
     '<polygon points="54,66 66,66 60,76" fill="#FF9F43"/>' +
-    '<circle cx="31" cy="70" r="4" fill="#FF8A65" opacity=".5"/><circle cx="89" cy="70" r="4" fill="#FF8A65" opacity=".5"/>' +
+    '<circle cx="31" cy="70" r="4" fill="#FF8A65" opacity=".85"/><circle cx="89" cy="70" r="4" fill="#FF8A65" opacity=".85"/>' +
     '<rect x="44" y="104" width="10" height="8" rx="4" fill="#FF9F43"/><rect x="66" y="104" width="10" height="8" rx="4" fill="#FF9F43"/>' +
     '</svg>';
 }
@@ -669,11 +670,12 @@ function finishTest() {
 /* ------------------------------------------------------------------
    6. Screens (each returns HTML)
 ------------------------------------------------------------------ */
-function bubble(m) {
+function bubble(m, isNew) {
   if (m.who === 'card') return summaryCard(true);
+  var nw = isNew ? ' new' : '';
   var txt = t(m.k), pic = m.pic ? '<div class="pic">' + drawPic(m.pic) + '</div>' : '';
-  if (m.who === 'me') return '<div class="msg me"><div class="bub">' + txt + '</div></div>';
-  return '<div class="msg z"><span class="av">' + mascot(34) + '</span><div class="bub">' + txt + pic + '</div></div>';
+  if (m.who === 'me') return '<div class="msg me' + nw + '"><div class="bub">' + txt + '</div></div>';
+  return '<div class="msg z' + nw + '"><span class="av">' + mascot(34) + '</span><div class="bub">' + txt + pic + '</div></div>';
 }
 function summaryCard(saved) {
   return '<div class="sumcard"><h3>📝 ' + t('sum_title') + '</h3><ul><li>' + t('sum1') + '</li><li>' + t('sum2') +
@@ -710,7 +712,8 @@ function vLesson() {
     '<button class="exit" data-act="go" data-arg="home">' + t('b_exit') + '</button></div><div class="phases">' + ph + '</div>';
   if (L.mode === 'chat') {
     out += '<div class="log" id="log">';
-    for (i = 0; i < L.history.length; i++) out += bubble(L.history[i]);
+    for (i = 0; i < L.history.length; i++) out += bubble(L.history[i], i >= L.shown);
+    L.shown = L.history.length;
     out += '</div><div class="dock">' + choices() +
       '<div class="mini"><button class="gold" data-act="askAnswer">🙋 ' + t('ask_demo') + '</button>' +
       '<button class="linkbtn" data-act="report">' + t('report_link') + '</button></div>';
@@ -838,8 +841,9 @@ function waView() {
   for (i = 0; i < S.wa.log.length; i++) {
     var m = S.wa.log[i];
     if (m.who === 'day') { log += '<div class="wday"><span>' + t(m.k) + '</span></div>'; continue; }
-    log += '<div class="wm ' + m.who + '"><div class="wb">' + t(m.k) + '<span class="tm" dir="ltr">' + (rtl() ? m.tm.replace('pm', 'م') : m.tm) + (m.who === 'me' ? ' ✓✓' : '') + '</span></div></div>';
+    log += '<div class="wm ' + m.who + (i >= S.wa.shown ? ' new' : '') + '"><div class="wb">' + t(m.k) + '<span class="tm" dir="ltr">' + (rtl() ? m.tm.replace('pm', 'م') : m.tm) + (m.who === 'me' ? ' ✓✓' : '') + '</span></div></div>';
   }
+  S.wa.shown = S.wa.log.length;
   var quick = '';
   if (S.wa.sent) {
     var cmds = ['REPORT', 'PLAN', 'PAUSE', 'HELP'];
