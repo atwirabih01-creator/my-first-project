@@ -217,6 +217,20 @@ Nothing can promise 100% safety, but Zaki uses every reasonable layer. The safet
 - It runs on every prompt or model change. A phase cannot ship if any test fails.
 - Human review of flagged sessions during the pilot.
 
+
+### 8.7 Updates from the Phase 0 safety review (2026-10-16, binding)
+
+Full detail: `docs/research/08-safety-review-phase0.md`. These override anything above that conflicts.
+
+- **Help routes by country**, from a fixed, dated table (never AI-written, never behind the parental gate, work offline). Lebanon (child-visible): "Tell a grown-up you trust", 112 (police, 24/7), 1564 (Embrace, 24/7), himaya 03 414 964 with "If nobody answers, or you are in danger now, call 112". Qatar: 919 (Aman, 24/7). Unverified numbers are never shown to a child.
+- **When a disclosure may involve someone at home:** no automatic parent alert; hidden from the parent area and reports; only an independent reviewer (not a family member) sees it.
+- **Moderation layers:** Arabizi normaliser + Lebanese/Gulf/French keyword lists, a disclosure classifier, OpenAI moderation (text only, no identity), gentle check-in on unclear messages, 100% human review for the first 2 weeks of any pilot. No Perspective API, no Llama Guard.
+- **Data flows:** all AI calls go through Zaki's own server; the child's name never goes to any AI company; the maths checker runs on our server (not Anthropic code execution); no OpenAI realtime voice or read-aloud.
+- **War and fear:** fear messages get a calm fixed script and the 1564 line; Zaki never discusses politics, sectarian topics or the war.
+- **Voice input** stays off until accurate enough for ages 6–8, with a "Did you say…?" check.
+- **10 hard gates (G1–G10)** must be closed before any real child uses Zaki, including the founder's own family.
+- **Red-team suite:** 600+ cases incl. Lebanese Arabic, Arabizi and mixed language; any failure blocks shipping.
+
 ## 9. Legal and business checklist (Qatar first; each new country needs its own check)
 
 Not legal advice. Confirm with a Qatari lawyer before real families use the app.
