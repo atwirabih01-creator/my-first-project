@@ -13,7 +13,7 @@ Status labels: **Confirmed** (official source says it), **Partly confirmed** (of
 - **For the family pilot in Lebanon, put the app straight onto the family's own iPhones and iPads.** Apple's beta-testing app (TestFlight) works in Lebanon, but Apple's terms do not allow children under 13 to use it. The simplest route is to register each family device (up to 100 iPhones and 100 iPads a year) and install Zaki from a private link. No Apple review is needed for this.
 - **Accounts and costs:** an Apple developer account costs US$99 a year. Open it in your own name now: it is quick and needs no company. Switch it to a company account later, once a company exists. Google Play is a one-time US$25 later on. Expo is free to start and US$19 a month once you build often. You do not need to buy a Mac.
 - **"Track everything properly" is allowed if Zaki keeps its own records.** Every lesson, answer, score and session is saved in Zaki's own database (Supabase), and that powers a full learning dashboard for you and the reports for mom. Apple and Google also give free download and crash numbers without adding anything to the app. Do not add outside tracking tools such as Google/Firebase Analytics, Facebook or Mixpanel, or any advertising tool.
-- **Payments change once Zaki is in the app stores.** If mom pays inside the app, it must go through Apple's own payment system, and Apple takes a share (not re-checked; usually 15% for small developers). Outside the US, the app is not allowed to send people to pay somewhere else. This matters for the pricing tests in Phase 4.
+- **Payments change once Zaki is in the app stores.** If mom pays inside the app, it must go through Apple's own payment system, and Apple takes a share: 15% if Zaki joins Apple's Small Business Program (free to join, for developers earning under US$1 million a year; you must sign up for it in App Store Connect), otherwise 30% (15% on subscriptions after a subscriber's first paid year). Checked 2026-10-16. Outside the US, the app is not allowed to send people to pay somewhere else. This matters for the pricing tests in Phase 4.
 - **US age-check laws (Texas, Utah, Louisiana) do not reach Lebanon or the Gulf**, as far as Apple's pages show. The easiest path is to offer Zaki only in Middle East stores at first.
 
 ---
@@ -24,11 +24,11 @@ Status labels: **Confirmed** (official source says it), **Partly confirmed** (of
 |---|---|---|---|
 | 10.1 "App" row | Next.js web app that installs on the phone (PWA); "No app-store wait. Native app later if needed." | **WRONG now.** Use **Expo (React Native, TypeScript)** for one native app on iPhone/iPad (and Android later from the same code). Build in the cloud with EAS Build and send to Apple with EAS Submit (Expo's online build and upload services). No Mac needed. | Founder decision (native App Store app). Expo builds iOS without a Mac. A wrapped website risks a "minimum functionality" rejection under Apple rule 4.2. |
 | 10.1 "Hosting" row | Vercel Pro hosts the app | The child app no longer runs on Vercel. Keep Vercel (or Supabase Edge Functions, Supabase's small server programs) only for server-side code: AI calls, the WhatsApp webhook (the address Meta sends WhatsApp messages to), and the founder's private admin dashboard. Vercel Pro (US$20/month) can wait until those are live. | The app installs on the phone, so the server only runs back-end work. |
-| 10.1 "Database" row | Supabase, Frankfurt/Mumbai | Keep Supabase. **Add:** plan for a Supabase custom domain. In 2025 the UAE blocked `*.supabase.co` for about 18 days, and the temporary workaround did not cover logins or files. | Supabase blog, 26 Mar 2026 (below). |
+| 10.1 "Database" row | Supabase, Frankfurt/Mumbai | Keep Supabase. **Add:** plan for a Supabase custom domain (a paid add-on on a paid Supabase plan). From 2 Sep 2025 the UAE (Etisalat and Du networks) blocked `*.supabase.co` for about 18 days; Supabase's temporary proxy domain restored the database API, Realtime and Edge Functions, but login callbacks and stored-file links stayed broken. (The custom-domain idea is our own conclusion; Supabase's post lists custom domains as an option for a separate India block.) | Supabase blog, 26 Mar 2026 (below); re-checked 2026-10-16. |
 | 8.3 Design | "Use only private, aggregated analytics" | Make it concrete: **first-party events in Supabase plus the store consoles only. No third-party analytics or crash tools inside the app.** See Section 4 below. | Apple 1.3 / 5.1.4 and Google Families data rules. |
 | 8.4 Platform rules | "If published to app stores later: follow Apple's Kids Category (ages 6–8 / 9–11) and Google Play's Families policy." | Now, not later. **Add:** (a) Apple Kids Category lets you choose **one** age band (5 and under, 6–8 or 9–11). Zaki covers grades 1–6 (about 6–12), so pick one band. Age 12 is outside all bands. (b) The words "For Kids" and "For Children" are allowed in the store listing **only** if Zaki is in the Kids Category. (c) The parental gate must also cover the WhatsApp/mom link. (d) Get explicit parental permission before child data goes to Anthropic/OpenAI (5.1.2(i)). (e) Include a "Report this answer" button (Google requires this for AI apps). (f) Answer Apple's age-rating questions with the AI chat in mind. (g) Account deletion must be possible inside the app. | Quoted rules below. |
 | 9 Legal/business | Qatar company registration | **Add:** Apple Developer account. Individual now; switch to organisation after a company exists. Organisation needs a legal entity, a D-U-N-S number (a free business ID from Dun & Bradstreet that can take up to 30 days), a domain email and a working website. | Apple enrolment page. |
-| 10.3 Costs | AI, WhatsApp, hosting | **Add:** Apple US$99/year; Google Play US$25 once; Expo US$0 (free plan) → US$19/month (Starter); Apple/Google take a commission on in-app subscriptions (not re-checked; 15% is typical for small developers). | Official price pages. |
+| 10.3 Costs | AI, WhatsApp, hosting | **Add:** Apple US$99/year; Google Play US$25 once; Expo US$0 (free plan) → US$19/month (Starter); Apple/Google take a commission on in-app subscriptions: Apple 15% for Small Business Program members (enrolment required; under US$1M proceeds/year), otherwise 30% in a subscriber's first paid year then 15%; Google Play 15% on auto-renewing subscriptions and on the first US$1M/year in "remaining markets" (Lebanon/GCC) (verified 2026-10-16, see Fact-check). | Official price pages. |
 | 12 Phase 0 | Accounts: GitHub, Vercel, Supabase, Anthropic, Meta | **Add:** Expo account (free) and Apple Developer Program (individual, US$99). The founder needs his own iPhone or iPad for testing. Google Play can wait. | — |
 | 12 Phase 1 | Clickable prototype (web) | Build the prototype as the Expo app and run it on the founder's iPhone through an Expo development build. | Same code goes to the store later. |
 | 12 Phase 3 | Private pilot, 5–10 families | **Family pilot (Lebanon):** Expo "internal distribution", which uses Apple's ad hoc installs: register each family device and install from a private link. No Apple review, no TestFlight, no age problem. **Wider pilot:** TestFlight external testing installed under a **parent's** Apple Account (children under 13 cannot use TestFlight). The first external build needs a light Apple review. | TestFlight terms; Expo docs. |
@@ -103,6 +103,7 @@ Zaki must not use App Tracking Transparency (the iPhone pop-up asking to track y
 
   The questionnaire also has new required questions on "In-app controls", "Capabilities", "Medical or wellness topics" and "Violent themes".
 - Upcoming requirements page (https://developer.apple.com/news/upcoming-requirements/): developers had to answer the new questions by **31 Jan 2026**.
+- **Newer (added in fact-check 2026-10-16):** Apple news 9 Jul 2026 (https://developer.apple.com/news/?id=tlur8uvi) added **social media questions** to the age rating questionnaire; "beginning in September 2026, responses will be required when submitting new apps or updates". Zaki has no social features, but the questions must still be answered at submission.
 - Age ratings reference (https://developer.apple.com/help/app-store-connect/reference/app-information/age-ratings-values-and-definitions): "Messaging and Chat", "User-Generated Content", "Parental Controls" and "Age Assurance" are listed under 4+. "Unrestricted Web Access" raises the rating to 16+. **Zaki must not include a free web browser.**
 
 ### 1.8 Declared Age Range API and US/other age-assurance laws: **Confirmed**
@@ -115,7 +116,7 @@ The Declared Age Range API is an Apple tool that tells an app a user's age band,
   > "there are no changes to the App Review process."
 
   Feature versions: iOS 26 (basic API), 26.2 (expanded API and PermissionKit), 26.4 (significant-update sheets).
-- **Texas SB 2420:** Apple news, 3 Jun 2026 (https://developer.apple.com/news/?id=8jzbigf4, found via search). A court lifted the injunction, so new Texas Apple Accounts now need age assurance and parent consent for under-18 downloads, purchases and "significant changes". Developers use the Declared Age Range API plus the Significant Change API (PermissionKit).
+- **Texas SB 2420:** Apple news "Update for Apps Distributed in Texas", 3 Jun 2026 (https://developer.apple.com/news/?id=sg176nne; corrected link, see Fact-check): "Due to a recent court ruling lifting an injunction on Texas law SB 2420, new Apple Accounts in Texas are now subject to the law". From **4 Jun 2026**, new Texas accounts need age assurance and parent or guardian consent for under-18 downloads, In-App Purchases and "significant changes"; parents can revoke consent. Developers use the Declared Age Range API plus the Significant Change API (PermissionKit). (Earlier, on 23 Dec 2025, https://developer.apple.com/news/?id=8jzbigf4, Apple had paused its Texas plans because of the injunction.) Press reports say the appeal is still ongoing, so this could change again.
 - **Utah and Louisiana:** Apple news, 24 Feb 2026 (https://developer.apple.com/news/?id=f5zj08ey):
   > "For users with new Apple Accounts in Utah as of May 6, 2026, and in Louisiana as of July 1, 2026, age categories will be shared with the developer's app when requested through the Declared Age Range API."
 - **Brazil, Australia, Singapore:** the same page says that from 24 Feb 2026 Apple blocks 18+ apps for unconfirmed adults. This does not affect a 4+ kids app.
@@ -127,7 +128,7 @@ The Declared Age Range API is an Apple tool that tells an app a user's age band,
 - **3.1.1 In-App Purchase:** "If you want to unlock features or functionality within your app, (by way of example: subscriptions …) you must use in-app purchase."
 - **3.1.3:** "Apps in this section cannot, within the app, encourage users to use a purchasing method other than in-app purchase, except for apps on the United States storefront…"
 - **5.1.1(v):** "If your app supports account creation, you must also offer account deletion within the app."
-- **SDK minimum: Confirmed.** Since 28 Apr 2026, uploads must be built with Xcode 26 or later using the iOS 26 SDK. Expo's cloud builds handle this (https://developer.apple.com/news/upcoming-requirements/).
+- **SDK minimum: Confirmed.** Since 28 Apr 2026, uploads must be built with Xcode 26 or later using the iOS 26 SDK. Expo's cloud builds handle this (https://developer.apple.com/news/upcoming-requirements/). **Next step (fact-check 2026-10-16):** starting April 2027, uploads must be built with the iOS 27 / iPadOS 27 SDK (Apple news 9 Sep 2026, https://developer.apple.com/news/?id=k1mtkt1k). Using PermissionKit's significant-change features needs the iOS 26.2 SDK / Xcode 26.2 or later (age assurance Q&A).
 
 ---
 
@@ -151,7 +152,7 @@ TestFlight is Apple's app for installing test versions of apps.
 
   > "This method requires a paid Apple Developer account."
 
-  It needs each device's ID (UDID). People install from a shareable link. New devices can take Apple 24–72 hours to process.
+  It needs each device's ID (UDID). People install from a shareable link. Adding a new device means making a new build. For new or recently renewed Apple memberships, Apple "can take up to 24–72 hours to finish processing a newly registered device", so the first build that includes it may fail and must be retried.
 - Apple, https://developer.apple.com/help/account/devices/devices-overview/: you can register "up to 100 … per product family, per membership year". Disabling a device does not free its slot.
 - Why it fits: no TestFlight age problem, no beta review, and it works on the child's own iPad. The limit is plenty for one family plus 5–10 pilot families.
 
@@ -191,7 +192,7 @@ https://support.google.com/googleplay/android-developer/answer/13985936: AI chat
 - https://support.google.com/googleplay/android-developer/answer/14151465: personal accounts created after 13 Nov 2023 need a closed test with "a minimum of 12 testers" opted in for **14 consecutive days** before going to production. **Still current** on 2026-10-15.
 - The page does not mention organisation accounts. It is described as a personal-account requirement, so organisation accounts are likely not covered: **Partly confirmed**.
 - Internal testing (https://support.google.com/googleplay/android-developer/answer/9845334): "up to 100 testers per app", and it "might not be subject to standard Play policy or security reviews". This is good for a family pilot on Android.
-- Fee: US$25 one-time. Organisation accounts need a D-U-N-S number (https://support.google.com/googleplay/android-developer/answer/6112435): **Confirmed**.
+- Fee: US$25 one-time (https://support.google.com/googleplay/android-developer/answer/6112435). Organisation accounts need a D-U-N-S number (https://support.google.com/googleplay/android-developer/answer/13628312; the 6112435 page itself does not mention D-U-N-S): **Confirmed**.
 - **Recommendation:** if Android is needed before a company exists, a personal account plus 12 testers for 14 days is doable with family and friends. Otherwise wait and open an organisation account.
 
 ---
@@ -252,7 +253,10 @@ This gives full learning tracking while staying inside Apple 1.3/5.1.4 and Googl
 - Apple upcoming requirements: https://developer.apple.com/news/upcoming-requirements/
 - Apple age assurance Q&A: https://developer.apple.com/support/age-assurance/
 - Apple news, Brazil/Australia/Singapore/Utah/Louisiana (24 Feb 2026): https://developer.apple.com/news/?id=f5zj08ey
-- Apple news, Texas update (3 Jun 2026, via search): https://developer.apple.com/news/?id=8jzbigf4
+- Apple news, Texas update (3 Jun 2026): https://developer.apple.com/news/?id=sg176nne ; earlier Texas pause (23 Dec 2025): https://developer.apple.com/news/?id=8jzbigf4
+- Apple news, age rating social media questions (9 Jul 2026): https://developer.apple.com/news/?id=tlur8uvi ; new OS submissions / April 2027 SDK (9 Sep 2026): https://developer.apple.com/news/?id=k1mtkt1k
+- Apple Small Business Program: https://developer.apple.com/app-store/small-business-program/ ; Apple subscriptions (85% after one year): https://developer.apple.com/app-store/subscriptions/
+- Google Play service fees: https://support.google.com/googleplay/android-developer/answer/112622
 - Apple news, guidelines update (8 Jun 2026): https://developer.apple.com/news/?id=a233fmpw
 - TestFlight: https://developer.apple.com/testflight/ ; https://developer.apple.com/help/app-store-connect/test-a-beta-version/testflight-overview/
 - TestFlight terms: https://www.apple.com/legal/internet-services/itunes/testflight/

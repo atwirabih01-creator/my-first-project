@@ -43,7 +43,7 @@ Status labels: **Confirmed** (an official page says it), **Partly confirmed** (o
 Source: Anthropic, "Guidelines for organizations serving minors", https://support.claude.com/en/articles/9307344 (last updated 16 Mar 2026; checked 2026-10-15).
 
 - **Allowed, with safeguards. Confirmed.** Organisations may let minors use their products built on Claude if they follow the guidelines and applicable laws. The page sets **no minimum age and does not mention under-13s**. A kids' app for ages 6–12 is not banned. The conditions are the safeguards below plus legal compliance. (The page does not say "under-13 is allowed" in so many words. It is simply not restricted.)
-- **Required safeguards. Confirmed.** The page lists:
+- **Expected safeguards. Confirmed.** The page says organisations "should implement" safeguards that "may include, but are not limited to" the following. They are worded as expectations, not a strict checklist, but Anthropic audits for them and can suspend accounts:
   - "Age verification systems to ensure only intended users can access the product"
   - "Content moderation and filtering to block inappropriate or harmful content"
   - "Monitoring and reporting mechanisms to identify and address potential issues"
@@ -99,7 +99,7 @@ Sources: claude-api skill (cached 2026-10-06), confirmed against https://platfor
 | Claude Fable 5.1 (top model) | $10 | $12.50 | $0.25 | $50 | not ZDR (needs 30-day retention) |
 | (older) Claude Haiku 4.5 | $1.00 | $1.25 | $0.10 | $5.00 | |
 
-- **Prompt caching. Confirmed.** A 5-minute cache write costs 1.25x input and a 1-hour write costs 2x. Reads cost 0.1x (0.05x on Sonnet 5.5 and Opus 5.5). It stacks with the batch discount. The minimum cacheable prompt for Haiku 5.5 and Sonnet 5.5 is 286 tokens.
+- **Prompt caching. Confirmed.** A 5-minute cache write costs 1.25x input and a 1-hour write costs 2x. Reads cost 0.1x (0.05x on Sonnet 5.5 and Opus 5.5). It stacks with the batch discount. The minimum cacheable prompt for Haiku 5.5, Sonnet 5.5 and Opus 5.5 is **512 tokens** (prompt-caching docs; shorter prompts are simply not cached). *(Fact-check 2026-10-15: corrected from "286 tokens". 286 is the tool-use system-prompt size on the pricing page, not the cache minimum.)*
 - **Batch API. Confirmed.** 50% off. **Not ZDR-eligible** (kept 29 days). Use it only for jobs with no child data, e.g. building general question banks from textbook pages with names removed.
 - **US-only processing. Confirmed.** `inference_geo: "us"` costs 1.1x. The default is "global".
 - **Code execution tool. Confirmed.** Free when used together with web search or web fetch. Otherwise each organisation gets **1,550 free hours per month**, then $0.05 per container-hour. Our verifier will almost certainly stay inside the free hours.
@@ -243,3 +243,39 @@ Add about **$5 per full run** of the 200-prompt red-team test suite on Sonnet 5.
 - Anthropic supported countries: https://www.anthropic.com/supported-countries
 - OpenAI supported countries: https://developers.openai.com/api/docs/supported-countries
 - OpenAI API key safety: https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety ; https://help.openai.com/en/articles/8304786-how-can-i-keep-my-openai-accounts-secure ; https://developers.openai.com/api/reference/overview
+
+---
+
+## Fact-check (2026-10-15)
+
+Independent re-check by a second researcher. Each claim was compared against the official page itself, not against the earlier summary. Where a page-reading tool gave a summary, the raw page was downloaded and checked line by line (this caught one false summary, see "Vertex locations" below).
+
+**Verified (official source re-opened)**
+- Model names and API ids: `claude-haiku-5-5`, `claude-sonnet-5-5`, `claude-opus-5-5`, Fable 5.1 (platform pricing page).
+- All prices in the 1.3 table: Haiku 5.5 $0.10 / $0.125 / $0.01 / $0.50 (≤100K) and $0.50 / $0.625 / $0.05 / $2.50 (>100K); Sonnet 5.5 $2 / $2.50 / **$0.10** / $10; Opus 5.5 $4 / $5 / $0.20 / $20; Fable 5.1 $10 / $12.50 / $0.25 / $50; Haiku 4.5 $1 / $1.25 / $0.10 / $5. Batch prices are exactly half. (An older internal reference listed Sonnet 5.5 cache reads at $0.20. The live page says $0.10, which is 0.05x, so the file was right.)
+- Cache multipliers: 5-minute write 1.25x, 1-hour write 2x, read 0.1x (0.05x on Sonnet 5.5 / Opus 5.5). These stack with the batch discount. The Haiku 5.5 100K-token threshold counts cached tokens too.
+- `inference_geo: "us"` costs 1.1x. Only "us" and "global" exist, and data is stored in the US only.
+- Code execution: free when used with `web_search_20260209` / `web_fetch_20260209`, otherwise 1,550 free hours per organisation per month, then $0.05 per container-hour (5-minute minimum). Not ZDR-eligible, containers kept up to 30 days, supported on Haiku 5.5 and Sonnet 5.5. Web search costs $10 per 1,000.
+- ZDR: arranged through Anthropic sales, enabled per organisation. Eligibility table matches: Batch (29 days), Files, code execution, Skills, MCP connector and Managed Agents are not eligible; web search/fetch are eligible except dynamic filtering; client-side tools are eligible. No CORS under ZDR. Flagged chats kept up to 2 years. Fable/Mythos need 30-day retention.
+- Privacy centre (updated 1 Jul 2026): deletion within 30 days, flagged content up to 2 years, safety classification scores up to 7 years.
+- Minors guidelines (updated 16 Mar 2026): the four safeguard examples, the child-safety system prompt, the "must disclose" AI rule, COPPA-style compliance stated publicly, audits leading to suspension. No minimum age and no approval step.
+- Usage Policy: effective 12 Nov 2026, minor means under 18, AI disclosure "at the beginning of each chat session or in the product interface", and the list of high-risk education uses.
+- Commercial Terms (effective 17 Jun 2025): no training on Customer Content, no end-user age limit, DPA incorporated by reference.
+- OpenAI: moderation is free and covers text and images (no audio). The image categories listed are correct, and `sexual/minors` is text-only. `/v1/moderations` has no abuse-monitoring or application-state retention and is ZDR-eligible. General abuse logs are kept up to 30 days. ZDR and Modified Abuse Monitoring need OpenAI approval. The under-13 sentence was found as quoted, with no mention of parental consent or age prediction. The moderation guide makes no claim about Arabic. The UAE region (`ae.api.openai.com`) needs approval plus ZDR or Modified Abuse Monitoring, and covers only some endpoints.
+- `gpt-6-luna` exists and is described as "Our most efficient model for focused, high-volume tasks": $0.10 in / $0.01 cached / $0.50 out (up to 272K tokens). gpt-5-nano costs $0.05 / $0.40.
+- Gemini API terms (updated 2026-04-28): 18+ only, and not for services likely to be accessed by under-18s. Google Cloud Service Specific Terms §20(d) Age Restrictions (wording matches) and §18 no-training clause.
+- Vertex / Agent Platform locations: in Tel Aviv, Doha and Dammam **no Gemini or Claude model is ticked**. Only Gemini Embedding, Embeddings for Text and Embeddings for Multimodal (all three regions) and Virtual Try-On (Doha only). Checked in the raw HTML because a page-summary tool wrongly said Gemini and Claude were available there.
+- Bedrock: Haiku, Sonnet and Opus 5.5 in `me-central-1` (UAE), `me-south-1` (Bahrain) and `il-central-1` are offered only through Global cross-region inference, with no In-Region or Geo option. There is no Saudi region in the table.
+- Foundry: Global Standard and US Data Zone Standard only, and Sonnet 5.5 is Global Standard only.
+- Anthropic supported countries include Lebanon, Qatar, UAE, Saudi Arabia, Bahrain, Kuwait, Oman, Jordan and Egypt.
+- **Cost arithmetic recomputed** with the verified prices and the file's own assumptions. One 15-minute session costs about $0.0064–0.0077 on Haiku and $0.110 on Sonnet with caching ($0.41 without). Monthly tutoring: $0.54 lean, $2.21 heavy. Subtotals $2.10 / $4.11, which is about $3.15 / $6.16 with the buffer. Heavy without caching: $10.2, or $15.3 with the buffer. Red-team run $5.00. Pilot figures (3 children $9 / $18 / $45; 5 children $15 / $30 / $75) are correct. Caveat: if each turn's new text is also written to the cache (normal with automatic caching), a Sonnet session is about $0.14, adding about $0.50 per child per month on the heavy plan. That is inside the 50% buffer. The jump in lesson-pack cost from $1.15 (lean) to $1.45 (heavy) is not explained in the file. It is small, but the reason should be written down.
+
+**Corrected**
+- Minimum cacheable prompt: "286 tokens" → **512 tokens** for Haiku 5.5, Sonnet 5.5 and Opus 5.5 (https://platform.claude.com/docs/en/build-with-claude/prompt-caching). No cost figure changes, because Zaki's repeated prompt is about 8,000+ tokens.
+- Minors guidelines: "Required safeguards" → "Expected safeguards (should implement, may include but not limited to)". This is a wording nuance; treat them as required in practice.
+
+**Could not verify / not re-checked**
+- Google Cloud Service Specific Terms "last modified 12 Oct 2026": the date was not in the part of the page that could be read.
+- The renaming of Vertex AI to "Gemini Enterprise Agent Platform" is consistent with the current Google URLs, but the services-summary page was not re-opened.
+- OpenAI API-key help articles, Anthropic App Attest details, and OpenAI supported countries were not re-opened in this check. Low decision impact.
+- OpenAI's Arabic moderation quality: still no official statement. Our own test set must decide.
