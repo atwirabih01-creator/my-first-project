@@ -342,3 +342,59 @@ Keep it short. Tick every item before the first child session.
 - TIMSS 2015 / 2019 Lebanon profiles: https://timssandpirls.bc.edu/timss2015/encyclopedia/countries/lebanon/ , https://isc.bc.edu/timss2019/encyclopedia/pdf/Lebanon.pdf
 - L'Orient Today on English in schools: https://today.lorientlejour.com/article/1481686/ ; on curriculum reform (Decree 3445): https://today.lorientlejour.com/article/1547687/
 - CRDP newsletter (Jan 2025): https://crdp.org/sites/default/files/inline-files/Newsletter%20French%20and%20English.pdf
+
+**Added during fact-check (2026-10-16)**
+- Apple TestFlight Terms and Conditions: https://www.apple.com/legal/internet-services/itunes/testflight/sren/terms.html
+- StatCounter CSV export (Lebanon, mobile OS, Oct 2025–Sep 2026), via gs.statcounter.com
+- OCHA Lebanon Flash Update #20 (23 Apr 2026): https://unsco.unmissions.org/sites/default/files/2026-04/2026.04.23_OCHA_Lebanon_Flash_Update%20No%2020_final.pdf
+- Daily Beirut on the Cabinet curriculum decision (25 Jun 2026): https://dailybeirut.com/en/lebanon-news/lebanese-cabinet-approves-new-education-curriculum-and-multiple-appointments/
+- Annahar on the Decree 3445 pilot (7 Sep 2026): https://www.annahar.com/lebanon/344736/
+- Find A Helpline, Lebanon: https://findahelpline.com/countries/lb
+- Child Helpline International, Lebanon members: https://childhelplineinternational.org/lebanon-higher-council-for-childhood/ , https://childhelplineinternational.org/lebanon-nabaa/
+- UNHCR Lebanon, Assistance for children: https://help.unhcr.org/lebanon/en/welcome/protecting-child/ (blocks automated reading; content seen in search results only)
+
+---
+
+## Fact-check (2026-10-15)
+
+*Independent re-check by the Reality Checker agent, carried out 2026-10-15/16. Research, not legal advice. Nobody was contacted, nothing was signed up for, no money was spent.*
+
+### Help lines (top priority, shown to children)
+
+| Claim | Result | Evidence |
+|---|---|---|
+| Police emergency 112 | **Verified** | ISF site footer (https://www.isf.gov.lb/en); embassy and NNA emergency lists (secondary) |
+| ISF domestic violence 1745 (not 1744) | **Verified: 1745** | ISF homepage banner "Call 1745 to report domestic violence"; KAFA node/86. The one ISF Inspectorate page with "1744" is the only source anywhere using it, so it is a likely typo. |
+| Embrace National Lifeline 1564, 24 hours | **Verified**, 24/7 now on the official page | embracelebanon.org: "24 hours a day, 7 days a week". Languages still not published. |
+| himaya 03 414 964 | **Number verified**; **hours corrected**: not 24/7 as far as any source shows | himaya.org shows "HOTLINE: 03 414 964" with no hours. UNHCR lists himaya regional lines as Mon–Fri 8:30–16:00. The child script now always adds "if nobody answers, call 112". |
+| A national child helpline exists | **Corrected: none found** | The CHI member pages for Lebanon (Higher Council for Childhood, Naba'a) give no phone helpline |
+| KAFA 03 018 019 | **Number verified**; 24/7 **partly confirmed** | kafa.org.lb header; Find A Helpline says 24/7 (secondary) |
+| MoSA 1714 | **Could not verify** as a child line | Only UNICEF lists it, under "sexual exploitation and abuse" complaints. The MoSA site is unreachable. Keep it hidden. |
+| UNICEF regional child-protection lines (Caritas, IRC, TdH Lausanne, himaya North) | **Added**, verified on the UNICEF page | https://www.unicef.org/lebanon/support-families-emergencies |
+| Red Cross ambulance 140 | **Added**, partly confirmed | Secondary emergency-number lists |
+
+### Law 81/2018 (checked against the English Official Gazette translation)
+- Art. 85 personal-use exemption: **Verified** (wording matches).
+- Art. 94(7) prior consent removes the permit requirement "unless there is a legal impediment": **Verified**. Art. 94(4) is for schools only: **Verified**.
+- Art. 91 health / genetic / sexual life ban with exceptions (1) explicit agreement … (4) Art. 97 licence: **Verified**. Art. 97(3) Minister of Public Health licence, 2-month deadline, silence means denial: **Verified**.
+- Art. 96, 14 items including item 7 (representative if the controller lives abroad) and item 12 (transfer to another State): **Verified**. Art. 98 item 8 (foreign transfer on the public list): **Verified**. No transfer ban or adequacy rule: **Verified** (the text is silent).
+- Art. 101, free, within 10 days: **Verified** (calendar days; the text says "ten (10) days"). Art. 107, 10 working days, LBP 1–15 million: **Verified** (the translation has a typo, "ten (1) working days").
+- Art. 106, LBP 1–30 million and/or 3 months–3 years: **Verified**. Arts. 108 and 109: **Verified**.
+- Amendments or implementing decrees to Oct 2026: **None found** (2024 commentary still describes Law 81 as the only regime). Lawyer to confirm.
+- LBP 89,500/USD conversion: not re-checked; arithmetic is correct.
+
+### Other claims
+- StatCounter Sep 2026, 72.9% Android / 27.1% iOS: **Verified**. Earlier-2026 range **corrected** from "64–69%" to "64.0–69.5%" (CSV).
+- EDL ~4 h/day in July 2026, down from 7–9 h in Feb 2026: **Verified** against the cited source (Libnanews, 9 Sep 2026; secondary).
+- Hostilities since 2 March 2026: **Verified** (OCHA). Added ceasefire context (mid-April 10-day ceasefire, extended; fragile as of Oct 2026; about 335,000 still displaced per secondary reports).
+- TestFlight: 100 internal / 10,000 external testers, first-build Beta App Review, 90-day builds: **Verified** (Apple). **Children under 13 cannot use TestFlight: added** (Apple TestFlight terms). This was previously "not confirmed". Lebanon availability: no restriction found; **partly confirmed**.
+- Language of instruction: **Corrected wording** to the TIMSS 2019 text (grades 1–6 taught in Arabic, English *or* French; foreign language from grade 7).
+- Decree 3445: **Verified** that it exists (Annahar, Daily Beirut). Added: Cabinet approval late June 2026; an optional pilot in KG1, KG3 and Grade 2; compulsory use phased in later. The exact issue date is still unconfirmed (26 June vs 15 July).
+
+### Remaining uncertainties
+1. himaya's real hours, and whether a child can call it. Needs a phone check by a trusted adult.
+2. Languages on 1564; KAFA 24/7 is from a secondary source only.
+3. MoSA 1714 scope.
+4. Whether a child using a TestFlight beta installed with a parent's account is acceptable under Apple's terms (ad hoc distribution avoids the question).
+5. Decree 3445 exact date and rollout schedule.
+6. Any 2025–2026 data-protection bill: none found, but the Lebanese Parliament site was not searched directly.
