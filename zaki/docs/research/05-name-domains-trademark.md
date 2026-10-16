@@ -17,6 +17,7 @@ Status labels: **Confirmed** (checked directly at the source), **Partly confirme
 - **The Arabic word ذكي just means "smart".** Dozens of apps use it ("the smart teacher", "smart preparation"). Trademark offices usually refuse to give one company ownership of an everyday word like "smart" for a smart-learning product. On its own, it would be weak protection.
 - **Good domains are still free:** heyzaki.app, zakitutor.com, zakikids.com, zakitutor.app, askzaki.app, zakihomework.com, zakitutor.ai, and the Qatar, Saudi and Lebanon country versions (zaki.qa, zaki.sa, zaki.com.lb). *Fact-check correction: plain zaki.lb cannot be bought; Lebanon only sells names like zaki.com.lb.* **Taken:** zaki.com, zaki.ai, zaki.app, zaki.ae, askzaki.com, heyzaki.com, zakiapp.com, meetzaki.com, zakilearn.com, zaki.academy (taken by the kids app).
 - **Verdict: AMBER.** We can keep "Zaki" as the friendly character's name. The **brand we register and publish should be a two-part name plus a mascot logo**, for example "Hey Zaki" or "Zaki Tutor". A lawyer should do a proper search in Lebanon, Qatar, Saudi Arabia and the UAE before we spend money on branding.
+- **Fact-check note:** the independent checker found one more kids' "Zaki" product, ZakiPay (a kids' money app in Saudi Arabia). The checker recommends a new invented brand name, with Zaki kept as the mascot (see "Fact-check" at the end).
 - **If the founder wants a name the company can fully own across the region, now is the cheapest time to rename.** It costs nothing before launch. Two-part "Zaki" names are workable but will always share the space with other "Zaki"s.
 
 ## What this changes in the plan
@@ -190,7 +191,7 @@ How it was checked: each public profile page was compared with a known real acco
 |---|---|---|---|
 | **"Zaki - AI Agent & Assistant"** (developer: abdulaziz almautrofi) | Arabic and English AI assistant, released May 2026, available in the Saudi, Qatar, UAE, Egypt and Lebanon stores | https://apps.apple.com/sa/app/zaki-ai-agent-assistant/id6762629122 | Confirmed |
 | **"Zaki \| زكي"** (Basel AbuTaleb) | AI writing assistant, Dec 2025 | https://apps.apple.com/sa/app/zaki-%D8%B2%D9%83%D9%8A/id6755938445 | Confirmed |
-| **ZAKI AI** (zakiai.co) | Arabic and English AI chatbots for UAE businesses (+971 phone number) | https://zakiai.co/ | Confirmed |
+| **ZAKI AI** (zakiai.co) | Arabic and English AI chatbots for UAE businesses (+971 phone number). *Fact-check: its website footer mentions "zaki.ai", so it may be the owner of zaki.ai (not proven).* | https://zakiai.co/ | Confirmed |
 | **Zaki Universal Inc.** ("ZAKI®") | Giving and payments apps (Zaki, Zaki Pay, Zaki Merchant); **says it has a registered trademark** | https://apps.apple.com/sa/app/zaki/id6749177228 ; zaki.net | Partly confirmed (its own claim) |
 | **ZakiPay** (zakipay.com) *(added in fact-check)* | **Debit card and money-learning app for kids and teens in Saudi Arabia**, with a go-live waiting list. Same audience (children and parents) in a target market | https://zakipay.com | Confirmed (website live 2026-10-16) |
 | **Over Zaki** (Over Zaki Information Technology) | AI store and website builder: Over Zaki, ZakiWhats, ZakiOrder, ZakiPass | https://apps.apple.com/sa/app/over-zaki/id6741842512 | Confirmed |
@@ -238,3 +239,57 @@ Zaki: Meal Planner (Husam Badwan), Zaki: AI Video Maker, Team Zaki (fitness), ZA
 2. Check the Instagram handles by hand in the app (section 2).
 3. Ask a regional IP lawyer for a clearance search: Lebanon, Qatar, Saudi Arabia, UAE; classes 9, 41, 42; words `Hey Zaki`, `Zaki Tutor`, `Zaki`, `ذكي`. Budget roughly USD 100–300 per country for searches (*Partly confirmed*).
 4. After that, decide whether to buy `heyzaki.app`, `zakitutor.com` and `heyzaki.ai` (about USD 15–100 each per year) and reserve the handles. **This spends money, so the owner must approve it first.**
+
+---
+
+## Fact-check (2026-10-15)
+
+An independent checker re-ran the lookups on 2026-10-15/16 (RDAP registry lookups, Google public DNS, Apple's store search, Google Play pages, WIPO's official treaty list, web searches). Nothing was registered, bought, reserved or contacted.
+
+### Claims checked
+
+| Claim | Result | Notes |
+|---|---|---|
+| "Zaki kids" / "Zaki — Little Thinkers" on Google Play, ages 2–7, Education, 10+ downloads, updated 8 Oct 2026; site zaki.academy | **Verified** | Play listing title "Zaki kids", website title "Zaki — Little Thinkers". zaki.academy registered 2026-06-25 (Namecheap). |
+| "Zaky & Friends" (One 4 Kids Pty Ltd) | **Verified** | The App Store app is now called "One4Kids TV" (Education, updated Sep 2026); reviews mention Zaky. Also on Google Play (com.one4kids). |
+| Qatar Islamic Bank "Zaki" AI assistant | **Verified** | QIB's "Zaki Virtual Assistant" page is live. |
+| areeba "zaky" and "zaky LB" in Lebanon | **Verified** | Both by Areeba SAL (Finance) in the Lebanon App Store and on Google Play. |
+| Saudi "Zaki - AI Agent & Assistant" | **Verified** | Developer abdulaziz almautrofi, Productivity; in LB, QA, SA, AE and US stores. |
+| ZAKI AI (UAE) | **Verified** | zakiai.co, "Built for UAE Businesses", +971 number. Its footer mentions zaki.ai. |
+| Zaki Universal Inc. "ZAKI®" | **Verified as a claim** | The App Store text says "ZAKI®, a registered trademark of Zaki Universal Inc." We still can't see which country registered it. |
+| App Store name "Zaki" taken; "hey zaki" / "zaki tutor" give no matches | **Verified** | LB, QA, SA and AE stores return 0 results for "hey zaki" and "zaki tutor". About 17 Zaki/Zaky apps show up for "zaki" in the Lebanon store. |
+| Domains: zaki.com, zaki.ai, zaki.app, heyzaki.com, askzaki.com, zakilearn.com registered | **Verified** | Dates match. Extra detail: zaki.com is due for renewal on **2026-10-27**, but it is under a strict lock, so expect it to renew. zaki.app expires 2026-12-09. |
+| heyzaki.app, zakitutor.com, zakikids.com, zakitutor.app, askzaki.app, heyzaki.ai, zakitutor.ai, zakihomework.com free | **Verified** | All returned "not found" at the registry. |
+| zaki.qa, zaki.sa free | **Partly verified** | Google DNS says these names don't exist. The registry lookup services for .qa, .sa and .lb timed out from our network. |
+| zaki.lb free | **Corrected** | Plain .lb names are **not sold to the public**, only .com.lb and similar. Use zaki.com.lb. |
+| .qa / .com.qa rules | **Could not re-verify** | Left as written (registrar sources). |
+| .sa rules | **Partly verified** | Official SaudiNIC rules require a Saudi-based admin contact. Registrars say individuals need a Saudi ID or residence permit. A company name or trademark is needed to register a matching company domain. |
+| .com.lb rules | **Partly verified** | LBDR's 2021 policy (accredited registrars). The .lb registry was handed to Internet Society Lebanon in 2024, so a registrar should confirm the current rules. |
+| Lebanon not in the Madrid System | **Verified** | It is absent from WIPO's official list (117 members). **New:** Saudi Arabia joined on **8 Oct 2026**. Qatar (2024), UAE (2021), Oman, Bahrain and Egypt are members. Kuwait and Jordan are not. |
+
+### Extra conflicts found
+
+- **ZakiPay** (zakipay.com): a **kids' and teens' debit card and money-learning app for Saudi Arabia**. Same audience (parents and children). Added to 4.2.
+- **"ZaKi"** by Bozor App on Google Play (updated Sep 2026) and **"ZaKey"** (Zakey LLC, shopping) in the Qatar store. Both are in unrelated fields, so low concern.
+- **No app, website or US trademark called "Hey Zaki" or "Zaki Tutor" was found** in web searches, Apple's store (LB/QA/SA/AE/US) or Google Play. A proper trademark search (WIPO, national offices) is still needed, because the free databases could not be searched automatically.
+
+### Checker's verdict on "Hey Zaki: Homework Tutor"
+
+- **It is available today** as a store name and domain (heyzaki.app), and nothing directly blocks it.
+- **But it is a weak brand to own.** The distinctive part, "Zaki", is shared with a kids' learning app (Zaki kids), a kids' money app in Saudi Arabia (ZakiPay), a Lebanese payments app (zaky), a Qatari bank AI (QIB Zaki), several Arabic AI assistants, and a company claiming "ZAKI®". "Hey" adds almost nothing a trademark office would count as distinctive. heyzaki.com was registered by someone else in June 2026.
+- **Recommendation:** a **separate, invented brand name, with Zaki kept as the mascot** ("Learn with Zaki"), is safer and cheaper to protect across Lebanon and the GCC. Keep "Hey Zaki" only as a fallback if the founder strongly prefers it. Either way, a lawyer's search comes first.
+
+### Alternative brand names checked (2026-10-16)
+
+| Name | Meaning / feel | .com | .app | .ai | App Store (LB/US) and Google Play |
+|---|---|---|---|---|---|
+| **Fahmoo** (فهمو) | from فهم "understanding", playful ending | **Free** | **Free** | **Free** | No apps with this name. Note: Quran apps called "Fahm" exist, so the name is close but not the same. |
+| **Shatroo** (شاطرو) | from شاطر "clever kid", the praise parents say | **Free** | **Free** | **Free** | No apps with this name |
+| **Wajiboo** (واجبو) | from واجب "homework" | **Free** | **Free** | Could not check (rate-limited) | No apps with this name. Note: it is close to "Wajibati" (a prayer app). |
+| **Sabbourati** (سبّورتي) | "my blackboard". Long (10 letters) and harder for English speakers | **Free** | **Free** | **Free** | No apps found |
+| Fahimni (فهّمني, "help me understand") | describes the job well | Taken | Free | — | None found |
+
+Also checked and **rejected** (the .com is taken, the name is in use, or both): Shatir/Shater ("Shater: Study Assistant" already exists), Nabeeh, Ustazi/Ostazi, Qalamy, Hudhud, Darsi/Darsy (education apps exist), Wajibati, Allimni/Alimni (education apps exist), Mafhoum, Ilmoo, Kalimo (language app exists), Tafakkur, Zakido (game exists), Fikroo, Nabiha, Lamhaa, Fehmo, Shatoor, Allemny.
+
+**Checker's top picks:** **Shatroo** (warm, every Arab parent says "شاطر!", easy in English) and **Fahmoo** (about understanding, not answers, which fits the "explain, don't do it for them" idea). Example store name: "Shatroo: Homework with Zaki". These are only domain and store checks. A lawyer still needs to run a trademark search, and nothing has been bought.
+
