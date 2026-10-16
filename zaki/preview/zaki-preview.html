@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zaki Preview</title>
+<!--
+  Zaki: clickable design preview.
+  Everything is scripted. No real AI, no network, no real data.
+  Plain ES5 JavaScript and conservative CSS so it runs on older iPhone Safari.
+-->
+<style>
+:root{
+  --bg:#EAF6F7; --ink:#1E3A4C; --ink2:#4B6575; --card:#FFFFFF;
+  --teal:#2A9DAA; --teal-d:#1F7F8A; --teal-l:#D8F1F3;
+  --sun:#FFC857; --sun-l:#FFF4D6; --coral:#FF8A65; --green:#3DAA6D; --green-l:#E2F5EA;
+  --lilac:#8E7CC3; --line:#D5E5EA; --help:#5B7FD6; --help-l:#E9EFFC;
+  --wa-bg:#ECE5DD; --wa-me:#DCF8C6; --wa-head:#075E54;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0;height:100%}
+body{background:#CFE8EC;background-image:linear-gradient(160deg,#D8F1F3 0%,#FFF4D6 100%);
+  color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Geeza Pro","Noto Naskh Arabic",Tahoma,sans-serif;
+  font-size:17px;line-height:1.45;-webkit-text-size-adjust:100%}
+html[lang="ar"] body{font-size:18px;line-height:1.6}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+
+/* Phone frame: full screen on phones, a centered phone on desktop */
+.phone{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--bg);overflow:hidden;
+  display:flex;flex-direction:column}
+@media (min-width:520px){
+  body{display:flex;align-items:center;justify-content:center;min-height:100%}
+  .phone{position:relative;width:390px;height:844px;max-height:calc(100vh - 32px);
+    border-radius:44px;border:10px solid #1F2A37;box-shadow:0 20px 60px rgba(30,58,76,.35)}
+}
+
+/* Top area */
+.banner{background:var(--sun);color:#5A4300;font-size:13px;font-weight:700;text-align:center;padding:4px 10px;flex-shrink:0}
+.head{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:var(--card);border-bottom:1px solid var(--line);flex-shrink:0}
+.brand{display:flex;align-items:center;font-weight:800;font-size:20px;color:var(--teal-d)}
+.brand svg{margin-inline-end:6px;margin-right:6px}
+html[dir="rtl"] .brand svg{margin-right:0;margin-left:6px}
+.langbtn{border:2px solid var(--teal);background:var(--teal-l);color:var(--teal-d);font-weight:700;border-radius:22px;padding:6px 14px;min-height:44px}
+.seen{background:var(--teal-l);color:var(--teal-d);font-size:14px;font-weight:600;text-align:center;padding:5px 10px;flex-shrink:0}
+.main{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;position:relative}
+.main.lessonmode{overflow:hidden}
+.pad{padding:16px}
+
+/* Tab bar */
+.tabs{display:flex;background:var(--card);border-top:1px solid var(--line);flex-shrink:0;padding-bottom:env(safe-area-inset-bottom)}
+.tab{flex:1;border:0;background:none;padding:6px 2px 8px;min-height:62px;font-size:12px;font-weight:600;color:var(--ink2);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.tab .ic{font-size:22px;line-height:1.2}
+.tab.on{color:var(--teal-d)}
+.tab.on .ic{background:var(--teal-l);border-radius:14px;padding:0 10px}
+
+/* Generic pieces */
+h1{font-size:24px;margin:0 0 4px} h2{font-size:19px;margin:18px 0 8px}
+.sub{color:var(--ink2);margin:0 0 12px;font-size:15px}
+.card{background:var(--card);border-radius:22px;padding:16px;box-shadow:0 2px 0 var(--line);margin-bottom:14px}
+.big{display:block;width:100%;min-height:64px;border:0;border-radius:22px;font-size:20px;font-weight:800;padding:12px 18px;margin:8px 0;box-shadow:0 4px 0 rgba(0,0,0,.12)}
+.big:active{-webkit-transform:translateY(2px);transform:translateY(2px);box-shadow:0 2px 0 rgba(0,0,0,.12)}
+.b-teal{background:var(--teal);color:#fff}
+.b-sun{background:var(--sun);color:#4A3700}
+.b-white{background:#fff;color:var(--ink);border:2px solid var(--line)}
+.b-help{background:var(--help-l);color:#2F4FA0;border:2px solid #BFD0F5}
+.b-green{background:var(--green);color:#fff}
+.mid{min-height:52px;font-size:17px;border-radius:18px}
+.linkbtn{background:none;border:0;color:var(--ink2);text-decoration:underline;font-size:14px;padding:8px 6px;min-height:40px}
+.row{display:flex;align-items:center}
+.row > .grow{flex:1}
+.center{text-align:center}
+.muted{color:var(--ink2);font-size:14px}
+.chip{display:inline-block;border-radius:12px;padding:2px 10px;font-size:13px;font-weight:700}
+.st-new{background:#EEF1F4;color:#4B6575}.st-learning{background:var(--sun-l);color:#7A5A00}
+.st-learned{background:var(--green-l);color:#1F6E43}.st-mastered{background:#EDE7FA;color:#5A45A0}
+.toast{position:absolute;left:16px;right:16px;bottom:84px;background:var(--ink);color:#fff;border-radius:16px;padding:12px 14px;font-size:15px;z-index:20;text-align:center;
+  -webkit-animation:pop .2s ease-out;animation:pop .2s ease-out}
+@-webkit-keyframes pop{from{opacity:0;-webkit-transform:translateY(8px)}to{opacity:1;-webkit-transform:none}}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* Fractions drawn as stacked numbers (no bidi problems in Arabic) */
+.frac{display:inline-block;vertical-align:middle;text-align:center;line-height:1;margin:0 .15em;direction:ltr;font-weight:800}
+.frac .fn{display:block;border-bottom:2px solid currentColor;padding:0 .2em .1em}
+.frac .fd{display:block;padding:.1em .2em 0}
+
+/* Start screen */
+.hero{text-align:center;padding:20px 16px 8px}
+.langpick .big{font-size:24px}
+
+/* Chat (lesson) */
+.lesson{display:flex;flex-direction:column;height:100%}
+.ltop{display:flex;align-items:center;padding:8px 12px;background:var(--card);border-bottom:1px solid var(--line)}
+.ltop .t{flex:1;font-weight:800;font-size:16px}
+.exit{border:0;background:#EEF1F4;border-radius:16px;padding:6px 12px;min-height:44px;font-weight:700;font-size:14px}
+.phases{display:flex;padding:6px 10px;background:var(--card);border-bottom:1px solid var(--line)}
+.ph{flex:1;text-align:center;font-size:11px;font-weight:700;color:#93A7B3;padding:3px 0;border-radius:10px;margin:0 2px;background:#F2F6F8}
+.ph.done{color:var(--teal-d);background:var(--teal-l)}
+.ph.on{color:#fff;background:var(--teal)}
+.log{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px}
+.msg{display:flex;align-items:flex-end;margin-bottom:10px;-webkit-animation:pop .25s ease-out;animation:pop .25s ease-out}
+.msg.me{justify-content:flex-end}
+.av{flex-shrink:0;margin-right:6px}
+html[dir="rtl"] .av{margin-right:0;margin-left:6px}
+.bub{max-width:82%;padding:10px 14px;border-radius:20px;background:#fff;box-shadow:0 1px 0 var(--line)}
+.msg.z .bub{border-bottom-left-radius:6px}
+.msg.me .bub{background:var(--teal);color:#fff;border-bottom-right-radius:6px;font-weight:600}
+html[dir="rtl"] .msg.z .bub{border-bottom-left-radius:20px;border-bottom-right-radius:6px}
+html[dir="rtl"] .msg.me .bub{border-bottom-right-radius:20px;border-bottom-left-radius:6px}
+.pic{margin-top:8px;text-align:center}
+.pic svg{max-width:100%;height:auto}
+.sumcard{background:var(--sun-l);border:2px dashed #E9B949;border-radius:20px;padding:14px;margin:4px 0 12px}
+.sumcard h3{margin:0 0 6px;font-size:20px}
+.sumcard ul{margin:0;padding:0 0 0 20px}
+html[dir="rtl"] .sumcard ul{padding:0 20px 0 0}
+.saved{display:inline-block;margin-top:8px;color:#1F6E43;font-weight:800;font-size:14px}
+.dock{background:var(--card);border-top:1px solid var(--line);padding:8px 12px 6px}
+.opts{display:flex;flex-wrap:wrap;margin:0 -4px}
+.opt{flex:1 1 30%;min-width:28%;min-height:64px;margin:4px;border:2px solid var(--teal);background:#fff;color:var(--ink);border-radius:20px;font-size:22px;font-weight:800;padding:6px}
+.opt.wide{flex-basis:100%;font-size:17px;font-weight:700}
+.opt:active{background:var(--teal-l)}
+.helprow{display:flex;align-items:center;margin-top:4px}
+.helprow .big{margin:4px 0;min-height:60px;font-size:18px;flex:1}
+.mini{display:flex;flex-wrap:wrap;justify-content:space-between}
+.gold{background:none;border:2px dashed var(--lilac);color:#5A45A0;border-radius:16px;font-size:14px;font-weight:700;padding:6px 10px;min-height:44px;margin:2px 0}
+.lbfrac{display:flex;align-items:center;justify-content:center;font-size:34px}
+.lbfrac .lb{font-size:13px;font-weight:700;color:var(--ink2);text-align:start;text-align:left;margin-left:10px;line-height:1.3}
+html[dir="rtl"] .lbfrac .lb{text-align:right;margin-left:0;margin-right:10px}
+.lbfrac .lb div{padding:6px 0}
+
+/* Test */
+.testv{flex:1;min-height:0;overflow-y:auto;padding:16px}
+.pbar{height:22px;background:#E3EEF1;border-radius:12px;overflow:hidden;margin:6px 0 4px;border:2px solid #CFE2E7}
+.pfill{height:100%;width:0;background:var(--green);background-image:linear-gradient(90deg,#5CC98B,#3DAA6D);border-radius:10px;-webkit-transition:width .5s ease;transition:width .5s ease}
+.qcard{background:#fff;border-radius:22px;padding:16px;margin:12px 0;text-align:center;font-size:19px;font-weight:700}
+.result{text-align:center;padding:10px 0}
+.result .bigemoji{font-size:54px}
+.starsrow{font-size:30px;letter-spacing:4px}
+
+/* Home */
+.plan{background:var(--teal);color:#fff;border-radius:24px;padding:16px;margin-bottom:14px}
+.plan .lbl{font-size:14px;opacity:.9;font-weight:700}
+.plan .what{font-size:20px;font-weight:800;margin:4px 0 6px}
+.plan .big{margin-bottom:0}
+.statrow{display:flex;margin:0 -6px 14px}
+.stat{flex:1;margin:0 6px;background:#fff;border-radius:20px;padding:12px;text-align:center;box-shadow:0 2px 0 var(--line)}
+.stat b{display:block;font-size:22px}
+
+/* Classes / tests lists */
+.tile{display:flex;align-items:center;width:100%;min-height:68px;border:0;background:#fff;border-radius:20px;margin-bottom:10px;padding:10px 14px;box-shadow:0 2px 0 var(--line);text-align:start;text-align:left}
+html[dir="rtl"] .tile{text-align:right}
+.tile .ti{font-size:30px;width:46px;text-align:center}
+.tile .tt{flex:1;font-weight:800;font-size:18px;padding:0 8px}
+.tile .tt small{display:block;font-weight:600;color:var(--ink2);font-size:13px}
+
+/* Flashcards */
+.fc{display:block;width:100%;min-height:240px;border:0;border-radius:26px;background:#fff;box-shadow:0 4px 0 var(--line);padding:18px;margin:6px 0 12px;font-size:24px;font-weight:800}
+.fc.back{background:var(--green-l)}
+.fc .side{display:block;font-size:13px;color:var(--ink2);font-weight:700;margin-bottom:10px;text-transform:uppercase}
+.fc.flip{-webkit-animation:flip .3s ease-out;animation:flip .3s ease-out}
+@-webkit-keyframes flip{from{-webkit-transform:scaleX(.2)}to{-webkit-transform:scaleX(1)}}
+@keyframes flip{from{transform:scaleX(.2)}to{transform:scaleX(1)}}
+.fcnav{display:flex;align-items:center}
+.fcnav .big{flex:1;margin:0}
+.fcnav .cnt{width:80px;text-align:center;font-weight:800}
+
+/* Parent */
+.gate input{width:100%;font-size:26px;text-align:center;padding:12px;border-radius:18px;border:2px solid var(--line);margin:10px 0;direction:ltr}
+.seg{display:flex;background:#E3EEF1;border-radius:18px;padding:4px;margin-bottom:14px}
+.seg button{flex:1;border:0;background:none;border-radius:14px;min-height:46px;font-weight:700;font-size:15px}
+.seg button.on{background:#fff;color:var(--teal-d);box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.set{display:flex;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.set:last-child{border-bottom:0}
+.set .k{flex:1;font-weight:700}
+.step{width:44px;height:44px;border-radius:14px;border:2px solid var(--line);background:#fff;font-size:22px;font-weight:800}
+.set .v{min-width:74px;text-align:center;font-weight:700}
+.set select{font:inherit;padding:8px;border-radius:12px;border:2px solid var(--line);background:#fff;min-height:44px}
+
+/* WhatsApp simulator */
+.wa{border-radius:20px;overflow:hidden;box-shadow:0 2px 0 var(--line);background:var(--wa-bg)}
+.wahead{background:var(--wa-head);color:#fff;display:flex;align-items:center;padding:8px 12px}
+.wahead .n{font-weight:700} .wahead small{display:block;opacity:.85;font-size:12px}
+.wahead .avc{width:38px;height:38px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;margin-right:10px}
+html[dir="rtl"] .wahead .avc{margin-right:0;margin-left:10px}
+.walog{padding:10px 10px 4px;min-height:200px}
+.wday{text-align:center;margin:6px 0 10px}
+.wday span{background:#E1F2FB;color:#4B6575;font-size:12px;border-radius:8px;padding:3px 10px}
+.wm{display:flex;margin-bottom:6px;-webkit-animation:pop .2s ease-out;animation:pop .2s ease-out}
+.wm.me{justify-content:flex-end}
+.wb{max-width:84%;background:#fff;border-radius:10px;padding:6px 9px 4px;font-size:15px;line-height:1.4;box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.wm.me .wb{background:var(--wa-me)}
+.wb .tm{display:block;text-align:right;font-size:11px;color:#7A8A93;margin-top:2px}
+html[dir="rtl"] .wb .tm{text-align:left}
+.waquick{padding:4px 10px 8px}
+.waquick .q{display:inline-block;border:1px solid #9BC7B8;background:#fff;color:var(--wa-head);border-radius:18px;padding:8px 14px;margin:3px;font-weight:700;font-size:14px;min-height:40px}
+.wacomp{display:flex;align-items:center;padding:8px;background:#F0F0F0}
+.wacomp .in{flex:1;background:#fff;border-radius:22px;padding:10px 14px;font-size:15px;min-height:44px;color:var(--ink)}
+.wacomp .in.ph{color:#9AA7AE}
+.wasend{width:48px;height:48px;border-radius:50%;border:0;background:#00A884;color:#fff;font-size:20px;margin-left:8px}
+html[dir="rtl"] .wasend{margin-left:0;margin-right:8px;-webkit-transform:scaleX(-1);transform:scaleX(-1)}
+.wasend[disabled]{background:#B9C7CC}
+.pulse{-webkit-animation:pulse 1.4s infinite;animation:pulse 1.4s infinite}
+@-webkit-keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,168,132,.5)}50%{box-shadow:0 0 0 8px rgba(0,168,132,0)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(0,168,132,.5)}50%{box-shadow:0 0 0 8px rgba(0,168,132,0)}}
+
+/* Help (safety) screen: calm, fixed text */
+.helpv{background:#F3F6FD;min-height:100%;padding:18px 16px 24px}
+.helpv .lead{font-size:22px;font-weight:800;margin:6px 0}
+.hl{background:#fff;border-radius:20px;padding:12px 14px;margin:10px 0;border:2px solid #DCE5FA}
+.hl .num{font-size:30px;font-weight:900;color:#2F4FA0;direction:ltr;display:inline-block;letter-spacing:1px}
+.hl.first{background:var(--help);color:#fff;border-color:var(--help);font-size:19px;font-weight:700}
+.fallback{background:#FFF4D6;border-radius:18px;padding:12px 14px;font-weight:800;margin:12px 0}
+.fallback .num{color:#2F4FA0;font-size:24px;direction:ltr;display:inline-block}
+
+@media (prefers-reduced-motion:reduce){
+  *{-webkit-animation:none!important;animation:none!important;-webkit-transition:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="phone" id="phone">
+  <div class="banner" id="banner" role="note"></div>
+  <header class="head">
+    <div class="brand" id="brand"></div>
+    <button class="langbtn" id="langbtn" data-act="lang"></button>
+  </header>
+  <div class="seen" id="seen" role="status"></div>
+  <main class="main" id="main" aria-live="polite"></main>
+  <nav class="tabs" id="tabs"></nav>
+</div>
+
+<script>
+(function () {
+'use strict';
+
+/* ------------------------------------------------------------------
+   1. Text in both languages. {name} style tokens are filled in,
+      {3/4} style tokens become stacked fractions.
+------------------------------------------------------------------ */
+var T = {
+en: {
+  appName: "Zaki", banner: "Preview: scripted demo, not real AI", langBtn: "العربية", langAria: "Switch language to Arabic",
+  seen: "Your grown-ups can see your lessons 👀", name: "Ali",
+  tab_home: "Home", tab_classes: "Classes", tab_tests: "Tests", tab_cards: "Flashcards", tab_parent: "Parent",
+  choose: "Choose your language",
+  hi: "Hi {name}! I'm Zaki, an AI teacher (not a person).",
+  quiet: "Are you in a quiet place and ready to focus?", ready: "Ready ✅",
+  home_hi: "Hi {name}! 👋", home_sub: "Grade 3", plan_from: "Today's plan from Mom",
+  plan: "Fractions lesson + 10-min practice", b_start: "Start ▶", b_continue: "Continue ▶", b_again: "Practice again ▶",
+  stars: "stars", next_time: "Next study time", b_help: "I need help",
+  lesson_title: "Math · Fractions", ph_recap: "Recap", ph_teach: "Learn", ph_check: "Check", ph_summary: "Summary", ph_test: "Test",
+  b_exit: "✕ Exit", report_link: "Report this answer", ask_demo: "Try: ask Zaki for the answer",
+  report_thanks: "Thank you! A person from the Zaki team will check this answer.",
+  l_intro: "Let's learn fractions today! First, 2 quick questions from our last lesson about halves.",
+  r1: "What part of this man'oushe is green?", r1_hint: "Hint: count all the parts. Then count the green parts.",
+  r1_ok: "Yes! You remembered. 🌟",
+  r2: "Ali cuts a loaf of bread into 2 equal parts. What is each part called?",
+  o_half: "a half", o_whole: "a whole", o_quarter: "a quarter",
+  r2_hint: "Hint: think of our last lesson. When we cut something into 2 equal parts, each part has a special name.",
+  r2_ok: "Great memory! Now let's learn something new.",
+  t1: "A fraction is a part of a whole thing. Here is a whole man'oushe.",
+  t2: "Mama cuts the man'oushe into 4 equal parts.",
+  t3: "Ali eats 1 part. He ate {1/4} of the man'oushe. We say: one quarter.",
+  t4: "The bottom number tells how many equal parts there are in all. The top number tells how many parts we take.",
+  lbl_top: "parts we take", lbl_bottom: "all equal parts",
+  t5: "The parts must be equal, the same size. That is fair sharing!",
+  b_next: "Next ▶", b_ready: "I'm ready to try! ✋",
+  c_intro: "Your turn! Take your time.",
+  c1: "What fraction of this bread is colored?",
+  c1_hint: "Hint: count the colored parts for the top number. Then count all the parts for the bottom number.",
+  c1_ex: "Let's look at a different one together. This bread has 5 parts and 2 are colored. Top: 2 colored parts. Bottom: 5 parts in all. So it is {2/5}.",
+  c1_look: "Look again slowly. Count the colored parts first, then all the parts.",
+  c1_ok: "Wonderful! You counted so carefully. 🌟",
+  try_again: "Now try yours again. You can do it!",
+  how: "How did you know?", how1: "I counted the colored parts", how2: "I counted all the parts", how3: "I'm not sure",
+  how1_r: "Yes! The colored parts give the top number.", how2_r: "Yes! All the parts give the bottom number.",
+  how3_r: "That's okay! Top = colored parts. Bottom = all the parts.",
+  c2: "Teta cuts a man'oushe into 3 equal parts. Ali eats 1 part. What fraction did he eat?",
+  c2_hint: "Hint: how many parts are there in all? That is the bottom number.",
+  c2_ex: "Let's try a different one together. A cake has 6 equal parts. You eat 1. Top: 1 part eaten. Bottom: 6 parts in all. So you ate {1/6}.",
+  c2_look: "Look again: how many parts did Ali eat? How many parts are there in all?",
+  c2_ok: "Super! You worked it out yourself. 🌟",
+  sum_intro: "You did great! Here is your summary card.",
+  sum_title: "Fractions", sum1: "A fraction is a part of a whole.", sum2: "Bottom number = all the equal parts.",
+  sum3: "Top number = the parts we take.", sum4: "{1/4} = 1 of 4 equal parts.", sum_saved: "✓ Saved to Classes",
+  b_test: "Start the test ✏️",
+  me_ask: "Zaki, just tell me the answer, please!",
+  refuse: "I won't tell you the answer, because I know you can find it yourself! Here is a hint:",
+  refuse_gen: "I don't give answers to questions, but I will always help you think. Let's keep going!",
+  test_title: "Fractions test", qof: "Question {i} of {n}", no_timer: "No timer. Take your time.",
+  tq_what: "What fraction is colored?", tq_bottom: "In a fraction, what does the bottom number tell us?",
+  tq_top: "In a fraction, what does the top number tell us?",
+  o_allparts: "How many equal parts in all", o_takeparts: "How many parts we take",
+  tq_whole: "Which fraction is one whole man'oushe?",
+  tq_both: "Ali cuts bread into 2 equal parts and eats both. What fraction did he eat?",
+  tq_all4: "A man'oushe has 4 equal parts. Ali eats all 4. What fraction did he eat?",
+  res_pass: "Learned! 🎉", res_score: "You got {s} of {n}.", res_stars: "+3 stars ⭐",
+  res_break: "Great effort! Time for a short break. 🧃", b_home: "Home", b_seeClasses: "See it in Classes",
+  res_fail: "Good try!", res_fail_sub: "Let's look at the summary again, then try new questions.",
+  b_newtest: "New test ✏️", retries_left: "New tests left today: {n}",
+  res_more: "You worked hard today! We'll tell Mom you need a bit more practice. We can try again tomorrow.",
+  cls_title: "Classes", cls_sub: "Lessons saved by Zaki", subj_math: "Math", subj_sci: "Science", subj_en: "English",
+  subj_ar: "Arabic", subj_soc: "Social Studies", n_lessons: "Lessons: {n}", b_back: "◀ Subjects",
+  les_halves: "Halves", les_frac: "Fractions",
+  st_new: "New", st_learning: "Learning", st_learned: "Learned", st_mastered: "Mastered",
+  mastered_note: "Mastered = passed on two different days.",
+  cls_empty: "No lessons yet. Mom can add one on WhatsApp.",
+  sum_locked: "Finish the lesson to save its summary here.", b_open: "Open lesson ▶",
+  halves_sum: "2 equal parts. Each part is {1/2} (one half).",
+  tst_title: "Tests", tst_up: "Coming up", tst_frac: "Fractions — Sunday",
+  tst_plan: "Zaki's plan: 1 lesson + 2 practice sessions", b_practice: "Practice now ▶", tst_past: "Past results",
+  tst_practice: "Fractions practice test",
+  crd_title: "Flashcards", crd_sub: "Made from your Fractions lesson", crd_tap: "Tap the card to flip it",
+  crd_prev: "◀ Back", crd_next: "Next ▶", crd_count: "{i} of {n}", crd_front: "Question", crd_back: "Answer",
+  f_what: "What fraction is this?", f_q1b: "{1/4} one quarter", f_q2: "The bottom number?", f_q2b: "All the equal parts",
+  f_q3: "The top number?", f_q3b: "The parts we take", f_q4b: "{1/2} one half", f_q5: "{4/4} = ?", f_q5b: "One whole!",
+  gate_title: "For grown-ups only", gate_sub: "Grown-up, please type this number using digits:",
+  gate_word: "seven hundred forty-two", gate_ph: "Type the number", b_gate: "Open", gate_wrong: "That's not right. Please ask a grown-up.",
+  par_title: "Parent area", par_settings: "Settings", par_wa: "WhatsApp (demo)",
+  set_child: "Child", set_child_v: "Ali · Grade 3", set_limit: "Daily limit", min: "{n} min", set_time: "Study time",
+  set_lang: "Language", set_country: "Country for help numbers", lebanon: "Lebanon",
+  set_country_note: "Set at sign-up. Help numbers come from a fixed, checked list.",
+  help_never: "The help screen and the “I need help” button are never locked.",
+  b_lock: "🔒 Lock parent area", b_reset: "Restart preview", reset_done: "Preview restarted.",
+  tm_16: "4:00 pm", tm_17: "5:00 pm", tm_18: "6:00 pm",
+  wa_sub: "Simulated chat · nothing is really sent", wa_type: "Type a message (demo)", wa_send: "Send",
+  wa_tap: "Tap the green send button to message Zaki.", wa_quick: "Quick replies:", wa_today: "Today",
+  wa_later: "After Ali's session",
+  wa_policy: "Zaki on WhatsApp is only for parents: plans, reports and reminders. Kids learn inside the app.",
+  wa_mom1: "Ali has a math test on fractions Sunday",
+  wa_z1: "Got it. I'll prepare a fractions lesson + 2 practice sessions before Sunday.",
+  wa_report: "Good evening! Ali's session today 📚\n✅ Finished: Fractions lesson + test (8/10, passed on 2nd try)\n💪 Strong: adding fractions with the same bottom number\n🤔 Needs practice: comparing 1/3 and 1/4\n🎯 5-min idea for tomorrow: cut bread into 3 and 4 pieces, ask which piece is bigger\nReply PLAN to change tomorrow's plan.",
+  q_REPORT: "REPORT", q_PLAN: "PLAN", q_PAUSE: "PAUSE", q_HELP: "HELP",
+  r_REPORT: "Ali today: Fractions lesson ✅ · Test 8/10 (passed on 2nd try) · Time used: 18 of 30 min · ⭐ +3 stars.",
+  r_PLAN: "Tomorrow's plan: Fractions practice (10 min) + flashcards (5 min).\nReply 1 to keep it, 2 to switch to Science, 3 for a rest day.",
+  r_PAUSE: "Zaki is paused. Ali won't get lessons or reminders until you reply RESUME.",
+  r_HELP: "A person from the Zaki team will reply to you here soon. In an emergency, call 112.",
+  help_1: "Thank you for telling me.", help_2: "You are not in trouble.",
+  help_3: "Please tell a grown-up you trust right now: a parent, grandparent, aunt, uncle or teacher.",
+  help_list: "These people can also help (Lebanon):",
+  h112: "Police. If you are in danger now. (24/7)",
+  h1564: "Embrace. If you feel very sad or think about hurting yourself. Kind people answer all day and all night. (24/7)",
+  hhimaya: "himaya. A charity that helps children, if someone at home or someone you know is hurting you.",
+  h_fallback: "If nobody answers, or you are in danger now, call", h_ask: "Ask a grown-up to help you call.",
+  h_note: "(In the real app, a safety reviewer is alerted.)", b_back_zaki: "Back to Zaki",
+  pic_lbl: "{k} of {n} parts colored", pic_eq: "Equal parts: fair. Unequal parts: not fair.", ok: "fair", notok: "not fair"
+},
+ar: {
+  appName: "ذكي", banner: "معاينة: عرض تجريبي، ليس ذكاءً اصطناعيًا حقيقيًا", langBtn: "English", langAria: "تغيير اللغة إلى الإنجليزية",
+  seen: "أهلك يرون دروسك 👀", name: "علي",
+  tab_home: "الرئيسية", tab_classes: "دروسي", tab_tests: "الاختبارات", tab_cards: "البطاقات", tab_parent: "الأهل",
+  choose: "اختر لغتك",
+  hi: "مرحبًا يا {name}! أنا ذكي، معلّم يعمل بالذكاء الاصطناعي (ولست إنسانًا).",
+  quiet: "هل أنت في مكان هادئ ومستعد للتركيز؟", ready: "مستعد ✅",
+  home_hi: "أهلًا يا {name}! 👋", home_sub: "الصف الثالث", plan_from: "خطة اليوم من ماما",
+  plan: "درس الكسور + تدريب لمدة 10 دقائق", b_start: "ابدأ ◀", b_continue: "تابِع ◀", b_again: "تدرّب مرة أخرى ◀",
+  stars: "نجمة", next_time: "موعد الدراسة القادم", b_help: "أحتاج إلى مساعدة",
+  lesson_title: "الرياضيات · الكسور", ph_recap: "مراجعة", ph_teach: "تعلّم", ph_check: "تحقّق", ph_summary: "الملخّص", ph_test: "اختبار",
+  b_exit: "✕ خروج", report_link: "الإبلاغ عن هذه الإجابة", ask_demo: "جرّب: اطلب من ذكي الإجابة",
+  report_thanks: "شكرًا لك! سيتحقّق شخص من فريق ذكي من هذه الإجابة.",
+  l_intro: "هيّا نتعلّم الكسور اليوم! أولًا، سؤالان سريعان من درسنا الماضي عن النِّصف.",
+  r1: "ما الجزء الأخضر من هذه المنقوشة؟", r1_hint: "تلميح: عُدّ كل الأجزاء، ثم عُدّ الأجزاء الخضراء.",
+  r1_ok: "أحسنت! لقد تذكّرت. 🌟",
+  r2: "قسم علي رغيف خبز إلى جزأين متساويين. ماذا نسمّي كل جزء؟",
+  o_half: "نِصف", o_whole: "واحد كامل", o_quarter: "رُبع",
+  r2_hint: "تلميح: تذكّر درسنا الماضي. عندما نقسم شيئًا إلى جزأين متساويين، يكون لكل جزء اسم خاص.",
+  r2_ok: "ذاكرة رائعة! والآن لنتعلّم شيئًا جديدًا.",
+  t1: "الكسر هو جزء من شيء كامل. هذه منقوشة كاملة.",
+  t2: "قسمت ماما المنقوشة إلى 4 أجزاء متساوية.",
+  t3: "أكل علي جزءًا واحدًا. أكل {1/4} المنقوشة. نقول: رُبع.",
+  t4: "الرقم في الأسفل يخبرنا بعدد الأجزاء المتساوية كلها. والرقم في الأعلى يخبرنا بعدد الأجزاء التي نأخذها.",
+  lbl_top: "الأجزاء التي نأخذها", lbl_bottom: "كل الأجزاء المتساوية",
+  t5: "يجب أن تكون الأجزاء متساوية، بالحجم نفسه. هذه قسمة عادلة!",
+  b_next: "التالي ◀", b_ready: "أنا مستعد لأحاول! ✋",
+  c_intro: "جاء دورك! خذ وقتك.",
+  c1: "اختر الكسر الذي يدلّ على الجزء الملوّن من الخبز.",
+  c1_hint: "تلميح: عُدّ الأجزاء الملوّنة لتعرف الرقم في الأعلى. ثم عُدّ كل الأجزاء لتعرف الرقم في الأسفل.",
+  c1_ex: "لنحلّ مثالًا آخر معًا. هذا الخبز فيه 5 أجزاء، منها 2 ملوّنان. في الأعلى: 2 (الأجزاء الملوّنة). في الأسفل: 5 (كل الأجزاء). إذن الكسر هو {2/5}.",
+  c1_look: "انظر مرة أخرى بهدوء. عُدّ الأجزاء الملوّنة أولًا، ثم كل الأجزاء.",
+  c1_ok: "رائع! لقد عددت بانتباه كبير. 🌟",
+  try_again: "والآن جرّب سؤالك مرة أخرى. أنت تستطيع!",
+  how: "كيف عرفت؟", how1: "عددت الأجزاء الملوّنة", how2: "عددت كل الأجزاء", how3: "لست متأكدًا",
+  how1_r: "نعم! الأجزاء الملوّنة تعطينا الرقم في الأعلى.", how2_r: "نعم! كل الأجزاء تعطينا الرقم في الأسفل.",
+  how3_r: "لا بأس! في الأعلى: الأجزاء الملوّنة. في الأسفل: كل الأجزاء.",
+  c2: "قسمت الجدّة منقوشة إلى 3 أجزاء متساوية، وأكل علي جزءًا واحدًا. ما الكسر الذي أكله؟",
+  c2_hint: "تلميح: كم عدد الأجزاء كلها؟ هذا هو الرقم في الأسفل.",
+  c2_ex: "لنجرّب مثالًا آخر معًا. كعكة فيها 6 أجزاء متساوية، وأكلتَ جزءًا واحدًا. في الأعلى: 1 (الجزء الذي أكلته). في الأسفل: 6 (كل الأجزاء). إذن أكلتَ {1/6}.",
+  c2_look: "انظر مرة أخرى: كم جزءًا أكل علي؟ وكم عدد الأجزاء كلها؟",
+  c2_ok: "ممتاز! لقد وجدت الحل بنفسك. 🌟",
+  sum_intro: "أحسنت! هذه بطاقة الملخّص.",
+  sum_title: "الكسور", sum1: "الكسر جزء من شيء كامل.", sum2: "الرقم في الأسفل = كل الأجزاء المتساوية.",
+  sum3: "الرقم في الأعلى = الأجزاء التي نأخذها.", sum4: "{1/4} = جزء واحد من 4 أجزاء متساوية.", sum_saved: "✓ حُفظت في دروسي",
+  b_test: "ابدأ الاختبار ✏️",
+  me_ask: "يا ذكي، قل لي الإجابة فقط، من فضلك!",
+  refuse: "لن أخبرك بالإجابة، لأنني أعرف أنك تستطيع أن تجدها بنفسك! إليك تلميحًا:",
+  refuse_gen: "أنا لا أعطي الإجابات، لكنني سأساعدك دائمًا على التفكير. هيّا نكمل!",
+  test_title: "اختبار الكسور", qof: "السؤال {i} من {n}", no_timer: "لا يوجد مؤقّت. خذ وقتك.",
+  tq_what: "ما الكسر الملوّن؟", tq_bottom: "في الكسر، بماذا يخبرنا الرقم في الأسفل؟",
+  tq_top: "في الكسر، بماذا يخبرنا الرقم في الأعلى؟",
+  o_allparts: "عدد الأجزاء المتساوية كلها", o_takeparts: "عدد الأجزاء التي نأخذها",
+  tq_whole: "أيّ كسر يساوي منقوشة كاملة؟",
+  tq_both: "قسم علي خبزًا إلى جزأين متساويين وأكلهما معًا. ما الكسر الذي أكله؟",
+  tq_all4: "منقوشة فيها 4 أجزاء متساوية، وأكل علي الأجزاء الأربعة كلها. ما الكسر الذي أكله؟",
+  res_pass: "تعلّمتَها! 🎉", res_score: "إجاباتك الصحيحة: {s} من {n}.", res_stars: "+3 نجوم ⭐",
+  res_break: "مجهود رائع! حان وقت استراحة قصيرة. 🧃", b_home: "الرئيسية", b_seeClasses: "شاهدها في دروسي",
+  res_fail: "محاولة جيدة!", res_fail_sub: "لننظر إلى الملخّص مرة أخرى، ثم نجرّب أسئلة جديدة.",
+  b_newtest: "اختبار جديد ✏️", retries_left: "الاختبارات الجديدة المتبقية اليوم: {n}",
+  res_more: "لقد اجتهدت اليوم! سنخبر ماما أنك تحتاج إلى قليل من التدريب الإضافي. يمكننا أن نحاول مرة أخرى غدًا.",
+  cls_title: "دروسي", cls_sub: "الدروس التي حفظها ذكي", subj_math: "الرياضيات", subj_sci: "العلوم", subj_en: "اللغة الإنجليزية",
+  subj_ar: "اللغة العربية", subj_soc: "الدراسات الاجتماعية", n_lessons: "الدروس: {n}", b_back: "المواد ▶",
+  les_halves: "النِّصف", les_frac: "الكسور",
+  st_new: "جديد", st_learning: "أتعلّمه", st_learned: "تعلّمته", st_mastered: "أتقنته",
+  mastered_note: "أتقنته = نجحت فيه في يومين مختلفين.",
+  cls_empty: "لا توجد دروس بعد. يمكن لماما أن تضيف درسًا عبر واتساب.",
+  sum_locked: "أنهِ الدرس ليُحفظ ملخّصه هنا.", b_open: "افتح الدرس ◀",
+  halves_sum: "جزآن متساويان. كل جزء هو {1/2} (نِصف).",
+  tst_title: "الاختبارات", tst_up: "قريبًا", tst_frac: "الكسور — يوم الأحد",
+  tst_plan: "خطة ذكي: درس واحد + جلستا تدريب", b_practice: "تدرّب الآن ◀", tst_past: "النتائج السابقة",
+  tst_practice: "اختبار تدريبي على الكسور",
+  crd_title: "البطاقات", crd_sub: "من درس الكسور", crd_tap: "اضغط على البطاقة لتقلبها",
+  crd_prev: "▶ السابقة", crd_next: "التالية ◀", crd_count: "{i} من {n}", crd_front: "سؤال", crd_back: "الجواب",
+  f_what: "ما هذا الكسر؟", f_q1b: "{1/4} رُبع", f_q2: "الرقم في الأسفل؟", f_q2b: "كل الأجزاء المتساوية",
+  f_q3: "الرقم في الأعلى؟", f_q3b: "الأجزاء التي نأخذها", f_q4b: "{1/2} نِصف", f_q5: "{4/4} = ؟", f_q5b: "واحد كامل!",
+  gate_title: "للكبار فقط", gate_sub: "على الشخص الكبير أن يكتب هذا العدد بالأرقام:",
+  gate_word: "سبعمئة واثنان وأربعون", gate_ph: "اكتب العدد", b_gate: "افتح", gate_wrong: "هذا غير صحيح. من فضلك اطلب من شخص كبير.",
+  par_title: "منطقة الأهل", par_settings: "الإعدادات", par_wa: "واتساب (تجريبي)",
+  set_child: "الطفل", set_child_v: "علي · الصف الثالث", set_limit: "الحد اليومي", min: "{n} دقيقة", set_time: "موعد الدراسة",
+  set_lang: "اللغة", set_country: "بلد أرقام المساعدة", lebanon: "لبنان",
+  set_country_note: "يُحدَّد عند التسجيل. أرقام المساعدة من قائمة ثابتة ومُراجَعة.",
+  help_never: "شاشة المساعدة وزر «أحتاج إلى مساعدة» لا يُقفلان أبدًا.",
+  b_lock: "🔒 أقفل منطقة الأهل", b_reset: "أعد تشغيل المعاينة", reset_done: "أُعيد تشغيل المعاينة.",
+  tm_16: "4:00 مساءً", tm_17: "5:00 مساءً", tm_18: "6:00 مساءً",
+  wa_sub: "محادثة تجريبية · لا يُرسَل شيء فعلًا", wa_type: "اكتبي رسالة (تجريبي)", wa_send: "إرسال",
+  wa_tap: "اضغطي زر الإرسال الأخضر لمراسلة ذكي.", wa_quick: "ردود سريعة:", wa_today: "اليوم",
+  wa_later: "بعد جلسة علي",
+  wa_policy: "ذكي على واتساب للأهل فقط: الخطط والتقارير والتذكيرات. الأطفال يتعلّمون داخل التطبيق.",
+  wa_mom1: "عند علي اختبار رياضيات عن الكسور يوم الأحد",
+  wa_z1: "تمام. سأحضّر درسًا عن الكسور + جلستَي تدريب قبل يوم الأحد.",
+  wa_report: "مساء الخير! جلسة علي اليوم 📚\n✅ أنهى: درس الكسور + اختبار (8/10، نجح في المحاولة الثانية)\n💪 قوي في: جمع الكسور التي لها المقام نفسه\n🤔 يحتاج إلى تدريب: المقارنة بين 1/3 و 1/4\n🎯 فكرة لخمس دقائق غدًا: قطّعوا رغيف خبز إلى 3 قطع وآخر إلى 4 قطع، واسألوه: أيّ قطعة أكبر؟\nأرسلي «خطة» (PLAN) لتغيير خطة الغد.",
+  q_REPORT: "تقرير (REPORT)", q_PLAN: "خطة (PLAN)", q_PAUSE: "إيقاف مؤقت (PAUSE)", q_HELP: "مساعدة (HELP)",
+  r_REPORT: "علي اليوم: درس الكسور ✅ · الاختبار 8/10 (نجح في المحاولة الثانية) · الوقت: 18 من 30 دقيقة · ⭐ +3 نجوم.",
+  r_PLAN: "خطة الغد: تدريب على الكسور (10 دقائق) + بطاقات (5 دقائق).\nأرسلي 1 للإبقاء عليها، أو 2 للتحويل إلى العلوم، أو 3 ليوم راحة.",
+  r_PAUSE: "تمّ إيقاف ذكي مؤقتًا. لن يتلقّى علي دروسًا أو تذكيرات حتى ترسلي «استئناف» (RESUME).",
+  r_HELP: "سيردّ عليكِ شخص من فريق ذكي هنا قريبًا. في حالة الطوارئ، اتصلي بالرقم 112.",
+  help_1: "شكرًا لأنك أخبرتني.", help_2: "أنت لست في مشكلة.",
+  help_3: "من فضلك أخبِر الآن شخصًا كبيرًا تثق به: أحد والديك، أو جدّك أو جدّتك، أو عمّك أو خالتك، أو معلّمك.",
+  help_list: "هؤلاء أيضًا يستطيعون مساعدتك (لبنان):",
+  h112: "الشرطة. إذا كنت في خطر الآن. (ليلًا ونهارًا)",
+  h1564: "Embrace (إمبريس). إذا كنت حزينًا جدًا أو تفكّر في إيذاء نفسك. أشخاص لطفاء يجيبون ليلًا ونهارًا.",
+  hhimaya: "himaya (حماية). جمعية تساعد الأطفال، إذا كان أحد في البيت أو شخص تعرفه يؤذيك.",
+  h_fallback: "إذا لم يُجِب أحد، أو كنت في خطر الآن، اتصل بالرقم", h_ask: "اطلب من شخص كبير أن يساعدك في الاتصال.",
+  h_note: "(في التطبيق الحقيقي، يتم تنبيه مسؤول مختصّ بسلامة الأطفال.)", b_back_zaki: "العودة إلى ذكي",
+  pic_lbl: "{k} من {n} أجزاء ملوّنة", pic_eq: "أجزاء متساوية: عادلة. أجزاء غير متساوية: غير عادلة.", ok: "عادلة", notok: "غير عادلة"
+}
+};
+
+/* ------------------------------------------------------------------
+   2. App state (kept in memory only)
+------------------------------------------------------------------ */
+var S, L;
+function freshState() {
+  S = { lang: S ? S.lang : 'en', screen: 'start', startStep: 0, stars: 12, fracStatus: 'new', summarySaved: false,
+        parentOpen: false, parentTab: 'settings', gateWrong: false, limit: 30, studyTime: '17',
+        classView: 'list', cardIdx: 0, cardBack: false, cardAnim: false, practiceScore: null,
+        wa: { log: [], sent: false } };
+  freshLesson();
+}
+function freshLesson() {
+  L = { history: [], pos: 0, pending: null, phase: 'recap', mode: 'chat', started: false, done: false,
+        test: { set: 0, qi: 0, score: 0 }, result: null };
+}
+
+/* ------------------------------------------------------------------
+   3. Small helpers
+------------------------------------------------------------------ */
+function frac(a, b) {
+  return '<span class="frac" role="img" aria-label="' + a + '/' + b + '"><span class="fn">' + a + '</span><span class="fd">' + b + '</span></span>';
+}
+function t(key, p) {
+  var s = T[S.lang][key];
+  if (s === undefined) s = key;           // plain labels such as "2"
+  s = s.replace(/\{(\w+)\}/g, function (m, k) {
+    if (k === 'name') return T[S.lang].name;
+    return (p && p[k] !== undefined) ? p[k] : m;
+  });
+  s = s.replace(/\{(\d+)\/(\d+)\}/g, function (m, a, b) { return frac(a, b); });
+  return s.replace(/\n/g, '<br>');
+}
+function $(id) { return document.getElementById(id); }
+function rtl() { return S.lang === 'ar'; }
+
+/* ------------------------------------------------------------------
+   4. Drawings (inline SVG): mascot and fraction pictures
+------------------------------------------------------------------ */
+function mascot(size) {
+  return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 120 120" role="img" aria-label="Zaki">' +
+    '<line x1="60" y1="8" x2="60" y2="22" stroke="#1F7F8A" stroke-width="4" stroke-linecap="round"/>' +
+    '<circle cx="60" cy="7" r="5" fill="#FFC857"/>' +
+    '<polygon points="26,30 30,10 46,24" fill="#1F7F8A"/><polygon points="94,30 90,10 74,24" fill="#1F7F8A"/>' +
+    '<ellipse cx="22" cy="72" rx="9" ry="20" fill="#1F7F8A"/><ellipse cx="98" cy="72" rx="9" ry="20" fill="#1F7F8A"/>' +
+    '<rect x="22" y="18" width="76" height="90" rx="34" fill="#2A9DAA"/>' +
+    '<ellipse cx="60" cy="88" rx="24" ry="16" fill="#D8F1F3"/>' +
+    '<path d="M50 84 q5 5 10 0 q5 5 10 0" stroke="#7CC4CC" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+    '<path d="M50 93 q5 5 10 0 q5 5 10 0" stroke="#7CC4CC" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+    '<circle cx="43" cy="52" r="16" fill="#fff" stroke="#1E3A4C" stroke-width="4"/>' +
+    '<circle cx="77" cy="52" r="16" fill="#fff" stroke="#1E3A4C" stroke-width="4"/>' +
+    '<circle cx="45" cy="53" r="7" fill="#1E3A4C"/><circle cx="79" cy="53" r="7" fill="#1E3A4C"/>' +
+    '<circle cx="47.5" cy="50" r="2.5" fill="#fff"/><circle cx="81.5" cy="50" r="2.5" fill="#fff"/>' +
+    '<polygon points="54,66 66,66 60,76" fill="#FF9F43"/>' +
+    '<circle cx="31" cy="70" r="4" fill="#FF8A65" opacity=".5"/><circle cx="89" cy="70" r="4" fill="#FF8A65" opacity=".5"/>' +
+    '<rect x="44" y="104" width="10" height="8" rx="4" fill="#FF9F43"/><rect x="66" y="104" width="10" height="8" rx="4" fill="#FF9F43"/>' +
+    '</svg>';
+}
+function picLabel(n, k) { return t('pic_lbl', { k: k, n: n }); }
+/* A round man'oushe cut into n parts; k parts have za'atar (green). */
+function pie(n, k) {
+  var cx = 60, cy = 60, r = 50, out = '', i;
+  out += '<svg width="150" height="150" viewBox="0 0 120 120" role="img" aria-label="' + picLabel(n, k) + '">';
+  out += '<circle cx="60" cy="60" r="55" fill="#E3B26B"/>';
+  if (n === 1) {
+    out += '<circle cx="60" cy="60" r="50" fill="' + (k ? '#7DB55C' : '#F8DFA8') + '" stroke="#B9874B" stroke-width="2"/>';
+  } else {
+    for (i = 0; i < n; i++) {
+      // in Arabic, count (and colour) going the other way round
+      var j = rtl() ? (n - 1 - i) : i;
+      var a0 = (-90 + j * 360 / n) * Math.PI / 180, a1 = (-90 + (j + 1) * 360 / n) * Math.PI / 180;
+      var x0 = cx + r * Math.cos(a0), y0 = cy + r * Math.sin(a0), x1 = cx + r * Math.cos(a1), y1 = cy + r * Math.sin(a1);
+      out += '<path d="M60 60 L' + x0.toFixed(2) + ' ' + y0.toFixed(2) + ' A50 50 0 0 1 ' + x1.toFixed(2) + ' ' + y1.toFixed(2) +
+        ' Z" fill="' + (i < k ? '#7DB55C' : '#F8DFA8') + '" stroke="#B9874B" stroke-width="2"/>';
+    }
+  }
+  if (k) { // za'atar dots on the green parts look nice but stay simple
+    out += '<circle cx="60" cy="60" r="3" fill="#B9874B"/>';
+  }
+  return out + '</svg>';
+}
+/* A long bread cut into n equal parts; k parts colored. */
+function bar(n, k) {
+  var w = 220 / n, out = '<svg width="250" height="90" viewBox="0 0 240 80" role="img" aria-label="' + picLabel(n, k) + '">', i;
+  out += '<rect x="6" y="8" width="228" height="64" rx="26" fill="#D9A15A"/>';
+  for (i = 0; i < n; i++) {
+    var colored = rtl() ? (i >= n - k) : (i < k);
+    out += '<rect x="' + (10 + i * w).toFixed(2) + '" y="14" width="' + w.toFixed(2) + '" height="52" fill="' +
+      (colored ? '#F2994A' : '#FCEBD0') + '" stroke="#A8743A" stroke-width="2"/>';
+  }
+  return out + '</svg>';
+}
+/* Equal vs unequal parts */
+function eqPic() {
+  var out = '<svg width="250" height="150" viewBox="0 0 240 140" role="img" aria-label="' + t('pic_eq') + '">';
+  var xs = [0, 50, 100, 150, 200], ys = [0, 30, 110, 150, 200], i;
+  for (i = 0; i < 4; i++) out += '<rect x="' + (10 + xs[i]) + '" y="10" width="50" height="40" fill="#FCEBD0" stroke="#A8743A" stroke-width="2"/>';
+  for (i = 0; i < 4; i++) out += '<rect x="' + (10 + ys[i]) + '" y="80" width="' + (ys[i + 1] - ys[i]) + '" height="40" fill="#FCEBD0" stroke="#A8743A" stroke-width="2"/>';
+  out += '<text x="120" y="68" text-anchor="middle" font-size="14" font-weight="700" fill="#1F6E43">✓ ' + T[S.lang].ok + '</text>';
+  out += '<text x="120" y="137" text-anchor="middle" font-size="14" font-weight="700" fill="#B5462E">✗ ' + T[S.lang].notok + '</text>';
+  return out + '</svg>';
+}
+function labelFrac() {
+  var ar = rtl() ? '➡ ' : '⬅ ';
+  return '<div class="lbfrac">' + frac(1, 4) + '<div class="lb"><div>' + ar + t('lbl_top') + '</div><div>' + ar + t('lbl_bottom') + '</div></div></div>';
+}
+function drawPic(p) {
+  if (!p) return '';
+  if (p[0] === 'pie') return pie(p[1], p[2]);
+  if (p[0] === 'bar') return bar(p[1], p[2]);
+  if (p[0] === 'eq') return eqPic();
+  if (p[0] === 'label') return labelFrac();
+  return '';
+}
+
+/* ------------------------------------------------------------------
+   5. The lesson script (all of Zaki's replies are pre-written)
+------------------------------------------------------------------ */
+var SCRIPT = [
+  { t: 'say', k: 'l_intro', ph: 'recap' },
+  { t: 'q', k: 'r1', pic: ['pie', 2, 1], opts: ['{1/2}', '{1/3}', '2'], a: 0, hint: 'r1_hint', look: 'r1_hint', ok: 'r1_ok' },
+  { t: 'q', k: 'r2', opts: ['o_half', 'o_whole', 'o_quarter'], a: 0, hint: 'r2_hint', look: 'r2_hint', ok: 'r2_ok', wide: true },
+  { t: 'say', k: 't1', pic: ['pie', 1, 0], ph: 'teach' }, { t: 'next' },
+  { t: 'say', k: 't2', pic: ['pie', 4, 0] }, { t: 'next' },
+  { t: 'say', k: 't3', pic: ['pie', 4, 1] }, { t: 'next' },
+  { t: 'say', k: 't4', pic: ['label'] }, { t: 'next' },
+  { t: 'say', k: 't5', pic: ['eq'] }, { t: 'next', k: 'b_ready' },
+  { t: 'say', k: 'c_intro', ph: 'check' },
+  { t: 'q', k: 'c1', pic: ['bar', 4, 3], opts: ['{3/4}', '{1/4}', '{4/3}'], a: 0, hint: 'c1_hint', ex: 'c1_ex', expic: ['bar', 5, 2], look: 'c1_look', ok: 'c1_ok', how: true },
+  { t: 'q', k: 'c2', pic: ['pie', 3, 1], opts: ['{1/2}', '{1/3}', '{3/1}'], a: 1, hint: 'c2_hint', ex: 'c2_ex', expic: ['pie', 6, 1], look: 'c2_look', ok: 'c2_ok', how: true },
+  { t: 'summary', ph: 'summary' }
+];
+/* Three different 5-question tests (first try + max 2 retries) */
+var TESTS = [
+  [ { k: 'tq_what', pic: ['pie', 2, 1], opts: ['{1/2}', '{1/4}', '{2/2}'], a: 0 },
+    { k: 'tq_what', pic: ['bar', 4, 1], opts: ['{1/3}', '{1/4}', '{4/1}'], a: 1 },
+    { k: 'tq_bottom', opts: ['o_allparts', 'o_takeparts'], a: 0, wide: true },
+    { k: 'tq_what', pic: ['pie', 3, 2], opts: ['{1/3}', '{3/2}', '{2/3}'], a: 2 },
+    { k: 'tq_whole', opts: ['{1/4}', '{4/4}', '{0/4}'], a: 1 } ],
+  [ { k: 'tq_what', pic: ['pie', 4, 3], opts: ['{3/4}', '{1/4}', '{4/3}'], a: 0 },
+    { k: 'tq_what', pic: ['bar', 3, 1], opts: ['{1/2}', '{3/1}', '{1/3}'], a: 2 },
+    { k: 'tq_top', opts: ['o_allparts', 'o_takeparts'], a: 1, wide: true },
+    { k: 'tq_what', pic: ['bar', 4, 2], opts: ['{4/2}', '{2/4}', '{2/2}'], a: 1 },
+    { k: 'tq_both', opts: ['{1/2}', '{2/1}', '{2/2}'], a: 2 } ],
+  [ { k: 'tq_what', pic: ['pie', 5, 1], opts: ['{1/5}', '{5/1}', '{1/4}'], a: 0 },
+    { k: 'tq_what', pic: ['bar', 5, 3], opts: ['{2/5}', '{3/5}', '{5/3}'], a: 1 },
+    { k: 'tq_all4', opts: ['{1/4}', '{4/4}', '{4/1}'], a: 1 },
+    { k: 'tq_what', pic: ['pie', 6, 2], opts: ['{6/2}', '{2/4}', '{2/6}'], a: 2 },
+    { k: 'tq_bottom', opts: ['o_allparts', 'o_takeparts'], a: 0, wide: true } ]
+];
+var PASS = 4; // 4 of 5 = 80%
+
+function say(who, k, pic, extra) { L.history.push({ who: who, k: k, pic: pic, extra: extra }); }
+
+/* Walk through the script until we need the child to tap something */
+function runLesson() {
+  while (L.pos < SCRIPT.length) {
+    var st = SCRIPT[L.pos];
+    if (st.ph) L.phase = st.ph;
+    if (st.t === 'say') { say('z', st.k, st.pic); L.pos++; continue; }
+    if (st.t === 'next') { L.pending = { type: 'next', k: st.k || 'b_next' }; return; }
+    if (st.t === 'q') { say('z', st.k, st.pic); L.pending = { type: 'q', st: st, tries: 0 }; return; }
+    if (st.t === 'summary') {
+      say('z', 'sum_intro'); say('card', 'summary');
+      S.summarySaved = true;
+      L.pending = { type: 'btn', act: 'startTest', k: 'b_test' };
+      return;
+    }
+  }
+}
+function answer(i) {
+  var p = L.pending, st = p.st;
+  say('me', st.opts[i]);
+  if (i === st.a) {
+    say('z', st.ok);
+    if (st.how) { say('z', 'how'); L.pending = { type: 'how' }; }
+    else { L.pos++; L.pending = null; runLesson(); }
+    return;
+  }
+  p.tries++;
+  if (p.tries === 1) say('z', st.hint);                                   // 1st wrong: a hint, never the answer
+  else if (p.tries === 2 && st.ex) { say('z', st.ex, st.expic); say('z', 'try_again'); } // 2nd: similar worked example
+  else say('z', st.look);                                                 // after that: gentle nudge, still no answer
+}
+function howReply(i) {
+  say('me', 'how' + (i + 1)); say('z', 'how' + (i + 1) + '_r');
+  L.pos++; L.pending = null; runLesson();
+}
+function askForAnswer() {
+  say('me', 'me_ask');
+  if (L.pending && L.pending.type === 'q') { say('z', 'refuse'); say('z', L.pending.st.hint); }
+  else say('z', 'refuse_gen');
+}
+function startTest(set) {
+  L.mode = 'test'; L.phase = 'test'; L.test = { set: set, qi: 0, score: 0 }; L.result = null;
+}
+function testAnswer(i) {
+  var q = TESTS[L.test.set][L.test.qi];
+  if (i === q.a) L.test.score++;
+  L.test.qi++;
+  if (L.test.qi >= 5) finishTest();
+}
+function finishTest() {
+  L.mode = 'result';
+  if (L.test.score >= PASS) {
+    L.result = 'pass'; S.fracStatus = 'learned'; S.stars += 3; S.practiceScore = L.test.score; L.done = true;
+  } else if (L.test.set < 2) {
+    L.result = 'retry';
+  } else {
+    L.result = 'more'; L.done = true;
+  }
+}
+
+/* ------------------------------------------------------------------
+   6. Screens (each returns HTML)
+------------------------------------------------------------------ */
+function bubble(m) {
+  if (m.who === 'card') return summaryCard(true);
+  var txt = t(m.k), pic = m.pic ? '<div class="pic">' + drawPic(m.pic) + '</div>' : '';
+  if (m.who === 'me') return '<div class="msg me"><div class="bub">' + txt + '</div></div>';
+  return '<div class="msg z"><span class="av">' + mascot(34) + '</span><div class="bub">' + txt + pic + '</div></div>';
+}
+function summaryCard(saved) {
+  return '<div class="sumcard"><h3>📝 ' + t('sum_title') + '</h3><ul><li>' + t('sum1') + '</li><li>' + t('sum2') +
+    '</li><li>' + t('sum3') + '</li><li>' + t('sum4') + '</li></ul>' + (saved ? '<span class="saved">' + t('sum_saved') + '</span>' : '') + '</div>';
+}
+
+function vStart() {
+  if (S.startStep === 0) {
+    return '<div class="hero">' + mascot(150) + '<h1>Hello! · مرحبًا!</h1><p class="sub">Choose your language · اختر لغتك</p></div>' +
+      '<div class="pad langpick"><button class="big b-white" data-act="pickLang" data-arg="en" lang="en">English</button>' +
+      '<button class="big b-white" data-act="pickLang" data-arg="ar" lang="ar" dir="rtl">العربية</button></div>';
+  }
+  return '<div class="hero">' + mascot(130) + '</div><div class="pad">' +
+    '<div class="msg z"><span class="av">' + mascot(34) + '</span><div class="bub">' + t('hi') + '</div></div>' +
+    '<div class="msg z"><span class="av">' + mascot(34) + '</span><div class="bub">' + t('quiet') + '</div></div>' +
+    '<button class="big b-green" data-act="ready">' + t('ready') + '</button></div>';
+}
+
+function vHome() {
+  var startKey = L.done ? 'b_again' : (L.started ? 'b_continue' : 'b_start');
+  return '<div class="pad"><div class="row" style="margin-bottom:12px"><div class="grow"><h1>' + t('home_hi') + '</h1>' +
+    '<p class="sub" style="margin:0">' + t('home_sub') + '</p></div>' + mascot(70) + '</div>' +
+    '<div class="plan"><div class="lbl">📋 ' + t('plan_from') + '</div><div class="what">' + t('plan') + '</div>' +
+    '<button class="big b-sun" data-act="startLesson">' + t(startKey) + '</button></div>' +
+    '<div class="statrow"><div class="stat"><b>⭐ ' + S.stars + '</b>' + t('stars') + '</div>' +
+    '<div class="stat"><b>⏰ <span dir="ltr">' + t('tm_' + S.studyTime).split(' ')[0] + '</span></b>' + t('next_time') + '</div></div>' +
+    '<button class="big b-help" data-act="help">🤝 ' + t('b_help') + '</button></div>';
+}
+
+function vLesson() {
+  var phases = ['recap', 'teach', 'check', 'summary', 'test'], idx = phases.indexOf(L.phase), i, ph = '';
+  for (i = 0; i < phases.length; i++) ph += '<div class="ph' + (i < idx ? ' done' : (i === idx ? ' on' : '')) + '">' + t('ph_' + phases[i]) + '</div>';
+  var out = '<div class="lesson"><div class="ltop"><div class="t">🔢 ' + t('lesson_title') + '</div>' +
+    '<button class="exit" data-act="go" data-arg="home">' + t('b_exit') + '</button></div><div class="phases">' + ph + '</div>';
+  if (L.mode === 'chat') {
+    out += '<div class="log" id="log">';
+    for (i = 0; i < L.history.length; i++) out += bubble(L.history[i]);
+    out += '</div><div class="dock">' + choices() +
+      '<div class="mini"><button class="gold" data-act="askAnswer">🙋 ' + t('ask_demo') + '</button>' +
+      '<button class="linkbtn" data-act="report">' + t('report_link') + '</button></div>';
+  } else {
+    out += '<div class="testv" id="log">' + (L.mode === 'test' ? testView() : resultView()) + '</div><div class="dock">' +
+      (L.mode === 'test' ? '<div class="mini" style="justify-content:flex-end"><button class="linkbtn" data-act="report">' + t('report_link') + '</button></div>' : '');
+  }
+  out += '<div class="helprow"><button class="big b-help" data-act="help">🤝 ' + t('b_help') + '</button></div></div></div>';
+  return out;
+}
+function optBtn(label, act, i, wide) {
+  return '<button class="opt' + (wide ? ' wide' : '') + '" data-act="' + act + '" data-arg="' + i + '">' + t(label) + '</button>';
+}
+function choices() {
+  var p = L.pending, out = '<div class="opts">', i;
+  if (!p) return '';
+  if (p.type === 'next' || p.type === 'btn') return '<button class="big b-teal" style="margin-top:0" data-act="' + (p.act || 'next') + '">' + t(p.k) + '</button>';
+  if (p.type === 'q') for (i = 0; i < p.st.opts.length; i++) out += optBtn(p.st.opts[i], 'ans', i, p.st.wide);
+  if (p.type === 'how') for (i = 0; i < 3; i++) out += optBtn('how' + (i + 1), 'how', i, true);
+  return out + '</div>';
+}
+function testView() {
+  var q = TESTS[L.test.set][L.test.qi], i, opts = '';
+  for (i = 0; i < q.opts.length; i++) opts += optBtn(q.opts[i], 'tans', i, q.wide);
+  var pct = Math.round(L.test.qi / 5 * 100);
+  return '<h2 style="margin-top:0">✏️ ' + t('test_title') + '</h2>' +
+    '<div class="pbar" role="progressbar" aria-valuemin="0" aria-valuemax="5" aria-valuenow="' + L.test.qi + '"><div class="pfill" id="pfill" style="width:' + pct + '%"></div></div>' +
+    '<div class="row muted"><span class="grow">' + t('qof', { i: L.test.qi + 1, n: 5 }) + '</span><span>' + t('no_timer') + '</span></div>' +
+    '<div class="qcard">' + t(q.k) + (q.pic ? '<div class="pic">' + drawPic(q.pic) + '</div>' : '') + '</div><div class="opts">' + opts + '</div>';
+}
+function resultView() {
+  var sc = t('res_score', { s: L.test.score, n: 5 }), bar = '<div class="pbar"><div class="pfill" style="width:100%"></div></div>';
+  if (L.result === 'pass') {
+    return '<div class="result">' + bar + '<div class="bigemoji">🎉</div><h1>' + t('res_pass') + '</h1><p>' + sc + '</p>' +
+      '<div class="starsrow">⭐⭐⭐</div><p><b>' + t('res_stars') + '</b></p><p>' + t('res_break') + '</p>' +
+      '<button class="big b-teal" data-act="go" data-arg="home">' + t('b_home') + '</button>' +
+      '<button class="big b-white mid" data-act="seeClasses">' + t('b_seeClasses') + '</button></div>';
+  }
+  if (L.result === 'retry') {
+    return '<div class="result">' + bar + mascot(80) + '<h1>' + t('res_fail') + '</h1><p>' + sc + '</p><p>' + t('res_fail_sub') + '</p></div>' +
+      summaryCard(false) + '<p class="muted center">' + t('retries_left', { n: 2 - L.test.set }) + '</p>' +
+      '<button class="big b-teal" data-act="newTest">' + t('b_newtest') + '</button>';
+  }
+  return '<div class="result">' + bar + mascot(90) + '<h1>' + t('res_fail') + '</h1><p>' + sc + '</p><p>' + t('res_more') + '</p>' +
+    '<button class="big b-teal" data-act="go" data-arg="home">' + t('b_home') + '</button></div>';
+}
+
+function statusChip(st) { return '<span class="chip st-' + st + '">' + t('st_' + st) + '</span>'; }
+function vClasses() {
+  if (S.classView === 'math') {
+    var fr = S.fracStatus;
+    return '<div class="pad"><button class="linkbtn" data-act="classView" data-arg="list">' + t('b_back') + '</button>' +
+      '<h1>🔢 ' + t('subj_math') + '</h1>' +
+      '<div class="card"><div class="row"><b class="grow">' + t('les_frac') + '</b>' + statusChip(fr) + '</div>' +
+      (S.summarySaved ? summaryCard(false) : '<p class="muted">' + t('sum_locked') + '</p>') +
+      '<button class="big b-teal mid" data-act="startLesson">' + t('b_open') + '</button></div>' +
+      '<div class="card"><div class="row"><b class="grow">' + t('les_halves') + '</b>' + statusChip('mastered') + '</div>' +
+      '<div class="sumcard" style="margin-bottom:0"><h3>📝 ' + t('les_halves') + '</h3>' + t('halves_sum') + '</div></div>' +
+      '<p class="muted">' + statusChip('new') + ' ' + statusChip('learning') + ' ' + statusChip('learned') + ' ' + statusChip('mastered') + '<br>' + t('mastered_note') + '</p></div>';
+  }
+  if (S.classView !== 'list') {
+    return '<div class="pad"><button class="linkbtn" data-act="classView" data-arg="list">' + t('b_back') + '</button>' +
+      '<h1>' + t(S.classView) + '</h1><div class="card center">' + mascot(70) + '<p>' + t('cls_empty') + '</p></div></div>';
+  }
+  var subs = [['subj_math', '🔢', 2], ['subj_sci', '🔬', 0], ['subj_en', '🔤', 0], ['subj_ar', '📖', 0], ['subj_soc', '🌍', 0]], i, out = '';
+  for (i = 0; i < subs.length; i++) {
+    out += '<button class="tile" data-act="classView" data-arg="' + (i === 0 ? 'math' : subs[i][0]) + '"><span class="ti">' + subs[i][1] +
+      '</span><span class="tt">' + t(subs[i][0]) + '<small>' + t('n_lessons', { n: subs[i][2] }) + '</small></span></button>';
+  }
+  return '<div class="pad"><h1>📚 ' + t('cls_title') + '</h1><p class="sub">' + t('cls_sub') + '</p>' + out + '</div>';
+}
+
+function vTests() {
+  var past = '';
+  if (S.practiceScore !== null) past += '<div class="card row"><span class="grow"><b>' + t('tst_practice') + '</b><br><span class="muted">' + t('res_score', { s: S.practiceScore, n: 5 }) + '</span></span>' + statusChip('learned') + '</div>';
+  past += '<div class="card row"><span class="grow"><b>' + t('les_halves') + '</b><br><span class="muted">' + t('res_score', { s: 5, n: 5 }) + '</span></span>' + statusChip('mastered') + '</div>';
+  return '<div class="pad"><h1>📝 ' + t('tst_title') + '</h1><h2>' + t('tst_up') + '</h2>' +
+    '<div class="card"><div class="row"><span class="ti" style="font-size:30px;width:46px">📅</span><div class="grow"><b>' + t('tst_frac') + '</b><br><span class="muted">' + t('tst_plan') + '</span></div></div>' +
+    '<button class="big b-sun mid" data-act="startLesson">' + t('b_practice') + '</button></div><h2>' + t('tst_past') + '</h2>' + past + '</div>';
+}
+
+var CARDS = [
+  { f: 'f_what', fp: ['pie', 4, 1], b: 'f_q1b' }, { f: 'f_q2', b: 'f_q2b' }, { f: 'f_q3', b: 'f_q3b' },
+  { f: 'f_what', fp: ['bar', 2, 1], b: 'f_q4b' }, { f: 'f_q5', b: 'f_q5b' }
+];
+function vCards() {
+  var c = CARDS[S.cardIdx], side = S.cardBack ? 'back' : 'front';
+  var body = S.cardBack ? t(c.b) : (t(c.f) + (c.fp ? '<div class="pic">' + drawPic(c.fp) + '</div>' : ''));
+  return '<div class="pad"><h1>🃏 ' + t('crd_title') + '</h1><p class="sub">' + t('crd_sub') + '</p>' +
+    '<button class="fc ' + side + (S.cardAnim ? ' flip' : '') + '" data-act="flip" aria-live="polite"><span class="side">' + t('crd_' + side) + '</span>' + body + '</button>' +
+    '<p class="muted center">' + t('crd_tap') + '</p>' +
+    '<div class="fcnav"><button class="big b-white mid" data-act="card" data-arg="-1">' + t('crd_prev') + '</button>' +
+    '<span class="cnt">' + t('crd_count', { i: S.cardIdx + 1, n: CARDS.length }) + '</span>' +
+    '<button class="big b-teal mid" data-act="card" data-arg="1">' + t('crd_next') + '</button></div></div>';
+}
+
+function vParent() {
+  if (!S.parentOpen) {
+    return '<div class="pad gate"><div class="card center"><div style="font-size:44px">🔒</div><h1>' + t('gate_title') + '</h1>' +
+      '<p>' + t('gate_sub') + '</p><p style="font-size:22px;font-weight:800">“' + t('gate_word') + '”</p>' +
+      '<form id="gateform" autocomplete="off"><input id="gatein" type="text" inputmode="numeric" pattern="[0-9]*" placeholder="' + t('gate_ph') + '" aria-label="' + t('gate_ph') + '">' +
+      (S.gateWrong ? '<p style="color:#B5462E;font-weight:700" role="alert">' + t('gate_wrong') + '</p>' : '') +
+      '<button class="big b-teal" type="submit">' + t('b_gate') + '</button></form></div></div>';
+  }
+  var seg = '<div class="seg"><button class="' + (S.parentTab === 'settings' ? 'on' : '') + '" data-act="ptab" data-arg="settings">⚙️ ' + t('par_settings') + '</button>' +
+    '<button class="' + (S.parentTab === 'wa' ? 'on' : '') + '" data-act="ptab" data-arg="wa">💬 ' + t('par_wa') + '</button></div>';
+  var body = S.parentTab === 'settings' ? settingsView() : waView();
+  return '<div class="pad"><h1>👪 ' + t('par_title') + '</h1>' + seg + body + '</div>';
+}
+function settingsView() {
+  var opt = function (v) { return '<option value="' + v + '"' + (S.studyTime === v ? ' selected' : '') + '>' + t('tm_' + v) + '</option>'; };
+  return '<div class="card"><div class="set"><span class="k">' + t('set_child') + '</span><span>' + t('set_child_v') + '</span></div>' +
+    '<div class="set"><span class="k">' + t('set_limit') + '</span><button class="step" data-act="limit" data-arg="-15" aria-label="-">−</button>' +
+    '<span class="v">' + t('min', { n: S.limit }) + '</span><button class="step" data-act="limit" data-arg="15" aria-label="+">+</button></div>' +
+    '<div class="set"><span class="k">' + t('set_time') + '</span><select id="studytime" aria-label="' + t('set_time') + '">' + opt('16') + opt('17') + opt('18') + '</select></div>' +
+    '<div class="set"><span class="k">' + t('set_lang') + '</span><button class="langbtn" data-act="lang">' + t('langBtn') + '</button></div>' +
+    '<div class="set" style="display:block"><div class="row"><span class="k">' + t('set_country') + '</span><b>🇱🇧 ' + t('lebanon') + '</b></div>' +
+    '<div class="muted">' + t('set_country_note') + '</div></div></div>' +
+    '<p class="muted">🤝 ' + t('help_never') + '</p>' +
+    '<button class="big b-white mid" data-act="lock">' + t('b_lock') + '</button>' +
+    '<button class="linkbtn" data-act="reset">' + t('b_reset') + '</button>';
+}
+function waView() {
+  var i, log = '<div class="wday"><span>' + t('wa_today') + '</span></div>';
+  for (i = 0; i < S.wa.log.length; i++) {
+    var m = S.wa.log[i];
+    if (m.who === 'day') { log += '<div class="wday"><span>' + t(m.k) + '</span></div>'; continue; }
+    log += '<div class="wm ' + m.who + '"><div class="wb">' + t(m.k) + '<span class="tm" dir="ltr">' + (rtl() ? m.tm.replace('pm', 'م') : m.tm) + (m.who === 'me' ? ' ✓✓' : '') + '</span></div></div>';
+  }
+  var quick = '';
+  if (S.wa.sent) {
+    var cmds = ['REPORT', 'PLAN', 'PAUSE', 'HELP'];
+    quick = '<div class="waquick"><div class="muted">' + t('wa_quick') + '</div>';
+    for (i = 0; i < cmds.length; i++) quick += '<button class="q" data-act="wacmd" data-arg="' + cmds[i] + '">' + t('q_' + cmds[i]) + '</button>';
+    quick += '</div>';
+  }
+  var comp = S.wa.sent
+    ? '<div class="wacomp"><div class="in ph">' + t('wa_type') + '</div><button class="wasend" disabled aria-label="' + t('wa_send') + '">➤</button></div>'
+    : '<div class="wacomp"><div class="in">' + t('wa_mom1') + '</div><button class="wasend pulse" data-act="wasend" aria-label="' + t('wa_send') + '">➤</button></div>';
+  return (S.wa.sent ? '' : '<p class="muted">👉 ' + t('wa_tap') + '</p>') +
+    '<div class="wa"><div class="wahead"><span class="avc">' + mascot(32) + '</span><div><span class="n">' + t('appName') + '</span><small>' + t('wa_sub') + '</small></div></div>' +
+    '<div class="walog" id="walog">' + log + '</div>' + quick + comp + '</div><p class="muted">ℹ️ ' + t('wa_policy') + '</p>';
+}
+
+function vHelp() {
+  return '<div class="helpv">' + '<div class="center">' + mascot(90) + '</div>' +
+    '<p class="lead">' + t('help_1') + '</p><p class="lead">' + t('help_2') + '</p>' +
+    '<div class="hl first">🤝 ' + t('help_3') + '</div>' +
+    '<p style="font-weight:700;margin:16px 0 4px">' + t('help_list') + '</p>' +
+    '<div class="hl"><span class="num">112</span><div>' + t('h112') + '</div></div>' +
+    '<div class="hl"><span class="num">1564</span><div>' + t('h1564') + '</div></div>' +
+    '<div class="hl"><span class="num">03 414 964</span><div>' + t('hhimaya') + '</div></div>' +
+    '<div class="fallback">' + t('h_fallback') + ' <span class="num">112</span>.</div>' +
+    '<p>📞 ' + t('h_ask') + '</p><p class="muted">' + t('h_note') + '</p>' +
+    '<button class="big b-teal" data-act="back">' + t('b_back_zaki') + '</button></div>';
+}
+
+/* ------------------------------------------------------------------
+   7. Rendering and navigation
+------------------------------------------------------------------ */
+var TABS = [['home', '🏠'], ['classes', '📚'], ['tests', '📝'], ['cards', '🃏'], ['parent', '👪']];
+var VIEWS = { start: vStart, home: vHome, lesson: vLesson, classes: vClasses, tests: vTests, cards: vCards, parent: vParent, help: vHelp };
+var prevScreen = 'home', toastTimer = null;
+
+function render() {
+  var html = document.documentElement;
+  html.lang = S.lang; html.dir = rtl() ? 'rtl' : 'ltr';
+  document.title = S.lang === 'ar' ? 'معاينة ذكي' : 'Zaki Preview';
+  $('banner').innerHTML = t('banner');
+  $('brand').innerHTML = mascot(34) + t('appName');
+  $('langbtn').innerHTML = t('langBtn'); $('langbtn').setAttribute('aria-label', t('langAria'));
+  $('seen').innerHTML = t('seen');
+  $('seen').style.display = (S.screen === 'parent' || S.screen === 'start') ? 'none' : 'block';
+  var showTabs = S.screen !== 'start' && S.screen !== 'lesson' && S.screen !== 'help', tabs = '', i;
+  if (showTabs) {
+    for (i = 0; i < TABS.length; i++) {
+      tabs += '<button class="tab' + (S.screen === TABS[i][0] ? ' on' : '') + '" data-act="go" data-arg="' + TABS[i][0] + '"' +
+        (S.screen === TABS[i][0] ? ' aria-current="page"' : '') + '><span class="ic" aria-hidden="true">' + TABS[i][1] + '</span>' + t('tab_' + TABS[i][0]) + '</button>';
+    }
+  }
+  $('tabs').innerHTML = tabs; $('tabs').style.display = showTabs ? 'flex' : 'none';
+  var main = $('main');
+  main.className = 'main' + (S.screen === 'lesson' ? ' lessonmode' : '');
+  main.innerHTML = VIEWS[S.screen]();
+  S.cardAnim = false;
+  var log = $('log'); if (log) log.scrollTop = log.scrollHeight;
+  var wl = $('walog'); if (wl) main.scrollTop = main.scrollHeight;
+}
+function go(screen) {
+  if (S.screen === 'parent' && screen !== 'parent') { S.parentOpen = false; S.gateWrong = false; } // re-lock when leaving
+  if (screen !== 'help') prevScreen = screen;
+  if (screen === 'classes' && S.screen !== 'classes') S.classView = 'list';
+  S.screen = screen; render();
+  if (screen !== 'lesson') $('main').scrollTop = 0;
+}
+function toast(msg) {
+  var old = document.querySelector('.toast'); if (old) old.parentNode.removeChild(old);
+  var d = document.createElement('div'); d.className = 'toast'; d.setAttribute('role', 'status'); d.innerHTML = msg;
+  $('phone').appendChild(d);
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { if (d.parentNode) d.parentNode.removeChild(d); }, 2600);
+}
+function setLang(l) {
+  S.lang = l;
+  try { window.localStorage.setItem('zaki-lang', l); } catch (e) { /* storage not available: fine */ }
+  render();
+}
+function waPush(who, k, tm) { S.wa.log.push({ who: who, k: k, tm: tm }); }
+
+/* One click handler for the whole app (buttons carry data-act) */
+document.addEventListener('click', function (ev) {
+  var el = ev.target;
+  while (el && el !== document && !(el.getAttribute && el.getAttribute('data-act'))) el = el.parentNode;
+  if (!el || el === document) return;
+  var act = el.getAttribute('data-act'), arg = el.getAttribute('data-arg');
+  switch (act) {
+    case 'lang': setLang(rtl() ? 'en' : 'ar'); break;
+    case 'pickLang': S.startStep = 1; setLang(arg); break;
+    case 'ready': go('home'); break;
+    case 'go': go(arg); break;
+    case 'help': prevScreen = S.screen; S.screen = 'help'; render(); $('main').scrollTop = 0; break;
+    case 'back': S.screen = prevScreen; render(); break;
+    case 'startLesson':
+      if (L.done) freshLesson();
+      if (!L.started) { L.started = true; if (S.fracStatus === 'new') S.fracStatus = 'learning'; runLesson(); }
+      go('lesson'); break;
+    case 'next': L.pos++; L.pending = null; runLesson(); render(); break;
+    case 'ans': answer(+arg); render(); break;
+    case 'how': howReply(+arg); render(); break;
+    case 'askAnswer': askForAnswer(); render(); break;
+    case 'report': toast('🚩 ' + t('report_thanks')); break;
+    case 'startTest': startTest(0); render(); break;
+    case 'tans': testAnswer(+arg); render(); break;
+    case 'newTest': startTest(L.test.set + 1); render(); break;
+    case 'seeClasses': S.classView = 'math'; S.screen = 'classes'; render(); break;
+    case 'classView': S.classView = arg; render(); $('main').scrollTop = 0; break;
+    case 'flip': S.cardBack = !S.cardBack; S.cardAnim = true; render(); break;
+    case 'card': S.cardIdx = (S.cardIdx + (+arg) + CARDS.length) % CARDS.length; S.cardBack = false; S.cardAnim = true; render(); break;
+    case 'ptab': S.parentTab = arg; render(); break;
+    case 'limit': S.limit = Math.max(15, Math.min(60, S.limit + (+arg))); render(); break;
+    case 'lock': S.parentOpen = false; render(); break;
+    case 'reset': freshState(); S.startStep = 1; S.screen = 'home'; render(); toast(t('reset_done')); break;
+    case 'wasend':
+      S.wa.sent = true; waPush('me', 'wa_mom1', '4:02 pm'); render();
+      setTimeout(function () { waPush('z', 'wa_z1', '4:02 pm'); render(); }, 700);
+      setTimeout(function () { S.wa.log.push({ who: 'day', k: 'wa_later' }); waPush('z', 'wa_report', '6:10 pm'); render(); }, 1500);
+      break;
+    case 'wacmd': waPush('me', 'q_' + arg, '6:12 pm'); render();
+      setTimeout(function () { waPush('z', 'r_' + arg, '6:12 pm'); render(); }, 500);
+      break;
+  }
+});
+document.addEventListener('submit', function (ev) {
+  if (ev.target.id !== 'gateform') return;
+  ev.preventDefault();
+  var v = ($('gatein').value || '').replace(/\s/g, '');
+  if (v === '742') { S.parentOpen = true; S.gateWrong = false; } else { S.gateWrong = true; }
+  render();
+});
+document.addEventListener('change', function (ev) {
+  if (ev.target.id === 'studytime') { S.studyTime = ev.target.value; render(); }
+});
+
+/* Start */
+freshState();
+try { var saved = window.localStorage.getItem('zaki-lang'); if (saved === 'ar' || saved === 'en') S.lang = saved; } catch (e) { /* ignore */ }
+render();
+
+/* For automated checks only (read-only peek; no data leaves the page) */
+window.__zaki = { tests: TESTS, script: SCRIPT, state: function () { return { S: S, L: L }; } };
+})();
+</script>
+</body>
+</html>
