@@ -15,14 +15,14 @@ Status labels: **Confirmed** (checked directly at the source), **Partly confirme
 - **In Lebanon, where the pilot runs, a payments app called "zaky" exists.** It is made by areeba, a well-known Lebanese payments company, and was updated as recently as October 2026.
 - **The exact App Store name "Zaki" is taken.** Apple does not allow two apps with the same name. So we need a longer store name such as **"Zaki: Homework Helper"** or **"Hey Zaki – Homework Tutor"**. Every combination we tested returned no matching apps.
 - **The Arabic word ذكي just means "smart".** Dozens of apps use it ("the smart teacher", "smart preparation"). Trademark offices usually refuse to give one company ownership of an everyday word like "smart" for a smart-learning product. On its own, it would be weak protection.
-- **Good domains are still free:** heyzaki.app, zakitutor.com, zakikids.com, zakitutor.app, askzaki.app, zakihomework.com, zakitutor.ai, and the Qatar, Saudi and Lebanon country versions (zaki.qa, zaki.sa, zaki.lb). **Taken:** zaki.com, zaki.ai, zaki.app, zaki.ae, askzaki.com, heyzaki.com, zakiapp.com, meetzaki.com, zakilearn.com, zaki.academy (taken by the kids app).
+- **Good domains are still free:** heyzaki.app, zakitutor.com, zakikids.com, zakitutor.app, askzaki.app, zakihomework.com, zakitutor.ai, and the Qatar, Saudi and Lebanon country versions (zaki.qa, zaki.sa, zaki.com.lb). *Fact-check correction: plain zaki.lb cannot be bought; Lebanon only sells names like zaki.com.lb.* **Taken:** zaki.com, zaki.ai, zaki.app, zaki.ae, askzaki.com, heyzaki.com, zakiapp.com, meetzaki.com, zakilearn.com, zaki.academy (taken by the kids app).
 - **Verdict: AMBER.** We can keep "Zaki" as the friendly character's name. The **brand we register and publish should be a two-part name plus a mascot logo**, for example "Hey Zaki" or "Zaki Tutor". A lawyer should do a proper search in Lebanon, Qatar, Saudi Arabia and the UAE before we spend money on branding.
 - **If the founder wants a name the company can fully own across the region, now is the cheapest time to rename.** It costs nothing before launch. Two-part "Zaki" names are workable but will always share the space with other "Zaki"s.
 
 ## What this changes in the plan
 
 1. **Section 2, decision #1 ("no education-app conflicts found") is out of date.** There is now a kids' learning app called "Zaki" (Google Play, ages 2–7, site zaki.academy). There is also a long-running children's Islamic learning series, "Zaky & Friends" (One4Kids). Suggested new wording: *"Zaki is the character name. The registered brand is a two-part name (working choice: 'Hey Zaki'), pending lawyer clearance."*
-2. **Section 9, item 4 (trademark):** widen it from Qatar to **Lebanon (pilot), Qatar, Saudi Arabia and the UAE**. File for the **two-part name plus logo**, not the single word "Zaki" or "ذكي". Classes to cover: **9** (the downloadable app), **41** (education and tutoring), and **42** (online software or AI service). Use the Madrid system (one international application covering several countries) only after a lawyer confirms which countries it reaches. Lebanon is **not** a Madrid member (see 3.4), so it needs its own national filing.
+2. **Section 9, item 4 (trademark):** widen it from Qatar to **Lebanon (pilot), Qatar, Saudi Arabia and the UAE**. File for the **two-part name plus logo**, not the single word "Zaki" or "ذكي". Classes to cover: **9** (the downloadable app), **41** (education and tutoring), and **42** (online software or AI service). Use the Madrid system (one international application covering several countries) only after a lawyer confirms which countries it reaches. Lebanon is **not** a Madrid member (see 3.4), so it needs its own national filing. *Fact-check: WIPO's official list shows Qatar (member since Aug 2024), the UAE (Dec 2021) and **Saudi Arabia (joined 8 Oct 2026)** are all Madrid members, so one Madrid filing can now cover QA, SA and AE. Lebanon, Kuwait and Jordan are not members.*
 3. **Section 9, item 5 (domains and handles):** replace the list with the "Recommended set" in section 1.4 below. **zaki.ai is confirmed taken.** Main regional website: a **.com or .app** name, because country domains need a local company.
 4. **Phase 4 (launch prep), new item:** choose the store name, such as "Hey Zaki: Homework Tutor". Reserve it in App Store Connect and Google Play Console once the developer account exists. That step is free but needs the owner's approval (CLAUDE.md "ask first").
 5. **Section 11 (market):** add QIB "Zaki" (Qatar), areeba "zaky" (Lebanon), "Zaki – AI Agent & Assistant" (Saudi developer) and "Zaki kids" (Google Play) as **name neighbours**. None of them is a direct competitor, but all can cause confusion.
@@ -79,7 +79,8 @@ When a name does not exist in a country's domain zone, it is almost always unreg
 | Domain | Result | Status |
 |---|---|---|
 | zaki.com.qa, heyzaki.qa, zakitutor.qa | Appear available | Partly confirmed |
-| **zaki.lb, zaki.com.lb, heyzaki.com.lb** (Lebanon pilot) | Appear available | Partly confirmed |
+| **zaki.com.lb, heyzaki.com.lb** (Lebanon pilot) | Appear available | Partly confirmed |
+| zaki.lb | **Not for sale.** Lebanon's registry does not sell names directly under .lb, only under .com.lb, .org.lb and similar (LBDR Domain Name Policy 2021; the .lb registry moved to Internet Society Lebanon in 2024, so a registrar should confirm this still applies) | Corrected in fact-check |
 | zaki.sa, zaki.com.sa | Appear available | Partly confirmed |
 | **zaki.ae** | **Registered** (Cloudflare name servers) | Confirmed (it is live in DNS) |
 | heyzaki.ae, zakitutor.ae | Appear available | Partly confirmed |
@@ -97,7 +98,7 @@ When a name does not exist in a country's domain zone, it is almost always unreg
 
 - **Main regional website:** `heyzaki.app` (free, matches "Hey Zaki", and the .app ending always uses secure connections). Backup: `zakitutor.com`.
 - **Protect against look-alikes (cheap):** `zakitutor.com`, `zakikids.com`, `heyzaki.ai`.
-- **Country sites later, once a local company exists:** `zaki.lb` / `zaki.com.lb` (pilot), `zaki.qa`, `zaki.sa`.
+- **Country sites later, once a local company exists:** `zaki.com.lb` (pilot; plain `zaki.lb` is not sold), `zaki.qa`, `zaki.sa`.
 - `zaki.app` expires on 2026-12-09. A domain-watch alert is free, but don't plan around it.
 
 ---
@@ -150,7 +151,7 @@ How it was checked: each public profile page was compared with a known real acco
 
 ### 3.4 Lebanon (Ministry of Economy and Trade, Intellectual Property Protection Office): pilot country
 
-1. The Office is at the Ministry of Economy and Trade (https://www.economy.gov.lb). Lebanon **is not part of the Madrid system**, so international filings don't reach it; you need a **national filing** (*Partly confirmed* from IP-firm guides).
+1. The Office is at the Ministry of Economy and Trade (https://www.economy.gov.lb). Lebanon **is not part of the Madrid system**, so international filings don't reach it; you need a **national filing** (*Confirmed* in the fact-check: Lebanon is missing from WIPO's official list of 117 Madrid members, https://www.wipo.int/wipolex/en/treaties/parties/8, checked 2026-10-16).
 2. A public online database of Lebanese marks reportedly exists, but we could not find a working link. In practice, **searches are done by a local IP lawyer or agent**, about **USD 110 for the first class + 100 for each extra class**, and searches only cover the words (not logos). Arabic-script searches may cost extra. https://www.ip-coster.com/IPGuides/trademark-lebanon (checked 2026-10-15).
 3. Ask the lawyer to search: `zaki`, `zaky`, `ذكي`, `زكي`, `hey zaki` in classes **9, 41, 42**. Also ask specifically about **areeba SAL's "zaky"** mark and which classes it covers.
 4. New filings are published in the Official Gazette with a 30-day objection period.
@@ -191,6 +192,7 @@ How it was checked: each public profile page was compared with a known real acco
 | **"Zaki \| زكي"** (Basel AbuTaleb) | AI writing assistant, Dec 2025 | https://apps.apple.com/sa/app/zaki-%D8%B2%D9%83%D9%8A/id6755938445 | Confirmed |
 | **ZAKI AI** (zakiai.co) | Arabic and English AI chatbots for UAE businesses (+971 phone number) | https://zakiai.co/ | Confirmed |
 | **Zaki Universal Inc.** ("ZAKI®") | Giving and payments apps (Zaki, Zaki Pay, Zaki Merchant); **says it has a registered trademark** | https://apps.apple.com/sa/app/zaki/id6749177228 ; zaki.net | Partly confirmed (its own claim) |
+| **ZakiPay** (zakipay.com) *(added in fact-check)* | **Debit card and money-learning app for kids and teens in Saudi Arabia**, with a go-live waiting list. Same audience (children and parents) in a target market | https://zakipay.com | Confirmed (website live 2026-10-16) |
 | **Over Zaki** (Over Zaki Information Technology) | AI store and website builder: Over Zaki, ZakiWhats, ZakiOrder, ZakiPass | https://apps.apple.com/sa/app/over-zaki/id6741842512 | Confirmed |
 
 ### 4.3 Low concern (different fields)
