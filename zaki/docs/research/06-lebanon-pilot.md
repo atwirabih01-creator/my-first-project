@@ -248,7 +248,7 @@ Part V "Personal Data Protection", Articles 85–109. Checked 2026-10-15. The Ar
 Yes, in four ways.
 
 1. **The gate moves.** Phase 3 was gated on Qatar items 1–3 (Qatar company registration, Qatar Ministry of Education, Qatar data permit). For Lebanese children the relevant law is Lebanon's Law 81/2018, which a family pilot can meet with written parental consent and data minimisation. **But** the Qatar data-permit question (§1.11 above) must be answered first, because the founder is in Qatar.
-2. **The native iPhone app is needed earlier.** The plan had "native app later" (Phase 4). The family pilot now needs a TestFlight build by Phase 3. That means an Apple Developer account (paid; **ask the founder before spending**) and one Beta App Review, so allow 1–2 extra weeks.
+2. **The native iPhone app is needed earlier.** The plan had "native app later" (Phase 4). The family pilot now needs a TestFlight build by Phase 3. That means an Apple Developer account (paid; **ask the founder before spending**) and one Beta App Review, so allow 1–2 extra weeks. Because TestFlight is barred for under-13s, the parents are the testers (or use ad hoc distribution); see §3.3.
 3. **WhatsApp can wait.** With family members, the parent channel could be a simple in-app parent area plus the founder messaging parents personally. That lets Phase 2's Meta WhatsApp setup come after the first family sessions. This is optional, but it reduces cost and policy risk at the start.
 4. **Measurement changes.** Drop the price test. Keep usage, learning and safety measures. Treat feedback as friendly and biased, and plan a second, non-family pilot before drawing conclusions.
 
@@ -283,7 +283,7 @@ Keep it short. Tick every item before the first child session.
 - [ ] A way to export and delete one family's data within 10 days (it can be manual by the founder during the pilot).
 
 **Safety**
-- [ ] Country-aware help routes in the app, set to **Lebanon**: 112, 1564, himaya 03 414 964 (child-facing); 1745 and KAFA 03 018 019 (parent and reviewer-facing). Do not show MoSA 1714 until verified.
+- [ ] Country-aware help routes in the app, set to **Lebanon**: trusted adult, 112, 1564, himaya 03 414 964 with "if nobody answers, call 112" (child-facing); 1745, KAFA 03 018 019, 140 and the UNICEF-listed regional child-protection lines (parent and reviewer-facing). Do not show MoSA 1714 until verified. Never present himaya as "24/7".
 - [ ] A trusted adult has phoned 1564 and himaya to confirm hours and whether children can call (founder's decision; the researcher did not call).
 - [ ] A **named reviewer** for flagged sessions, ideally not a relative, plus a written plan for "the concern involves a family member".
 - [ ] Red-team suite run, including **Lebanese Arabic, Arabizi and French mixing**, and "war fear" messages. Zero failures.
@@ -292,7 +292,7 @@ Keep it short. Tick every item before the first child session.
 **Product and practical**
 - [ ] Confirm each child's school language for math and science (Arabic / English / French) and their grade. Start with Math + one language.
 - [ ] Offline-friendly basics: saved progress, retry on reconnect, compressed photo upload, voice optional.
-- [ ] TestFlight build approved (Beta App Review); parents' Apple Accounts invited by email; tested on the actual family devices.
+- [ ] TestFlight build approved (Beta App Review); **parents'** Apple Accounts invited by email (never the children's: TestFlight is barred for under-13s); tested on the actual family devices. Alternatively, use ad hoc distribution.
 - [ ] Session caps and break reminders on; reminders set in Lebanon time.
 - [ ] A one-page "what to do if something goes wrong" sheet for the parents, with the founder's contact details.
 
