@@ -73,8 +73,8 @@ export const FIXED_MESSAGES: Record<FixedMessageKey, Record<Lang, string>> = {
     ar: "لا يستطيع ذكي التفكير الآن. عملك محفوظ.\nحاول مرة أخرى بعد قليل.",
   },
   ai_intro: {
-    en: "Hi! I'm Zaki, an AI helper (not a person). 🤖",
-    ar: "مرحبًا! أنا ذكي، مساعد آلي يعمل بالذكاء الاصطناعي (لست إنسانًا). 🤖",
+    en: "Hi! I'm Zaki, an AI helper (not a person).",
+    ar: "مرحبًا! أنا ذكي، مساعد آلي يعمل بالذكاء الاصطناعي (لست إنسانًا).",
   },
 };
 

@@ -44,20 +44,25 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "hurting me", "touches me", "touched me", "touching me", "touch my private", "touches my private",
     "kicks me", "kicked me", "slaps me", "slapped me", "burns me", "locks me", "locked me in",
     "chokes me", "pinches me", "makes me take off", "take off my clothes", "abuse", "abused me",
+    "kills me", "going to kill me", "wants to kill me", "will kill me", "threatens me", "threatened me",
+    "asked for my photo", "asked for a photo", "wants my photo", "asked me to send", "send him a photo",
+    "send her a photo", "asked me for pictures", "wants to meet me",
   ],
   fr: [
     "me frappe", "m'a frappe", "me bat", "me touche", "m'a touche", "me fait mal", "m'a fait mal",
-    "m'enferme",
+    "m'enferme", "me tue", "va me tuer", "me menace", "veut ma photo",
   ],
   ar: [
     "يضربني", "بيضربني", "ضربني", "عم يضربني", "يلمسني", "بيلمسني", "لمسني", "يؤذيني", "بيأذيني",
     "اذاني", "يعذبني", "بيعذبني", "يحبسني", "بيحبسني", "يرفسني", "يكويني", "يقرصني", "يخنقني",
-    "يشلحني", "يتحرش", "تحرش",
+    "يشلحني", "يتحرش", "تحرش", "يقتلني", "بيقتلني", "رح يقتلني", "يهددني", "بيهددني", "طلب صورتي",
+    "بدو صورتي", "بدها صورتي", "طلب مني صورة",
   ],
   arabizi: [
     "byedrabne", "byedrabni", "yedrabne", "yedrabni", "darabne", "darabni", "byelmesne", "byelmesni",
     "yelmesne", "lamasne", "lamasni", "bye2zine", "bye2zini", "ye2zine", "bi3azebne", "byi7bosne",
-    "yetharash", "ta7arosh",
+    "yetharash", "ta7arosh", "bi2tolne", "byi2tolne", "ye2tolne", "ra7 ye2tolne", "bihaddedne",
+    "talab soorte", "talab sourte", "baddo soorte", "baddo sourte",
   ],
 };
 
@@ -139,7 +144,7 @@ export const PERSONAL_DATA: KeywordGroup = {
     "my full name", "my last name", "my surname", "my family name", "my school is", "my school's name",
     "i go to school at", "i live in", "i live at", "my address", "my phone", "my number is",
     "my mom's number", "my dad's number", "send you a photo", "send a picture of me", "picture of me",
-    "photo of me",
+    "photo of me", "my photo", "my picture",
   ],
   fr: ["mon nom de famille", "mon adresse", "j'habite a", "mon ecole s'appelle", "mon numero"],
   ar: [
@@ -153,7 +158,7 @@ export const PERSONAL_DATA: KeywordGroup = {
 export const ADULT_TOPIC: KeywordGroup = {
   en: ["porn", "sex", "sexy", "nude", "nudes", "naked", "xxx", "drugs", "cocaine", "weed"],
   fr: ["porno", "sexe", "nue", "drogue"],
-  ar: ["سكس", "اباحي", "اباحية", "عاري", "عارية", "مخدرات", "حشيش"],
+  ar: ["سكس", "اباحي", "اباحية", "عاري", "عارية", "مخدرات"],
   arabizi: ["seks", "sexy"],
 };
 
@@ -161,7 +166,7 @@ export const ADULT_TOPIC: KeywordGroup = {
 export const POLITICS: KeywordGroup = {
   en: ["hezbollah", "politics", "political party", "election", "elections", "israel", "sunni", "shia", "shiite", "sect", "civil war", "militia"],
   fr: ["politique", "hezbollah", "israel", "guerre civile", "milice"],
-  ar: ["حزب الله", "سياسة", "السياسة", "انتخابات", "اسرائيل", "طائفة", "طائفي", "سني", "شيعي", "الحرب الاهلية", "ميليشيا"],
+  ar: ["حزب الله", "سياسة", "السياسة", "انتخابات", "اسرائيل", "طائفة", "طائفي", "طائفية", "الحرب الاهلية", "ميليشيا"],
   arabizi: ["7ezb", "7ezbollah", "siyese", "siyasa", "isra2il", "isra2eel"],
 };
 

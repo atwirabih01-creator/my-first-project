@@ -121,6 +121,12 @@ export function arabiziWordToArabic(word: string): string[] {
   if (!HAS_LATIN.test(word)) return [word];
   let variants: string[] = [""];
   let i = 0;
+  // Joined article: "el7arb", "al bayt" -> "ال" + word
+  const art = word.match(/^(?:el|al|il)(?=[a-z0-9']{3,})/);
+  if (art) {
+    variants = ["ال"];
+    i = art[0].length;
+  }
   while (i < word.length) {
     const two = word.slice(i, i + 2);
     const di = DIGRAPHS.find(([k]) => k === two);
@@ -175,7 +181,9 @@ const FOLD: Record<string, string> = {
 /** Skeleton of one Arabic-script word: fold sound-alikes, drop weak letters, drop leading hamza. */
 export function arabicSkeleton(word: string): string {
   let out = "";
-  for (const ch of word) {
+  // Definite article "ال" is not part of the word.
+  const w = word.length > 3 ? word.replace(/^ال/, "") : word;
+  for (const ch of w) {
     if (ch in FOLD) out += FOLD[ch];
     else if (/[ء-ي]/.test(ch)) out += ch;
     // anything else (latin leftovers, digits) is dropped from the skeleton

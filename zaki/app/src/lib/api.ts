@@ -119,7 +119,12 @@ export function localCheck(q: Question, answer: number, wrongSoFar: number): { c
   return { correct, feedbackKey: n === 1 ? 'hint1' : n === 2 ? 'hint2' : 'example' };
 }
 
-export async function checkAnswer(pack: LessonPack, q: Question, answer: number, wrongSoFar: number) {
+export async function checkAnswer(
+  pack: LessonPack,
+  q: Question,
+  answer: number,
+  wrongSoFar: number,
+): Promise<{ correct: boolean; feedbackKey: FeedbackKey }> {
   const local = localCheck(q, answer, wrongSoFar);
   if (demoMode) return local;
   try {
@@ -131,7 +136,8 @@ export async function checkAnswer(pack: LessonPack, q: Question, answer: number,
     handleSafety(data.safety);
     if (typeof data.correct !== 'boolean') return local;
     // The hint ladder is driven by the app so it always matches the child's attempts.
-    return { correct: data.correct, feedbackKey: data.correct ? 'right' : local.feedbackKey === 'right' ? 'hint1' : local.feedbackKey };
+    const ladder: FeedbackKey = local.feedbackKey === 'right' ? 'hint1' : local.feedbackKey;
+    return { correct: data.correct, feedbackKey: data.correct ? 'right' : ladder };
   } catch {
     return local;
   }
