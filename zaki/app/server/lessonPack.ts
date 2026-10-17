@@ -10,6 +10,8 @@
 //  5. SHUFFLE answer positions in our own code.
 // Demo mode (no ANTHROPIC_API_KEY): returns a bundled sample pack.
 
+import { shufflePack } from "./shuffle";
+export { shufflePack };
 import { callClaude, jsonOf, textOf, type ClaudeMessage, type ClaudeParams } from "./ai";
 import { MODELS, aiEnabled } from "./config/models";
 import { TRUSTED_RESEARCH_DOMAINS, isTrustedUrl } from "./config/trustedSources";
@@ -232,35 +234,6 @@ async function writePack(req: LessonPackRequest, notes: string, extra: string): 
 // ---------------------------------------------------------------------------------------
 // Shuffle (our code decides where the right answer sits)
 // ---------------------------------------------------------------------------------------
-
-function randInt(n: number): number {
-  const a = new Uint32Array(1);
-  crypto.getRandomValues(a);
-  return a[0] % n;
-}
-
-function shuffleChoices<T extends { choices: string[]; answerIndex: number }>(item: T): T {
-  // Keep fixed orders for sign and yes/no choices so the screen stays predictable.
-  const fixed = item.choices.every((c) => [">", "<", "="].includes(c.trim())) || item.choices.length === 2;
-  if (fixed) return item;
-  const order = item.choices.map((_, i) => i);
-  for (let i = order.length - 1; i > 0; i--) {
-    const j = randInt(i + 1);
-    [order[i], order[j]] = [order[j], order[i]];
-  }
-  return { ...item, choices: order.map((i) => item.choices[i]), answerIndex: order.indexOf(item.answerIndex) };
-}
-
-export function shufflePack(pack: LessonPack): LessonPack {
-  const qs = (l: Question[]) => l.map(shuffleChoices);
-  return {
-    ...pack,
-    recap: pack.recap.map(shuffleChoices),
-    checks: qs(pack.checks),
-    test: qs(pack.test),
-    retestPool: qs(pack.retestPool),
-  };
-}
 
 // ---------------------------------------------------------------------------------------
 // Main entry

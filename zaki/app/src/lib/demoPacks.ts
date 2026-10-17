@@ -1,6 +1,7 @@
 // DEMO MODE lessons (no server / no AI key): the server's bundled sample packs
 // (server/samples: plain data, no secrets), one per subject, English + Arabic.
 import { SAMPLE_PACKS } from '../../server/samples';
+import { shufflePack } from '../../server/shuffle';
 import type { Lang, LessonPack, Source, Subject } from './types';
 
 const SUBJECT_TITLE: Record<Subject, Record<Lang, string>> = {
@@ -15,7 +16,7 @@ const SUBJECT_TITLE: Record<Subject, Record<Lang, string>> = {
 export function getDemoPack(subject: Subject, lang: Lang, grade: number): { pack: LessonPack; sources: Source[] } {
   const bySubject = SAMPLE_PACKS[subject] ?? SAMPLE_PACKS.math;
   const base = bySubject[lang] ?? bySubject.en;
-  const pack = JSON.parse(JSON.stringify(base)) as LessonPack;
+  const pack = shufflePack(JSON.parse(JSON.stringify(base)) as LessonPack);
   const title = lang === 'ar' ? `مصدر تجريبي: درس نموذجي في ${SUBJECT_TITLE[subject].ar}` : `Sample source (demo): ${SUBJECT_TITLE[subject].en} sample lesson`;
   return { pack: { ...pack, grade }, sources: [{ title }] };
 }

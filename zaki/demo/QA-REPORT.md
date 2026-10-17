@@ -1,5 +1,10 @@
 # Zaki demo file: QA report
 
+> **Update 2026-10-17 (re-check of the rebuilt file):** the fixes for B1, B2, S1, S2 and S4 all work.
+> One **new problem** turned up: in every lesson the right answer is always the **first** button,
+> so tapping the top answer every time scores 5/5. Verdict: **NOT READY until that is fixed** (a small change).
+> Details are in the "Re-check" section at the bottom.
+
 **File tested:** `zaki/demo/zaki-demo.html`, opened straight from disk (file://), not through a server
 **Date:** 2026-10-17. **Tester:** EvidenceQA (automated clicking with Playwright plus manual review of screenshots)
 **Screenshots:** `zaki/demo/qa-screenshots/` (file names are listed with each item below)
@@ -114,3 +119,73 @@ Going "forward" again or reloading reopens Zaki at the Start screen, with saved 
 - Real iPhone Safari (WebKit could not start here). Includes whether saved data survives on an iPhone when opened from disk.
 - Dyslexia font toggle, delete learner, and changing time limit / study time: seen on the settings screen, but I didn't check what they change.
 - Voice, photos and real AI replies: not part of the demo.
+
+---
+
+## Re-check of the rebuilt file (2026-10-17, file dated 18:27)
+
+**How:** Chromium, opening the file from disk. For the back-arrow tests, a different web page was opened in the tab **before** Zaki, so any arrow that leaves the app would visibly land on it. Screenshots are in `qa-screenshots/recheck/`. iPhone/WebKit is still NOT TESTED here (it can't run on this machine).
+
+### Verdict: NOT READY. 1 blocker remaining (new in this build, quick fix)
+
+| Item | Result | Evidence |
+|---|---|---|
+| **B1** ← back arrow | **FIXED, PASS**: 47 of 47 screens tested, all staying inside the app, in English and Arabic | R-back-*.png |
+| **B2** Send button on phones | **FIXED, PASS**: 12 of 12 | R-send-*.png |
+| **S1** safety words | **FIXED, PASS**: 12 of 12 phrases open the safety screen, and 11 of 12 normal school phrases don't | R-safety-*.png |
+| **S2** what the Lebanon safety screens say | **FIXED, PASS**: 28 of 28 checks | R-safety-*.png |
+| **S4** WhatsApp free questions | **FIXED, PASS**: 10 of 10 | R-wa-01-wa-questions.png, R-wa-02-wa-plan-and-commands.png |
+| One full lesson in each of the 5 subjects (English) + 3 in Arabic | **PASS** for the flow; **FAIL** on answer order (see N1) | L-*.png, ladder-*.png, always-first-choice-*.png |
+| New console errors | **PASS**: none in any run. Only the expected `/api` failure | run logs |
+| Dead ends / blank pages / "not found" | **PASS**: none found | — |
+
+**B1 details:**
+- **Screens tested:** Ready, Home, Classes, a class's summary, Tests, Flashcards, Practice and a practice item. Inside a lesson: intro, memory game, teach, a check question after a wrong answer and hint, Ask Zaki, summary, mid-test and result. Also the "I need help" chooser, the safety screen's top arrow, New learner, Break screen, Grown-ups gate, parent menu, Settings, Add lesson, Progress and WhatsApp.
+- Pressing ← over and over walks back Class → Home → Start and never leaves the app.
+- The browser's own Back button still leaves Zaki (to the previous page). That is expected when opening the file from disk, because the address bar can't change.
+
+**B2 details:**
+- At 320, 375 and 430 px wide, in English and Arabic, in both the lesson's Ask step and Practice → Ask Zaki: the Send button and text box sit fully on screen, nothing slides sideways after sending, and Zaki replies.
+- Example: 320 px English, Send at x=214–287. In Arabic, Send is on the left at x=33–108, as it should be.
+
+**S1 details:**
+- **Opens the safety screen:** "baba darabne", "bayye darabne", "baba darabni", "بابا ضربني" (for both Maya and Ali), "khayef ktir" (both), "أنا خايف كتير", "my dad hits me", "someone touched me", "I want to die".
+- **Correctly ignored:** "what is a noun?", "my dad helped me with my homework", "the boy hit the ball in the story", "baba bought me a new book", "this is hard", "ما هو الكسر؟", "بابا ساعدني في الواجب", and others.
+- **One false alarm:** "I am scared of spiders in the science book" opens the safety screen. That is cautious rather than dangerous. Minor.
+
+**S2 details:**
+- Every Lebanon safety screen (abuse, fear, self-harm, and "I need help → I don't feel safe", English and Arabic) shows "Tell a grown-up you trust…", "If you are in danger right now, call 112" and 1564. The abuse screens also show himaya 03 414 964.
+- No screen promises secrecy, and none shows 919.
+- The old "I'm going to let a grown-up… know" promise (M1) now reads "please show this screen to a grown-up you trust". M1 is fixed too.
+
+**S4 details:**
+- Seven questions ("How is she doing in math?", "Is Ali ok?", "thanks!", an Arabic question, and others) got the reply "I can only help with reports and lesson plans here". No new lessons were created; the child's class list was identical before and after.
+- A real plan message ("Science test on plants Sunday") still adds a lesson.
+- REPORT, PLAN, PAUSE and HELP still work.
+
+**Lesson details:**
+- **Lessons run:** Maya (English): Math "Fractions", plus Science "Plants", English "Adjectives", Arabic "Sun letters" and Social studies "Maps" added through the parent area. Ali (Arabic): Math "الكسور", plus Arabic "الحروف" and English "Animals".
+- **What all 8 did correctly:** intro → memory game → teach → check questions with hints → Ask Zaki (refuses "just tell me the answer") → summary (3–5 points + a source) → test → result. Failing led to the summary again and then a retest.
+- **Hint ladder:** hint 1, then a different hint 2, then on the third wrong tap a "similar example" (a cake cut into 3, 1/3). The answer was never shown, in English or Arabic (ladder-Maya-3rd-wrong.png, ladder-Ali-3rd-wrong.png).
+- **Arabic lessons:** no English app text. The English-subject lesson shows English example words (ball, run, happy, "vowel"), which is expected for an English lesson.
+
+### Remaining issues
+
+**N1 (BLOCKER, new in this build): the right answer is always the first button.**
+- In all 8 lessons, every check question had the right answer in the first position.
+- In the tests, tapping the first answer every time gives **"You got 5 of 5!" / "حصلتَ على 5 من 5!"**.
+- In the earlier build the answers were mixed (for example, the Fractions test was 1st, 2nd, 2nd, 1st, 1st).
+- A child, or the founder, will notice within a few questions, and it makes the tests meaningless.
+- Only the memory-game questions are shuffled.
+- **Fix:** shuffle the answer order for check and test questions too.
+- **Evidence:** always-first-choice-Maya.png, always-first-choice-Ali.png. The test questions and their first answers ("3", "3/5", ">", "3/6", "5/8") were all correct.
+
+**Minor:**
+- **N2.** "scared of spiders…" triggers the safety screen (false alarm, see S1).
+- **N3.** The WhatsApp simulator replies in Arabic to English questions when the selected child is Ali, because it uses Ali's report language. That's correct by the settings, but may surprise the founder.
+- **N4.** A sample lesson doesn't match the lesson name the parent typed. For example, a lesson named "Nouns" taught adjectives. The app does say "Demo mode: a sample lesson was used."
+- **N5.** Pressing ← in the middle of a test goes straight to Home with no "are you sure?". Progress on that test is lost.
+- **Still open from the first round:**
+  - S3: risk on older iPhones. Confirm on a real iPhone; consider sending a web link instead of the file.
+  - M2: the parent area now shows "Now working on: Ali", which helps.
+  - M3 and M4.
