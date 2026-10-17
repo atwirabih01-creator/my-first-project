@@ -1,56 +1,27 @@
-# Welcome to your Expo app 👋
+# Zaki app (Phase 1, fake child profiles only)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
-
-## Get started
-
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **src/app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
+## Try it in a web browser
 ```bash
-npm run reset-project
+npm install
+npx expo start --web        # opens the app; press "w" if it doesn't open by itself
 ```
+If the server or AI key isn't ready, the app shows a small yellow
+"Demo mode: AI not connected yet" banner and still works with built-in sample lessons.
 
-This command will move the starter code to the **example** directory and create a blank **src/app** directory where you can start developing.
+## Try it on an iPhone
+Install "Expo Go" from the App Store, run `npx expo start`, and scan the QR code with the iPhone camera.
 
-### Other setup steps
+## Make a no-server website (demo mode only)
+```bash
+ZAKI_STATIC_WEB=1 npx expo export -p web
+```
+The `dist/` folder is a plain website that can be put on any simple web host. Everything runs in demo mode.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Checks
+```bash
+npx tsc --noEmit
+npx expo lint
+```
+Click-through tests: see `e2e/README.md`. Screenshots: `test-screenshots/`.
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+See `ARCHITECTURE.md` for how the app talks to the server.
