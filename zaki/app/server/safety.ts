@@ -60,6 +60,9 @@ const COMPILED = {
   adult: compile(KW.ADULT_TOPIC),
   politics: compile(KW.POLITICS),
   injection: compile(KW.PROMPT_INJECTION),
+  war: compile(KW.WAR_WORDS),
+  threatIdiom: compile(KW.THREAT_IDIOMS),
+  death: compile(KW.DEATH_WORDS),
 };
 
 /**
@@ -70,7 +73,7 @@ const COMPILED = {
  *  - Arabizi (Latin word containing a digit, e.g. "2asf", "bi2tolni"): skeleton match.
  *  - Plain Latin words: skeleton match only for long keywords (so "safe" never matches قصف).
  */
-function wordMatches(textWordBase: string, variants: string[], k: KwWord): boolean {
+function wordMatches(textWordBase: string, variants: string[], k: KwWord, multiWord = false): boolean {
   if (ARABIC_SCRIPT.test(textWordBase)) {
     if (textWordBase === k.lit || stripClitic(textWordBase) === k.litStripped) return true;
     if (k.skel.length >= 4) return variants.some((v) => v === k.skel || v.includes(k.skel));
@@ -78,7 +81,8 @@ function wordMatches(textWordBase: string, variants: string[], k: KwWord): boole
   }
   if (!k.skel) return textWordBase === k.lit;
   const looksArabizi = /\d/.test(textWordBase);
-  if (!looksArabizi && k.skel.length < 4) return false;
+  // Inside a multi-word Arabizi phrase ("bde mut"), short words may match their exact skeleton.
+  if (!looksArabizi && k.skel.length < 4) return multiWord && k.skel.length >= 2 && variants.some((v) => v === k.skel);
   return variants.some((v) => v === k.skel || (k.skel.length >= 4 && v.includes(k.skel)));
 }
 
@@ -87,7 +91,7 @@ function skeletonPhraseIn(views: NormalizedViews, words: string[], phrase: KwWor
   for (let i = 0; i + n <= views.skeletonWords.length; i++) {
     let ok = true;
     for (let j = 0; j < n; j++) {
-      if (!wordMatches(words[i + j], views.skeletonWords[i + j], phrase[j])) {
+      if (!wordMatches(words[i + j], views.skeletonWords[i + j], phrase[j], n >= 2)) {
         ok = false;
         break;
       }
@@ -112,6 +116,15 @@ function wordListIn(base: string, words: string[], group: KeywordGroup): boolean
 function groupIn(views: NormalizedViews, g: CompiledGroup): boolean {
   const words = views.base ? views.base.split(" ") : [];
   if (g.latin.some((p) => latinPhraseIn(views.base, p))) return true;
+  // Phrases typed without spaces ("killmyself", or "b a d e m o u t" after de-spacing).
+  if (
+    g.latin.some((p) => {
+      if (!p.includes(" ")) return false;
+      const compact = p.replace(/ /g, "");
+      return compact.length >= 7 && words.some((w) => w.length >= compact.length && w.includes(compact));
+    })
+  )
+    return true;
   return g.arabic.some((p) => skeletonPhraseIn(views, words, p));
 }
 
@@ -136,15 +149,79 @@ export type KeywordScan = {
   injection: boolean;
 };
 
-export function keywordScan(text: string): KeywordScan {
+/** Join runs of single letters: "b a d e m o u t" -> "bademout", "k i l l" -> "kill", "م و ت" -> "موت". */
+export function despace(text: string): string {
+  const words = normalizeBase(text).split(" ");
+  const out: string[] = [];
+  let run = "";
+  const flush = () => {
+    if (run.length >= 2) out.push(run);
+    else if (run) out.push(run);
+    run = "";
+  };
+  for (const w of words) {
+    if ([...w].length === 1 && /\p{L}/u.test(w)) run += w;
+    else {
+      flush();
+      out.push(w);
+    }
+  }
+  flush();
+  return out.join(" ");
+}
+
+/** Leetspeak for English/French: "w4nt t0 d1e" -> "want to die", "i want 2 die". */
+export function unleet(text: string): string {
+  return normalizeBase(text)
+    .split(" ")
+    .map((w) => {
+      if (w === "2") return "to";
+      if (w === "4") return "for";
+      if (!/[a-z]/.test(w) || !/\d/.test(w)) return w;
+      return w.replace(/4/g, "a").replace(/0/g, "o").replace(/1/g, "i").replace(/3/g, "e").replace(/5/g, "s").replace(/7/g, "t");
+    })
+    .join(" ");
+}
+
+function scanStrong(text: string) {
   const views = normalizeViews(text);
-  const words = views.base ? views.base.split(" ") : [];
   return {
     selfHarm: groupIn(views, COMPILED.selfHarm),
     disclosure: groupIn(views, COMPILED.disclosure),
     secrecy: groupIn(views, COMPILED.secrecy),
     fear: groupIn(views, COMPILED.fear),
-    home: wordListIn(views.base, words, KW.HOME_TERMS),
+    war: groupIn(views, COMPILED.war),
+    threatIdiom: groupIn(views, COMPILED.threatIdiom),
+    death: groupIn(views, COMPILED.death),
+  };
+}
+
+export function keywordScan(text: string): KeywordScan {
+  const views = normalizeViews(text);
+  const words = views.base ? views.base.split(" ") : [];
+  // Strong lists are checked on the text, its de-spaced form and its leetspeak-decoded form.
+  const variants = Array.from(new Set([text, despace(text), unleet(text), unleet(despace(text))]));
+  const hits = variants.map(scanStrong);
+  const any = (k: keyof ReturnType<typeof scanStrong>) => hits.some((h) => h[k]);
+
+  const home = wordListIn(views.base, words, KW.HOME_TERMS);
+  const school = wordListIn(views.base, words, KW.SCHOOL_CONTEXT);
+  const exam = wordListIn(views.base, words, KW.EXAM_WORDS);
+  const griefPerson = home || wordListIn(views.base, words, KW.GRIEF_PERSON) || wordListIn(views.base, words, KW.OUTSIDE_TERMS);
+
+  // Fear: strong fear words, except normal exam worry ("scared of the science exam");
+  // war words only outside school talk ("the war of 1812 in history"); grief with a person.
+  const strongFear = any("fear") && !(exam && !any("war"));
+  const warFear = any("war") && !school;
+  const grief = any("death") && griefPerson;
+  const threat = any("threatIdiom") && !school;
+
+  return {
+    selfHarm: any("selfHarm"),
+    disclosure: any("disclosure") || threat,
+    secrecy: any("secrecy"),
+    fear: strongFear || warFear || grief,
+    home,
     outside: wordListIn(views.base, words, KW.OUTSIDE_TERMS),
     personal: groupIn(views, COMPILED.personal) || containsPhoneNumber(text) || EMAIL_RE.test(text),
     adult: groupIn(views, COMPILED.adult),

@@ -37,6 +37,8 @@ export const SELF_HARM: KeywordGroup = {
     "beddi mout", "abi amoot", "abgha amoot", "ma bade 3ish", "ma badde 3ish", "2azi nafse",
     "b2de mout", "b2de moot", "e2tol 7ale", "a2tol 7ale", "i2tol 7aleh", "2e2tol 7ale", "ma 3ad badde 3ish",
     "ma 3ad bade 3ish", "ma3ad bade 3ish", "ma3ad badde 3ish", "2azze 7ale", "2azi 7ale", "low mitt", "iza mitt",
+    "ma 3ad badde 3ich", "ma 3ad bade 3ich", "ma3ad badde 3ich", "ma3ad bade 3ich", "ma bade 3ich", "ma badde 3ich",
+    "ma 3ad bade 3eesh", "ma 3ad badde 3eesh", "ma3ad bade 3eesh",
   ],
 };
 
@@ -47,7 +49,7 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "hurting me", "touches me", "touched me", "touching me", "touch my private", "touches my private",
     "kicks me", "kicked me", "slaps me", "slapped me", "burns me", "locks me", "locked me in",
     "chokes me", "pinches me", "makes me take off", "take off my clothes", "abuse", "abused me",
-    "kills me", "going to kill me", "wants to kill me", "will kill me", "threatens me", "threatened me",
+    "wants to kill me", "threatens me", "threatened me",
     "asked for my photo", "asked for a photo", "wants my photo", "asked me to send", "send him a photo",
     "send her a photo", "asked me for pictures", "wants to meet me", "touched my private", "touched my privates",
     "touchd me", "touchd my", "said i should die", "told me to die", "told me to kill myself", "go die",
@@ -61,14 +63,14 @@ export const DISCLOSURE_HARM: KeywordGroup = {
   ar: [
     "يضربني", "بيضربني", "ضربني", "عم يضربني", "يلمسني", "بيلمسني", "لمسني", "يؤذيني", "بيأذيني",
     "اذاني", "يعذبني", "بيعذبني", "يحبسني", "بيحبسني", "يرفسني", "يكويني", "يقرصني", "يخنقني",
-    "يشلحني", "يتحرش", "تحرش", "يقتلني", "بيقتلني", "رح يقتلني", "يهددني", "بيهددني", "طلب صورتي",
+    "يشلحني", "يتحرش", "تحرش", "يهددني", "بيهددني", "طلب صورتي",
     "بدو صورتي", "بدها صورتي", "طلب مني صورة", "ضربتني", "بتضربني", "تضربني", "عم تضربني", "وجعني",
     "بيوجعني", "بتوجعني", "عم يوجعني", "عم توجعني", "اذتني", "بتأذيني", "لمستني", "بتلمسني",
   ],
   arabizi: [
     "byedrabne", "byedrabni", "yedrabne", "yedrabni", "darabne", "darabni", "byelmesne", "byelmesni",
     "yelmesne", "lamasne", "lamasni", "bye2zine", "bye2zini", "ye2zine", "bi3azebne", "byi7bosne",
-    "yetharash", "ta7arosh", "bi2tolne", "byi2tolne", "ye2tolne", "ra7 ye2tolne", "bihaddedne",
+    "yetharash", "ta7arosh", "bihaddedne",
     "talab soorte", "talab sourte", "baddo soorte", "baddo sourte", "darbetne", "darabetne", "darbitne",
     "btedrabne", "btidrabne", "wajja3ne", "bewaj3ne", "btewaj3ne", "btwaj3ne", "lamasetne", "btelmesne",
   ],

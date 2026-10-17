@@ -41,7 +41,7 @@ function numericLeak(reply: string, item: Question, value: Rational): boolean {
   }
   const v = ratToString(value);
   // "= 6", "is 6", "answer is 6", "يساوي 6"
-  if (new RegExp(`${ANSWER_LEAD}\\s*:?\\s*${escapeRe(v)}(?![\\d/.])`, "iu").test(text)) return true;
+  if (new RegExp(`${ANSWER_LEAD}\\s*:?\\s*${escapeRe(v)}(?![\\d/]|[.,]\\d)`, "iu").test(text)) return true;
   // The full correct choice text, e.g. "6 km" / "6 كم"
   const choice = normalizeMathText(item.choices[item.answerIndex]).trim();
   if (/\s/.test(choice) && text.toLowerCase().includes(choice.toLowerCase())) return true;
