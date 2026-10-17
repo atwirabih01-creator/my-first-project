@@ -18,22 +18,25 @@ export type KeywordGroup = {
 /** Child says they want to hurt / kill themselves or die. */
 export const SELF_HARM: KeywordGroup = {
   en: [
-    "kill myself", "killing myself", "want to die", "wanna die", "want to be dead", "wish i was dead",
+    "kill myself", "killing myself", "want to die", "i want to die", "wanna die", "want to die", "wanna die", "want to be dead", "wish i was dead",
     "wish i were dead", "hurt myself", "hurting myself", "cut myself", "end my life", "suicide",
     "don't want to live", "dont want to live", "do not want to live", "better off dead", "die tonight",
   ],
   fr: [
     "me tuer", "je veux mourir", "envie de mourir", "me faire du mal", "suicide", "me suicider",
-    "plus envie de vivre",
+    "plus envie de vivre", "je veux mourir", "je vais me tuer",
   ],
   ar: [
     "اقتل نفسي", "بقتل نفسي", "انتحر", "انتحار", "بدي موت", "بدي اموت", "ابي اموت", "ابغى اموت",
     "اريد ان اموت", "اريد الموت", "اذي نفسي", "اؤذي نفسي", "ما بدي عيش", "لا اريد ان اعيش",
-    "نفسي اموت", "اجرح نفسي",
+    "نفسي اموت", "اجرح نفسي", "اقتل حالي", "بدي اقتل حالي", "بقتل حالي", "اذي حالي", "بدي اذي حالي",
+    "ما عاد بدي عيش", "لو متت", "اذا متت", "احسن لو متت", "بتمنى موت", "اتمنى الموت", "اريد ان انتحر",
   ],
   arabizi: [
     "a2tol nafse", "a2tol nafsi", "bi2tol nafse", "ente7ar", "bade mout", "badde mout", "bdde mout",
     "beddi mout", "abi amoot", "abgha amoot", "ma bade 3ish", "ma badde 3ish", "2azi nafse",
+    "b2de mout", "b2de moot", "e2tol 7ale", "a2tol 7ale", "i2tol 7aleh", "2e2tol 7ale", "ma 3ad badde 3ish",
+    "ma 3ad bade 3ish", "ma3ad bade 3ish", "ma3ad badde 3ish", "2azze 7ale", "2azi 7ale", "low mitt", "iza mitt",
   ],
 };
 
@@ -46,23 +49,28 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "chokes me", "pinches me", "makes me take off", "take off my clothes", "abuse", "abused me",
     "kills me", "going to kill me", "wants to kill me", "will kill me", "threatens me", "threatened me",
     "asked for my photo", "asked for a photo", "wants my photo", "asked me to send", "send him a photo",
-    "send her a photo", "asked me for pictures", "wants to meet me",
+    "send her a photo", "asked me for pictures", "wants to meet me", "touched my private", "touched my privates",
+    "touchd me", "touchd my", "said i should die", "told me to die", "told me to kill myself", "go die",
+    "someone hurts me", "someone is hurting me",
   ],
   fr: [
     "me frappe", "m'a frappe", "me bat", "me touche", "m'a touche", "me fait mal", "m'a fait mal",
-    "m'enferme", "me tue", "va me tuer", "me menace", "veut ma photo",
+    "m'enferme", "me tue", "va me tuer", "me menace", "veut ma photo", "me tape", "me tapent", "me frappent",
+    "me fait du mal", "m'a tape", "me touche la",
   ],
   ar: [
     "يضربني", "بيضربني", "ضربني", "عم يضربني", "يلمسني", "بيلمسني", "لمسني", "يؤذيني", "بيأذيني",
     "اذاني", "يعذبني", "بيعذبني", "يحبسني", "بيحبسني", "يرفسني", "يكويني", "يقرصني", "يخنقني",
     "يشلحني", "يتحرش", "تحرش", "يقتلني", "بيقتلني", "رح يقتلني", "يهددني", "بيهددني", "طلب صورتي",
-    "بدو صورتي", "بدها صورتي", "طلب مني صورة",
+    "بدو صورتي", "بدها صورتي", "طلب مني صورة", "ضربتني", "بتضربني", "تضربني", "عم تضربني", "وجعني",
+    "بيوجعني", "بتوجعني", "عم يوجعني", "عم توجعني", "اذتني", "بتأذيني", "لمستني", "بتلمسني",
   ],
   arabizi: [
     "byedrabne", "byedrabni", "yedrabne", "yedrabni", "darabne", "darabni", "byelmesne", "byelmesni",
     "yelmesne", "lamasne", "lamasni", "bye2zine", "bye2zini", "ye2zine", "bi3azebne", "byi7bosne",
     "yetharash", "ta7arosh", "bi2tolne", "byi2tolne", "ye2tolne", "ra7 ye2tolne", "bihaddedne",
-    "talab soorte", "talab sourte", "baddo soorte", "baddo sourte",
+    "talab soorte", "talab sourte", "baddo soorte", "baddo sourte", "darbetne", "darabetne", "darbitne",
+    "btedrabne", "btidrabne", "wajja3ne", "bewaj3ne", "btewaj3ne", "btwaj3ne", "lamasetne", "btelmesne",
   ],
 };
 
@@ -84,26 +92,23 @@ export const SECRECY: KeywordGroup = {
 /** Fear, war fear, displacement, grief and strong sadness (calm route, 1564, never police). */
 export const FEAR_DISTRESS: KeywordGroup = {
   en: [
-    "scared of the bombs", "bomb", "bombs", "bombing", "airstrike", "air strike", "drones", "missile",
-    "missiles", "explosion", "war", "the war", "i'm scared", "im scared", "i am scared", "so scared",
+    "scared of the bombs", "i'm scared", "im scared", "i am scared", "so scared",
     "very scared", "i'm afraid", "i am afraid", "terrified", "we had to leave our house",
     "had to leave our home", "my house was destroyed", "will we die", "are we going to die",
     "died in the war", "i'm very sad", "i am very sad", "so sad", "nobody loves me", "i'm lonely",
     "i cry every", "can't stop crying",
   ],
   fr: [
-    "j'ai peur", "tres peur", "les bombes", "bombe", "la guerre", "bombardement", "explosion",
-    "je suis triste", "tres triste", "personne ne m'aime",
+    "j'ai peur", "tres peur", "je suis triste", "tres triste", "personne ne m'aime",
   ],
   ar: [
-    "خايف", "خايفة", "خايفه", "اخاف", "انا خايف", "قصف", "القصف", "صاروخ", "صواريخ", "انفجار", "غارة",
-    "غارات", "الحرب", "حرب", "الدرون", "قنبلة", "قنابل", "تركنا بيتنا", "هربنا من البيت",
+    "خايف", "خايفة", "خايفه", "اخاف", "انا خايف", "تركنا بيتنا", "سنموت", "هل سنموت", "حنموت", "رح نموت", "هربنا من البيت",
     "رح نموت", "حنموت", "زعلان كتير", "حزين جدا", "حزينة جدا", "ما حدا بيحبني", "لا احد يحبني",
     "بكي كل يوم",
   ],
   arabizi: [
-    "khayef", "khayfe", "khayfi", "5ayef", "5ayfe", "a5af", "2asf", "el 2asf", "sarou5", "sawarikh",
-    "sawari5", "infijar", "ghara", "el 7arb", "7arb", "2anbale", "ra7 nmout", "ze3lan ktir",
+    "khayef", "khayfe", "khayfi", "5ayef", "5ayfe", "a5af", "ra7 nmout", "rah nmout", "ra7 nmoot",
+    "rah nmoot", "ze3lan ktir",
     "ma 7ada bi7ebne",
   ],
 };
@@ -121,7 +126,7 @@ export const HOME_TERMS: KeywordGroup = {
   ar: [
     "بابا", "ابي", "ابوي", "ابويا", "بيي", "امي", "ماما", "امّي", "اخي", "خيي", "اخوي", "اختي", "خيتي",
     "عمي", "عمو", "خالي", "خالو", "عمتي", "خالتي", "جدي", "جدو", "ستي", "تيتا", "جدتي", "البيت",
-    "بالبيت", "بيتنا", "اهلي", "عيلتي", "الخادمة", "الشغالة", "السواق", "المربية", "مرت ابي", "زوج امي",
+    "بالبيت", "بيتنا", "اهلي", "عيلتي", "الخادمة", "الشغالة", "السواق", "المربية", "مرت ابي", "زوج امي", "والدي", "والدتي", "ابوي",
   ],
   arabizi: [
     "baba", "bayye", "bayyi", "abouye", "mama", "emme", "emmi", "ummi", "khayye", "khayyi", "akhoui",
@@ -181,4 +186,52 @@ export const PROMPT_INJECTION: KeywordGroup = {
   fr: ["ignore les instructions", "oublie les instructions", "oublie tes regles", "mode developpeur"],
   ar: ["تجاهل التعليمات", "تجاهل كل التعليمات", "انسى التعليمات", "انس التعليمات", "تجاهل القواعد", "اوقف الحماية"],
   arabizi: ["tjehal el ta3limet", "ensa el ta3limet"],
+};
+
+/** War words. WEAK: they trigger the fear route only when the message is not school talk
+ *  ("we learned about the war of 1812 in history", "volcanoes explode like bombs"). */
+export const WAR_WORDS: KeywordGroup = {
+  en: ["bomb", "bombs", "bombing", "bombed", "airstrike", "air strike", "airstrikes", "drone", "drones", "missile", "missiles", "explosion", "explosions", "the war", "war", "shelling", "jets", "warplanes", "the planes came"],
+  fr: ["les bombes", "bombe", "la guerre", "bombardement", "explosion", "les drones", "les avions"],
+  ar: ["قصف", "القصف", "صاروخ", "صواريخ", "انفجار", "غارة", "غارات", "الحرب", "حرب", "الدرون", "قنبلة", "قنابل", "الطائرات", "الطيارات", "الطيران", "المسيرات", "ام كامل"],
+  arabizi: ["2asf", "el 2asf", "sarou5", "sawarikh", "sawari5", "infijar", "ghara", "el 7arb", "7arb", "2anbale", "el tayyarat", "drone", "el drone", "um kamel", "em kemel"],
+};
+
+/** "X is killing me" idioms. WEAK: ignored in school talk ("el math 3am yi2telne"). */
+export const THREAT_IDIOMS: KeywordGroup = {
+  en: ["killing me", "kills me", "going to kill me", "will kill me", "gonna kill me"],
+  ar: ["يقتلني", "بيقتلني", "عم يقتلني", "رح يقتلني", "قتلني"],
+  arabizi: ["bi2tolne", "byi2tolne", "ye2tolne", "yi2telne", "ra7 ye2tolne", "3am yi2telne", "2atalne"],
+};
+
+/** School / exam context words used to suppress WEAK words and exam worries. Whole words. */
+export const SCHOOL_CONTEXT: KeywordGroup = {
+  en: ["learn", "learned", "learning", "learnt", "lesson", "history", "class", "studying", "study", "homework", "math", "maths", "science", "volcano", "volcanoes", "book", "story", "game", "movie", "test", "exam", "quiz"],
+  fr: ["apprendre", "appris", "lecon", "histoire", "classe", "devoirs", "maths", "sciences", "livre", "jeu", "film", "controle", "examen"],
+  ar: ["ندرس", "درسنا", "درس", "الدرس", "التاريخ", "بالتاريخ", "الصف", "بالصف", "الفرض", "الواجب", "الرياضيات", "الحساب", "العلوم", "البركان", "القصه", "اللعبه", "الفيلم", "الامتحان", "امتحان", "الاختبار", "اختبار", "الكتاب"],
+  arabizi: ["ndrous", "darasna", "el dars", "el tarikh", "el math", "math", "el science", "el exam", "exam", "el fard", "el game", "film"],
+};
+
+/** Exam / test words: "I'm scared of the exam" is normal worry, not a safety case. */
+export const EXAM_WORDS: KeywordGroup = {
+  en: ["test", "exam", "quiz", "exams", "tests", "spelling test", "homework", "grades", "marks"],
+  fr: ["controle", "examen", "interro", "devoirs", "note"],
+  ar: ["امتحان", "الامتحان", "اختبار", "الاختبار", "مسابقه", "المسابقه", "الفرض", "العلامه", "العلامات", "الواجب"],
+  arabizi: ["exam", "el exam", "test", "el test", "mosab2a", "el fard", "3alame"],
+};
+
+/** Death words (grief). Trigger the calm fear route only with a person word (GRIEF_PERSON). */
+export const DEATH_WORDS: KeywordGroup = {
+  en: ["died", "passed away", "has died", "is dead", "was killed", "got killed"],
+  fr: ["est mort", "est morte", "mort", "morte", "decede", "decedee"],
+  ar: ["مات", "ماتت", "توفي", "توفى", "توفيت", "توفت", "متوفي", "استشهد", "استشهدت", "قتل", "انقتل"],
+  arabizi: ["met", "mat", "matet", "maatet", "twaffa", "twaffet", "este4had", "en2atal"],
+};
+
+/** People words for grief (home terms count too). Whole words. */
+export const GRIEF_PERSON: KeywordGroup = {
+  en: ["my", "our", "friend", "classmate", "teacher", "neighbour", "neighbor"],
+  fr: ["mon", "ma", "mes", "notre", "ami", "amie", "copain", "copine", "grand-pere", "grand pere", "grand-mere"],
+  ar: ["والدي", "والدتي", "ابي", "امي", "رفيقي", "رفيقتي", "صاحبي", "صاحبتي", "صديقي", "صديقتي", "جارنا", "جارتنا", "معلمتي", "استاذي"],
+  arabizi: ["jiddo", "teta", "sitti", "re2e", "rfi2e", "sa7be", "sa7bte", "jarna"],
 };

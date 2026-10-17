@@ -29,7 +29,20 @@ export type ValidationResult = {
   repairs: string[];
 };
 
-type Expect = { subject: Subject; grade: number; lang: Lang; topic?: string; id?: string };
+type Expect = {
+  subject: Subject;
+  grade: number;
+  lang: Lang;
+  topic?: string;
+  id?: string;
+  /**
+   * Lenient = shape check only (for packs the app sends back to /api/tutor and
+   * /api/check-answer): bad items are dropped, but minimum counts, the Arabic-share rule and
+   * the safety-word scan are skipped. Pack text is still treated as DATA by the tutor and
+   * every reply is still post-checked and moderated.
+   */
+  lenient?: boolean;
+};
 
 const ARABIC = /[؀-ۿ]/;
 
@@ -120,7 +133,7 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
   if (o.grade !== undefined && o.grade !== expect.grade) repairs.push("grade forced to request value");
 
   const topic = str(o.topic, PACK_LIMITS.len.topic) ?? (expect.topic ? str(expect.topic, PACK_LIMITS.len.topic) : null);
-  if (!topic) errors.push("topic missing");
+  if (!topic && !expect.lenient) errors.push("topic missing");
 
   const softErrors: string[] = [];
   const recap = arr(o.recap)
@@ -184,6 +197,11 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
   }
 
   const counts = { recap, teachSteps, checks, test, retestPool, summary, flashcards };
+  if (expect.lenient) {
+    const id = typeof o.id === "string" && /^[A-Za-z0-9_-]{1,80}$/.test(o.id) ? o.id : expect.id ?? `pack_${crypto.randomUUID()}`;
+    const pack: LessonPack = { id, subject: expect.subject, topic: topic ?? "lesson", grade: expect.grade, lang: expect.lang, ...counts };
+    return { ok: true, pack, errors, repairs };
+  }
   for (const [k, list] of Object.entries(counts)) {
     const min = PACK_LIMITS[k as keyof typeof counts].min;
     if (list.length < min) errors.push(`${k}: needs at least ${min}, has ${list.length}`);

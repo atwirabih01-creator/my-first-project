@@ -315,7 +315,8 @@ export type ModerationResult = {
 export type ModerateOptions = {
   speaker: "child" | "tutor";
   lang: Lang;
-  country: Country;
+  /** Undefined = the parent has not set a country (help routes: trusted adult only). */
+  country?: Country;
   childRef?: string;
   /** Skip the remote layers (used for fast checks such as lesson-pack text). */
   localOnly?: boolean;
@@ -377,6 +378,9 @@ export async function moderate(text: string, opts: ModerateOptions): Promise<Mod
   }
 
   if (result.safety.flagged) {
+    // Parent route only when it is clearly safe to tell the parent; otherwise reviewer only.
+    const toParent = result.safety.alertParent === true && result.safety.involvesHome !== true;
+    result.safety = { ...result.safety, alertParent: toParent, route: toParent ? "parent" : "reviewer" };
     void logFlag({
       category: result.category,
       involvesHome: result.safety.involvesHome ?? false,
@@ -535,7 +539,7 @@ export type FlagRecord = {
   alertParent: boolean;
   speaker: "child" | "tutor";
   lang: Lang;
-  country: Country;
+  country?: Country;
   layers: string[];
   /** Random app-side id only. Never a name. */
   childRef?: string;

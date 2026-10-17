@@ -23,7 +23,8 @@ export type TutorRequest = {
   message: string;
   lang: Lang;
   grade: number;
-  country: Country;
+  /** Undefined = not set by the parent. */
+  country?: Country;
   /** Optional (extension): the check/test item on screen, so its answer is protected exactly. */
   questionId?: string;
   /** Random app-side id, used only for the reviewer flag log. Never sent to the AI. */
@@ -117,7 +118,7 @@ function buildMessages(req: TutorRequest, hintLevel: number | undefined) {
     `step: ${req.step}`,
     `language: ${req.lang === "ar" ? "Arabic" : "English"}`,
     `grade: ${req.grade}`,
-    `country: ${req.country === "LB" ? "Lebanon" : "Qatar"}`,
+    `country: ${req.country === "LB" ? "Lebanon" : req.country === "QA" ? "Qatar" : "not set (use neutral examples, no money or war)"}`,
     `session start: ${req.history.length === 0 ? "yes (say you are an AI helper)" : "no"}`,
     hintLevel ? `hint level: ${hintLevel}` : "",
     current ? `current question id: ${current.id}` : "",

@@ -63,4 +63,7 @@ export type SafetyInfo = {
   /** Always true for flagged items: an independent reviewer sees it. */
   reviewerQueue?: boolean;
   helpRouteKind?: HelpRouteKind;
+  /** Who is told when flagged: "reviewer" (independent reviewer only) or "parent"
+   *  (parent AND reviewer). Always "reviewer" when involvesHome is true or unclear. */
+  route?: "reviewer" | "parent";
 };

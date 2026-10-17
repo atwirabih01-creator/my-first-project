@@ -29,13 +29,11 @@ export default function Safety() {
       bg="#F4F8FF"
       showLang>
       <View style={{ alignItems: 'center', gap: S.sm }} testID="safety-screen">
-        <Mascot size={110} mood="calm" animate={false} />
+        <Mascot size={80} mood="calm" animate={false} />
         <Txt variant="title" center>
           {t('safetyTitle')}
         </Txt>
-        <Txt variant="big" center>
-          {t('safetyBody')}
-        </Txt>
+        <Txt center>{t('safetyBody')}</Txt>
       </View>
 
       <Card tone="lilac">
@@ -69,7 +67,6 @@ export default function Safety() {
           </Txt>
         </Card>
       ))}
-      <Txt center>{t('safetyAskCall')}</Txt>
 
       <Btn
         title={t('safetyBack')}

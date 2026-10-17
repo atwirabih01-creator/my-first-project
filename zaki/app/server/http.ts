@@ -96,6 +96,11 @@ export function asLang(v: unknown): Lang {
   throw new HttpError(400, 'lang must be "en" or "ar"');
 }
 
+export function asOptionalCountry(v: unknown): Country | undefined {
+  if (v === undefined || v === null || v === "") return undefined;
+  return asCountry(v);
+}
+
 export function asCountry(v: unknown): Country {
   if (v === "LB" || v === "QA") return v;
   throw new HttpError(400, 'country must be "LB" or "QA"');
@@ -122,8 +127,8 @@ export function asText(v: unknown, field: string, max: number, min = 1): string 
 /** childRef must be a random id (letters, digits, - and _), never a name. Optional. */
 export function asChildRef(v: unknown): string | undefined {
   if (v === undefined || v === null || v === "") return undefined;
-  if (typeof v === "string" && /^[A-Za-z0-9_-]{8,64}$/.test(v)) return v;
-  throw new HttpError(400, "childRef must be a random id (8-64 letters, digits, - or _)");
+  if (typeof v === "string" && /^[A-Za-z0-9_-]{6,64}$/.test(v)) return v;
+  throw new HttpError(400, "childRef must be a random id (6-64 letters, digits, - or _)");
 }
 
 /** Wrap a route handler: turns errors into JSON responses without logging any body text. */
