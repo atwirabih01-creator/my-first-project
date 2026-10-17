@@ -1,11 +1,12 @@
 // Screen frame used by every page: language direction, demo banner, header,
 // "grown-up can see" indicator, daily time tracking and the parental-gate guard.
-import { Redirect, router, useFocusEffect } from 'expo-router';
+import { Redirect, useFocusEffect, type Href } from 'expo-router';
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { AppState, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { C, MaxWidth, R, S } from '@/constants/theme';
+import { goTo } from '@/lib/nav';
 import { todayStr, useApp, useChild, useT } from '@/lib/store';
 import { Txt } from './ui';
 
@@ -71,7 +72,7 @@ function useTimeTracking(enabled: boolean, lessonKey?: string) {
   const used = progress.usage[todayStr()] ?? 0;
   const over = enabled && !!child && used >= settings.dailyLimitMin;
   useEffect(() => {
-    if (over && focused) router.replace('/break');
+    if (over && focused) goTo('/break');
   }, [over, focused]);
 }
 
@@ -91,7 +92,8 @@ export function Screen({
 }: {
   children: ReactNode;
   title?: string;
-  back?: boolean | (() => void);
+  /** Logical parent screen (or a handler). Never browser history. */
+  back?: Href | (() => void);
   child?: boolean;
   parent?: boolean;
   scroll?: boolean;
@@ -112,7 +114,10 @@ export function Screen({
 
   const dir = rtl ? 'rtl' : 'ltr';
   const webDir = Platform.OS === 'web' ? ({ dir } as object) : {};
-  const onBack = typeof back === 'function' ? back : () => (router.canGoBack() ? router.back() : router.dismissTo('/'));
+  const onBack = () => {
+    if (typeof back === 'function') back();
+    else if (back) goTo(back);
+  };
 
   const body = <View style={styles.inner}>{children}</View>;
 

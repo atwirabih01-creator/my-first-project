@@ -34,7 +34,7 @@ export default function Progress() {
   const topicOf = (key: string) => progress.lessons[key]?.topic ?? key.split(':')[1];
 
   return (
-    <Screen parent back title={`📊 ${t('pProgress')}`}>
+    <Screen parent back="/parent" title={`📊 ${t('pProgress')}`}>
       <ParentChildPicker />
       {child ? (
         <View style={{ gap: S.md }}>

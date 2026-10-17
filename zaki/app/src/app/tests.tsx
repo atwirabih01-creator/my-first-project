@@ -21,7 +21,7 @@ export default function Tests() {
   };
 
   return (
-    <Screen child trackTime back title={`📝 ${t('tests')}`}>
+    <Screen child trackTime back="/home" title={`📝 ${t('tests')}`}>
       <Txt variant="h2">⏳ {t('upcoming')}</Txt>
       {upcoming.length === 0 ? <Txt>{t('noUpcoming')}</Txt> : null}
       {upcoming.map((p) => {

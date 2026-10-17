@@ -35,10 +35,10 @@ export function Choice({
   return (
     <Pressable
       testID={testID}
-      onPress={state === 'wrong' ? undefined : onPress}
+      onPress={onPress}
       accessibilityRole="button"
       accessibilityLabel={label}
-      accessibilityState={{ disabled: state === 'wrong', selected: state === 'right' }}
+      accessibilityState={{ selected: state === 'right' }}
       style={({ pressed }) => [
         styles.choice,
         { backgroundColor: bg, borderColor: border, minHeight: big ? 72 : 60 },
@@ -218,7 +218,7 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
         ))}
         {busy ? <Txt variant="small">{t('thinking')}</Txt> : null}
       </View>
-      <Row>
+      <Row style={{ width: '100%' }}>
         <TextInput
           testID="chat-input"
           value={text}
@@ -231,7 +231,7 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
           maxLength={300}
           style={[styles.input, { textAlign: lang === 'ar' ? 'right' : 'left', writingDirection: lang === 'ar' ? 'rtl' : 'ltr' }]}
         />
-        <Btn title={t('send')} onPress={send} disabled={busy || !text.trim()} testID="chat-send" />
+        <Btn title={t('send')} onPress={send} disabled={busy || !text.trim()} testID="chat-send" style={{ flexShrink: 0, paddingHorizontal: S.md }} />
       </Row>
     </Card>
   );
@@ -271,9 +271,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  bubble: { maxWidth: '85%', borderRadius: R.md, paddingHorizontal: S.md, paddingVertical: S.sm },
+  bubble: { maxWidth: '85%', flexShrink: 1, minWidth: 0, borderRadius: R.md, paddingHorizontal: S.md, paddingVertical: S.sm },
   input: {
     flex: 1,
+    flexShrink: 1,
+    minWidth: 0, // lets the box shrink on narrow phones so Send always fits
+    width: '100%',
     minHeight: 52,
     borderRadius: R.md,
     borderWidth: 2,

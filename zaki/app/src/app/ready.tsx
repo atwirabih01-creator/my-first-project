@@ -16,7 +16,7 @@ export default function Ready() {
   const [notYet, setNotYet] = useState(false);
 
   return (
-    <Screen child back={() => router.dismissTo('/')}>
+    <Screen child back="/">
       <View style={{ alignItems: 'center', gap: S.md, paddingTop: S.lg }}>
         {child ? <Avatar id={child.avatar} size={72} /> : null}
         <Txt variant="title" center>

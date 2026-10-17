@@ -45,7 +45,7 @@ export default function Classes() {
   const all = [...items.values()];
 
   return (
-    <Screen child trackTime back title={`📚 ${t('myClasses')}`}>
+    <Screen child trackTime back="/home" title={`📚 ${t('myClasses')}`}>
       {all.length === 0 ? <Txt>{t('noLessons')}</Txt> : null}
       {SUBJECTS.filter((s) => all.some((x) => x.subject === s.id)).map((s) => (
         <View key={s.id} style={{ gap: S.sm }}>

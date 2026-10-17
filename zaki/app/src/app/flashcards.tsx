@@ -46,7 +46,7 @@ export default function Flashcards() {
   }, [cards, round]);
 
   return (
-    <Screen child trackTime back title={`🃏 ${t('flashcards')}`}>
+    <Screen child trackTime back="/home" title={`🃏 ${t('flashcards')}`}>
       {cards.length === 0 ? (
         <Txt>{t('fcNone')}</Txt>
       ) : (

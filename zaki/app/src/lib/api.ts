@@ -210,30 +210,56 @@ export async function sendParentMessage(
 }
 
 const SUBJECT_WORDS: [Subject, RegExp][] = [
-  ['math', /(math|maths|رياضيات|حساب|كسور|fraction)/i],
-  ['science', /(science|علوم|water|ماء|plant|نبات)/i],
-  ['english', /(english|انجليزي|إنجليزي|انكليزي)/i],
-  ['arabic', /(arabic|عربي|العربية)/i],
-  ['social', /(social|history|geography|اجتماعيات|تاريخ|جغرافيا)/i],
+  ['math', /\b(math|maths|mathematics)\b|رياضيات|الرياضيات|حساب/i],
+  ['science', /\bscience\b|علوم|العلوم/i],
+  ['english', /\benglish\b|انجليزي|إنجليزي|انكليزي|الإنجليزية|الانجليزية/i],
+  ['arabic', /\barabic\b|عربي|العربية/i],
+  ['social', /\b(social studies|social|history|geography)\b|اجتماعيات|الاجتماعيات|تاريخ|جغرافيا/i],
 ];
+const TEST_WORD = /\b(test|exam|quiz)\b|اختبار|امتحان|مسابقة/i;
+const LESSON_WORD = /\b(lesson|homework|chapter|page)\b|درس|واجب|فصل|صفحة/i;
+// "on X" / "about X" / "عن X" / "حول X": the topic exactly as the parent typed it.
+const TOPIC_AFTER = /(?:\b(?:on|about)\b|(?:^|\s)(?:عن|حول|في)\s)\s*(.+)$/i;
+const DAYS_EN = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+const DAYS_AR = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+const TRAILING_WHEN = /\s*(?:\b(?:on\s+)?(?:next\s+)?(?:sunday|monday|tuesday|wednesday|thursday|friday|saturday|tomorrow|today)\b|(?:يوم\s+)?(?:الأحد|الاثنين|الثلاثاء|الأربعاء|الخميس|الجمعة|السبت)|غدًا|غدا|اليوم)\s*[.!]*$/i;
 
-/** Very small demo parser: "Math test on fractions Sunday" -> plan. */
+function nextWeekday(day: number): string {
+  const d = new Date();
+  const diff = (day - d.getDay() + 7) % 7 || 7;
+  d.setDate(d.getDate() + diff);
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+/**
+ * Small demo parser for the WhatsApp simulator. Adds a plan ONLY for a clear request that
+ * names a subject AND says lesson/test AND gives a topic, e.g. "Science test on plants Sunday".
+ * Questions ("How is she doing in math?") never become lessons. The topic keeps the parent's
+ * own words (only a trailing day name is moved into the due date).
+ */
 export function demoParsePlan(text: string): ParentPlan | undefined {
-  const found = SUBJECT_WORDS.find(([, re]) => re.test(text));
-  if (!found) return undefined;
-  let topic = text
-    .replace(/\b(test|lesson|on|about|has|a|the|for|sunday|monday|tuesday|wednesday|thursday|friday|saturday|tomorrow|today)\b/gi, ' ')
-    .replace(/(اختبار|درس|عن|يوم|الأحد|الاثنين|الثلاثاء|الأربعاء|الخميس|الجمعة|السبت|غدا|غدًا|اليوم)/g, ' ')
-    .replace(found[1], ' ')
-    .replace(/\s+/g, ' ')
-    .trim();
-  if (!topic) topic = text.trim();
-  const isTest = /(test|exam|quiz|اختبار|امتحان|فحص)/i.test(text);
+  const msg = text.trim();
+  if (!msg || /[?؟]/.test(msg)) return undefined;
+  if (/^(how|what|why|when|is|are|can|does|do|كيف|شو|ماذا|لماذا|متى|هل)\b/i.test(msg)) return undefined;
+  const found = SUBJECT_WORDS.find(([, re]) => re.test(msg));
+  const isTest = TEST_WORD.test(msg);
+  if (!found || (!isTest && !LESSON_WORD.test(msg))) return undefined;
+  const m = msg.match(TOPIC_AFTER);
+  if (!m) return undefined;
+  const topic = m[1].replace(TRAILING_WHEN, '').trim();
+  if (topic.length < 2) return undefined;
   let dueDate: string | undefined;
   if (isTest) {
-    const d = new Date();
-    d.setDate(d.getDate() + 3);
-    dueDate = d.toISOString().slice(0, 10);
+    const lower = msg.toLowerCase();
+    const en = DAYS_EN.findIndex((d) => lower.includes(d));
+    const ar = DAYS_AR.findIndex((d) => msg.includes(d));
+    const day = en >= 0 ? en : ar;
+    if (day >= 0) dueDate = nextWeekday(day);
+    else {
+      const d = new Date();
+      d.setDate(d.getDate() + 3);
+      dueDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    }
   }
   return { subject: found[0], topic: topic.slice(0, 60), dueDate, sessions: 2 };
 }

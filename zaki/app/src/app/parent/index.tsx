@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { ParentChildPicker } from '@/components/ParentChildPicker';
 import { Screen } from '@/components/Screen';
 import { Btn, Card, Txt } from '@/components/ui';
+import { goTo } from '@/lib/nav';
 import { useApp, useT } from '@/lib/store';
 
 export default function ParentHome() {
@@ -11,7 +12,7 @@ export default function ParentHome() {
   const { t } = useT();
   const leave = () => {
     app.lockParent();
-    router.dismissTo('/');
+    goTo('/');
   };
   return (
     <Screen parent back={leave} title={`👪 ${t('parentTitle')}`}>

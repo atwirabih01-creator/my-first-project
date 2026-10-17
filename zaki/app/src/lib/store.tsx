@@ -155,7 +155,8 @@ type Actions = {
   deleteChild: (id: string) => void;
   updateChild: (id: string, patch: Partial<ChildProfile>) => void;
   updateSettings: (id: string, patch: Partial<ChildSettings>) => void;
-  addPlanItem: (id: string, item: Omit<PlanItem, 'id' | 'addedAt'>) => PlanItem;
+  /** Adds to the plan; returns null when the same subject + topic is already there (any case). */
+  addPlanItem: (id: string, item: Omit<PlanItem, 'id' | 'addedAt'>) => PlanItem | null;
   savePack: (id: string, key: string, cp: CachedPack) => void;
   touchLesson: (id: string, key: string, subject: Subject, topic: string) => void;
   recordWrongCheck: (id: string, key: string) => void;
@@ -181,6 +182,10 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     parentUnlocked: false,
   }));
   const sessionStartRef = useRef<Record<string, string>>({});
+  const stateRef = useRef(state);
+  useEffect(() => {
+    stateRef.current = state;
+  }, [state]);
 
   // Load once.
   useEffect(() => {
@@ -293,6 +298,17 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       updateSettings: (id, patch) =>
         setState((s) => ({ ...s, settings: { ...s.settings, [id]: { ...(s.settings[id] ?? DEFAULT_SETTINGS), ...patch } } })),
       addPlanItem: (id, item) => {
+        const same = (p: PlanItem) => p.subject === item.subject && p.topic.trim().toLowerCase() === item.topic.trim().toLowerCase();
+        if ((stateRef.current.plans[id] ?? []).some(same)) {
+          // Already planned: only upgrade it to a test / update the date if asked.
+          if (item.kind === 'test') {
+            setState((s) => ({
+              ...s,
+              plans: { ...s.plans, [id]: (s.plans[id] ?? []).map((p) => (same(p) ? { ...p, kind: 'test', dueDate: item.dueDate ?? p.dueDate } : p)) },
+            }));
+          }
+          return null;
+        }
         const full: PlanItem = { ...item, id: randomId('p'), addedAt: new Date().toISOString() };
         setState((s) => ({ ...s, plans: { ...s.plans, [id]: [...(s.plans[id] ?? []), full] } }));
         return full;

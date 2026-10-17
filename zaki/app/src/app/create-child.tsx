@@ -23,7 +23,7 @@ export default function CreateChild() {
   const ok = clean.trim().length >= 2;
 
   return (
-    <Screen title={t('createTitle')} back>
+    <Screen title={t('createTitle')} back="/">
       <Card>
         <Txt bold>{t('nickname')}</Txt>
         <TextInput

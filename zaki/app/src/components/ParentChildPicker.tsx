@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
+import { View } from 'react-native';
 
+import { C, S } from '@/constants/theme';
 import { useApp, useT } from '@/lib/store';
 import { Avatar } from './Avatar';
-import { Chip, Row, Txt } from './ui';
+import { Card, Chip, Row, Txt } from './ui';
 
-/** Which child the grown-up is looking at. Keeps the grown-up's chosen language. */
+/** Which child the grown-up is working on: shown big, with a switch. Keeps the grown-up's language. */
 export function ParentChildPicker() {
   const app = useApp();
   const { t } = useT();
@@ -13,18 +15,36 @@ export function ParentChildPicker() {
   useEffect(() => {
     if (missing && first) app.setActiveChild(first, true);
   }, [missing, first, app]);
+  const current = app.profiles.find((p) => p.id === app.activeChildId);
   if (app.profiles.length === 0) return null;
   return (
-    <Row wrap>
-      <Txt variant="small" bold>
-        {t('pChild')}:
-      </Txt>
-      {app.profiles.map((p) => (
-        <Row key={p.id} gap={4}>
-          <Avatar id={p.avatar} size={32} />
-          <Chip label={p.nickname} selected={p.id === app.activeChildId} onPress={() => app.setActiveChild(p.id, true)} testID={`pchild-${p.nickname}`} />
+    <Card tone="primary" style={{ gap: S.sm }}>
+      {current ? (
+        <Row testID="parent-current-child">
+          <Avatar id={current.avatar} size={48} />
+          <View style={{ flex: 1, minWidth: 0 }}>
+            <Txt variant="h2" color={C.primary}>
+              {t('pNowFor', { name: current.nickname, n: current.grade })}
+            </Txt>
+          </View>
         </Row>
-      ))}
-    </Row>
+      ) : null}
+      {app.profiles.length > 1 ? (
+        <Row wrap>
+          <Txt variant="small" bold>
+            {t('pSwitch')}
+          </Txt>
+          {app.profiles.map((p) => (
+            <Chip
+              key={p.id}
+              label={p.nickname}
+              selected={p.id === app.activeChildId}
+              onPress={() => app.setActiveChild(p.id, true)}
+              testID={`pchild-${p.nickname}`}
+            />
+          ))}
+        </Row>
+      ) : null}
+    </Card>
   );
 }

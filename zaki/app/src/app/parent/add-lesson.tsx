@@ -79,7 +79,7 @@ export default function AddLesson() {
   }
 
   return (
-    <Screen parent back title={`➕ ${t('pAddLesson')}`}>
+    <Screen parent back="/parent" title={`➕ ${t('pAddLesson')}`}>
       <ParentChildPicker />
       {busy ? (
         <View style={{ alignItems: 'center', gap: S.md, paddingVertical: S.xl }} testID="preparing">
@@ -149,7 +149,7 @@ export default function AddLesson() {
               {demoUsed ? <Txt variant="small">{t('demoUsedSample')}</Txt> : null}
             </Card>
           ) : null}
-          <Btn title={t('prepare')} big icon="✨" onPress={prepare} testID="prepare-lesson" />
+          <Btn title={child ? t('prepareFor', { name: child.nickname }) : t('prepare')} big icon="✨" onPress={prepare} testID="prepare-lesson" />
         </>
       )}
     </Screen>

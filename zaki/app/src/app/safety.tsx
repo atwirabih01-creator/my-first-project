@@ -1,6 +1,6 @@
 // FIXED SAFETY SCREEN. Calm, bundled text only (never AI text), never promises secrecy,
 // works offline, never behind the parental gate. Numbers are plain big text (no tel: links).
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { View } from 'react-native';
 
 import { Mascot } from '@/components/Mascot';
@@ -8,6 +8,7 @@ import { Screen } from '@/components/Screen';
 import { Btn, Card, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
 import { getChildHelpRoutes, type HelpKind } from '@/lib/helpRoutes';
+import { goTo } from '@/lib/nav';
 import { useChild, useT } from '@/lib/store';
 
 const KINDS: HelpKind[] = ['home', 'self_harm', 'fear', 'general'];
@@ -25,7 +26,7 @@ export default function Safety() {
 
   return (
     <Screen
-      back={() => (router.canGoBack() ? router.back() : router.replace(app.activeChildId ? '/home' : '/'))}
+      back={app.activeChildId ? '/home' : '/'}
       bg="#F4F8FF"
       showLang>
       <View style={{ alignItems: 'center', gap: S.sm }} testID="safety-screen">
@@ -40,7 +41,8 @@ export default function Safety() {
         <Txt bold center>
           {t('safetyNoSecret')}
         </Txt>
-        <Txt center>{t('safetyFlag')}</Txt>
+        {/* Only promise that someone will be told when a real server is connected. */}
+        <Txt center testID="safety-tell-line">{app.demo === false ? t('safetyFlag') : t('safetyShowGrownUp')}</Txt>
       </Card>
 
       <Txt variant="h2">{t('safetyWhat')}</Txt>
@@ -71,7 +73,7 @@ export default function Safety() {
       <Btn
         title={t('safetyBack')}
         variant="secondary"
-        onPress={() => (router.canGoBack() ? router.back() : router.dismissTo('/'))}
+        onPress={() => goTo(app.activeChildId ? '/home' : '/')}
         testID="safety-back"
       />
     </Screen>

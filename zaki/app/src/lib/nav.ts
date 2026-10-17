@@ -1,4 +1,4 @@
-import { router } from 'expo-router';
+import { router, type Href } from 'expo-router';
 
 /** Open the lesson loop for a subject + topic. mode "test" jumps straight to the test. */
 export function openLesson(item: { subject: string; topic: string }, mode: 'full' | 'test' = 'full') {
@@ -12,4 +12,24 @@ export function formatDate(iso: string, lang: string): string {
   } catch {
     return iso;
   }
+}
+
+/**
+ * In-app "back": always go to a fixed, logical parent screen. Never uses browser
+ * history, so it also works when the demo is opened as a file (file://), where the
+ * browser's own history would leave the app.
+ */
+export function goTo(href: Href) {
+  // replace() swaps the current screen and never calls history.back()/go(), unlike
+  // back()/dismissTo(), which step through browser history (fatal on file://).
+  router.replace(href);
+}
+
+// Where "I need help" should return to (the lesson the child was in), without history.
+let helpReturn: Href | null = null;
+export function setHelpReturn(href: Href | null) {
+  helpReturn = href;
+}
+export function getHelpReturn(): Href | null {
+  return helpReturn;
 }

@@ -1,6 +1,6 @@
 // LESSON LOOP: loading -> intro -> recap -> teach -> check -> ask Zaki -> summary -> test
 // -> pass ("Learned!") or fail (summary again -> retest from retestPool, max 2 retries a day).
-import { router, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import { View } from 'react-native';
 
@@ -10,6 +10,7 @@ import { AskZaki, Choice, LessonHelpBar, QuestionWithHints } from '@/components/
 import { Btn, Card, ProgressBar, Row, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
 import { fetchLessonPack } from '@/lib/api';
+import { goTo, setHelpReturn } from '@/lib/nav';
 import { lessonKeyOf, MAX_TESTS_PER_DAY, todayStr, useChild, useT } from '@/lib/store';
 import type { CachedPack, Question, Subject } from '@/lib/types';
 
@@ -107,7 +108,8 @@ export default function Lesson() {
 
   if (!child) return <Screen child>{null}</Screen>;
 
-  const goHome = () => router.dismissTo('/home');
+  const goHome = () => goTo('/home');
+  setHelpReturn({ pathname: '/lesson', params: { subject, topic } });
 
   function startTest() {
     if (!pack) return;

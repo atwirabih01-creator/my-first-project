@@ -127,8 +127,8 @@ export function Card({ children, style, tone }: { children: ReactNode; style?: S
   return <View style={[styles.card, { backgroundColor: bg }, style]}>{children}</View>;
 }
 
-export function Row({ children, style, gap = S.sm, wrap }: { children: ReactNode; style?: StyleProp<ViewStyle>; gap?: number; wrap?: boolean }) {
-  return <View style={[{ flexDirection: 'row', alignItems: 'center', gap }, wrap && { flexWrap: 'wrap' }, style]}>{children}</View>;
+export function Row({ children, style, gap = S.sm, wrap, testID }: { children: ReactNode; style?: StyleProp<ViewStyle>; gap?: number; wrap?: boolean; testID?: string }) {
+  return <View testID={testID} style={[{ flexDirection: 'row', alignItems: 'center', gap }, wrap && { flexWrap: 'wrap' }, style]}>{children}</View>;
 }
 
 export function Chip({ label, selected, onPress, a11yLabel, testID }: { label: string; selected?: boolean; onPress?: () => void; a11yLabel?: string; testID?: string }) {

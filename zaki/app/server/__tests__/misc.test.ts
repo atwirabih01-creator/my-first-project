@@ -14,15 +14,22 @@ describe("help routes (fixed table)", () => {
     assert.equal(HELP_ROUTES_LAST_CHECKED, "2026-10-16");
     assert.equal(getChildHelpRoutes, AppCopy.getChildHelpRoutes);
   });
-  it("Lebanon: trusted adult first; home -> himaya with the 112 fallback; fear -> 1564 and no police", () => {
+  it("Lebanon: trusted adult first; 112 danger line on every screen; home -> 1564 + himaya with the 112 fallback; fear -> 112 + 1564, no police wording", () => {
     const home = getChildHelpRoutes("LB", "home", NOW);
     assert.equal(home[0].id, "trusted_adult");
     const himaya = home.find((r) => r.id === "lb_himaya")!;
     assert.equal(himaya.number, "03 414 964");
     assert.match(himaya.fallback!.en, /If nobody answers, or you are in danger now, call 112/);
     assert.ok(home.some((r) => r.number === "112"));
-    const fear = getChildHelpRoutes("LB", "fear", NOW).map((r) => r.number);
-    assert.deepEqual(fear, [null, "1564"]);
+    assert.ok(home.some((r) => r.number === "1564"));
+    const fearRoutes = getChildHelpRoutes("LB", "fear", NOW);
+    assert.deepEqual(fearRoutes.map((r) => r.number), [null, "112", "1564"]);
+    for (const r of fearRoutes) assert.ok(!/police/i.test(r.text.en) && !/الشرطة/.test(r.text.ar));
+    for (const kind of ["home", "self_harm", "fear", "general"] as const) {
+      const routes = getChildHelpRoutes("LB", kind, NOW);
+      assert.equal(routes[0].id, "trusted_adult");
+      assert.ok(routes.some((r) => r.number === "112"), kind);
+    }
     assert.ok(!getChildHelpRoutes("LB", "general", NOW).some((r) => r.number === "919"));
   });
   it("Qatar: 919 (Aman); unknown country: trusted adult only; stale table: emergency only", () => {

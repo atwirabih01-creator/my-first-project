@@ -59,11 +59,12 @@ export const HELP_ROUTES: Record<HelpCountry, HelpRoute[]> = {
       number: "112",
       intlNumber: "+961 112",
       text: {
-        en: "If you are in danger now, call 112 (police, all day and all night).",
-        ar: "إذا كنت في خطر الآن، اتصل بالرقم 112 (الشرطة، طوال النهار والليل).",
+        en: "If you are in danger right now, call 112.",
+        ar: "إذا كنت في خطر الآن، اتصل بالرقم 112.",
       },
       available247: true,
-      kinds: ["home", "self_harm", "general"],
+      // Shown on EVERY child safety screen in Lebanon (QA S2), including fear. Neutral wording, no police framing.
+      kinds: ["home", "self_harm", "fear", "general"],
       emergency: true,
     },
     {
@@ -75,7 +76,7 @@ export const HELP_ROUTES: Record<HelpCountry, HelpRoute[]> = {
         ar: "إذا كنت حزينًا جدًّا أو خائفًا، اتصل بالرقم 1564 (إمبريس). يجيبك أشخاص لطفاء طوال النهار والليل.",
       },
       available247: true,
-      kinds: ["self_harm", "fear", "general"],
+      kinds: ["home", "self_harm", "fear", "general"],
     },
     {
       id: "lb_himaya",

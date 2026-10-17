@@ -8,7 +8,7 @@ import { Screen } from '@/components/Screen';
 import { Btn, Card, Row, Stars, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
 import { lessonKeyOf, statusOf, todayStr, useChild, useT } from '@/lib/store';
-import { formatDate, openLesson } from '@/lib/nav';
+import { formatDate, openLesson, setHelpReturn } from '@/lib/nav';
 import { subjectInfo } from '@/lib/subjects';
 import type { PlanItem } from '@/lib/types';
 
@@ -17,6 +17,7 @@ export default function Home() {
   const { t, lang } = useT();
   if (!child) return <Screen child>{null}</Screen>;
 
+  setHelpReturn(null);
   const young = child.grade <= 3;
   const used = progress.usage[todayStr()] ?? 0;
   const left = Math.max(0, Math.round(settings.dailyLimitMin - used));
@@ -34,7 +35,7 @@ export default function Home() {
     <Screen
       child
       trackTime
-      back={() => router.dismissTo('/')}
+      back="/"
       headerRight={<Stars n={progress.stars} />}>
       <Row>
         <Avatar id={child.avatar} size={56} />

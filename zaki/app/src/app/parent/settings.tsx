@@ -18,7 +18,7 @@ export default function Settings() {
   const [confirmDelete, setConfirmDelete] = useState(false);
 
   return (
-    <Screen parent back title={`⚙️ ${t('pSettings')}`}>
+    <Screen parent back="/parent" title={`⚙️ ${t('pSettings')}`}>
       <ParentChildPicker />
       {child ? (
         <View style={{ gap: S.md }}>

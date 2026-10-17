@@ -11,7 +11,7 @@ import { useT } from '@/lib/store';
 export default function Break() {
   const { t } = useT();
   return (
-    <Screen child back={() => router.dismissTo('/')}>
+    <Screen child back="/">
       <View style={{ alignItems: 'center', gap: S.lg, paddingTop: S.xl }} testID="break-screen">
         <Mascot size={170} mood="calm" />
         <Txt variant="title" center>

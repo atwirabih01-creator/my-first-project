@@ -7,13 +7,16 @@ import { Mascot } from '@/components/Mascot';
 import { Screen } from '@/components/Screen';
 import { Btn, Card, Txt } from '@/components/ui';
 import { S } from '@/constants/theme';
-import { useT } from '@/lib/store';
+import { getHelpReturn, goTo } from '@/lib/nav';
+import { useApp, useT } from '@/lib/store';
 
 export default function Help() {
   const { t } = useT();
+  const app = useApp();
+  const backTo = getHelpReturn() ?? (app.activeChildId ? '/home' : '/');
   const [lessonHelp, setLessonHelp] = useState(false);
   return (
-    <Screen child back title={t('helpTitle')}>
+    <Screen child back={backTo} title={t('helpTitle')}>
       <View style={{ alignItems: 'center' }}>
         <Mascot size={120} mood="calm" />
       </View>
@@ -21,7 +24,7 @@ export default function Help() {
       {lessonHelp ? (
         <Card tone="sun">
           <Txt>{t('helpLessonText')}</Txt>
-          <Btn title={t('back')} variant="secondary" onPress={() => router.back()} />
+          <Btn title={t('back')} variant="secondary" onPress={() => goTo(backTo)} />
         </Card>
       ) : null}
       <Btn

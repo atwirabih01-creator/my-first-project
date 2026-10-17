@@ -7,6 +7,7 @@ import { Screen } from '@/components/Screen';
 import { AskZaki, LessonHelpBar, QuestionWithHints } from '@/components/lesson';
 import { Btn, Card, Chip, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
+import { setHelpReturn } from '@/lib/nav';
 import { statusOf, useChild, useT } from '@/lib/store';
 import { subjectInfo } from '@/lib/subjects';
 
@@ -19,6 +20,7 @@ export default function Practice() {
   const [step, setStep] = useState(0);
   const [qi, setQi] = useState(0);
 
+  setHelpReturn('/practice');
   const cp = key ? packs[key] : undefined;
   const pack = cp?.pack ?? null;
   const extra = pack ? [...pack.checks, ...pack.retestPool.slice(0, 3)] : [];
@@ -27,7 +29,7 @@ export default function Practice() {
     <Screen
       child
       trackTime
-      back={key ? () => setKey(null) : true}
+      back={key ? () => setKey(null) : '/home'}
       title={`💬 ${t('practice')}`}
       lessonKey={key ?? undefined}
       footer={key ? <LessonHelpBar lessonKey={key} /> : undefined}>

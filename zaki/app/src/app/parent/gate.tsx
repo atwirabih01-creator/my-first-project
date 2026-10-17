@@ -33,7 +33,7 @@ export default function Gate() {
   }
 
   return (
-    <Screen back title={`🔒 ${t('gateTitle')}`}>
+    <Screen back={app.activeChildId ? '/home' : '/'} title={`🔒 ${t('gateTitle')}`}>
       <Card>
         <Txt>{t('gateText')}</Txt>
         <Txt variant="title" center testID="gate-words">

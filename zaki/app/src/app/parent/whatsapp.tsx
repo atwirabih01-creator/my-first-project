@@ -55,29 +55,35 @@ export default function WhatsApp() {
     setBusy(true);
     const res = await sendParentMessage(body, rl, settings.country);
     setBusy(false);
-    if (res.plan) {
-      app.addPlanItem(child.id, {
+    let added: 'added' | 'already' | null = null;
+    if (res.plan && res.plan.topic && res.plan.subject) {
+      const item = app.addPlanItem(child.id, {
         subject: res.plan.subject,
         topic: res.plan.topic,
         kind: res.plan.dueDate ? 'test' : 'lesson',
         dueDate: res.plan.dueDate,
         sessions: res.plan.sessions,
       });
+      added = item ? 'added' : 'already';
     }
+    const planLine = () =>
+      res.plan
+        ? translate(rl, added === 'added' ? 'waPlanAdded' : 'waAlready', { topic: res.plan.topic, name: child.nickname })
+        : '';
     if (res.reply) {
       zaki(res.reply);
-      if (res.plan) zaki(translate(rl, 'waPlanAdded', { topic: res.plan.topic, name: child.nickname }));
+      if (added) zaki(planLine());
       return;
     }
-    // Demo replies (no server).
+    // Demo replies (no server). Anything unclear gets the fixed polite redirect.
     if (cmd === 'PLAN' || cmd === 'خطة') zaki(translate(rl, 'waPlanReply'));
     else if (cmd === 'HELP' || cmd === 'مساعدة') zaki(translate(rl, 'waHelp'));
-    else if (res.plan) zaki(translate(rl, 'waPlanAdded', { topic: res.plan.topic, name: child.nickname }));
+    else if (added) zaki(planLine());
     else zaki(translate(rl, 'waRedirect'));
   }
 
   return (
-    <Screen parent back title={`💬 ${t('pWhatsapp')}`} scroll={false} bg={C.waBg}>
+    <Screen parent back="/parent" title={`💬 ${t('pWhatsapp')}`} scroll={false} bg={C.waBg}>
       <ParentChildPicker />
       <View style={styles.header}>
         <View style={styles.headerAvatar}>
@@ -139,6 +145,6 @@ const styles = StyleSheet.create({
   msgText: { fontSize: 16, color: '#111B21', lineHeight: 22 },
   time: { fontSize: 11, color: '#667781', alignSelf: 'flex-end' },
   quick: { backgroundColor: '#FFFFFF', borderRadius: R.pill, paddingHorizontal: S.md, minHeight: 40, justifyContent: 'center', borderWidth: 1, borderColor: '#CFE3DD' },
-  input: { flex: 1, minHeight: 48, backgroundColor: '#FFFFFF', borderRadius: R.pill, paddingHorizontal: S.lg, fontSize: 16, color: C.text },
-  sendBtn: { width: 48, height: 48, borderRadius: 24, backgroundColor: '#00A884', alignItems: 'center', justifyContent: 'center' },
+  input: { flex: 1, flexShrink: 1, minWidth: 0, width: '100%', minHeight: 48, backgroundColor: '#FFFFFF', borderRadius: R.pill, paddingHorizontal: S.lg, fontSize: 16, color: C.text },
+  sendBtn: { flexShrink: 0, width: 48, height: 48, borderRadius: 24, backgroundColor: '#00A884', alignItems: 'center', justifyContent: 'center' },
 });
