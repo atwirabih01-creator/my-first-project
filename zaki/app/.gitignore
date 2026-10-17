@@ -41,3 +41,6 @@ example
 # generated native folders
 /ios
 /android
+
+# Zaki safety flag queue (reviewer only, never commit)
+server/data/flags.jsonl

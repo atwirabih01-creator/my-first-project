@@ -8,6 +8,6 @@ module.exports = ({ config }) => {
   return {
     ...config,
     web: { ...config.web, output: 'single' },
-    plugins: (config.plugins || []).map((p) => (p === 'expo-router' ? ['expo-router', { apiRoutes: false }] : p)),
+    plugins: (config.plugins || []).map((p) => (p === 'expo-router' ? ['expo-router', { apiRoutes: false, asyncRoutes: false }] : p)),
   };
 };
