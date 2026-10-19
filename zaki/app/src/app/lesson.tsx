@@ -1,6 +1,6 @@
 // LESSON LOOP: loading -> intro -> recap -> teach -> check -> ask Zaki -> summary -> test
 // -> pass ("Learned!") or fail (summary again -> retest from retestPool, max 2 retries a day).
-import { useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import { Modal, View } from 'react-native';
 
@@ -206,6 +206,18 @@ export default function Lesson() {
                 goHome();
               }}
               testID="leave-go"
+            />
+            {/* Safety rule: "I need help" is never dimmed or blocked, even in this box. */}
+            <Btn
+              title={t('needHelp')}
+              icon="🆘"
+              variant="help"
+              big
+              onPress={() => {
+                setAskLeave(false);
+                router.push('/help');
+              }}
+              testID="leave-need-help"
             />
           </Card>
         </View>

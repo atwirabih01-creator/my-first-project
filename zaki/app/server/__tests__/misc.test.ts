@@ -66,13 +66,44 @@ describe("http helpers", () => {
     await assert.rejects(readJsonBody(new Request("http://x", { method: "POST", body: "[1]" }), 100), (e: HttpError) => e.status === 400);
     assert.deepEqual(await readJsonBody(new Request("http://x", { method: "POST", body: '{"a":1}' }), 100), { a: 1 });
   });
-  it("rate-limits per client", () => {
+  it("rate-limits per client (only trusts X-Forwarded-For with TRUST_PROXY=1)", () => {
+    const before = process.env.TRUST_PROXY;
+    process.env.TRUST_PROXY = "1";
     __resetRateLimitsForTests();
     const r = new Request("http://x", { headers: { "x-forwarded-for": "1.2.3.4" } });
     for (let i = 0; i < 20; i++) rateLimit(r, "parent", 0);
     assert.throws(() => rateLimit(r, "parent", 0), (e: HttpError) => e.status === 429);
     rateLimit(new Request("http://x", { headers: { "x-forwarded-for": "5.6.7.8" } }), "parent", 0);
     rateLimit(r, "parent", 61_000); // new window
+    if (before === undefined) delete process.env.TRUST_PROXY;
+    else process.env.TRUST_PROXY = before;
+  });
+  it("a spoofed X-Forwarded-For does not reset the limit when TRUST_PROXY is unset", () => {
+    const before = process.env.TRUST_PROXY;
+    delete process.env.TRUST_PROXY;
+    __resetRateLimitsForTests();
+    for (let i = 0; i < 20; i++) rateLimit(new Request("http://x", { headers: { "x-forwarded-for": `9.9.9.${i}` } }), "parent", 0);
+    assert.throws(
+      () => rateLimit(new Request("http://x", { headers: { "x-forwarded-for": "1.1.1.1" } }), "parent", 0),
+      (e: HttpError) => e.status === 429,
+    );
+    if (before !== undefined) process.env.TRUST_PROXY = before;
+  });
+  it("ZAKI_RATE_LIMIT_OFF=1 skips limiting outside production only", () => {
+    const penv = process.env as Record<string, string | undefined>;
+    const env = { off: penv.ZAKI_RATE_LIMIT_OFF, node: penv.NODE_ENV };
+    __resetRateLimitsForTests();
+    penv.ZAKI_RATE_LIMIT_OFF = "1";
+    penv.NODE_ENV = "test";
+    for (let i = 0; i < 50; i++) rateLimit(new Request("http://x"), "parent", 0);
+    penv.NODE_ENV = "production";
+    __resetRateLimitsForTests();
+    for (let i = 0; i < 20; i++) rateLimit(new Request("http://x"), "parent", 0);
+    assert.throws(() => rateLimit(new Request("http://x"), "parent", 0), (e: HttpError) => e.status === 429);
+    if (env.off === undefined) delete penv.ZAKI_RATE_LIMIT_OFF;
+    else penv.ZAKI_RATE_LIMIT_OFF = env.off;
+    if (env.node === undefined) delete penv.NODE_ENV;
+    else penv.NODE_ENV = env.node;
   });
   it("childRef must be a random id, never a name with spaces", () => {
     assert.equal(asChildRef("kid_123456"), "kid_123456");

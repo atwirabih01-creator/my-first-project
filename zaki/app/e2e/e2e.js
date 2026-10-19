@@ -156,8 +156,29 @@ const fromWords = (w) => {
   await tap('back-btn');
   check('N5: back mid-test shows in-app "Leave the test?"', (await visible('leave-title', 3000)) && (await tid('leave-title').innerText()).includes('Leave the test'));
   await shot('en-test-leave-confirm');
+  const helpBox = await tid('leave-need-help').boundingBox();
+  check('Safety: full-size "I need help" inside the leave box', !!helpBox && helpBox.height >= 60 && helpBox.width >= 250);
+  await tap('leave-need-help');
+  check('Safety: "I need help" from the leave box opens help (no gate)', inApp() && (await visible('help-feel', 3000)));
+  await tap('back-btn');
+  await visible('intro-start', 8000);
+  await tap('intro-start');
+  while (!(await visible('teach-text', 500)) && !(await visible('to-test', 300))) {
+    if (await visible('question-text', 300)) await answerCurrent(true);
+  }
+  // Return to the test the quickest way: skip through teach/checks/ask to the test.
+  while (await visible('teach-text', 500)) await tap('next-btn');
+  while (await visible('question-text', 500) && !(await visible('test-timer', 200))) {
+    await answerCurrent(true);
+    await tap('next-btn');
+  }
+  if (await visible('ask-skip', 1000)) await tap('ask-skip');
+  if (await visible('to-test', 1000)) await tap('to-test');
+  await tap('test-start');
+  await tap('back-btn');
+  await visible('leave-title', 3000);
   await tap('leave-stay');
-  check('N5: Stay keeps the same test question', inApp() && (await tid('question-text').innerText()) === firstTestQ);
+  check('N5: Stay keeps the same test question', inApp() && (await tid('question-text').innerText()) === firstTestQ && (await visible('test-timer', 2000)));
   // Fail: 2 right, 3 wrong
   for (const right of [true, true, false, false, false]) await answerCurrent(right);
   check('fail result', await visible('result-fail'));

@@ -58,15 +58,29 @@ export const RATE_LIMITS = {
   health: { limit: 60, windowMs: 60_000 },
 } as const;
 
+/**
+ * Who is calling. Proxy headers (X-Forwarded-For etc.) can be set by ANY client, so they
+ * are only trusted when the host sets TRUST_PROXY=1 (i.e. we sit behind a proxy that
+ * overwrites them). Otherwise every caller shares one bucket: the limit then caps the
+ * whole server, and a spoofed header can never reset it. (Web Request objects in API
+ * routes don't expose the socket address.)
+ */
 function clientKey(request: Request): string {
+  if (process.env.TRUST_PROXY !== "1") return "local";
   const h = request.headers;
   const ip =
     h.get("cf-connecting-ip") ?? h.get("x-real-ip") ?? h.get("x-forwarded-for")?.split(",")[0]?.trim() ?? "local";
   return ip.slice(0, 64);
 }
 
+/** Dev/test-only switch (e.g. for the red-team suite). Never active in production. */
+function rateLimitOff(): boolean {
+  return process.env.NODE_ENV !== "production" && process.env.ZAKI_RATE_LIMIT_OFF === "1";
+}
+
 /** Throws 429 when the caller is over the limit for this route. */
 export function rateLimit(request: Request, route: keyof typeof RATE_LIMITS, now = Date.now()): void {
+  if (rateLimitOff()) return;
   const { limit, windowMs } = RATE_LIMITS[route];
   const key = `${route}:${clientKey(request)}`;
   let b = buckets.get(key);

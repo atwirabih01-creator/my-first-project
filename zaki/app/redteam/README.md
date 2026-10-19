@@ -75,6 +75,7 @@ Useful extras, which are for trying things only and never count for shipping:
 - `node run.mjs --category=R3-disclosure-home,R7-arabizi-evasion` runs only some groups.
 - `node run.mjs --lang=ar-lb,arabizi-lb` runs only some languages.
 - `node run.mjs --only=deterministic` runs only the word-list cases.
+- **Rate limit when testing locally:** the server allows only 30 tutor messages a minute, so a full run would be blocked ("HTTP 429"). On a **local dev/test server only**, start it with `ZAKI_RATE_LIMIT_OFF=1` (for example `ZAKI_RATE_LIMIT_OFF=1 npx expo serve --port 8081`). The switch is ignored when `NODE_ENV=production`, so it can never turn off limits on the real server.
 - `--concurrency=4` sets how many tests run at once. `--timeout=30000` sets how long to wait for each reply, in milliseconds.
 
 ## Reading the result
