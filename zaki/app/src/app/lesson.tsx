@@ -2,7 +2,7 @@
 // -> pass ("Learned!") or fail (summary again -> retest from retestPool, max 2 retries a day).
 import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
-import { View } from 'react-native';
+import { Modal, View } from 'react-native';
 
 import { Mascot } from '@/components/Mascot';
 import { Screen } from '@/components/Screen';
@@ -10,6 +10,7 @@ import { AskZaki, Choice, LessonHelpBar, QuestionWithHints } from '@/components/
 import { Btn, Card, ProgressBar, Row, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
 import { fetchLessonPack } from '@/lib/api';
+import { shuffleChoices } from '../../server/shuffle';
 import { goTo, setHelpReturn } from '@/lib/nav';
 import { lessonKeyOf, MAX_TESTS_PER_DAY, todayStr, useChild, useT } from '@/lib/store';
 import type { CachedPack, Question, Subject } from '@/lib/types';
@@ -46,6 +47,7 @@ export default function Lesson() {
   const [idx, setIdx] = useState(0);
   const [recapWrong, setRecapWrong] = useState<number | null>(null);
   const [reload, setReload] = useState(0);
+  const [askLeave, setAskLeave] = useState(false);
 
   // Test state
   const [testQs, setTestQs] = useState<Question[]>([]);
@@ -121,10 +123,14 @@ export default function Lesson() {
     let qs: Question[];
     if (attempt <= 1 || pack.retestPool.length === 0) {
       qs = pack.test.slice(0, TEST_SIZE);
-    } else {
+    } else if (attempt === 2 || pack.retestPool.length > TEST_SIZE) {
       const pool = pack.retestPool;
       const start = ((attempt - 2) * TEST_SIZE) % pool.length;
       qs = [...pool.slice(start), ...pool.slice(0, start)].slice(0, Math.min(TEST_SIZE, pool.length));
+    } else {
+      // Second retest the same day with a small pool: don't repeat the first retest.
+      // Reuse the original test questions in a new order with the answers moved around.
+      qs = [...pack.test].reverse().slice(0, TEST_SIZE).map((q) => shuffleChoices(q));
     }
     setTestQs(qs);
     setTestIdx(0);
@@ -162,6 +168,11 @@ export default function Lesson() {
   }
 
   const showHelpBar = phase !== 'loading' && phase !== 'error';
+  // Demo mode: if the sample lesson isn't what the grown-up typed, show the sample's real topic.
+  const norm = (x: string) => x.trim().toLowerCase();
+  const sampleMismatch =
+    !!cp?.demo && !!pack && norm(pack.topic) !== norm(topic) && !norm(pack.topic).includes(norm(topic)) && !norm(topic).includes(norm(pack.topic));
+  const onBack = () => (phase === 'test' ? setAskLeave(true) : goHome());
   const sources = cp?.sources ?? [];
 
   return (
@@ -169,9 +180,37 @@ export default function Lesson() {
       child
       trackTime
       lessonKey={key}
-      back={goHome}
-      title={topic}
+      back={onBack}
+      title={sampleMismatch && pack ? pack.topic : topic}
       footer={showHelpBar ? <LessonHelpBar lessonKey={key} context={helpContext} /> : undefined}>
+      {sampleMismatch && pack ? (
+        <Txt variant="small" testID="sample-note">
+          🧪 {t('sampleNote', { topic: pack.topic })}
+        </Txt>
+      ) : null}
+
+      {/* N5: leaving in the middle of a test asks first (in-app, no browser dialog). */}
+      <Modal visible={askLeave} transparent animationType="fade" onRequestClose={() => setAskLeave(false)}>
+        <View style={{ flex: 1, backgroundColor: 'rgba(30,58,76,0.45)', alignItems: 'center', justifyContent: 'center', padding: S.lg }}>
+          <Card style={{ width: '100%', maxWidth: 420, gap: S.md }}>
+            <Txt variant="h2" center testID="leave-title">
+              {t('leaveTitle')}
+            </Txt>
+            <Txt center>{t('leaveText')}</Txt>
+            <Btn title={t('stay')} big onPress={() => setAskLeave(false)} testID="leave-stay" />
+            <Btn
+              title={t('leave')}
+              variant="secondary"
+              onPress={() => {
+                setAskLeave(false);
+                goHome();
+              }}
+              testID="leave-go"
+            />
+          </Card>
+        </View>
+      </Modal>
+
       {settings.paused ? (
         <Card tone="sun" style={{ alignItems: 'center' }}>
           <Mascot size={100} mood="calm" />

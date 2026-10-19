@@ -152,6 +152,12 @@ const fromWords = (w) => {
   check('grade 5 shows count-up timer', await visible('test-timer'));
   const firstTestQ = await tid('question-text').innerText();
   await shot('en-test-timed');
+  // N5: leaving mid-test asks first (in-app), Stay keeps the test going
+  await tap('back-btn');
+  check('N5: back mid-test shows in-app "Leave the test?"', (await visible('leave-title', 3000)) && (await tid('leave-title').innerText()).includes('Leave the test'));
+  await shot('en-test-leave-confirm');
+  await tap('leave-stay');
+  check('N5: Stay keeps the same test question', inApp() && (await tid('question-text').innerText()) === firstTestQ);
   // Fail: 2 right, 3 wrong
   for (const right of [true, true, false, false, false]) await answerCurrent(right);
   check('fail result', await visible('result-fail'));
@@ -253,6 +259,10 @@ const fromWords = (w) => {
   await tap('p-add');
   check('photo reminder shown', (await tid('photo-reminder').innerText()).includes('no faces or names'));
   check('M2: prepare button names the child', (await tid('prepare-lesson').innerText()).includes('Maya'));
+  await tap('subject-english');
+  await tid('lesson-name').fill('Nouns');
+  await tap('prepare-lesson');
+  check('N4: add-lesson says which sample lesson was used', (await tid('add-lesson-msg').locator('..').innerText({ timeout: 10000 })).includes('sample lesson was used ('));
   await tap('subject-science');
   await tid('lesson-name').fill('Plants');
   await shot('en-parent-add-lesson');
@@ -276,6 +286,8 @@ const fromWords = (w) => {
   check('S4: a question is NOT added as a lesson (polite redirect)', r.includes('only help with reports and lesson plans'));
   r = await waSend('Science test on plants Sunday');
   check('S4: duplicate topic (case-insensitive) not added twice', r.includes('already'));
+  r = await waSend('كيف حال مايا اليوم؟');
+  check('N3: Arabic message gets an Arabic reply (report language is English)', /[\u0600-\u06FF]/.test(r) && r.includes('أستطيع'));
   r = await waSend('Math test on fractions and decimals Sunday');
   check('S4: clear request added with the parent\'s exact words', r.includes('added "fractions and decimals"'));
   await tap('wa-HELP');
@@ -291,6 +303,11 @@ const fromWords = (w) => {
   await tap('profile-Maya');
   await tap('ready-yes');
   const planTexts = await page.getByTestId(/^plan-/).locator('visible=true').allInnerTexts();
+  await page.getByTestId('plan-Nouns').locator('visible=true').first().click();
+  await visible('intro-start', 8000);
+  check('N4: demo lesson titled by the real sample topic, with a sample note', (await tid('sample-note').innerText()).includes('Sample lesson (demo)'));
+  await shot('en-n4-sample-note');
+  await tap('back-btn');
   check('S4: plan has no question-lesson and no duplicate', !planTexts.some((x) => /how is she/i.test(x)) && planTexts.filter((x) => /plants/i.test(x)).length === 1, planTexts.join(' | '));
 
   // ---------- Time cap (break screen) ----------

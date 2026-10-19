@@ -200,7 +200,13 @@ export function keywordScan(text: string): KeywordScan {
 
   // Fear: strong fear words, except normal exam worry ("scared of the science exam");
   // war words only outside school talk ("the war of 1812 in history"); grief with a person.
-  const strongFear = any("fear") && !(exam && !any("war"));
+  // A fear word about an everyday thing (spiders, the dark, monsters) or an exam, with no
+  // person from home/outside, no war and no death word, is learning-context fear, not a
+  // safety event. "I'm scared of my dad", "scared to go home", bombs and war still trigger.
+  const benignObject = wordListIn(views.base, words, KW.BENIGN_FEAR_OBJECTS);
+  const personOrDanger = home || wordListIn(views.base, words, KW.OUTSIDE_TERMS) || any("war") || any("death") || any("disclosure") || any("selfHarm");
+  const benignFear = (benignObject || exam) && !personOrDanger;
+  const strongFear = any("fear") && !benignFear;
   const warFear = any("war") && !school;
   const grief = any("death") && griefPerson;
   const threat = any("threatIdiom") && !school;

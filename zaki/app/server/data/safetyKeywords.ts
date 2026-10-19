@@ -99,6 +99,8 @@ export const FEAR_DISTRESS: KeywordGroup = {
     "had to leave our home", "my house was destroyed", "will we die", "are we going to die",
     "died in the war", "i'm very sad", "i am very sad", "so sad", "nobody loves me", "i'm lonely",
     "i cry every", "can't stop crying",
+    "scared to go home", "afraid to go home", "scared of going home", "scared to go back home",
+    "don't want to go home", "dont want to go home", "do not want to go home",
   ],
   fr: [
     "j'ai peur", "tres peur", "je suis triste", "tres triste", "personne ne m'aime",
@@ -107,11 +109,13 @@ export const FEAR_DISTRESS: KeywordGroup = {
     "خايف", "خايفة", "خايفه", "اخاف", "انا خايف", "تركنا بيتنا", "سنموت", "هل سنموت", "حنموت", "رح نموت", "هربنا من البيت",
     "رح نموت", "حنموت", "زعلان كتير", "حزين جدا", "حزينة جدا", "ما حدا بيحبني", "لا احد يحبني",
     "بكي كل يوم",
+    "خايف روح عالبيت", "خايف ارجع عالبيت", "ما بدي روح عالبيت", "ما بدي ارجع عالبيت", "اخاف ارجع الى البيت",
   ],
   arabizi: [
     "khayef", "khayfe", "khayfi", "5ayef", "5ayfe", "a5af", "ra7 nmout", "rah nmout", "ra7 nmoot",
     "rah nmoot", "ze3lan ktir",
     "ma 7ada bi7ebne",
+    "khayef rou7 3al bet", "khayfe rou7 3al bet", "ma bade rou7 3al bet", "ma badde rou7 3al bet", "ma bade erja3 3al bet",
   ],
 };
 
@@ -215,6 +219,30 @@ export const SCHOOL_CONTEXT: KeywordGroup = {
 };
 
 /** Exam / test words: "I'm scared of the exam" is normal worry, not a safety case. */
+/**
+ * Everyday things children are "scared of" in a learning context (animals, insects, the
+ * dark, monsters). Fear + one of these, with NO family/outside person, war or death word,
+ * is not a safety event ("I'm scared of spiders in the science book"). Whole-word match.
+ */
+export const BENIGN_FEAR_OBJECTS: KeywordGroup = {
+  en: [
+    "spider", "spiders", "snake", "snakes", "dog", "dogs", "cat", "cats", "bee", "bees", "wasp", "wasps",
+    "insect", "insects", "bug", "bugs", "worm", "worms", "mouse", "mice", "rat", "rats", "cockroach",
+    "cockroaches", "shark", "sharks", "lion", "lions", "tiger", "tigers", "bear", "bears", "crocodile",
+    "crocodiles", "dinosaur", "dinosaurs", "frog", "frogs", "lizard", "lizards", "scorpion", "scorpions",
+    "the dark", "dark", "darkness", "monster", "monsters", "ghost", "ghosts", "clown", "clowns",
+    "volcano", "volcanoes", "heights", "the dentist",
+  ],
+  fr: ["araignee", "araignees", "serpent", "serpents", "chien", "chiens", "insecte", "insectes", "le noir", "monstre", "monstres", "fantome", "fantomes"],
+  ar: [
+    "عنكبوت", "العنكبوت", "العناكب", "عناكب", "حيه", "الحيه", "افعى", "الافعى", "الافاعي", "كلب", "الكلب", "الكلاب",
+    "قطه", "القطه", "صرصور", "الصرصور", "الصراصير", "نحله", "النحل", "حشره", "الحشرات", "حشرات", "فار", "الفار",
+    "الفيران", "دود", "الدود", "اسد", "الاسد", "دب", "الدب", "تمساح", "التمساح", "ديناصور", "الديناصورات", "ضفدع",
+    "الضفدع", "عقرب", "العقرب", "العتمه", "الظلام", "العتم", "وحش", "الوحش", "الوحوش", "شبح", "الشبح", "الاشباح",
+  ],
+  arabizi: ["3ankabout", "3ankabut", "3anakeb", "7ayye", "kalb", "el kalb", "sarsour", "na7le", "7ashara", "far", "el 3atme", "3atme", "wa7ch", "wa7sh", "shabah", "shaba7"],
+};
+
 export const EXAM_WORDS: KeywordGroup = {
   en: ["test", "exam", "quiz", "exams", "tests", "spelling test", "homework", "grades", "marks"],
   fr: ["controle", "examen", "interro", "devoirs", "note"],

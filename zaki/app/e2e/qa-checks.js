@@ -40,8 +40,8 @@ const check = (n, ok, extra = '') => {
   // S1: offline safety words (incl. the R12 spellings from the safety review)
   const page = await (await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })).newPage();
   const tid = (id) => page.getByTestId(id).locator('visible=true').first();
-  const phrases = ['baba darabne', 'bayye darabne', 'baba darabni', 'بابا ضربني', 'my dad hits me', 'someone touched me', 'I want to die', 'bade mout', 'khayef ktir'];
-  const safe = ['What is evaporation?', 'I am scared of the science exam', 'is 3/4 bigger than 1/2'];
+  const phrases = ["I'm scared", "I'm scared of my dad", 'scared to go home', 'im scared of the bombs', 'baba darabne', 'bayye darabne', 'baba darabni', 'بابا ضربني', 'my dad hits me', 'someone touched me', 'I want to die', 'bade mout', 'khayef ktir'];
+  const safe = ['I am scared of spiders in the science book', "I'm scared of the dark", 'أنا خايف من العنكبوت', 'What is evaporation?', 'I am scared of the science exam', 'is 3/4 bigger than 1/2'];
   const open = async () => {
     await page.goto(BASE);
     await tid('profile-Maya').click({ timeout: 15000 });

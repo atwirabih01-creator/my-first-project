@@ -29,7 +29,7 @@ export default function AddLesson() {
   });
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
-  const [demoUsed, setDemoUsed] = useState(false);
+  const [demoUsed, setDemoUsed] = useState<string | null>(null);
 
   async function pick() {
     try {
@@ -72,7 +72,7 @@ export default function AddLesson() {
     app.savePack(child.id, key, { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo });
     app.addPlanItem(child.id, { subject, topic: name, kind: hasTest ? 'test' : 'lesson', dueDate: hasTest ? dueDate : undefined, packKey: key });
     setBusy(false);
-    setDemoUsed(res.demo);
+    setDemoUsed(res.demo ? res.pack.topic : null);
     setMsg(t('lessonReady', { name: child.nickname }));
     setTopic('');
     setPhotos([]);
@@ -146,7 +146,7 @@ export default function AddLesson() {
               <Txt bold testID="add-lesson-msg">
                 {msg}
               </Txt>
-              {demoUsed ? <Txt variant="small">{t('demoUsedSample')}</Txt> : null}
+              {demoUsed ? <Txt variant="small">{t('demoUsedSampleNamed', { topic: demoUsed })}</Txt> : null}
             </Card>
           ) : null}
           <Btn title={child ? t('prepareFor', { name: child.nickname }) : t('prepare')} big icon="✨" onPress={prepare} testID="prepare-lesson" />

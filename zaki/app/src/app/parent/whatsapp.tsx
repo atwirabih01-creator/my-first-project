@@ -34,26 +34,28 @@ export default function WhatsApp() {
     setTimeout(() => scrollRef.current?.scrollToEnd({ animated: true }), 50);
   };
 
-  async function send(raw: string) {
+  async function send(raw: string, fromButton = false) {
     const body = raw.trim();
     if (!body || !child || busy) return;
     setText('');
     push({ from: 'parent', text: body, time: nowTime() });
     const cmd = body.toUpperCase();
+    // Reply in the language the parent wrote in; button taps use the report language.
+    const lang: 'en' | 'ar' = fromButton ? rl : /[\u0600-\u06FF]/.test(body) ? 'ar' : /[A-Za-z]/.test(body) ? 'en' : rl;
     const zaki = (s: string) => push({ from: 'zaki', text: s, time: nowTime() });
 
     if (cmd === 'REPORT' || cmd === 'تقرير') {
-      zaki(buildReport(child, progress, packs, rl));
+      zaki(buildReport(child, progress, packs, lang));
       return;
     }
     if (cmd === 'PAUSE' || cmd === 'إيقاف') {
       const paused = !settings.paused;
       app.updateSettings(child.id, { paused });
-      zaki(translate(rl, paused ? 'waPauseOn' : 'waPauseOff', { name: child.nickname }));
+      zaki(translate(lang, paused ? 'waPauseOn' : 'waPauseOff', { name: child.nickname }));
       return;
     }
     setBusy(true);
-    const res = await sendParentMessage(body, rl, settings.country);
+    const res = await sendParentMessage(body, lang, settings.country);
     setBusy(false);
     let added: 'added' | 'already' | null = null;
     if (res.plan && res.plan.topic && res.plan.subject) {
@@ -68,7 +70,7 @@ export default function WhatsApp() {
     }
     const planLine = () =>
       res.plan
-        ? translate(rl, added === 'added' ? 'waPlanAdded' : 'waAlready', { topic: res.plan.topic, name: child.nickname })
+        ? translate(lang, added === 'added' ? 'waPlanAdded' : 'waAlready', { topic: res.plan.topic, name: child.nickname })
         : '';
     if (res.reply) {
       zaki(res.reply);
@@ -76,10 +78,10 @@ export default function WhatsApp() {
       return;
     }
     // Demo replies (no server). Anything unclear gets the fixed polite redirect.
-    if (cmd === 'PLAN' || cmd === 'خطة') zaki(translate(rl, 'waPlanReply'));
-    else if (cmd === 'HELP' || cmd === 'مساعدة') zaki(translate(rl, 'waHelp'));
+    if (cmd === 'PLAN' || cmd === 'خطة') zaki(translate(lang, 'waPlanReply'));
+    else if (cmd === 'HELP' || cmd === 'مساعدة') zaki(translate(lang, 'waHelp'));
     else if (added) zaki(planLine());
-    else zaki(translate(rl, 'waRedirect'));
+    else zaki(translate(lang, 'waRedirect'));
   }
 
   return (
@@ -106,7 +108,7 @@ export default function WhatsApp() {
       </ScrollView>
       <Row wrap style={{ paddingVertical: S.xs }}>
         {['REPORT', 'PLAN', 'PAUSE', 'HELP'].map((c) => (
-          <Pressable key={c} onPress={() => send(c)} style={styles.quick} accessibilityRole="button" accessibilityLabel={c} testID={`wa-${c}`}>
+          <Pressable key={c} onPress={() => send(c, true)} style={styles.quick} accessibilityRole="button" accessibilityLabel={c} testID={`wa-${c}`}>
             <Text style={{ color: C.waGreen, fontWeight: '800' }}>{c}</Text>
           </Pressable>
         ))}
