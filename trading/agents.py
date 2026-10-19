@@ -60,7 +60,7 @@ class Version:
     min_prob: float = 0.80         # Sage's win-probability bar
     max_stretch_atr: float = 3.0   # refuse to chase price far above its average
     max_vol_pct: float = 0.95      # refuse when volatility is in its wildest 5%
-    cooldown: int = 6              # hours to wait after a loss on the same market
+    cooldown: int = 6              # bars (chart candles) to wait after a loss on the same market
     sage_kind: str = "logit"       # logit = overall statistics model, knn = "most similar past trades"
     knn_k: int = 60
     # general

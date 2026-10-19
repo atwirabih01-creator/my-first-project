@@ -42,6 +42,16 @@ A trade happens **only when all three say yes.**
 3. **Sharp sell-offs (Feb 2026) cause most of the damage.**
 4. **No version got close to "80% wins *and* profitable" on fresh data.**
 
+## Independent check (Reality Checker)
+
+An independent checker re-ran the tests and confirmed every headline number. It found **no
+peeking at future prices** and no bug that changes the conclusion. Minor notes:
+- Round 1's pick was based on just 1 trade, so Round 1's exam tells us nothing (Rounds 2–3 are fine).
+- The "biggest drop" figures understate risk slightly (they count only closed trades).
+- The strategy design needs about 78% wins just to break even, so 80% leaves almost no profit.
+- With cheaper fees (0.10% per side) the fresh exam would be about +0.8% instead of −2%,
+  but the win rate stays at 77% at any fee level, so the 80% goal fails either way.
+
 ## Data limits (honest list)
 
 - **No X/Twitter feed is connected**, so the agents can't read tweets yet. Hawk's "shock"
