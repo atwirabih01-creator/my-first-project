@@ -189,3 +189,57 @@ Going "forward" again or reloading reopens Zaki at the Start screen, with saved 
   - S3: risk on older iPhones. Confirm on a real iPhone; consider sending a web link instead of the file.
   - M2: the parent area now shows "Now working on: Ali", which helps.
   - M3 and M4.
+
+---
+
+## Round 3: six new features (2026-10-19, file dated 21:58)
+
+**How:** Chromium, opening the file from disk, phone width 390, English (Maya) and Arabic (Ali). A real web page was opened before Zaki, so any arrow that leaves the app would show it. Correct and wrong answers were picked by reading the app's own saved answer key. Screenshots are in `qa-screenshots/round3/`. iPhone/WebKit is still NOT TESTED.
+
+### Verdict: NOT READY. 1 blocker (safety text in grown-up Ask Zaki)
+
+| # | Feature | Result |
+|---|---|---|
+| 1 | Pass-to-unlock | **PASS, 14/14**. Later lessons show 🔒 "Pass the "X" test to unlock" (English and Arabic). Tapping a locked lesson doesn't open it. Home Start opens the current lesson. 3/5 (60%) keeps the next lesson locked; 4/5 (exactly 80%) unlocks it. Survives reload. Parent Unlock and re-lock work. Reordering with ↑/↓ changes which lesson is open and what Home Start opens. A passed lesson stays open even if moved below an unpassed one. (U01–U14) |
+| 2 | Full lesson review | **PASS, 7/7**. After a page reload, a learned lesson shows "Review lesson" + "Retake test" (English and Arabic). Review walks teach → check → Ask → summary with no dead end. A retake gets a new shuffle. Failing a retake does **not** re-lock the next lesson, and the lesson stays "Learned". Arabic review has no English. (V*) |
+| 3 | Exam builder / exams | **Mostly PASS, with should-fix items.** The exam is built from the ticked lessons and balanced per lesson (e.g. 3/4/3). Answers are shuffled. It appears in the child's Tests with Practice and Take. Practice runs to a result. The result shows a per-lesson breakdown ("Shapes 0/3 · Decimals 0/4 · Fractions 0/3"). Weak lessons get "Review lesson: X" buttons, which open that lesson. A locked one correctly shows "This lesson is locked 🔒". The parent sees a per-lesson report. Grade 5 has a timer, grade 3 none. Arabic exam has no English. ← mid-exam opens "Leave the test?" with Stay / Leave / **I need help**. Stay returns to the same question. "I need help" is never blocked. See issues E1–E6. (X*, W*) |
+| 4 | Grown-up Ask Zaki | **FAIL on safety.** The demo reply works in English and Arabic. The photo reminder is shown. The photo picker opens and the photo shows. There are no links anywhere, and a request for a link gives none. But **all 4 worrying messages got the normal demo tip instead of the fixed help text** (P*, see BLOCKER G1) |
+| 5 | AI cap / library (demo) | **PASS (nothing breaks).** The labels exist in the code: "Today's AI limit is reached — the lesson will be prepared tomorrow" and "Ready instantly (from Zaki's library)". They can't appear in the demo, because there is no server. Adding the same lesson twice doesn't duplicate it. 45 Ask-Zaki messages at a normal pace all got replies. A "⏳ Ready tomorrow" lesson put into the saved data by hand shows correctly and Start skips it (see L1) |
+| 6 | Regression sweep | **Partly re-verified when this report was written.** Earlier back-arrow, Send-button and safety-phrase runs were still in progress; the 9 checks finished so far all PASS. The shuffled-answer and new-screen back-arrow checks had not reported yet. Seen in every finished run so far: no console errors apart from the expected `/api` failures, no blank pages, no "not found". |
+
+### Bug list (prioritized)
+
+**BLOCKER**
+- **G1. Grown-up Ask Zaki ignores worrying messages in demo mode.**
+  - These four messages each got the cheerful generic reply ("Tip for now: ask your child to teach you what they learned today in 3 sentences"), with no help numbers:
+    - "My son told me his uncle touches him…"
+    - "I think my daughter wants to hurt herself"
+    - "ابني قال إن عمه يضربه"
+    - "baba darabne, my kid keeps saying this"
+  - The specification says a worrying message gets the fixed help text. The child-side keyword check already works offline. The parent screen needs the same local check before the demo reply.
+  - Evidence: P*-parent-ask-worry-*.png, en-parent-ask-worry-5s.png.
+
+**Should fix**
+- **E1. Exam date isn't validated.** These were all accepted:
+  - "31/10/2026": silently saved as **today**, so the child sees an exam due today.
+  - "2020-01-01" (in the past).
+  - "2026-02-30" (impossible date).
+- **E2. Pressing "Build the exam" with no lessons ticked does nothing**, with no message.
+- **E3. The exam intro text contradicts itself.** It reads "10 questions from 3 lessons. **5 questions.** Beat your own score!" (also "20 questions… 5 questions"). Evidence: W*-en-exam-take-intro.
+- **E4. Getting help during an exam loses the exam.**
+  - "I need help" → help screen → ← (or the safety screen's "Go back") takes the child to Tests or Home, not back to the question.
+  - Re-entering starts the exam from question 1.
+  - A child who asks for help then has to restart the exam. Help is never blocked, which is right, but it costs them.
+- **E5. The exam builder allows still-locked lessons.**
+  - The child is examined on lessons they can't open yet.
+  - "Review lesson: Shapes" then shows "This lesson is locked 🔒".
+  - Either block locked lessons in the builder or warn the parent.
+
+**Minor**
+- **E6.** In a new demo, the exam builder says "No saved lessons in this subject yet" for Math, even though Maya has Fractions in her plan. A lesson only appears after it has been started once.
+- **E7.** Arabic grammar: "فيه 10 سؤالًا" should be "فيه 10 أسئلة" (numbers 3–10 take the plural).
+- **E8.** "Help with my lesson" during an exam says "Tap Hint in the lesson, or ask Zaki", but there are no hints during exams.
+- **P1.** Grown-up Ask Zaki has no "Remove photo" option (Add lesson has one).
+- **L1. A lesson marked "⏳ Ready tomorrow" because of the AI limit locks every lesson after it** ("Pass the "Geometry" test to unlock" while Geometry can't be studied yet). This can only happen with a real server.
+- **C1.** Sending messages faster than Zaki replies (one every 0.35 s) gets replies for only about half. At a normal pace, all 45 were answered.
+- **Carried over:** N4 (sample lesson doesn't match the typed name, e.g. "Decimals" shows Fractions content; it is labelled "🧪 Sample lesson (demo)"), N2 (spider false alarm), S3 (old iPhones untested).
