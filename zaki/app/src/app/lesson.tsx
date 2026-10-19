@@ -10,6 +10,7 @@ import { AskZaki, Choice, LessonHelpBar, QuestionWithHints } from '@/components/
 import { Btn, Card, ProgressBar, Row, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
 import { fetchLessonPack } from '@/lib/api';
+import { accessForKey } from '@/lib/unlock';
 import { shuffleChoices } from '../../server/shuffle';
 import { goTo, setHelpReturn } from '@/lib/nav';
 import { lessonKeyOf, MAX_TESTS_PER_DAY, todayStr, useChild, useT } from '@/lib/store';
@@ -28,7 +29,8 @@ type Phase =
   | 'test'
   | 'result'
   | 'resummary'
-  | 'limit';
+  | 'limit'
+  | 'notReady';
 
 const TEST_SIZE = 5;
 const nowMs = () => Date.now();
@@ -39,7 +41,7 @@ export default function Lesson() {
   const subject = (params.subject ?? 'math') as Subject;
   const topic = params.topic ?? '';
   const key = lessonKeyOf(subject, topic);
-  const { child, settings, progress, packs, app } = useChild();
+  const { child, settings, progress, packs, plan, app } = useChild();
   const { t } = useT();
 
   const [cp, setCp] = useState<CachedPack | null>(packs[key] ?? null);
@@ -63,14 +65,21 @@ export default function Lesson() {
   const passedToday = testsToday.some((x) => x.passed);
   const young = (child?.grade ?? 3) <= 3;
   const timed = !young;
+  // Pass-to-unlock: a later lesson stays locked until the one before it is passed.
+  const access = accessForKey(plan, progress, key);
+  const locked = !access.open;
 
   // Load (or reuse) the lesson pack.
   useEffect(() => {
-    if (!child || cp) return;
+    if (!child || cp || locked) return;
     let alive = true;
     fetchLessonPack({ childRef: child.id, grade: child.grade, lang: child.lang, country: settings.country, subject, topic })
       .then((res) => {
         if (!alive) return;
+        if (res.budgetReached) {
+          setPhase('notReady'); // today's AI limit: the lesson is prepared tomorrow
+          return;
+        }
         if (res.safetyStopped) return; // safety screen already shown
         const cached: CachedPack = { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo };
         app.savePack(child.id, key, cached);
@@ -167,7 +176,7 @@ export default function Lesson() {
     }
   }
 
-  const showHelpBar = phase !== 'loading' && phase !== 'error';
+  const showHelpBar = phase !== 'loading' && phase !== 'error' && !locked;
   // Demo mode: if the sample lesson isn't what the grown-up typed, show the sample's real topic.
   const norm = (x: string) => x.trim().toLowerCase();
   const sampleMismatch =
@@ -233,7 +242,31 @@ export default function Lesson() {
         </Card>
       ) : null}
 
-      {!settings.paused && phase === 'loading' ? (
+      {locked ? (
+        <Card tone="lilac" style={{ alignItems: 'center' }}>
+          <Mascot size={100} mood="calm" />
+          <Txt variant="h2" center testID="locked-title">
+            {t('lockedTitle')}
+          </Txt>
+          <Txt center testID="locked-msg">
+            🔒 {t('lockedMsg', { topic: access.blocker ?? '' })}
+          </Txt>
+          <Btn title={t('backHome')} onPress={goHome} testID="back-home" />
+        </Card>
+      ) : null}
+
+      {!locked && phase === 'notReady' ? (
+        <Card tone="sun" style={{ alignItems: 'center' }} testID="lesson-not-ready">
+          <Mascot size={100} mood="calm" />
+          <Txt variant="h2" center>
+            {t('notReadyTitle')}
+          </Txt>
+          <Txt center>{t('notReadyText')}</Txt>
+          <Btn title={t('backHome')} onPress={goHome} />
+        </Card>
+      ) : null}
+
+      {!locked && !settings.paused && phase === 'loading' ? (
         <View style={{ alignItems: 'center', gap: S.lg, paddingTop: S.xxl }} testID="lesson-loading">
           <Mascot size={170} mood="thinking" />
           <Txt variant="h2" center>
