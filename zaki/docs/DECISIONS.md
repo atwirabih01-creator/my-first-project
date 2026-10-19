@@ -11,3 +11,5 @@ Decisions 1–12 from the project plan (Section 2) are the starting point. New d
 | 2026-10-16 | Build the real Phase 1 app now with the real AI teacher and research from trusted sources, not only scripted answers (founder) | Founder's request. Uses fake child profiles only; real AI connects once the founder adds an Anthropic key; demo mode works without it |
 | 2026-10-16 | App built with Expo (iPhone + web from one codebase), server routes hold all AI keys and safety checks | From research 07; replaces "Next.js web app" in Section 10.1 |
 | 2026-10-16 | Plan Section 8.7 added with the safety review's binding changes | Safety review condition for starting Phase 1 |
+| 2026-10-19 | Core flow confirmed: mom adds each lesson (topic or book photos) → AI builds it once → child goes step by step with small checks → full test → next lesson unlocks only after passing (founder) | Founder's product rule. AI cost is per new lesson (~$0.15); the child's lesson, checks and tests run without AI |
+| 2026-10-19 | Add a daily AI spending cap and a shared lesson library (typed topics only; photo-based lessons stay private) | Keeps the pay-as-you-go AI bill small and predictable |
