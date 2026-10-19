@@ -1,0 +1,395 @@
+{
+ "periods": [
+  "2023-10-20 22:00:00+00:00",
+  "2025-04-20 09:30:00+00:00",
+  "2026-01-19 03:15:00+00:00",
+  "2026-10-19 21:00:00+00:00"
+ ],
+ "versions": [
+  {
+   "version": "V13 4h shock follow",
+   "ideas_school": 100,
+   "school_win_rate": 0.58,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   },
+   "no_sage_tryout": {
+    "trades": 39,
+    "win_rate": 0.641,
+    "avg_win_pct": 4.35,
+    "avg_loss_pct": -6.46,
+    "profit_factor": 1.2,
+    "return_pct": 1.77,
+    "max_drawdown_pct": 4.73
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  },
+  {
+   "version": "V14 4h breakout runner",
+   "ideas_school": 265,
+   "school_win_rate": 0.453,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   },
+   "no_sage_tryout": {
+    "trades": 102,
+    "win_rate": 0.4608,
+    "avg_win_pct": 7.85,
+    "avg_loss_pct": -4.41,
+    "profit_factor": 1.52,
+    "return_pct": 13.17,
+    "max_drawdown_pct": 4.38
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  },
+  {
+   "version": "V15 4h all, quick profit",
+   "ideas_school": 488,
+   "school_win_rate": 0.67,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": 0.827
+   },
+   "no_sage_tryout": {
+    "trades": 167,
+    "win_rate": 0.7006,
+    "avg_win_pct": 3.39,
+    "avg_loss_pct": -6.07,
+    "profit_factor": 1.31,
+    "return_pct": 9.61,
+    "max_drawdown_pct": 4.85
+   },
+   "exam": {
+    "trades": 1,
+    "win_rate": 0.0,
+    "avg_win_pct": 0,
+    "avg_loss_pct": -4.28,
+    "profit_factor": 0.0,
+    "return_pct": -0.43,
+    "max_drawdown_pct": 0.0,
+    "sage_avg_prob": 0.813
+   }
+  },
+  {
+   "version": "V16 4h all + shorts, similar-trades Sage",
+   "ideas_school": 782,
+   "school_win_rate": 0.619,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": 0.821
+   },
+   "no_sage_tryout": {
+    "trades": 290,
+    "win_rate": 0.6793,
+    "avg_win_pct": 3.06,
+    "avg_loss_pct": -6.25,
+    "profit_factor": 1.04,
+    "return_pct": 1.88,
+    "max_drawdown_pct": 12.39
+   },
+   "exam": {
+    "trades": 1,
+    "win_rate": 1.0,
+    "avg_win_pct": 1.07,
+    "avg_loss_pct": 0,
+    "profit_factor": 99,
+    "return_pct": 0.11,
+    "max_drawdown_pct": 0.0,
+    "sage_avg_prob": 0.806
+   }
+  },
+  {
+   "version": "V17 4h strict researcher, similar-trades Sage",
+   "ideas_school": 419,
+   "school_win_rate": 0.683,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": 0.829
+   },
+   "no_sage_tryout": {
+    "trades": 179,
+    "win_rate": 0.7542,
+    "avg_win_pct": 2.47,
+    "avg_loss_pct": -8.19,
+    "profit_factor": 0.92,
+    "return_pct": -2.97,
+    "max_drawdown_pct": 10.27
+   },
+   "exam": {
+    "trades": 5,
+    "win_rate": 0.2,
+    "avg_win_pct": 1.48,
+    "avg_loss_pct": -5.13,
+    "profit_factor": 0.07,
+    "return_pct": -1.89,
+    "max_drawdown_pct": 2.04,
+    "sage_avg_prob": 0.809
+   }
+  },
+  {
+   "version": "V18 1h all + shorts, fee-aware, similar-trades Sage",
+   "ideas_school": 2715,
+   "school_win_rate": 0.757,
+   "tryout": {
+    "trades": 180,
+    "win_rate": 0.7722,
+    "avg_win_pct": 1.49,
+    "avg_loss_pct": -5.91,
+    "profit_factor": 0.86,
+    "return_pct": -3.51,
+    "max_drawdown_pct": 7.64,
+    "sage_avg_prob": 0.83
+   },
+   "no_sage_tryout": {
+    "trades": 987,
+    "win_rate": 0.7882,
+    "avg_win_pct": 1.59,
+    "avg_loss_pct": -5.94,
+    "profit_factor": 0.99,
+    "return_pct": -1.18,
+    "max_drawdown_pct": 17.25
+   },
+   "exam": {
+    "trades": 77,
+    "win_rate": 0.7143,
+    "avg_win_pct": 1.21,
+    "avg_loss_pct": -4.71,
+    "profit_factor": 0.64,
+    "return_pct": -3.65,
+    "max_drawdown_pct": 5.75,
+    "sage_avg_prob": 0.835
+   }
+  },
+  {
+   "version": "V19 1h strict researcher + shorts, similar-trades Sage",
+   "ideas_school": 1786,
+   "school_win_rate": 0.764,
+   "tryout": {
+    "trades": 126,
+    "win_rate": 0.8333,
+    "avg_win_pct": 1.29,
+    "avg_loss_pct": -4.57,
+    "profit_factor": 1.41,
+    "return_pct": 3.96,
+    "max_drawdown_pct": 2.65,
+    "sage_avg_prob": 0.839
+   },
+   "no_sage_tryout": {
+    "trades": 784,
+    "win_rate": 0.8151,
+    "avg_win_pct": 1.46,
+    "avg_loss_pct": -5.69,
+    "profit_factor": 1.13,
+    "return_pct": 10.61,
+    "max_drawdown_pct": 6.51
+   },
+   "exam": {
+    "trades": 94,
+    "win_rate": 0.734,
+    "avg_win_pct": 1.06,
+    "avg_loss_pct": -4.37,
+    "profit_factor": 0.67,
+    "return_pct": -3.57,
+    "max_drawdown_pct": 4.94,
+    "sage_avg_prob": 0.836
+   }
+  },
+  {
+   "version": "V20 1h shock + breakout, similar-trades Sage",
+   "ideas_school": 1677,
+   "school_win_rate": 0.683,
+   "tryout": {
+    "trades": 4,
+    "win_rate": 0.5,
+    "avg_win_pct": 1.17,
+    "avg_loss_pct": -3.83,
+    "profit_factor": 0.31,
+    "return_pct": -0.53,
+    "max_drawdown_pct": 0.38,
+    "sage_avg_prob": 0.826
+   },
+   "no_sage_tryout": {
+    "trades": 861,
+    "win_rate": 0.7073,
+    "avg_win_pct": 1.93,
+    "avg_loss_pct": -4.76,
+    "profit_factor": 0.98,
+    "return_pct": -2.53,
+    "max_drawdown_pct": 16.82
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": 0.822
+   }
+  },
+  {
+   "version": "V21 4h all + shorts, Sage 75%",
+   "ideas_school": 782,
+   "school_win_rate": 0.619,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": 0.783
+   },
+   "no_sage_tryout": {
+    "trades": 290,
+    "win_rate": 0.6793,
+    "avg_win_pct": 3.06,
+    "avg_loss_pct": -6.25,
+    "profit_factor": 1.04,
+    "return_pct": 1.88,
+    "max_drawdown_pct": 12.39
+   },
+   "exam": {
+    "trades": 10,
+    "win_rate": 0.4,
+    "avg_win_pct": 1.94,
+    "avg_loss_pct": -5.24,
+    "profit_factor": 0.25,
+    "return_pct": -2.35,
+    "max_drawdown_pct": 2.42,
+    "sage_avg_prob": 0.774
+   }
+  },
+  {
+   "version": "V22 4h wide stop scalp + shorts",
+   "ideas_school": 759,
+   "school_win_rate": 0.726,
+   "tryout": {
+    "trades": 4,
+    "win_rate": 0.75,
+    "avg_win_pct": 2.02,
+    "avg_loss_pct": -12.03,
+    "profit_factor": 0.5,
+    "return_pct": -0.6,
+    "max_drawdown_pct": 1.2,
+    "sage_avg_prob": 0.82
+   },
+   "no_sage_tryout": {
+    "trades": 289,
+    "win_rate": 0.7509,
+    "avg_win_pct": 2.53,
+    "avg_loss_pct": -8.18,
+    "profit_factor": 0.93,
+    "return_pct": -4.29,
+    "max_drawdown_pct": 13.55
+   },
+   "exam": {
+    "trades": 38,
+    "win_rate": 0.6579,
+    "avg_win_pct": 1.9,
+    "avg_loss_pct": -5.51,
+    "profit_factor": 0.66,
+    "return_pct": -2.42,
+    "max_drawdown_pct": 4.21,
+    "sage_avg_prob": 0.824
+   }
+  },
+  {
+   "version": "V23 4h no-tide + shorts",
+   "ideas_school": 979,
+   "school_win_rate": 0.622,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": 0.821
+   },
+   "no_sage_tryout": {
+    "trades": 366,
+    "win_rate": 0.6776,
+    "avg_win_pct": 3.03,
+    "avg_loss_pct": -6.0,
+    "profit_factor": 1.06,
+    "return_pct": 3.95,
+    "max_drawdown_pct": 9.89
+   },
+   "exam": {
+    "trades": 2,
+    "win_rate": 1.0,
+    "avg_win_pct": 2.28,
+    "avg_loss_pct": 0,
+    "profit_factor": 99,
+    "return_pct": 0.46,
+    "max_drawdown_pct": 0.0,
+    "sage_avg_prob": 0.815
+   }
+  },
+  {
+   "version": "V24 4h logit Sage + shorts",
+   "ideas_school": 759,
+   "school_win_rate": 0.677,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": 0.825
+   },
+   "no_sage_tryout": {
+    "trades": 291,
+    "win_rate": 0.7354,
+    "avg_win_pct": 2.47,
+    "avg_loss_pct": -7.08,
+    "profit_factor": 0.97,
+    "return_pct": -2.01,
+    "max_drawdown_pct": 12.64
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  }
+ ],
+ "picked": "V19 1h strict researcher + shorts, similar-trades Sage"
+}

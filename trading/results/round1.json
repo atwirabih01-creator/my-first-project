@@ -1,0 +1,381 @@
+{
+ "periods": {
+  "start": "2023-10-20 22:00:00+00:00",
+  "tryouts_start": "2025-04-20 09:30:00+00:00",
+  "exam_start": "2026-01-19 03:15:00+00:00",
+  "end": "2026-10-19 21:00:00+00:00"
+ },
+ "versions": [
+  {
+   "version": "V01 pullback even",
+   "ideas_school": 1359,
+   "school_win_rate": 0.504,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   },
+   "no_sage_tryout": {
+    "trades": 334,
+    "win_rate": 0.4461,
+    "avg_win_pct": 2.23,
+    "avg_loss_pct": -2.78,
+    "profit_factor": 0.65,
+    "return_pct": -16.8,
+    "max_drawdown_pct": 19.78
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  },
+  {
+   "version": "V02 pullback quick-profit",
+   "ideas_school": 1359,
+   "school_win_rate": 0.626,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   },
+   "no_sage_tryout": {
+    "trades": 364,
+    "win_rate": 0.5989,
+    "avg_win_pct": 1.34,
+    "avg_loss_pct": -3.27,
+    "profit_factor": 0.61,
+    "return_pct": -17.03,
+    "max_drawdown_pct": 19.83
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  },
+  {
+   "version": "V03 pullback scalp",
+   "ideas_school": 1359,
+   "school_win_rate": 0.689,
+   "tryout": {
+    "trades": 7,
+    "win_rate": 0.5714,
+    "avg_win_pct": 2.67,
+    "avg_loss_pct": -7.76,
+    "profit_factor": 0.46,
+    "return_pct": -1.27,
+    "max_drawdown_pct": 1.71,
+    "sage_avg_prob": 0.81
+   },
+   "no_sage_tryout": {
+    "trades": 394,
+    "win_rate": 0.6701,
+    "avg_win_pct": 1.09,
+    "avg_loss_pct": -3.45,
+    "profit_factor": 0.64,
+    "return_pct": -15.09,
+    "max_drawdown_pct": 17.93
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  },
+  {
+   "version": "V04 breakout runner",
+   "ideas_school": 785,
+   "school_win_rate": 0.394,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   },
+   "no_sage_tryout": {
+    "trades": 376,
+    "win_rate": 0.4202,
+    "avg_win_pct": 3.7,
+    "avg_loss_pct": -2.38,
+    "profit_factor": 1.13,
+    "return_pct": 6.49,
+    "max_drawdown_pct": 10.9
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  },
+  {
+   "version": "V05 breakout quick-profit",
+   "ideas_school": 785,
+   "school_win_rate": 0.689,
+   "tryout": {
+    "trades": 1,
+    "win_rate": 1.0,
+    "avg_win_pct": 1.32,
+    "avg_loss_pct": 0,
+    "profit_factor": 99,
+    "return_pct": 0.13,
+    "max_drawdown_pct": 0.0,
+    "sage_avg_prob": 0.81
+   },
+   "no_sage_tryout": {
+    "trades": 508,
+    "win_rate": 0.6909,
+    "avg_win_pct": 1.19,
+    "avg_loss_pct": -3.02,
+    "profit_factor": 0.88,
+    "return_pct": -5.62,
+    "max_drawdown_pct": 10.27
+   },
+   "exam": {
+    "trades": 1,
+    "win_rate": 1.0,
+    "avg_win_pct": 0.26,
+    "avg_loss_pct": 0,
+    "profit_factor": 99,
+    "return_pct": 0.03,
+    "max_drawdown_pct": 0.0,
+    "sage_avg_prob": 0.815
+   }
+  },
+  {
+   "version": "V06 news-shock follow",
+   "ideas_school": 244,
+   "school_win_rate": 0.611,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   },
+   "no_sage_tryout": {
+    "trades": 156,
+    "win_rate": 0.6987,
+    "avg_win_pct": 1.91,
+    "avg_loss_pct": -3.14,
+    "profit_factor": 1.41,
+    "return_pct": 6.24,
+    "max_drawdown_pct": 4.04
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  },
+  {
+   "version": "V07 all setups",
+   "ideas_school": 2135,
+   "school_win_rate": 0.653,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   },
+   "no_sage_tryout": {
+    "trades": 849,
+    "win_rate": 0.662,
+    "avg_win_pct": 1.46,
+    "avg_loss_pct": -3.52,
+    "profit_factor": 0.81,
+    "return_pct": -17.89,
+    "max_drawdown_pct": 23.55
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  },
+  {
+   "version": "V08 all setups + shorts",
+   "ideas_school": 4190,
+   "school_win_rate": 0.661,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   },
+   "no_sage_tryout": {
+    "trades": 1658,
+    "win_rate": 0.6791,
+    "avg_win_pct": 1.5,
+    "avg_loss_pct": -3.49,
+    "profit_factor": 0.91,
+    "return_pct": -16.34,
+    "max_drawdown_pct": 25.69
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  },
+  {
+   "version": "V09 pullback scalp + shorts",
+   "ideas_school": 2897,
+   "school_win_rate": 0.713,
+   "tryout": {
+    "trades": 48,
+    "win_rate": 0.7292,
+    "avg_win_pct": 1.83,
+    "avg_loss_pct": -6.06,
+    "profit_factor": 0.81,
+    "return_pct": -1.49,
+    "max_drawdown_pct": 3.29,
+    "sage_avg_prob": 0.836
+   },
+   "no_sage_tryout": {
+    "trades": 944,
+    "win_rate": 0.7225,
+    "avg_win_pct": 1.05,
+    "avg_loss_pct": -3.47,
+    "profit_factor": 0.78,
+    "return_pct": -18.02,
+    "max_drawdown_pct": 21.46
+   },
+   "exam": {
+    "trades": 12,
+    "win_rate": 0.9167,
+    "avg_win_pct": 0.71,
+    "avg_loss_pct": -2.7,
+    "profit_factor": 2.88,
+    "return_pct": 0.51,
+    "max_drawdown_pct": 0.27,
+    "sage_avg_prob": 0.809
+   }
+  },
+  {
+   "version": "V10 slow trend pullback",
+   "ideas_school": 1391,
+   "school_win_rate": 0.643,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   },
+   "no_sage_tryout": {
+    "trades": 357,
+    "win_rate": 0.5826,
+    "avg_win_pct": 1.38,
+    "avg_loss_pct": -3.33,
+    "profit_factor": 0.58,
+    "return_pct": -18.98,
+    "max_drawdown_pct": 21.75
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  },
+  {
+   "version": "V11 strict researcher",
+   "ideas_school": 906,
+   "school_win_rate": 0.732,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": 0.81
+   },
+   "no_sage_tryout": {
+    "trades": 472,
+    "win_rate": 0.7818,
+    "avg_win_pct": 1.23,
+    "avg_loss_pct": -4.79,
+    "profit_factor": 0.92,
+    "return_pct": -4.12,
+    "max_drawdown_pct": 8.89
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": 0.808
+   }
+  },
+  {
+   "version": "V12 fast scalp",
+   "ideas_school": 2131,
+   "school_win_rate": 0.604,
+   "tryout": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   },
+   "no_sage_tryout": {
+    "trades": 946,
+    "win_rate": 0.6121,
+    "avg_win_pct": 0.82,
+    "avg_loss_pct": -2.04,
+    "profit_factor": 0.63,
+    "return_pct": -24.35,
+    "max_drawdown_pct": 26.53
+   },
+   "exam": {
+    "trades": 0,
+    "win_rate": 0,
+    "profit_factor": 0,
+    "return_pct": 0,
+    "max_drawdown_pct": 0,
+    "sage_avg_prob": null
+   }
+  }
+ ],
+ "picked": "V05 breakout quick-profit"
+}

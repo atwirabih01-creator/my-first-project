@@ -1,0 +1,125 @@
+{
+ "walk_forward_13_markets": [
+  {
+   "trades": 34,
+   "win_rate": 0.7941,
+   "avg_win_pct": 1.1,
+   "avg_loss_pct": -4.78,
+   "profit_factor": 0.88,
+   "return_pct": -0.4,
+   "max_drawdown_pct": 2.12,
+   "version": "V25 V19 buy-only"
+  },
+  {
+   "trades": 34,
+   "win_rate": 0.7941,
+   "avg_win_pct": 1.1,
+   "avg_loss_pct": -4.78,
+   "profit_factor": 0.88,
+   "return_pct": -0.4,
+   "max_drawdown_pct": 2.12,
+   "version": "V26 V19 buy-only + crash guard"
+  },
+  {
+   "trades": 4,
+   "win_rate": 0.75,
+   "avg_win_pct": 1.27,
+   "avg_loss_pct": -5.49,
+   "profit_factor": 0.69,
+   "return_pct": -0.17,
+   "max_drawdown_pct": 0.55,
+   "version": "V27 buy-only + crash guard, Sage 85%"
+  },
+  {
+   "trades": 31,
+   "win_rate": 0.8065,
+   "avg_win_pct": 1.05,
+   "avg_loss_pct": -4.29,
+   "profit_factor": 1.02,
+   "return_pct": 0.05,
+   "max_drawdown_pct": 1.55,
+   "version": "V28 buy-only + crash guard, pullback only"
+  },
+  {
+   "trades": 32,
+   "win_rate": 0.7812,
+   "avg_win_pct": 0.96,
+   "avg_loss_pct": -6.01,
+   "profit_factor": 0.57,
+   "return_pct": -1.81,
+   "max_drawdown_pct": 3.25,
+   "version": "V29 buy-only + crash guard, target 0.8 ATR"
+  },
+  {
+   "trades": 21,
+   "win_rate": 0.7619,
+   "avg_win_pct": 1.13,
+   "avg_loss_pct": -3.79,
+   "profit_factor": 0.96,
+   "return_pct": -0.09,
+   "max_drawdown_pct": 1.42,
+   "version": "V30 buy-only + crash guard, stop 2.5"
+  },
+  {
+   "trades": 5,
+   "win_rate": 0.6,
+   "avg_win_pct": 1.01,
+   "avg_loss_pct": -6.13,
+   "profit_factor": 0.25,
+   "return_pct": -0.92,
+   "max_drawdown_pct": 1.02,
+   "version": "V31 buy-only + crash guard, wider Sage memory"
+  },
+  {
+   "trades": 228,
+   "win_rate": 0.7895,
+   "avg_win_pct": 1.2,
+   "avg_loss_pct": -4.33,
+   "profit_factor": 1.04,
+   "return_pct": 0.77,
+   "max_drawdown_pct": 6.97,
+   "version": "V32 buy+sell, crash guard both ways"
+  },
+  {
+   "trades": 35,
+   "win_rate": 0.7714,
+   "avg_win_pct": 1.1,
+   "avg_loss_pct": -4.62,
+   "profit_factor": 0.8,
+   "return_pct": -0.74,
+   "max_drawdown_pct": 2.12,
+   "version": "V33 buy-only + crash guard, no tide rule"
+  },
+  {
+   "trades": 16,
+   "win_rate": 0.75,
+   "avg_win_pct": 1.01,
+   "avg_loss_pct": -3.76,
+   "profit_factor": 0.81,
+   "return_pct": -0.3,
+   "max_drawdown_pct": 0.84,
+   "version": "V34 buy-only + crash guard, hold 24h"
+  },
+  {
+   "trades": 32,
+   "win_rate": 0.7812,
+   "avg_win_pct": 1.1,
+   "avg_loss_pct": -4.78,
+   "profit_factor": 0.82,
+   "return_pct": -0.62,
+   "max_drawdown_pct": 2.22,
+   "version": "V35 buy-only, tight crash guard 2%"
+  },
+  {
+   "trades": 69,
+   "win_rate": 0.7246,
+   "avg_win_pct": 1.46,
+   "avg_loss_pct": -6.04,
+   "profit_factor": 0.64,
+   "return_pct": -4.13,
+   "max_drawdown_pct": 5.4,
+   "version": "V36 buy-only + crash guard, researcher 0.6"
+  }
+ ],
+ "picked": "V32 buy+sell, crash guard both ways"
+}
