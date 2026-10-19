@@ -8,12 +8,15 @@ import { Screen } from '@/components/Screen';
 import { Btn, Card, Chip, Row, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
 import { useChild, useT } from '@/lib/store';
+import { SUBJECTS } from '@/lib/subjects';
+import { planAccess } from '@/lib/unlock';
 
 const LIMITS = [15, 20, 30, 45, 60];
 const TIMES = ['15:00', '16:00', '17:00', '18:00', '19:00'];
 
 export default function Settings() {
-  const { child, settings, app } = useChild();
+  const { child, settings, app, plan, progress } = useChild();
+  const access = planAccess(plan, progress);
   const { t } = useT();
   const [confirmDelete, setConfirmDelete] = useState(false);
 
@@ -22,6 +25,41 @@ export default function Settings() {
       <ParentChildPicker />
       {child ? (
         <View style={{ gap: S.md }}>
+          <Card testID="lesson-order">
+            <Txt bold>🔐 {t('pLessonOrder')}</Txt>
+            <Txt variant="small">{t('pLessonOrderHint')}</Txt>
+            {SUBJECTS.filter((s) => plan.some((p) => p.subject === s.id)).map((s) => (
+              <View key={s.id} style={{ gap: S.xs }}>
+                <Txt variant="small" bold>
+                  {s.icon} {t(s.key)}
+                </Txt>
+                {plan
+                  .filter((p) => p.subject === s.id)
+                  .map((p, i, arr) => {
+                    const a = access[p.id];
+                    const label = a?.passed ? `✓ ${t('pIsPassed')}` : a?.open ? t('pIsOpen') : `🔒 ${t('pIsLocked')}`;
+                    return (
+                      <Row key={p.id} wrap testID={`order-${p.topic}`}>
+                        <Txt style={{ flex: 1, minWidth: 120 }}>
+                          {i + 1}. {p.topic} · <Txt variant="small">{label}</Txt>
+                        </Txt>
+                        <Btn small variant="ghost" title="↑" a11yLabel={t('moveUp')} disabled={i === 0} onPress={() => app.movePlanItem(child.id, p.id, -1)} testID={`up-${p.topic}`} />
+                        <Btn small variant="ghost" title="↓" a11yLabel={t('moveDown')} disabled={i === arr.length - 1} onPress={() => app.movePlanItem(child.id, p.id, 1)} testID={`down-${p.topic}`} />
+                        {!a?.passed && (p.unlocked || !a?.open) ? (
+                          <Btn
+                            small
+                            variant="secondary"
+                            title={p.unlocked ? t('pRelock') : `🔓 ${t('pUnlock')}`}
+                            onPress={() => app.setPlanItem(child.id, p.id, { unlocked: !p.unlocked })}
+                            testID={`unlock-${p.topic}`}
+                          />
+                        ) : null}
+                      </Row>
+                    );
+                  })}
+              </View>
+            ))}
+          </Card>
           <Card>
             <Txt bold>{t('dailyLimit')}</Txt>
             <Row wrap>

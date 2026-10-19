@@ -1,11 +1,12 @@
 // App-side API client. Talks ONLY to Zaki's own server (relative /api/* routes).
 // If the server is unreachable or reports ai:false, everything falls back to a
 // client-side DEMO MODE (bundled sample packs, local answer checks, scripted replies).
+import { mixExamQuestions } from '../../server/examMix';
 import { getDemoPack } from './demoPacks';
 import type { HelpKind } from './helpRoutes';
 import { kindFromCategory } from './localSafety';
 import { translate } from './i18n';
-import type { Country, Lang, LessonPack, Question, Safety, Source, Subject } from './types';
+import type { Country, ExamQuestion, Lang, LessonPack, Question, Safety, Source, Subject } from './types';
 
 type SafetyHandler = (kind: HelpKind) => void;
 let safetyHandler: SafetyHandler | null = null;
@@ -262,4 +263,45 @@ export function demoParsePlan(text: string): ParentPlan | undefined {
     }
   }
   return { subject: found[0], topic: topic.slice(0, 60), dueDate, sessions: 2 };
+}
+
+// ---------- exam builder ----------
+export async function buildExamQuestions(req: {
+  subject: Subject;
+  lang: Lang;
+  grade: number;
+  count: number;
+  lessons: { lessonKey: string; pack: LessonPack }[];
+}): Promise<{ questions: ExamQuestion[]; added: number; demo: boolean }> {
+  if (!demoMode) {
+    try {
+      const data = await request<{ questions?: ExamQuestion[]; added?: number }>('/api/exam', req, 60000);
+      if (Array.isArray(data.questions) && data.questions.length) return { questions: data.questions, added: data.added ?? 0, demo: false };
+    } catch {
+      // fall back to the local mix
+    }
+  }
+  return { questions: mixExamQuestions(req.lessons, req.count), added: 0, demo: true };
+}
+
+// ---------- parent Ask Zaki ----------
+export type ParentTurn = { role: 'parent' | 'zaki'; text: string };
+
+export async function askZakiAsParent(req: {
+  message: string;
+  lang: Lang;
+  country: Country;
+  history: ParentTurn[];
+  pageImages?: string[];
+}): Promise<{ reply: string; demo: boolean }> {
+  if (!demoMode) {
+    try {
+      const data = await request<{ reply?: string }>('/api/parent-ask', req, 90000);
+      if (typeof data.reply === 'string' && data.reply.trim()) return { reply: data.reply, demo: false };
+    } catch {
+      // fall through to the demo reply
+    }
+  }
+  await new Promise((r) => setTimeout(r, 400));
+  return { reply: translate(req.lang, 'parentAskDemo'), demo: true };
 }

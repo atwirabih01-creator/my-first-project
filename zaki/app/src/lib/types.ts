@@ -104,8 +104,35 @@ export type ChildProgress = {
   usage: Record<string, number>; // date -> minutes used
   reports: AnswerReport[];
   bestTestSeconds: Record<string, number>;
+  examResults?: ExamResult[];
 };
 
 export type CachedPack = { pack: LessonPack; sources: Source[]; savedAt: string; demo: boolean };
 
 export type LessonStatus = 'new' | 'learning' | 'learned' | 'mastered';
+
+export type ExamQuestion = Question & { lessonKey: string };
+
+/** A combined exam the grown-up built from several saved lessons (parent area). */
+export type Exam = {
+  id: string;
+  subject: Subject;
+  title: string;
+  date: string; // YYYY-MM-DD
+  lessonKeys: string[];
+  lessonTopics: Record<string, string>;
+  questions: ExamQuestion[];
+  createdAt: string;
+  addedByAi?: number;
+};
+
+export type ExamResult = {
+  examId: string;
+  date: string;
+  at: string;
+  score: number;
+  total: number;
+  seconds: number;
+  practice: boolean;
+  perLesson: Record<string, { correct: number; total: number }>;
+};

@@ -19,6 +19,8 @@ export const SIZE_LIMITS = {
   tutor: 200_000, // the pack travels with each turn
   checkAnswer: 200_000,
   parent: 4_000,
+  exam: 2_000_000, // several saved lessons
+  parentAsk: 7_000_000, // up to 3 photos
 } as const;
 
 export function json(data: unknown, status = 200, headers: Record<string, string> = {}): Response {
@@ -56,6 +58,8 @@ export const RATE_LIMITS = {
   checkAnswer: { limit: 120, windowMs: 60_000 },
   parent: { limit: 20, windowMs: 60_000 },
   health: { limit: 60, windowMs: 60_000 },
+  exam: { limit: 20, windowMs: 60_000 },
+  parentAsk: { limit: 20, windowMs: 60_000 },
 } as const;
 
 /**

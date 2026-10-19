@@ -7,8 +7,9 @@ import { Mascot } from '@/components/Mascot';
 import { Screen } from '@/components/Screen';
 import { Btn, Card, Row, Stars, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
-import { lessonKeyOf, statusOf, todayStr, useChild, useT } from '@/lib/store';
+import { todayStr, useChild, useT } from '@/lib/store';
 import { formatDate, openLesson, setHelpReturn } from '@/lib/nav';
+import { currentLesson, planAccess } from '@/lib/unlock';
 import { subjectInfo } from '@/lib/subjects';
 import type { PlanItem } from '@/lib/types';
 
@@ -21,8 +22,10 @@ export default function Home() {
   const young = child.grade <= 3;
   const used = progress.usage[todayStr()] ?? 0;
   const left = Math.max(0, Math.round(settings.dailyLimitMin - used));
-  const isDone = (p: PlanItem) => statusOf(progress.lessons[lessonKeyOf(p.subject, p.topic)]) !== 'new' && (progress.lessons[lessonKeyOf(p.subject, p.topic)]?.passDates.length ?? 0) > 0;
-  const next = plan.find((p) => !isDone(p)) ?? plan[0];
+  const access = planAccess(plan, progress);
+  const isDone = (p: PlanItem) => access[p.id]?.passed ?? false;
+  // Start always opens the current lesson: the first open one not yet passed.
+  const next = currentLesson(plan, progress);
 
   const tiles = [
     { key: 'classes', icon: '📚', label: t('myClasses'), href: '/classes' as const },
@@ -62,13 +65,15 @@ export default function Home() {
             {plan.map((p) => {
               const s = subjectInfo(p.subject);
               const done = isDone(p);
+              const lockedRow = !access[p.id]?.open;
               return (
                 <Pressable
                   key={p.id}
-                  onPress={() => openLesson(p, p.kind === 'test' && done ? 'test' : 'full')}
+                  onPress={() => (lockedRow ? undefined : openLesson(p, p.kind === 'test' && done ? 'test' : 'full'))}
                   accessibilityRole="button"
-                  accessibilityLabel={`${t(s.key)}: ${p.topic}`}
-                  style={[styles.planRow, done && { backgroundColor: C.mintSoft }]}
+                  accessibilityLabel={`${t(s.key)}: ${p.topic}${lockedRow ? ` (${t('lockedMsg', { topic: access[p.id]?.blocker ?? '' })})` : ''}`}
+                  accessibilityState={{ disabled: lockedRow }}
+                  style={[styles.planRow, done && { backgroundColor: C.mintSoft }, lockedRow && { backgroundColor: '#EEF1F4' }]}
                   testID={`plan-${p.topic}`}>
                   <Txt variant="big">{s.icon}</Txt>
                   <View style={{ flex: 1 }}>
@@ -76,8 +81,15 @@ export default function Home() {
                     <Txt variant="small">
                       {t(s.key)} · {p.kind === 'test' && p.dueDate ? t('planTest', { date: formatDate(p.dueDate, lang) }) : t('planLesson')}
                     </Txt>
+                    {lockedRow ? (
+                      <Txt variant="small" testID={`locked-${p.topic}`}>
+                        {t('lockedMsg', { topic: access[p.id]?.blocker ?? '' })}
+                      </Txt>
+                    ) : null}
                   </View>
                   {done ? <Txt variant="small" color={C.mint} bold>{t('planDone')}</Txt> : null}
+                  {lockedRow ? <Txt variant="big">🔒</Txt> : null}
+                  {p.pending ? <Txt variant="small" bold>⏳ {t('pendingTag')}</Txt> : null}
                 </Pressable>
               );
             })}

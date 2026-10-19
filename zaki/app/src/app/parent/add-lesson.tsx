@@ -30,6 +30,7 @@ export default function AddLesson() {
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [demoUsed, setDemoUsed] = useState<string | null>(null);
+  const [fromLibrary, setFromLibrary] = useState(false);
 
   async function pick() {
     try {
@@ -69,11 +70,21 @@ export default function AddLesson() {
       pageImages: photos.length ? photos.map((p) => p.base64) : undefined,
     });
     const key = lessonKeyOf(subject, name);
-    app.savePack(child.id, key, { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo });
-    app.addPlanItem(child.id, { subject, topic: name, kind: hasTest ? 'test' : 'lesson', dueDate: hasTest ? dueDate : undefined, packKey: key });
+    const planBase = { subject, topic: name, kind: hasTest ? ('test' as const) : ('lesson' as const), dueDate: hasTest ? dueDate : undefined, packKey: key };
     setBusy(false);
-    setDemoUsed(res.demo ? res.pack.topic : null);
-    setMsg(t('lessonReady', { name: child.nickname }));
+    if (res.budgetReached) {
+      // Daily AI limit: queue it; the app prepares it automatically on a later day.
+      app.addPlanItem(child.id, { ...planBase, pending: true });
+      setDemoUsed(null);
+      setFromLibrary(false);
+      setMsg(t('budgetQueued'));
+    } else {
+      app.savePack(child.id, key, { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo });
+      app.addPlanItem(child.id, planBase);
+      setDemoUsed(res.demo ? res.pack.topic : null);
+      setFromLibrary(!!res.fromLibrary);
+      setMsg(t('lessonReady', { name: child.nickname }));
+    }
     setTopic('');
     setPhotos([]);
   }
@@ -147,6 +158,7 @@ export default function AddLesson() {
                 {msg}
               </Txt>
               {demoUsed ? <Txt variant="small">{t('demoUsedSampleNamed', { topic: demoUsed })}</Txt> : null}
+              {fromLibrary ? <Txt variant="small" testID="from-library">⚡ {t('fromLibrary')}</Txt> : null}
             </Card>
           ) : null}
           <Btn title={child ? t('prepareFor', { name: child.nickname }) : t('prepare')} big icon="✨" onPress={prepare} testID="prepare-lesson" />

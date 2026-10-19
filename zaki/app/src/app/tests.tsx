@@ -1,4 +1,5 @@
 // Tests: upcoming tests from the grown-up's plan, results history, retry when ready.
+import { router } from 'expo-router';
 import { View } from 'react-native';
 
 import { Screen } from '@/components/Screen';
@@ -7,13 +8,15 @@ import { C, S } from '@/constants/theme';
 import { formatDate, openLesson } from '@/lib/nav';
 import { lessonKeyOf, MAX_TESTS_PER_DAY, todayStr, useChild, useT } from '@/lib/store';
 import { subjectInfo } from '@/lib/subjects';
+import { planAccess } from '@/lib/unlock';
 
 export default function Tests() {
-  const { progress, plan } = useChild();
+  const { progress, plan, exams } = useChild();
   const { t, lang } = useT();
   const today = todayStr();
   const upcoming = plan.filter((p) => p.kind === 'test' && (!p.dueDate || p.dueDate >= today));
   const results = [...progress.tests].reverse();
+  const access = planAccess(plan, progress);
 
   const triesLeft = (key: string) => {
     const todays = progress.tests.filter((x) => x.lessonKey === key && x.date === today);
@@ -22,6 +25,27 @@ export default function Tests() {
 
   return (
     <Screen child trackTime back="/home" title={`📝 ${t('tests')}`}>
+      {exams.length ? <Txt variant="h2">🏆 {t('exams')}</Txt> : null}
+      {exams.map((e) => {
+        const last = [...(progress.examResults ?? [])].reverse().find((r) => r.examId === e.id);
+        const upcomingExam = e.date >= today;
+        return (
+          <Card key={e.id} tone="lilac" testID={`exam-${e.title}`}>
+            <Txt bold>{e.title}</Txt>
+            <Txt variant="small">
+              {t('examOn', { date: formatDate(e.date, lang) })} · {t('examIntro', { n: e.questions.length, k: e.lessonKeys.length })}
+            </Txt>
+            {last ? <Txt variant="small">{t('examLast', { score: last.score, total: last.total })}{last.practice ? ` ${t('practiceTag')}` : ''}</Txt> : null}
+            <Row wrap>
+              {upcomingExam ? (
+                <Btn small variant="secondary" title={t('practiceExam')} onPress={() => router.push({ pathname: '/exam', params: { id: e.id, practice: '1' } })} testID={`exam-practice-${e.title}`} />
+              ) : null}
+              <Btn small title={t('takeExam')} onPress={() => router.push({ pathname: '/exam', params: { id: e.id } })} testID={`exam-take-${e.title}`} />
+            </Row>
+          </Card>
+        );
+      })}
+
       <Txt variant="h2">⏳ {t('upcoming')}</Txt>
       {upcoming.length === 0 ? <Txt>{t('noUpcoming')}</Txt> : null}
       {upcoming.map((p) => {
@@ -35,7 +59,11 @@ export default function Tests() {
                 <Txt variant="small">{p.dueDate ? t('planTest', { date: formatDate(p.dueDate, lang) }) : t(s.key)}</Txt>
               </View>
             </Row>
-            <Btn small title={t('practiseIt')} onPress={() => openLesson(p)} />
+            {access[p.id]?.open ? (
+              <Btn small title={t('practiseIt')} onPress={() => openLesson(p)} />
+            ) : (
+              <Txt variant="small">🔒 {t('lockedMsg', { topic: access[p.id]?.blocker ?? '' })}</Txt>
+            )}
           </Card>
         );
       })}

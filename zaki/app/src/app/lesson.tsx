@@ -45,7 +45,7 @@ export default function Lesson() {
   const { t } = useT();
 
   const [cp, setCp] = useState<CachedPack | null>(packs[key] ?? null);
-  const [phase, setPhase] = useState<Phase>(packs[key] ? (params.mode === 'test' ? 'testIntro' : 'intro') : 'loading');
+  const [phase, setPhase] = useState<Phase>(packs[key] ? (params.mode === 'test' ? 'testIntro' : params.mode === 'review' ? 'teach' : 'intro') : 'loading');
   const [idx, setIdx] = useState(0);
   const [recapWrong, setRecapWrong] = useState<number | null>(null);
   const [reload, setReload] = useState(0);
@@ -84,7 +84,7 @@ export default function Lesson() {
         const cached: CachedPack = { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo };
         app.savePack(child.id, key, cached);
         setCp(cached);
-        setPhase(params.mode === 'test' ? 'testIntro' : 'intro');
+        setPhase(params.mode === 'test' ? 'testIntro' : params.mode === 'review' ? 'teach' : 'intro');
       })
       .catch(() => alive && setPhase('error'));
     return () => {
@@ -141,7 +141,8 @@ export default function Lesson() {
       // Reuse the original test questions in a new order with the answers moved around.
       qs = [...pack.test].reverse().slice(0, TEST_SIZE).map((q) => shuffleChoices(q));
     }
-    setTestQs(qs);
+    // Every test attempt gets a fresh answer order (retakes never look the same).
+    setTestQs(qs.map((q) => shuffleChoices(q)));
     setTestIdx(0);
     setCorrect(0);
     const ts = nowMs();

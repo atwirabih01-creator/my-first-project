@@ -53,21 +53,24 @@ const fromWords = (w) => {
     await page.goto(BASE);
     await visible('profile-Maya', 15000);
   };
-  // Correct answer index for the question currently on screen, from the saved lesson.
+  // Correct answer for the question on screen, looked up by TEXT in the saved lessons/exams
+  // (answer positions are reshuffled on every attempt), then matched to the visible buttons.
   const answerFor = async () => {
     const q = (await tid('question-text').innerText()).trim();
-    const idx = await page.evaluate((qText) => {
+    const right = await page.evaluate((qText) => {
       const s = JSON.parse(localStorage.getItem('zaki:v1:state'));
-      for (const byKey of Object.values(s.packs)) {
-        for (const cp of Object.values(byKey)) {
-          const p = cp.pack;
-          for (const item of [...p.recap, ...p.checks, ...p.test, ...p.retestPool]) if (item.q.trim() === qText) return item.answerIndex;
-        }
-      }
-      return -1;
+      const items = [];
+      for (const byKey of Object.values(s.packs)) for (const cp of Object.values(byKey)) items.push(...cp.pack.recap, ...cp.pack.checks, ...cp.pack.test, ...cp.pack.retestPool);
+      for (const list of Object.values(s.exams || {})) for (const e of list) items.push(...e.questions);
+      const hit = items.find((it) => it.q.trim() === qText);
+      return hit ? hit.choices[hit.answerIndex] : null;
     }, q);
-    if (idx < 0) throw new Error('answer not found for: ' + q);
-    return idx;
+    if (right === null) throw new Error('answer not found for: ' + q);
+    const labels = await page.getByTestId(/^choice-\d$/).locator('visible=true').allInnerTexts();
+    const idx = labels.findIndex((l) => l.replace(/^✓\s*/, '').trim() === right.trim());
+    if (idx < 0) throw new Error('choice not visible for: ' + q);
+    const ids = await page.getByTestId(/^choice-\d$/).locator('visible=true').evaluateAll((els) => els.map((e) => e.getAttribute('data-testid')));
+    return Number(ids[idx].split('-')[1]);
   };
   let wrongTurn = 0;
   const wrongFor = async () => {
@@ -289,6 +292,23 @@ const fromWords = (w) => {
   await shot('en-parent-add-lesson');
   await tap('prepare-lesson');
   check('lesson prepared and added', await visible('add-lesson-msg', 10000));
+  // PASS-TO-UNLOCK: a second math lesson for Ali stays locked until "الكسور" is passed.
+  await tap('pchild-Ali');
+  await tap('subject-math');
+  await tid('lesson-name').fill('Decimals');
+  await tap('prepare-lesson');
+  await visible('add-lesson-msg', 10000);
+  await tap('back-btn');
+  await tap('p-settings');
+  check('Unlock: parent lesson order shows Decimals locked', (await tid('order-Decimals').innerText()).includes('Locked'));
+  await tap('unlock-Decimals');
+  check('Unlock: parent can unlock early (behind the gate)', (await tid('order-Decimals').innerText()).includes('Open'));
+  await shot('en-parent-lesson-order');
+  await tap('unlock-Decimals'); // lock again for the child-side check
+  check('Unlock: parent can lock again', (await tid('order-Decimals').innerText()).includes('Locked'));
+  await tap('back-btn');
+  await tap('pchild-Maya');
+  await tap('p-add');
   await tap('back-btn');
   check('B1: add-lesson back -> parent menu', inApp() && (await visible('p-whatsapp', 3000)));
   await tap('p-whatsapp');
@@ -319,6 +339,24 @@ const fromWords = (w) => {
   check('B2: no horizontal scroll in WhatsApp', await noHScroll());
   await shot('en-whatsapp-commands');
   await tap('back-btn');
+  // EXAM BUILDER: science exam from two saved lessons, 10 questions
+  await tap('p-exam');
+  await tap('exam-subject-science');
+  await tap('exam-lesson-The water cycle');
+  await tap('exam-lesson-Plants');
+  await tap('exam-count-10');
+  await shot('en-parent-exam-builder');
+  await tap('exam-build');
+  check('Exam: built from saved lessons (no AI in demo)', (await tid('exam-msg').innerText({ timeout: 10000 })).includes('10 questions'));
+  await tap('back-btn');
+  // PARENT ASK ZAKI (demo reply)
+  await tap('p-ask');
+  await tid('parent-ask-input').fill('How do I explain the water cycle?');
+  await tap('parent-ask-send');
+  check('Parent Ask Zaki: demo reply shown', (await tid('parent-ask-zaki').innerText({ timeout: 5000 })).includes('Demo mode'));
+  check('Parent Ask Zaki: no horizontal scroll', await noHScroll());
+  await shot('en-parent-ask');
+  await tap('back-btn');
   await tap('p-back-child');
   // Child plan: no "How is she doing in ?" item, no duplicate plants
   await tap('profile-Maya');
@@ -329,6 +367,32 @@ const fromWords = (w) => {
   check('N4: demo lesson titled by the real sample topic, with a sample note', (await tid('sample-note').innerText()).includes('Sample lesson (demo)'));
   await shot('en-n4-sample-note');
   await tap('back-btn');
+  // Child takes the exam: per-lesson breakdown
+  await tap('tile-tests');
+  await tap('exam-take-Science exam');
+  await tap('exam-start');
+  check('Exam: grade 5 count-up timer', await visible('test-timer'));
+  await tap('back-btn');
+  check('Exam: leave box keeps "I need help"', (await visible('leave-title', 3000)) && (await visible('leave-need-help', 1000)));
+  await tap('leave-stay');
+  for (let i = 0; i < 10; i++) await answerCurrent(true);
+  check('Exam: 10 of 10', (await tid('exam-score').innerText()).includes('10 of 10'));
+  check('Exam: result broken down per lesson', (await page.getByTestId('exam-lesson-row').locator('visible=true').count()) === 2);
+  await shot('en-exam-result');
+  await tap('back-home');
+  // FULL REVIEW of a learned lesson from the saved pack (no AI)
+  await tap('tile-classes');
+  await tap('class-Fractions');
+  await tap('review-Fractions');
+  check('Review lesson: re-reads teach steps', await visible('teach-text', 5000));
+  await tap('back-btn');
+  await tap('tile-classes');
+  await tap('class-Fractions');
+  await tap('retake-Fractions');
+  await tap('test-start');
+  check('Retake test: opens a test', await visible('question-text', 3000));
+  await tap('back-btn');
+  await tap('leave-go');
   check('S4: plan has no question-lesson and no duplicate', !planTexts.some((x) => /how is she/i.test(x)) && planTexts.filter((x) => /plants/i.test(x)).length === 1, planTexts.join(' | '));
 
   // ---------- Time cap (break screen) ----------
@@ -354,6 +418,9 @@ const fromWords = (w) => {
   await shot('ar-ready-check');
   await tap('ready-yes');
   check('Arabic watch indicator', (await tid('watch-indicator').innerText()).includes('يرون دروسك'));
+  check('Unlock: Decimals locked on Home until الكسور is passed', (await tid('locked-Decimals').innerText()).includes('الكسور'));
+  check('Unlock: Start goes to the current open lesson (الكسور)', (await tid('start-lesson').innerText()).includes('الكسور'));
+  await shot('ar-home-locked-next');
   check('no horizontal scroll (ar home)', await noHScroll());
   await shot('ar-home-today');
   await tap('start-lesson');
@@ -386,6 +453,7 @@ const fromWords = (w) => {
   check('Arabic pass', (await tid('result-pass').innerText()).includes('تعلّمتَه'));
   await shot('ar-test-pass');
   await tap('back-home');
+  check('Unlock: passing الكسور opens Decimals', !(await visible('locked-Decimals', 1000)) && (await tid('start-lesson').innerText()).includes('Decimals'));
   // Arabic fear screen (Arabizi): trusted adult first, 1564 and the 112 danger line
   await tap('tile-practice');
   await page.getByTestId(/practice-/).locator('visible=true').first().click();

@@ -1,7 +1,7 @@
 import { router, type Href } from 'expo-router';
 
 /** Open the lesson loop for a subject + topic. mode "test" jumps straight to the test. */
-export function openLesson(item: { subject: string; topic: string }, mode: 'full' | 'test' = 'full') {
+export function openLesson(item: { subject: string; topic: string }, mode: 'full' | 'test' | 'review' = 'full') {
   router.push({ pathname: '/lesson', params: { subject: item.subject, topic: item.topic, mode } });
 }
 

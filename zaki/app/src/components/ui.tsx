@@ -122,9 +122,9 @@ export function Btn({
   );
 }
 
-export function Card({ children, style, tone }: { children: ReactNode; style?: StyleProp<ViewStyle>; tone?: 'mint' | 'sun' | 'lilac' | 'coral' | 'primary' }) {
+export function Card({ children, style, tone, testID }: { children: ReactNode; style?: StyleProp<ViewStyle>; tone?: 'mint' | 'sun' | 'lilac' | 'coral' | 'primary'; testID?: string }) {
   const bg = tone ? { mint: C.mintSoft, sun: C.sunSoft, lilac: C.lilacSoft, coral: C.coralSoft, primary: C.primarySoft }[tone] : C.card;
-  return <View style={[styles.card, { backgroundColor: bg }, style]}>{children}</View>;
+  return <View testID={testID} style={[styles.card, { backgroundColor: bg }, style]}>{children}</View>;
 }
 
 export function Row({ children, style, gap = S.sm, wrap, testID }: { children: ReactNode; style?: StyleProp<ViewStyle>; gap?: number; wrap?: boolean; testID?: string }) {

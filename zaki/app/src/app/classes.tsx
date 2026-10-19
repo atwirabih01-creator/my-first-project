@@ -8,6 +8,7 @@ import { C, R, S } from '@/constants/theme';
 import { openLesson } from '@/lib/nav';
 import { lessonKeyOf, statusOf, useChild, useT } from '@/lib/store';
 import { SUBJECTS } from '@/lib/subjects';
+import { accessForKey } from '@/lib/unlock';
 import type { LessonStatus } from '@/lib/types';
 
 const STATUS_COLOR: Record<LessonStatus, { bg: string; fg: string }> = {
@@ -58,6 +59,8 @@ export default function Classes() {
               const status = statusOf(progress.lessons[x.key]);
               const pack = packs[x.key]?.pack;
               const isOpen = open === x.key;
+              const acc = accessForKey(plan, progress, x.key);
+              const learnedIt = status === 'learned' || status === 'mastered';
               return (
                 <Card key={x.key}>
                   <Pressable
@@ -69,12 +72,18 @@ export default function Classes() {
                     testID={`class-${x.topic}`}>
                     <Row>
                       <Txt bold style={{ flex: 1 }}>
+                        {acc.open ? '' : '🔒 '}
                         {x.topic}
                       </Txt>
                       <StatusPill status={status} />
                     </Row>
+                    {!acc.open ? (
+                      <Txt variant="small" testID={`class-locked-${x.topic}`}>
+                        {t('lockedMsg', { topic: acc.blocker ?? '' })}
+                      </Txt>
+                    ) : null}
                   </Pressable>
-                  {isOpen ? (
+                  {isOpen && acc.open ? (
                     <View style={{ gap: S.sm }}>
                       {pack ? (
                         <Card tone="mint">
@@ -87,8 +96,18 @@ export default function Classes() {
                         </Card>
                       ) : null}
                       <Row wrap>
-                        <Btn small title={status === 'new' ? t('learnIt') : t('practiseIt')} onPress={() => openLesson(x)} />
-                        {pack ? <Btn small variant="secondary" title={t('takeTest')} onPress={() => openLesson(x, 'test')} /> : null}
+                        {learnedIt && pack ? (
+                          <>
+                            {/* Full review from the saved lesson: no AI needed. */}
+                            <Btn small title={t('reviewLesson')} onPress={() => openLesson(x, 'review')} testID={`review-${x.topic}`} />
+                            <Btn small variant="secondary" title={t('retakeTest')} onPress={() => openLesson(x, 'test')} testID={`retake-${x.topic}`} />
+                          </>
+                        ) : (
+                          <>
+                            <Btn small title={status === 'new' ? t('learnIt') : t('practiseIt')} onPress={() => openLesson(x)} />
+                            {pack ? <Btn small variant="secondary" title={t('takeTest')} onPress={() => openLesson(x, 'test')} /> : null}
+                          </>
+                        )}
                       </Row>
                     </View>
                   ) : null}

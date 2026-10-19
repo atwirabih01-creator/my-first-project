@@ -2,7 +2,7 @@
 // Local only (Phase 1). Saved to device storage after every change.
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { getHealth, setDemoMode } from './api';
+import { fetchLessonPack, getHealth, setDemoMode } from './api';
 import { getDemoPack } from './demoPacks';
 import { isRTLLang, textAlignFor, translate, type StringKey } from './i18n';
 import { loadJSON, saveJSON } from './storage';
@@ -10,6 +10,8 @@ import type {
   AvatarId,
   CachedPack,
   ChildProfile,
+  Exam,
+  ExamResult,
   ChildProgress,
   ChildSettings,
   Lang,
@@ -75,6 +77,7 @@ type Persisted = {
   progress: Record<string, ChildProgress>;
   plans: Record<string, PlanItem[]>;
   packs: Record<string, Record<string, CachedPack>>; // childId -> lessonKey -> pack
+  exams?: Record<string, Exam[]>; // childId -> exams built by the grown-up
 };
 
 function seed(): Persisted {
@@ -159,6 +162,8 @@ type Actions = {
   addPlanItem: (id: string, item: Omit<PlanItem, 'id' | 'addedAt'>) => PlanItem | null;
   savePack: (id: string, key: string, cp: CachedPack) => void;
   movePlanItem: (id: string, itemId: string, dir: -1 | 1) => void;
+  addExam: (id: string, exam: Exam) => void;
+  recordExamResult: (id: string, r: ExamResult) => void;
   setPlanItem: (id: string, itemId: string, patch: Partial<PlanItem>) => void;
   touchLesson: (id: string, key: string, subject: Subject, topic: string) => void;
   recordWrongCheck: (id: string, key: string) => void;
@@ -194,7 +199,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     let alive = true;
     (async () => {
       const saved = await loadJSON<Persisted | null>('state', null);
-      const data = saved && saved.version === 1 && Array.isArray(saved.profiles) ? saved : seed();
+      const data = saved && saved.version === 1 && Array.isArray(saved.profiles) ? { exams: {}, ...saved } : { exams: {}, ...seed() };
       if (!saved) await saveJSON('state', data);
       const lastLang = await loadJSON<Lang>('uiLang', 'en');
       if (alive) setState((s) => ({ ...s, ...data, uiLang: lastLang, loaded: true }));
@@ -207,8 +212,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   // Persist after changes.
   useEffect(() => {
     if (!state.loaded) return;
-    const { version, profiles, settings, progress, plans, packs } = state;
-    saveJSON('state', { version, profiles, settings, progress, plans, packs });
+    const { version, profiles, settings, progress, plans, packs, exams } = state;
+    saveJSON('state', { version, profiles, settings, progress, plans, packs, exams });
   }, [state]);
 
   useEffect(() => {
@@ -234,6 +239,31 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       alive = false;
     };
   }, []);
+
+  // Lessons queued because the daily AI limit was reached: try again (once per app start)
+  // when a real server is connected. Each one stays queued if the limit is still reached.
+  const queueRan = useRef(false);
+  useEffect(() => {
+    if (!state.loaded || state.demo !== false || queueRan.current) return;
+    queueRan.current = true;
+    (async () => {
+      const snap = stateRef.current;
+      for (const child of snap.profiles) {
+        const settingsFor = snap.settings[child.id] ?? DEFAULT_SETTINGS;
+        for (const item of (snap.plans[child.id] ?? []).filter((p) => p.pending)) {
+          const res = await fetchLessonPack({ childRef: child.id, grade: child.grade, lang: child.lang, country: settingsFor.country, subject: item.subject, topic: item.topic });
+          if (res.budgetReached) return; // still over today's limit: stop, try another day
+          if ('safetyStopped' in res && res.safetyStopped) continue;
+          const key = lessonKeyOf(item.subject, item.topic);
+          setState((s) => ({
+            ...s,
+            packs: { ...s.packs, [child.id]: { ...(s.packs[child.id] ?? {}), [key]: { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo } } },
+            plans: { ...s.plans, [child.id]: (s.plans[child.id] ?? []).map((p) => (p.id === item.id ? { ...p, pending: false } : p)) },
+          }));
+        }
+      }
+    })();
+  }, [state.loaded, state.demo]);
 
   // The grown-up area locks itself again after 15 minutes.
   useEffect(() => {
@@ -315,6 +345,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         setState((s) => ({ ...s, plans: { ...s.plans, [id]: [...(s.plans[id] ?? []), full] } }));
         return full;
       },
+      addExam: (id, exam) => setState((s) => ({ ...s, exams: { ...(s.exams ?? {}), [id]: [...(s.exams?.[id] ?? []), exam] } })),
+      recordExamResult: (id, r) => updateProgress(id, (p) => ({ ...p, examResults: [...(p.examResults ?? []), r] })),
       movePlanItem: (id, itemId, dir) =>
         setState((s) => {
           const list = [...(s.plans[id] ?? [])];
@@ -408,7 +440,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 }
 
 function emptyPersisted(): Persisted {
-  return { version: 1, profiles: [], settings: {}, progress: {}, plans: {}, packs: {} };
+  return { version: 1, profiles: [], settings: {}, progress: {}, plans: {}, packs: {}, exams: {} };
 }
 
 export function useApp() {
@@ -425,7 +457,8 @@ export function useChild() {
   const progress = child ? (app.progress[child.id] ?? emptyProgress()) : emptyProgress();
   const plan = child ? (app.plans[child.id] ?? []) : [];
   const packs = child ? (app.packs[child.id] ?? {}) : {};
-  return { app, child, settings, progress, plan, packs };
+  const exams = child ? (app.exams?.[child.id] ?? []) : [];
+  return { app, child, settings, progress, plan, packs, exams };
 }
 
 /** Translation helpers for the current UI language. */

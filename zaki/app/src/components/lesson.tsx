@@ -1,7 +1,7 @@
 // Lesson building blocks shared by the lesson loop and practice screens.
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { C, R, S } from '@/constants/theme';
 import { askTutor, checkAnswer, type ChatTurn, type FeedbackKey } from '@/lib/api';
@@ -287,3 +287,33 @@ const styles = StyleSheet.create({
     color: C.text,
   },
 });
+
+/** "Leave the test?" box. "I need help" is always inside it too (never blocked). */
+export function LeaveTestModal({ visible, onStay, onLeave }: { visible: boolean; onStay: () => void; onLeave: () => void }) {
+  const { t } = useT();
+  return (
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onStay}>
+      <View style={{ flex: 1, backgroundColor: 'rgba(30,58,76,0.45)', alignItems: 'center', justifyContent: 'center', padding: S.lg }}>
+        <Card style={{ width: '100%', maxWidth: 420, gap: S.md }}>
+          <Txt variant="h2" center testID="leave-title">
+            {t('leaveTitle')}
+          </Txt>
+          <Txt center>{t('leaveText')}</Txt>
+          <Btn title={t('stay')} big onPress={onStay} testID="leave-stay" />
+          <Btn title={t('leave')} variant="secondary" onPress={onLeave} testID="leave-go" />
+          <Btn
+            title={t('needHelp')}
+            icon="🆘"
+            variant="help"
+            big
+            onPress={() => {
+              onStay();
+              router.push('/help');
+            }}
+            testID="leave-need-help"
+          />
+        </Card>
+      </View>
+    </Modal>
+  );
+}
