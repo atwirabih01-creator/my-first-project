@@ -6,6 +6,7 @@
 // details scrubbed, grade, language and country. Never a name or a child id.
 
 import { callClaude, isRefusal, textOf } from "./ai";
+import { BudgetExceededError, takeChildTurn } from "./budget";
 import { MODELS, aiEnabled } from "./config/models";
 import { fixedMessage } from "./data/safetyMessages";
 import { postCheckReply, protectedItems } from "./replyChecks";
@@ -36,6 +37,8 @@ export type TutorResponse = {
   hintLevel?: number;
   safety: SafetyInfo;
   demo?: boolean;
+  /** Today's AI limit (server budget or this child's turns) is used up. */
+  budgetReached?: boolean;
 };
 
 const MAX_HISTORY_TURNS = 12;
@@ -139,7 +142,8 @@ async function askClaude(req: TutorRequest, hintLevel: number | undefined, extra
     const last = messages[messages.length - 1];
     last.content += `\n<note_from_app>${extraNote}</note_from_app>`;
   }
-  const msg = await callClaude({
+  const msg = await callClaude(
+    {
     model: heavy ? MODELS.tutor : MODELS.light,
     max_tokens: 1500,
     thinking: { type: "adaptive" },
@@ -149,7 +153,9 @@ async function askClaude(req: TutorRequest, hintLevel: number | undefined, extra
       { type: "text", text: `<lesson_pack>\n${packForModel(req.pack)}\n</lesson_pack>`, cache_control: { type: "ephemeral" } },
     ],
     messages,
-  });
+    },
+    { purpose: "tutor" },
+  );
   if (isRefusal(msg)) return null;
   return textOf(msg).trim() || null;
 }
@@ -183,7 +189,12 @@ export async function runTutorTurn(req: TutorRequest): Promise<TutorResponse> {
     return { reply: fixedMessage("demo_tutor", req.lang), hintLevel, safety: childCheck.safety, demo: true };
   }
 
-  // 3. Ask Claude; post-check; one retry if the reply leaked an answer or broke a rule.
+  // 3. Daily limits (per-child turns + server budget). Safety checks above already ran.
+  if (req.childRef && !takeChildTurn(req.childRef)) {
+    return { reply: fixedMessage("budget_tutor", req.lang), hintLevel, safety: childCheck.safety, budgetReached: true };
+  }
+
+  // 4. Ask Claude; post-check; one retry if the reply leaked an answer or broke a rule.
   const items = protectedItems(req.pack, req.step, req.questionId);
   let reply: string | null = null;
   let leakedId: string | undefined;
@@ -199,7 +210,10 @@ export async function runTutorTurn(req: TutorRequest): Promise<TutorResponse> {
       if (pc.blocked === null) reply = pc.text;
       else leakedId = pc.leakedId ?? leakedId;
     }
-  } catch {
+  } catch (e) {
+    if (e instanceof BudgetExceededError) {
+      return { reply: fixedMessage("budget_tutor", req.lang), hintLevel, safety: childCheck.safety, budgetReached: true };
+    }
     return { reply: fixedMessage("ai_unavailable", req.lang), hintLevel, safety: childCheck.safety };
   }
   if (reply === null) {

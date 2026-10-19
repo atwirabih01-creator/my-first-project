@@ -13,3 +13,6 @@ Decisions 1–12 from the project plan (Section 2) are the starting point. New d
 | 2026-10-16 | Plan Section 8.7 added with the safety review's binding changes | Safety review condition for starting Phase 1 |
 | 2026-10-19 | Core flow confirmed: mom adds each lesson (topic or book photos) → AI builds it once → child goes step by step with small checks → full test → next lesson unlocks only after passing (founder) | Founder's product rule. AI cost is per new lesson (~$0.15); the child's lesson, checks and tests run without AI |
 | 2026-10-19 | Add a daily AI spending cap and a shared lesson library (typed topics only; photo-based lessons stay private) | Keeps the pay-as-you-go AI bill small and predictable |
+| 2026-10-19 | Every lesson is saved in full and can be reopened (steps, questions, test) anytime (founder) | Children come back before exams; costs nothing (no AI) |
+| 2026-10-19 | Exam builder: parent picks several lessons (e.g. a mid-term) → one combined exam with a date, per-lesson results and practice before the date (founder) | Built from saved questions (free); optional AI adds fresh verified questions |
+| 2026-10-19 | "Ask Zaki" for parents too: explain a topic or an uploaded page so the mom can help (founder) | In the app's parent area, not WhatsApp (Meta rule); school topics only; counts toward the daily AI cap |

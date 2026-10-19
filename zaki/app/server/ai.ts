@@ -5,6 +5,7 @@
 // Nothing here logs prompt or reply text.
 
 import Anthropic from "@anthropic-ai/sdk";
+import { assertCanSpend, recordUsage, type SpendPurpose } from "./budget";
 import type {
   BetaMessage,
   MessageCreateParamsNonStreaming,
@@ -43,15 +44,23 @@ function withFallback(params: ClaudeParams): ClaudeParams {
  * Call Claude. `stream: true` uses the SDK stream helper and waits for the final message
  * (avoids HTTP timeouts for long outputs such as lesson packs).
  */
-export async function callClaude(params: ClaudeParams, opts: { stream?: boolean } = {}): Promise<ClaudeMessage> {
+export async function callClaude(
+  params: ClaudeParams,
+  opts: { stream?: boolean; purpose?: SpendPurpose } = {},
+): Promise<ClaudeMessage> {
   const stream = opts.stream ?? false;
+  const purpose = opts.purpose ?? "tutor";
+  // Daily spending cap: throws BudgetExceededError before any money is spent.
+  assertCanSpend(purpose);
   const p = withFallback(params);
-  if (testImpl) return testImpl(p, { stream });
-  const c = getClient();
-  if (stream) {
-    return c.beta.messages.stream(p).finalMessage();
+  let msg: ClaudeMessage;
+  if (testImpl) msg = await testImpl(p, { stream });
+  else {
+    const c = getClient();
+    msg = stream ? await c.beta.messages.stream(p).finalMessage() : await c.beta.messages.create(p);
   }
-  return c.beta.messages.create(p);
+  recordUsage(p.model, msg.usage, purpose);
+  return msg;
 }
 
 /** Concatenate the text blocks of a reply. */

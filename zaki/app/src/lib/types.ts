@@ -64,6 +64,10 @@ export type PlanItem = {
   addedAt: string;
   packKey?: string; // lesson key for a cached pack
   sessions?: number;
+  /** Grown-up unlocked this lesson early (pass-to-unlock override). */
+  unlocked?: boolean;
+  /** Waiting for tomorrow: today's AI limit was reached when it was added. */
+  pending?: boolean;
 };
 
 export type TestResult = {

@@ -111,7 +111,10 @@ type ClassifierResult = { category: SafetyCategory; involvesHome: boolean } | nu
 export async function haikuClassify(text: string, speaker: "child" | "tutor"): Promise<ClassifierResult> {
   if (!aiEnabled()) return null;
   try {
-    const msg = await callClaude({
+    // Safety classifier may use the small safety reserve; if even that is used up,
+    // callClaude throws and we fall back to the keyword layer (which always runs).
+    const msg = await callClaude(
+      {
       model: MODELS.classifier,
       max_tokens: 256,
       thinking: { type: "disabled" },
@@ -123,7 +126,9 @@ export async function haikuClassify(text: string, speaker: "child" | "tutor"): P
           content: `speaker: ${speaker}\n<message>\n${text.replace(/<\/?message>/gi, "")}\n</message>`,
         },
       ],
-    });
+      },
+      { purpose: "safety" },
+    );
     const parsed = jsonOf<{ category?: string; involvesHome?: boolean }>(msg);
     if (!parsed || !CLASSIFIER_CATEGORIES.includes(parsed.category as SafetyCategory)) return null;
     return { category: parsed.category as SafetyCategory, involvesHome: Boolean(parsed.involvesHome) };

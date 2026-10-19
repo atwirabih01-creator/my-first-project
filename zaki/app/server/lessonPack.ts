@@ -17,6 +17,8 @@ import { MODELS, aiEnabled } from "./config/models";
 import { TRUSTED_RESEARCH_DOMAINS, isTrustedUrl } from "./config/trustedSources";
 import { LESSON_PACK_JSON_SCHEMA, validatePack } from "./packValidator";
 import { moderate } from "./safety";
+import { BudgetExceededError, canSpend } from "./budget";
+import { getFromLibrary, libraryKey, saveToLibrary } from "./library";
 import { getSamplePack } from "./samples";
 import type { Country, Lang, LessonPack, Question, Subject } from "./types";
 import { verifyPack } from "./verify";
@@ -38,7 +40,12 @@ export type LessonPackResponse = {
   sources: Source[];
   verify: { checked: number; removed: number };
   demo?: boolean;
+  /** Served from the shared library (typed-topic packs only): no AI cost. */
+  fromLibrary?: boolean;
 };
+
+/** Returned instead of a pack when today's AI budget is used up (the app queues it). */
+export type BudgetReachedResponse = { budgetReached: true };
 
 export class LessonPackError extends Error {
   constructor(
@@ -90,7 +97,8 @@ export async function researchTopic(subject: Subject, topic: string, grade: numb
   ];
   let msg: ClaudeMessage | null = null;
   for (let turn = 0; turn < 3; turn++) {
-    msg = await callClaude({
+    msg = await callClaude(
+      {
       model: MODELS.lessonPack,
       max_tokens: 8000,
       thinking: { type: "adaptive" },
@@ -105,7 +113,9 @@ export async function researchTopic(subject: Subject, topic: string, grade: numb
         },
       ],
       messages,
-    });
+      },
+      { purpose: "lesson" },
+    );
     if (msg.stop_reason !== "pause_turn") break;
     messages.push({ role: "assistant", content: msg.content });
   }
@@ -225,7 +235,7 @@ async function writePack(req: LessonPackRequest, notes: string, extra: string): 
       system: [{ type: "text", text: PACK_SYSTEM, cache_control: { type: "ephemeral" } }],
       messages: [{ role: "user", content: buildUserContent(req, notes, extra) }],
     },
-    { stream: true },
+    { stream: true, purpose: "lesson" },
   );
   if (msg.stop_reason === "refusal") throw new LessonPackError("AI declined to write this pack", "ai_refused");
   return jsonOf<Record<string, unknown>>(msg);
@@ -239,7 +249,14 @@ async function writePack(req: LessonPackRequest, notes: string, extra: string): 
 // Main entry
 // ---------------------------------------------------------------------------------------
 
-export async function buildLessonPack(req: LessonPackRequest): Promise<LessonPackResponse> {
+export async function buildLessonPack(req: LessonPackRequest): Promise<LessonPackResponse | BudgetReachedResponse> {
+  const hasPhotos = (req.pageImages ?? []).length > 0;
+  // Shared library first: typed-topic packs only, never photo packs. No AI cost.
+  const key = libraryKey(req.subject, req.topic, req.grade, req.lang);
+  if (!hasPhotos) {
+    const hit = getFromLibrary(key);
+    if (hit) return { pack: hit.pack, sources: hit.sources, verify: hit.verify, fromLibrary: true };
+  }
   if (!aiEnabled()) {
     const sample = getSamplePack(req.subject, req.lang);
     const v = verifyPack(sample);
@@ -249,6 +266,18 @@ export async function buildLessonPack(req: LessonPackRequest): Promise<LessonPac
   // Images are checked before any AI call.
   (req.pageImages ?? []).slice(0, MAX_PAGE_IMAGES).forEach(cleanBase64Image);
 
+  if (!canSpend("lesson")) return { budgetReached: true };
+  try {
+    const built = await buildWithAi(req);
+    if (!hasPhotos) saveToLibrary(key, { pack: built.pack, sources: built.sources, verify: built.verify });
+    return built;
+  } catch (e) {
+    if (e instanceof BudgetExceededError) return { budgetReached: true };
+    throw e;
+  }
+}
+
+async function buildWithAi(req: LessonPackRequest): Promise<LessonPackResponse> {
   let notes = "";
   let sources: Source[] = [];
   try {

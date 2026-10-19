@@ -18,7 +18,8 @@ export type FixedMessageKey =
   | "answer_protected"
   | "demo_tutor"
   | "ai_unavailable"
-  | "ai_intro";
+  | "ai_intro"
+  | "budget_tutor";
 
 export const FIXED_MESSAGES: Record<FixedMessageKey, Record<Lang, string>> = {
   // Disclosure of harm / abuse / secrecy. Honest in both routes: it does NOT say "Mom will see this".
@@ -71,6 +72,10 @@ export const FIXED_MESSAGES: Record<FixedMessageKey, Record<Lang, string>> = {
   ai_unavailable: {
     en: "Zaki can't think right now. Your work is saved.\nTry again in a little while.",
     ar: "لا يستطيع ذكي التفكير الآن. عملك محفوظ.\nحاول مرة أخرى بعد قليل.",
+  },
+  budget_tutor: {
+    en: "Zaki has done a lot of thinking today!\nLet's keep practising with your flashcards and practice questions.\nWe can chat again tomorrow.",
+    ar: "فكّر ذكي كثيرًا اليوم!\nلنتابع التدريب بالبطاقات وأسئلة التدريب.\nيمكننا أن نتحدّث مرة أخرى غدًا.",
   },
   ai_intro: {
     en: "Hi! I'm Zaki, an AI helper (not a person).",

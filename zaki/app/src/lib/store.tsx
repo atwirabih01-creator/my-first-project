@@ -158,6 +158,8 @@ type Actions = {
   /** Adds to the plan; returns null when the same subject + topic is already there (any case). */
   addPlanItem: (id: string, item: Omit<PlanItem, 'id' | 'addedAt'>) => PlanItem | null;
   savePack: (id: string, key: string, cp: CachedPack) => void;
+  movePlanItem: (id: string, itemId: string, dir: -1 | 1) => void;
+  setPlanItem: (id: string, itemId: string, patch: Partial<PlanItem>) => void;
   touchLesson: (id: string, key: string, subject: Subject, topic: string) => void;
   recordWrongCheck: (id: string, key: string) => void;
   recordTest: (id: string, r: Omit<TestResult, 'date' | 'at'>) => void;
@@ -313,6 +315,20 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         setState((s) => ({ ...s, plans: { ...s.plans, [id]: [...(s.plans[id] ?? []), full] } }));
         return full;
       },
+      movePlanItem: (id, itemId, dir) =>
+        setState((s) => {
+          const list = [...(s.plans[id] ?? [])];
+          const i = list.findIndex((p) => p.id === itemId);
+          if (i < 0) return s;
+          // Move within the same subject: swap with the nearest same-subject neighbour.
+          let j = i + dir;
+          while (j >= 0 && j < list.length && list[j].subject !== list[i].subject) j += dir;
+          if (j < 0 || j >= list.length) return s;
+          [list[i], list[j]] = [list[j], list[i]];
+          return { ...s, plans: { ...s.plans, [id]: list } };
+        }),
+      setPlanItem: (id, itemId, patch) =>
+        setState((s) => ({ ...s, plans: { ...s.plans, [id]: (s.plans[id] ?? []).map((p) => (p.id === itemId ? { ...p, ...patch } : p)) } })),
       savePack: (id, key, cp) =>
         setState((s) => ({ ...s, packs: { ...s.packs, [id]: { ...(s.packs[id] ?? {}), [key]: cp } } })),
       touchLesson: (id, key, subject, topic) =>

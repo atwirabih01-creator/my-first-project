@@ -8,6 +8,18 @@ export const MODELS = {
   classifier: "claude-haiku-5-5",
 } as const;
 
+/**
+ * Prices in US$ per million tokens (MTok), used ONLY to estimate spend for the daily
+ * budget. Check them against the provider's price page before relying on them.
+ * Cache writes are estimated at 1.25x the input price.
+ */
+export const PRICES_USD_PER_MTOK: Record<string, { input: number; output: number; cacheRead: number; cacheWrite: number }> = {
+  "claude-sonnet-5-5": { input: 2.0, output: 10.0, cacheRead: 0.1, cacheWrite: 2.5 },
+  "claude-haiku-5-5": { input: 0.1, output: 0.5, cacheRead: 0.01, cacheWrite: 0.125 },
+};
+/** Web search: US$10 per 1,000 searches. */
+export const WEB_SEARCH_USD_EACH = 10 / 1000;
+
 export function aiEnabled(): boolean {
   return Boolean(process.env.ANTHROPIC_API_KEY);
 }

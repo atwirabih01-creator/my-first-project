@@ -2,7 +2,7 @@ import { demoMode, fakeMessage, isClassifierCall, mockClaude, textMsg } from "./
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { isTrustedUrl } from "../config/trustedSources";
-import { LessonPackError, buildLessonPack, shufflePack } from "../lessonPack";
+import { LessonPackError, buildLessonPack, shufflePack, type LessonPackResponse } from "../lessonPack";
 import { getSamplePack } from "../samples";
 
 const req = { subject: "math" as const, topic: "Fractions", grade: 3, lang: "en" as const, country: "LB" as const };
@@ -24,7 +24,7 @@ describe("lesson pack builder", () => {
     demoMode();
     for (const subject of ["math", "science", "english", "arabic", "social"] as const) {
       for (const lang of ["en", "ar"] as const) {
-        const r = await buildLessonPack({ ...req, subject, lang });
+        const r = (await buildLessonPack({ ...req, subject, lang })) as LessonPackResponse;
         assert.equal(r.demo, true);
         assert.equal(r.pack.subject, subject);
         assert.equal(r.pack.lang, lang);
@@ -52,7 +52,7 @@ describe("lesson pack builder", () => {
       return textMsg(JSON.stringify(raw));
     });
     const jpeg = "/9j/" + "A".repeat(100);
-    const r = await buildLessonPack({ ...req, pageImages: [jpeg] });
+    const r = (await buildLessonPack({ ...req, pageImages: [jpeg] })) as LessonPackResponse;
     assert.deepEqual(r.sources, [{ url: "https://www.khanacademy.org/math/fractions", title: "Fractions" }]);
     assert.equal(r.verify.removed, 1);
     assert.ok(!r.pack.test.some((q) => q.id === "t6"));

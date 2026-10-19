@@ -65,12 +65,10 @@ export async function getHealth(): Promise<Health | null> {
 type Common = { childRef: string; grade: number; lang: Lang; country: Country };
 
 // ---------- lesson pack ----------
-export type LessonPackResult = {
-  pack: LessonPack;
-  sources: Source[];
-  demo: boolean;
-  safetyStopped?: boolean;
-};
+export type LessonPackResult =
+  | { pack: LessonPack; sources: Source[]; demo: boolean; safetyStopped?: boolean; fromLibrary?: boolean; budgetReached?: undefined }
+  /** Today's AI limit is reached: the lesson will be prepared tomorrow (the app queues it). */
+  | { budgetReached: true; pack?: undefined };
 
 function isValidPack(p: unknown): p is LessonPack {
   const x = p as LessonPack;
@@ -82,11 +80,12 @@ export async function fetchLessonPack(
 ): Promise<LessonPackResult> {
   if (!demoMode) {
     try {
-      const data = await request<{ pack: LessonPack; sources?: Source[]; safety?: Safety }>(
+      const data = await request<{ pack: LessonPack; sources?: Source[]; safety?: Safety; budgetReached?: boolean; fromLibrary?: boolean }>(
         '/api/lesson-pack',
         req,
         90000,
       );
+      if (data.budgetReached) return { budgetReached: true };
       if (handleSafety(data.safety)) {
         const d = getDemoPack(req.subject, req.lang, req.grade);
         return { ...d, demo: true, safetyStopped: true };
@@ -96,6 +95,7 @@ export async function fetchLessonPack(
           pack: { ...data.pack, recap: data.pack.recap ?? [], retestPool: data.pack.retestPool ?? [], flashcards: data.pack.flashcards ?? [] },
           sources: (data.sources ?? []).map((s) => ({ title: s.title })),
           demo: false,
+          fromLibrary: !!data.fromLibrary,
         };
       }
     } catch {

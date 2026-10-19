@@ -44,3 +44,7 @@ example
 
 # Zaki safety flag queue (reviewer only, never commit)
 server/data/flags.jsonl
+
+# Zaki runtime data (never commit)
+server/data/budget.json
+server/data/library/

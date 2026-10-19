@@ -1,7 +1,12 @@
 // Test helpers: a fake Claude message and env setup. No network, no keys.
 import { __setClaudeForTests, type ClaudeImpl, type ClaudeMessage, type ClaudeParams } from "../ai";
+import { __resetBudgetForTests } from "../budget";
+import { __resetLibraryForTests } from "../library";
 
 process.env.ZAKI_FLAG_FILE = "off";
+// Budget and library stay in memory in tests (no files written), fresh for every mock.
+__resetBudgetForTests(null);
+__resetLibraryForTests(null);
 
 export function fakeMessage(content: unknown[], stop_reason = "end_turn"): ClaudeMessage {
   return {
@@ -26,12 +31,16 @@ export function mockClaude(handler: (p: ClaudeParams, call: number) => ClaudeMes
     return handler(p, calls.length);
   };
   __setClaudeForTests(impl);
+  __resetBudgetForTests(null);
+  __resetLibraryForTests(null);
   process.env.ANTHROPIC_API_KEY = "test-key-not-real";
   return calls;
 }
 
 export function demoMode(): void {
   __setClaudeForTests(null);
+  __resetBudgetForTests(null);
+  __resetLibraryForTests(null);
   delete process.env.ANTHROPIC_API_KEY;
   delete process.env.OPENAI_API_KEY;
   delete process.env.OPENAI_ZDR_APPROVED;
