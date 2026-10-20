@@ -33,10 +33,7 @@ def random_version(i, rng):
     return Version(f"V{61 + i:03d} search", **kw, extra=ex)
 
 
-if __name__ == "__main__":
-    n = int(sys.argv[1]) if len(sys.argv) > 1 else 60
-    rng = random.Random(2026)
-    versions = [random_version(i, rng) for i in range(n)]
+def search(versions, exam_set, tag):
     d, btc = R4.practice_markets()
     syms = sorted(d); random.Random(5).shuffle(syms)
     half = {s: (0 if k < len(syms) // 2 else 1) for k, s in enumerate(syms)}
@@ -58,15 +55,21 @@ if __name__ == "__main__":
         print(f"{v.name} n={s['trades']:4d} win={s['win_rate']:.3f} pf={s['profit_factor']:5} | halves win "
               f"{hs[0]['win_rate']:.3f}/{hs[1]['win_rate']:.3f} pf {hs[0]['profit_factor']}/{hs[1]['profit_factor']}"
               f"{'  <-- PASSES DOUBLE CHECK' if row['double_check'] else ''}", flush=True)
-    json.dump(board, open(L.OUT / "round5_search.json", "w"), indent=1, default=str)
+    json.dump(board, open(L.OUT / f"{tag}_search.json", "w"), indent=1, default=str)
     ok = [r for r in board if r["double_check"]]
     if not ok:
-        print("\nNo version passed the double check; sealed exam B stays unused.")
-        sys.exit()
+        print(f"\nNo version passed the double check; sealed exam {exam_set} stays unused.")
+        return
     best = max(ok, key=lambda r: (min(r["half1"]["win_rate"], r["half2"]["win_rate"]), r["all"]["return_pct"]))
     v = [x for x in versions if x.name == best["version"]][0]
-    t = R4.sealed_exam(v, "B")
+    t = R4.sealed_exam(v, exam_set)
     s = L.score(t); s["passed"] = bool(s["trades"] >= 100 and s["win_rate"] >= 0.80 and s["profit_factor"] > 1)
-    t.to_csv(L.OUT / "round5_sealed_exam_trades.csv", index=False)
-    json.dump({"picked": best, "sealed_exam_B": s}, open(L.OUT / "round5.json", "w"), indent=1, default=str)
-    print(f"\nPICKED {best['version']} {best['settings']}\nSEALED EXAM (set B): {s}")
+    t.to_csv(L.OUT / f"{tag}_sealed_exam_trades.csv", index=False)
+    json.dump({"picked": best, f"sealed_exam_{exam_set}": s}, open(L.OUT / f"{tag}.json", "w"), indent=1, default=str)
+    print(f"\nPICKED {best['version']} {best['settings']}\nSEALED EXAM (set {exam_set}): {s}")
+
+
+if __name__ == "__main__":
+    n = int(sys.argv[1]) if len(sys.argv) > 1 else 60
+    rng = random.Random(2026)
+    search([random_version(i, rng) for i in range(n)], "B", "round5")
