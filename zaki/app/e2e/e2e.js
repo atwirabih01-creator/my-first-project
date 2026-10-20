@@ -86,6 +86,7 @@ const fromWords = (w) => {
   await home();
   check('start screen shows profiles', true);
   check('demo banner shown when no server', await visible('demo-banner', 8000));
+  check('Demo reviewer code is NOT on the child-facing banner', !(await tid('demo-banner').innerText()).includes('2468'));
   check('no horizontal scroll (start)', await noHScroll());
   await shot('en-start-profiles');
 
@@ -104,6 +105,7 @@ const fromWords = (w) => {
   await tap('consent-save');
   check('Consent: refused without both guardians', (await tid('consent-error').innerText()).includes('each guardian'));
   await tap('consent-mode-one');
+  check('Consent: one-guardian intro does not say "both of you"', !(await tid('consent-intro').innerText()).includes('both of you'));
   await tid('g1-name').fill('Rami Haddad');
   await tid('g1-rel').fill('father');
   await tap('g1-agree');
@@ -257,6 +259,16 @@ const fromWords = (w) => {
   if (await visible('tab-ask', 500)) await tap('back-btn');
   await tap('back-btn');
   check('B1: Practice back -> Home', inApp() && (await visible('start-lesson', 3000)));
+  // A disclosure clearly OUTSIDE the home (stranger online): parent is told too.
+  await tap('tile-practice');
+  await page.getByTestId(/practice-/).locator('visible=true').first().click();
+  await tap('tab-ask');
+  await tid('chat-input').fill('a stranger online asked for my photo');
+  await tap('chat-send');
+  check('Stranger-online disclosure -> safety screen', await visible('safety-screen'));
+  await tap('back-btn');
+  if (await visible('tab-ask', 500)) await tap('back-btn');
+  await tap('back-btn');
 
   // I need help from inside a lesson; back returns to the lesson
   await tap('start-lesson');
@@ -556,7 +568,7 @@ const fromWords = (w) => {
   await tap('back-btn');
   await tap('pchild-Maya');
   await tap('p-progress');
-  check('Maya: reviewer-route flags ("my dad hits me", help button) are NOT shown to the parent', (await page.getByTestId('safety-note').locator('visible=true').count()) === 0 && !/dad/i.test(await tid('safety-notes').innerText()));
+  check('Maya: only the outside-home note is shown; reviewer-route flags ("my dad hits me", help button) are NOT, and no child words', (await page.getByTestId('safety-note').locator('visible=true').count()) === 1 && !/dad|stranger|photo/i.test(await tid('safety-notes').innerText()));
   await tap('back-btn');
   await tap('p-settings');
   check('Settings shows consent status', (await tid('consent-status-text').innerText()).includes('Rami (father), Lina (mother)'));
@@ -569,7 +581,7 @@ const fromWords = (w) => {
   const exported = JSON.parse(fs.readFileSync(exportPath, 'utf8'));
   fs.unlinkSync(exportPath);
   check('Export: JSON with profiles, lessons, results, consent', download.suggestedFilename().startsWith('zaki-data-') && exported.profiles.length >= 2 && Object.keys(exported.lessons).length > 0 && exported.progress && exported.consent.guardians.length === 2);
-  check('Export: no reviewer-only safety reports in the family export', !JSON.stringify(exported).includes('dad hits') && exported.safetyNotes.every((n) => n.category === 'fear'));
+  check('Export: no reviewer-only safety reports in the family export', !JSON.stringify(exported).includes('dad hits') && exported.safetyNotes.length === 2 && exported.safetyNotes.every((n) => !('excerpt' in n)) && !JSON.stringify(exported).includes('stranger'));
   await tap('back-btn');
   // Reviewer inbox
   await tap('p-back-child');
@@ -581,11 +593,20 @@ const fromWords = (w) => {
   await tap('reviewer-open');
   const inbox = await tid('reviewer-inbox').innerText();
   check('Reviewer: sees all flags with route, childRef and scrubbed excerpt', inbox.includes('my dad hits me') && inbox.includes('Reviewer only') && inbox.includes('Parent also told') && inbox.includes('childRef: c_') && !inbox.includes('Maya'));
+  const cats = await page.getByTestId('reviewer-category').locator('visible=true').allInnerTexts();
+  check('Reviewer: human-readable categories (no raw codes)', cats.length >= 4 && cats.every((c) => !/^(home|general|fear|self_harm|disclosure_harm|server)$/.test(c)) && cats.includes('Possible harm (child told something)'), cats.join(' | '));
+  check('Reviewer: stranger online is labelled outside the home; help button is "unclear"', inbox.includes('Parent also told (outside the home)') && inbox.includes('unclear who is involved') && inbox.includes('possible home involvement'));
+  check('Reviewer: local date format (not US m/d/yyyy)', !/\d{1,2}\/\d{1,2}\/20\d\d/.test(inbox));
   await page.getByTestId('flag-note').locator('visible=true').first().fill('Called the school counsellor.');
   await page.getByTestId('flag-status-resolved').locator('visible=true').first().click();
   await page.waitForTimeout(300);
   check('Reviewer: status + note saved', (await page.evaluate(() => JSON.parse(localStorage.getItem('zaki:v1:state')).flags.some((f) => f.status === 'resolved' && f.note === 'Called the school counsellor.'))));
   await shot('en-reviewer-inbox');
+  await tap('lang-toggle');
+  const arInbox = await tid('reviewer-inbox').innerText();
+  check('Reviewer inbox in Arabic: Arabic labels, right-to-left', arInbox.includes('أذى محتمل') && arInbox.includes('للمراجِع فقط') && (await page.evaluate(() => !!document.querySelector('[dir="rtl"]'))));
+  await shot('ar-reviewer-inbox');
+  await tap('lang-toggle');
   await tap('back-btn');
   // Withdraw consent -> child blocked again
   await tap('grownups-btn');
@@ -594,6 +615,18 @@ const fromWords = (w) => {
   await tap('consent-withdraw');
   await tap('consent-withdraw-yes');
   check('Withdraw: status says withdrawn', (await tid('consent-status-text').innerText()).includes('Withdrawn'));
+  await tap('back-btn');
+  check('Demo reviewer code shown inside the grown-ups area', (await tid('demo-reviewer-code').innerText()).includes('2468'));
+  await tap('p-ask');
+  check('Grown-up Ask Zaki: blocked without consent (banner)', await visible('parent-ask-needs-consent', 3000));
+  await tid('parent-ask-input').fill('How do I explain fractions?');
+  await tap('parent-ask-send');
+  await page.waitForTimeout(500);
+  check('Grown-up Ask Zaki: no AI answer without consent', (await page.locator('[data-testid="parent-ask-zaki"]').last().innerText()).includes('give family consent first'));
+  await tid('parent-ask-input').fill('My son told me his uncle touches him');
+  await tap('parent-ask-send');
+  await page.waitForTimeout(500);
+  check('Grown-up Ask Zaki: offline worry check still runs without consent', (await page.locator('[data-testid="parent-ask-concern"]').last().innerText()).includes('1745'));
   await tap('back-btn');
   await tap('p-back-child');
   await tap('profile-Maya');
@@ -609,7 +642,12 @@ const fromWords = (w) => {
   await tid('delete-input').fill('DELETE');
   await tap('delete-btn');
   check('Delete: everything wiped (no profiles, no consent)', (await visible('restore-demo', 5000)) && (await page.evaluate(() => { const s = JSON.parse(localStorage.getItem('zaki:v1:state')); return s.profiles.length === 0 && !s.consent; })));
-  check('Delete: safety flags kept only anonymised', await page.evaluate(() => { const f = JSON.parse(localStorage.getItem('zaki:v1:state')).flags; return f.length > 0 && f.every((x) => !x.childRef && /removed/.test(x.excerpt)); }));
+  check('Delete: no flag keeps a child link; OPEN flags keep their words, RESOLVED ones lose them', await page.evaluate(() => {
+    const f = JSON.parse(localStorage.getItem('zaki:v1:state')).flags;
+    const resolved = f.filter((x) => x.status === 'resolved');
+    const open = f.filter((x) => x.status !== 'resolved');
+    return f.every((x) => !x.childRef) && resolved.length >= 1 && resolved.every((x) => /removed/.test(x.excerpt)) && open.length >= 1 && open.some((x) => /dad hits me/.test(x.excerpt));
+  }));
   await shot('en-after-delete');
   await tap('restore-demo');
   check('Demo children can be restored after delete', await visible('profile-Maya', 3000));

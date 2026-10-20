@@ -43,7 +43,7 @@ export function DemoBanner() {
   return (
     <View style={styles.demo} testID="demo-banner">
       <Txt variant="small" center color="#6B4E00">
-        🧪 {t('demoBanner')} · {t('demoReviewerCode')}
+        🧪 {t('demoBanner')}
       </Txt>
     </View>
   );

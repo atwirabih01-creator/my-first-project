@@ -155,6 +155,8 @@ export type LocalFlag = {
   ts: string;
   category: string;
   route: 'reviewer' | 'parent';
+  /** Who seems involved: someone at home, someone outside the home, or unclear. */
+  involvement?: 'home' | 'outside' | 'unclear';
   childRef?: string;
   excerpt: string;
   status: 'new' | 'seen' | 'referred' | 'resolved';

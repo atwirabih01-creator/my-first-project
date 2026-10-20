@@ -8,16 +8,39 @@ import { Screen } from '@/components/Screen';
 import { Btn, Card, Chip, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
 import { fetchReviewerFlags, updateReviewerFlag, type ServerReviewerFlag } from '@/lib/api';
-import { normalizeDigits } from '@/lib/i18n';
+import { normalizeDigits, type StringKey } from '@/lib/i18n';
 import { useApp, useT } from '@/lib/store';
 
 const DEMO_CODE = '2468';
+
+const LOCAL_CATEGORY: Record<string, string> = { home: 'disclosure_harm', fear: 'violence_fear', general: 'help_button' };
+const KNOWN = ['disclosure_harm', 'self_harm', 'violence_fear', 'sexual', 'personal_data', 'adult_topic', 'prompt_injection', 'off_topic', 'politics', 'help_button', 'server'];
+
+/** Human-readable category (en/ar) instead of a raw code. */
+function categoryKey(category: string): StringKey {
+  const c = LOCAL_CATEGORY[category] ?? category;
+  return (KNOWN.includes(c) ? `cat_${c}` : 'cat_other') as StringKey;
+}
+
+function routeKey(f: { route: 'reviewer' | 'parent'; involvement?: string; involvesHome?: boolean }): StringKey {
+  const involvement = f.involvement ?? (f.involvesHome ? 'home' : undefined);
+  if (f.route === 'reviewer') return involvement === 'home' ? 'routeReviewer' : 'routeReviewerUnclear';
+  return involvement === 'outside' ? 'routeParentOutside' : 'routeParent';
+}
+
+function localTime(ts: string, lang: string): string {
+  try {
+    return new Date(ts).toLocaleString(lang === 'ar' ? 'ar-LB' : 'en-GB', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+  } catch {
+    return ts.slice(0, 16).replace('T', ' ');
+  }
+}
 type Flag = ServerReviewerFlag;
 type Status = Flag['status'];
 
 export default function Reviewer() {
   const app = useApp();
-  const { t, align } = useT();
+  const { t, align, lang } = useT();
   const [code, setCode] = useState('');
   const [open, setOpen] = useState<null | 'local' | 'server'>(null);
   const [serverFlags, setServerFlags] = useState<Flag[]>([]);
@@ -43,7 +66,7 @@ export default function Reviewer() {
 
   const flags: Flag[] =
     open === 'local'
-      ? [...(app.flags ?? [])].reverse().map((f) => ({ id: f.id, ts: f.ts, category: f.category, route: f.route, childRef: f.childRef, excerpt: f.excerpt, status: f.status, note: f.note }))
+      ? [...(app.flags ?? [])].reverse().map((f) => ({ id: f.id, ts: f.ts, category: f.category, route: f.route, involvement: f.involvement, childRef: f.childRef, excerpt: f.excerpt, status: f.status, note: f.note }))
       : serverFlags;
 
   async function setStatus(f: Flag, status: Status) {
@@ -83,14 +106,14 @@ export default function Reviewer() {
           {flags.map((f) => (
             <Card key={f.id} tone={f.route === 'reviewer' ? 'coral' : undefined} testID="reviewer-flag">
               <Row wrap>
-                <Txt bold>{f.category}</Txt>
-                <Txt variant="small">{new Date(f.ts).toLocaleString()}</Txt>
+                <Txt bold testID="reviewer-category">{t(categoryKey(f.category))}</Txt>
+                <Txt variant="small">{localTime(f.ts, lang)}</Txt>
               </Row>
               <Txt variant="small" bold>
-                {f.route === 'reviewer' ? t('routeReviewer') : t('routeParent')}
+                {t(routeKey(f))}
               </Txt>
               <Txt variant="small">childRef: {f.childRef ?? '—'}</Txt>
-              <Txt testID="reviewer-excerpt">“{f.excerpt}”</Txt>
+              {f.excerpt ? <Txt testID="reviewer-excerpt">“{f.excerpt}”</Txt> : null}
               <Row wrap>
                 {(['new', 'seen', 'referred', 'resolved'] as Status[]).map((s) => (
                   <Chip key={s} label={t(s === 'new' ? 'statusNew' : s === 'seen' ? 'statusSeen' : s === 'referred' ? 'statusReferred' : 'statusResolved')} selected={f.status === s} onPress={() => setStatus(f, s)} testID={`flag-status-${s}`} />

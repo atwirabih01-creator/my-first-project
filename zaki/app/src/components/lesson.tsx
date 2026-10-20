@@ -25,14 +25,25 @@ export function scrubExcerpt(text: string): string {
     .slice(0, 160);
 }
 
-/** Possible home involvement (or a harm disclosure, where it's unclear who): reviewer only. */
-export function flagRouteFor(kind: string, text: string): 'reviewer' | 'parent' {
-  if (kind === 'home' || kind === 'general') return 'reviewer';
+/**
+ * Routing rule (safety review R3/R4): someone at home involved, or a harm disclosure where it
+ * is UNCLEAR who is involved -> reviewer only. Clearly outside the home (stranger, online,
+ * school) -> parent is told too. Self-harm/fear with nobody at home named -> parent too.
+ */
+export function flagRouteFor(kind: string, text: string): { route: 'reviewer' | 'parent'; involvement: 'home' | 'outside' | 'unclear' } {
+  let home = false;
+  let outside = false;
   try {
-    return keywordScan(text).home ? 'reviewer' : 'parent';
+    const s = keywordScan(text);
+    home = s.home;
+    outside = s.outside;
   } catch {
-    return 'reviewer';
+    // treat as unclear
   }
+  const involvement = home ? 'home' : outside ? 'outside' : 'unclear';
+  if (kind === 'general' || home) return { route: 'reviewer', involvement };
+  if (kind === 'home') return { route: outside ? 'parent' : 'reviewer', involvement };
+  return { route: 'parent', involvement };
 }
 
 /** Big tappable answer choice. */
@@ -196,7 +207,7 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
     if (kind) {
       setText('');
       // Kept on this device for the safety reviewer (demo/offline). Reviewer-route flags are never shown to parents.
-      app.addLocalFlag({ category: kind, route: flagRouteFor(kind, message), childRef: child.id, excerpt: scrubExcerpt(message) });
+      app.addLocalFlag({ category: kind, ...flagRouteFor(kind, message), childRef: child.id, excerpt: scrubExcerpt(message) });
       goToSafety(kind);
       return;
     }
@@ -221,7 +232,7 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
     }
     setBusy(false);
     if (res.safetyStopped) {
-      app.addLocalFlag({ category: 'server', route: flagRouteFor('home', message), childRef: child.id, excerpt: scrubExcerpt(message) });
+      app.addLocalFlag({ category: 'server', ...flagRouteFor('home', message), childRef: child.id, excerpt: scrubExcerpt(message) });
       return;
     }
     setHistory((h) => [...h, { role: 'zaki', text: sanitizeReply(res.reply, lang) }]);

@@ -26,6 +26,11 @@ export default function ParentHome() {
       <Btn title={t('pWhatsapp')} icon="💬" big variant="success" onPress={() => router.push('/parent/whatsapp')} testID="p-whatsapp" />
       <Card tone="sun">
         <Txt variant="small">{t('waNote')}</Txt>
+        {app.demo ? (
+          <Txt variant="small" testID="demo-reviewer-code">
+            🧪 {t('demoReviewerCode')}
+          </Txt>
+        ) : null}
       </Card>
       <Btn title={t('pBackChild')} variant="secondary" onPress={leave} testID="p-back-child" />
     </Screen>

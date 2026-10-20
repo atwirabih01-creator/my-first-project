@@ -19,6 +19,13 @@ let consentOk = false;
 export function setConsentActive(on: boolean) {
   consentOk = on;
 }
+let familyAuth: { familyId: string; familyKey: string } | null = null;
+/** Set by the store once the family is registered: AI requests carry it so the server can check consent. */
+export function setFamilyAuth(f: { id: string; key: string } | null | undefined) {
+  familyAuth = f ? { familyId: f.id, familyKey: f.key } : null;
+}
+const withFamily = <T extends object>(body: T) => (familyAuth ? { ...body, ...familyAuth } : body);
+
 export class ConsentRequiredError extends Error {
   constructor() {
     super('consent required');
@@ -97,7 +104,7 @@ export async function fetchLessonPack(
     try {
       const data = await request<{ pack: LessonPack; sources?: Source[]; safety?: Safety; budgetReached?: boolean; fromLibrary?: boolean }>(
         '/api/lesson-pack',
-        req,
+        withFamily(req),
         90000,
       );
       if (data.budgetReached) return { budgetReached: true };
@@ -189,7 +196,7 @@ export async function askTutor(
     try {
       const data = await request<{ reply: string; safety?: Safety }>(
         '/api/tutor',
-        { ...req, packId: req.pack.id },
+        withFamily({ ...req, packId: req.pack.id }),
         30000,
       );
       if (handleSafety(data.safety)) return { reply: '', demo: false, safetyStopped: true };
@@ -290,7 +297,7 @@ export async function buildExamQuestions(req: {
 }): Promise<{ questions: ExamQuestion[]; added: number; demo: boolean }> {
   if (!demoMode) {
     try {
-      const data = await request<{ questions?: ExamQuestion[]; added?: number }>('/api/exam', req, 60000);
+      const data = await request<{ questions?: ExamQuestion[]; added?: number }>('/api/exam', withFamily(req), 60000);
       if (Array.isArray(data.questions) && data.questions.length) return { questions: data.questions, added: data.added ?? 0, demo: false };
     } catch {
       // fall back to the local mix
@@ -308,14 +315,16 @@ export async function askZakiAsParent(req: {
   country: Country;
   history: ParentTurn[];
   pageImages?: string[];
-}): Promise<{ reply: string; demo: boolean; concern?: string }> {
+}): Promise<{ reply: string; demo: boolean; concern?: string; consentRequired?: boolean }> {
   // Safety first, offline and before any demo or server reply: a worry about a child gets
   // the fixed ADULT help text (numbers from the table, never AI text).
   const worry = parentConcernScan(req.message);
   if (worry) return { reply: adultSafetyMessage(req.lang, req.country, worry), demo: false, concern: worry };
+  // No AI for a family without active consent (offline worry check above still ran).
+  if (!consentOk) return { reply: translate(req.lang, 'parentAskNeedsConsent'), demo: false, consentRequired: true };
   if (!demoMode) {
     try {
-      const data = await request<{ reply?: string; concern?: string }>('/api/parent-ask', req, 90000);
+      const data = await request<{ reply?: string; concern?: string }>('/api/parent-ask', withFamily(req), 90000);
       if (typeof data.reply === 'string' && data.reply.trim()) return { reply: data.reply, demo: false, concern: data.concern };
     } catch {
       // fall through to the demo reply
@@ -331,6 +340,8 @@ export type ServerReviewerFlag = {
   ts: string;
   category: string;
   route: 'reviewer' | 'parent';
+  involvesHome?: boolean;
+  involvement?: 'home' | 'outside' | 'unclear';
   childRef?: string;
   excerpt: string;
   status: 'new' | 'seen' | 'referred' | 'resolved';

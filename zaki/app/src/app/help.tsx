@@ -33,7 +33,7 @@ export default function Help() {
         big
         variant="help"
         onPress={() => {
-          if (app.activeChildId) app.addLocalFlag({ category: 'general', route: 'reviewer', childRef: app.activeChildId, excerpt: '"I don\'t feel safe" button' });
+          if (app.activeChildId) app.addLocalFlag({ category: 'general', route: 'reviewer', involvement: 'unclear', childRef: app.activeChildId, excerpt: '' });
           router.replace({ pathname: '/safety', params: { kind: 'general' } });
         }}
         testID="help-feel"

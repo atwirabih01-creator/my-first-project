@@ -2,7 +2,7 @@
 // Local only (Phase 1). Saved to device storage after every change.
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { consentRemote, fetchLessonPack, getHealth, registerFamilyRemote, setConsentActive, setDemoMode, syncFamilyRemote, type FamilyLink } from './api';
+import { consentRemote, fetchLessonPack, getHealth, registerFamilyRemote, setConsentActive, setDemoMode, setFamilyAuth, syncFamilyRemote, type FamilyLink } from './api';
 import { CONSENT_VERSION } from './consentText';
 import { getDemoPack } from './demoPacks';
 import { isRTLLang, textAlignFor, translate, type StringKey } from './i18n';
@@ -284,6 +284,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setConsentActive(consentOn);
   }, [consentOn]);
+  useEffect(() => {
+    setFamilyAuth(state.family);
+  }, [state.family]);
 
   // Family identity: once consent is given and a real server is connected, register the family
   // (the server returns a secret key, kept only on this device), then sync children + progress.
@@ -435,7 +438,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         setState((s) => ({
           ...s,
           ...emptyPersisted(),
-          flags: (s.flags ?? []).map((f) => ({ ...f, childRef: undefined, excerpt: '[removed at the family\'s request]' })),
+          // Founder rule: open safety cases keep the child's (scrubbed) words, with no link to the
+          // child; only resolved cases lose the words. A case can't be erased by the person it may concern.
+          flags: (s.flags ?? []).map((f) => ({ ...f, childRef: undefined, excerpt: f.status === 'resolved' ? '[removed at the family\'s request]' : f.excerpt })),
           activeChildId: null,
           parentUnlocked: false,
         })),

@@ -69,7 +69,7 @@ export default function Consent() {
   return (
     <Screen parent back="/parent" title={`📝 ${t('consentTitle')}`}>
       <ParentChildPicker />
-      <Txt>{t('consentIntro')}</Txt>
+      <Txt testID="consent-intro">{mode === 'two-guardians' ? t('consentIntro') : t('consentIntroOne')}</Txt>
       {CONSENT_SECTIONS[lang].map((s) => (
         <Card key={s.title} tone="primary">
           <Txt bold>{s.title}</Txt>

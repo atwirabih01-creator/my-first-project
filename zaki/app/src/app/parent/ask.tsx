@@ -1,5 +1,6 @@
 // PARENT "ASK ZAKI" (grown-ups, behind the gate): explain a school topic or a photographed
 // book page TO THE PARENT, so they can help their child. Never sends child names.
+import { router } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import { Image, StyleSheet, TextInput, View } from 'react-native';
@@ -9,13 +10,14 @@ import { Screen } from '@/components/Screen';
 import { Btn, Card, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
 import { askZakiAsParent, type ParentTurn } from '@/lib/api';
-import { useChild, useT } from '@/lib/store';
+import { consentActive, useChild, useT } from '@/lib/store';
 
 type Photo = { uri: string; base64: string };
 type Turn = ParentTurn & { concern?: boolean };
 
 export default function ParentAsk() {
-  const { settings } = useChild();
+  const { settings, app } = useChild();
+  const hasConsent = consentActive(app.consent);
   const { t, lang, align } = useT();
   const [history, setHistory] = useState<Turn[]>([]);
   const [text, setText] = useState('');
@@ -48,6 +50,13 @@ export default function ParentAsk() {
 
   return (
     <Screen parent back="/parent" title={`💡 ${t('pAsk')}`}>
+      {!hasConsent ? (
+        <Card tone="sun" testID="parent-ask-needs-consent">
+          <Txt bold>{t('consentNeededTitle')}</Txt>
+          <Txt>{t('parentAskConsentBanner')}</Txt>
+          <Btn small title={t('consentReview')} onPress={() => router.push('/parent/consent')} />
+        </Card>
+      ) : null}
       <Card tone="primary">
         <Row style={{ alignItems: 'flex-start' }}>
           <Mascot size={52} animate={false} />
