@@ -5,6 +5,7 @@
 // The real client comes from ./supabaseClient (the only file that imports @supabase/supabase-js);
 // tests pass a fake client with the same small surface.
 import {
+  REMOVED_EXCERPT,
   RETENTION,
   StorageError,
   assertChildRef,
@@ -585,8 +586,17 @@ export function createSupabaseStore(getClient: () => Promise<SupabaseLike>): Zak
       if (!childRefs.length) return 0;
       childRefs.forEach(assertChildRef);
       const c = await db();
+      // Closed cases lose the words first; open cases keep their scrubbed excerpt.
+      await run(c.from("flags").update({ excerpt: REMOVED_EXCERPT }).in("child_ref", childRefs).eq("status", "closed"), "unlink_closed_excerpts");
       const rows = await run(c.from("flags").update({ child_ref: null, family_id: null }).in("child_ref", childRefs).select("id"), "unlink_children");
       return Array.isArray(rows) ? rows.length : 0;
+    },
+
+    async hasActiveConsent(familyId) {
+      assertFamilyId(familyId);
+      const c = await db();
+      const rows = await run(c.from("consents").select("id, withdrawn_at").eq("family_id", familyId), "active_consent");
+      return Array.isArray(rows) && rows.some((r: { withdrawn_at?: string | null }) => !r.withdrawn_at);
     },
 
     async exportFamily(familyId) {

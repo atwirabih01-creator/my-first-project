@@ -3,7 +3,11 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { beforeEach, describe, it } from "node:test";
 import { __clearFlagsForTests, moderate } from "../safety";
-import { listFlagsForReviewer } from "../review";
+import { listFlagsForReviewer, updateFlagReview } from "../review";
+import { getSamplePack } from "../samples";
+import { POST as tutorRoute } from "../../src/app/api/tutor+api";
+import { POST as parentAskRoute } from "../../src/app/api/parent-ask+api";
+import { POST as lessonPackRoute } from "../../src/app/api/lesson-pack+api";
 import { createFileStore, getStore, __setStoreForTests, type ZakiStore } from "../storage";
 import { POST as registerRoute } from "../../src/app/api/family/register+api";
 import { POST as syncRoute } from "../../src/app/api/family/sync+api";
@@ -99,5 +103,45 @@ describe("family identity (server-issued secret key)", () => {
     __setStoreForTests(createFileStore({ dataDir: null, flagFile: null, budgetFile: null, libraryDir: null }));
     assert.equal(getStore().kind, "file");
     __setStoreForTests(createFileStore({ dataDir: null, flagFile: null, budgetFile: null, libraryDir: null }));
+  });
+
+  it("AI routes refuse a verified family whose consent is withdrawn (403); fine again after re-consent", async () => {
+    const r = await register();
+    const creds = { familyId: r.familyId, familyKey: r.familyKey };
+    const pack = getSamplePack("math", "en");
+    const tutorBody = { packId: pack.id, pack, step: "chat", history: [], message: "what is a fraction", lang: "en", grade: 3, country: "LB" };
+    assert.equal((await post(tutorRoute, { ...tutorBody, ...creds })).status, 200);
+    await post(consentRoute, { ...creds, action: "withdraw", consentId: r.consentId });
+    for (const [route, body] of [
+      [tutorRoute, tutorBody],
+      [parentAskRoute, { message: "Explain fractions", lang: "en" }],
+      [lessonPackRoute, { subject: "math", topic: "Fractions", grade: 3, lang: "en", country: "LB" }],
+    ] as const) {
+      const res = await post(route, { ...body, ...creds });
+      assert.equal(res.status, 403);
+      assert.match(await res.text(), /consent_required/);
+    }
+    // a wrong key is refused too (401), not silently ignored
+    assert.equal((await post(tutorRoute, { ...tutorBody, familyId: r.familyId, familyKey: "y".repeat(43) })).status, 401);
+    await post(consentRoute, { ...creds, action: "give", consentVersion: "v2" });
+    assert.equal((await post(tutorRoute, { ...tutorBody, ...creds })).status, 200);
+  });
+
+  it("founder rule: on delete, OPEN flags keep their scrubbed words (no child link); RESOLVED ones lose them", async () => {
+    const r = await register();
+    await post(syncRoute, { familyId: r.familyId, familyKey: r.familyKey, children: [kid("kid_dddddddd")] });
+    await moderate("my dad hits me", { speaker: "child", lang: "en", country: "LB", childRef: "kid_dddddddd", localOnly: true });
+    await moderate("I want to die", { speaker: "child", lang: "en", country: "LB", childRef: "kid_dddddddd", localOnly: true });
+    const before = await listFlagsForReviewer();
+    const closed = before.find((f) => f.category === "self_harm")!;
+    await updateFlagReview(closed.id, "resolved", "handled");
+    await post(deleteRoute, { familyId: r.familyId, familyKey: r.familyKey });
+    const after = await listFlagsForReviewer();
+    const open = after.find((f) => f.category === "disclosure_harm")!;
+    const done = after.find((f) => f.id === closed.id)!;
+    assert.equal(open.childRef, undefined);
+    assert.match(open.excerpt, /dad hits me/, "open case keeps the child's words");
+    assert.equal(done.childRef, undefined);
+    assert.match(done.excerpt, /removed/, "resolved case keeps no words");
   });
 });

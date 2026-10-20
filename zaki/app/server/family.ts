@@ -61,6 +61,19 @@ export async function verifyFamily(familyId: unknown, familyKey: unknown): Promi
   return familyId;
 }
 
+/**
+ * AI routes: when a request carries family credentials, the key must be valid AND the family
+ * must have an active consent; otherwise the route refuses (403 consent_required).
+ * Requests without credentials are handled as before (pilot devices not yet registered).
+ */
+export async function assertFamilyConsentIfPresent(body: Record<string, unknown>): Promise<void> {
+  if (body.familyId === undefined && body.familyKey === undefined) return;
+  const familyId = await verifyFamily(body.familyId, body.familyKey);
+  if (!(await getStore().hasActiveConsent(familyId))) {
+    throw new HttpError(403, "family consent is missing or withdrawn", "consent_required");
+  }
+}
+
 export type SyncChildInput = {
   childRef: string;
   nickname: string;

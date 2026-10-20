@@ -3,6 +3,7 @@
 //        message, lang, grade, country?, childRef?, questionId? }
 // -> { reply, hintLevel?, safety, demo? }
 import { HttpError, SIZE_LIMITS, asChildRef, asGrade, asLang, asOptionalCountry, asSubject, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
+import { assertFamilyConsentIfPresent } from "../../../server/family";
 import { validatePack } from "../../../server/packValidator";
 import { TUTOR_STEPS, runTutorTurn, type TutorStep } from "../../../server/tutor";
 
@@ -10,6 +11,7 @@ export async function POST(request: Request): Promise<Response> {
   return handle(async () => {
     rateLimit(request, "tutor");
     const body = await readJsonBody(request, SIZE_LIMITS.tutor);
+    await assertFamilyConsentIfPresent(body); // no AI for a family without active consent
     const lang = asLang(body.lang);
     const grade = asGrade(body.grade);
     const country = asOptionalCountry(body.country);

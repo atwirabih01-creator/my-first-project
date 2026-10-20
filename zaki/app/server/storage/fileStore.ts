@@ -11,6 +11,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import {
+  REMOVED_EXCERPT,
   RETENTION,
   StorageError,
   assertChildRef,
@@ -164,6 +165,8 @@ export function createFileStore(opts: FileStoreOptions = {}): ZakiStore {
           if (f.childRef && refs.has(f.childRef)) {
             delete f.childRef;
             delete f.familyId;
+            // Open cases keep the child's (scrubbed) words; closed ones don't.
+            if (f.status === "closed") f.excerpt = REMOVED_EXCERPT;
           }
         }
       } else if (l.id) {
@@ -408,6 +411,11 @@ export function createFileStore(opts: FileStoreOptions = {}): ZakiStore {
     async getFamilyKeyHash(familyId) {
       const f = loadFamily(familyId);
       return f?.keyHash ?? null;
+    },
+
+    async hasActiveConsent(familyId) {
+      const f = loadFamily(familyId);
+      return !!f && f.consents.some((c) => !c.withdrawnAt);
     },
 
     async unlinkChildren(childRefs) {

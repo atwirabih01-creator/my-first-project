@@ -2,12 +2,14 @@
 // body { subject, topic, grade, lang, country, childRef?, pageImages?: string[] (base64 jpeg, max 3) }
 // -> { pack, sources: {title,url}[], verify: { checked, removed }, demo? }
 import { HttpError, SIZE_LIMITS, asChildRef, asCountry, asGrade, asLang, asSubject, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
+import { assertFamilyConsentIfPresent } from "../../../server/family";
 import { LessonPackError, MAX_PAGE_IMAGES, buildLessonPack } from "../../../server/lessonPack";
 
 export async function POST(request: Request): Promise<Response> {
   return handle(async () => {
     rateLimit(request, "lessonPack");
     const body = await readJsonBody(request, SIZE_LIMITS.lessonPack);
+    await assertFamilyConsentIfPresent(body); // no AI for a family without active consent
     asChildRef(body.childRef);
     const images = body.pageImages;
     if (images !== undefined && (!Array.isArray(images) || images.length > MAX_PAGE_IMAGES || images.some((i) => typeof i !== "string"))) {

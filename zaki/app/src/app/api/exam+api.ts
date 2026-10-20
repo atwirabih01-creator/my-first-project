@@ -6,12 +6,14 @@
 import { buildExam } from "../../../server/exam";
 import { EXAM_DEFAULT_QUESTIONS, EXAM_MAX_QUESTIONS, EXAM_MIN_QUESTIONS } from "../../../server/examMix";
 import { HttpError, SIZE_LIMITS, asGrade, asLang, asSubject, handle, json, rateLimit, readJsonBody } from "../../../server/http";
+import { assertFamilyConsentIfPresent } from "../../../server/family";
 import { validatePack } from "../../../server/packValidator";
 
 export async function POST(request: Request): Promise<Response> {
   return handle(async () => {
     rateLimit(request, "exam");
     const body = await readJsonBody(request, SIZE_LIMITS.exam);
+    await assertFamilyConsentIfPresent(body); // no AI for a family without active consent
     const subject = asSubject(body.subject);
     const lang = asLang(body.lang);
     const grade = asGrade(body.grade);

@@ -219,8 +219,15 @@ export interface ZakiStore {
    */
   setFamilyKeyHash(familyId: string, keyHash: string): Promise<void>;
   getFamilyKeyHash(familyId: string): Promise<string | null>;
-  /** Family deletion: flags of these children lose their childRef/familyId but are kept (open referrals). */
+  /**
+   * Family deletion: flags of these children lose their childRef/familyId but are kept.
+   * Founder decision: OPEN flags (pending_review / reviewed / referred) keep their scrubbed
+   * excerpt, so a safety case can't be erased by the person it may concern; CLOSED flags
+   * lose the excerpt too.
+   */
   unlinkChildren(childRefs: string[]): Promise<number>;
+  /** True when the family has at least one consent that is not withdrawn. */
+  hasActiveConsent(familyId: string): Promise<boolean>;
 
   // Parent rights: export everything, delete everything (answer within 10 days).
   exportFamily(familyId: string): Promise<FamilyExport | null>;
@@ -246,6 +253,8 @@ export function cleanName(name: string, max: number, allowDigits = false): strin
   if (!n || n.length > max || /[@\n\r]/.test(n) || (!allowDigits && /\d/.test(n))) throw new StorageError("bad_name");
   return n;
 }
+export const REMOVED_EXCERPT = "[removed at the family's request]";
+
 export function newChildRef(): string {
   return crypto.randomUUID().replace(/-/g, "");
 }
