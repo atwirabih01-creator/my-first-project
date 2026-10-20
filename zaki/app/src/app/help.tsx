@@ -7,7 +7,7 @@ import { Mascot } from '@/components/Mascot';
 import { Screen } from '@/components/Screen';
 import { Btn, Card, Txt } from '@/components/ui';
 import { S } from '@/constants/theme';
-import { getHelpReturn, goTo } from '@/lib/nav';
+import { getHelpReturn, goTo, isHelpInTest } from '@/lib/nav';
 import { useApp, useT } from '@/lib/store';
 
 export default function Help() {
@@ -23,7 +23,7 @@ export default function Help() {
       <Btn title={t('helpLesson')} icon="📘" big onPress={() => setLessonHelp(true)} testID="help-lesson" />
       {lessonHelp ? (
         <Card tone="sun">
-          <Txt>{t('helpLessonText')}</Txt>
+          <Txt>{isHelpInTest() ? t('helpTestText') : t('helpLessonText')}</Txt>
           <Btn title={t('back')} variant="secondary" onPress={() => goTo(backTo)} />
         </Card>
       ) : null}

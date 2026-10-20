@@ -4,7 +4,8 @@
 // A grown-up can unlock a lesson early (behind the parental gate).
 import type { ChildProgress, PlanItem } from './types';
 
-export type LessonAccess = { open: boolean; passed: boolean; blocker?: string };
+/** pending = waiting for tomorrow (daily AI limit): not studyable yet, but it does NOT block later lessons. */
+export type LessonAccess = { open: boolean; passed: boolean; blocker?: string; pending?: boolean };
 
 const keyOf = (p: Pick<PlanItem, 'subject' | 'topic'>) => `${p.subject}:${p.topic.trim().toLowerCase().replace(/\s+/g, '-')}`;
 
@@ -19,6 +20,11 @@ export function planAccess(plan: PlanItem[], progress: ChildProgress): Record<st
   for (const item of plan) {
     const s = (state[item.subject] ??= { allPassed: true });
     const passed = isPassed(progress, keyOf(item));
+    if (item.pending && !passed) {
+      // Skipped in the queue until it is prepared; lessons after it are not blocked by it.
+      out[item.id] = { open: false, passed: false, pending: true };
+      continue;
+    }
     const open = passed || !!item.unlocked || s.allPassed;
     out[item.id] = { open, passed, blocker: open ? undefined : s.lastNotPassed };
     if (!passed) {

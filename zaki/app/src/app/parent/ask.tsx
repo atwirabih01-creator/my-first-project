@@ -12,11 +12,12 @@ import { askZakiAsParent, type ParentTurn } from '@/lib/api';
 import { useChild, useT } from '@/lib/store';
 
 type Photo = { uri: string; base64: string };
+type Turn = ParentTurn & { concern?: boolean };
 
 export default function ParentAsk() {
   const { settings } = useChild();
   const { t, lang, align } = useT();
-  const [history, setHistory] = useState<ParentTurn[]>([]);
+  const [history, setHistory] = useState<Turn[]>([]);
   const [text, setText] = useState('');
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [busy, setBusy] = useState(false);
@@ -34,15 +35,15 @@ export default function ParentAsk() {
 
   async function send() {
     const message = text.trim();
-    if (!message || busy) return;
-    const next: ParentTurn[] = [...history, { role: 'parent', text: message }];
-    setHistory(next);
+    if (!message || busy) return; // input is locked while Zaki answers, so nothing is dropped
+    const prior = history.map(({ role, text: tx }) => ({ role, text: tx }));
+    setHistory((h) => [...h, { role: 'parent', text: message }]);
     setText('');
     setBusy(true);
-    const res = await askZakiAsParent({ message, lang, country: settings.country, history, pageImages: photos.length ? photos.map((p) => p.base64) : undefined });
+    const res = await askZakiAsParent({ message, lang, country: settings.country, history: prior, pageImages: photos.length ? photos.map((p) => p.base64) : undefined });
     setBusy(false);
     setPhotos([]);
-    setHistory([...next, { role: 'zaki', text: res.reply }]);
+    setHistory((h) => [...h, { role: 'zaki', text: res.reply, concern: !!res.concern }]);
   }
 
   return (
@@ -55,7 +56,14 @@ export default function ParentAsk() {
       </Card>
       <View style={{ gap: S.sm }} testID="parent-ask-log">
         {history.map((m, i) => (
-          <View key={i} style={[styles.bubble, m.role === 'parent' ? { alignSelf: 'flex-end', backgroundColor: C.primarySoft } : { alignSelf: 'flex-start', backgroundColor: '#FFFFFF' }]} testID={m.role === 'zaki' ? 'parent-ask-zaki' : undefined}>
+          <View
+            key={i}
+            style={[
+              styles.bubble,
+              m.role === 'parent' ? { alignSelf: 'flex-end', backgroundColor: C.primarySoft } : { alignSelf: 'flex-start', backgroundColor: '#FFFFFF' },
+              m.concern && { backgroundColor: C.coralSoft, borderColor: C.coral, borderWidth: 2 },
+            ]}
+            testID={m.role === 'zaki' ? (m.concern ? 'parent-ask-concern' : 'parent-ask-zaki') : undefined}>
             <Txt>{m.text}</Txt>
           </View>
         ))}
@@ -68,7 +76,10 @@ export default function ParentAsk() {
         </Txt>
         <Row wrap>
           {photos.map((p, i) => (
-            <Image key={i} source={{ uri: p.uri }} style={styles.thumb} accessibilityLabel={`${t('photos')} ${i + 1}`} />
+            <View key={i} style={{ alignItems: 'center', gap: 4 }}>
+              <Image source={{ uri: p.uri }} style={styles.thumb} accessibilityLabel={`${t('photos')} ${i + 1}`} />
+              <Btn small variant="ghost" title={t('removePhoto')} onPress={() => setPhotos(photos.filter((_, j) => j !== i))} testID={`parent-ask-remove-photo-${i}`} />
+            </View>
           ))}
         </Row>
         {photos.length < 3 ? <Btn small variant="secondary" icon="🖼️" title={t('addPhoto')} onPress={pick} /> : null}
@@ -81,6 +92,7 @@ export default function ParentAsk() {
           placeholder={t('parentAskPh')}
           placeholderTextColor="#8893AA"
           onSubmitEditing={send}
+          editable={!busy}
           maxLength={1500}
           accessibilityLabel={t('parentAskPh')}
           style={[styles.input, { textAlign: align }]}

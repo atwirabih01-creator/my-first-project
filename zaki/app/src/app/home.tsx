@@ -8,7 +8,7 @@ import { Screen } from '@/components/Screen';
 import { Btn, Card, Row, Stars, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
 import { todayStr, useChild, useT } from '@/lib/store';
-import { formatDate, openLesson, setHelpReturn } from '@/lib/nav';
+import { formatDate, openLesson, useHelpReturn } from '@/lib/nav';
 import { currentLesson, planAccess } from '@/lib/unlock';
 import { subjectInfo } from '@/lib/subjects';
 import type { PlanItem } from '@/lib/types';
@@ -16,9 +16,9 @@ import type { PlanItem } from '@/lib/types';
 export default function Home() {
   const { child, settings, progress, plan } = useChild();
   const { t, lang } = useT();
+  useHelpReturn(null);
   if (!child) return <Screen child>{null}</Screen>;
 
-  setHelpReturn(null);
   const young = child.grade <= 3;
   const used = progress.usage[todayStr()] ?? 0;
   const left = Math.max(0, Math.round(settings.dailyLimitMin - used));
@@ -65,7 +65,7 @@ export default function Home() {
             {plan.map((p) => {
               const s = subjectInfo(p.subject);
               const done = isDone(p);
-              const lockedRow = !access[p.id]?.open;
+              const lockedRow = !access[p.id]?.open && !access[p.id]?.pending;
               return (
                 <Pressable
                   key={p.id}

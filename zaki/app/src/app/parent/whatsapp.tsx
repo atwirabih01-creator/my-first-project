@@ -121,6 +121,7 @@ export default function WhatsApp() {
           placeholder={translate(rl, 'waPlaceholder')}
           placeholderTextColor="#8893AA"
           onSubmitEditing={() => send(text)}
+          editable={!busy}
           accessibilityLabel={translate(rl, 'waPlaceholder')}
           style={styles.input}
         />

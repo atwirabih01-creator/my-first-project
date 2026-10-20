@@ -178,8 +178,7 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
       goToSafety(kind);
       return;
     }
-    const nextHistory: ChatTurn[] = [...history, { role: 'child', text: message }];
-    setHistory(nextHistory);
+    setHistory((h) => [...h, { role: 'child', text: message }]);
     setText('');
     setBusy(true);
     const res = await askTutor({
@@ -194,7 +193,7 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
     });
     setBusy(false);
     if (res.safetyStopped) return;
-    setHistory([...nextHistory, { role: 'zaki', text: sanitizeReply(res.reply, lang) }]);
+    setHistory((h) => [...h, { role: 'zaki', text: sanitizeReply(res.reply, lang) }]);
   }
 
   return (
@@ -226,6 +225,7 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
           placeholder={t('askPlaceholder')}
           placeholderTextColor="#8893AA"
           onSubmitEditing={send}
+          editable={!busy}
           returnKeyType="send"
           accessibilityLabel={t('askPlaceholder')}
           maxLength={300}

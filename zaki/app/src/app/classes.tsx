@@ -72,12 +72,12 @@ export default function Classes() {
                     testID={`class-${x.topic}`}>
                     <Row>
                       <Txt bold style={{ flex: 1 }}>
-                        {acc.open ? '' : '🔒 '}
+                        {acc.open || acc.pending ? '' : '🔒 '}
                         {x.topic}
                       </Txt>
                       <StatusPill status={status} />
                     </Row>
-                    {!acc.open ? (
+                    {!acc.open && !acc.pending ? (
                       <Txt variant="small" testID={`class-locked-${x.topic}`}>
                         {t('lockedMsg', { topic: acc.blocker ?? '' })}
                       </Txt>

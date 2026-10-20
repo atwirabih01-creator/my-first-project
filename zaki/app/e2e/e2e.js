@@ -163,21 +163,10 @@ const fromWords = (w) => {
   check('Safety: full-size "I need help" inside the leave box', !!helpBox && helpBox.height >= 60 && helpBox.width >= 250);
   await tap('leave-need-help');
   check('Safety: "I need help" from the leave box opens help (no gate)', inApp() && (await visible('help-feel', 3000)));
+  await tap('help-lesson');
+  check('E8: help during a test talks about the question, not hints', (await page.locator('body').innerText()).includes('Read the question again'));
   await tap('back-btn');
-  await visible('intro-start', 8000);
-  await tap('intro-start');
-  while (!(await visible('teach-text', 500)) && !(await visible('to-test', 300))) {
-    if (await visible('question-text', 300)) await answerCurrent(true);
-  }
-  // Return to the test the quickest way: skip through teach/checks/ask to the test.
-  while (await visible('teach-text', 500)) await tap('next-btn');
-  while (await visible('question-text', 500) && !(await visible('test-timer', 200))) {
-    await answerCurrent(true);
-    await tap('next-btn');
-  }
-  if (await visible('ask-skip', 1000)) await tap('ask-skip');
-  if (await visible('to-test', 1000)) await tap('to-test');
-  await tap('test-start');
+  check('E4: back from help resumes the SAME test question', inApp() && (await visible('test-timer', 5000)) && (await tid('question-text').innerText()) === firstTestQ);
   await tap('back-btn');
   await visible('leave-title', 3000);
   await tap('leave-stay');
@@ -232,7 +221,10 @@ const fromWords = (w) => {
   check('safety: never shows Qatar 919 to LB child', !body.includes('919'));
   await shot('en-safety-screen');
   await tap('back-btn');
-  check('B1: safety back arrow stays in app', inApp() && (await visible('start-lesson', 3000)));
+  check('B1: safety back arrow stays in app and returns to where the child was (Practice)', inApp() && (await page.getByTestId(/^practice-|^tab-ask$/).locator('visible=true').count()) > 0);
+  if (await visible('tab-ask', 500)) await tap('back-btn');
+  await tap('back-btn');
+  check('B1: Practice back -> Home', inApp() && (await visible('start-lesson', 3000)));
 
   // I need help from inside a lesson; back returns to the lesson
   await tap('start-lesson');
@@ -245,9 +237,7 @@ const fromWords = (w) => {
   await tap('help-feel');
   check('help -> safety without parental gate', await visible('safety-screen'));
   await tap('safety-back');
-  check('B1: safety "Go back" lands on Home', inApp() && (await visible('start-lesson', 3000)));
-  await tap('start-lesson');
-  await visible('intro-start', 8000);
+  check('B1: safety "Go back" returns to the lesson the child was in', inApp() && (await visible('intro-start', 5000)));
   await tap('back-btn');
   check('B1: lesson back arrow lands on Home', inApp() && (await visible('start-lesson', 3000)));
   await tap('start-lesson');
@@ -341,7 +331,30 @@ const fromWords = (w) => {
   await tap('back-btn');
   // EXAM BUILDER: science exam from two saved lessons, 10 questions
   await tap('p-exam');
+  await tap('exam-build');
+  check('E2: building with nothing ticked shows a clear message', (await tid('exam-error').innerText()).includes('Tick at least one lesson'));
+  check('E6: plan lesson without a pack is listed as "not prepared yet"', (await tid('exam-unavailable-fractions and decimals').innerText()).includes('not prepared yet'));
+  await tap('pchild-Ali');
+  await tap('exam-subject-math');
+  check('E5: a still-locked lesson cannot be ticked (Ali: Decimals)', (await tid('exam-unavailable-Decimals').innerText()).includes('locked'));
+  await tap('pchild-Maya');
   await tap('exam-subject-science');
+  await tap('exam-lesson-The water cycle');
+  await tid('exam-day').fill('30');
+  await tid('exam-month').fill('2');
+  await tap('exam-build');
+  check('E1: impossible date (30 Feb) rejected', (await tid('exam-error').innerText()).includes('real date in the future'));
+  await tid('exam-day').fill('1');
+  await tid('exam-month').fill('1');
+  await tid('exam-year').fill('2020');
+  await tap('exam-build');
+  check('E1: past date rejected', (await tid('exam-error').innerText()).includes('real date in the future'));
+  const fut = new Date();
+  fut.setDate(fut.getDate() + 10);
+  await tid('exam-day').fill(String(fut.getDate()));
+  await tid('exam-month').fill(String(fut.getMonth() + 1));
+  await tid('exam-year').fill(String(fut.getFullYear()));
+  await tap('exam-lesson-The water cycle'); // untick; ticked again below
   await tap('exam-lesson-The water cycle');
   await tap('exam-lesson-Plants');
   await tap('exam-count-10');
@@ -351,9 +364,28 @@ const fromWords = (w) => {
   await tap('back-btn');
   // PARENT ASK ZAKI (demo reply)
   await tap('p-ask');
-  await tid('parent-ask-input').fill('How do I explain the water cycle?');
-  await tap('parent-ask-send');
-  check('Parent Ask Zaki: demo reply shown', (await tid('parent-ask-zaki').innerText({ timeout: 5000 })).includes('Demo mode'));
+  const askParent = async (text) => {
+    const before = await page.getByTestId(/^parent-ask-(zaki|concern)$/).count();
+    await tid('parent-ask-input').fill(text);
+    await tap('parent-ask-send');
+    await page.waitForFunction((n) => document.querySelectorAll('[data-testid="parent-ask-zaki"],[data-testid="parent-ask-concern"]').length > n, before, { timeout: 8000 });
+    const last = page.locator('[data-testid="parent-ask-zaki"],[data-testid="parent-ask-concern"]').last();
+    return { id: await last.getAttribute('data-testid'), text: await last.innerText() };
+  };
+  for (const [msg, must] of [
+    ['My son told me his uncle touches him', ['1745', '03 414 964', '03 018 019', '112']],
+    ['I think my daughter wants to hurt herself', ['1564', '112']],
+    ['ابني قال إن عمه يضربه', ['1745', '03 414 964']],
+    ['baba darabne, my kid keeps saying this', ['1745', 'KAFA']],
+  ]) {
+    const r = await askParent(msg);
+    check(`P0 parent safety: "${msg}" -> fixed adult help text`, r.id === 'parent-ask-concern' && r.text.includes('safety comes first') && must.every((m) => r.text.includes(m)) && !r.text.includes('Demo mode'), r.text.slice(0, 80));
+  }
+  await shot('en-parent-ask-concern');
+  for (const msg of ['How do I explain the water cycle?', 'My son is scared of spiders in the science book']) {
+    const r = await askParent(msg);
+    check(`P0 parent safety: harmless "${msg}" -> normal answer`, r.id === 'parent-ask-zaki' && r.text.includes('Demo mode'));
+  }
   check('Parent Ask Zaki: no horizontal scroll', await noHScroll());
   await shot('en-parent-ask');
   await tap('back-btn');
@@ -370,12 +402,22 @@ const fromWords = (w) => {
   // Child takes the exam: per-lesson breakdown
   await tap('tile-tests');
   await tap('exam-take-Science exam');
+  const intro = await tid('exam-intro').innerText();
+  check('E3: exam intro has one accurate count', intro.includes('10 questions from 2 lessons') && !intro.includes('5 questions'), intro.replace(/\n/g, ' '));
   await tap('exam-start');
+  await answerCurrent(true);
+  await answerCurrent(true);
+  const examQ3 = await tid('question-text').innerText();
+  await tap('need-help');
+  await tap('help-lesson');
+  check('E8: exam help text has no hint advice', !(await page.locator('body').innerText()).includes('Tap Hint'));
+  await tap('back-btn');
+  check('E4: back from help resumes the exam at the same question', (await visible('test-timer', 5000)) && (await tid('question-text').innerText()) === examQ3);
   check('Exam: grade 5 count-up timer', await visible('test-timer'));
   await tap('back-btn');
   check('Exam: leave box keeps "I need help"', (await visible('leave-title', 3000)) && (await visible('leave-need-help', 1000)));
   await tap('leave-stay');
-  for (let i = 0; i < 10; i++) await answerCurrent(true);
+  for (let i = 0; i < 8; i++) await answerCurrent(true);
   check('Exam: 10 of 10', (await tid('exam-score').innerText()).includes('10 of 10'));
   check('Exam: result broken down per lesson', (await page.getByTestId('exam-lesson-row').locator('visible=true').count()) === 2);
   await shot('en-exam-result');
@@ -419,6 +461,7 @@ const fromWords = (w) => {
   await tap('ready-yes');
   check('Arabic watch indicator', (await tid('watch-indicator').innerText()).includes('يرون دروسك'));
   check('Unlock: Decimals locked on Home until الكسور is passed', (await tid('locked-Decimals').innerText()).includes('الكسور'));
+  check('E7: Arabic count grammar (minutes)', /\d+ (دقيقةً|دقائق)|دقيقتان|دقيقة واحدة/.test(await page.locator('body').innerText()));
   check('Unlock: Start goes to the current open lesson (الكسور)', (await tid('start-lesson').innerText()).includes('الكسور'));
   await shot('ar-home-locked-next');
   check('no horizontal scroll (ar home)', await noHScroll());

@@ -8,7 +8,7 @@ import { Screen } from '@/components/Screen';
 import { Btn, Card, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
 import { getChildHelpRoutes, type HelpKind } from '@/lib/helpRoutes';
-import { goTo } from '@/lib/nav';
+import { getHelpReturn, goTo } from '@/lib/nav';
 import { useChild, useT } from '@/lib/store';
 
 const KINDS: HelpKind[] = ['home', 'self_harm', 'fear', 'general'];
@@ -26,7 +26,7 @@ export default function Safety() {
 
   return (
     <Screen
-      back={app.activeChildId ? '/home' : '/'}
+      back={getHelpReturn() ?? (app.activeChildId ? '/home' : '/')}
       bg="#F4F8FF"
       showLang>
       <View style={{ alignItems: 'center', gap: S.sm }} testID="safety-screen">
@@ -73,7 +73,7 @@ export default function Safety() {
       <Btn
         title={t('safetyBack')}
         variant="secondary"
-        onPress={() => goTo(app.activeChildId ? '/home' : '/')}
+        onPress={() => goTo(getHelpReturn() ?? (app.activeChildId ? '/home' : '/'))}
         testID="safety-back"
       />
     </Screen>

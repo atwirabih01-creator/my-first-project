@@ -133,3 +133,61 @@ export function getChildHelpRoutes(
   }
   return all.filter((r) => r.kinds.includes(kind));
 }
+
+// ---------------------------------------------------------------------------------------
+// ADULT help routes: shown only to GROWN-UPS (parent Ask Zaki), never to a child.
+// Source: docs/research/08-safety-review-phase0.md help-route table ("adult-facing" rows).
+// Qatar 999 is not listed: it is not verified in the table yet.
+// ---------------------------------------------------------------------------------------
+export type AdultHelpKind = "home" | "self_harm" | "fear" | "general";
+export type AdultHelpRoute = { id: string; number: string; text: Record<HelpLang, string>; kinds: AdultHelpKind[] };
+
+export const ADULT_HELP_ROUTES: Record<HelpCountry, AdultHelpRoute[]> = {
+  LB: [
+    { id: "lb_adult_112", number: "112", text: { en: "Emergency (Internal Security Forces): 112", ar: "الطوارئ (قوى الأمن الداخلي): 112" }, kinds: ["home", "self_harm", "fear", "general"] },
+    { id: "lb_adult_1745", number: "1745", text: { en: "ISF domestic violence line: 1745", ar: "خط قوى الأمن الداخلي للعنف الأسري: 1745" }, kinds: ["home"] },
+    { id: "lb_adult_himaya", number: "03 414 964", text: { en: "himaya (child protection charity): 03 414 964", ar: "جمعية حماية (لحماية الأطفال): 03 414 964" }, kinds: ["home"] },
+    { id: "lb_adult_kafa", number: "03 018 019", text: { en: "KAFA (family violence support): 03 018 019", ar: "جمعية كفى (دعم ضحايا العنف الأسري): 03 018 019" }, kinds: ["home"] },
+    { id: "lb_adult_1564", number: "1564", text: { en: "Embrace lifeline (emotional crisis, self-harm), all day and night: 1564", ar: "خط الحياة إمبريس (أزمة نفسية، إيذاء النفس) طوال النهار والليل: 1564" }, kinds: ["self_harm", "fear", "general"] },
+  ],
+  QA: [
+    { id: "qa_adult_919", number: "919", text: { en: "Aman Centre (child protection), free, all day and night: 919", ar: "مركز أمان (حماية الطفل)، مجاني طوال النهار والليل: 919" }, kinds: ["home", "self_harm", "fear", "general"] },
+  ],
+};
+
+export function getAdultHelpRoutes(country: HelpCountry | string | null | undefined, kind: AdultHelpKind): AdultHelpRoute[] {
+  if (country !== "LB" && country !== "QA") return [];
+  return ADULT_HELP_ROUTES[country].filter((r) => r.kinds.includes(kind));
+}
+
+/**
+ * Fixed text for a GROWN-UP whose message suggests a child may be unsafe. Calm and direct,
+ * numbers only from the table above. Never AI-written. Used by the server and offline.
+ */
+export function adultSafetyMessage(lang: HelpLang, country: HelpCountry | string | null | undefined, kind: AdultHelpKind): string {
+  const intro: Record<HelpLang, string[]> = {
+    en: [
+      "Your child's safety comes first.",
+      kind === "self_harm"
+        ? "If your child may hurt themselves, stay with them now, keep them away from anything dangerous, and get help right away."
+        : kind === "fear"
+          ? "Stay close, listen calmly and let them know they are safe to talk to you. If the fear is strong or doesn't pass, get support."
+          : "Thank you for taking this seriously. Listen calmly, tell your child they did the right thing by telling you, and that it is not their fault. Keep them away from the person involved and get help.",
+      "This chat is for school topics, so please contact people who can help:",
+    ],
+    ar: [
+      "سلامة طفلك أولًا.",
+      kind === "self_harm"
+        ? "إذا كان طفلك قد يؤذي نفسه، فابقَ معه الآن، وأبعِد عنه أي شيء خطِر، واطلب المساعدة فورًا."
+        : kind === "fear"
+          ? "ابقَ قريبًا منه، واستمع إليه بهدوء، وأخبِره أنه يستطيع أن يتحدث إليك بأمان. إذا كان الخوف شديدًا أو لم يَزُل، فاطلب الدعم."
+          : "شكرًا لأنك تأخذ الأمر بجدية. استمع بهدوء، وأخبِر طفلك أنه فعل الصواب حين أخبرك وأن ما حدث ليس ذنبه. أبعِده عن الشخص المعني واطلب المساعدة.",
+      "هذه المحادثة مخصّصة لموضوعات المدرسة، لذلك من فضلك تواصل مع من يستطيع المساعدة:",
+    ],
+  };
+  const routes = getAdultHelpRoutes(country, kind);
+  const lines = routes.length
+    ? routes.map((r) => `• ${r.text[lang]}`)
+    : [lang === "ar" ? "• خدمات الطوارئ أو حماية الطفل في بلدك." : "• Your country's emergency or child-protection services."];
+  return [...intro[lang], ...lines].join("\n");
+}

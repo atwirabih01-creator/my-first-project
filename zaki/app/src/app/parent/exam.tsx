@@ -11,8 +11,11 @@ import { Btn, Card, Chip, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
 import { buildExamQuestions } from '@/lib/api';
 import { formatDate } from '@/lib/nav';
-import { randomId, todayStr, useChild, useT } from '@/lib/store';
+import { randomId, useChild, useT } from '@/lib/store';
 import { SUBJECTS, subjectInfo } from '@/lib/subjects';
+import { accessForKey } from '@/lib/unlock';
+import { examDateFrom } from '@/lib/examDate';
+
 import type { Subject } from '@/lib/types';
 
 const COUNTS = [10, 15, 20];
@@ -23,26 +26,47 @@ export default function ExamBuilder() {
   const [subject, setSubject] = useState<Subject>('math');
   const [picked, setPicked] = useState<string[]>([]);
   const [title, setTitle] = useState('');
-  const [date, setDate] = useState(() => {
+  const [initialDate] = useState(() => {
     const d = new Date();
     d.setDate(d.getDate() + 7);
-    return todayStr(d);
+    return d;
   });
+  const [day, setDay] = useState(String(initialDate.getDate()));
+  const [month, setMonth] = useState(String(initialDate.getMonth() + 1));
+  const [year, setYear] = useState(String(initialDate.getFullYear()));
+  const [error, setError] = useState<string | null>(null);
   const [count, setCount] = useState(15);
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
 
-  // Saved lessons in this subject (full packs are stored on this device).
-  const lessons = Object.entries(packs)
-    .filter(([, cp]) => cp.pack.subject === subject)
-    .map(([key, cp]) => ({ key, pack: cp.pack, topic: progress.lessons[key]?.topic ?? plan.find((p) => `${p.subject}:${p.topic.trim().toLowerCase().replace(/\s+/g, '-')}` === key)?.topic ?? cp.pack.topic }));
-  const chosen = lessons.filter((l) => picked.includes(l.key));
+  // Lessons in this subject: saved packs + the grown-up's plan. Only lessons the child can
+  // open (passed or the current one) AND that are prepared can go into an exam.
+  const keyOf = (s: string, tp: string) => `${s}:${tp.trim().toLowerCase().replace(/\s+/g, '-')}`;
+  const keys = new Map<string, string>();
+  for (const [key, cp] of Object.entries(packs)) if (cp.pack.subject === subject) keys.set(key, progress.lessons[key]?.topic ?? cp.pack.topic);
+  for (const p of plan) if (p.subject === subject) keys.set(keyOf(p.subject, p.topic), p.topic);
+  const lessons = [...keys.entries()].map(([key, topic]) => {
+    const acc = accessForKey(plan, progress, key);
+    const pack = packs[key]?.pack;
+    return { key, topic, pack, locked: !acc.open && !acc.passed, prepared: !!pack };
+  });
+  const chosen = lessons.filter((l) => picked.includes(l.key) && l.pack && !l.locked) as { key: string; topic: string; pack: NonNullable<(typeof lessons)[number]['pack']> }[];
   const defaultTitle = t('examDefaultTitle', { subject: t(subjectInfo(subject).key) });
 
   async function build() {
-    if (!child || chosen.length === 0) return;
-    setBusy(true);
+    if (!child) return;
     setMsg(null);
+    if (chosen.length === 0) {
+      setError(t('examPickFirst'));
+      return;
+    }
+    const date = examDateFrom(day, month, year);
+    if (!date) {
+      setError(t('examDateBad'));
+      return;
+    }
+    setError(null);
+    setBusy(true);
     const res = await buildExamQuestions({
       subject,
       lang: child.lang,
@@ -55,7 +79,7 @@ export default function ExamBuilder() {
       id: randomId('x'),
       subject,
       title: name,
-      date: /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : todayStr(),
+      date,
       lessonKeys: chosen.map((l) => l.key),
       lessonTopics: Object.fromEntries(chosen.map((l) => [l.key, l.topic])),
       questions: res.questions,
@@ -101,22 +125,42 @@ export default function ExamBuilder() {
             <Txt bold>{t('examPickLessons')}</Txt>
             {lessons.length === 0 ? <Txt variant="small">{t('examNoLessons')}</Txt> : null}
             <Row wrap>
-              {lessons.map((l) => (
-                <Chip
-                  key={l.key}
-                  label={`${picked.includes(l.key) ? '☑' : '☐'} ${l.topic}`}
-                  selected={picked.includes(l.key)}
-                  onPress={() => setPicked((p) => (p.includes(l.key) ? p.filter((k) => k !== l.key) : [...p, l.key]))}
-                  testID={`exam-lesson-${l.topic}`}
-                />
-              ))}
+              {lessons
+                .filter((l) => l.prepared && !l.locked)
+                .map((l) => (
+                  <Chip
+                    key={l.key}
+                    label={`${picked.includes(l.key) ? '☑' : '☐'} ${l.topic}`}
+                    selected={picked.includes(l.key)}
+                    onPress={() => setPicked((p) => (p.includes(l.key) ? p.filter((k) => k !== l.key) : [...p, l.key]))}
+                    testID={`exam-lesson-${l.topic}`}
+                  />
+                ))}
             </Row>
+            {lessons
+              .filter((l) => !l.prepared || l.locked)
+              .map((l) => (
+                <Txt key={l.key} variant="small" testID={`exam-unavailable-${l.topic}`}>
+                  {l.locked ? '🔒' : '⏳'} {l.topic}: {l.locked ? t('examLockedLesson', { name: child?.nickname ?? '' }) : t('examNotPrepared')}
+                </Txt>
+              ))}
           </Card>
           <Card>
             <Txt bold>{t('examTitleLabel')}</Txt>
             <TextInput value={title} onChangeText={setTitle} placeholder={defaultTitle} placeholderTextColor="#8893AA" maxLength={50} accessibilityLabel={t('examTitleLabel')} style={[styles.input, { textAlign: align }]} testID="exam-title" />
             <Txt bold>{t('examDate')}</Txt>
-            <TextInput value={date} onChangeText={setDate} maxLength={10} accessibilityLabel={t('examDate')} style={[styles.input, { textAlign: 'center' }]} testID="exam-date" />
+            <Row>
+              {[
+                { v: day, set: setDay, label: t('day'), id: 'exam-day', max: 2 },
+                { v: month, set: setMonth, label: t('month'), id: 'exam-month', max: 2 },
+                { v: year, set: setYear, label: t('year'), id: 'exam-year', max: 4 },
+              ].map((f) => (
+                <View key={f.id} style={{ flex: f.max === 4 ? 1.4 : 1, minWidth: 0, gap: 2 }}>
+                  <Txt variant="small">{f.label}</Txt>
+                  <TextInput value={f.v} onChangeText={(x) => f.set(x.replace(/[^0-9٠-٩]/g, ''))} keyboardType="number-pad" maxLength={f.max} accessibilityLabel={f.label} style={[styles.input, { textAlign: 'center', paddingHorizontal: 4 }]} testID={f.id} />
+                </View>
+              ))}
+            </Row>
             <Txt bold>{t('examCount')}</Txt>
             <Row wrap>
               {COUNTS.map((n) => (
@@ -124,6 +168,13 @@ export default function ExamBuilder() {
               ))}
             </Row>
           </Card>
+          {error ? (
+            <Card tone="coral">
+              <Txt bold testID="exam-error">
+                {error}
+              </Txt>
+            </Card>
+          ) : null}
           {msg ? (
             <Card tone="mint">
               <Txt bold testID="exam-msg">
@@ -131,7 +182,7 @@ export default function ExamBuilder() {
               </Txt>
             </Card>
           ) : null}
-          <Btn title={t('examBuild')} big icon="✨" disabled={chosen.length === 0} onPress={build} testID="exam-build" />
+          <Btn title={t('examBuild')} big icon="✨" onPress={build} testID="exam-build" />
           {exams.length ? (
             <Card testID="exam-report">
               <Txt variant="h2">{t('examExisting')}</Txt>

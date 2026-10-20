@@ -10,7 +10,8 @@ import { Screen } from '@/components/Screen';
 import { Choice, LeaveTestModal, LessonHelpBar } from '@/components/lesson';
 import { Btn, Card, ProgressBar, Row, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
-import { formatDate, goTo, openLesson, setHelpReturn } from '@/lib/nav';
+import { clearInProgress, loadInProgress, saveInProgress } from '@/lib/inProgress';
+import { formatDate, goTo, openLesson, useHelpReturn } from '@/lib/nav';
 import { todayStr, useChild, useT } from '@/lib/store';
 import type { ExamQuestion, ExamResult } from '@/lib/types';
 import { examBreakdown } from '../../server/examMix';
@@ -33,16 +34,25 @@ export default function ExamScreen() {
   const { t, lang } = useT();
   const exam = exams.find((e) => e.id === id);
   const isPractice = practice === '1';
-  const [phase, setPhase] = useState<'intro' | 'test' | 'result'>('intro');
-  const [qs, setQs] = useState<ExamQuestion[]>([]);
-  const [idx, setIdx] = useState(0);
-  const [answers, setAnswers] = useState<number[]>([]);
-  const [startedAt, setStartedAt] = useState(0);
-  const [now, setNow] = useState(0);
+  // Resume an unfinished exam (e.g. after "I need help") at the same question.
+  const progressKey = `exam:${child?.id}:${id}:${isPractice ? 'p' : 'r'}`;
+  type Saved = { qs: ExamQuestion[]; idx: number; answers: number[]; startedAt: number };
+  const [saved] = useState(() => loadInProgress<Saved>(progressKey));
+  const [phase, setPhase] = useState<'intro' | 'test' | 'result'>(saved ? 'test' : 'intro');
+  const [qs, setQs] = useState<ExamQuestion[]>(saved?.qs ?? []);
+  const [idx, setIdx] = useState(saved?.idx ?? 0);
+  const [answers, setAnswers] = useState<number[]>(saved?.answers ?? []);
+  const [startedAt, setStartedAt] = useState(saved?.startedAt ?? 0);
+  const [now, setNow] = useState(saved?.startedAt ?? 0);
   const [askLeave, setAskLeave] = useState(false);
   const [result, setResult] = useState<ExamResult | null>(null);
   const young = (child?.grade ?? 3) <= 3;
   const timed = !young;
+  useHelpReturn({ pathname: '/exam', params: { id: id ?? '', practice: isPractice ? '1' : '0' } }, phase === 'test');
+
+  useEffect(() => {
+    if (phase === 'test') saveInProgress(progressKey, { qs, idx, answers, startedAt });
+  }, [phase, qs, idx, answers, startedAt, progressKey]);
 
   useEffect(() => {
     if (phase !== 'test' || !timed) return;
@@ -57,7 +67,6 @@ export default function ExamScreen() {
       </Screen>
     );
   }
-  setHelpReturn('/tests');
 
   const best = (progress.examResults ?? []).filter((r) => r.examId === exam.id && !r.practice).reduce<number | undefined>((b, r) => (b === undefined || r.seconds < b ? r.seconds : b), undefined);
 
@@ -92,6 +101,7 @@ export default function ExamScreen() {
       practice: isPractice,
       perLesson,
     };
+    clearInProgress(progressKey);
     app.recordExamResult(child!.id, r);
     if (!isPractice && score / qs.length >= 0.8) app.addStars(child!.id, 5);
     setAnswers(next);
@@ -113,6 +123,7 @@ export default function ExamScreen() {
         onStay={() => setAskLeave(false)}
         onLeave={() => {
           setAskLeave(false);
+          clearInProgress(progressKey);
           goTo('/tests');
         }}
       />
@@ -124,7 +135,7 @@ export default function ExamScreen() {
           </Txt>
           <Txt center>{t('examOn', { date: formatDate(exam.date, lang) })}</Txt>
           <Txt variant="big" center>
-            {t('examIntro', { n: exam.questions.length, k: exam.lessonKeys.length })} {timed ? t('testIntroTimed') : t('testIntro')}
+            {t('examIntro', { n: exam.questions.length, k: exam.lessonKeys.length })} {timed ? t('examTimed') : t('examUntimed')}
           </Txt>
           {timed && best !== undefined ? <Txt center>🏅 {t('bestTime', { s: best })}</Txt> : null}
           <Btn title={t('testStart')} big style={{ alignSelf: 'stretch' }} onPress={start} testID="exam-start" />

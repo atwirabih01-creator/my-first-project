@@ -9,11 +9,13 @@ import { BudgetExceededError, canSpend } from "./budget";
 import { MODELS, aiEnabled } from "./config/models";
 import { cleanBase64Image, MAX_PAGE_IMAGES } from "./lessonPack";
 import { containsPhoneNumber, moderate, scrubPii } from "./safety";
+import { adultSafetyMessage, type AdultHelpKind } from "../src/lib/helpRoutes";
+import { parentConcernScan } from "./keywordScan";
 import type { Country, Lang } from "./types";
 
 export type ParentAskTurn = { role: "parent" | "zaki"; text: string };
 export type ParentAskRequest = { message: string; lang: Lang; country?: Country; history: ParentAskTurn[]; pageImages?: string[] };
-export type ParentAskResponse = { reply: string; demo?: boolean; budgetReached?: boolean; blocked?: boolean };
+export type ParentAskResponse = { reply: string; demo?: boolean; budgetReached?: boolean; blocked?: boolean; concern?: "home" | "self_harm" | "fear" };
 
 export const PARENT_ASK_SYSTEM = `You are Zaki's helper for PARENTS (adults), inside the Zaki app for children in grades 1-6.
 The parent wants to understand a school topic so they can help their child at home.
@@ -50,30 +52,24 @@ const FIXED: Record<"scope" | "demo" | "budget" | "blocked", Record<Lang, string
   },
 };
 
-/** Fixed text when a parent message suggests a child may be unsafe (numbers from the help table). */
-export function parentConcernMessage(lang: Lang, country?: Country): string {
-  const lines: Record<Lang, string[]> = {
-    en: [
-      "It sounds like something worrying may be happening. This chat is for school topics, so I can't handle this here.",
-      "If a child may be in danger, please contact a trusted professional or emergency services now.",
-    ],
-    ar: [
-      "يبدو أن أمرًا مقلقًا قد يكون يحدث. هذه المحادثة مخصّصة لموضوعات المدرسة، لذلك لا أستطيع التعامل مع هذا هنا.",
-      "إذا كان طفل قد يكون في خطر، فمن فضلك تواصل الآن مع مختص موثوق أو مع خدمات الطوارئ.",
-    ],
-  };
-  if (country === "LB") lines[lang].push(lang === "ar" ? "في لبنان: الطوارئ 112، والدعم النفسي 1564 (إمبريس)." : "In Lebanon: emergency 112; emotional support 1564 (Embrace).");
-  if (country === "QA") lines[lang].push(lang === "ar" ? "في قطر: مركز أمان لحماية الأطفال 919." : "In Qatar: Aman child protection 919.");
-  return lines[lang].join("\n");
+/** Fixed adult text when a parent message suggests a child may be unsafe (numbers from the table). */
+export function parentConcernMessage(lang: Lang, country?: Country, kind: AdultHelpKind = "home"): string {
+  return adultSafetyMessage(lang, country, kind);
 }
 
 const LINK_RE = /https?:\/\/|www\.|\b[a-z0-9-]+\.(com|org|net|edu|gov|qa|lb)\b/i;
 
 export async function runParentAsk(req: ParentAskRequest): Promise<ParentAskResponse> {
-  // 1. Moderation of the parent's message (keywords always; AI layers if available).
+  // 1a. Fixed keyword check for worries about a child (parent + child word lists). Runs
+  //     before anything else, with no AI, in every mode (demo, over budget, online).
+  const worry = parentConcernScan(req.message);
+  if (worry) return { reply: parentConcernMessage(req.lang, req.country, worry), blocked: true, concern: worry };
+
+  // 1b. Moderation of the parent's message (keywords always; AI layers if available).
   const check = await moderate(req.message, { speaker: "tutor", lang: req.lang, country: req.country });
   if (check.category === "self_harm" || check.category === "disclosure_harm" || check.category === "violence_fear") {
-    return { reply: parentConcernMessage(req.lang, req.country), blocked: true };
+    const kind = check.category === "self_harm" ? "self_harm" : check.category === "violence_fear" ? "fear" : "home";
+    return { reply: parentConcernMessage(req.lang, req.country, kind), blocked: true, concern: kind };
   }
   if (check.block) return { reply: FIXED.scope[req.lang], blocked: true };
 

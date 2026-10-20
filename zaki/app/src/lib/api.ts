@@ -2,6 +2,8 @@
 // If the server is unreachable or reports ai:false, everything falls back to a
 // client-side DEMO MODE (bundled sample packs, local answer checks, scripted replies).
 import { mixExamQuestions } from '../../server/examMix';
+import { parentConcernScan } from '../../server/keywordScan';
+import { adultSafetyMessage } from './helpRoutes';
 import { getDemoPack } from './demoPacks';
 import type { HelpKind } from './helpRoutes';
 import { kindFromCategory } from './localSafety';
@@ -293,11 +295,15 @@ export async function askZakiAsParent(req: {
   country: Country;
   history: ParentTurn[];
   pageImages?: string[];
-}): Promise<{ reply: string; demo: boolean }> {
+}): Promise<{ reply: string; demo: boolean; concern?: string }> {
+  // Safety first, offline and before any demo or server reply: a worry about a child gets
+  // the fixed ADULT help text (numbers from the table, never AI text).
+  const worry = parentConcernScan(req.message);
+  if (worry) return { reply: adultSafetyMessage(req.lang, req.country, worry), demo: false, concern: worry };
   if (!demoMode) {
     try {
-      const data = await request<{ reply?: string }>('/api/parent-ask', req, 90000);
-      if (typeof data.reply === 'string' && data.reply.trim()) return { reply: data.reply, demo: false };
+      const data = await request<{ reply?: string; concern?: string }>('/api/parent-ask', req, 90000);
+      if (typeof data.reply === 'string' && data.reply.trim()) return { reply: data.reply, demo: false, concern: data.concern };
     } catch {
       // fall through to the demo reply
     }

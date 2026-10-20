@@ -1,4 +1,5 @@
-import { router, type Href } from 'expo-router';
+import { router, useFocusEffect, type Href } from 'expo-router';
+import { useCallback } from 'react';
 
 /** Open the lesson loop for a subject + topic. mode "test" jumps straight to the test. */
 export function openLesson(item: { subject: string; topic: string }, mode: 'full' | 'test' | 'review' = 'full') {
@@ -27,9 +28,28 @@ export function goTo(href: Href) {
 
 // Where "I need help" should return to (the lesson the child was in), without history.
 let helpReturn: Href | null = null;
-export function setHelpReturn(href: Href | null) {
+let helpInTest = false;
+/** inTest: the child is in a test/exam (no hints there), so help shows test-friendly text. */
+export function setHelpReturn(href: Href | null, opts: { inTest?: boolean } = {}) {
   helpReturn = href;
+  helpInTest = !!opts.inTest;
 }
 export function getHelpReturn(): Href | null {
   return helpReturn;
+}
+export function isHelpInTest(): boolean {
+  return helpInTest;
+}
+
+/**
+ * Remember where "I need help" / the safety screen should return to. Runs only when this
+ * screen is FOCUSED (screens hidden in the stack still re-render and must not overwrite it).
+ */
+export function useHelpReturn(href: Href | null, inTest = false) {
+  const key = JSON.stringify(href);
+  useFocusEffect(
+    useCallback(() => {
+      setHelpReturn(key === 'null' ? null : (JSON.parse(key) as Href), { inTest });
+    }, [key, inTest]),
+  );
 }

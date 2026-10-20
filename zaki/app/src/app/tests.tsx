@@ -59,7 +59,7 @@ export default function Tests() {
                 <Txt variant="small">{p.dueDate ? t('planTest', { date: formatDate(p.dueDate, lang) }) : t(s.key)}</Txt>
               </View>
             </Row>
-            {access[p.id]?.open ? (
+            {access[p.id]?.open || access[p.id]?.pending ? (
               <Btn small title={t('practiseIt')} onPress={() => openLesson(p)} />
             ) : (
               <Txt variant="small">🔒 {t('lockedMsg', { topic: access[p.id]?.blocker ?? '' })}</Txt>

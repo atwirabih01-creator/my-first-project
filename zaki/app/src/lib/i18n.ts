@@ -49,7 +49,7 @@ const en = {
   todayPlan: "Today's plan",
   noPlan: 'No plan yet. Ask your grown-up to add a lesson.',
   start: 'Start',
-  starsN: '{n} stars',
+  starsN: '{n|star}',
   myClasses: 'My classes',
   tests: 'Tests',
   flashcards: 'Flashcards',
@@ -57,7 +57,7 @@ const en = {
   nextStudy: 'Next study time: {time}',
   paused: 'Zaki is resting today. Ask your grown-up.',
   switchLearner: 'Switch learner',
-  minutesLeft: '{n} min left today',
+  minutesLeft: '{n|min} left today',
   planLesson: 'Lesson',
   planTest: 'Test on {date}',
   planDone: 'Done ✓',
@@ -99,7 +99,7 @@ const en = {
   questionOf: 'Question {n} of {m}',
   learned: 'Learned!',
   passedText: 'You got {score} of {total}!',
-  starsEarned: '+{n} stars',
+  starsEarned: '+{n|star}',
   newRecord: 'New personal best!',
   failTitle: 'Good effort!',
   failText: "You got {score} of {total}. Let's look at the summary again, then try new questions.",
@@ -111,11 +111,20 @@ const en = {
   takeExam: 'Take exam',
   practiceExam: 'Practice exam',
   examOn: 'Exam on {date}',
-  examIntro: '{n} questions from {k} lessons.',
+  examIntro: '{n|q} from {k|lesson}.',
   examResultTitle: 'Exam finished!',
   examWeak: 'Let\'s review these lessons:',
   examLast: 'Last result: {score}/{total}',
   practiceTag: '(practice)',
+  examTimed: 'Beat your own score!',
+  examUntimed: 'Take your time.',
+  examDateBad: 'Please enter a real date in the future (day / month / year).',
+  examPickFirst: 'Tick at least one lesson first.',
+  examNotPrepared: 'not prepared yet',
+  examLockedLesson: 'locked for {name} (not reached yet)',
+  day: 'Day',
+  month: 'Month',
+  year: 'Year',
   lockedMsg: 'Pass the "{topic}" test to unlock',
   lockedTitle: 'This lesson is locked 🔒',
   notReadyTitle: 'Zaki will prepare this lesson tomorrow',
@@ -145,6 +154,7 @@ const en = {
   helpLesson: 'Help with my lesson',
   helpFeel: "I don't feel safe, or I'm upset",
   helpLessonText: 'Tap Hint in the lesson, or ask Zaki a question. You can also ask a grown-up near you.',
+  helpTestText: "Read the question again slowly. If you're not sure, choose your best answer, that's okay! You can also ask a grown-up near you.",
   safetyTitle: 'Thank you for telling me',
   safetyBody: "You did the right thing. I'm a computer helper, so I can't help with this alone. A real grown-up can.",
   safetyWhat: 'Here is what you can do:',
@@ -218,14 +228,14 @@ const en = {
   pAsk: 'Ask Zaki (for grown-ups)',
   examTitleLabel: 'Exam name',
   examDefaultTitle: '{subject} exam',
-  examDate: 'Exam date (YYYY-MM-DD)',
+  examDate: 'Exam date',
   examCount: 'Number of questions',
   examPickLessons: 'Tick the lessons for this exam',
   examNoLessons: 'No saved lessons in this subject yet. Add lessons first.',
   examBuild: 'Build the exam',
   examBuilding: 'Zaki is mixing questions from the lessons…',
-  examReady: 'Exam ready: "{title}" with {n} questions. {name} will see it in Tests.',
-  examAiAdded: '{n} new questions were added by Zaki and checked.',
+  examReady: 'Exam ready: "{title}" with {n|q}. {name} will see it in Tests.',
+  examAiAdded: 'Zaki added and checked new questions: {n|q}.',
   examExisting: 'Exams',
   examNoResult: 'Not taken yet',
   examPerLesson: 'Per lesson',
@@ -249,7 +259,7 @@ const en = {
   prepareFor: 'Prepare lesson for {name}',
   waAlready: '"{topic}" is already in {name}\'s plan.',
   dailyLimit: 'Daily time limit',
-  minN: '{n} min',
+  minN: '{n|min}',
   studyTime: 'Study time',
   childLang: "Child's language",
   reportLang: 'Report language',
@@ -359,7 +369,7 @@ const ar: Record<StringKey, string> = {
   todayPlan: 'خطة اليوم',
   noPlan: 'لا توجد خطة بعد. اطلبْ من أحد الكبار إضافة درس.',
   start: 'ابدأ',
-  starsN: '{n} نجمة',
+  starsN: '{n|star}',
   myClasses: 'دروسي',
   tests: 'الاختبارات',
   flashcards: 'البطاقات',
@@ -367,7 +377,7 @@ const ar: Record<StringKey, string> = {
   nextStudy: 'وقت الدراسة القادم: {time}',
   paused: 'ذكي يرتاح اليوم. اسألْ أحد الكبار.',
   switchLearner: 'تغيير المتعلّم',
-  minutesLeft: 'بقي {n} دقيقة اليوم',
+  minutesLeft: 'بقي اليوم: {n|min}',
   planLesson: 'درس',
   planTest: 'اختبار يوم {date}',
   planDone: 'تمّ ✓',
@@ -407,7 +417,7 @@ const ar: Record<StringKey, string> = {
   questionOf: 'السؤال {n} من {m}',
   learned: 'تعلّمتَه!',
   passedText: 'حصلتَ على {score} من {total}!',
-  starsEarned: '+{n} نجمة',
+  starsEarned: '+{n|star}',
   newRecord: 'رقم قياسي جديد لك!',
   failTitle: 'مجهود رائع!',
   failText: 'حصلتَ على {score} من {total}. هيّا نقرأ الملخّص مرة أخرى، ثم نجرّب أسئلة جديدة.',
@@ -419,11 +429,20 @@ const ar: Record<StringKey, string> = {
   takeExam: 'ابدأ الامتحان',
   practiceExam: 'امتحان تدريبي',
   examOn: 'امتحان يوم {date}',
-  examIntro: '{n} سؤالًا من {k} دروس.',
+  examIntro: '{n|q} من {k|lesson}.',
   examResultTitle: 'انتهى الامتحان!',
   examWeak: 'هيّا نراجع هذه الدروس:',
   examLast: 'آخر نتيجة: {score}/{total}',
   practiceTag: '(تدريب)',
+  examTimed: 'تغلّبْ على نتيجتك السابقة!',
+  examUntimed: 'خُذْ وقتك.',
+  examDateBad: 'من فضلك أدخِلْ تاريخًا حقيقيًا في المستقبل (يوم / شهر / سنة).',
+  examPickFirst: 'اخترْ درسًا واحدًا على الأقل أولًا.',
+  examNotPrepared: 'لم يُحضَّر بعد',
+  examLockedLesson: 'مقفل عند {name} (لم يصل إليه بعد)',
+  day: 'اليوم',
+  month: 'الشهر',
+  year: 'السنة',
   lockedMsg: 'انجحْ في اختبار «{topic}» لفتح هذا الدرس',
   lockedTitle: 'هذا الدرس مقفل 🔒',
   notReadyTitle: 'سيُحضّر ذكي هذا الدرس غدًا',
@@ -451,6 +470,7 @@ const ar: Record<StringKey, string> = {
   helpLesson: 'مساعدة في درسي',
   helpFeel: 'لا أشعر بالأمان، أو أنا منزعج',
   helpLessonText: 'اضغطْ "تلميح" في الدرس، أو اسألْ ذكي سؤالًا. ويمكنك أيضًا أن تسأل شخصًا كبيرًا قريبًا منك.',
+  helpTestText: 'اقرأ السؤال مرة أخرى ببطء. إذا لم تكن متأكدًا، فاخترْ أفضل إجابة عندك، ولا بأس! ويمكنك أيضًا أن تسأل شخصًا كبيرًا قريبًا منك.',
   safetyTitle: 'شكرًا لأنك أخبرتني',
   safetyBody: 'لقد فعلتَ الصواب. أنا مساعد حاسوبي، ولا أستطيع المساعدة في هذا وحدي. شخص كبير حقيقي يستطيع.',
   safetyWhat: 'هذا ما يمكنك فعله:',
@@ -517,14 +537,14 @@ const ar: Record<StringKey, string> = {
   pAsk: 'اسألْ ذكي (للكبار)',
   examTitleLabel: 'اسم الامتحان',
   examDefaultTitle: 'امتحان {subject}',
-  examDate: 'تاريخ الامتحان (سنة-شهر-يوم)',
+  examDate: 'تاريخ الامتحان',
   examCount: 'عدد الأسئلة',
   examPickLessons: 'اخترِ الدروس لهذا الامتحان',
   examNoLessons: 'لا توجد دروس محفوظة في هذه المادة بعد. أضِفْ دروسًا أولًا.',
   examBuild: 'إنشاء الامتحان',
   examBuilding: 'ذكي يمزج أسئلة من الدروس…',
-  examReady: 'الامتحان جاهز: «{title}» فيه {n} سؤالًا. سيراه {name} في الاختبارات.',
-  examAiAdded: 'أضاف ذكي {n} أسئلة جديدة وتحقّق منها.',
+  examReady: 'الامتحان جاهز: «{title}» فيه {n|q}. سيراه {name} في الاختبارات.',
+  examAiAdded: 'أضاف ذكي أسئلة جديدة وتحقّق منها: {n|q}.',
   examExisting: 'الامتحانات',
   examNoResult: 'لم يُقدَّم بعد',
   examPerLesson: 'حسب الدرس',
@@ -548,7 +568,7 @@ const ar: Record<StringKey, string> = {
   prepareFor: 'تحضير الدرس لـ{name}',
   waAlready: '"{topic}" موجود مسبقًا في خطة {name}.',
   dailyLimit: 'الوقت المسموح يوميًا',
-  minN: '{n} دقيقة',
+  minN: '{n|min}',
   studyTime: 'وقت الدراسة',
   childLang: 'لغة الطفل',
   reportLang: 'لغة التقرير',
@@ -614,10 +634,46 @@ const ar: Record<StringKey, string> = {
 
 export const STRINGS: Record<Lang, Record<StringKey, string>> = { en, ar };
 
+// Counted nouns: "{n|q}" in a string becomes "3 questions" / "3 أسئلة" with correct plurals.
+type Noun = 'q' | 'lesson' | 'star' | 'min';
+const NOUNS_EN: Record<Noun, [string, string]> = {
+  q: ['question', 'questions'],
+  lesson: ['lesson', 'lessons'],
+  star: ['star', 'stars'],
+  min: ['min', 'min'],
+};
+// Arabic: [1, 2, 3-10 (plural), 11-99 (accusative singular), 0 / 100+ (genitive singular)]
+const NOUNS_AR: Record<Noun, [string, string, string, string, string]> = {
+  q: ['سؤال واحد', 'سؤالان', 'أسئلة', 'سؤالًا', 'سؤال'],
+  lesson: ['درس واحد', 'درسان', 'دروس', 'درسًا', 'درس'],
+  star: ['نجمة واحدة', 'نجمتان', 'نجوم', 'نجمةً', 'نجمة'],
+  min: ['دقيقة واحدة', 'دقيقتان', 'دقائق', 'دقيقةً', 'دقيقة'],
+};
+
+/** "3 questions" / "3 أسئلة" / "11 سؤالًا" / "سؤالان" with the right plural rule. */
+export function countNoun(lang: Lang, n: number, noun: Noun): string {
+  if (lang === 'ar') {
+    const f = NOUNS_AR[noun];
+    const m = Math.abs(n) % 100;
+    if (n === 1) return f[0];
+    if (n === 2) return f[1];
+    if (Math.abs(n) >= 3 && Math.abs(n) <= 10) return `${n} ${f[2]}`;
+    if (m >= 11 && m <= 99 && Math.abs(n) < 100) return `${n} ${f[3]}`;
+    if (Math.abs(n) >= 100 && m >= 3 && m <= 10) return `${n} ${f[2]}`;
+    if (Math.abs(n) >= 100 && m >= 11) return `${n} ${f[3]}`;
+    return `${n} ${f[4]}`;
+  }
+  const [one, many] = NOUNS_EN[noun];
+  return `${n} ${n === 1 ? one : many}`;
+}
+
 export function translate(lang: Lang, key: StringKey, params?: Record<string, string | number>): string {
   let s = STRINGS[lang][key] ?? STRINGS.en[key] ?? key;
   if (params) {
-    for (const [k, v] of Object.entries(params)) s = s.split(`{${k}}`).join(String(v));
+    for (const [k, v] of Object.entries(params)) {
+      s = s.replace(new RegExp(`\\{${k}\\|(q|lesson|star|min)\\}`, 'g'), (_m, noun: Noun) => countNoun(lang, Number(v), noun));
+      s = s.split(`{${k}}`).join(String(v));
+    }
   }
   return s;
 }

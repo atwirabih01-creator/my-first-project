@@ -10,9 +10,10 @@ import { AskZaki, Choice, LessonHelpBar, QuestionWithHints } from '@/components/
 import { Btn, Card, ProgressBar, Row, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
 import { fetchLessonPack } from '@/lib/api';
+import { clearInProgress, loadInProgress, saveInProgress } from '@/lib/inProgress';
 import { accessForKey } from '@/lib/unlock';
 import { shuffleChoices } from '../../server/shuffle';
-import { goTo, setHelpReturn } from '@/lib/nav';
+import { goTo, useHelpReturn } from '@/lib/nav';
 import { lessonKeyOf, MAX_TESTS_PER_DAY, todayStr, useChild, useT } from '@/lib/store';
 import type { CachedPack, Question, Subject } from '@/lib/types';
 
@@ -45,18 +46,28 @@ export default function Lesson() {
   const { t } = useT();
 
   const [cp, setCp] = useState<CachedPack | null>(packs[key] ?? null);
-  const [phase, setPhase] = useState<Phase>(packs[key] ? (params.mode === 'test' ? 'testIntro' : params.mode === 'review' ? 'teach' : 'intro') : 'loading');
+  // Resume an unfinished test (e.g. after "I need help") at the same question.
+  const progressKey = `test:${child?.id}:${key}`;
+  type SavedTest = { testQs: Question[]; testIdx: number; correct: number; startedAt: number };
+  const [savedTest] = useState(() => (packs[key] ? loadInProgress<SavedTest>(progressKey) : null));
+  const [phase, setPhase] = useState<Phase>(
+    packs[key] ? (savedTest ? 'test' : params.mode === 'test' ? 'testIntro' : params.mode === 'review' ? 'teach' : 'intro') : 'loading',
+  );
   const [idx, setIdx] = useState(0);
   const [recapWrong, setRecapWrong] = useState<number | null>(null);
   const [reload, setReload] = useState(0);
   const [askLeave, setAskLeave] = useState(false);
 
   // Test state
-  const [testQs, setTestQs] = useState<Question[]>([]);
-  const [testIdx, setTestIdx] = useState(0);
-  const [correct, setCorrect] = useState(0);
-  const [startedAt, setStartedAt] = useState(0);
-  const [now, setNow] = useState(0);
+  const [testQs, setTestQs] = useState<Question[]>(savedTest?.testQs ?? []);
+  const [testIdx, setTestIdx] = useState(savedTest?.testIdx ?? 0);
+  const [correct, setCorrect] = useState(savedTest?.correct ?? 0);
+  const [startedAt, setStartedAt] = useState(savedTest?.startedAt ?? 0);
+  const [now, setNow] = useState(savedTest?.startedAt ?? 0);
+
+  useEffect(() => {
+    if (phase === 'test') saveInProgress(progressKey, { testQs, testIdx, correct, startedAt });
+  }, [phase, testQs, testIdx, correct, startedAt, progressKey]);
   const [lastResult, setLastResult] = useState<{ score: number; total: number; passed: boolean; seconds: number; record: boolean } | null>(null);
 
   const childId = child?.id;
@@ -65,9 +76,10 @@ export default function Lesson() {
   const passedToday = testsToday.some((x) => x.passed);
   const young = (child?.grade ?? 3) <= 3;
   const timed = !young;
+  useHelpReturn({ pathname: '/lesson', params: { subject, topic } }, phase === 'test');
   // Pass-to-unlock: a later lesson stays locked until the one before it is passed.
   const access = accessForKey(plan, progress, key);
-  const locked = !access.open;
+  const locked = !access.open && !access.pending; // a pending lesson tries to load (or says 'tomorrow')
 
   // Load (or reuse) the lesson pack.
   useEffect(() => {
@@ -120,7 +132,6 @@ export default function Lesson() {
   if (!child) return <Screen child>{null}</Screen>;
 
   const goHome = () => goTo('/home');
-  setHelpReturn({ pathname: '/lesson', params: { subject, topic } });
 
   function startTest() {
     if (!pack) return;
@@ -169,6 +180,7 @@ export default function Lesson() {
     if (passed) app.addStars(child!.id, nextCorrect + 2);
     setCorrect(nextCorrect);
     setLastResult({ score: nextCorrect, total, passed, seconds, record });
+    clearInProgress(progressKey);
     if (!passed && testsToday.length + 1 >= MAX_TESTS_PER_DAY) {
       app.markNeedsGrownUp(child!.id, key);
       setPhase('limit');
@@ -213,6 +225,7 @@ export default function Lesson() {
               variant="secondary"
               onPress={() => {
                 setAskLeave(false);
+                clearInProgress(progressKey);
                 goHome();
               }}
               testID="leave-go"

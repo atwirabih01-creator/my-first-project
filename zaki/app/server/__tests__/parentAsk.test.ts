@@ -63,4 +63,34 @@ describe("parent Ask Zaki", () => {
     assert.equal(r.budgetReached, true);
     assert.equal(calls.filter((c) => !isClassifierCall(c)).length, 0);
   });
+
+  it("QA round 3 P0: worrying messages get the fixed ADULT text even in demo mode (no AI)", async () => {
+    demoMode();
+    const cases: [string, "en" | "ar", RegExp[]][] = [
+      ["My son told me his uncle touches him", "en", [/safety comes first/, /112/, /1745/, /03 414 964/, /03 018 019/]],
+      ["I think my daughter wants to hurt herself", "en", [/safety comes first/, /112/, /1564/]],
+      ["ابني قال إن عمه يضربه", "ar", [/سلامة طفلك أولًا/, /1745/, /03 414 964/]],
+      ["baba darabne, my kid keeps saying this", "en", [/safety comes first/, /1745/]],
+    ];
+    for (const [message, lang, must] of cases) {
+      const r = await runParentAsk({ message, lang, country: "LB", history: [] });
+      assert.equal(r.blocked, true, message);
+      assert.ok(r.concern, message);
+      assert.equal(r.demo, undefined, "not the demo tip");
+      for (const m of must) assert.match(r.reply, m, message);
+      assert.ok(!/919/.test(r.reply), "never a Qatar number for Lebanon");
+    }
+    const qa = await runParentAsk({ message: "My son told me his uncle touches him", lang: "en", country: "QA", history: [] });
+    assert.match(qa.reply, /919/);
+    assert.ok(!/1745|112/.test(qa.reply));
+  });
+
+  it("harmless school questions still get the normal (demo) answer", async () => {
+    demoMode();
+    for (const message of ["How do I explain fractions?", "My son is scared of spiders in the science book, how do I teach insects?"]) {
+      const r = await runParentAsk({ message, lang: "en", country: "LB", history: [] });
+      assert.equal(r.demo, true, message);
+      assert.equal(r.concern, undefined, message);
+    }
+  });
 });

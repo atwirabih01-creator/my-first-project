@@ -37,7 +37,7 @@ export default function Settings() {
                   .filter((p) => p.subject === s.id)
                   .map((p, i, arr) => {
                     const a = access[p.id];
-                    const label = a?.passed ? `✓ ${t('pIsPassed')}` : a?.open ? t('pIsOpen') : `🔒 ${t('pIsLocked')}`;
+                    const label = a?.passed ? `✓ ${t('pIsPassed')}` : a?.pending ? `⏳ ${t('pendingTag')}` : a?.open ? t('pIsOpen') : `🔒 ${t('pIsLocked')}`;
                     return (
                       <Row key={p.id} wrap testID={`order-${p.topic}`}>
                         <Txt style={{ flex: 1, minWidth: 120 }}>
