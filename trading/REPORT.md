@@ -1,7 +1,7 @@
 # Trading Desk — Paper-Trading Report (19 Oct 2026)
 
 **Short version:** the three agents are built and running in paper mode only. We tested
-**36 versions** on 3 years of real hourly prices across 28 markets. **None reached the goal**
+**228 versions** (in 6 rounds) on 3 years of real hourly prices across 28 markets. **None reached the goal**
 (80%+ wins over 100+ paper trades on fresh data *and* making money). So, under your own
 rule, **nothing moves to real money.**
 
@@ -41,6 +41,30 @@ A trade happens **only when all three say yes.**
    That is normal in trading and exactly why the exam exists.
 3. **Sharp sell-offs (Feb 2026) cause most of the damage.**
 4. **No version got close to "80% wins *and* profitable" on fresh data.**
+
+## Rounds 4–6 (20 Oct 2026) — the 3 extra rounds you approved
+
+**Stricter method:** practice on 72 markets over 24 months. Three *sealed* exam sets of ~60
+never-seen markets each (A, B, C), one per round. Rules for passing were written down
+before each exam.
+
+| Round | Versions tried | Best on practice | Result |
+|---|---|---|---|
+| 4 | 12 + 12 draft + 36 grid | V52 (trailing stop, strict Sage): 109 trades, 80% wins | **Sealed exam A: 64 trades, 73% wins, −1.4%** ❌ |
+| 5 | 60 random combinations | V079 "news-shock follow": 181 trades, **90% wins**, +5% | Failed the double check (one half of the markets lost money) → exam B kept sealed |
+| 6 | 72 settings around V079 | none passed the double check | Exam C kept sealed |
+
+**Total tested so far: 228 versions.** None passed.
+
+**Why V079 isn't the answer:** it wins 90% of the time because it takes a tiny profit and
+uses a very wide stop-loss. Its average loss (−8.4%) is about 7 times its average win (+1.2%),
+so it needs about 87% wins just to break even. Small changes to its settings make it
+collapse. That is a fragile setup, not a real edge.
+
+**The consistent pattern across all six rounds:** versions that reach 80% in practice drop
+to about 73–77% on new markets. At 80% wins, these designs barely break even after fees.
+
+Sealed exams B and C are still untouched and available for a future, genuinely new idea.
 
 ## Independent check (Reality Checker)
 
