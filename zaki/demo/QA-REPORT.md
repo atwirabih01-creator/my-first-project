@@ -243,3 +243,25 @@ Going "forward" again or reloading reopens Zaki at the Start screen, with saved 
 - **L1. A lesson marked "⏳ Ready tomorrow" because of the AI limit locks every lesson after it** ("Pass the "Geometry" test to unlock" while Geometry can't be studied yet). This can only happen with a real server.
 - **C1.** Sending messages faster than Zaki replies (one every 0.35 s) gets replies for only about half. At a normal pace, all 45 were answered.
 - **Carried over:** N4 (sample lesson doesn't match the typed name, e.g. "Decimals" shows Fractions content; it is labelled "🧪 Sample lesson (demo)"), N2 (spider false alarm), S3 (old iPhones untested).
+
+---
+
+## Round 3 recheck (2026-10-20, file dated 00:41)
+
+Focused recheck only (not a full sweep). Chromium, opening the file from disk, phone width 390. Screenshots `qa-screenshots/round3/RR*`. Script: 31 of 31 checks pass, with no console errors other than the expected `/api` failure.
+
+### Verdict: READY (no blockers)
+
+| Item | Result | Evidence |
+|---|---|---|
+| **P0 (G1)** grown-up Ask Zaki, worrying messages | **FIXED.** "uncle touches him", "wants to hurt herself", "ابني قال إن عمه يضربه" and "baba darabne…" each get a calm adult help text in a red box, with no study tip and no links. The abuse texts list 112, himaya 03 414 964, the ISF line 1745 and KAFA 03 018 019. The self-harm text lists 112 + Embrace 1564. Two harmless questions (incl. "hit a home run") get the normal demo answer. With the country set to Qatar, the text shows 919 and no Lebanon numbers | RR01–RR05 |
+| **E1** exam date | **FIXED.** The date is now three boxes (day / month / year). 31/13/2026, 1/1/2020, 30/2/2026, yesterday, letters and empty boxes are all refused with "Please enter a real date in the future (day / month / year)". 30/10/2026 is accepted | RR02-builder-bad-date |
+| **E4** "I need help" during an exam | **FIXED.** In all 4 routes the child comes back to the **same question**: help → ←; help → "I don't feel safe" → Go back; help → safety screen → top ←; Leave box → I need help → ← | RR03, RR04 |
+| **E5** locked lessons in the exam builder | **FIXED.** Shown as "🔒 Shapes: locked for Maya (not reached yet)" and can't be ticked. The built exam contains only Decimals + Fractions | RR01-builder, RR02 |
+| Regression: back arrows on the new screens | **PASS.** Exam builder, grown-up Ask, exam intro, mid-exam (Leave box), exam result, review lesson and retake test all stay in the app. (The previous round's run of these also passed 13/13) | — |
+| Regression: answers shuffled | **PASS.** Right-answer positions across saved packs: 1st ×12, 2nd ×18, 3rd ×10. Tapping the first answer every time scored 1/5 | — |
+
+**Remaining (not blockers):**
+- **Should check before sharing widely:** a human should confirm the two newly added numbers (ISF 1745, KAFA 03 018 019) are current. I could not verify them from here.
+- Minor items from Round 3 not rechecked this time: E2 (nothing-ticked message), E3 (intro text "5 questions"), E6, E7 (Arabic "10 سؤالًا"), E8, P1, L1, C1; plus older N2, N4.
+- S3 (old iPhones) is still untested.
