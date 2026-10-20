@@ -10,12 +10,14 @@ import type {
   AvatarId,
   CachedPack,
   ChildProfile,
+  ConsentRecord,
   Exam,
   ExamResult,
   ChildProgress,
   ChildSettings,
   Lang,
   LessonRecord,
+  LocalFlag,
   LessonStatus,
   PlanItem,
   Subject,
@@ -78,6 +80,8 @@ type Persisted = {
   plans: Record<string, PlanItem[]>;
   packs: Record<string, Record<string, CachedPack>>; // childId -> lessonKey -> pack
   exams?: Record<string, Exam[]>; // childId -> exams built by the grown-up
+  consent?: ConsentRecord | null; // once per family
+  flags?: LocalFlag[]; // safety flags kept on this device (demo/offline)
 };
 
 function seed(): Persisted {
@@ -163,6 +167,13 @@ type Actions = {
   savePack: (id: string, key: string, cp: CachedPack) => void;
   movePlanItem: (id: string, itemId: string, dir: -1 | 1) => void;
   addExam: (id: string, exam: Exam) => void;
+  giveConsent: (c: ConsentRecord) => void;
+  withdrawConsent: () => void;
+  addLocalFlag: (f: Omit<LocalFlag, 'id' | 'ts' | 'status'>) => void;
+  reviewLocalFlag: (id: string, status: LocalFlag['status'], note?: string) => void;
+  /** Delete everything on this device. Safety flags are kept only anonymised. */
+  wipeAll: () => void;
+  restoreDemoChildren: () => void;
   recordExamResult: (id: string, r: ExamResult) => void;
   setPlanItem: (id: string, itemId: string, patch: Partial<PlanItem>) => void;
   touchLesson: (id: string, key: string, subject: Subject, topic: string) => void;
@@ -212,8 +223,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   // Persist after changes.
   useEffect(() => {
     if (!state.loaded) return;
-    const { version, profiles, settings, progress, plans, packs, exams } = state;
-    saveJSON('state', { version, profiles, settings, progress, plans, packs, exams });
+    const { version, profiles, settings, progress, plans, packs, exams, consent, flags } = state;
+    saveJSON('state', { version, profiles, settings, progress, plans, packs, exams, consent, flags });
   }, [state]);
 
   useEffect(() => {
@@ -345,6 +356,21 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         setState((s) => ({ ...s, plans: { ...s.plans, [id]: [...(s.plans[id] ?? []), full] } }));
         return full;
       },
+      giveConsent: (c) => setState((s) => ({ ...s, consent: c })),
+      withdrawConsent: () => setState((s) => (s.consent ? { ...s, consent: { ...s.consent, withdrawnAt: new Date().toISOString() } } : s)),
+      addLocalFlag: (f) =>
+        setState((s) => ({ ...s, flags: [...(s.flags ?? []), { ...f, id: randomId('f'), ts: new Date().toISOString(), status: 'new' as const }].slice(-200) })),
+      reviewLocalFlag: (id, status, note) =>
+        setState((s) => ({ ...s, flags: (s.flags ?? []).map((f) => (f.id === id ? { ...f, status, note: note ?? f.note } : f)) })),
+      wipeAll: () =>
+        setState((s) => ({
+          ...s,
+          ...emptyPersisted(),
+          flags: (s.flags ?? []).map((f) => ({ ...f, childRef: undefined, excerpt: '[removed at the family\'s request]' })),
+          activeChildId: null,
+          parentUnlocked: false,
+        })),
+      restoreDemoChildren: () => setState((s) => ({ ...s, ...seed(), consent: s.consent ?? null, flags: s.flags ?? [] })),
       addExam: (id, exam) => setState((s) => ({ ...s, exams: { ...(s.exams ?? {}), [id]: [...(s.exams?.[id] ?? []), exam] } })),
       recordExamResult: (id, r) => updateProgress(id, (p) => ({ ...p, examResults: [...(p.examResults ?? []), r] })),
       movePlanItem: (id, itemId, dir) =>
@@ -440,7 +466,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 }
 
 function emptyPersisted(): Persisted {
-  return { version: 1, profiles: [], settings: {}, progress: {}, plans: {}, packs: {}, exams: {} };
+  return { version: 1, profiles: [], settings: {}, progress: {}, plans: {}, packs: {}, exams: {}, consent: null, flags: [] };
 }
 
 export function useApp() {
@@ -462,6 +488,11 @@ export function useChild() {
 }
 
 /** Translation helpers for the current UI language. */
+/** Consent given and not withdrawn: lessons and AI may be used. */
+export function consentActive(c: ConsentRecord | null | undefined): boolean {
+  return !!c && !c.withdrawnAt;
+}
+
 export function useT() {
   const { uiLang, settings, profiles, activeChildId } = useApp();
   const childSettings = activeChildId ? settings[activeChildId] : undefined;

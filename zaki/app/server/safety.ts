@@ -243,6 +243,7 @@ export async function moderate(text: string, opts: ModerateOptions): Promise<Mod
       category: result.category,
       involvesHome: result.safety.involvesHome ?? false,
       alertParent: result.safety.alertParent ?? false,
+      route: toParent ? "parent" : "reviewer",
       speaker: opts.speaker,
       lang: opts.lang,
       country: opts.country,
@@ -404,6 +405,8 @@ export type FlagRecord = {
   /** Short, PII-scrubbed excerpt for the independent reviewer. */
   excerpt: string;
   status: "pending_review";
+  /** "reviewer" = possible home involvement or unclear: NEVER shown to parents. */
+  route?: "reviewer" | "parent";
 };
 
 const MAX_MEMORY_FLAGS = 500;
@@ -415,6 +418,11 @@ export function getFlagQueue(): readonly FlagRecord[] {
 
 export function __clearFlagsForTests(): void {
   flagQueue.length = 0;
+}
+
+/** Tests/reviewer module: replace records in place (e.g. anonymised after a family deletion). */
+export function __replaceFlags(fn: (f: FlagRecord) => FlagRecord): void {
+  for (let i = 0; i < flagQueue.length; i++) flagQueue[i] = fn(flagQueue[i]);
 }
 
 async function logFlag(f: Omit<FlagRecord, "id" | "ts" | "status">): Promise<void> {

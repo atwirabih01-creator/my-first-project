@@ -143,6 +143,20 @@ export function budgetStatus(now = new Date()) {
   };
 }
 
+/** Family deletion: forget today's AI-turn counters for these children. */
+export function forgetChildren(childRefs: string[]): number {
+  const s = load();
+  let n = 0;
+  for (const ref of childRefs) {
+    if (ref in s.childTurns) {
+      delete s.childTurns[ref];
+      n++;
+    }
+  }
+  save();
+  return n;
+}
+
 /** Tests only. `file: null` keeps everything in memory. */
 export function __resetBudgetForTests(file: string | null = null): void {
   state = null;

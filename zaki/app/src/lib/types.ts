@@ -136,3 +136,27 @@ export type ExamResult = {
   practice: boolean;
   perLesson: Record<string, { correct: number; total: number }>;
 };
+
+/** Family consent (once per family, before any lesson or AI use). First names only. */
+export type ConsentRecord = {
+  version: string;
+  at: string; // ISO time
+  date: string; // YYYY-MM-DD shown on the form
+  mode: 'two-guardians' | 'one-with-agreement';
+  guardians: { firstName: string; relationship: string }[];
+  /** One guardian confirmed the other guardian agrees (or that they are the only legal guardian). */
+  otherGuardianAgrees?: boolean;
+  withdrawnAt?: string;
+};
+
+/** A safety flag kept on this device (demo/offline). route "reviewer" is NEVER shown to parents. */
+export type LocalFlag = {
+  id: string;
+  ts: string;
+  category: string;
+  route: 'reviewer' | 'parent';
+  childRef?: string;
+  excerpt: string;
+  status: 'new' | 'seen' | 'resolved';
+  note?: string;
+};

@@ -48,3 +48,4 @@ server/data/flags.jsonl
 # Zaki runtime data (never commit)
 server/data/budget.json
 server/data/library/
+server/data/flag-reviews.json
