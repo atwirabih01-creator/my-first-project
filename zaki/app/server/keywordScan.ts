@@ -236,3 +236,27 @@ export function keywordCategory(scan: KeywordScan): SafetyCategory {
   if (scan.politics) return "off_topic";
   return "none";
 }
+
+const PARENT_COMPILED = {
+  harm: compile(KW.PARENT_CONCERN_HARM),
+  self: compile(KW.PARENT_CONCERN_SELF),
+};
+
+export type ParentConcernKind = "home" | "self_harm" | "fear";
+
+/**
+ * A grown-up's message about a possibly unsafe child (parent Ask Zaki). Checks the parent
+ * (third-person) lists AND the child lists ("baba darabne"). Pure, works offline.
+ */
+export function parentConcernScan(text: string): ParentConcernKind | null {
+  if (!text.trim()) return null;
+  const variants = Array.from(new Set([text, despace(text), unleet(text)]));
+  const views = variants.map(normalizeViews);
+  if (views.some((v) => groupIn(v, PARENT_COMPILED.self))) return "self_harm";
+  const cat = keywordCategory(keywordScan(text));
+  if (cat === "self_harm") return "self_harm";
+  if (views.some((v) => groupIn(v, PARENT_COMPILED.harm))) return "home";
+  if (cat === "disclosure_harm") return "home";
+  if (cat === "violence_fear") return "fear";
+  return null;
+}

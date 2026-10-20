@@ -220,6 +220,40 @@ export const SCHOOL_CONTEXT: KeywordGroup = {
 
 /** Exam / test words: "I'm scared of the exam" is normal worry, not a safety case. */
 /**
+ * A GROWN-UP describing a worry about a child, in the third person (parent Ask Zaki).
+ * Matched together with the child lists, so "baba darabne" also counts.
+ */
+export const PARENT_CONCERN_HARM: KeywordGroup = {
+  en: [
+    "touches him", "touches her", "touched him", "touched her", "touching him", "touching her",
+    "hits him", "hits her", "hit him", "hit her", "beats him", "beats her", "beat him", "beat her",
+    "hurts him", "hurts her", "hurt him", "hurt her", "abuses him", "abuses her", "abused him", "abused her",
+    "is being abused", "being abused", "abuse", "molested", "molests", "inappropriately", "private parts",
+    "slaps him", "slaps her", "kicks him", "kicks her", "locks him", "locks her", "threatens him", "threatens her",
+  ],
+  fr: ["le frappe", "la frappe", "le touche", "la touche", "abus", "maltraite", "maltraitee"],
+  ar: [
+    "يضربه", "يضربها", "بيضربه", "بيضربها", "ضربه", "ضربها", "يلمسه", "يلمسها", "بيلمسه", "بيلمسها", "لمسه", "لمسها",
+    "يؤذيه", "يؤذيها", "بيأذيه", "بيأذيها", "يتحرش", "تحرش", "اعتداء", "يعنفه", "يعنفها", "تعنيف",
+  ],
+  arabizi: ["byedrabo", "byedraba", "darabo", "daraba", "byelmeso", "byelmesa", "bi2zi", "bey2zi", "ta7arosh"],
+};
+
+export const PARENT_CONCERN_SELF: KeywordGroup = {
+  en: [
+    "hurt herself", "hurt himself", "hurting herself", "hurting himself", "kill herself", "kill himself",
+    "wants to die", "want to die", "suicide", "suicidal", "self harm", "self-harm", "cuts herself", "cuts himself",
+    "cutting herself", "cutting himself", "end her life", "end his life",
+  ],
+  fr: ["se faire du mal", "se tuer", "veut mourir", "suicide"],
+  ar: [
+    "يؤذي نفسه", "تؤذي نفسها", "يريد ان يموت", "تريد ان تموت", "بدو يموت", "بدها تموت", "ينتحر", "تنتحر", "انتحار",
+    "يقتل نفسه", "تقتل نفسها", "يجرح نفسه", "تجرح نفسها",
+  ],
+  arabizi: ["bi2zi 7alo", "bt2zi 7ala", "bado ymout", "bada tmout", "yente7er", "tente7er"],
+};
+
+/**
  * Everyday things children are "scared of" in a learning context (animals, insects, the
  * dark, monsters). Fear + one of these, with NO family/outside person, war or death word,
  * is not a safety event ("I'm scared of spiders in the science book"). Whole-word match.
