@@ -43,6 +43,7 @@ def build(d, btc, v: Version):
         f["stretch"] = (f["close"] - ema(f["close"], v.trend_fast)) / f["atr"]
         f["vol_pct"] = (f["atr"] / f["close"]).rolling(24 * 90 // v.bar_hours, min_periods=24 * 20 // v.bar_hours).rank(pct=True)
         f["dir"] = f["hawk_sig"]
+        f["btc_7d"] = btc["close"].reindex(f.index).pct_change(168 // v.bar_hours)
         agree = (f["dir"] != 0) & (f["atlas_score"] * f["dir"] >= v.atlas_min_score)
         if v.need_btc_tide and sym != "BTCUSDT":
             agree &= f["tide"] == f["dir"]
@@ -57,14 +58,25 @@ def build(d, btc, v: Version):
             if v.target_atr * at[i] / e < v.min_target_pct:
                 continue
             stop, tgt = e - s * v.stop_atr * at[i], e + s * v.target_atr * at[i]
+            be = v.extra.get("breakeven_atr")       # once this far in profit, stop moves to "fees covered"
+            trail = v.extra.get("trail_atr")        # after that, the stop follows price this far behind
+            best, armed = e, False
             exit_px, j_exit, why = None, None, "time"
             for j in range(i + 1, min(i + 1 + v.max_hold, len(o))):
                 hit_stop = lo[j] <= stop if s > 0 else hi[j] >= stop
                 hit_tgt = hi[j] >= tgt if s > 0 else lo[j] <= tgt
-                if hit_stop:                       # if both happen in one hour, assume the worse one
-                    exit_px, j_exit, why = stop, j, "stop"; break
+                if hit_stop:                       # if both happen in one bar, assume the worse one
+                    gap = o[j] < stop if s > 0 else o[j] > stop
+                    exit_px, j_exit, why = (o[j] if gap else stop), j, ("protect" if armed else "stop"); break
                 if hit_tgt:
                     exit_px, j_exit, why = tgt, j, "target"; break
+                best = max(best, hi[j]) if s > 0 else min(best, lo[j])
+                if be and s * (best - e) >= be * at[i]:   # takes effect from the next bar only
+                    lock = e * (1 + s * 2.5 * COST)
+                    if trail:
+                        lock = (max if s > 0 else min)(lock, best - s * trail * at[i])
+                    stop = (max if s > 0 else min)(stop, lock)
+                    armed = True
             if exit_px is None:
                 j_exit = min(i + v.max_hold, len(o) - 1)
                 exit_px = cl[j_exit]
@@ -72,7 +84,8 @@ def build(d, btc, v: Version):
             ideas.append({"symbol": sym, "time": f.index[i], "exit_time": f.index[j_exit],
                           "dir": int(s), "entry": e, "exit": exit_px, "why": why, "pnl": pnl,
                           **{k: f[k].iloc[i] for k in ["atlas_score", "btc_ret", "flow", "rel", "tide", "rsi",
-                                                       "vol_z", "ret_z", "stretch", "vol_pct"]}})
+                                                       "vol_z", "ret_z", "stretch", "vol_pct"]},
+                          "hour": f.index[i].hour, "btc_7d": f["btc_7d"].iloc[i]})
     return pd.DataFrame(ideas).sort_values("time").reset_index(drop=True)
 
 

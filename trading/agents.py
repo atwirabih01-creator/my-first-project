@@ -169,11 +169,11 @@ class Sage:
         if self.v.sage_kind == "knn":
             Q = self._x(rows)[:, :-1]
             out = np.empty(len(Q))
-            for s in range(0, len(Q), 500):
-                d = ((Q[s:s + 500, None, :] - self.X[None, :, :]) ** 2).sum(-1)
+            for s in range(0, len(Q), 100):
+                d = ((Q[s:s + 100, None, :] - self.X[None, :, :]) ** 2).sum(-1)
                 k = min(self.v.knn_k, self.X.shape[0])
                 nn = np.argpartition(d, k - 1, axis=1)[:, :k]
-                out[s:s + 500] = (self.y[nn].sum(1) + 1) / (k + 2)    # small pull toward 50% to stay humble
+                out[s:s + 100] = (self.y[nn].sum(1) + 1) / (k + 2)    # small pull toward 50% to stay humble
             return out
         return 1 / (1 + np.exp(-self._x(rows) @ self.w))
 
