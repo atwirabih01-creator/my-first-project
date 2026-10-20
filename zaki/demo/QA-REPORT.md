@@ -265,3 +265,43 @@ Focused recheck only (not a full sweep). Chromium, opening the file from disk, p
 - **Should check before sharing widely:** a human should confirm the two newly added numbers (ISF 1745, KAFA 03 018 019) are current. I could not verify them from here.
 - Minor items from Round 3 not rechecked this time: E2 (nothing-ticked message), E3 (intro text "5 questions"), E6, E7 (Arabic "10 سؤالًا"), E8, P1, L1, C1; plus older N2, N4.
 - S3 (old iPhones) is still untested.
+
+---
+
+## Round 4: consent, safety reviewer, export/delete (2026-10-20, file dated 10:49)
+
+**How:** Chromium, opening the file from disk, phone width 390, English + Arabic. A real web page was opened before Zaki so any arrow that leaves the app would show it. Script results: 42/48 checks passed on the first run. All 6 failures were then traced to my script (details at the bottom), and the features behind them were re-checked by hand and work. Screenshots are in `qa-screenshots/round3/R4*`. No console errors other than the expected `/api` one.
+
+### Verdict: READY (no blockers). 3 should-fix items
+
+| Area | Result | Evidence |
+|---|---|---|
+| **Consent blocks children** | **PASS.** Before consent, Maya, Ali and a newly created learner all stop at "A grown-up needs to set up Zaki first" (Arabic screen fully Arabic). The child's "Grown-ups" button leads to the parental gate. Consent covers the whole family | R401, R402 |
+| **Consent rules** | **PASS.** Refused, with "Please type a first name and relationship and tick 'I agree' for each guardian": an empty form; only guardian 1 in two-guardian mode; guardian 2 without the tick; one guardian without the "the other parent/guardian agrees (or I am the only legal guardian)" tick. Accepted: one guardian with that tick. Settings then shows "Given on Tuesday, Oct 20 by Rana (Mother) (version 2026-10-20.1)" | R403–R406 |
+| **Consent text** | **PASS, complete**, in English and Arabic. It covers: <br>• what is kept (nickname only, chat about 90 days, photos about 30 days) <br>• companies (Anthropic; OpenAI only if turned on; "a storage provider" — not named) <br>• servers outside Lebanon/Qatar (USA/Europe) <br>• a named non-family safety reviewer, and home-involved messages NOT shown to parents <br>• Anthropic may keep flagged conversations up to 2 years <br>• data requests answered within 10 days <br>• export / delete / withdraw. <br>The Arabic version has no English apart from company names | R403, R407 |
+| **Withdraw** | **PASS.** Settings → Withdraw → confirm ("Zaki will stop using AI and lessons…") → children are blocked again. Status reads "Withdrawn on…" after reload. Giving consent again unblocks them | R415 |
+| **Reviewer inbox** | **PASS.** The wrong code (1111) is refused; 2468 opens it. "baba darabne", "بابا ضربني", the "I don't feel safe" button and "a stranger online…" each appear with category, time, excerpt and a random child code (no names). New/Seen/Referred/Resolved and a reviewer note both work and survive reload | R408–R412 |
+| **Flags never reach the family** | **PASS.** The child's words appear nowhere in parent Progress (Maya or Ali), in WhatsApp REPORT, or in the export file | R413, R414 |
+| **Export** | **PASS.** Downloads `zaki-data-2026-10-20.json`, which is valid JSON with: app, exportedAt, consent, profiles, settings, plans, progress, lessons, exams, safetyNotes (empty). No family key, no reviewer flags, no excerpts | — |
+| **Delete** | **PASS.** A wrong word does nothing. "DELETE" (and "احذف" in Arabic) wipes profiles, progress, plans, lessons, exams and consent. The start screen then offers "Add the demo children (Ali and Maya)". Reviewer flags stay, but without child code or text ("[removed at the family's request]") | R416, R417 |
+| **Quick regression** | **PASS.** Lesson flow after consent; pass-to-unlock; exam build + take; "I need help" mid-exam returns to the same question; ← on consent, data, reviewer entry/inbox and the blocked-child screen all stay in the app | — |
+
+### Should fix
+1. **Grown-up "Ask Zaki" works before consent and after withdrawal.** In the real app this is an AI call. The architecture says consent comes "before any lesson or AI call", and the withdraw message says "Zaki will stop using AI".
+2. **Reviewer inbox labels.**
+   - Categories show as raw codes ("home", "general") and the time is US-style (10/20/2026, 10:57 AM).
+   - "a stranger online asked for my photo" was filed as "home — Reviewer only (possible home involvement)". By the routing rule it is clearly outside the family. Routing it to the reviewer is the safe direction, but the label misleads the reviewer.
+3. **Decision for the founder: Delete erases the text of open safety cases.** After a parent presses Delete, a "New" (unreviewed) flag keeps only "[removed at the family's request]". If the person deleting is the person the child disclosed about, the reviewer loses the child's words. This is documented behaviour, but it needs a conscious decision, ideally with the safety reviewer.
+
+### Minor
+- The consent text says "a storage provider" without naming it.
+- In one-guardian mode, the intro still says "Zaki needs both of you to agree".
+- The reviewer demo code 2468 is printed on the start-screen banner, where children can see it. Fine for the demo, but not for real use.
+- The Arabic reviewer inbox was not checked.
+
+**False alarms in my first run, all re-checked and fine:**
+- An "English" line in the Arabic consent text was the child's name, Sami.
+- My category check didn't recognise the code "home".
+- My note check didn't read text typed in the input box.
+- The "key" fields in the export are lesson IDs.
+- My script skipped the withdraw confirmation step.
