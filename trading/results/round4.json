@@ -1,0 +1,135 @@
+{
+ "round": 4,
+ "practice": [
+  {
+   "trades": 129,
+   "win_rate": 0.7752,
+   "avg_win_pct": 1.29,
+   "avg_loss_pct": -3.94,
+   "profit_factor": 1.13,
+   "return_pct": 1.4,
+   "max_drawdown_pct": 4.08,
+   "version": "V49 trailing + style check"
+  },
+  {
+   "trades": 124,
+   "win_rate": 0.7742,
+   "avg_win_pct": 1.4,
+   "avg_loss_pct": -4.08,
+   "profit_factor": 1.18,
+   "return_pct": 2.03,
+   "max_drawdown_pct": 4.04,
+   "version": "V50 trailing 1.0 + style check"
+  },
+  {
+   "trades": 123,
+   "win_rate": 0.7724,
+   "avg_win_pct": 1.57,
+   "avg_loss_pct": -4.08,
+   "profit_factor": 1.31,
+   "return_pct": 3.48,
+   "max_drawdown_pct": 4.51,
+   "version": "V51 trailing 1.3 + style check"
+  },
+  {
+   "trades": 109,
+   "win_rate": 0.7982,
+   "avg_win_pct": 1.46,
+   "avg_loss_pct": -4.62,
+   "profit_factor": 1.25,
+   "return_pct": 2.55,
+   "max_drawdown_pct": 3.03,
+   "version": "V52 trailing, Sage 85%"
+  },
+  {
+   "trades": 522,
+   "win_rate": 0.7567,
+   "avg_win_pct": 1.23,
+   "avg_loss_pct": -4.01,
+   "profit_factor": 0.96,
+   "return_pct": -2.34,
+   "max_drawdown_pct": 12.37,
+   "version": "V53 trailing (V48)"
+  },
+  {
+   "trades": 92,
+   "win_rate": 0.8152,
+   "avg_win_pct": 1.33,
+   "avg_loss_pct": -3.77,
+   "profit_factor": 1.55,
+   "return_pct": 3.56,
+   "max_drawdown_pct": 3.28,
+   "version": "V54 trailing, Sage 82% + loose style check"
+  },
+  {
+   "trades": 151,
+   "win_rate": 0.7219,
+   "avg_win_pct": 1.31,
+   "avg_loss_pct": -3.76,
+   "profit_factor": 0.91,
+   "return_pct": -1.54,
+   "max_drawdown_pct": 5.37,
+   "version": "V55 trailing, later break-even + style check"
+  },
+  {
+   "trades": 164,
+   "win_rate": 0.7073,
+   "avg_win_pct": 1.52,
+   "avg_loss_pct": -5.05,
+   "profit_factor": 0.73,
+   "return_pct": -6.42,
+   "max_drawdown_pct": 6.93,
+   "version": "V56 V32 + style check, Sage 85% (V44)"
+  },
+  {
+   "trades": 381,
+   "win_rate": 0.769,
+   "avg_win_pct": 1.44,
+   "avg_loss_pct": -5.01,
+   "profit_factor": 0.96,
+   "return_pct": -2.1,
+   "max_drawdown_pct": 6.08,
+   "version": "V57 V32, Sage 85% (V43)"
+  },
+  {
+   "trades": 0,
+   "win_rate": 0,
+   "profit_factor": 0,
+   "return_pct": 0,
+   "max_drawdown_pct": 0,
+   "version": "V58 trailing + style check, buy-only"
+  },
+  {
+   "trades": 80,
+   "win_rate": 0.85,
+   "avg_win_pct": 1.18,
+   "avg_loss_pct": -5.02,
+   "profit_factor": 1.33,
+   "return_pct": 1.97,
+   "max_drawdown_pct": 2.46,
+   "version": "V59 trailing + style check, wider Sage memory"
+  },
+  {
+   "trades": 239,
+   "win_rate": 0.7448,
+   "avg_win_pct": 1.46,
+   "avg_loss_pct": -4.31,
+   "profit_factor": 0.99,
+   "return_pct": -0.41,
+   "max_drawdown_pct": 9.13,
+   "version": "V60 trailing + style check, looser researcher"
+  }
+ ],
+ "picked": "V52 trailing, Sage 85%",
+ "sealed_exam": {
+  "set": "A",
+  "trades": 64,
+  "win_rate": 0.7344,
+  "avg_win_pct": 1.36,
+  "avg_loss_pct": -4.55,
+  "profit_factor": 0.83,
+  "return_pct": -1.38,
+  "max_drawdown_pct": 4.15,
+  "passed": false
+ }
+}
