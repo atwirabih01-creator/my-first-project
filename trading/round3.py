@@ -39,8 +39,7 @@ def walk(study_pool, judged, v, start, end):
             continue
         past = study_pool[study_pool.exit_time < m0]
         sage = Sage(v).fit(past, past.pnl > 0)
-        p = sage.prob(part)
-        approved.append(part[(p >= v.min_prob) & sage.risk_ok(part).values])
+        approved.append(part[sage.approve(part)])
     ok = pd.concat(approved) if approved else judged.iloc[:0]
     return L.trade(ok.sort_values("time"), v)
 

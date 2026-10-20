@@ -153,8 +153,9 @@ class Sage:
 
     def fit(self, rows, won, l2=1.0, iters=3000, lr=0.1):
         X, y = self._x(rows), np.asarray(won, dtype=float)
-        if self.v.sage_kind == "knn":
+        if self.v.sage_kind in ("knn", "knn_ev"):
             self.X, self.y = X[:, :-1], y
+            self.r = rows["pnl"].values.astype(float) if "pnl" in rows else y
             return self
         w = np.zeros(X.shape[1])
         w[-1] = np.log((y.mean() + 1e-3) / (1 - y.mean() + 1e-3))
@@ -176,6 +177,24 @@ class Sage:
                 out[s:s + 100] = (self.y[nn].sum(1) + 1) / (k + 2)    # small pull toward 50% to stay humble
             return out
         return 1 / (1 + np.exp(-self._x(rows) @ self.w))
+
+    def expected(self, rows):
+        """Average after-fee result of the most similar past trades (the 'profit' version of Sage)."""
+        Q = self._x(rows)[:, :-1]
+        out = np.empty(len(Q))
+        k = min(self.v.knn_k, self.X.shape[0])
+        for s in range(0, len(Q), 100):
+            d = ((Q[s:s + 100, None, :] - self.X[None, :, :]) ** 2).sum(-1)
+            nn = np.argpartition(d, k - 1, axis=1)[:, :k]
+            out[s:s + 100] = self.r[nn].mean(1) * k / (k + 10)      # shrink toward zero to stay humble
+        return out
+
+    def approve(self, rows):
+        if self.v.sage_kind == "knn_ev":
+            ok = self.expected(rows) >= self.v.extra.get("min_ev", 0.003)
+        else:
+            ok = self.prob(rows) >= self.v.min_prob
+        return np.asarray(ok) & self.risk_ok(rows).values
 
     def risk_ok(self, rows):
         v = self.v

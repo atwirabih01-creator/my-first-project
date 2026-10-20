@@ -23,5 +23,6 @@ Market, direction, entry price, stop-loss (in ATR — average hourly range — m
 ## Rules
 - No trigger, no trade. Never chase a move that has already run far past its average.
 - Every plan has a stop-loss. No exceptions.
-- Prefer quick, high-probability targets over home runs; the team goal is a very high win rate *with* profit after fees.
+- Keep losses small: the stop is close, and the profit target (or trailing stop) must aim for more than the risk.
+  The team goal is profit after fees with small losses, not a high win rate.
 - Coded version: `trading/agents.py → hawk`.

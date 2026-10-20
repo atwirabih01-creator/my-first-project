@@ -103,7 +103,8 @@ def trade(ideas, v: Version):
 
 def score(t):
     if len(t) == 0:
-        return {"trades": 0, "win_rate": 0, "profit_factor": 0, "return_pct": 0, "max_drawdown_pct": 0}
+        return {"trades": 0, "win_rate": 0, "avg_win_pct": 0, "avg_loss_pct": 0, "profit_factor": 0,
+                "return_pct": 0, "max_drawdown_pct": 0}
     eq = START_CASH * np.cumprod(1 + STAKE * t["pnl"].values)
     peak = np.maximum.accumulate(eq)
     wins, losses = t.pnl[t.pnl > 0], t.pnl[t.pnl <= 0]
