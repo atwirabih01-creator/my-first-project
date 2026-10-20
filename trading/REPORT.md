@@ -1,9 +1,12 @@
-# Trading Desk — Paper-Trading Report (19 Oct 2026)
+# Trading Desk — Paper-Trading Report (updated 20 Oct 2026)
 
-**Short version:** the three agents are built and running in paper mode only. We tested
-**228 versions** (in 6 rounds) on 3 years of real hourly prices across 28 markets. **None reached the goal**
-(80%+ wins over 100+ paper trades on fresh data *and* making money). So, under your own
-rule, **nothing moves to real money.**
+**Short version:** the three agents are built and run in paper mode only. We tested
+**416 versions** in 8 rounds, on up to 3 years of real hourly prices across about 250 coins.
+- **First goal (80% wins over 100+ trades, and profitable): not reached.**
+- **New goal (profit after fees with small losses, at least $1.20 earned per $1 lost):** the best
+  version made **+10% on a sealed exam** but earned $1.17 per $1 lost, just under the bar.
+
+So, under your own rules, **nothing moves to real money.** Next step: forward paper trading on live prices.
 
 ## The team
 
@@ -65,6 +68,33 @@ collapse. That is a fragile setup, not a real edge.
 to about 73–77% on new markets. At 80% wins, these designs barely break even after fees.
 
 Sealed exams B and C are still untouched and available for a future, genuinely new idea.
+
+## Rounds 7–8 — new goal: make money after fees, with losses kept small
+
+Your rule (also in CLAUDE.md): on a sealed exam of never-seen coins, the version needs 100+
+trades, a profit, at least $1.20 earned per $1 lost, an average loss no bigger than 1.5× the
+average win, and a biggest drop of 10% or less. Sage now asks "did similar past trades make
+money on average?" instead of "will this one win?".
+
+| Round | Tried | Pick | Sealed exam | Pass? |
+|---|---|---|---|---|
+| 7 | 80 random "profit-first" versions | P069: follows sudden spikes, tight stop, trailing stop | **B** (59 coins): 205 trades, 41% wins, **+2.1%**, $1.09 per $1 lost, biggest drop 5.7% | ❌ (needed $1.20) |
+| 8 | 108 variations of the two best leads | **Q051**: buys dips on 4-hour charts | **C** (61 coins): 192 trades, 59% wins, **+10.0%**, $1.17 per $1 lost, biggest drop 9.2% | ❌ (needed $1.20) |
+
+**Total versions tested: 416.** For the first time, versions made money on sealed exams.
+Neither passed your bar.
+
+**Independent check of Q051 (Reality Checker):** the numbers reproduce exactly, and there is no
+peeking at the future and no mixing of exam coins into practice. But:
+- 5 trades produced 71% of the profit. Without them it is about +2.5%.
+- All of the profit came from buy trades. Sell trades broke even.
+- 4 of 9 quarters lost money.
+- Statistically, there is about a 1-in-4 chance its true result is zero or a loss.
+- The exam coins covered the *same months* as practice. The one truly new test left is
+  **future live prices**.
+
+**Status: all three sealed exams are now used.** The honest next step is forward paper trading:
+run Q051 on live prices for a few months and see whether the profit holds.
 
 ## Independent check (Reality Checker)
 
