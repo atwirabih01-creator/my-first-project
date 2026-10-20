@@ -22,7 +22,9 @@ function Stat({ label, value, testID }: { label: string; value: string | number;
 }
 
 export default function Progress() {
-  const { child, progress } = useChild();
+  const { child, progress, app } = useChild();
+  // Parent view: ONLY flags routed to the parent. Reviewer-route flags (possible home involvement) never appear here.
+  const notes = (app.flags ?? []).filter((f) => f.route === 'parent' && f.childRef === child?.id);
   const { t, lang } = useT();
   const minutes = Math.round(Object.values(progress.usage).reduce((a, b) => a + b, 0));
   const avg = progress.tests.length
@@ -64,6 +66,18 @@ export default function Progress() {
               <Txt key={r.key}>
                 • {r.topic}
                 {r.needsGrownUp ? ` (${t('progNeedsGrownUp')})` : ''}
+              </Txt>
+            ))}
+          </Card>
+          <Card tone="lilac" testID="safety-notes">
+            <Txt variant="h2">💛 {t('safetyNotes')}</Txt>
+            {notes.length === 0 ? <Txt>{t('safetyNotesNone')}</Txt> : null}
+            {notes.map((f) => (
+              <Txt key={f.id} variant="small" testID="safety-note">
+                {t('safetyNoteRow', {
+                  date: formatDate(f.ts.slice(0, 10), lang),
+                  kind: t(f.category === 'fear' ? 'kind_fear' : f.category === 'self_harm' ? 'kind_self_harm' : f.category === 'general' ? 'kind_general' : 'kind_home'),
+                })}
               </Txt>
             ))}
           </Card>

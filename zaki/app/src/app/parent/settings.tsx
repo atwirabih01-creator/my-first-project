@@ -7,6 +7,7 @@ import { ParentChildPicker } from '@/components/ParentChildPicker';
 import { Screen } from '@/components/Screen';
 import { Btn, Card, Chip, Row, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
+import { formatDate } from '@/lib/nav';
 import { useChild, useT } from '@/lib/store';
 import { SUBJECTS } from '@/lib/subjects';
 import { planAccess } from '@/lib/unlock';
@@ -17,12 +18,38 @@ const TIMES = ['15:00', '16:00', '17:00', '18:00', '19:00'];
 export default function Settings() {
   const { child, settings, app, plan, progress } = useChild();
   const access = planAccess(plan, progress);
-  const { t } = useT();
+  const { t, lang } = useT();
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [confirmWithdraw, setConfirmWithdraw] = useState(false);
+  const consent = app.consent;
 
   return (
     <Screen parent back="/parent" title={`⚙️ ${t('pSettings')}`}>
       <ParentChildPicker />
+      <Card tone={consent && !consent.withdrawnAt ? 'mint' : 'sun'} testID="consent-status">
+        <Txt bold>📝 {t('consentStatus')}</Txt>
+        <Txt testID="consent-status-text">
+          {!consent
+            ? t('consentNone')
+            : consent.withdrawnAt
+              ? t('consentWithdrawn', { date: formatDate(consent.withdrawnAt.slice(0, 10), lang) })
+              : t('consentGiven', { date: formatDate(consent.date, lang), names: consent.guardians.map((g) => `${g.firstName} (${g.relationship})`).join(', '), v: consent.version })}
+        </Txt>
+        <Row wrap>
+          <Btn small title={t('consentReview')} onPress={() => router.push('/parent/consent')} testID="consent-open" />
+          {consent && !consent.withdrawnAt ? (
+            confirmWithdraw ? (
+              <>
+                <Txt variant="small">{t('consentWithdrawConfirm')}</Txt>
+                <Btn small variant="help" title={t('consentWithdraw')} onPress={() => { app.withdrawConsent(); setConfirmWithdraw(false); }} testID="consent-withdraw-yes" />
+                <Btn small variant="secondary" title={t('cancel')} onPress={() => setConfirmWithdraw(false)} />
+              </>
+            ) : (
+              <Btn small variant="secondary" title={t('consentWithdraw')} onPress={() => setConfirmWithdraw(true)} testID="consent-withdraw" />
+            )
+          ) : null}
+        </Row>
+      </Card>
       {child ? (
         <View style={{ gap: S.md }}>
           <Card testID="lesson-order">

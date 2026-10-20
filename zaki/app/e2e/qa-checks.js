@@ -1,6 +1,7 @@
 // QA regression checks: B2 (Send button fits at 320-430px) and S1 (offline safety words).
 const { chromium } = require('playwright');
 const path = require('path');
+const { giveTestConsent } = require('./consent-helper');
 const BASE = process.env.BASE || 'http://localhost:8090';
 const OUT = process.env.OUT || path.join(__dirname, '..', 'test-screenshots');
 const results = [];
@@ -17,6 +18,7 @@ const check = (n, ok, extra = '') => {
     await page.goto(BASE);
     await page.evaluate(() => localStorage.clear());
     await page.goto(BASE);
+    await giveTestConsent(page, BASE);
     await tid('profile-Maya').click({ timeout: 15000 });
     await tid('ready-yes').click();
     await tid('tile-practice').click();
@@ -52,6 +54,8 @@ const check = (n, ok, extra = '') => {
   };
   await page.goto(BASE);
   await page.evaluate(() => localStorage.clear());
+  await page.goto(BASE);
+  await giveTestConsent(page, BASE);
   for (const p of phrases) {
     await open();
     await tid('chat-input').fill(p);

@@ -22,6 +22,7 @@ export default function ParentHome() {
       <Btn title={t('pProgress')} icon="📊" big onPress={() => router.push('/parent/progress')} testID="p-progress" />
       <Btn title={t('pExam')} icon="🏆" big onPress={() => router.push('/parent/exam')} testID="p-exam" />
       <Btn title={t('pAsk')} icon="💡" big onPress={() => router.push('/parent/ask')} testID="p-ask" />
+      <Btn title={t('pData')} icon="🗂️" big variant="secondary" onPress={() => router.push('/parent/data')} testID="p-data" />
       <Btn title={t('pWhatsapp')} icon="💬" big variant="success" onPress={() => router.push('/parent/whatsapp')} testID="p-whatsapp" />
       <Card tone="sun">
         <Txt variant="small">{t('waNote')}</Txt>

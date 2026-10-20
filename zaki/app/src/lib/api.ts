@@ -13,6 +13,17 @@ import type { Country, ExamQuestion, Lang, LessonPack, Question, Safety, Source,
 type SafetyHandler = (kind: HelpKind) => void;
 let safetyHandler: SafetyHandler | null = null;
 let demoMode = false;
+let consentOk = false;
+
+/** Set by the store: no lesson or AI request is made before a grown-up has given consent. */
+export function setConsentActive(on: boolean) {
+  consentOk = on;
+}
+export class ConsentRequiredError extends Error {
+  constructor() {
+    super('consent required');
+  }
+}
 
 export function setSafetyHandler(fn: SafetyHandler | null) {
   safetyHandler = fn;
@@ -81,6 +92,7 @@ function isValidPack(p: unknown): p is LessonPack {
 export async function fetchLessonPack(
   req: Common & { subject: Subject; topic: string; pageImages?: string[] },
 ): Promise<LessonPackResult> {
+  if (!consentOk) throw new ConsentRequiredError();
   if (!demoMode) {
     try {
       const data = await request<{ pack: LessonPack; sources?: Source[]; safety?: Safety; budgetReached?: boolean; fromLibrary?: boolean }>(
@@ -172,6 +184,7 @@ function hash(s: string): number {
 export async function askTutor(
   req: Common & { pack: LessonPack | null; step: 'recap' | 'teach' | 'check' | 'chat'; history: ChatTurn[]; message: string },
 ): Promise<{ reply: string; demo: boolean; safetyStopped: boolean }> {
+  if (!consentOk) throw new ConsentRequiredError();
   if (!demoMode && req.pack) {
     try {
       const data = await request<{ reply: string; safety?: Safety }>(
@@ -310,4 +323,43 @@ export async function askZakiAsParent(req: {
   }
   await new Promise((r) => setTimeout(r, 400));
   return { reply: translate(req.lang, 'parentAskDemo'), demo: true };
+}
+
+// ---------- safety reviewer (server) ----------
+export type ServerReviewerFlag = {
+  id: string;
+  ts: string;
+  category: string;
+  route: 'reviewer' | 'parent';
+  childRef?: string;
+  excerpt: string;
+  status: 'new' | 'seen' | 'resolved';
+  note?: string;
+};
+
+async function reviewerRequest<T>(path: string, code: string, body?: unknown): Promise<T> {
+  const res = await fetch(path, {
+    method: body === undefined ? 'GET' : 'POST',
+    headers: { 'Content-Type': 'application/json', 'x-reviewer-code': code },
+    body: body === undefined ? undefined : JSON.stringify(body),
+  });
+  if (res.status === 401) throw new Error('wrong_code');
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  return (await res.json()) as T;
+}
+
+export async function fetchReviewerFlags(code: string): Promise<ServerReviewerFlag[]> {
+  const data = await reviewerRequest<{ flags: ServerReviewerFlag[] }>('/api/review/flags', code);
+  return data.flags ?? [];
+}
+
+export async function updateReviewerFlag(code: string, id: string, status: ServerReviewerFlag['status'], note?: string) {
+  return reviewerRequest<{ flag: ServerReviewerFlag }>(`/api/review/flags/${encodeURIComponent(id)}`, code, { status, note });
+}
+
+// ---------- family deletion ----------
+/** Asks the server to delete what it stores for these children. Throws if it can't be reached. */
+export async function deleteFamilyOnServer(childRefs: string[]): Promise<void> {
+  if (demoMode || childRefs.length === 0) return; // demo: nothing is stored on a server
+  await request('/api/delete-family', { childRefs }, 20000);
 }

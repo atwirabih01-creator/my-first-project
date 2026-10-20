@@ -60,8 +60,12 @@ export default function StartScreen() {
         </Pressable>
       </View>
 
+      {app.profiles.length === 0 && app.demo ? (
+        <Btn title={t('restoreDemo')} variant="ghost" onPress={app.restoreDemoChildren} testID="restore-demo" />
+      ) : null}
       <View style={{ flexGrow: 1 }} />
       <Btn title={t('grownUps')} icon="🔒" variant="secondary" onPress={() => router.push('/parent/gate')} testID="grownups-btn" />
+      <Btn title={t('reviewerArea')} icon="🛡️" small variant="ghost" onPress={() => router.push('/reviewer')} testID="reviewer-btn" />
     </Screen>
   );
 }

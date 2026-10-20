@@ -6,6 +6,7 @@ import { Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-nativ
 import { C, R, S } from '@/constants/theme';
 import { askTutor, checkAnswer, type ChatTurn, type FeedbackKey } from '@/lib/api';
 import { localSafetyCheck } from '@/lib/localSafety';
+import { keywordScan } from '../../server/keywordScan';
 import { useChild, useT } from '@/lib/store';
 import type { LessonPack, Question } from '@/lib/types';
 import { Mascot } from './Mascot';
@@ -13,6 +14,25 @@ import { Btn, Card, Row, Txt } from './ui';
 
 export function goToSafety(kind: string) {
   router.push({ pathname: '/safety', params: { kind } });
+}
+
+/** Short excerpt for the safety reviewer: numbers and emails removed, max 160 characters. */
+export function scrubExcerpt(text: string): string {
+  return text
+    .replace(/[^\s@]+@[^\s@]+/g, '[email]')
+    .replace(/\d[\d\s-]{4,}\d/g, '[number]')
+    .replace(/\s+/g, ' ')
+    .slice(0, 160);
+}
+
+/** Possible home involvement (or a harm disclosure, where it's unclear who): reviewer only. */
+export function flagRouteFor(kind: string, text: string): 'reviewer' | 'parent' {
+  if (kind === 'home' || kind === 'general') return 'reviewer';
+  try {
+    return keywordScan(text).home ? 'reviewer' : 'parent';
+  } catch {
+    return 'reviewer';
+  }
 }
 
 /** Big tappable answer choice. */
@@ -164,7 +184,7 @@ function sanitizeReply(text: string, lang: 'en' | 'ar'): string {
 /** "Ask Zaki" free chat box. Local safety words are checked before anything is sent. */
 export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step?: 'recap' | 'teach' | 'check' | 'chat' }) {
   const { t, lang } = useT();
-  const { child, settings } = useChild();
+  const { child, settings, app } = useChild();
   const [history, setHistory] = useState<ChatTurn[]>([]);
   const [text, setText] = useState('');
   const [busy, setBusy] = useState(false);
@@ -175,24 +195,35 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
     const kind = localSafetyCheck(message);
     if (kind) {
       setText('');
+      // Kept on this device for the safety reviewer (demo/offline). Reviewer-route flags are never shown to parents.
+      app.addLocalFlag({ category: kind, route: flagRouteFor(kind, message), childRef: child.id, excerpt: scrubExcerpt(message) });
       goToSafety(kind);
       return;
     }
     setHistory((h) => [...h, { role: 'child', text: message }]);
     setText('');
     setBusy(true);
-    const res = await askTutor({
-      childRef: child.id,
-      grade: child.grade,
-      lang,
-      country: settings.country,
-      pack,
-      step,
-      history,
-      message,
-    });
+    let res: Awaited<ReturnType<typeof askTutor>>;
+    try {
+      res = await askTutor({
+        childRef: child.id,
+        grade: child.grade,
+        lang,
+        country: settings.country,
+        pack,
+        step,
+        history,
+        message,
+      });
+    } catch {
+      setBusy(false);
+      return; // e.g. consent withdrawn: no AI call is made
+    }
     setBusy(false);
-    if (res.safetyStopped) return;
+    if (res.safetyStopped) {
+      app.addLocalFlag({ category: 'server', route: flagRouteFor('home', message), childRef: child.id, excerpt: scrubExcerpt(message) });
+      return;
+    }
     setHistory((h) => [...h, { role: 'zaki', text: sanitizeReply(res.reply, lang) }]);
   }
 

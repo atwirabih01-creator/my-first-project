@@ -14,7 +14,7 @@ import { clearInProgress, loadInProgress, saveInProgress } from '@/lib/inProgres
 import { accessForKey } from '@/lib/unlock';
 import { shuffleChoices } from '../../server/shuffle';
 import { goTo, useHelpReturn } from '@/lib/nav';
-import { lessonKeyOf, MAX_TESTS_PER_DAY, todayStr, useChild, useT } from '@/lib/store';
+import { consentActive, lessonKeyOf, MAX_TESTS_PER_DAY, todayStr, useChild, useT } from '@/lib/store';
 import type { CachedPack, Question, Subject } from '@/lib/types';
 
 type Phase =
@@ -79,7 +79,8 @@ export default function Lesson() {
   useHelpReturn({ pathname: '/lesson', params: { subject, topic } }, phase === 'test');
   // Pass-to-unlock: a later lesson stays locked until the one before it is passed.
   const access = accessForKey(plan, progress, key);
-  const locked = !access.open && !access.pending; // a pending lesson tries to load (or says 'tomorrow')
+  const noConsent = !consentActive(app.consent);
+  const locked = noConsent || (!access.open && !access.pending); // a pending lesson tries to load (or says 'tomorrow')
 
   // Load (or reuse) the lesson pack.
   useEffect(() => {
@@ -260,10 +261,10 @@ export default function Lesson() {
         <Card tone="lilac" style={{ alignItems: 'center' }}>
           <Mascot size={100} mood="calm" />
           <Txt variant="h2" center testID="locked-title">
-            {t('lockedTitle')}
+            {noConsent ? t('consentNeededTitle') : t('lockedTitle')}
           </Txt>
           <Txt center testID="locked-msg">
-            🔒 {t('lockedMsg', { topic: access.blocker ?? '' })}
+            {noConsent ? t('consentNeededText') : `🔒 ${t('lockedMsg', { topic: access.blocker ?? '' })}`}
           </Txt>
           <Btn title={t('backHome')} onPress={goHome} testID="back-home" />
         </Card>

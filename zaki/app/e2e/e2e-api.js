@@ -3,6 +3,7 @@
 // any response with safety.showSafetyScreen opens the fixed safety screen.
 const { chromium } = require('playwright');
 const path = require('path');
+const { giveTestConsent } = require('./consent-helper');
 const BASE = process.env.BASE || 'http://localhost:8090';
 const OUT = process.env.OUT || '/home/user/my-first-project/zaki/app/test-screenshots';
 const results = [];
@@ -31,6 +32,7 @@ const pack = {
   const tid = (id) => page.getByTestId(id).locator('visible=true').first();
   const visible = (id, t = 6000) => tid(id).waitFor({ state: 'visible', timeout: t }).then(() => true, () => false);
   await page.goto(BASE); await page.evaluate(() => localStorage.clear()); await page.goto(BASE);
+  await giveTestConsent(page, BASE);
   await visible('profile-Maya', 15000);
   await page.waitForTimeout(800);
   check('no demo banner when /api/health ai:true', (await page.getByTestId('demo-banner').count()) === 0);

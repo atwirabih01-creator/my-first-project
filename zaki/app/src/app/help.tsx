@@ -32,7 +32,10 @@ export default function Help() {
         icon="💛"
         big
         variant="help"
-        onPress={() => router.replace({ pathname: '/safety', params: { kind: 'general' } })}
+        onPress={() => {
+          if (app.activeChildId) app.addLocalFlag({ category: 'general', route: 'reviewer', childRef: app.activeChildId, excerpt: '"I don\'t feel safe" button' });
+          router.replace({ pathname: '/safety', params: { kind: 'general' } });
+        }}
         testID="help-feel"
       />
       <View style={{ height: S.lg }} />

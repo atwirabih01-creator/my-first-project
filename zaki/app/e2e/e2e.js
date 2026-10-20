@@ -89,6 +89,38 @@ const fromWords = (w) => {
   check('no horizontal scroll (start)', await noHScroll());
   await shot('en-start-profiles');
 
+  // ---------- Family consent (before any lesson) ----------
+  const solveGate = async () => {
+    await tid('gate-words').waitFor({ timeout: 5000 });
+    await tid('gate-input').fill(String(fromWords(await tid('gate-words').innerText())));
+    await tap('gate-open');
+  };
+  await tap('profile-Maya');
+  check('Consent: child cannot start before consent', (await visible('consent-needed', 3000)) && !(await visible('ready-yes', 500)));
+  await shot('en-consent-needed');
+  await tap('consent-grownups');
+  await solveGate();
+  check('Consent: plain-language screen (90 days, 30 days, outside Lebanon/Qatar, reviewer, 2 years, 10 days)', await page.locator('body').innerText().then((b) => ['90 days', '30 days', 'outside Lebanon and Qatar', 'not a member of your family', '2 years', '10 days'].every((x) => b.includes(x))));
+  await tap('consent-save');
+  check('Consent: refused without both guardians', (await tid('consent-error').innerText()).includes('each guardian'));
+  await tap('consent-mode-one');
+  await tid('g1-name').fill('Rami Haddad');
+  await tid('g1-rel').fill('father');
+  await tap('g1-agree');
+  await tap('consent-save');
+  check('Consent: one guardian must explicitly confirm the other agrees', await visible('consent-error', 2000));
+  await tap('consent-mode-two');
+  await tid('g2-name').fill('Lina');
+  await tid('g2-rel').fill('mother');
+  await tap('g2-agree');
+  await shot('en-consent-form');
+  await tap('consent-save');
+  check('Consent: saved with two guardians', await visible('consent-saved', 3000));
+  const savedConsent = await page.evaluate(() => JSON.parse(localStorage.getItem('zaki:v1:state')).consent);
+  check('Consent: record keeps version, time and FIRST names only', !!savedConsent && savedConsent.version && savedConsent.at && savedConsent.guardians.map((g) => g.firstName).join(',') === 'Rami,Lina');
+  await tap('back-btn');
+  await tap('p-back-child');
+
   // ---------- English: Maya grade 5 ----------
   await tap('profile-Maya');
   check('ready check question', (await tid('ready-question').innerText()).includes('quiet place and ready to focus'));
@@ -510,6 +542,83 @@ const fromWords = (w) => {
   check('S2 fear screen: no police framing', !body.includes('الشرطة'));
   await shot('ar-safety-screen');
   await tap('back-btn');
+
+  // ---------- Parent safety notes, reviewer inbox, export, withdraw, delete ----------
+  await home();
+  if (!(await page.locator('body').innerText()).includes('Who is learning')) await tap('lang-toggle');
+  await tap('grownups-btn');
+  await solveGate();
+  await tap('pchild-Ali');
+  await tap('p-progress');
+  const notesText = await tid('safety-notes').innerText();
+  check('Parent sees a calm safety note for Ali (fear), never reviewer-only flags', (await page.getByTestId('safety-note').locator('visible=true').count()) === 1 && !/dad|hits|khayef/i.test(notesText));
+  await shot('en-parent-safety-notes');
+  await tap('back-btn');
+  await tap('pchild-Maya');
+  await tap('p-progress');
+  check('Maya: reviewer-route flags ("my dad hits me", help button) are NOT shown to the parent', (await page.getByTestId('safety-note').locator('visible=true').count()) === 0 && !/dad/i.test(await tid('safety-notes').innerText()));
+  await tap('back-btn');
+  await tap('p-settings');
+  check('Settings shows consent status', (await tid('consent-status-text').innerText()).includes('Rami (father), Lina (mother)'));
+  await tap('back-btn');
+  // Export
+  await tap('p-data');
+  const [download] = await Promise.all([page.waitForEvent('download', { timeout: 10000 }), tap('export-btn')]);
+  const exportPath = path.join(OUT, '..', 'test-screenshots', 'export-check.json');
+  await download.saveAs(exportPath);
+  const exported = JSON.parse(fs.readFileSync(exportPath, 'utf8'));
+  fs.unlinkSync(exportPath);
+  check('Export: JSON with profiles, lessons, results, consent', download.suggestedFilename().startsWith('zaki-data-') && exported.profiles.length >= 2 && Object.keys(exported.lessons).length > 0 && exported.progress && exported.consent.guardians.length === 2);
+  check('Export: no reviewer-only safety reports in the family export', !JSON.stringify(exported).includes('dad hits') && exported.safetyNotes.every((n) => n.category === 'fear'));
+  await tap('back-btn');
+  // Reviewer inbox
+  await tap('p-back-child');
+  await tap('reviewer-btn');
+  await tid('reviewer-code').fill('1111');
+  await tap('reviewer-open');
+  check('Reviewer: wrong code refused', await visible('reviewer-error', 2000));
+  await tid('reviewer-code').fill('2468');
+  await tap('reviewer-open');
+  const inbox = await tid('reviewer-inbox').innerText();
+  check('Reviewer: sees all flags with route, childRef and scrubbed excerpt', inbox.includes('my dad hits me') && inbox.includes('Reviewer only') && inbox.includes('Parent also told') && inbox.includes('childRef: c_') && !inbox.includes('Maya'));
+  await page.getByTestId('flag-note').locator('visible=true').first().fill('Called the school counsellor.');
+  await page.getByTestId('flag-status-resolved').locator('visible=true').first().click();
+  await page.waitForTimeout(300);
+  check('Reviewer: status + note saved', (await page.evaluate(() => JSON.parse(localStorage.getItem('zaki:v1:state')).flags.some((f) => f.status === 'resolved' && f.note === 'Called the school counsellor.'))));
+  await shot('en-reviewer-inbox');
+  await tap('back-btn');
+  // Withdraw consent -> child blocked again
+  await tap('grownups-btn');
+  await solveGate();
+  await tap('p-settings');
+  await tap('consent-withdraw');
+  await tap('consent-withdraw-yes');
+  check('Withdraw: status says withdrawn', (await tid('consent-status-text').innerText()).includes('Withdrawn'));
+  await tap('back-btn');
+  await tap('p-back-child');
+  await tap('profile-Maya');
+  check('Withdraw: child is stopped until consent is given again', await visible('consent-needed', 3000));
+  await tap('back-btn');
+  // Delete everything
+  await tap('grownups-btn');
+  await solveGate();
+  await tap('p-data');
+  await tid('delete-input').fill('delete');
+  await tap('delete-btn');
+  check('Delete: needs the exact word', (await tid('data-msg').innerText()).includes('DELETE exactly'));
+  await tid('delete-input').fill('DELETE');
+  await tap('delete-btn');
+  check('Delete: everything wiped (no profiles, no consent)', (await visible('restore-demo', 5000)) && (await page.evaluate(() => { const s = JSON.parse(localStorage.getItem('zaki:v1:state')); return s.profiles.length === 0 && !s.consent; })));
+  check('Delete: safety flags kept only anonymised', await page.evaluate(() => { const f = JSON.parse(localStorage.getItem('zaki:v1:state')).flags; return f.length > 0 && f.every((x) => !x.childRef && /removed/.test(x.excerpt)); }));
+  await shot('en-after-delete');
+  await tap('restore-demo');
+  check('Demo children can be restored after delete', await visible('profile-Maya', 3000));
+  await page.evaluate(() => {
+    const k = 'zaki:v1:state';
+    const s = JSON.parse(localStorage.getItem(k));
+    s.consent = { version: 'test', at: new Date().toISOString(), date: new Date().toISOString().slice(0, 10), mode: 'two-guardians', guardians: [{ firstName: 'A', relationship: 'p' }, { firstName: 'B', relationship: 'p' }] };
+    localStorage.setItem(k, JSON.stringify(s));
+  });
 
   // ---------- Create a learner ----------
   await home();

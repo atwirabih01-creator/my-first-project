@@ -24,7 +24,7 @@ export default function Gate() {
     const typed = parseInt(normalizeDigits(value).replace(/\D/g, ''), 10);
     if (typed === n) {
       app.unlockParent();
-      router.replace(next === 'settings' ? '/parent/settings' : '/parent');
+      router.replace(next === 'settings' ? '/parent/settings' : next === 'consent' ? '/parent/consent' : '/parent');
     } else {
       setWrong(true);
       setValue('');

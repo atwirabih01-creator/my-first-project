@@ -435,11 +435,22 @@ create policy audit_log_family_read on public.audit_log for select to authentica
 revoke all on all tables in schema public from anon;
 revoke all on all tables in schema public from authenticated;
 grant select, insert, update, delete on
-  public.guardians, public.children, public.lessons, public.lesson_packs, public.exams,
+  public.children, public.lessons, public.lesson_packs, public.exams,
   public.attempts, public.sessions, public.chat_messages
   to authenticated;
-grant select, update on public.families to authenticated;
-grant select, insert, update on public.consents to authenticated;
+-- Guardians: a parent may add/rename grown-ups but never set or change a login (user_id);
+-- linking a second parent's login goes through the server (invite), so nobody can pull a
+-- stranger's account into a family or move themselves into another one.
+grant select, delete on public.guardians to authenticated;
+grant insert (family_id, first_name, relationship) on public.guardians to authenticated;
+grant update (first_name, relationship) on public.guardians to authenticated;
+-- Families: only the parent-editable fields.
+grant select on public.families to authenticated;
+grant update (country, report_lang, settings) on public.families to authenticated;
+-- Consents are evidence: a parent may add one and record a withdrawal, never rewrite history.
+grant select on public.consents to authenticated;
+grant insert (family_id, guardian_id, kind, version, method) on public.consents to authenticated;
+grant update (withdrawn_at) on public.consents to authenticated;
 grant select on public.flags, public.reviewers, public.library, public.audit_log to authenticated;
 grant all on all tables in schema public to service_role;
 grant usage, select on all sequences in schema public to service_role;
@@ -467,7 +478,7 @@ end $$;
 -- Everything Zaki holds about one family, as one JSON document (parent "export my data").
 -- Callable by the server (service role) or by a guardian of that family.
 create or replace function public.zaki_export_family(p_family_id uuid)
-returns jsonb language plpgsql stable security definer set search_path = '' as $$
+returns jsonb language plpgsql security definer set search_path = '' as $$
 declare result jsonb;
 begin
   if auth.uid() is not null and p_family_id not in (select public.zaki_my_family_ids()) then
@@ -494,8 +505,6 @@ begin
     values (case when auth.uid() is null then 'server' else 'family' end, auth.uid(), p_family_id, 'family_exported');
   return result;
 end $$;
--- An export writes one audit row, so it cannot be STABLE in strict terms; mark volatile.
-alter function public.zaki_export_family(uuid) volatile;
 
 -- Delete a family and everything under it (cascade). Safety flags keep only the random
 -- child_ref (family link set to null) so an open referral is never lost (safety review 8.2-e (3)).

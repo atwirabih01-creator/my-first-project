@@ -2,7 +2,7 @@
 // Local only (Phase 1). Saved to device storage after every change.
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { fetchLessonPack, getHealth, setDemoMode } from './api';
+import { fetchLessonPack, getHealth, setConsentActive, setDemoMode } from './api';
 import { getDemoPack } from './demoPacks';
 import { isRTLLang, textAlignFor, translate, type StringKey } from './i18n';
 import { loadJSON, saveJSON } from './storage';
@@ -255,7 +255,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   // when a real server is connected. Each one stays queued if the limit is still reached.
   const queueRan = useRef(false);
   useEffect(() => {
-    if (!state.loaded || state.demo !== false || queueRan.current) return;
+    if (!state.loaded || state.demo !== false || queueRan.current || !state.consent || state.consent.withdrawnAt) return;
     queueRan.current = true;
     (async () => {
       const snap = stateRef.current;
@@ -274,7 +274,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         }
       }
     })();
-  }, [state.loaded, state.demo]);
+  }, [state.loaded, state.demo, state.consent]);
+
+  // No lesson or AI request before a grown-up has given consent (and not withdrawn it).
+  const consentOn = !!state.consent && !state.consent.withdrawnAt;
+  useEffect(() => {
+    setConsentActive(consentOn);
+  }, [consentOn]);
 
   // The grown-up area locks itself again after 15 minutes.
   useEffect(() => {
