@@ -1,0 +1,5474 @@
+[
+ {
+  "version": "Q001 4h dip s1.5 t2.0 h24 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 273,
+   "win_rate": 0.619,
+   "avg_win_pct": 5.88,
+   "avg_loss_pct": -5.44,
+   "profit_factor": 1.76,
+   "return_pct": 52.65,
+   "max_drawdown_pct": 13.16
+  },
+  "half1": {
+   "trades": 146,
+   "win_rate": 0.6438,
+   "avg_win_pct": 5.64,
+   "avg_loss_pct": -5.72,
+   "profit_factor": 1.78,
+   "return_pct": 25.85,
+   "max_drawdown_pct": 9.7
+  },
+  "half2": {
+   "trades": 127,
+   "win_rate": 0.5906,
+   "avg_win_pct": 6.18,
+   "avg_loss_pct": -5.16,
+   "profit_factor": 1.73,
+   "return_pct": 21.3,
+   "max_drawdown_pct": 5.72
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q002 4h dip s1.5 t2.0 h24 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 277,
+   "win_rate": 0.6101,
+   "avg_win_pct": 5.81,
+   "avg_loss_pct": -5.43,
+   "profit_factor": 1.67,
+   "return_pct": 47.69,
+   "max_drawdown_pct": 10.85
+  },
+  "half1": {
+   "trades": 148,
+   "win_rate": 0.6419,
+   "avg_win_pct": 5.56,
+   "avg_loss_pct": -5.85,
+   "profit_factor": 1.7,
+   "return_pct": 24.02,
+   "max_drawdown_pct": 8.43
+  },
+  "half2": {
+   "trades": 129,
+   "win_rate": 0.5736,
+   "avg_win_pct": 6.12,
+   "avg_loss_pct": -5.02,
+   "profit_factor": 1.64,
+   "return_pct": 19.09,
+   "max_drawdown_pct": 3.61
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q003 4h dip s1.5 t2.0 h24 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 254,
+   "win_rate": 0.6181,
+   "avg_win_pct": 5.91,
+   "avg_loss_pct": -5.35,
+   "profit_factor": 1.79,
+   "return_pct": 49.82,
+   "max_drawdown_pct": 12.09
+  },
+  "half1": {
+   "trades": 140,
+   "win_rate": 0.6429,
+   "avg_win_pct": 5.58,
+   "avg_loss_pct": -5.74,
+   "profit_factor": 1.75,
+   "return_pct": 23.66,
+   "max_drawdown_pct": 8.75
+  },
+  "half2": {
+   "trades": 114,
+   "win_rate": 0.5877,
+   "avg_win_pct": 6.36,
+   "avg_loss_pct": -4.93,
+   "profit_factor": 1.84,
+   "return_pct": 21.15,
+   "max_drawdown_pct": 4.24
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q004 4h dip s1.5 t2.0 h24 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 253,
+   "win_rate": 0.6245,
+   "avg_win_pct": 5.78,
+   "avg_loss_pct": -5.29,
+   "profit_factor": 1.82,
+   "return_pct": 50.09,
+   "max_drawdown_pct": 11.06
+  },
+  "half1": {
+   "trades": 135,
+   "win_rate": 0.6593,
+   "avg_win_pct": 5.47,
+   "avg_loss_pct": -5.81,
+   "profit_factor": 1.82,
+   "return_pct": 24.28,
+   "max_drawdown_pct": 8.65
+  },
+  "half2": {
+   "trades": 118,
+   "win_rate": 0.5847,
+   "avg_win_pct": 6.18,
+   "avg_loss_pct": -4.8,
+   "profit_factor": 1.81,
+   "return_pct": 20.77,
+   "max_drawdown_pct": 3.61
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q005 4h dip s1.5 t2.0 h24 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 198,
+   "win_rate": 0.5859,
+   "avg_win_pct": 5.6,
+   "avg_loss_pct": -5.4,
+   "profit_factor": 1.47,
+   "return_pct": 22.54,
+   "max_drawdown_pct": 12.52
+  },
+  "half1": {
+   "trades": 109,
+   "win_rate": 0.6422,
+   "avg_win_pct": 5.36,
+   "avg_loss_pct": -5.91,
+   "profit_factor": 1.63,
+   "return_pct": 15.35,
+   "max_drawdown_pct": 7.25
+  },
+  "half2": {
+   "trades": 89,
+   "win_rate": 0.5169,
+   "avg_win_pct": 5.96,
+   "avg_loss_pct": -4.93,
+   "profit_factor": 1.29,
+   "return_pct": 6.23,
+   "max_drawdown_pct": 5.7
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q006 4h dip s1.5 t2.0 h24 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 188,
+   "win_rate": 0.5957,
+   "avg_win_pct": 5.6,
+   "avg_loss_pct": -5.11,
+   "profit_factor": 1.62,
+   "return_pct": 26.61,
+   "max_drawdown_pct": 11.04
+  },
+  "half1": {
+   "trades": 103,
+   "win_rate": 0.6602,
+   "avg_win_pct": 5.34,
+   "avg_loss_pct": -5.46,
+   "profit_factor": 1.9,
+   "return_pct": 18.61,
+   "max_drawdown_pct": 5.52
+  },
+  "half2": {
+   "trades": 85,
+   "win_rate": 0.5176,
+   "avg_win_pct": 6.0,
+   "avg_loss_pct": -4.81,
+   "profit_factor": 1.34,
+   "return_pct": 6.75,
+   "max_drawdown_pct": 6.17
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q007 4h dip s1.5 t2.0 h48 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 257,
+   "win_rate": 0.6109,
+   "avg_win_pct": 6.15,
+   "avg_loss_pct": -5.71,
+   "profit_factor": 1.69,
+   "return_pct": 47.67,
+   "max_drawdown_pct": 11.15
+  },
+  "half1": {
+   "trades": 143,
+   "win_rate": 0.6364,
+   "avg_win_pct": 5.82,
+   "avg_loss_pct": -5.61,
+   "profit_factor": 1.82,
+   "return_pct": 26.52,
+   "max_drawdown_pct": 7.21
+  },
+  "half2": {
+   "trades": 114,
+   "win_rate": 0.5789,
+   "avg_win_pct": 6.61,
+   "avg_loss_pct": -5.82,
+   "profit_factor": 1.56,
+   "return_pct": 16.71,
+   "max_drawdown_pct": 7.09
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q008 4h dip s1.5 t2.0 h48 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 259,
+   "win_rate": 0.5946,
+   "avg_win_pct": 5.98,
+   "avg_loss_pct": -5.81,
+   "profit_factor": 1.51,
+   "return_pct": 35.85,
+   "max_drawdown_pct": 12.09
+  },
+  "half1": {
+   "trades": 137,
+   "win_rate": 0.6277,
+   "avg_win_pct": 5.56,
+   "avg_loss_pct": -5.8,
+   "profit_factor": 1.62,
+   "return_pct": 19.72,
+   "max_drawdown_pct": 7.33
+  },
+  "half2": {
+   "trades": 122,
+   "win_rate": 0.5574,
+   "avg_win_pct": 6.52,
+   "avg_loss_pct": -5.82,
+   "profit_factor": 1.41,
+   "return_pct": 13.47,
+   "max_drawdown_pct": 7.04
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q009 4h dip s1.5 t2.0 h48 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 235,
+   "win_rate": 0.6,
+   "avg_win_pct": 6.11,
+   "avg_loss_pct": -5.68,
+   "profit_factor": 1.61,
+   "return_pct": 38.05,
+   "max_drawdown_pct": 11.98
+  },
+  "half1": {
+   "trades": 127,
+   "win_rate": 0.6142,
+   "avg_win_pct": 5.69,
+   "avg_loss_pct": -5.69,
+   "profit_factor": 1.59,
+   "return_pct": 17.69,
+   "max_drawdown_pct": 8.5
+  },
+  "half2": {
+   "trades": 108,
+   "win_rate": 0.5833,
+   "avg_win_pct": 6.63,
+   "avg_loss_pct": -5.68,
+   "profit_factor": 1.63,
+   "return_pct": 17.3,
+   "max_drawdown_pct": 4.62
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q010 4h dip s1.5 t2.0 h48 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 235,
+   "win_rate": 0.6128,
+   "avg_win_pct": 6.01,
+   "avg_loss_pct": -5.73,
+   "profit_factor": 1.66,
+   "return_pct": 40.41,
+   "max_drawdown_pct": 10.41
+  },
+  "half1": {
+   "trades": 124,
+   "win_rate": 0.6452,
+   "avg_win_pct": 5.55,
+   "avg_loss_pct": -5.72,
+   "profit_factor": 1.76,
+   "return_pct": 20.92,
+   "max_drawdown_pct": 6.56
+  },
+  "half2": {
+   "trades": 111,
+   "win_rate": 0.5766,
+   "avg_win_pct": 6.58,
+   "avg_loss_pct": -5.73,
+   "profit_factor": 1.56,
+   "return_pct": 16.13,
+   "max_drawdown_pct": 6.55
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q011 4h dip s1.5 t2.0 h48 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 182,
+   "win_rate": 0.6099,
+   "avg_win_pct": 5.91,
+   "avg_loss_pct": -5.7,
+   "profit_factor": 1.62,
+   "return_pct": 28.12,
+   "max_drawdown_pct": 11.26
+  },
+  "half1": {
+   "trades": 95,
+   "win_rate": 0.6632,
+   "avg_win_pct": 5.43,
+   "avg_loss_pct": -5.93,
+   "profit_factor": 1.8,
+   "return_pct": 16.23,
+   "max_drawdown_pct": 7.44
+  },
+  "half2": {
+   "trades": 87,
+   "win_rate": 0.5517,
+   "avg_win_pct": 6.55,
+   "avg_loss_pct": -5.51,
+   "profit_factor": 1.46,
+   "return_pct": 10.23,
+   "max_drawdown_pct": 5.46
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q012 4h dip s1.5 t2.0 h48 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 165,
+   "win_rate": 0.5758,
+   "avg_win_pct": 5.84,
+   "avg_loss_pct": -5.6,
+   "profit_factor": 1.42,
+   "return_pct": 17.32,
+   "max_drawdown_pct": 10.7
+  },
+  "half1": {
+   "trades": 86,
+   "win_rate": 0.6395,
+   "avg_win_pct": 5.46,
+   "avg_loss_pct": -5.7,
+   "profit_factor": 1.7,
+   "return_pct": 13.0,
+   "max_drawdown_pct": 4.71
+  },
+  "half2": {
+   "trades": 79,
+   "win_rate": 0.5063,
+   "avg_win_pct": 6.35,
+   "avg_loss_pct": -5.51,
+   "profit_factor": 1.18,
+   "return_pct": 3.82,
+   "max_drawdown_pct": 7.46
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q013 4h dip s1.5 t3.0 h24 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 273,
+   "win_rate": 0.5495,
+   "avg_win_pct": 7.23,
+   "avg_loss_pct": -4.86,
+   "profit_factor": 1.82,
+   "return_pct": 61.67,
+   "max_drawdown_pct": 11.27
+  },
+  "half1": {
+   "trades": 150,
+   "win_rate": 0.5533,
+   "avg_win_pct": 7.22,
+   "avg_loss_pct": -5.0,
+   "profit_factor": 1.79,
+   "return_pct": 29.76,
+   "max_drawdown_pct": 8.73
+  },
+  "half2": {
+   "trades": 123,
+   "win_rate": 0.5447,
+   "avg_win_pct": 7.25,
+   "avg_loss_pct": -4.69,
+   "profit_factor": 1.85,
+   "return_pct": 24.59,
+   "max_drawdown_pct": 3.05
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q014 4h dip s1.5 t3.0 h24 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 292,
+   "win_rate": 0.5068,
+   "avg_win_pct": 7.42,
+   "avg_loss_pct": -4.9,
+   "profit_factor": 1.56,
+   "return_pct": 46.99,
+   "max_drawdown_pct": 12.68
+  },
+  "half1": {
+   "trades": 160,
+   "win_rate": 0.5125,
+   "avg_win_pct": 7.29,
+   "avg_loss_pct": -5.05,
+   "profit_factor": 1.52,
+   "return_pct": 22.12,
+   "max_drawdown_pct": 10.31
+  },
+  "half2": {
+   "trades": 132,
+   "win_rate": 0.5,
+   "avg_win_pct": 7.59,
+   "avg_loss_pct": -4.73,
+   "profit_factor": 1.6,
+   "return_pct": 20.36,
+   "max_drawdown_pct": 3.39
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q015 4h dip s1.5 t3.0 h24 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 251,
+   "win_rate": 0.5259,
+   "avg_win_pct": 7.34,
+   "avg_loss_pct": -4.8,
+   "profit_factor": 1.69,
+   "return_pct": 47.8,
+   "max_drawdown_pct": 12.17
+  },
+  "half1": {
+   "trades": 137,
+   "win_rate": 0.5401,
+   "avg_win_pct": 7.28,
+   "avg_loss_pct": -5.08,
+   "profit_factor": 1.68,
+   "return_pct": 24.05,
+   "max_drawdown_pct": 8.77
+  },
+  "half2": {
+   "trades": 114,
+   "win_rate": 0.5088,
+   "avg_win_pct": 7.4,
+   "avg_loss_pct": -4.49,
+   "profit_factor": 1.71,
+   "return_pct": 19.15,
+   "max_drawdown_pct": 3.75
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q016 4h dip s1.5 t3.0 h24 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 258,
+   "win_rate": 0.5349,
+   "avg_win_pct": 7.25,
+   "avg_loss_pct": -4.89,
+   "profit_factor": 1.7,
+   "return_pct": 50.28,
+   "max_drawdown_pct": 10.65
+  },
+  "half1": {
+   "trades": 141,
+   "win_rate": 0.5461,
+   "avg_win_pct": 7.13,
+   "avg_loss_pct": -5.06,
+   "profit_factor": 1.69,
+   "return_pct": 24.77,
+   "max_drawdown_pct": 9.76
+  },
+  "half2": {
+   "trades": 117,
+   "win_rate": 0.5214,
+   "avg_win_pct": 7.4,
+   "avg_loss_pct": -4.69,
+   "profit_factor": 1.72,
+   "return_pct": 20.44,
+   "max_drawdown_pct": 2.23
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q017 4h dip s1.5 t3.0 h24 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 217,
+   "win_rate": 0.5207,
+   "avg_win_pct": 7.06,
+   "avg_loss_pct": -4.86,
+   "profit_factor": 1.58,
+   "return_pct": 33.34,
+   "max_drawdown_pct": 11.35
+  },
+  "half1": {
+   "trades": 115,
+   "win_rate": 0.5391,
+   "avg_win_pct": 6.75,
+   "avg_loss_pct": -5.05,
+   "profit_factor": 1.56,
+   "return_pct": 16.0,
+   "max_drawdown_pct": 7.55
+  },
+  "half2": {
+   "trades": 102,
+   "win_rate": 0.5,
+   "avg_win_pct": 7.44,
+   "avg_loss_pct": -4.66,
+   "profit_factor": 1.6,
+   "return_pct": 14.95,
+   "max_drawdown_pct": 5.27
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q018 4h dip s1.5 t3.0 h24 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 212,
+   "win_rate": 0.5472,
+   "avg_win_pct": 6.97,
+   "avg_loss_pct": -4.94,
+   "profit_factor": 1.7,
+   "return_pct": 39.01,
+   "max_drawdown_pct": 9.65
+  },
+  "half1": {
+   "trades": 113,
+   "win_rate": 0.5664,
+   "avg_win_pct": 6.66,
+   "avg_loss_pct": -5.43,
+   "profit_factor": 1.6,
+   "return_pct": 17.1,
+   "max_drawdown_pct": 7.75
+  },
+  "half2": {
+   "trades": 99,
+   "win_rate": 0.5253,
+   "avg_win_pct": 7.35,
+   "avg_loss_pct": -4.43,
+   "profit_factor": 1.84,
+   "return_pct": 18.71,
+   "max_drawdown_pct": 2.8
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q019 4h dip s1.5 t3.0 h48 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.4473,
+   "avg_win_pct": 8.53,
+   "avg_loss_pct": -5.43,
+   "profit_factor": 1.27,
+   "return_pct": 24.2,
+   "max_drawdown_pct": 12.25
+  },
+  "half1": {
+   "trades": 152,
+   "win_rate": 0.4539,
+   "avg_win_pct": 8.32,
+   "avg_loss_pct": -5.24,
+   "profit_factor": 1.32,
+   "return_pct": 14.52,
+   "max_drawdown_pct": 8.8
+  },
+  "half2": {
+   "trades": 123,
+   "win_rate": 0.439,
+   "avg_win_pct": 8.79,
+   "avg_loss_pct": -5.65,
+   "profit_factor": 1.22,
+   "return_pct": 8.45,
+   "max_drawdown_pct": 6.74
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q020 4h dip s1.5 t3.0 h48 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 286,
+   "win_rate": 0.4406,
+   "avg_win_pct": 8.5,
+   "avg_loss_pct": -5.2,
+   "profit_factor": 1.29,
+   "return_pct": 25.88,
+   "max_drawdown_pct": 12.68
+  },
+  "half1": {
+   "trades": 155,
+   "win_rate": 0.4323,
+   "avg_win_pct": 8.07,
+   "avg_loss_pct": -5.16,
+   "profit_factor": 1.19,
+   "return_pct": 8.61,
+   "max_drawdown_pct": 11.21
+  },
+  "half2": {
+   "trades": 131,
+   "win_rate": 0.4504,
+   "avg_win_pct": 8.98,
+   "avg_loss_pct": -5.26,
+   "profit_factor": 1.4,
+   "return_pct": 15.91,
+   "max_drawdown_pct": 4.49
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q021 4h dip s1.5 t3.0 h48 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 249,
+   "win_rate": 0.4659,
+   "avg_win_pct": 8.47,
+   "avg_loss_pct": -5.31,
+   "profit_factor": 1.39,
+   "return_pct": 31.0,
+   "max_drawdown_pct": 10.97
+  },
+  "half1": {
+   "trades": 138,
+   "win_rate": 0.471,
+   "avg_win_pct": 8.37,
+   "avg_loss_pct": -5.23,
+   "profit_factor": 1.42,
+   "return_pct": 17.14,
+   "max_drawdown_pct": 7.2
+  },
+  "half2": {
+   "trades": 111,
+   "win_rate": 0.4595,
+   "avg_win_pct": 8.61,
+   "avg_loss_pct": -5.4,
+   "profit_factor": 1.35,
+   "return_pct": 11.83,
+   "max_drawdown_pct": 5.26
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q022 4h dip s1.5 t3.0 h48 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 266,
+   "win_rate": 0.4474,
+   "avg_win_pct": 8.42,
+   "avg_loss_pct": -5.28,
+   "profit_factor": 1.29,
+   "return_pct": 24.31,
+   "max_drawdown_pct": 11.39
+  },
+  "half1": {
+   "trades": 145,
+   "win_rate": 0.4414,
+   "avg_win_pct": 8.26,
+   "avg_loss_pct": -5.1,
+   "profit_factor": 1.28,
+   "return_pct": 11.84,
+   "max_drawdown_pct": 10.1
+  },
+  "half2": {
+   "trades": 121,
+   "win_rate": 0.4545,
+   "avg_win_pct": 8.6,
+   "avg_loss_pct": -5.51,
+   "profit_factor": 1.3,
+   "return_pct": 11.15,
+   "max_drawdown_pct": 3.76
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q023 4h dip s1.5 t3.0 h48 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 217,
+   "win_rate": 0.4608,
+   "avg_win_pct": 8.48,
+   "avg_loss_pct": -5.24,
+   "profit_factor": 1.38,
+   "return_pct": 25.64,
+   "max_drawdown_pct": 11.24
+  },
+  "half1": {
+   "trades": 116,
+   "win_rate": 0.4569,
+   "avg_win_pct": 8.23,
+   "avg_loss_pct": -5.18,
+   "profit_factor": 1.34,
+   "return_pct": 11.29,
+   "max_drawdown_pct": 7.63
+  },
+  "half2": {
+   "trades": 101,
+   "win_rate": 0.4653,
+   "avg_win_pct": 8.75,
+   "avg_loss_pct": -5.32,
+   "profit_factor": 1.43,
+   "return_pct": 12.9,
+   "max_drawdown_pct": 4.74
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q024 4h dip s1.5 t3.0 h48 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 211,
+   "win_rate": 0.4739,
+   "avg_win_pct": 8.24,
+   "avg_loss_pct": -5.26,
+   "profit_factor": 1.41,
+   "return_pct": 26.37,
+   "max_drawdown_pct": 9.66
+  },
+  "half1": {
+   "trades": 108,
+   "win_rate": 0.4815,
+   "avg_win_pct": 7.9,
+   "avg_loss_pct": -5.18,
+   "profit_factor": 1.41,
+   "return_pct": 12.5,
+   "max_drawdown_pct": 7.6
+  },
+  "half2": {
+   "trades": 103,
+   "win_rate": 0.466,
+   "avg_win_pct": 8.61,
+   "avg_loss_pct": -5.35,
+   "profit_factor": 1.41,
+   "return_pct": 12.33,
+   "max_drawdown_pct": 3.82
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q025 4h dip s2.0 t2.0 h24 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 289,
+   "win_rate": 0.6782,
+   "avg_win_pct": 5.93,
+   "avg_loss_pct": -6.42,
+   "profit_factor": 1.95,
+   "return_pct": 74.92,
+   "max_drawdown_pct": 8.55
+  },
+  "half1": {
+   "trades": 154,
+   "win_rate": 0.7338,
+   "avg_win_pct": 5.7,
+   "avg_loss_pct": -6.86,
+   "profit_factor": 2.29,
+   "return_pct": 43.27,
+   "max_drawdown_pct": 5.3
+  },
+  "half2": {
+   "trades": 135,
+   "win_rate": 0.6148,
+   "avg_win_pct": 6.24,
+   "avg_loss_pct": -6.07,
+   "profit_factor": 1.64,
+   "return_pct": 22.09,
+   "max_drawdown_pct": 4.31
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q026 4h dip s2.0 t2.0 h24 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 311,
+   "win_rate": 0.6688,
+   "avg_win_pct": 5.85,
+   "avg_loss_pct": -6.03,
+   "profit_factor": 1.96,
+   "return_pct": 80.4,
+   "max_drawdown_pct": 9.23
+  },
+  "half1": {
+   "trades": 166,
+   "win_rate": 0.7169,
+   "avg_win_pct": 5.73,
+   "avg_loss_pct": -6.14,
+   "profit_factor": 2.36,
+   "return_pct": 47.65,
+   "max_drawdown_pct": 6.32
+  },
+  "half2": {
+   "trades": 145,
+   "win_rate": 0.6138,
+   "avg_win_pct": 6.02,
+   "avg_loss_pct": -5.94,
+   "profit_factor": 1.61,
+   "return_pct": 22.18,
+   "max_drawdown_pct": 5.6
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q027 4h dip s2.0 t2.0 h24 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 280,
+   "win_rate": 0.6714,
+   "avg_win_pct": 5.94,
+   "avg_loss_pct": -6.47,
+   "profit_factor": 1.88,
+   "return_pct": 67.32,
+   "max_drawdown_pct": 10.3
+  },
+  "half1": {
+   "trades": 148,
+   "win_rate": 0.7095,
+   "avg_win_pct": 5.67,
+   "avg_loss_pct": -6.95,
+   "profit_factor": 1.99,
+   "return_pct": 34.09,
+   "max_drawdown_pct": 7.11
+  },
+  "half2": {
+   "trades": 132,
+   "win_rate": 0.6288,
+   "avg_win_pct": 6.28,
+   "avg_loss_pct": -6.05,
+   "profit_factor": 1.76,
+   "return_pct": 24.79,
+   "max_drawdown_pct": 4.31
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q028 4h dip s2.0 t2.0 h24 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 284,
+   "win_rate": 0.669,
+   "avg_win_pct": 5.98,
+   "avg_loss_pct": -6.13,
+   "profit_factor": 1.97,
+   "return_pct": 73.88,
+   "max_drawdown_pct": 9.27
+  },
+  "half1": {
+   "trades": 149,
+   "win_rate": 0.7181,
+   "avg_win_pct": 5.81,
+   "avg_loss_pct": -6.55,
+   "profit_factor": 2.26,
+   "return_pct": 40.91,
+   "max_drawdown_pct": 6.14
+  },
+  "half2": {
+   "trades": 135,
+   "win_rate": 0.6148,
+   "avg_win_pct": 6.19,
+   "avg_loss_pct": -5.78,
+   "profit_factor": 1.71,
+   "return_pct": 23.4,
+   "max_drawdown_pct": 5.57
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q029 4h dip s2.0 t2.0 h24 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 236,
+   "win_rate": 0.6653,
+   "avg_win_pct": 5.89,
+   "avg_loss_pct": -6.4,
+   "profit_factor": 1.83,
+   "return_pct": 51.21,
+   "max_drawdown_pct": 10.99
+  },
+  "half1": {
+   "trades": 127,
+   "win_rate": 0.7008,
+   "avg_win_pct": 5.68,
+   "avg_loss_pct": -7.09,
+   "profit_factor": 1.88,
+   "return_pct": 26.32,
+   "max_drawdown_pct": 7.54
+  },
+  "half2": {
+   "trades": 109,
+   "win_rate": 0.6239,
+   "avg_win_pct": 6.15,
+   "avg_loss_pct": -5.75,
+   "profit_factor": 1.77,
+   "return_pct": 19.7,
+   "max_drawdown_pct": 4.82
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q030 4h dip s2.0 t2.0 h24 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 235,
+   "win_rate": 0.6468,
+   "avg_win_pct": 5.81,
+   "avg_loss_pct": -6.26,
+   "profit_factor": 1.7,
+   "return_pct": 43.17,
+   "max_drawdown_pct": 9.83
+  },
+  "half1": {
+   "trades": 123,
+   "win_rate": 0.6829,
+   "avg_win_pct": 5.56,
+   "avg_loss_pct": -7.03,
+   "profit_factor": 1.7,
+   "return_pct": 20.91,
+   "max_drawdown_pct": 5.97
+  },
+  "half2": {
+   "trades": 112,
+   "win_rate": 0.6071,
+   "avg_win_pct": 6.12,
+   "avg_loss_pct": -5.57,
+   "profit_factor": 1.7,
+   "return_pct": 18.41,
+   "max_drawdown_pct": 4.32
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q031 4h dip s2.0 t2.0 h48 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 296,
+   "win_rate": 0.6622,
+   "avg_win_pct": 6.19,
+   "avg_loss_pct": -7.51,
+   "profit_factor": 1.61,
+   "return_pct": 57.34,
+   "max_drawdown_pct": 10.36
+  },
+  "half1": {
+   "trades": 161,
+   "win_rate": 0.677,
+   "avg_win_pct": 5.92,
+   "avg_loss_pct": -7.36,
+   "profit_factor": 1.69,
+   "return_pct": 29.54,
+   "max_drawdown_pct": 6.21
+  },
+  "half2": {
+   "trades": 135,
+   "win_rate": 0.6444,
+   "avg_win_pct": 6.52,
+   "avg_loss_pct": -7.68,
+   "profit_factor": 1.54,
+   "return_pct": 21.46,
+   "max_drawdown_pct": 8.23
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q032 4h dip s2.0 t2.0 h48 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 310,
+   "win_rate": 0.6613,
+   "avg_win_pct": 6.35,
+   "avg_loss_pct": -7.14,
+   "profit_factor": 1.74,
+   "return_pct": 72.23,
+   "max_drawdown_pct": 9.96
+  },
+  "half1": {
+   "trades": 166,
+   "win_rate": 0.6928,
+   "avg_win_pct": 6.2,
+   "avg_loss_pct": -7.2,
+   "profit_factor": 1.94,
+   "return_pct": 40.69,
+   "max_drawdown_pct": 5.09
+  },
+  "half2": {
+   "trades": 144,
+   "win_rate": 0.625,
+   "avg_win_pct": 6.54,
+   "avg_loss_pct": -7.07,
+   "profit_factor": 1.54,
+   "return_pct": 22.42,
+   "max_drawdown_pct": 7.46
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q033 4h dip s2.0 t2.0 h48 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 271,
+   "win_rate": 0.6642,
+   "avg_win_pct": 6.22,
+   "avg_loss_pct": -7.45,
+   "profit_factor": 1.65,
+   "return_pct": 54.37,
+   "max_drawdown_pct": 9.97
+  },
+  "half1": {
+   "trades": 143,
+   "win_rate": 0.6923,
+   "avg_win_pct": 5.95,
+   "avg_loss_pct": -7.29,
+   "profit_factor": 1.84,
+   "return_pct": 30.35,
+   "max_drawdown_pct": 4.59
+  },
+  "half2": {
+   "trades": 128,
+   "win_rate": 0.6328,
+   "avg_win_pct": 6.55,
+   "avg_loss_pct": -7.61,
+   "profit_factor": 1.48,
+   "return_pct": 18.43,
+   "max_drawdown_pct": 8.56
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q034 4h dip s2.0 t2.0 h48 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 290,
+   "win_rate": 0.6552,
+   "avg_win_pct": 6.32,
+   "avg_loss_pct": -7.24,
+   "profit_factor": 1.66,
+   "return_pct": 59.92,
+   "max_drawdown_pct": 9.28
+  },
+  "half1": {
+   "trades": 154,
+   "win_rate": 0.6883,
+   "avg_win_pct": 6.14,
+   "avg_loss_pct": -7.32,
+   "profit_factor": 1.85,
+   "return_pct": 34.38,
+   "max_drawdown_pct": 5.1
+  },
+  "half2": {
+   "trades": 136,
+   "win_rate": 0.6176,
+   "avg_win_pct": 6.55,
+   "avg_loss_pct": -7.17,
+   "profit_factor": 1.48,
+   "return_pct": 19.0,
+   "max_drawdown_pct": 7.81
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q035 4h dip s2.0 t2.0 h48 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 231,
+   "win_rate": 0.6623,
+   "avg_win_pct": 6.19,
+   "avg_loss_pct": -7.78,
+   "profit_factor": 1.56,
+   "return_pct": 39.61,
+   "max_drawdown_pct": 11.77
+  },
+  "half1": {
+   "trades": 119,
+   "win_rate": 0.6807,
+   "avg_win_pct": 5.93,
+   "avg_loss_pct": -7.8,
+   "profit_factor": 1.62,
+   "return_pct": 19.8,
+   "max_drawdown_pct": 8.2
+  },
+  "half2": {
+   "trades": 112,
+   "win_rate": 0.6429,
+   "avg_win_pct": 6.48,
+   "avg_loss_pct": -7.75,
+   "profit_factor": 1.5,
+   "return_pct": 16.54,
+   "max_drawdown_pct": 7.52
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q036 4h dip s2.0 t2.0 h48 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 227,
+   "win_rate": 0.652,
+   "avg_win_pct": 5.97,
+   "avg_loss_pct": -7.28,
+   "profit_factor": 1.54,
+   "return_pct": 35.42,
+   "max_drawdown_pct": 11.19
+  },
+  "half1": {
+   "trades": 118,
+   "win_rate": 0.6695,
+   "avg_win_pct": 5.81,
+   "avg_loss_pct": -7.38,
+   "profit_factor": 1.59,
+   "return_pct": 18.34,
+   "max_drawdown_pct": 6.3
+  },
+  "half2": {
+   "trades": 109,
+   "win_rate": 0.633,
+   "avg_win_pct": 6.16,
+   "avg_loss_pct": -7.18,
+   "profit_factor": 1.48,
+   "return_pct": 14.43,
+   "max_drawdown_pct": 7.77
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q037 4h dip s2.0 t3.0 h24 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 285,
+   "win_rate": 0.607,
+   "avg_win_pct": 6.99,
+   "avg_loss_pct": -5.75,
+   "profit_factor": 1.88,
+   "return_pct": 74.54,
+   "max_drawdown_pct": 9.06
+  },
+  "half1": {
+   "trades": 153,
+   "win_rate": 0.634,
+   "avg_win_pct": 6.9,
+   "avg_loss_pct": -5.76,
+   "profit_factor": 2.08,
+   "return_pct": 40.87,
+   "max_drawdown_pct": 6.1
+  },
+  "half2": {
+   "trades": 132,
+   "win_rate": 0.5758,
+   "avg_win_pct": 7.1,
+   "avg_loss_pct": -5.75,
+   "profit_factor": 1.68,
+   "return_pct": 23.9,
+   "max_drawdown_pct": 4.43
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q038 4h dip s2.0 t3.0 h24 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 311,
+   "win_rate": 0.5949,
+   "avg_win_pct": 7.0,
+   "avg_loss_pct": -5.56,
+   "profit_factor": 1.85,
+   "return_pct": 79.77,
+   "max_drawdown_pct": 9.25
+  },
+  "half1": {
+   "trades": 169,
+   "win_rate": 0.6213,
+   "avg_win_pct": 6.79,
+   "avg_loss_pct": -5.45,
+   "profit_factor": 2.04,
+   "return_pct": 43.29,
+   "max_drawdown_pct": 7.1
+  },
+  "half2": {
+   "trades": 142,
+   "win_rate": 0.5634,
+   "avg_win_pct": 7.28,
+   "avg_loss_pct": -5.67,
+   "profit_factor": 1.66,
+   "return_pct": 25.46,
+   "max_drawdown_pct": 3.64
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q039 4h dip s2.0 t3.0 h24 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.6073,
+   "avg_win_pct": 7.15,
+   "avg_loss_pct": -5.88,
+   "profit_factor": 1.88,
+   "return_pct": 73.55,
+   "max_drawdown_pct": 9.06
+  },
+  "half1": {
+   "trades": 148,
+   "win_rate": 0.6419,
+   "avg_win_pct": 6.88,
+   "avg_loss_pct": -6.18,
+   "profit_factor": 1.99,
+   "return_pct": 37.92,
+   "max_drawdown_pct": 6.1
+  },
+  "half2": {
+   "trades": 127,
+   "win_rate": 0.5669,
+   "avg_win_pct": 7.52,
+   "avg_loss_pct": -5.59,
+   "profit_factor": 1.76,
+   "return_pct": 25.84,
+   "max_drawdown_pct": 4.43
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q040 4h dip s2.0 t3.0 h24 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 287,
+   "win_rate": 0.5958,
+   "avg_win_pct": 7.02,
+   "avg_loss_pct": -5.68,
+   "profit_factor": 1.82,
+   "return_pct": 70.72,
+   "max_drawdown_pct": 7.43
+  },
+  "half1": {
+   "trades": 156,
+   "win_rate": 0.6282,
+   "avg_win_pct": 6.94,
+   "avg_loss_pct": -5.63,
+   "profit_factor": 2.08,
+   "return_pct": 41.79,
+   "max_drawdown_pct": 6.67
+  },
+  "half2": {
+   "trades": 131,
+   "win_rate": 0.5573,
+   "avg_win_pct": 7.14,
+   "avg_loss_pct": -5.73,
+   "profit_factor": 1.57,
+   "return_pct": 20.41,
+   "max_drawdown_pct": 3.62
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q041 4h dip s2.0 t3.0 h24 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 236,
+   "win_rate": 0.6017,
+   "avg_win_pct": 7.13,
+   "avg_loss_pct": -5.93,
+   "profit_factor": 1.82,
+   "return_pct": 56.6,
+   "max_drawdown_pct": 10.3
+  },
+  "half1": {
+   "trades": 128,
+   "win_rate": 0.625,
+   "avg_win_pct": 6.76,
+   "avg_loss_pct": -6.38,
+   "profit_factor": 1.76,
+   "return_pct": 25.93,
+   "max_drawdown_pct": 6.99
+  },
+  "half2": {
+   "trades": 108,
+   "win_rate": 0.5741,
+   "avg_win_pct": 7.61,
+   "avg_loss_pct": -5.45,
+   "profit_factor": 1.88,
+   "return_pct": 24.35,
+   "max_drawdown_pct": 4.46
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q042 4h dip s2.0 t3.0 h24 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 246,
+   "win_rate": 0.5935,
+   "avg_win_pct": 7.05,
+   "avg_loss_pct": -6.0,
+   "profit_factor": 1.71,
+   "return_pct": 52.53,
+   "max_drawdown_pct": 7.58
+  },
+  "half1": {
+   "trades": 132,
+   "win_rate": 0.6136,
+   "avg_win_pct": 6.77,
+   "avg_loss_pct": -6.37,
+   "profit_factor": 1.69,
+   "return_pct": 24.57,
+   "max_drawdown_pct": 5.55
+  },
+  "half2": {
+   "trades": 114,
+   "win_rate": 0.5702,
+   "avg_win_pct": 7.41,
+   "avg_loss_pct": -5.63,
+   "profit_factor": 1.75,
+   "return_pct": 22.45,
+   "max_drawdown_pct": 3.71
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q043 4h dip s2.0 t3.0 h48 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 294,
+   "win_rate": 0.5238,
+   "avg_win_pct": 8.27,
+   "avg_loss_pct": -6.93,
+   "profit_factor": 1.31,
+   "return_pct": 34.13,
+   "max_drawdown_pct": 11.73
+  },
+  "half1": {
+   "trades": 160,
+   "win_rate": 0.5125,
+   "avg_win_pct": 8.26,
+   "avg_loss_pct": -6.85,
+   "profit_factor": 1.27,
+   "return_pct": 14.73,
+   "max_drawdown_pct": 8.95
+  },
+  "half2": {
+   "trades": 134,
+   "win_rate": 0.5373,
+   "avg_win_pct": 8.28,
+   "avg_loss_pct": -7.02,
+   "profit_factor": 1.37,
+   "return_pct": 16.91,
+   "max_drawdown_pct": 5.76
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q044 4h dip s2.0 t3.0 h48 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 305,
+   "win_rate": 0.518,
+   "avg_win_pct": 8.22,
+   "avg_loss_pct": -6.64,
+   "profit_factor": 1.33,
+   "return_pct": 36.81,
+   "max_drawdown_pct": 11.15
+  },
+  "half1": {
+   "trades": 166,
+   "win_rate": 0.5181,
+   "avg_win_pct": 8.3,
+   "avg_loss_pct": -6.48,
+   "profit_factor": 1.38,
+   "return_pct": 20.85,
+   "max_drawdown_pct": 7.53
+  },
+  "half2": {
+   "trades": 139,
+   "win_rate": 0.518,
+   "avg_win_pct": 8.14,
+   "avg_loss_pct": -6.82,
+   "profit_factor": 1.28,
+   "return_pct": 13.2,
+   "max_drawdown_pct": 5.74
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q045 4h dip s2.0 t3.0 h48 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.5236,
+   "avg_win_pct": 8.33,
+   "avg_loss_pct": -7.05,
+   "profit_factor": 1.3,
+   "return_pct": 30.47,
+   "max_drawdown_pct": 11.72
+  },
+  "half1": {
+   "trades": 152,
+   "win_rate": 0.5066,
+   "avg_win_pct": 8.3,
+   "avg_loss_pct": -6.92,
+   "profit_factor": 1.23,
+   "return_pct": 12.18,
+   "max_drawdown_pct": 10.35
+  },
+  "half2": {
+   "trades": 123,
+   "win_rate": 0.5447,
+   "avg_win_pct": 8.36,
+   "avg_loss_pct": -7.22,
+   "profit_factor": 1.38,
+   "return_pct": 16.3,
+   "max_drawdown_pct": 5.76
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q046 4h dip s2.0 t3.0 h48 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 288,
+   "win_rate": 0.5174,
+   "avg_win_pct": 8.35,
+   "avg_loss_pct": -6.69,
+   "profit_factor": 1.34,
+   "return_pct": 35.61,
+   "max_drawdown_pct": 12.13
+  },
+  "half1": {
+   "trades": 155,
+   "win_rate": 0.5226,
+   "avg_win_pct": 8.55,
+   "avg_loss_pct": -6.48,
+   "profit_factor": 1.44,
+   "return_pct": 23.09,
+   "max_drawdown_pct": 6.16
+  },
+  "half2": {
+   "trades": 133,
+   "win_rate": 0.5113,
+   "avg_win_pct": 8.11,
+   "avg_loss_pct": -6.92,
+   "profit_factor": 1.23,
+   "return_pct": 10.17,
+   "max_drawdown_pct": 6.96
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q047 4h dip s2.0 t3.0 h48 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 243,
+   "win_rate": 0.5391,
+   "avg_win_pct": 8.25,
+   "avg_loss_pct": -6.86,
+   "profit_factor": 1.41,
+   "return_pct": 35.5,
+   "max_drawdown_pct": 11.06
+  },
+  "half1": {
+   "trades": 132,
+   "win_rate": 0.5227,
+   "avg_win_pct": 8.39,
+   "avg_loss_pct": -6.58,
+   "profit_factor": 1.4,
+   "return_pct": 17.41,
+   "max_drawdown_pct": 7.76
+  },
+  "half2": {
+   "trades": 111,
+   "win_rate": 0.5586,
+   "avg_win_pct": 8.09,
+   "avg_loss_pct": -7.24,
+   "profit_factor": 1.42,
+   "return_pct": 15.41,
+   "max_drawdown_pct": 4.27
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q048 4h dip s2.0 t3.0 h48 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.0,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 252,
+   "win_rate": 0.5159,
+   "avg_win_pct": 8.27,
+   "avg_loss_pct": -6.7,
+   "profit_factor": 1.31,
+   "return_pct": 28.26,
+   "max_drawdown_pct": 8.92
+  },
+  "half1": {
+   "trades": 133,
+   "win_rate": 0.5188,
+   "avg_win_pct": 8.29,
+   "avg_loss_pct": -6.4,
+   "profit_factor": 1.4,
+   "return_pct": 17.09,
+   "max_drawdown_pct": 5.31
+  },
+  "half2": {
+   "trades": 119,
+   "win_rate": 0.5126,
+   "avg_win_pct": 8.25,
+   "avg_loss_pct": -7.03,
+   "profit_factor": 1.23,
+   "return_pct": 9.54,
+   "max_drawdown_pct": 4.24
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q049 4h dip s2.5 t2.0 h24 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 299,
+   "win_rate": 0.7057,
+   "avg_win_pct": 5.94,
+   "avg_loss_pct": -6.84,
+   "profit_factor": 2.08,
+   "return_pct": 90.3,
+   "max_drawdown_pct": 4.69
+  },
+  "half1": {
+   "trades": 159,
+   "win_rate": 0.7484,
+   "avg_win_pct": 5.78,
+   "avg_loss_pct": -6.97,
+   "profit_factor": 2.47,
+   "return_pct": 49.92,
+   "max_drawdown_pct": 4.3
+  },
+  "half2": {
+   "trades": 140,
+   "win_rate": 0.6571,
+   "avg_win_pct": 6.14,
+   "avg_loss_pct": -6.72,
+   "profit_factor": 1.75,
+   "return_pct": 26.93,
+   "max_drawdown_pct": 3.57
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q050 4h dip s2.5 t2.0 h24 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 308,
+   "win_rate": 0.7045,
+   "avg_win_pct": 5.89,
+   "avg_loss_pct": -6.62,
+   "profit_factor": 2.12,
+   "return_pct": 95.25,
+   "max_drawdown_pct": 5.02
+  },
+  "half1": {
+   "trades": 163,
+   "win_rate": 0.7546,
+   "avg_win_pct": 5.78,
+   "avg_loss_pct": -6.79,
+   "profit_factor": 2.62,
+   "return_pct": 54.69,
+   "max_drawdown_pct": 4.32
+  },
+  "half2": {
+   "trades": 145,
+   "win_rate": 0.6483,
+   "avg_win_pct": 6.04,
+   "avg_loss_pct": -6.49,
+   "profit_factor": 1.71,
+   "return_pct": 26.22,
+   "max_drawdown_pct": 3.92
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q051 4h dip s2.5 t2.0 h24 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 280,
+   "win_rate": 0.7214,
+   "avg_win_pct": 5.91,
+   "avg_loss_pct": -6.81,
+   "profit_factor": 2.25,
+   "return_pct": 92.5,
+   "max_drawdown_pct": 6.66
+  },
+  "half1": {
+   "trades": 151,
+   "win_rate": 0.755,
+   "avg_win_pct": 5.7,
+   "avg_loss_pct": -6.93,
+   "profit_factor": 2.53,
+   "return_pct": 47.64,
+   "max_drawdown_pct": 6.33
+  },
+  "half2": {
+   "trades": 129,
+   "win_rate": 0.6822,
+   "avg_win_pct": 6.18,
+   "avg_loss_pct": -6.71,
+   "profit_factor": 1.98,
+   "return_pct": 30.38,
+   "max_drawdown_pct": 3.17
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q052 4h dip s2.5 t2.0 h24 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 287,
+   "win_rate": 0.7073,
+   "avg_win_pct": 5.96,
+   "avg_loss_pct": -6.65,
+   "profit_factor": 2.16,
+   "return_pct": 90.43,
+   "max_drawdown_pct": 4.88
+  },
+  "half1": {
+   "trades": 153,
+   "win_rate": 0.7516,
+   "avg_win_pct": 5.79,
+   "avg_loss_pct": -6.92,
+   "profit_factor": 2.53,
+   "return_pct": 49.16,
+   "max_drawdown_pct": 4.32
+  },
+  "half2": {
+   "trades": 134,
+   "win_rate": 0.6567,
+   "avg_win_pct": 6.18,
+   "avg_loss_pct": -6.43,
+   "profit_factor": 1.84,
+   "return_pct": 27.67,
+   "max_drawdown_pct": 3.78
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q053 4h dip s2.5 t2.0 h24 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 250,
+   "win_rate": 0.712,
+   "avg_win_pct": 5.92,
+   "avg_loss_pct": -6.94,
+   "profit_factor": 2.11,
+   "return_pct": 72.89,
+   "max_drawdown_pct": 6.83
+  },
+  "half1": {
+   "trades": 131,
+   "win_rate": 0.7481,
+   "avg_win_pct": 5.72,
+   "avg_loss_pct": -7.28,
+   "profit_factor": 2.34,
+   "return_pct": 37.4,
+   "max_drawdown_pct": 6.7
+  },
+  "half2": {
+   "trades": 119,
+   "win_rate": 0.6723,
+   "avg_win_pct": 6.15,
+   "avg_loss_pct": -6.65,
+   "profit_factor": 1.9,
+   "return_pct": 25.83,
+   "max_drawdown_pct": 3.17
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q054 4h dip s2.5 t2.0 h24 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 248,
+   "win_rate": 0.7177,
+   "avg_win_pct": 5.84,
+   "avg_loss_pct": -6.82,
+   "profit_factor": 2.18,
+   "return_pct": 74.41,
+   "max_drawdown_pct": 5.21
+  },
+  "half1": {
+   "trades": 130,
+   "win_rate": 0.7538,
+   "avg_win_pct": 5.69,
+   "avg_loss_pct": -7.08,
+   "profit_factor": 2.46,
+   "return_pct": 38.82,
+   "max_drawdown_pct": 4.51
+  },
+  "half2": {
+   "trades": 118,
+   "win_rate": 0.678,
+   "avg_win_pct": 6.02,
+   "avg_loss_pct": -6.59,
+   "profit_factor": 1.92,
+   "return_pct": 25.64,
+   "max_drawdown_pct": 3.17
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q055 4h dip s2.5 t2.0 h48 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 291,
+   "win_rate": 0.7045,
+   "avg_win_pct": 6.13,
+   "avg_loss_pct": -8.95,
+   "profit_factor": 1.63,
+   "return_pct": 61.24,
+   "max_drawdown_pct": 8.91
+  },
+  "half1": {
+   "trades": 157,
+   "win_rate": 0.7325,
+   "avg_win_pct": 5.89,
+   "avg_loss_pct": -8.81,
+   "profit_factor": 1.83,
+   "return_pct": 35.36,
+   "max_drawdown_pct": 6.06
+  },
+  "half2": {
+   "trades": 134,
+   "win_rate": 0.6716,
+   "avg_win_pct": 6.43,
+   "avg_loss_pct": -9.08,
+   "profit_factor": 1.45,
+   "return_pct": 19.12,
+   "max_drawdown_pct": 6.17
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q056 4h dip s2.5 t2.0 h48 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 306,
+   "win_rate": 0.6732,
+   "avg_win_pct": 6.12,
+   "avg_loss_pct": -8.79,
+   "profit_factor": 1.43,
+   "return_pct": 45.12,
+   "max_drawdown_pct": 12.34
+  },
+  "half1": {
+   "trades": 161,
+   "win_rate": 0.7081,
+   "avg_win_pct": 5.93,
+   "avg_loss_pct": -8.69,
+   "profit_factor": 1.66,
+   "return_pct": 30.19,
+   "max_drawdown_pct": 6.86
+  },
+  "half2": {
+   "trades": 145,
+   "win_rate": 0.6345,
+   "avg_win_pct": 6.34,
+   "avg_loss_pct": -8.87,
+   "profit_factor": 1.24,
+   "return_pct": 11.47,
+   "max_drawdown_pct": 7.17
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q057 4h dip s2.5 t2.0 h48 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 278,
+   "win_rate": 0.705,
+   "avg_win_pct": 6.17,
+   "avg_loss_pct": -9.06,
+   "profit_factor": 1.63,
+   "return_pct": 58.14,
+   "max_drawdown_pct": 9.76
+  },
+  "half1": {
+   "trades": 149,
+   "win_rate": 0.7315,
+   "avg_win_pct": 5.98,
+   "avg_loss_pct": -8.91,
+   "profit_factor": 1.83,
+   "return_pct": 33.81,
+   "max_drawdown_pct": 5.67
+  },
+  "half2": {
+   "trades": 129,
+   "win_rate": 0.6744,
+   "avg_win_pct": 6.41,
+   "avg_loss_pct": -9.21,
+   "profit_factor": 1.44,
+   "return_pct": 18.18,
+   "max_drawdown_pct": 5.68
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q058 4h dip s2.5 t2.0 h48 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 282,
+   "win_rate": 0.6844,
+   "avg_win_pct": 6.02,
+   "avg_loss_pct": -8.55,
+   "profit_factor": 1.53,
+   "return_pct": 48.14,
+   "max_drawdown_pct": 9.71
+  },
+  "half1": {
+   "trades": 151,
+   "win_rate": 0.702,
+   "avg_win_pct": 5.77,
+   "avg_loss_pct": -8.7,
+   "profit_factor": 1.56,
+   "return_pct": 24.12,
+   "max_drawdown_pct": 7.11
+  },
+  "half2": {
+   "trades": 131,
+   "win_rate": 0.6641,
+   "avg_win_pct": 6.33,
+   "avg_loss_pct": -8.4,
+   "profit_factor": 1.49,
+   "return_pct": 19.35,
+   "max_drawdown_pct": 4.47
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q059 4h dip s2.5 t2.0 h48 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 235,
+   "win_rate": 0.7149,
+   "avg_win_pct": 6.14,
+   "avg_loss_pct": -8.98,
+   "profit_factor": 1.71,
+   "return_pct": 52.68,
+   "max_drawdown_pct": 6.98
+  },
+  "half1": {
+   "trades": 120,
+   "win_rate": 0.725,
+   "avg_win_pct": 5.82,
+   "avg_loss_pct": -8.86,
+   "profit_factor": 1.73,
+   "return_pct": 23.46,
+   "max_drawdown_pct": 6.99
+  },
+  "half2": {
+   "trades": 115,
+   "win_rate": 0.7043,
+   "avg_win_pct": 6.49,
+   "avg_loss_pct": -9.1,
+   "profit_factor": 1.7,
+   "return_pct": 23.67,
+   "max_drawdown_pct": 5.28
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q060 4h dip s2.5 t2.0 h48 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 228,
+   "win_rate": 0.7061,
+   "avg_win_pct": 5.86,
+   "avg_loss_pct": -8.72,
+   "profit_factor": 1.61,
+   "return_pct": 42.27,
+   "max_drawdown_pct": 7.84
+  },
+  "half1": {
+   "trades": 117,
+   "win_rate": 0.735,
+   "avg_win_pct": 5.56,
+   "avg_loss_pct": -8.62,
+   "profit_factor": 1.79,
+   "return_pct": 23.19,
+   "max_drawdown_pct": 6.37
+  },
+  "half2": {
+   "trades": 111,
+   "win_rate": 0.6757,
+   "avg_win_pct": 6.2,
+   "avg_loss_pct": -8.81,
+   "profit_factor": 1.46,
+   "return_pct": 15.49,
+   "max_drawdown_pct": 3.96
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q061 4h dip s2.5 t3.0 h24 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 293,
+   "win_rate": 0.6416,
+   "avg_win_pct": 7.03,
+   "avg_loss_pct": -6.17,
+   "profit_factor": 2.04,
+   "return_pct": 94.29,
+   "max_drawdown_pct": 6.95
+  },
+  "half1": {
+   "trades": 155,
+   "win_rate": 0.6645,
+   "avg_win_pct": 6.87,
+   "avg_loss_pct": -6.18,
+   "profit_factor": 2.2,
+   "return_pct": 46.48,
+   "max_drawdown_pct": 4.59
+  },
+  "half2": {
+   "trades": 138,
+   "win_rate": 0.6159,
+   "avg_win_pct": 7.22,
+   "avg_loss_pct": -6.16,
+   "profit_factor": 1.88,
+   "return_pct": 32.65,
+   "max_drawdown_pct": 3.4
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q062 4h dip s2.5 t3.0 h24 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 304,
+   "win_rate": 0.6349,
+   "avg_win_pct": 7.02,
+   "avg_loss_pct": -6.32,
+   "profit_factor": 1.93,
+   "return_pct": 90.44,
+   "max_drawdown_pct": 8.08
+  },
+  "half1": {
+   "trades": 163,
+   "win_rate": 0.6626,
+   "avg_win_pct": 6.82,
+   "avg_loss_pct": -6.31,
+   "profit_factor": 2.12,
+   "return_pct": 46.91,
+   "max_drawdown_pct": 6.09
+  },
+  "half2": {
+   "trades": 141,
+   "win_rate": 0.6028,
+   "avg_win_pct": 7.28,
+   "avg_loss_pct": -6.34,
+   "profit_factor": 1.74,
+   "return_pct": 29.63,
+   "max_drawdown_pct": 3.58
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q063 4h dip s2.5 t3.0 h24 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 272,
+   "win_rate": 0.6397,
+   "avg_win_pct": 7.1,
+   "avg_loss_pct": -6.19,
+   "profit_factor": 2.04,
+   "return_pct": 86.08,
+   "max_drawdown_pct": 6.49
+  },
+  "half1": {
+   "trades": 144,
+   "win_rate": 0.6736,
+   "avg_win_pct": 6.97,
+   "avg_loss_pct": -6.13,
+   "profit_factor": 2.34,
+   "return_pct": 46.72,
+   "max_drawdown_pct": 4.19
+  },
+  "half2": {
+   "trades": 128,
+   "win_rate": 0.6016,
+   "avg_win_pct": 7.27,
+   "avg_loss_pct": -6.24,
+   "profit_factor": 1.76,
+   "return_pct": 26.83,
+   "max_drawdown_pct": 3.22
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q064 4h dip s2.5 t3.0 h24 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 290,
+   "win_rate": 0.6483,
+   "avg_win_pct": 7.1,
+   "avg_loss_pct": -6.27,
+   "profit_factor": 2.09,
+   "return_pct": 98.65,
+   "max_drawdown_pct": 6.74
+  },
+  "half1": {
+   "trades": 156,
+   "win_rate": 0.6731,
+   "avg_win_pct": 6.9,
+   "avg_loss_pct": -6.21,
+   "profit_factor": 2.29,
+   "return_pct": 49.65,
+   "max_drawdown_pct": 5.12
+  },
+  "half2": {
+   "trades": 134,
+   "win_rate": 0.6194,
+   "avg_win_pct": 7.35,
+   "avg_loss_pct": -6.33,
+   "profit_factor": 1.89,
+   "return_pct": 32.75,
+   "max_drawdown_pct": 3.22
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q065 4h dip s2.5 t3.0 h24 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 247,
+   "win_rate": 0.6397,
+   "avg_win_pct": 6.97,
+   "avg_loss_pct": -6.41,
+   "profit_factor": 1.93,
+   "return_pct": 68.75,
+   "max_drawdown_pct": 6.06
+  },
+  "half1": {
+   "trades": 128,
+   "win_rate": 0.6797,
+   "avg_win_pct": 6.81,
+   "avg_loss_pct": -6.51,
+   "profit_factor": 2.22,
+   "return_pct": 37.99,
+   "max_drawdown_pct": 4.49
+  },
+  "half2": {
+   "trades": 119,
+   "win_rate": 0.5966,
+   "avg_win_pct": 7.17,
+   "avg_loss_pct": -6.33,
+   "profit_factor": 1.68,
+   "return_pct": 22.29,
+   "max_drawdown_pct": 3.36
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q066 4h dip s2.5 t3.0 h24 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 253,
+   "win_rate": 0.6522,
+   "avg_win_pct": 7.06,
+   "avg_loss_pct": -6.52,
+   "profit_factor": 2.03,
+   "return_pct": 79.28,
+   "max_drawdown_pct": 6.79
+  },
+  "half1": {
+   "trades": 135,
+   "win_rate": 0.6889,
+   "avg_win_pct": 6.86,
+   "avg_loss_pct": -6.86,
+   "profit_factor": 2.22,
+   "return_pct": 41.34,
+   "max_drawdown_pct": 4.2
+  },
+  "half2": {
+   "trades": 118,
+   "win_rate": 0.6102,
+   "avg_win_pct": 7.32,
+   "avg_loss_pct": -6.2,
+   "profit_factor": 1.85,
+   "return_pct": 26.84,
+   "max_drawdown_pct": 3.2
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q067 4h dip s2.5 t3.0 h48 ev0.004 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 291,
+   "win_rate": 0.5773,
+   "avg_win_pct": 8.13,
+   "avg_loss_pct": -8.2,
+   "profit_factor": 1.35,
+   "return_pct": 41.13,
+   "max_drawdown_pct": 15.28
+  },
+  "half1": {
+   "trades": 158,
+   "win_rate": 0.5886,
+   "avg_win_pct": 8.27,
+   "avg_loss_pct": -8.17,
+   "profit_factor": 1.45,
+   "return_pct": 26.06,
+   "max_drawdown_pct": 10.44
+  },
+  "half2": {
+   "trades": 133,
+   "win_rate": 0.5639,
+   "avg_win_pct": 7.95,
+   "avg_loss_pct": -8.24,
+   "profit_factor": 1.25,
+   "return_pct": 11.95,
+   "max_drawdown_pct": 6.3
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q068 4h dip s2.5 t3.0 h48 ev0.004 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.004
+  },
+  "all": {
+   "trades": 299,
+   "win_rate": 0.5619,
+   "avg_win_pct": 8.2,
+   "avg_loss_pct": -7.96,
+   "profit_factor": 1.32,
+   "return_pct": 38.02,
+   "max_drawdown_pct": 13.49
+  },
+  "half1": {
+   "trades": 162,
+   "win_rate": 0.5617,
+   "avg_win_pct": 8.2,
+   "avg_loss_pct": -7.65,
+   "profit_factor": 1.37,
+   "return_pct": 21.75,
+   "max_drawdown_pct": 9.69
+  },
+  "half2": {
+   "trades": 137,
+   "win_rate": 0.562,
+   "avg_win_pct": 8.2,
+   "avg_loss_pct": -8.33,
+   "profit_factor": 1.26,
+   "return_pct": 13.37,
+   "max_drawdown_pct": 7.1
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q069 4h dip s2.5 t3.0 h48 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 276,
+   "win_rate": 0.5797,
+   "avg_win_pct": 8.08,
+   "avg_loss_pct": -8.23,
+   "profit_factor": 1.35,
+   "return_pct": 38.65,
+   "max_drawdown_pct": 12.89
+  },
+  "half1": {
+   "trades": 148,
+   "win_rate": 0.5878,
+   "avg_win_pct": 8.19,
+   "avg_loss_pct": -8.31,
+   "profit_factor": 1.41,
+   "return_pct": 22.18,
+   "max_drawdown_pct": 9.15
+  },
+  "half2": {
+   "trades": 128,
+   "win_rate": 0.5703,
+   "avg_win_pct": 7.94,
+   "avg_loss_pct": -8.15,
+   "profit_factor": 1.29,
+   "return_pct": 13.48,
+   "max_drawdown_pct": 5.19
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q070 4h dip s2.5 t3.0 h48 ev0.006 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 284,
+   "win_rate": 0.5563,
+   "avg_win_pct": 8.07,
+   "avg_loss_pct": -7.89,
+   "profit_factor": 1.28,
+   "return_pct": 31.03,
+   "max_drawdown_pct": 12.49
+  },
+  "half1": {
+   "trades": 156,
+   "win_rate": 0.5513,
+   "avg_win_pct": 8.02,
+   "avg_loss_pct": -7.56,
+   "profit_factor": 1.3,
+   "return_pct": 16.7,
+   "max_drawdown_pct": 9.44
+  },
+  "half2": {
+   "trades": 128,
+   "win_rate": 0.5625,
+   "avg_win_pct": 8.13,
+   "avg_loss_pct": -8.29,
+   "profit_factor": 1.26,
+   "return_pct": 12.27,
+   "max_drawdown_pct": 5.83
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q071 4h dip s2.5 t3.0 h48 ev0.01 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 245,
+   "win_rate": 0.5837,
+   "avg_win_pct": 8.24,
+   "avg_loss_pct": -8.1,
+   "profit_factor": 1.43,
+   "return_pct": 40.86,
+   "max_drawdown_pct": 14.58
+  },
+  "half1": {
+   "trades": 127,
+   "win_rate": 0.5906,
+   "avg_win_pct": 8.25,
+   "avg_loss_pct": -7.74,
+   "profit_factor": 1.54,
+   "return_pct": 23.58,
+   "max_drawdown_pct": 9.01
+  },
+  "half2": {
+   "trades": 118,
+   "win_rate": 0.5763,
+   "avg_win_pct": 8.22,
+   "avg_loss_pct": -8.47,
+   "profit_factor": 1.32,
+   "return_pct": 13.99,
+   "max_drawdown_pct": 6.88
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q072 4h dip s2.5 t3.0 h48 ev0.01 k100",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 3.0,
+   "max_hold": 48,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.01
+  },
+  "all": {
+   "trades": 252,
+   "win_rate": 0.5794,
+   "avg_win_pct": 8.11,
+   "avg_loss_pct": -8.06,
+   "profit_factor": 1.39,
+   "return_pct": 37.71,
+   "max_drawdown_pct": 10.92
+  },
+  "half1": {
+   "trades": 133,
+   "win_rate": 0.6015,
+   "avg_win_pct": 8.08,
+   "avg_loss_pct": -7.8,
+   "profit_factor": 1.56,
+   "return_pct": 25.61,
+   "max_drawdown_pct": 6.56
+  },
+  "half2": {
+   "trades": 119,
+   "win_rate": 0.5546,
+   "avg_win_pct": 8.15,
+   "avg_loss_pct": -8.32,
+   "profit_factor": 1.22,
+   "return_pct": 9.64,
+   "max_drawdown_pct": 6.11
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q073 spike trail s1.0 tr1.5 be1.0 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.0,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.4873,
+   "avg_win_pct": 2.51,
+   "avg_loss_pct": -1.84,
+   "profit_factor": 1.3,
+   "return_pct": 7.93,
+   "max_drawdown_pct": 4.94
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.4909,
+   "avg_win_pct": 2.52,
+   "avg_loss_pct": -1.68,
+   "profit_factor": 1.45,
+   "return_pct": 6.45,
+   "max_drawdown_pct": 2.76
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.4818,
+   "avg_win_pct": 2.5,
+   "avg_loss_pct": -2.07,
+   "profit_factor": 1.12,
+   "return_pct": 1.39,
+   "max_drawdown_pct": 3.62
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q074 spike trail s1.0 tr1.5 be1.0 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.0,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 84,
+   "win_rate": 0.5952,
+   "avg_win_pct": 1.62,
+   "avg_loss_pct": -1.65,
+   "profit_factor": 1.45,
+   "return_pct": 2.52,
+   "max_drawdown_pct": 1.54
+  },
+  "half1": {
+   "trades": 43,
+   "win_rate": 0.5814,
+   "avg_win_pct": 1.47,
+   "avg_loss_pct": -1.65,
+   "profit_factor": 1.24,
+   "return_pct": 0.7,
+   "max_drawdown_pct": 1.02
+  },
+  "half2": {
+   "trades": 41,
+   "win_rate": 0.6098,
+   "avg_win_pct": 1.78,
+   "avg_loss_pct": -1.65,
+   "profit_factor": 1.68,
+   "return_pct": 1.8,
+   "max_drawdown_pct": 0.58
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q075 spike trail s1.0 tr1.5 be1.0 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.0,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 42,
+   "win_rate": 0.5238,
+   "avg_win_pct": 0.96,
+   "avg_loss_pct": -1.84,
+   "profit_factor": 0.57,
+   "return_pct": -1.56,
+   "max_drawdown_pct": 2.38
+  },
+  "half1": {
+   "trades": 21,
+   "win_rate": 0.5238,
+   "avg_win_pct": 1.39,
+   "avg_loss_pct": -1.86,
+   "profit_factor": 0.82,
+   "return_pct": -0.34,
+   "max_drawdown_pct": 0.95
+  },
+  "half2": {
+   "trades": 21,
+   "win_rate": 0.5238,
+   "avg_win_pct": 0.52,
+   "avg_loss_pct": -1.81,
+   "profit_factor": 0.32,
+   "return_pct": -1.23,
+   "max_drawdown_pct": 1.44
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q076 spike trail s1.0 tr1.5 be1.5 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.5,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.4655,
+   "avg_win_pct": 2.93,
+   "avg_loss_pct": -1.93,
+   "profit_factor": 1.32,
+   "return_pct": 9.39,
+   "max_drawdown_pct": 5.26
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.4727,
+   "avg_win_pct": 2.95,
+   "avg_loss_pct": -1.8,
+   "profit_factor": 1.47,
+   "return_pct": 7.59,
+   "max_drawdown_pct": 2.75
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.4545,
+   "avg_win_pct": 2.9,
+   "avg_loss_pct": -2.13,
+   "profit_factor": 1.13,
+   "return_pct": 1.67,
+   "max_drawdown_pct": 3.65
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q077 spike trail s1.0 tr1.5 be1.5 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.5,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 91,
+   "win_rate": 0.4945,
+   "avg_win_pct": 1.93,
+   "avg_loss_pct": -1.74,
+   "profit_factor": 1.09,
+   "return_pct": 0.68,
+   "max_drawdown_pct": 2.15
+  },
+  "half1": {
+   "trades": 50,
+   "win_rate": 0.5,
+   "avg_win_pct": 1.91,
+   "avg_loss_pct": -1.6,
+   "profit_factor": 1.2,
+   "return_pct": 0.78,
+   "max_drawdown_pct": 1.39
+  },
+  "half2": {
+   "trades": 41,
+   "win_rate": 0.4878,
+   "avg_win_pct": 1.95,
+   "avg_loss_pct": -1.9,
+   "profit_factor": 0.98,
+   "return_pct": -0.1,
+   "max_drawdown_pct": 0.92
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q078 spike trail s1.0 tr1.5 be1.5 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.5,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 44,
+   "win_rate": 0.4545,
+   "avg_win_pct": 1.43,
+   "avg_loss_pct": -1.8,
+   "profit_factor": 0.66,
+   "return_pct": -1.46,
+   "max_drawdown_pct": 2.32
+  },
+  "half1": {
+   "trades": 24,
+   "win_rate": 0.5,
+   "avg_win_pct": 1.83,
+   "avg_loss_pct": -1.81,
+   "profit_factor": 1.01,
+   "return_pct": 0.02,
+   "max_drawdown_pct": 0.87
+  },
+  "half2": {
+   "trades": 20,
+   "win_rate": 0.4,
+   "avg_win_pct": 0.84,
+   "avg_loss_pct": -1.8,
+   "profit_factor": 0.31,
+   "return_pct": -1.48,
+   "max_drawdown_pct": 1.62
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q079 spike trail s1.0 tr2.0 be1.0 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.0,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.4873,
+   "avg_win_pct": 2.6,
+   "avg_loss_pct": -1.84,
+   "profit_factor": 1.35,
+   "return_pct": 9.21,
+   "max_drawdown_pct": 4.76
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.4909,
+   "avg_win_pct": 2.53,
+   "avg_loss_pct": -1.68,
+   "profit_factor": 1.45,
+   "return_pct": 6.48,
+   "max_drawdown_pct": 3.09
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.4818,
+   "avg_win_pct": 2.72,
+   "avg_loss_pct": -2.07,
+   "profit_factor": 1.22,
+   "return_pct": 2.56,
+   "max_drawdown_pct": 2.4
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q080 spike trail s1.0 tr2.0 be1.0 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.0,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 96,
+   "win_rate": 0.5521,
+   "avg_win_pct": 0.92,
+   "avg_loss_pct": -1.62,
+   "profit_factor": 0.7,
+   "return_pct": -2.08,
+   "max_drawdown_pct": 3.87
+  },
+  "half1": {
+   "trades": 53,
+   "win_rate": 0.5472,
+   "avg_win_pct": 1.05,
+   "avg_loss_pct": -1.57,
+   "profit_factor": 0.81,
+   "return_pct": -0.71,
+   "max_drawdown_pct": 1.81
+  },
+  "half2": {
+   "trades": 43,
+   "win_rate": 0.5581,
+   "avg_win_pct": 0.75,
+   "avg_loss_pct": -1.68,
+   "profit_factor": 0.57,
+   "return_pct": -1.37,
+   "max_drawdown_pct": 2.09
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q081 spike trail s1.0 tr2.0 be1.0 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.0,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 53,
+   "win_rate": 0.5472,
+   "avg_win_pct": 0.75,
+   "avg_loss_pct": -1.79,
+   "profit_factor": 0.51,
+   "return_pct": -2.11,
+   "max_drawdown_pct": 2.66
+  },
+  "half1": {
+   "trades": 27,
+   "win_rate": 0.5556,
+   "avg_win_pct": 0.98,
+   "avg_loss_pct": -1.84,
+   "profit_factor": 0.67,
+   "return_pct": -0.74,
+   "max_drawdown_pct": 0.97
+  },
+  "half2": {
+   "trades": 26,
+   "win_rate": 0.5385,
+   "avg_win_pct": 0.51,
+   "avg_loss_pct": -1.75,
+   "profit_factor": 0.34,
+   "return_pct": -1.38,
+   "max_drawdown_pct": 1.87
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q082 spike trail s1.0 tr2.0 be1.5 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.5,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.4655,
+   "avg_win_pct": 2.97,
+   "avg_loss_pct": -1.93,
+   "profit_factor": 1.34,
+   "return_pct": 9.82,
+   "max_drawdown_pct": 4.91
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.4727,
+   "avg_win_pct": 2.9,
+   "avg_loss_pct": -1.8,
+   "profit_factor": 1.45,
+   "return_pct": 7.15,
+   "max_drawdown_pct": 3.18
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.4545,
+   "avg_win_pct": 3.07,
+   "avg_loss_pct": -2.13,
+   "profit_factor": 1.2,
+   "return_pct": 2.49,
+   "max_drawdown_pct": 2.4
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q083 spike trail s1.0 tr2.0 be1.5 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.5,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 100,
+   "win_rate": 0.47,
+   "avg_win_pct": 1.5,
+   "avg_loss_pct": -1.72,
+   "profit_factor": 0.78,
+   "return_pct": -2.03,
+   "max_drawdown_pct": 3.88
+  },
+  "half1": {
+   "trades": 57,
+   "win_rate": 0.4561,
+   "avg_win_pct": 1.93,
+   "avg_loss_pct": -1.6,
+   "profit_factor": 1.01,
+   "return_pct": 0.04,
+   "max_drawdown_pct": 1.71
+  },
+  "half2": {
+   "trades": 43,
+   "win_rate": 0.4884,
+   "avg_win_pct": 0.98,
+   "avg_loss_pct": -1.88,
+   "profit_factor": 0.5,
+   "return_pct": -2.07,
+   "max_drawdown_pct": 2.21
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q084 spike trail s1.0 tr2.0 be1.5 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.5,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 55,
+   "win_rate": 0.4727,
+   "avg_win_pct": 1.24,
+   "avg_loss_pct": -1.75,
+   "profit_factor": 0.63,
+   "return_pct": -1.86,
+   "max_drawdown_pct": 2.9
+  },
+  "half1": {
+   "trades": 28,
+   "win_rate": 0.5,
+   "avg_win_pct": 1.74,
+   "avg_loss_pct": -1.67,
+   "profit_factor": 1.04,
+   "return_pct": 0.1,
+   "max_drawdown_pct": 0.95
+  },
+  "half2": {
+   "trades": 27,
+   "win_rate": 0.4444,
+   "avg_win_pct": 0.65,
+   "avg_loss_pct": -1.83,
+   "profit_factor": 0.28,
+   "return_pct": -1.96,
+   "max_drawdown_pct": 2.43
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q085 spike trail s1.0 tr3.0 be1.0 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.0,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.4873,
+   "avg_win_pct": 2.53,
+   "avg_loss_pct": -1.84,
+   "profit_factor": 1.31,
+   "return_pct": 8.0,
+   "max_drawdown_pct": 5.24
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.4909,
+   "avg_win_pct": 2.54,
+   "avg_loss_pct": -1.68,
+   "profit_factor": 1.46,
+   "return_pct": 6.56,
+   "max_drawdown_pct": 3.92
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.4818,
+   "avg_win_pct": 2.5,
+   "avg_loss_pct": -2.07,
+   "profit_factor": 1.12,
+   "return_pct": 1.35,
+   "max_drawdown_pct": 2.73
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q086 spike trail s1.0 tr3.0 be1.0 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.0,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 112,
+   "win_rate": 0.5893,
+   "avg_win_pct": 0.67,
+   "avg_loss_pct": -1.6,
+   "profit_factor": 0.6,
+   "return_pct": -2.92,
+   "max_drawdown_pct": 2.92
+  },
+  "half1": {
+   "trades": 65,
+   "win_rate": 0.5846,
+   "avg_win_pct": 0.6,
+   "avg_loss_pct": -1.51,
+   "profit_factor": 0.56,
+   "return_pct": -1.79,
+   "max_drawdown_pct": 1.65
+  },
+  "half2": {
+   "trades": 47,
+   "win_rate": 0.5957,
+   "avg_win_pct": 0.76,
+   "avg_loss_pct": -1.72,
+   "profit_factor": 0.65,
+   "return_pct": -1.15,
+   "max_drawdown_pct": 1.63
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q087 spike trail s1.0 tr3.0 be1.0 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.0,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 78,
+   "win_rate": 0.641,
+   "avg_win_pct": 0.61,
+   "avg_loss_pct": -1.74,
+   "profit_factor": 0.63,
+   "return_pct": -1.8,
+   "max_drawdown_pct": 3.02
+  },
+  "half1": {
+   "trades": 40,
+   "win_rate": 0.7,
+   "avg_win_pct": 0.66,
+   "avg_loss_pct": -1.71,
+   "profit_factor": 0.91,
+   "return_pct": -0.2,
+   "max_drawdown_pct": 0.89
+  },
+  "half2": {
+   "trades": 38,
+   "win_rate": 0.5789,
+   "avg_win_pct": 0.55,
+   "avg_loss_pct": -1.77,
+   "profit_factor": 0.43,
+   "return_pct": -1.61,
+   "max_drawdown_pct": 2.15
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q088 spike trail s1.0 tr3.0 be1.5 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.5,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.4655,
+   "avg_win_pct": 2.88,
+   "avg_loss_pct": -1.93,
+   "profit_factor": 1.3,
+   "return_pct": 8.61,
+   "max_drawdown_pct": 5.39
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.4727,
+   "avg_win_pct": 2.97,
+   "avg_loss_pct": -1.8,
+   "profit_factor": 1.48,
+   "return_pct": 7.65,
+   "max_drawdown_pct": 3.86
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.4545,
+   "avg_win_pct": 2.75,
+   "avg_loss_pct": -2.13,
+   "profit_factor": 1.08,
+   "return_pct": 0.9,
+   "max_drawdown_pct": 2.73
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q089 spike trail s1.0 tr3.0 be1.5 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.5,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 123,
+   "win_rate": 0.5203,
+   "avg_win_pct": 1.36,
+   "avg_loss_pct": -1.72,
+   "profit_factor": 0.86,
+   "return_pct": -1.48,
+   "max_drawdown_pct": 3.81
+  },
+  "half1": {
+   "trades": 71,
+   "win_rate": 0.5352,
+   "avg_win_pct": 1.72,
+   "avg_loss_pct": -1.62,
+   "profit_factor": 1.23,
+   "return_pct": 1.18,
+   "max_drawdown_pct": 1.77
+  },
+  "half2": {
+   "trades": 52,
+   "win_rate": 0.5,
+   "avg_win_pct": 0.83,
+   "avg_loss_pct": -1.85,
+   "profit_factor": 0.45,
+   "return_pct": -2.63,
+   "max_drawdown_pct": 2.86
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q090 spike trail s1.0 tr3.0 be1.5 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.0,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.5,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 77,
+   "win_rate": 0.5455,
+   "avg_win_pct": 1.28,
+   "avg_loss_pct": -1.84,
+   "profit_factor": 0.83,
+   "return_pct": -1.09,
+   "max_drawdown_pct": 3.31
+  },
+  "half1": {
+   "trades": 37,
+   "win_rate": 0.5676,
+   "avg_win_pct": 1.92,
+   "avg_loss_pct": -1.68,
+   "profit_factor": 1.5,
+   "return_pct": 1.34,
+   "max_drawdown_pct": 0.85
+  },
+  "half2": {
+   "trades": 40,
+   "win_rate": 0.525,
+   "avg_win_pct": 0.63,
+   "avg_loss_pct": -1.98,
+   "profit_factor": 0.35,
+   "return_pct": -2.41,
+   "max_drawdown_pct": 2.86
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q091 spike trail s1.5 tr1.5 be1.0 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.0,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.5745,
+   "avg_win_pct": 2.57,
+   "avg_loss_pct": -2.4,
+   "profit_factor": 1.45,
+   "return_pct": 13.23,
+   "max_drawdown_pct": 4.59
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.5818,
+   "avg_win_pct": 2.6,
+   "avg_loss_pct": -2.14,
+   "profit_factor": 1.69,
+   "return_pct": 10.61,
+   "max_drawdown_pct": 3.73
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.5636,
+   "avg_win_pct": 2.54,
+   "avg_loss_pct": -2.77,
+   "profit_factor": 1.18,
+   "return_pct": 2.36,
+   "max_drawdown_pct": 3.66
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q092 spike trail s1.5 tr1.5 be1.0 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.0,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 149,
+   "win_rate": 0.6107,
+   "avg_win_pct": 2.05,
+   "avg_loss_pct": -2.4,
+   "profit_factor": 1.34,
+   "return_pct": 4.73,
+   "max_drawdown_pct": 3.9
+  },
+  "half1": {
+   "trades": 87,
+   "win_rate": 0.6322,
+   "avg_win_pct": 1.97,
+   "avg_loss_pct": -2.14,
+   "profit_factor": 1.58,
+   "return_pct": 4.01,
+   "max_drawdown_pct": 2.56
+  },
+  "half2": {
+   "trades": 62,
+   "win_rate": 0.5806,
+   "avg_win_pct": 2.17,
+   "avg_loss_pct": -2.72,
+   "profit_factor": 1.1,
+   "return_pct": 0.69,
+   "max_drawdown_pct": 2.07
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q093 spike trail s1.5 tr1.5 be1.0 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.0,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 106,
+   "win_rate": 0.6887,
+   "avg_win_pct": 2.01,
+   "avg_loss_pct": -2.5,
+   "profit_factor": 1.78,
+   "return_pct": 6.6,
+   "max_drawdown_pct": 3.29
+  },
+  "half1": {
+   "trades": 62,
+   "win_rate": 0.7419,
+   "avg_win_pct": 2.16,
+   "avg_loss_pct": -2.21,
+   "profit_factor": 2.81,
+   "return_pct": 6.57,
+   "max_drawdown_pct": 2.02
+  },
+  "half2": {
+   "trades": 44,
+   "win_rate": 0.6136,
+   "avg_win_pct": 1.76,
+   "avg_loss_pct": -2.77,
+   "profit_factor": 1.01,
+   "return_pct": 0.03,
+   "max_drawdown_pct": 1.46
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q094 spike trail s1.5 tr1.5 be1.5 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.5,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.5527,
+   "avg_win_pct": 2.99,
+   "avg_loss_pct": -2.62,
+   "profit_factor": 1.41,
+   "return_pct": 14.03,
+   "max_drawdown_pct": 4.91
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.5697,
+   "avg_win_pct": 2.95,
+   "avg_loss_pct": -2.4,
+   "profit_factor": 1.63,
+   "return_pct": 11.17,
+   "max_drawdown_pct": 3.63
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.5273,
+   "avg_win_pct": 3.07,
+   "avg_loss_pct": -2.92,
+   "profit_factor": 1.17,
+   "return_pct": 2.57,
+   "max_drawdown_pct": 4.0
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q095 spike trail s1.5 tr1.5 be1.5 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.5,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 142,
+   "win_rate": 0.5845,
+   "avg_win_pct": 2.32,
+   "avg_loss_pct": -2.43,
+   "profit_factor": 1.34,
+   "return_pct": 4.92,
+   "max_drawdown_pct": 2.96
+  },
+  "half1": {
+   "trades": 84,
+   "win_rate": 0.631,
+   "avg_win_pct": 2.42,
+   "avg_loss_pct": -2.17,
+   "profit_factor": 1.91,
+   "return_pct": 6.27,
+   "max_drawdown_pct": 2.21
+  },
+  "half2": {
+   "trades": 58,
+   "win_rate": 0.5172,
+   "avg_win_pct": 2.12,
+   "avg_loss_pct": -2.72,
+   "profit_factor": 0.84,
+   "return_pct": -1.27,
+   "max_drawdown_pct": 2.09
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q096 spike trail s1.5 tr1.5 be1.5 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.5,
+   "trail_atr": 1.5
+  },
+  "all": {
+   "trades": 103,
+   "win_rate": 0.6408,
+   "avg_win_pct": 2.22,
+   "avg_loss_pct": -2.53,
+   "profit_factor": 1.57,
+   "return_pct": 5.42,
+   "max_drawdown_pct": 2.57
+  },
+  "half1": {
+   "trades": 58,
+   "win_rate": 0.7069,
+   "avg_win_pct": 2.21,
+   "avg_loss_pct": -1.98,
+   "profit_factor": 2.69,
+   "return_pct": 5.83,
+   "max_drawdown_pct": 2.09
+  },
+  "half2": {
+   "trades": 45,
+   "win_rate": 0.5556,
+   "avg_win_pct": 2.25,
+   "avg_loss_pct": -2.99,
+   "profit_factor": 0.94,
+   "return_pct": -0.39,
+   "max_drawdown_pct": 1.76
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q097 spike trail s1.5 tr2.0 be1.0 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.0,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.5745,
+   "avg_win_pct": 2.72,
+   "avg_loss_pct": -2.4,
+   "profit_factor": 1.53,
+   "return_pct": 15.78,
+   "max_drawdown_pct": 5.5
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.5818,
+   "avg_win_pct": 2.78,
+   "avg_loss_pct": -2.14,
+   "profit_factor": 1.81,
+   "return_pct": 12.53,
+   "max_drawdown_pct": 4.05
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.5636,
+   "avg_win_pct": 2.62,
+   "avg_loss_pct": -2.77,
+   "profit_factor": 1.22,
+   "return_pct": 2.89,
+   "max_drawdown_pct": 2.89
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q098 spike trail s1.5 tr2.0 be1.0 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.0,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 165,
+   "win_rate": 0.5576,
+   "avg_win_pct": 1.66,
+   "avg_loss_pct": -2.27,
+   "profit_factor": 0.92,
+   "return_pct": -1.33,
+   "max_drawdown_pct": 5.56
+  },
+  "half1": {
+   "trades": 96,
+   "win_rate": 0.5625,
+   "avg_win_pct": 1.97,
+   "avg_loss_pct": -2.0,
+   "profit_factor": 1.26,
+   "return_pct": 2.19,
+   "max_drawdown_pct": 3.25
+  },
+  "half2": {
+   "trades": 69,
+   "win_rate": 0.5507,
+   "avg_win_pct": 1.22,
+   "avg_loss_pct": -2.62,
+   "profit_factor": 0.57,
+   "return_pct": -3.44,
+   "max_drawdown_pct": 3.56
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q099 spike trail s1.5 tr2.0 be1.0 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.0,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 126,
+   "win_rate": 0.6349,
+   "avg_win_pct": 1.71,
+   "avg_loss_pct": -2.29,
+   "profit_factor": 1.3,
+   "return_pct": 3.1,
+   "max_drawdown_pct": 3.72
+  },
+  "half1": {
+   "trades": 71,
+   "win_rate": 0.6761,
+   "avg_win_pct": 2.09,
+   "avg_loss_pct": -2.19,
+   "profit_factor": 1.99,
+   "return_pct": 5.06,
+   "max_drawdown_pct": 2.11
+  },
+  "half2": {
+   "trades": 55,
+   "win_rate": 0.5818,
+   "avg_win_pct": 1.14,
+   "avg_loss_pct": -2.4,
+   "profit_factor": 0.66,
+   "return_pct": -1.87,
+   "max_drawdown_pct": 1.98
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q100 spike trail s1.5 tr2.0 be1.5 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.5,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.5527,
+   "avg_win_pct": 3.08,
+   "avg_loss_pct": -2.62,
+   "profit_factor": 1.46,
+   "return_pct": 15.55,
+   "max_drawdown_pct": 4.87
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.5697,
+   "avg_win_pct": 3.08,
+   "avg_loss_pct": -2.4,
+   "profit_factor": 1.7,
+   "return_pct": 12.5,
+   "max_drawdown_pct": 4.11
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.5273,
+   "avg_win_pct": 3.09,
+   "avg_loss_pct": -2.92,
+   "profit_factor": 1.18,
+   "return_pct": 2.71,
+   "max_drawdown_pct": 3.29
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q101 spike trail s1.5 tr2.0 be1.5 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.5,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 162,
+   "win_rate": 0.5309,
+   "avg_win_pct": 2.2,
+   "avg_loss_pct": -2.42,
+   "profit_factor": 1.03,
+   "return_pct": 0.49,
+   "max_drawdown_pct": 5.18
+  },
+  "half1": {
+   "trades": 95,
+   "win_rate": 0.5474,
+   "avg_win_pct": 2.37,
+   "avg_loss_pct": -2.19,
+   "profit_factor": 1.31,
+   "return_pct": 2.88,
+   "max_drawdown_pct": 3.36
+  },
+  "half2": {
+   "trades": 67,
+   "win_rate": 0.5075,
+   "avg_win_pct": 1.95,
+   "avg_loss_pct": -2.71,
+   "profit_factor": 0.74,
+   "return_pct": -2.32,
+   "max_drawdown_pct": 3.12
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q102 spike trail s1.5 tr2.0 be1.5 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.5,
+   "trail_atr": 2.0
+  },
+  "all": {
+   "trades": 111,
+   "win_rate": 0.5946,
+   "avg_win_pct": 1.85,
+   "avg_loss_pct": -2.31,
+   "profit_factor": 1.17,
+   "return_pct": 1.77,
+   "max_drawdown_pct": 3.54
+  },
+  "half1": {
+   "trades": 64,
+   "win_rate": 0.625,
+   "avg_win_pct": 2.12,
+   "avg_loss_pct": -2.0,
+   "profit_factor": 1.77,
+   "return_pct": 3.71,
+   "max_drawdown_pct": 1.77
+  },
+  "half2": {
+   "trades": 47,
+   "win_rate": 0.5532,
+   "avg_win_pct": 1.43,
+   "avg_loss_pct": -2.67,
+   "profit_factor": 0.67,
+   "return_pct": -1.87,
+   "max_drawdown_pct": 3.19
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q103 spike trail s1.5 tr3.0 be1.0 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.0,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.5745,
+   "avg_win_pct": 2.79,
+   "avg_loss_pct": -2.4,
+   "profit_factor": 1.57,
+   "return_pct": 16.92,
+   "max_drawdown_pct": 7.08
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.5818,
+   "avg_win_pct": 2.78,
+   "avg_loss_pct": -2.14,
+   "profit_factor": 1.81,
+   "return_pct": 12.52,
+   "max_drawdown_pct": 4.92
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.5636,
+   "avg_win_pct": 2.79,
+   "avg_loss_pct": -2.77,
+   "profit_factor": 1.3,
+   "return_pct": 3.9,
+   "max_drawdown_pct": 3.34
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q104 spike trail s1.5 tr3.0 be1.0 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.0,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 180,
+   "win_rate": 0.5722,
+   "avg_win_pct": 1.69,
+   "avg_loss_pct": -2.42,
+   "profit_factor": 0.93,
+   "return_pct": -1.33,
+   "max_drawdown_pct": 6.53
+  },
+  "half1": {
+   "trades": 104,
+   "win_rate": 0.5769,
+   "avg_win_pct": 2.15,
+   "avg_loss_pct": -2.2,
+   "profit_factor": 1.33,
+   "return_pct": 3.17,
+   "max_drawdown_pct": 3.78
+  },
+  "half2": {
+   "trades": 76,
+   "win_rate": 0.5658,
+   "avg_win_pct": 1.05,
+   "avg_loss_pct": -2.71,
+   "profit_factor": 0.5,
+   "return_pct": -4.36,
+   "max_drawdown_pct": 4.37
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q105 spike trail s1.5 tr3.0 be1.0 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.0,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 135,
+   "win_rate": 0.6074,
+   "avg_win_pct": 1.75,
+   "avg_loss_pct": -2.47,
+   "profit_factor": 1.1,
+   "return_pct": 1.21,
+   "max_drawdown_pct": 5.11
+  },
+  "half1": {
+   "trades": 79,
+   "win_rate": 0.6329,
+   "avg_win_pct": 2.16,
+   "avg_loss_pct": -2.22,
+   "profit_factor": 1.68,
+   "return_pct": 4.38,
+   "max_drawdown_pct": 2.76
+  },
+  "half2": {
+   "trades": 56,
+   "win_rate": 0.5714,
+   "avg_win_pct": 1.11,
+   "avg_loss_pct": -2.76,
+   "profit_factor": 0.54,
+   "return_pct": -3.04,
+   "max_drawdown_pct": 2.83
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q106 spike trail s1.5 tr3.0 be1.5 ev-1.0",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": -1.0,
+   "breakeven_atr": 1.5,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 275,
+   "win_rate": 0.5527,
+   "avg_win_pct": 3.15,
+   "avg_loss_pct": -2.62,
+   "profit_factor": 1.49,
+   "return_pct": 16.58,
+   "max_drawdown_pct": 6.66
+  },
+  "half1": {
+   "trades": 165,
+   "win_rate": 0.5697,
+   "avg_win_pct": 3.12,
+   "avg_loss_pct": -2.4,
+   "profit_factor": 1.72,
+   "return_pct": 12.81,
+   "max_drawdown_pct": 4.88
+  },
+  "half2": {
+   "trades": 110,
+   "win_rate": 0.5273,
+   "avg_win_pct": 3.21,
+   "avg_loss_pct": -2.92,
+   "profit_factor": 1.23,
+   "return_pct": 3.34,
+   "max_drawdown_pct": 3.91
+  },
+  "double_check": true
+ },
+ {
+  "version": "Q107 spike trail s1.5 tr3.0 be1.5 ev0.002",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.002,
+   "breakeven_atr": 1.5,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 168,
+   "win_rate": 0.5476,
+   "avg_win_pct": 2.08,
+   "avg_loss_pct": -2.45,
+   "profit_factor": 1.03,
+   "return_pct": 0.35,
+   "max_drawdown_pct": 5.56
+  },
+  "half1": {
+   "trades": 95,
+   "win_rate": 0.5579,
+   "avg_win_pct": 2.61,
+   "avg_loss_pct": -2.17,
+   "profit_factor": 1.52,
+   "return_pct": 4.72,
+   "max_drawdown_pct": 3.05
+  },
+  "half2": {
+   "trades": 73,
+   "win_rate": 0.5342,
+   "avg_win_pct": 1.35,
+   "avg_loss_pct": -2.79,
+   "profit_factor": 0.55,
+   "return_pct": -4.17,
+   "max_drawdown_pct": 4.61
+  },
+  "double_check": false
+ },
+ {
+  "version": "Q108 spike trail s1.5 tr3.0 be1.5 ev0.004",
+  "settings": {
+   "bar_hours": 1,
+   "setups": [
+    "shock"
+   ],
+   "atlas_min_score": 0.5,
+   "need_btc_tide": true,
+   "stop_atr": 1.5,
+   "target_atr": 10.0,
+   "max_hold": 96,
+   "allow_short": true,
+   "knn_k": 100,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 48,
+   "max_stretch_atr": 3.0,
+   "crash_guard": 0.03,
+   "min_ev": 0.004,
+   "breakeven_atr": 1.5,
+   "trail_atr": 3.0
+  },
+  "all": {
+   "trades": 124,
+   "win_rate": 0.5887,
+   "avg_win_pct": 1.77,
+   "avg_loss_pct": -2.47,
+   "profit_factor": 1.03,
+   "return_pct": 0.25,
+   "max_drawdown_pct": 5.23
+  },
+  "half1": {
+   "trades": 75,
+   "win_rate": 0.64,
+   "avg_win_pct": 2.32,
+   "avg_loss_pct": -2.21,
+   "profit_factor": 1.87,
+   "return_pct": 5.26,
+   "max_drawdown_pct": 2.32
+  },
+  "half2": {
+   "trades": 49,
+   "win_rate": 0.5102,
+   "avg_win_pct": 0.71,
+   "avg_loss_pct": -2.76,
+   "profit_factor": 0.27,
+   "return_pct": -4.76,
+   "max_drawdown_pct": 4.44
+  },
+  "double_check": false
+ }
+]

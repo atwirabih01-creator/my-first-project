@@ -1,0 +1,62 @@
+{
+ "picked": {
+  "version": "Q051 4h dip s2.5 t2.0 h24 ev0.006 k60",
+  "settings": {
+   "bar_hours": 4,
+   "setups": [
+    "pullback"
+   ],
+   "atlas_min_score": 0.25,
+   "need_btc_tide": true,
+   "stop_atr": 2.5,
+   "target_atr": 2.0,
+   "max_hold": 24,
+   "allow_short": true,
+   "knn_k": 60,
+   "vol_z": 1.5,
+   "rsi_dip": 30,
+   "breakout_hours": 30,
+   "max_stretch_atr": 99.0,
+   "crash_guard": 0.05,
+   "min_ev": 0.006
+  },
+  "all": {
+   "trades": 280,
+   "win_rate": 0.7214,
+   "avg_win_pct": 5.91,
+   "avg_loss_pct": -6.81,
+   "profit_factor": 2.25,
+   "return_pct": 92.5,
+   "max_drawdown_pct": 6.66
+  },
+  "half1": {
+   "trades": 151,
+   "win_rate": 0.755,
+   "avg_win_pct": 5.7,
+   "avg_loss_pct": -6.93,
+   "profit_factor": 2.53,
+   "return_pct": 47.64,
+   "max_drawdown_pct": 6.33
+  },
+  "half2": {
+   "trades": 129,
+   "win_rate": 0.6822,
+   "avg_win_pct": 6.18,
+   "avg_loss_pct": -6.71,
+   "profit_factor": 1.98,
+   "return_pct": 30.38,
+   "max_drawdown_pct": 3.17
+  },
+  "double_check": true
+ },
+ "sealed_exam_C": {
+  "trades": 192,
+  "win_rate": 0.5885,
+  "avg_win_pct": 6.3,
+  "avg_loss_pct": -7.73,
+  "profit_factor": 1.17,
+  "return_pct": 10.02,
+  "max_drawdown_pct": 9.18,
+  "passed": false
+ }
+}
