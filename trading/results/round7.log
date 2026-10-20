@@ -1,2 +1,83 @@
 P001 n=   0 win=0.000 pf=    0 ret=     0 dd=    0 win/loss=0/0 | halves pf 0/0
 P002 n=   1 win=0.000 pf=  0.0 ret= -0.17 dd=  0.0 win/loss=0/-1.72 | halves pf 0.0/0
+P003 n= 558 win=0.220 pf= 0.92 ret=  -6.7 dd= 13.3 win/loss=6.2/-1.91 | halves pf 0.88/0.97
+P004 n=1884 win=0.393 pf= 0.82 ret= -54.8 dd=59.62 win/loss=4.68/-3.71 | halves pf 0.78/0.86
+P005 n=  10 win=0.400 pf= 0.65 ret= -1.17 dd= 2.63 win/loss=5.34/-5.49 | halves pf 0.73/0.56
+P006 n=   0 win=0.000 pf=    0 ret=     0 dd=    0 win/loss=0/0 | halves pf 0/0
+P007 n=2048 win=0.533 pf=  0.8 ret=-35.37 dd=35.65 win/loss=1.59/-2.26 | halves pf 0.85/0.75
+P008 n=  11 win=0.273 pf=  0.5 ret= -1.48 dd= 1.45 win/loss=4.94/-3.7 | halves pf 0.33/1.23
+P009 n=2336 win=0.223 pf=  0.9 ret=-30.83 dd=35.99 win/loss=5.82/-1.86 | halves pf 0.84/0.96
+P010 n= 188 win=0.468 pf= 0.86 ret= -4.02 dd= 6.79 win/loss=2.84/-2.89 | halves pf 0.96/0.72
+P011 n= 124 win=0.419 pf= 0.47 ret=-12.03 dd=12.89 win/loss=2.19/-3.35 | halves pf 0.53/0.42
+P012 n=   5 win=0.400 pf=  2.3 ret=  1.25 dd= 0.53 win/loss=11.11/-3.23 | halves pf 1.08/99
+P013 n= 224 win=0.228 pf= 0.64 ret=-20.03 dd=30.54 win/loss=7.61/-3.52 | halves pf 0.74/0.5
+P014 n= 101 win=0.673 pf= 0.95 ret= -0.65 dd= 4.06 win/loss=1.52/-3.31 | halves pf 1.76/0.41
+P015 n= 597 win=0.350 pf= 0.65 ret=-24.31 dd=25.17 win/loss=2.51/-2.06 | halves pf 0.67/0.64
+P016 n=   0 win=0.000 pf=    0 ret=     0 dd=    0 win/loss=0/0 | halves pf 0/0
+P017 n=   0 win=0.000 pf=    0 ret=     0 dd=    0 win/loss=0/0 | halves pf 0/0
+P018 n= 760 win=0.637 pf= 1.08 ret= 11.01 dd= 22.2 win/loss=3.21/-5.2 | halves pf 1.04/1.13
+P019 n=  32 win=0.625 pf= 0.62 ret= -2.43 dd= 3.21 win/loss=1.95/-5.27 | halves pf 0.63/0.6
+P020 n= 131 win=0.534 pf=  0.5 ret=-10.42 dd=12.26 win/loss=1.57/-3.59 | halves pf 0.57/0.41
+P021 n=2640 win=0.498 pf= 0.81 ret=-48.75 dd=54.24 win/loss=2.07/-2.55 | halves pf 0.79/0.82
+P022 n= 109 win=0.358 pf= 0.47 ret= -8.76 dd= 8.88 win/loss=2.09/-2.47 | halves pf 0.34/0.69
+P023 n=  49 win=0.061 pf= 0.25 ret= -7.92 dd= 9.76 win/loss=9.27/-2.39 | halves pf 0.0/0.35
+P024 n= 948 win=0.592 pf= 0.94 ret= -7.32 dd=13.76 win/loss=1.79/-2.77 | halves pf 1.07/0.8
+P025 n=  72 win=0.472 pf= 0.95 ret= -0.91 dd= 4.54 win/loss=4.64/-4.36 | halves pf 0.83/1.09
+P026 n=   7 win=0.286 pf= 0.27 ret= -1.16 dd=  0.6 win/loss=2.19/-3.2 | halves pf 0.31/0.23
+P027 n=1406 win=0.469 pf=  0.8 ret=-24.76 dd=29.68 win/loss=1.68/-1.86 | halves pf 0.71/0.91
+P028 n= 529 win=0.433 pf= 0.57 ret=-19.88 dd=20.03 win/loss=1.28/-1.71 | halves pf 0.52/0.63
+P029 n= 170 win=0.435 pf= 0.97 ret= -1.02 dd=  7.6 win/loss=4.5/-3.56 | halves pf 0.88/1.08
+P030 n= 250 win=0.532 pf= 0.81 ret= -9.39 dd=16.58 win/loss=2.97/-4.19 | halves pf 0.61/1.05
+P031 n=   0 win=0.000 pf=    0 ret=     0 dd=    0 win/loss=0/0 | halves pf 0/0
+P032 n=1360 win=0.610 pf=  0.7 ret=-39.78 dd=42.77 win/loss=1.4/-3.13 | halves pf 0.6/0.81
+P033 n=  12 win=0.083 pf= 0.24 ret= -3.29 dd=  4.3 win/loss=10.51/-3.99 | halves pf 1.47/0.0
+P034 n=  50 win=0.500 pf= 0.74 ret= -3.78 dd= 6.97 win/loss=4.23/-5.74 | halves pf 0.96/0.46
+P035 n=2006 win=0.510 pf= 0.88 ret=-36.01 dd=38.21 win/loss=3.11/-3.67 | halves pf 0.93/0.83
+P036 n= 774 win=0.531 pf= 0.65 ret=-34.47 dd=34.26 win/loss=1.89/-3.29 | halves pf 0.65/0.65
+P037 n= 147 win=0.415 pf= 0.93 ret= -4.49 dd=14.61 win/loss=8.92/-6.8 | halves pf 1.32/0.57
+P038 n= 593 win=0.248 pf= 0.76 ret=-28.15 dd=32.84 win/loss=7.0/-3.03 | halves pf 0.74/0.79
+P039 n= 156 win=0.237 pf= 0.65 ret=-12.65 dd=16.69 win/loss=6.65/-3.19 | halves pf 0.72/0.57
+P040 n=  43 win=0.419 pf= 0.78 ret= -2.17 dd= 3.98 win/loss=4.22/-3.88 | halves pf 1.07/0.39
+P041 n= 109 win=0.220 pf= 0.83 ret= -5.85 dd= 6.46 win/loss=11.81/-4.0 | halves pf 1.04/0.58
+P042 n=  28 win=0.214 pf= 0.39 ret= -4.72 dd= 5.05 win/loss=5.15/-3.59 | halves pf 0.4/0.38
+P043 n= 798 win=0.526 pf= 0.59 ret=-31.91 dd=32.02 win/loss=1.3/-2.45 | halves pf 0.49/0.69
+P044 n=   1 win=0.000 pf=  0.0 ret= -1.06 dd=  0.0 win/loss=0/-10.56 | halves pf 0/0.0
+P045 n=  27 win=0.407 pf= 0.71 ret= -3.03 dd= 3.21 win/loss=6.56/-6.39 | halves pf 0.65/0.82
+P046 n=5372 win=0.467 pf= 0.94 ret=-40.12 dd=51.32 win/loss=3.06/-2.85 | halves pf 0.94/0.94
+P047 n=2011 win=0.309 pf= 0.99 ret= -6.04 dd=27.54 win/loss=5.85/-2.65 | halves pf 1.0/0.98
+P048 n=1089 win=0.425 pf= 0.85 ret=-16.81 dd= 20.5 win/loss=2.25/-1.95 | halves pf 0.9/0.81
+P049 n= 280 win=0.671 pf= 1.88 ret= 67.32 dd= 10.3 win/loss=5.94/-6.47 | halves pf 1.99/1.76
+P050 n= 117 win=0.214 pf= 0.73 ret= -5.24 dd= 8.41 win/loss=5.7/-2.13 | halves pf 0.88/0.62
+P051 n= 389 win=0.509 pf= 0.89 ret=-10.96 dd= 20.7 win/loss=4.28/-4.99 | halves pf 1.0/0.75
+P052 n=   3 win=0.333 pf= 0.41 ret= -0.24 dd= 0.17 win/loss=1.72/-2.08 | halves pf 0.0/0.99
+P053 n=1501 win=0.358 pf= 0.91 ret=-25.69 dd=39.04 win/loss=5.43/-3.32 | halves pf 0.94/0.88
+P054 n= 819 win=0.464 pf= 0.69 ret=-32.21 dd=36.73 win/loss=2.21/-2.79 | halves pf 0.55/0.86
+P055 n=1988 win=0.490 pf= 1.09 ret= 45.01 dd=61.15 win/loss=5.18/-4.56 | halves pf 1.01/1.19
+P056 n= 123 win=0.577 pf= 1.17 ret=  2.03 dd= 4.37 win/loss=2.03/-2.38 | halves pf 1.98/0.4
+P057 n=1607 win=0.274 pf= 0.81 ret=-46.59 dd=53.85 win/loss=6.05/-2.81 | halves pf 0.74/0.9
+P058 n=   0 win=0.000 pf=    0 ret=     0 dd=    0 win/loss=0/0 | halves pf 0/0
+P059 n=  46 win=0.413 pf= 0.42 ret= -2.37 dd= 2.66 win/loss=0.9/-1.52 | halves pf 0.41/0.43
+P060 n= 118 win=0.322 pf= 0.82 ret= -8.05 dd=10.55 win/loss=9.43/-5.48 | halves pf 0.98/0.62
+P061 n=   0 win=0.000 pf=    0 ret=     0 dd=    0 win/loss=0/0 | halves pf 0/0
+P062 n=  81 win=0.420 pf= 0.54 ret= -5.22 dd= 5.48 win/loss=1.85/-2.47 | halves pf 0.94/0.18
+P063 n= 809 win=0.365 pf= 0.94 ret= -11.9 dd=22.12 win/loss=5.82/-3.57 | halves pf 0.91/0.97
+P064 n= 169 win=0.544 pf= 0.69 ret=-10.46 dd=13.36 win/loss=2.69/-4.62 | halves pf 0.47/0.96
+P065 n= 227 win=0.374 pf= 0.66 ret= -9.48 dd=10.56 win/loss=2.2/-2.01 | halves pf 0.64/0.68
+P066 n= 267 win=0.607 pf= 0.82 ret= -6.09 dd= 7.03 win/loss=1.65/-3.12 | halves pf 0.44/1.16
+P067 n=2183 win=0.569 pf= 0.76 ret=-47.99 dd=52.62 win/loss=1.67/-2.88 | halves pf 0.68/0.86
+P068 n= 131 win=0.458 pf= 0.91 ret=  -1.6 dd= 6.84 win/loss=2.44/-2.28 | halves pf 0.84/0.96
+P069 n= 275 win=0.466 pf= 1.34 ret=  9.82 dd= 4.91 win/loss=2.97/-1.93 | halves pf 1.45/1.2  <-- PASSES DOUBLE CHECK
+P070 n= 187 win=0.406 pf= 0.48 ret= -9.21 dd=  9.3 win/loss=1.16/-1.66 | halves pf 0.62/0.28
+P071 n= 905 win=0.484 pf= 0.88 ret=-13.29 dd=14.29 win/loss=2.38/-2.52 | halves pf 0.82/0.95
+P072 n= 129 win=0.450 pf= 0.99 ret= -0.29 dd= 6.45 win/loss=2.46/-2.04 | halves pf 1.04/0.92
+P073 n=2217 win=0.324 pf= 0.79 ret=-59.11 dd=59.79 win/loss=4.49/-2.74 | halves pf 0.83/0.74
+P074 n= 542 win=0.456 pf= 0.84 ret= -12.7 dd= 13.0 win/loss=2.84/-2.82 | halves pf 0.86/0.82
+P075 n= 208 win=0.457 pf= 0.47 ret= -16.1 dd=16.47 win/loss=1.62/-2.9 | halves pf 0.44/0.52
+P076 n= 137 win=0.358 pf= 1.25 ret=  7.67 dd= 9.38 win/loss=8.18/-3.65 | halves pf 1.29/1.2
+P077 n=1055 win=0.425 pf=  0.8 ret=-20.16 dd=21.19 win/loss=1.93/-1.79 | halves pf 0.83/0.76
+P078 n=   5 win=0.600 pf= 2.79 ret=  1.53 dd= 0.86 win/loss=8.01/-4.31 | halves pf 2.29/2.98
+P079 n=   9 win=0.222 pf= 0.13 ret=  -2.9 dd=  2.9 win/loss=2.27/-4.83 | halves pf 0.33/0.0
+P080 n=  57 win=0.632 pf= 1.38 ret=  1.48 dd= 2.18 win/loss=1.51/-1.88 | halves pf 3.19/0.38
+
+PICKED P069 {'bar_hours': 1, 'setups': ('shock',), 'atlas_min_score': 0.5, 'need_btc_tide': True, 'stop_atr': 1.0, 'target_atr': 10.0, 'max_hold': 96, 'allow_short': True, 'knn_k': 100, 'vol_z': 1.5, 'rsi_dip': 30, 'breakout_hours': 48, 'max_stretch_atr': 3.0, 'crash_guard': 0.03, 'min_ev': -1.0, 'breakeven_atr': 1.5, 'trail_atr': 2.0}
+SEALED EXAM (set B): {'trades': 205, 'win_rate': 0.4146, 'avg_win_pct': np.float64(3.12), 'avg_loss_pct': np.float64(-2.03), 'profit_factor': 1.09, 'return_pct': np.float64(2.05), 'max_drawdown_pct': 5.7, 'passed': False}
