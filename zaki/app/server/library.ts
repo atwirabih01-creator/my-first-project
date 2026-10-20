@@ -1,13 +1,11 @@
 // Shared lesson library: a pack built from a TYPED topic only (no photos) is saved once and
 // reused for the next family asking for the same subject + topic + grade + language, at no
 // AI cost. Packs built from page photos are NEVER stored here (they are private to a family).
-// Storage: server/data/library/<hash>.json (gitignored for now; later a database).
-import { createHash } from "node:crypto";
-import fs from "node:fs";
-import path from "node:path";
-
+// Storage goes through getStore(): files under server/data/library/ by default, or the online
+// database's `library` table when Supabase is configured.
 import { normalizeBase } from "./normalize";
 import { shufflePack } from "./shuffle";
+import { createFileStore, getStore, __setStoreForTests } from "./storage";
 import type { Lang, LessonPack, Subject } from "./types";
 
 export type LibraryEntry = {
@@ -18,14 +16,6 @@ export type LibraryEntry = {
   savedAt: string;
 };
 
-const memory = new Map<string, LibraryEntry>();
-let dirOverride: string | null | undefined;
-
-function libDir(): string | null {
-  if (dirOverride !== undefined) return dirOverride;
-  return process.env.ZAKI_LIBRARY_DIR || path.join(process.cwd(), "server", "data", "library");
-}
-
 /** "  Fractions!! " and "fractions" share a key; Arabic is normalized too. */
 export function libraryKey(subject: Subject, topic: string, grade: number, lang: Lang): string {
   const t = normalizeBase(topic)
@@ -35,47 +25,27 @@ export function libraryKey(subject: Subject, topic: string, grade: number, lang:
   return `${subject}|${t}|${grade}|${lang}`;
 }
 
-const fileFor = (dir: string, key: string) => path.join(dir, createHash("sha256").update(key).digest("hex").slice(0, 32) + ".json");
-
-const clone = <T>(x: T): T => JSON.parse(JSON.stringify(x)) as T;
-
-/** A cached pack for this key (answer positions re-shuffled), or null. */
-export function getFromLibrary(key: string): LibraryEntry | null {
-  let entry = memory.get(key) ?? null;
-  if (!entry) {
-    const dir = libDir();
-    if (dir) {
-      try {
-        const saved = JSON.parse(fs.readFileSync(fileFor(dir, key), "utf8")) as LibraryEntry;
-        if (saved && saved.key === key && saved.pack) {
-          entry = saved;
-          memory.set(key, saved);
-        }
-      } catch {
-        // not in the library
-      }
-    }
-  }
-  if (!entry) return null;
-  const copy = clone(entry);
-  return { ...copy, pack: shufflePack(copy.pack) };
-}
-
-export function saveToLibrary(key: string, value: Omit<LibraryEntry, "key" | "savedAt">): void {
-  const entry: LibraryEntry = { key, ...clone(value), savedAt: new Date().toISOString() };
-  memory.set(key, entry);
-  const dir = libDir();
-  if (!dir) return;
+/** A cached pack for this key (answer positions re-shuffled), or null. Never throws. */
+export async function getFromLibrary(key: string): Promise<LibraryEntry | null> {
+  let entry: LibraryEntry | null = null;
   try {
-    fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(fileFor(dir, key), JSON.stringify(entry));
+    entry = await getStore().libraryGet(key);
   } catch {
-    // read-only hosting: keep the in-memory copy
+    return null; // library unavailable: just build the pack
+  }
+  if (!entry || entry.key !== key || !entry.pack) return null;
+  return { ...entry, pack: shufflePack(entry.pack) };
+}
+
+export async function saveToLibrary(key: string, value: Omit<LibraryEntry, "key" | "savedAt">): Promise<void> {
+  try {
+    await getStore().libraryPut({ key, ...JSON.parse(JSON.stringify(value)), savedAt: new Date().toISOString() });
+  } catch {
+    // saving to the library is best effort
   }
 }
 
-/** Tests only. `dir: null` keeps the library in memory. */
+/** Tests only: a fresh file store whose library lives in `dir` (null = memory); everything else in memory. */
 export function __resetLibraryForTests(dir: string | null = null): void {
-  memory.clear();
-  dirOverride = dir;
+  __setStoreForTests(createFileStore({ dataDir: null, flagFile: null, budgetFile: null, libraryDir: dir }));
 }

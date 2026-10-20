@@ -2,7 +2,8 @@
 // Local only (Phase 1). Saved to device storage after every change.
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { fetchLessonPack, getHealth, setConsentActive, setDemoMode } from './api';
+import { consentRemote, fetchLessonPack, getHealth, registerFamilyRemote, setConsentActive, setDemoMode, syncFamilyRemote, type FamilyLink } from './api';
+import { CONSENT_VERSION } from './consentText';
 import { getDemoPack } from './demoPacks';
 import { isRTLLang, textAlignFor, translate, type StringKey } from './i18n';
 import { loadJSON, saveJSON } from './storage';
@@ -82,6 +83,8 @@ type Persisted = {
   exams?: Record<string, Exam[]>; // childId -> exams built by the grown-up
   consent?: ConsentRecord | null; // once per family
   flags?: LocalFlag[]; // safety flags kept on this device (demo/offline)
+  /** Server family link: id + SECRET key issued at consent (never exported, never shown). */
+  family?: FamilyLink | null;
 };
 
 function seed(): Persisted {
@@ -223,8 +226,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   // Persist after changes.
   useEffect(() => {
     if (!state.loaded) return;
-    const { version, profiles, settings, progress, plans, packs, exams, consent, flags } = state;
-    saveJSON('state', { version, profiles, settings, progress, plans, packs, exams, consent, flags });
+    const { version, profiles, settings, progress, plans, packs, exams, consent, flags, family } = state;
+    saveJSON('state', { version, profiles, settings, progress, plans, packs, exams, consent, flags, family });
   }, [state]);
 
   useEffect(() => {
@@ -281,6 +284,62 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     setConsentActive(consentOn);
   }, [consentOn]);
+
+  // Family identity: once consent is given and a real server is connected, register the family
+  // (the server returns a secret key, kept only on this device), then sync children + progress.
+  const familyBusy = useRef(false);
+  useEffect(() => {
+    if (!state.loaded || state.demo !== false || !consentOn || familyBusy.current) return;
+    const c = state.consent!;
+    familyBusy.current = true;
+    (async () => {
+      let fam = stateRef.current.family ?? null;
+      if (!fam) {
+        fam = await registerFamilyRemote({ guardians: c.guardians, consentVersion: c.version || CONSENT_VERSION, country: Object.values(stateRef.current.settings)[0]?.country });
+        if (fam) {
+          fam = { ...fam, consentAt: c.at };
+          const linked = fam;
+          setState((s) => ({ ...s, family: linked }));
+        }
+      } else if (fam.consentAt !== c.at) {
+        // consent given again after a withdrawal: record it on the server too
+        const id = await consentRemote(fam, 'give', c.version);
+        if (id) {
+          fam = { ...fam, consentId: id, consentAt: c.at };
+          const linked = fam;
+          setState((s) => ({ ...s, family: linked }));
+        }
+      }
+      if (fam) {
+        const snap = stateRef.current;
+        await syncFamilyRemote(
+          fam,
+          snap.profiles.map((p) => {
+            const pr = snap.progress[p.id];
+            return {
+              childRef: p.id,
+              nickname: p.nickname,
+              grade: p.grade,
+              lang: p.lang,
+              avatar: p.avatar,
+              dailyLimitMin: snap.settings[p.id]?.dailyLimitMin ?? 30,
+              progress: pr
+                ? {
+                    plan: snap.plans[p.id] ?? [],
+                    tests: pr.tests,
+                    sessions: pr.sessions,
+                    exams: snap.exams?.[p.id] ?? [],
+                    examResults: pr.examResults ?? [],
+                    state: { stars: pr.stars, lessons: pr.lessons, usage: pr.usage, bestTestSeconds: pr.bestTestSeconds },
+                  }
+                : undefined,
+            };
+          }),
+        );
+      }
+      familyBusy.current = false;
+    })();
+  }, [state.loaded, state.demo, consentOn, state.consent, state.profiles]);
 
   // The grown-up area locks itself again after 15 minutes.
   useEffect(() => {
@@ -363,7 +422,11 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         return full;
       },
       giveConsent: (c) => setState((s) => ({ ...s, consent: c })),
-      withdrawConsent: () => setState((s) => (s.consent ? { ...s, consent: { ...s.consent, withdrawnAt: new Date().toISOString() } } : s)),
+      withdrawConsent: () => {
+        const fam = stateRef.current.family;
+        if (fam) void consentRemote(fam, 'withdraw');
+        setState((s) => (s.consent ? { ...s, consent: { ...s.consent, withdrawnAt: new Date().toISOString() } } : s));
+      },
       addLocalFlag: (f) =>
         setState((s) => ({ ...s, flags: [...(s.flags ?? []), { ...f, id: randomId('f'), ts: new Date().toISOString(), status: 'new' as const }].slice(-200) })),
       reviewLocalFlag: (id, status, note) =>
@@ -472,7 +535,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 }
 
 function emptyPersisted(): Persisted {
-  return { version: 1, profiles: [], settings: {}, progress: {}, plans: {}, packs: {}, exams: {}, consent: null, flags: [] };
+  return { version: 1, profiles: [], settings: {}, progress: {}, plans: {}, packs: {}, exams: {}, consent: null, flags: [], family: null };
 }
 
 export function useApp() {

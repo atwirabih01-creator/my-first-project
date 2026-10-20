@@ -7,6 +7,6 @@ export async function GET(request: Request): Promise<Response> {
   return handle(async () => {
     rateLimit(request, "review");
     checkReviewerCode(request);
-    return json({ flags: listFlagsForReviewer() });
+    return json({ flags: await listFlagsForReviewer() });
   });
 }

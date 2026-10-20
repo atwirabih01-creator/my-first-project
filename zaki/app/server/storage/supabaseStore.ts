@@ -566,6 +566,29 @@ export function createSupabaseStore(getClient: () => Promise<SupabaseLike>): Zak
       };
     },
 
+    async setFamilyKeyHash(familyId, keyHash) {
+      assertFamilyId(familyId);
+      if (!/^[0-9a-f]{64}$/.test(keyHash)) throw new StorageError("bad_key_hash");
+      const c = await db();
+      await run(c.from("family_keys").upsert({ family_id: familyId, key_hash: keyHash }, { onConflict: "family_id" }), "set_family_key");
+      await audit("family_key_set", familyId);
+    },
+
+    async getFamilyKeyHash(familyId) {
+      assertFamilyId(familyId);
+      const c = await db();
+      const r = await run(c.from("family_keys").select("key_hash").eq("family_id", familyId).maybeSingle(), "get_family_key");
+      return r?.key_hash ?? null;
+    },
+
+    async unlinkChildren(childRefs) {
+      if (!childRefs.length) return 0;
+      childRefs.forEach(assertChildRef);
+      const c = await db();
+      const rows = await run(c.from("flags").update({ child_ref: null, family_id: null }).in("child_ref", childRefs).select("id"), "unlink_children");
+      return Array.isArray(rows) ? rows.length : 0;
+    },
+
     async exportFamily(familyId) {
       assertFamilyId(familyId);
       const c = await db();

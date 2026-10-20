@@ -52,7 +52,7 @@ describe("shared lesson library", () => {
     const calls = fakeAi();
     const jpeg = "/9j/" + "A".repeat(100);
     await buildLessonPack({ ...req, pageImages: [jpeg] });
-    assert.equal(getFromLibrary(libraryKey("math", "Fractions", 3, "en")), null);
+    assert.equal(await getFromLibrary(libraryKey("math", "Fractions", 3, "en")), null);
     const before = aiCalls(calls);
     const typed = (await buildLessonPack(req)) as LessonPackResponse;
     assert.equal(typed.fromLibrary, undefined, "typed request after a photo request is built fresh");

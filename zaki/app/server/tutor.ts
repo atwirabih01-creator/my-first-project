@@ -190,7 +190,7 @@ export async function runTutorTurn(req: TutorRequest): Promise<TutorResponse> {
   }
 
   // 3. Daily limits (per-child turns + server budget). Safety checks above already ran.
-  if (req.childRef && !takeChildTurn(req.childRef)) {
+  if (req.childRef && !(await takeChildTurn(req.childRef))) {
     return { reply: fixedMessage("budget_tutor", req.lang), hintLevel, safety: childCheck.safety, budgetReached: true };
   }
 

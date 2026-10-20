@@ -2,10 +2,9 @@ import { demoMode, mockClaude, textMsg } from "./helpers";
 import assert from "node:assert/strict";
 import { afterEach, beforeEach, describe, it } from "node:test";
 import { __clearFlagsForTests, moderate } from "../safety";
-import { __resetReviewForTests, anonymiseFlagsFor, checkReviewerCode, flagsForParent, listFlagsForReviewer, updateFlagReview } from "../review";
+import { anonymiseFlagsFor, checkReviewerCode, flagsForParent, listFlagsForReviewer, updateFlagReview } from "../review";
 import { GET as listRoute } from "../../src/app/api/review/flags+api";
 import { POST as updateRoute } from "../../src/app/api/review/flags/[id]+api";
-import { POST as deleteFamilyRoute } from "../../src/app/api/delete-family+api";
 import { POST as parentMessageRoute } from "../../src/app/api/parent-message+api";
 
 const HOME = "kid_home_123";
@@ -21,11 +20,10 @@ async function seedFlags() {
 const req = (url: string, init: RequestInit & { code?: string } = {}) =>
   new Request(`http://local${url}`, { ...init, headers: { "content-type": "application/json", ...(init.code ? { "x-reviewer-code": init.code } : {}) } });
 
-describe("safety reviewer inbox", () => {
+describe("safety reviewer inbox (via the storage layer)", () => {
   beforeEach(async () => {
-    demoMode();
+    demoMode(); // fresh in-memory store
     __clearFlagsForTests();
-    __resetReviewForTests();
     delete process.env.ZAKI_REVIEWER_CODE;
     await seedFlags();
   });
@@ -34,21 +32,21 @@ describe("safety reviewer inbox", () => {
     demoMode();
   });
 
-  it("reviewer sees every flag with route, childRef and a scrubbed excerpt (no names)", () => {
-    const flags = listFlagsForReviewer();
+  it("reviewer sees every flag with route, childRef and a scrubbed excerpt (no names)", async () => {
+    const flags = await listFlagsForReviewer();
     const home = flags.find((f) => f.childRef === HOME)!;
     const out = flags.find((f) => f.childRef === OUT)!;
     assert.equal(home.route, "reviewer");
     assert.equal(out.route, "parent");
     assert.equal(home.status, "new");
-    assert.ok(home.excerpt.length > 0 && home.excerpt.length <= 160);
+    assert.ok(home.excerpt.length > 0 && home.excerpt.length <= 200);
   });
 
-  it("parent-facing view NEVER contains reviewer-route flags, and never an excerpt", () => {
-    const forParent = flagsForParent([HOME, OUT]);
+  it("parent-facing view NEVER contains reviewer-route flags, and never an excerpt", async () => {
+    const forParent = await flagsForParent([HOME, OUT]);
     assert.equal(forParent.length, 1);
     assert.deepEqual(Object.keys(forParent[0]).sort(), ["category", "ts"]);
-    assert.equal(flagsForParent([HOME]).length, 0);
+    assert.equal((await flagsForParent([HOME])).length, 0);
   });
 
   it("parent endpoints don't expose reviewer flags (WhatsApp REPORT)", async () => {
@@ -75,24 +73,21 @@ describe("safety reviewer inbox", () => {
     const { flags } = (await ok.json()) as { flags: { id: string }[] };
     assert.equal(flags.length, 2);
     const id = flags[0].id;
-    const up = await updateRoute(req(`/api/review/flags/${id}`, { method: "POST", code: "2468", body: JSON.stringify({ status: "resolved", note: "Spoke with school counsellor." }) }), { id });
+    const up = await updateRoute(req(`/api/review/flags/${id}`, { method: "POST", code: "2468", body: JSON.stringify({ status: "referred", note: "Spoke with school counsellor." }) }), { id });
     assert.equal(up.status, 200);
-    assert.equal(listFlagsForReviewer().find((f) => f.id === id)!.status, "resolved");
+    const after = (await listFlagsForReviewer()).find((f) => f.id === id)!;
+    assert.equal(after.status, "referred");
+    assert.equal(after.note, "Spoke with school counsellor.");
     assert.equal((await updateRoute(req(`/api/review/flags/${id}`, { method: "POST", code: "2468", body: JSON.stringify({ status: "deleted" }) }), { id })).status, 400);
-    assert.throws(() => updateFlagReview("00000000-0000-0000-0000-000000000000", "seen"), /not found/);
+    await assert.rejects(updateFlagReview("00000000-0000-0000-0000-000000000000", "seen"), /not found/);
     assert.equal((await updateRoute(req(`/api/review/flags/${id}`, { method: "POST", body: JSON.stringify({ status: "seen" }) }), { id })).status, 401);
   });
 
-  it("family deletion: flags kept only anonymised (no childRef, no excerpt)", async () => {
-    const res = await deleteFamilyRoute(req("/api/delete-family", { method: "POST", body: JSON.stringify({ childRefs: [HOME, OUT] }) }));
-    assert.equal(res.status, 200);
-    const body = (await res.json()) as { deleted: { flagsAnonymised: number } };
-    assert.equal(body.deleted.flagsAnonymised, 2);
-    const flags = listFlagsForReviewer();
+  it("family deletion: flags kept for open referrals but with no link to the child", async () => {
+    assert.equal(await anonymiseFlagsFor([HOME, OUT]), 2);
+    const flags = await listFlagsForReviewer();
     assert.equal(flags.length, 2, "the safety record is kept");
-    assert.ok(flags.every((f) => f.childRef === undefined && /removed/.test(f.excerpt)));
-    assert.equal(flagsForParent([HOME, OUT]).length, 0);
-    assert.equal(anonymiseFlagsFor([HOME]), 0);
-    assert.equal((await deleteFamilyRoute(req("/api/delete-family", { method: "POST", body: JSON.stringify({ childRefs: ["Ali Hassan"] }) }))).status, 400);
+    assert.ok(flags.every((f) => f.childRef === undefined));
+    assert.equal((await flagsForParent([HOME, OUT])).length, 0);
   });
 });

@@ -91,7 +91,7 @@ function acceptNewQuestion(raw: Record<string, unknown>, lessons: ExamLessonInpu
 export async function buildExam(req: ExamRequest): Promise<ExamResponse> {
   const mixed = mixExamQuestions(req.lessons, req.count);
   if (!aiEnabled()) return { questions: mixed, added: 0, demo: true };
-  if (!canSpend("lesson")) return { questions: mixed, added: 0, budgetReached: true };
+  if (!(await canSpend("lesson"))) return { questions: mixed, added: 0, budgetReached: true };
   try {
     const msg = await callClaude(
       {

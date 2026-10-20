@@ -49,3 +49,5 @@ server/data/flags.jsonl
 server/data/budget.json
 server/data/library/
 server/data/flag-reviews.json
+server/data/families/
+server/data/*.tmp

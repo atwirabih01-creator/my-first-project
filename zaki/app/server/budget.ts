@@ -10,6 +10,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { PRICES_USD_PER_MTOK, WEB_SEARCH_USD_EACH } from "./config/models";
+import { getStore, storageKind } from "./storage";
+
+/** Online database configured: the daily totals live there (shared by every server instance). */
+const online = () => storageKind() === "supabase";
 
 export type SpendPurpose = "lesson" | "tutor" | "safety";
 
@@ -97,20 +101,28 @@ export function estimateCostUsd(model: string, usage: UsageLike): number {
   );
 }
 
+async function spentToday(now: Date): Promise<number> {
+  if (online()) return (await getStore().budgetGet(today(now))).spentUsd;
+  return load(now).spentUsd;
+}
+
 /** May a call for this purpose start now? Safety calls may also use the reserve. */
-export function canSpend(purpose: SpendPurpose, now = new Date()): boolean {
-  const s = load(now);
+export async function canSpend(purpose: SpendPurpose, now = new Date()): Promise<boolean> {
   const limit = dailyBudgetUsd() * (purpose === "safety" ? 1 + SAFETY_RESERVE_RATIO : 1);
-  return s.spentUsd < limit;
+  return (await spentToday(now)) < limit;
 }
 
-export function assertCanSpend(purpose: SpendPurpose, now = new Date()): void {
-  if (!canSpend(purpose, now)) throw new BudgetExceededError(purpose);
+export async function assertCanSpend(purpose: SpendPurpose, now = new Date()): Promise<void> {
+  if (!(await canSpend(purpose, now))) throw new BudgetExceededError(purpose);
 }
 
-export function recordUsage(model: string, usage: UsageLike, purpose: SpendPurpose, now = new Date()): number {
+export async function recordUsage(model: string, usage: UsageLike, purpose: SpendPurpose, now = new Date()): Promise<number> {
   const cost = estimateCostUsd(model, usage);
   if (cost <= 0) return 0;
+  if (online()) {
+    await getStore().budgetAdd(today(now), purpose, cost);
+    return cost;
+  }
   const s = load(now);
   s.spentUsd += cost;
   s.byPurpose[purpose] = (s.byPurpose[purpose] ?? 0) + cost;
@@ -119,7 +131,8 @@ export function recordUsage(model: string, usage: UsageLike, purpose: SpendPurpo
 }
 
 /** Counts one Ask-Zaki AI turn for a child. Returns false (and counts nothing) when over the cap. */
-export function takeChildTurn(childRef: string, now = new Date()): boolean {
+export async function takeChildTurn(childRef: string, now = new Date()): Promise<boolean> {
+  if (online()) return getStore().childTurnTake(today(now), childRef, childDailyTurns());
   const s = load(now);
   const used = s.childTurns[childRef] ?? 0;
   if (used >= childDailyTurns()) return false;
@@ -128,8 +141,8 @@ export function takeChildTurn(childRef: string, now = new Date()): boolean {
   return true;
 }
 
-export function budgetStatus(now = new Date()) {
-  const s = load(now);
+export async function budgetStatus(now = new Date()) {
+  const s = { ...load(now), spentUsd: await spentToday(now) };
   const limit = dailyBudgetUsd();
   const r = (x: number) => Math.round(x * 10000) / 10000;
   return {
@@ -143,8 +156,8 @@ export function budgetStatus(now = new Date()) {
   };
 }
 
-/** Family deletion: forget today's AI-turn counters for these children. */
-export function forgetChildren(childRefs: string[]): number {
+/** Family deletion: forget today's AI-turn counters for these children (local counters; the database deletes them with the family). */
+export async function forgetChildren(childRefs: string[]): Promise<number> {
   const s = load();
   let n = 0;
   for (const ref of childRefs) {

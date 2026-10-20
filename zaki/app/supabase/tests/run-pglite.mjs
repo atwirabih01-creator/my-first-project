@@ -18,6 +18,7 @@ process.on("unhandledRejection", (e) => { console.error("FAILED:", e?.message, e
 const read = (p) => fs.readFileSync(path.join(here, p), "utf8");
 await db.exec(read("supabase-shim.sql"));
 await db.exec(read("../migrations/0001_init.sql"));
+await db.exec(read("../migrations/0003_family_keys.sql"));
 
 let passed = 0;
 const ok = (name) => { passed++; console.log("  ok -", name); };
@@ -50,6 +51,13 @@ const childB = (await as("authenticated", USER_B, (t) => t.query(
   `insert into public.children (family_id, nickname, grade, lang, avatar) values ($1,'Sara',2,'en','fox') returning id, child_ref`, [famB]))).rows[0];
 assert.match(childA.child_ref, /^[a-f0-9]{32}$/);
 ok("children get a random child_ref automatically");
+
+// ---- family secret keys (0003): service role only ----
+await as("service_role", null, (t) => t.query(`insert into public.family_keys (family_id, key_hash) values ($1, $2)`, [famA, "a".repeat(64)]));
+const keysSeenByA = await as("authenticated", USER_A, (t) => t.query(`select key_hash from public.family_keys`).catch(() => ({ rows: [] })));
+assert.equal(keysSeenByA.rows.length, 0);
+ok("a parent can't read family key hashes (not even their own)");
+await denied(as("authenticated", USER_A, (t) => t.query(`insert into public.family_keys (family_id, key_hash) values ($1, $2)`, [famB, "b".repeat(64)])), "a parent can't write family keys");
 
 // ---- family isolation ----
 const seenByA = await as("authenticated", USER_A, (t) => t.query(`select id from public.children`));

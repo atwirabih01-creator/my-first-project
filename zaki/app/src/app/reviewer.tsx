@@ -92,8 +92,8 @@ export default function Reviewer() {
               <Txt variant="small">childRef: {f.childRef ?? '—'}</Txt>
               <Txt testID="reviewer-excerpt">“{f.excerpt}”</Txt>
               <Row wrap>
-                {(['new', 'seen', 'resolved'] as Status[]).map((s) => (
-                  <Chip key={s} label={t(s === 'new' ? 'statusNew' : s === 'seen' ? 'statusSeen' : 'statusResolved')} selected={f.status === s} onPress={() => setStatus(f, s)} testID={`flag-status-${s}`} />
+                {(['new', 'seen', 'referred', 'resolved'] as Status[]).map((s) => (
+                  <Chip key={s} label={t(s === 'new' ? 'statusNew' : s === 'seen' ? 'statusSeen' : s === 'referred' ? 'statusReferred' : 'statusResolved')} selected={f.status === s} onPress={() => setStatus(f, s)} testID={`flag-status-${s}`} />
                 ))}
               </Row>
               <TextInput

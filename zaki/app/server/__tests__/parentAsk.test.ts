@@ -58,7 +58,7 @@ describe("parent Ask Zaki", () => {
 
   it("counts toward the daily budget: over budget -> fixed reply, no AI call", async () => {
     const calls = mockClaude((p) => (isClassifierCall(p) ? textMsg(NONE) : textMsg("x")));
-    recordUsage("claude-sonnet-5-5", { input_tokens: 600_000 }, "tutor");
+    await recordUsage("claude-sonnet-5-5", { input_tokens: 600_000 }, "tutor");
     const r = await runParentAsk(req("Explain place value"));
     assert.equal(r.budgetReached, true);
     assert.equal(calls.filter((c) => !isClassifierCall(c)).length, 0);

@@ -56,7 +56,7 @@ export default function OurData() {
     }
     setBusy(true);
     try {
-      await deleteFamilyOnServer(app.profiles.map((p) => p.id));
+      await deleteFamilyOnServer(app.family);
     } catch {
       setBusy(false);
       setMsg(t('deleteServerFail'));

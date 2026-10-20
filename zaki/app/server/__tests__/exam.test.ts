@@ -71,7 +71,7 @@ describe("exam builder (mix, no AI)", () => {
 
   it("over budget: mix only, flagged budgetReached", async () => {
     mockClaude(() => textMsg("{}"));
-    recordUsage("claude-sonnet-5-5", { input_tokens: 600_000 }, "lesson");
+    await recordUsage("claude-sonnet-5-5", { input_tokens: 600_000 }, "lesson");
     const r = await buildExam({ subject: "math", lang: "en", grade: 3, count: 10, lessons });
     assert.equal(r.budgetReached, true);
     assert.equal(r.questions.length, 10);

@@ -333,7 +333,7 @@ export type ServerReviewerFlag = {
   route: 'reviewer' | 'parent';
   childRef?: string;
   excerpt: string;
-  status: 'new' | 'seen' | 'resolved';
+  status: 'new' | 'seen' | 'referred' | 'resolved';
   note?: string;
 };
 
@@ -357,9 +357,48 @@ export async function updateReviewerFlag(code: string, id: string, status: Serve
   return reviewerRequest<{ flag: ServerReviewerFlag }>(`/api/review/flags/${encodeURIComponent(id)}`, code, { status, note });
 }
 
+// ---------- family identity (server-issued secret key) ----------
+/** consentAt = which consent record (by time) the server already has. */
+export type FamilyLink = { id: string; key: string; consentId?: string; consentAt?: string };
+
+export async function registerFamilyRemote(req: {
+  guardians: { firstName: string; relationship: string }[];
+  consentVersion: string;
+  country?: Country;
+  reportLang?: Lang;
+}): Promise<FamilyLink | null> {
+  if (demoMode) return null;
+  try {
+    const r = await request<{ familyId: string; familyKey: string; consentId: string }>('/api/family/register', req, 20000);
+    return r.familyId && r.familyKey ? { id: r.familyId, key: r.familyKey, consentId: r.consentId } : null;
+  } catch {
+    return null; // offline: retried on a later app start
+  }
+}
+
+export async function syncFamilyRemote(family: FamilyLink, children: unknown[]): Promise<boolean> {
+  if (demoMode) return false;
+  try {
+    await request('/api/family/sync', { familyId: family.id, familyKey: family.key, children }, 30000);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export async function consentRemote(family: FamilyLink, action: 'withdraw' | 'give', consentVersion?: string): Promise<string | undefined> {
+  if (demoMode) return undefined;
+  try {
+    const r = await request<{ consentId?: string }>('/api/family/consent', { familyId: family.id, familyKey: family.key, action, consentId: family.consentId, consentVersion }, 15000);
+    return r.consentId;
+  } catch {
+    return undefined;
+  }
+}
+
 // ---------- family deletion ----------
-/** Asks the server to delete what it stores for these children. Throws if it can't be reached. */
-export async function deleteFamilyOnServer(childRefs: string[]): Promise<void> {
-  if (demoMode || childRefs.length === 0) return; // demo: nothing is stored on a server
-  await request('/api/delete-family', { childRefs }, 20000);
+/** Asks the server to delete what it stores for this family (key checked server-side). Throws if it can't be reached. */
+export async function deleteFamilyOnServer(family: FamilyLink | null | undefined): Promise<void> {
+  if (demoMode || !family) return; // demo / never registered: nothing is stored on a server
+  await request('/api/delete-family', { familyId: family.id, familyKey: family.key }, 20000);
 }

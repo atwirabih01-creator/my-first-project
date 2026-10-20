@@ -37,6 +37,8 @@ import {
 
 type FamilyFile = {
   family: Family;
+  /** SHA-256 of the family's secret key (never the key itself). */
+  keyHash?: string;
   guardians: Guardian[];
   consents: Consent[];
   children: Record<string, { child: Child; progress: ProgressSnapshot | null }>;
@@ -47,7 +49,8 @@ type BudgetFile = { date: string; spentUsd: number; byPurpose: Record<SpendPurpo
 type FlagLine =
   | (Partial<StoredFlag> & { id: string; ts: string; alertParent?: boolean; type?: undefined })
   | { type: "review"; id: string; at: string; status: FlagStatus; reviewerNote?: string; sharedWithParent?: boolean }
-  | { type: "unlink"; familyId: string; at: string };
+  | { type: "unlink"; familyId: string; at: string }
+  | { type: "unlinkChildren"; childRefs: string[]; at: string };
 
 export type FileStoreOptions = {
   /** Folder for all files. Default: ZAKI_DATA_DIR or <cwd>/server/data. null = memory only. */
@@ -155,6 +158,14 @@ export function createFileStore(opts: FileStoreOptions = {}): ZakiStore {
         }
       } else if (l.type === "unlink") {
         for (const f of byId.values()) if (f.familyId === l.familyId) delete f.familyId;
+      } else if (l.type === "unlinkChildren") {
+        const refs = new Set(l.childRefs);
+        for (const f of byId.values()) {
+          if (f.childRef && refs.has(f.childRef)) {
+            delete f.childRef;
+            delete f.familyId;
+          }
+        }
       } else if (l.id) {
         byId.set(l.id, {
           id: l.id,
@@ -387,6 +398,25 @@ export function createFileStore(opts: FileStoreOptions = {}): ZakiStore {
       return f?.children[childRef]?.progress ? clone(f.children[childRef].progress) : null;
     },
 
+    async setFamilyKeyHash(familyId, keyHash) {
+      const f = mustFamily(familyId);
+      if (!/^[0-9a-f]{64}$/.test(keyHash)) throw new StorageError("bad_key_hash");
+      f.keyHash = keyHash;
+      saveFamily(f);
+    },
+
+    async getFamilyKeyHash(familyId) {
+      const f = loadFamily(familyId);
+      return f?.keyHash ?? null;
+    },
+
+    async unlinkChildren(childRefs) {
+      const refs = new Set(childRefs);
+      const n = currentFlags().filter((f) => f.childRef && refs.has(f.childRef)).length;
+      if (n) appendFlagLine({ type: "unlinkChildren", childRefs: [...refs], at: new Date().toISOString() });
+      return n;
+    },
+
     async exportFamily(familyId): Promise<FamilyExport | null> {
       const f = loadFamily(familyId);
       if (!f) return null;
@@ -394,7 +424,7 @@ export function createFileStore(opts: FileStoreOptions = {}): ZakiStore {
       return {
         exportedAt: new Date().toISOString(),
         storage: "file",
-        data: { ...clone(f), parentAlerts: alerts },
+        data: { ...clone({ ...f, keyHash: undefined }), parentAlerts: alerts },
       };
     },
 

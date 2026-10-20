@@ -254,7 +254,7 @@ export async function buildLessonPack(req: LessonPackRequest): Promise<LessonPac
   // Shared library first: typed-topic packs only, never photo packs. No AI cost.
   const key = libraryKey(req.subject, req.topic, req.grade, req.lang);
   if (!hasPhotos) {
-    const hit = getFromLibrary(key);
+    const hit = await getFromLibrary(key);
     if (hit) return { pack: hit.pack, sources: hit.sources, verify: hit.verify, fromLibrary: true };
   }
   if (!aiEnabled()) {
@@ -266,10 +266,10 @@ export async function buildLessonPack(req: LessonPackRequest): Promise<LessonPac
   // Images are checked before any AI call.
   (req.pageImages ?? []).slice(0, MAX_PAGE_IMAGES).forEach(cleanBase64Image);
 
-  if (!canSpend("lesson")) return { budgetReached: true };
+  if (!(await canSpend("lesson"))) return { budgetReached: true };
   try {
     const built = await buildWithAi(req);
-    if (!hasPhotos) saveToLibrary(key, { pack: built.pack, sources: built.sources, verify: built.verify });
+    if (!hasPhotos) await saveToLibrary(key, { pack: built.pack, sources: built.sources, verify: built.verify });
     return built;
   } catch (e) {
     if (e instanceof BudgetExceededError) return { budgetReached: true };

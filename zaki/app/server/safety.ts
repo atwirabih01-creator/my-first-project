@@ -12,6 +12,7 @@
 import { callClaude, jsonOf } from "./ai";
 import { MODELS, aiEnabled, openAiModerationEnabled } from "./config/models";
 import { fixedMessage, type FixedMessageKey } from "./data/safetyMessages";
+import { getStore, type FlagInput } from "./storage";
 import type { Country, HelpRouteKind, Lang, SafetyCategory, SafetyInfo } from "./types";
 
 // Layer B (keyword matching) lives in ./keywordScan so the app can share it offline.
@@ -420,23 +421,26 @@ export function __clearFlagsForTests(): void {
   flagQueue.length = 0;
 }
 
-/** Tests/reviewer module: replace records in place (e.g. anonymised after a family deletion). */
-export function __replaceFlags(fn: (f: FlagRecord) => FlagRecord): void {
-  for (let i = 0; i < flagQueue.length; i++) flagQueue[i] = fn(flagQueue[i]);
-}
-
 async function logFlag(f: Omit<FlagRecord, "id" | "ts" | "status">): Promise<void> {
   const rec: FlagRecord = { id: crypto.randomUUID(), ts: new Date().toISOString(), status: "pending_review", ...f };
   flagQueue.push(rec);
   if (flagQueue.length > MAX_MEMORY_FLAGS) flagQueue.shift();
-  if (process.env.ZAKI_FLAG_FILE === "off") return;
+  // Durable copy for the independent reviewer: files (server/data/flags.jsonl) or the online
+  // database, via the storage layer. Never blocks the child's reply.
   try {
-    const fs = await import("node:fs/promises");
-    const path = await import("node:path");
-    const file = process.env.ZAKI_FLAG_FILE || path.join(process.cwd(), "server", "data", "flags.jsonl");
-    await fs.mkdir(path.dirname(file), { recursive: true });
-    await fs.appendFile(file, JSON.stringify(rec) + "\n", "utf8");
+    const stored = await getStore().addFlag({
+      category: rec.category as FlagInput["category"],
+      route: rec.route ?? (rec.alertParent && !rec.involvesHome ? "parent" : "reviewer"),
+      involvesHome: rec.involvesHome,
+      speaker: rec.speaker,
+      lang: rec.lang,
+      country: rec.country,
+      layers: rec.layers,
+      childRef: rec.childRef,
+      excerpt: rec.excerpt,
+    });
+    rec.id = stored.id;
   } catch {
-    // No writable disk (e.g. serverless hosting): the in-memory queue still holds it.
+    // Storage unavailable: the in-memory queue still holds it.
   }
 }

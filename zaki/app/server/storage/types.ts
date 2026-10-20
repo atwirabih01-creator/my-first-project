@@ -212,6 +212,16 @@ export interface ZakiStore {
   syncProgress(familyId: string, childRef: string, snap: ProgressSnapshot): Promise<void>;
   getProgress(familyId: string, childRef: string): Promise<ProgressSnapshot | null>;
 
+  /**
+   * Family identity (decision (a)): a server-issued secret key per family/device. Only its
+   * SHA-256 hash is stored, readable by the service role only. Routes verify it before any
+   * family data is touched.
+   */
+  setFamilyKeyHash(familyId: string, keyHash: string): Promise<void>;
+  getFamilyKeyHash(familyId: string): Promise<string | null>;
+  /** Family deletion: flags of these children lose their childRef/familyId but are kept (open referrals). */
+  unlinkChildren(childRefs: string[]): Promise<number>;
+
   // Parent rights: export everything, delete everything (answer within 10 days).
   exportFamily(familyId: string): Promise<FamilyExport | null>;
   deleteFamily(familyId: string): Promise<boolean>;

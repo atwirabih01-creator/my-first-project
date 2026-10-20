@@ -51,7 +51,7 @@ export async function callClaude(
   const stream = opts.stream ?? false;
   const purpose = opts.purpose ?? "tutor";
   // Daily spending cap: throws BudgetExceededError before any money is spent.
-  assertCanSpend(purpose);
+  await assertCanSpend(purpose);
   const p = withFallback(params);
   let msg: ClaudeMessage;
   if (testImpl) msg = await testImpl(p, { stream });
@@ -59,7 +59,7 @@ export async function callClaude(
     const c = getClient();
     msg = stream ? await c.beta.messages.stream(p).finalMessage() : await c.beta.messages.create(p);
   }
-  recordUsage(p.model, msg.usage, purpose);
+  await recordUsage(p.model, msg.usage, purpose);
   return msg;
 }
 

@@ -6,6 +6,7 @@
     "@anthropic-ai/sdk": "^0.135.0",
     "@expo/ui": "~58.0.19",
     "@react-native-async-storage/async-storage": "2.2.0",
+    "@supabase/supabase-js": "^2.118.0",
     "expo": "~58.0.12",
     "expo-constants": "~58.0.12",
     "expo-device": "~58.0.5",
@@ -49,7 +50,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "lint": "expo lint",
-    "test:server": "node --import tsx --test server/__tests__/*.test.ts"
+    "test:server": "node --import tsx --test server/__tests__/*.test.ts server/storage/__tests__/*.test.ts"
   },
   "private": true
 }

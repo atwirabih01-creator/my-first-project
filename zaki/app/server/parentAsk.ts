@@ -75,7 +75,7 @@ export async function runParentAsk(req: ParentAskRequest): Promise<ParentAskResp
 
   // 2. Demo mode / budget.
   if (!aiEnabled()) return { reply: FIXED.demo[req.lang], demo: true };
-  if (!canSpend("tutor")) return { reply: FIXED.budget[req.lang], budgetReached: true };
+  if (!(await canSpend("tutor"))) return { reply: FIXED.budget[req.lang], budgetReached: true };
 
   // 3. Build the request: photos are wrapped as DATA; personal numbers/emails scrubbed.
   const imgs = (req.pageImages ?? []).slice(0, MAX_PAGE_IMAGES).map(cleanBase64Image);

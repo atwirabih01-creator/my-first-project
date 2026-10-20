@@ -157,6 +157,6 @@ export type LocalFlag = {
   route: 'reviewer' | 'parent';
   childRef?: string;
   excerpt: string;
-  status: 'new' | 'seen' | 'resolved';
+  status: 'new' | 'seen' | 'referred' | 'resolved';
   note?: string;
 };

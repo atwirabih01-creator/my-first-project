@@ -10,7 +10,7 @@ export async function GET(request: Request): Promise<Response> {
       ok: true,
       ai: aiEnabled(),
       moderation: openAiModerationEnabled() ? "openai" : "fallback",
-      budget: budgetStatus(),
+      budget: await budgetStatus(),
     });
   });
 }

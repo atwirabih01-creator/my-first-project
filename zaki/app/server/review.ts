@@ -1,18 +1,18 @@
-// SAFETY REVIEWER INBOX + family deletion.
+// SAFETY REVIEWER INBOX + family deletion, on top of the storage layer (getStore()):
+// files (server/data/flags.jsonl) by default, or the online database when configured.
 // The independent reviewer (not a family member) sees every flag. Flags with route
 // "reviewer" (possible home involvement, or unclear) are NEVER given to parent-facing code.
-// Source: the flag queue (memory + server/data/flags.jsonl). Reviewer status/notes are kept
-// in server/data/flag-reviews.json (gitignored).
 import { timingSafeEqual } from "node:crypto";
-import fs from "node:fs";
-import path from "node:path";
 
 import { aiEnabled } from "./config/models";
 import { HttpError } from "./http";
-import { __replaceFlags, getFlagQueue, type FlagRecord } from "./safety";
+import { getStore, type FlagStatus, type StoredFlag } from "./storage";
 
-export type ReviewStatus = "new" | "seen" | "resolved";
-export const REVIEW_STATUSES: ReviewStatus[] = ["new", "seen", "resolved"];
+/** Statuses as the reviewer sees them, mapped onto the stored ones. */
+export type ReviewStatus = "new" | "seen" | "referred" | "resolved";
+export const REVIEW_STATUSES: ReviewStatus[] = ["new", "seen", "referred", "resolved"];
+const TO_STORE: Record<ReviewStatus, FlagStatus> = { new: "pending_review", seen: "reviewed", referred: "referred", resolved: "closed" };
+const FROM_STORE: Record<FlagStatus, ReviewStatus> = { pending_review: "new", reviewed: "seen", referred: "referred", closed: "resolved" };
 export const DEMO_REVIEWER_CODE = "2468";
 
 export type ReviewerFlag = {
@@ -21,111 +21,50 @@ export type ReviewerFlag = {
   category: string;
   route: "reviewer" | "parent";
   involvesHome: boolean;
-  speaker: "child" | "tutor";
-  lang: string;
+  speaker: string;
+  lang?: string;
   childRef?: string;
   excerpt: string;
   status: ReviewStatus;
   note?: string;
 };
 
-type ReviewState = Record<string, { status: ReviewStatus; note?: string; updatedAt: string }>;
-let reviews: ReviewState | null = null;
-let fileOverride: { flags?: string | null; reviews?: string | null } = {};
-
-const flagFile = () =>
-  fileOverride.flags !== undefined ? fileOverride.flags : process.env.ZAKI_FLAG_FILE === "off" ? null : process.env.ZAKI_FLAG_FILE || path.join(process.cwd(), "server", "data", "flags.jsonl");
-const reviewFile = () =>
-  fileOverride.reviews !== undefined ? fileOverride.reviews : process.env.ZAKI_FLAG_FILE === "off" ? null : path.join(process.cwd(), "server", "data", "flag-reviews.json");
-
-function loadReviews(): ReviewState {
-  if (reviews) return reviews;
-  reviews = {};
-  const f = reviewFile();
-  if (f) {
-    try {
-      reviews = JSON.parse(fs.readFileSync(f, "utf8")) as ReviewState;
-    } catch {
-      // none yet
-    }
-  }
-  return reviews;
-}
-
-function saveReviews(): void {
-  const f = reviewFile();
-  if (!f || !reviews) return;
-  try {
-    fs.mkdirSync(path.dirname(f), { recursive: true });
-    fs.writeFileSync(f, JSON.stringify(reviews));
-  } catch {
-    // read-only hosting
-  }
-}
-
-/** All flags: the JSONL file (survives restarts) merged with the in-memory queue. */
-function allFlags(): FlagRecord[] {
-  const byId = new Map<string, FlagRecord>();
-  const f = flagFile();
-  if (f) {
-    try {
-      for (const line of fs.readFileSync(f, "utf8").split("\n")) {
-        if (!line.trim()) continue;
-        try {
-          const rec = JSON.parse(line) as FlagRecord;
-          if (rec && rec.id) byId.set(rec.id, rec);
-        } catch {
-          // skip a broken line
-        }
-      }
-    } catch {
-      // no file
-    }
-  }
-  for (const rec of getFlagQueue()) byId.set(rec.id, rec);
-  return [...byId.values()];
-}
-
-const routeOf = (f: FlagRecord): "reviewer" | "parent" => f.route ?? (f.alertParent && !f.involvesHome ? "parent" : "reviewer");
+const toReviewer = (f: StoredFlag): ReviewerFlag => ({
+  id: f.id,
+  ts: f.ts,
+  category: f.category,
+  route: f.route,
+  involvesHome: f.involvesHome,
+  speaker: f.speaker,
+  lang: f.lang,
+  childRef: f.childRef,
+  excerpt: f.excerpt,
+  status: FROM_STORE[f.status] ?? "new",
+  note: f.reviewerNote,
+});
 
 /** Reviewer view: every flag, newest first, scrubbed excerpt, childRef only (never names). */
-export function listFlagsForReviewer(): ReviewerFlag[] {
-  const r = loadReviews();
-  return allFlags()
-    .map((f) => ({
-      id: f.id,
-      ts: f.ts,
-      category: f.category,
-      route: routeOf(f),
-      involvesHome: f.involvesHome,
-      speaker: f.speaker,
-      lang: f.lang,
-      childRef: f.childRef,
-      excerpt: f.excerpt,
-      status: r[f.id]?.status ?? "new",
-      note: r[f.id]?.note,
-    }))
-    .sort((a, b) => (a.ts < b.ts ? 1 : -1));
+export async function listFlagsForReviewer(): Promise<ReviewerFlag[]> {
+  const flags = await getStore().listFlags();
+  return flags.map(toReviewer).sort((a, b) => (a.ts < b.ts ? 1 : -1));
 }
 
-export function updateFlagReview(id: string, status: ReviewStatus, note?: string): ReviewerFlag {
+export async function updateFlagReview(id: string, status: ReviewStatus, note?: string): Promise<ReviewerFlag> {
   if (!REVIEW_STATUSES.includes(status)) throw new HttpError(400, `status must be one of ${REVIEW_STATUSES.join(", ")}`);
-  const flag = listFlagsForReviewer().find((f) => f.id === id);
-  if (!flag) throw new HttpError(404, "flag not found", "not_found");
-  const r = loadReviews();
-  r[id] = { status, note: note?.slice(0, 1000), updatedAt: new Date().toISOString() };
-  saveReviews();
-  return { ...flag, status, note: r[id].note };
+  const updated = await getStore().reviewFlag(id, { status: TO_STORE[status], reviewerNote: note?.slice(0, 1000) });
+  if (!updated) throw new HttpError(404, "flag not found", "not_found");
+  return toReviewer(updated);
 }
 
 /**
- * The ONLY flag view parent-facing code may use: route "parent" flags for these children,
- * with no excerpt (category + time only). Reviewer-route flags are never included.
+ * The ONLY flag view parent-facing code may use: route "parent" flags (or ones the reviewer
+ * chose to share) for these children, with no excerpt (category + time only).
  */
-export function flagsForParent(childRefs: string[]): { category: string; ts: string }[] {
+export async function flagsForParent(childRefs: string[]): Promise<{ category: string; ts: string }[]> {
   const refs = new Set(childRefs);
-  return allFlags()
-    .filter((f) => routeOf(f) === "parent" && f.childRef !== undefined && refs.has(f.childRef))
+  const flags = await getStore().listFlags();
+  return flags
+    .filter((f) => (f.route === "parent" || f.sharedWithParent) && f.childRef !== undefined && refs.has(f.childRef))
     .map((f) => ({ category: f.category, ts: f.ts }));
 }
 
@@ -140,45 +79,9 @@ export function checkReviewerCode(request: Request): void {
 }
 
 /**
- * Family deletion: stored items for these childRefs are removed. Safety flags are kept ONLY in
- * anonymised form (no childRef, no excerpt) so the reviewer's safety record isn't lost.
+ * Family deletion: flags of these children are kept for the reviewer (an open referral must
+ * not vanish) but lose every link to the child/family (no childRef, no familyId).
  */
-export function anonymiseFlagsFor(childRefs: string[]): number {
-  const refs = new Set(childRefs);
-  let n = 0;
-  const scrub = (f: FlagRecord): FlagRecord => {
-    if (!f.childRef || !refs.has(f.childRef)) return f;
-    n++;
-    return { ...f, childRef: undefined, excerpt: "[removed at the family's request]" };
-  };
-  __replaceFlags(scrub);
-  const f = flagFile();
-  if (f) {
-    try {
-      const lines = fs.readFileSync(f, "utf8").split("\n").filter((l) => l.trim());
-      let changed = false;
-      const out = lines.map((line) => {
-        try {
-          const rec = JSON.parse(line) as FlagRecord;
-          if (rec.childRef && refs.has(rec.childRef)) {
-            changed = true;
-            return JSON.stringify({ ...rec, childRef: undefined, excerpt: "[removed at the family's request]" });
-          }
-        } catch {
-          // keep as is
-        }
-        return line;
-      });
-      if (changed) fs.writeFileSync(f, out.join("\n") + "\n");
-    } catch {
-      // no file
-    }
-  }
-  return n;
-}
-
-/** Tests only. */
-export function __resetReviewForTests(files: { flags?: string | null; reviews?: string | null } = { flags: null, reviews: null }): void {
-  reviews = null;
-  fileOverride = files;
+export async function anonymiseFlagsFor(childRefs: string[]): Promise<number> {
+  return getStore().unlinkChildren(childRefs);
 }

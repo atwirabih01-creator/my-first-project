@@ -42,12 +42,12 @@ describe("daily AI budget", () => {
     assert.equal(estimateCostUsd("claude-sonnet-5-5", null), 0);
   });
 
-  it("default limit is $1.00; env overrides; health status reports used/remaining", () => {
+  it("default limit is $1.00; env overrides; health status reports used/remaining", async () => {
     __resetBudgetForTests(null);
-    assert.equal(budgetStatus().limitUsd, 1);
+    assert.equal((await budgetStatus()).limitUsd, 1);
     process.env.ZAKI_DAILY_BUDGET_USD = "2.5";
-    spend(0.5);
-    const s = budgetStatus();
+    await spend(0.5);
+    const s = await budgetStatus();
     assert.equal(s.limitUsd, 2.5);
     assert.equal(s.spentUsd, 0.5);
     assert.equal(s.remainingUsd, 2);
@@ -56,19 +56,19 @@ describe("daily AI budget", () => {
 
   it("over budget: teaching calls refused; safety classifier may use the 10% reserve, then stops", async () => {
     mockClaude(() => textMsg("ok"));
-    spend(1.0);
-    assert.equal(canSpend("tutor"), false);
-    assert.equal(canSpend("lesson"), false);
-    assert.equal(canSpend("safety"), true);
+    await spend(1.0);
+    assert.equal(await canSpend("tutor"), false);
+    assert.equal(await canSpend("lesson"), false);
+    assert.equal(await canSpend("safety"), true);
     await assert.rejects(callClaude({ model: "claude-sonnet-5-5", max_tokens: 10, messages: [] }, { purpose: "tutor" }), BudgetExceededError);
     await callClaude({ model: "claude-haiku-5-5", max_tokens: 10, messages: [] }, { purpose: "safety" });
-    spend(0.2);
-    assert.equal(canSpend("safety"), false);
+    await spend(0.2);
+    assert.equal(await canSpend("safety"), false);
   });
 
   it("tutor over budget: friendly fixed reply, no tutor model call", async () => {
     const calls = mockClaude((p) => (isClassifierCall(p) ? textMsg(NONE) : textMsg("SHOULD NOT BE USED")));
-    spend(1.0);
+    await spend(1.0);
     const r = await runTutorTurn(tutorReq());
     assert.equal(r.budgetReached, true);
     assert.match(r.reply, /flashcards/);
@@ -77,7 +77,7 @@ describe("daily AI budget", () => {
 
   it("keyword safety ALWAYS runs, even with the whole budget and reserve used up", async () => {
     mockClaude(() => textMsg(NONE));
-    spend(5);
+    await spend(5);
     const r = await runTutorTurn(tutorReq({ message: "baba darabne" }));
     assert.equal(r.safety.showSafetyScreen, true);
     assert.match(r.reply, /Thank you for telling me/);
@@ -92,12 +92,12 @@ describe("daily AI budget", () => {
     assert.equal(third.budgetReached, true);
     // another child still has turns
     assert.equal((await runTutorTurn(tutorReq({ childRef: "kid_other1" }))).budgetReached, undefined);
-    assert.equal(takeChildTurn("kid_123456"), false);
+    assert.equal(await takeChildTurn("kid_123456"), false);
   });
 
   it("lesson pack over budget returns { budgetReached: true } without calling AI", async () => {
     const calls = mockClaude(() => textMsg("{}"));
-    spend(1.0);
+    await spend(1.0);
     const r = await buildLessonPack({ subject: "math", topic: "Decimals", grade: 4, lang: "en", country: "LB" });
     assert.deepEqual(r, { budgetReached: true });
     assert.equal(calls.length, 0);
@@ -108,11 +108,11 @@ describe("daily AI budget", () => {
     const file = path.join(dir, "budget.json");
     mockClaude(() => fakeMessage([{ type: "text", text: "hi", citations: null }]));
     __resetBudgetForTests(file);
-    recordUsage("claude-haiku-5-5", { input_tokens: 1_000_000 }, "safety");
+    await recordUsage("claude-haiku-5-5", { input_tokens: 1_000_000 }, "safety");
     const saved = JSON.parse(fs.readFileSync(file, "utf8"));
     assert.equal(saved.spentUsd, 0.1);
     __resetBudgetForTests(file); // simulate a server restart: total is reloaded
-    assert.equal(budgetStatus().spentUsd, 0.1);
+    assert.equal((await budgetStatus()).spentUsd, 0.1);
     __resetBudgetForTests(null);
   });
 });

@@ -21,6 +21,7 @@ export const SIZE_LIMITS = {
   parent: 4_000,
   exam: 2_000_000, // several saved lessons
   parentAsk: 7_000_000, // up to 3 photos
+  family: 2_000_000, // progress snapshots
 } as const;
 
 export function json(data: unknown, status = 200, headers: Record<string, string> = {}): Response {
@@ -62,6 +63,7 @@ export const RATE_LIMITS = {
   parentAsk: { limit: 20, windowMs: 60_000 },
   review: { limit: 60, windowMs: 60_000 },
   deleteFamily: { limit: 5, windowMs: 60_000 },
+  family: { limit: 30, windowMs: 60_000 },
 } as const;
 
 /**
