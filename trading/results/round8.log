@@ -1,1 +1,7 @@
 Q001 4h dip s1.5 t2.0 h24 ev0.004 k60 n= 273 win=0.619 pf= 1.76 ret= 52.65 dd=13.16 win/loss=5.88/-5.44 | halves pf 1.78/1.73
+Q002 4h dip s1.5 t2.0 h24 ev0.004 k100 n= 277 win=0.610 pf= 1.67 ret= 47.69 dd=10.85 win/loss=5.81/-5.43 | halves pf 1.7/1.64
+Q003 4h dip s1.5 t2.0 h24 ev0.006 k60 n= 254 win=0.618 pf= 1.79 ret= 49.82 dd=12.09 win/loss=5.91/-5.35 | halves pf 1.75/1.84
+Q004 4h dip s1.5 t2.0 h24 ev0.006 k100 n= 253 win=0.625 pf= 1.82 ret= 50.09 dd=11.06 win/loss=5.78/-5.29 | halves pf 1.82/1.81
+Q005 4h dip s1.5 t2.0 h24 ev0.01 k60 n= 198 win=0.586 pf= 1.47 ret= 22.54 dd=12.52 win/loss=5.6/-5.4 | halves pf 1.63/1.29
+Q006 4h dip s1.5 t2.0 h24 ev0.01 k100 n= 188 win=0.596 pf= 1.62 ret= 26.61 dd=11.04 win/loss=5.6/-5.11 | halves pf 1.9/1.34
+Q007 4h dip s1.5 t2.0 h48 ev0.004 k60 n= 257 win=0.611 pf= 1.69 ret= 47.67 dd=11.15 win/loss=6.15/-5.71 | halves pf 1.82/1.56
