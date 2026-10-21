@@ -4,3 +4,4 @@
   - Added D11–D14 on Sage's advice: smaller losses, small quick targets, time exits, early lock-in.
   - A "win" now means more than +0.10% after fees.
   - Rules updated to the owner's final target: 80 wins of 100, profit after fees, profit factor ≥ 1.2, biggest drop ≤ 10%. The old "average loss ≤ 1.5× average win" rule was retired.
+- **21 Oct 2026 — session 2:** added waiting "enter if price reaches a zone" plans (`desk_journal.py limit`), filled automatically from real prices. Backtests show D11–D14 alone don't meet the bar on meme dips.

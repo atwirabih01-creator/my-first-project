@@ -6,7 +6,10 @@ so all versions are judged on exactly the same ideas. Outcomes are worked out fr
 prices: stop first if both are touched in the same hour, 0.30% costs per trade.
 
   python3 desk_journal.py add SYMBOL long|short "atlas reason" "hawk plan" "sage reason" [setup]
-  python3 desk_journal.py update      # close finished trades from real prices
+  python3 desk_journal.py limit SYMBOL long|short LOW HIGH EXPIRES_HOURS "atlas" "hawk" "sage" [setup]
+                                      # Sage-approved "enter only if price reaches LOW-HIGH" plan; waits in
+                                      # journal/pending.csv and fills automatically on the next update
+  python3 desk_journal.py update      # fill pending plans, close finished trades from real prices
   python3 desk_journal.py score       # scoreboard per version + pass check
 """
 import csv, sys, time
@@ -51,11 +54,50 @@ def atr4h(symbol):
     return float(tr.ewm(alpha=1 / 14, adjust=False).mean().iloc[-1]), float(df.close.iloc[-1])
 
 
-def add(symbol, side, atlas_reason, hawk_plan, sage_reason, setup=""):
+PENDING = HERE / "journal" / "pending.csv"
+
+
+def limit(symbol, side, low, high, expires_hours, atlas_reason, hawk_plan, sage_reason, setup=""):
+    now = pd.Timestamp.now(tz="UTC").floor("min")
+    new = not PENDING.exists()
+    PENDING.parent.mkdir(exist_ok=True)
+    with open(PENDING, "a", newline="") as fh:
+        w = csv.writer(fh)
+        if new:
+            w.writerow(["created_utc", "expires_utc", "symbol", "side", "low", "high", "setup", "atlas", "hawk", "sage", "status"])
+        w.writerow([now, now + pd.Timedelta(hours=float(expires_hours)), symbol, side, float(low), float(high), setup,
+                    atlas_reason, hawk_plan, sage_reason, "waiting"])
+    print(f"waiting: {side} {symbol} if price reaches {low}-{high} before {now + pd.Timedelta(hours=float(expires_hours))}")
+
+
+def fill_pending():
+    """Turn waiting plans into trades when real prices reached the zone (filled at the zone edge)."""
+    if not PENDING.exists():
+        return
+    pend = pd.read_csv(PENDING)
+    end = int(time.time() * 1000)
+    for i, r in pend[pend.status == "waiting"].iterrows():
+        start = int(pd.Timestamp(r.created_utc).timestamp() * 1000)
+        bars = F.fetch(r.symbol, start, end).iloc[:-1]
+        bars = bars[(bars.index > pd.Timestamp(r.created_utc)) & (bars.index <= pd.Timestamp(r.expires_utc))]
+        hit = bars[(bars.low <= r.high) & (bars.high >= r.low)]
+        if len(hit):
+            t = hit.index[0]
+            o = float(hit.open.iloc[0])
+            px = min(o, r.high) if r.side == "long" else max(o, r.low)   # long fills at the zone top or better
+            add(r.symbol, r.side, r.atlas, r.hawk, r.sage, r.setup, entry=px, when=t + pd.Timedelta(minutes=59))
+            pend.loc[i, "status"] = f"filled {t}"
+        elif pd.Timestamp.now(tz="UTC") > pd.Timestamp(r.expires_utc):
+            pend.loc[i, "status"] = "expired"
+    pend.to_csv(PENDING, index=False)
+
+
+def add(symbol, side, atlas_reason, hawk_plan, sage_reason, setup="", entry=None, when=None):
     a, _ = atr4h(symbol)
     end = int(time.time() * 1000)
-    entry = float(F.fetch(symbol, end - 3 * 3600 * 1000, end).close.iloc[-1])
-    now = pd.Timestamp.now(tz="UTC").floor("min")
+    if entry is None:
+        entry = float(F.fetch(symbol, end - 3 * 3600 * 1000, end).close.iloc[-1])
+    now = (when or pd.Timestamp.now(tz="UTC")).floor("min")
     s = 1 if side == "long" else -1
     IDEAS.parent.mkdir(exist_ok=True)
     new = not IDEAS.exists()
@@ -106,6 +148,7 @@ def resolve(row, p, bars):
 
 
 def update():
+    fill_pending()
     if not TRADES.exists():
         print("no trades yet"); return
     t = pd.read_csv(TRADES, dtype={"target": object, "closed_utc": object, "exit": object, "result_pct": object})
@@ -150,6 +193,8 @@ if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "score"
     if cmd == "add":
         add(*sys.argv[2:])
+    elif cmd == "limit":
+        limit(*sys.argv[2:])
     elif cmd == "update":
         update()
     else:

@@ -64,6 +64,12 @@ Give Hawk the full research brief. For each shortlisted coin Hawk produces an **
 3. **All three must agree.** If any one says no, there is no trade. Sage writes one line per plan:
    APPROVED or REJECTED, with the reason.
 
+## Recording approved plans
+- Enter-now plans: `python3 trading/desk_journal.py add SYMBOL long|short "atlas" "hawk" "sage" SETUP`
+- "Enter only if price reaches a zone" plans (Sage-approved in advance):
+  `python3 trading/desk_journal.py limit SYMBOL long|short LOW HIGH EXPIRES_HOURS "atlas" "hawk" "sage" SETUP`
+  — they wait in `journal/pending.csv` and fill automatically from real prices on the next `update`.
+
 ## Record it (always, even when there is no trade)
 Write `trading/journal/YYYY-MM-DD-HHMM.md` with: the research brief (short), Hawk's plans, the
 backtest numbers, each agent's vote, and Sage's decision. For approved plans also append one row to
