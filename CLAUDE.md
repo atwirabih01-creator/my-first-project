@@ -37,3 +37,9 @@ this file or into the relevant agent's file, so the team remembers it next time.
   fees, with losses kept small"**. Pass = on a sealed exam of never-seen markets: 100+ paper
   trades, profit after fees with profit factor ≥ 1.2, average loss ≤ 1.5× average win, max
   drawdown ≤ 10%. Real money still needs the owner's explicit OK.
+- 21 Oct 2026: the three trading agents must **think, not follow a fixed habit**. Every decision
+  goes through three steps in order: (1) Atlas — deep study and research (news, social buzz,
+  money flows, history); (2) Hawk — deep analysis of the chart and a precise plan; (3) a
+  backtest of that exact setup and agreement of all three (Sage decides last). The aim is
+  **consistency** across crypto and especially meme coins — steady results, not big trades.
+  The routine lives in `.claude/skills/trading-desk/SKILL.md`; follow it every session.
