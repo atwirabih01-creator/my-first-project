@@ -40,7 +40,9 @@ SETUPS = {
 
 
 def version(setup, side):
-    v = Version(f"check {setup}", allow_short=side != "long", min_target_pct=0.015, **SETUPS[setup])
+    import copy
+    cfg = copy.deepcopy(SETUPS[setup])          # never share settings between versions
+    v = Version(f"check {setup}", allow_short=side != "long", min_target_pct=0.015, **cfg)
     if side == "short":
         v.extra["short_only"] = True
     return v
@@ -88,6 +90,8 @@ def desk_versions(setup, side):
         v.stop_atr, v.max_hold = p["stop"], max(p["hold"] // v.bar_hours, 1)
         if p["target"]:
             v.target_atr = p["target"]
+            v.extra.pop("breakeven_atr", None)      # fixed-target versions never use a trailing stop
+            v.extra.pop("trail_atr", None)
         else:
             v.target_atr = 10.0
             v.extra.update(breakeven_atr=p["breakeven"], trail_atr=p["trail"])

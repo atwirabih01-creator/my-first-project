@@ -1,19 +1,23 @@
 """Desk journal: records every paper trade the three agents agree on, and scores it from real prices.
 
-Every agreed idea is recorded once (coin, side, price, the coin's typical 4-hour range "ATR").
-Each of the 10 desk versions turns that idea into its own trade (its own stop, target, hold time),
-so all versions are judged on exactly the same ideas. Outcomes are worked out from Binance hourly
-prices: stop first if both are touched in the same hour, 0.30% costs per trade.
+Every agreed idea is recorded once (coin, side, entry price, the coin's typical 4-hour range "ATR"
+measured on 4-hour bars that had finished before entry). Each desk version turns that idea into its
+own trade (its own stop, target, hold time), so all versions are judged on exactly the same ideas.
+Outcomes come from Binance hourly prices, pessimistically: in the entry hour only the stop counts,
+in later hours the stop is checked before the target, and costs are 0.30% per trade.
 
   python3 desk_journal.py add SYMBOL long|short "atlas reason" "hawk plan" "sage reason" SETUP [STOP TARGET HOLD_H]
       SETUP decides which versions are recorded: only those the gate (gate.py) does not mark as known
       losers for this setup/side/coin group. STOP/TARGET/HOLD_H (prices, hours) add version "HWK" =
-      Hawk's own exact plan.
-  python3 desk_journal.py limit SYMBOL long|short LOW HIGH EXPIRES_HOURS "atlas" "hawk" "sage" [setup]
-                                      # Sage-approved "enter only if price reaches LOW-HIGH" plan; waits in
-                                      # journal/pending.csv and fills automatically on the next update
-  python3 desk_journal.py update      # fill pending plans, close finished trades from real prices
+      Hawk's own exact plan (rejected if the stop or target is on the wrong side of the entry).
+  python3 desk_journal.py limit SYMBOL long|short LOW HIGH EXPIRES_HOURS "atlas" "hawk" "sage" SETUP [STOP TARGET HOLD_H]
+      Sage-approved "enter only if price reaches LOW-HIGH" plan; waits in journal/pending.csv and fills
+      automatically (at the zone edge or the bar's open, whichever is realistic) on the next update.
+  python3 desk_journal.py update      # fill waiting plans, close finished trades from real prices
   python3 desk_journal.py score       # scoreboard per version + pass check
+
+One open idea per coin at a time (matches the backtests). A version's settings are copied onto each
+trade row when it opens, so editing a version later never changes trades already recorded.
 """
 import csv, sys, time
 from pathlib import Path
@@ -25,9 +29,11 @@ import paper_lab as L
 HERE = Path(__file__).parent
 IDEAS = HERE / "journal" / "ideas.csv"
 TRADES = HERE / "journal" / "paper_trades.csv"
+PENDING = HERE / "journal" / "pending.csv"
 COST = 0.0015
 
-# The 10 desk versions: how far the stop and target sit (in 4-hour ATRs) and the longest hold.
+# Desk versions: how far the stop and target sit (in 4-hour ATRs) and the longest hold (hours).
+# Never change a version's numbers once it has trades — add a new version instead.
 VERSIONS = {
     "D01": dict(stop=2.0, target=1.0, hold=48),
     "D02": dict(stop=2.0, target=0.75, hold=48),
@@ -46,25 +52,36 @@ VERSIONS = {
     "D14": dict(stop=1.25, target=None, hold=24, breakeven=0.5, trail=0.75),  # lock in early, then trail
 }
 WIN_MIN_PCT = 0.10           # a trade only counts as a win above +0.10% after fees (break-even exits are "flat")
-MIN_TARGET_PCT = 0.01        # a version skips an idea if its target is under 1% (fees would eat it)
+MIN_TARGET_PCT = 0.015       # same minimum target as the backtests and the gate
+TRADE_COLS = ["idea_id", "version", "opened_utc", "symbol", "side", "entry", "stop", "target", "hold_hours",
+              "atr", "breakeven", "trail", "status", "closed_utc", "exit", "result_pct"]
 
 
-def atr4h(symbol):
-    end = int(time.time() * 1000)
-    df = L.bars(F.fetch(symbol, end - 30 * 86400 * 1000, end), 4).iloc[:-1]
+def atr4h(symbol, before=None):
+    """Typical 4-hour range from 4-hour bars that finished before `before` (default: now)."""
+    before = pd.Timestamp(before) if before is not None else pd.Timestamp.now(tz="UTC")
+    end = int(before.timestamp() * 1000)
+    df = L.bars(F.fetch(symbol, end - 30 * 86400 * 1000, end), 4)
+    df = df[df.index + pd.Timedelta(hours=4) <= before]
     pc = df.close.shift()
     tr = pd.concat([df.high - df.low, (df.high - pc).abs(), (df.low - pc).abs()], axis=1).max(axis=1)
-    return float(tr.ewm(alpha=1 / 14, adjust=False).mean().iloc[-1]), float(df.close.iloc[-1])
+    return float(tr.ewm(alpha=1 / 14, adjust=False).mean().iloc[-1])
 
 
-PENDING = HERE / "journal" / "pending.csv"
+def _read(path):
+    return pd.read_csv(path, keep_default_na=False, dtype=str) if path.exists() else pd.DataFrame()
+
+
+def open_symbols():
+    t = _read(TRADES)
+    return set(t[t.status == "open"].symbol) if len(t) else set()
 
 
 def limit(symbol, side, low, high, expires_hours, atlas_reason, hawk_plan, sage_reason, setup="",
           hstop="", htarget="", hhold=""):
     now = pd.Timestamp.now(tz="UTC").floor("min")
-    new = not PENDING.exists()
     PENDING.parent.mkdir(exist_ok=True)
+    new = not PENDING.exists()
     with open(PENDING, "a", newline="") as fh:
         w = csv.writer(fh)
         if new:
@@ -76,136 +93,166 @@ def limit(symbol, side, low, high, expires_hours, atlas_reason, hawk_plan, sage_
 
 
 def fill_pending():
-    """Turn waiting plans into trades when real prices reached the zone (filled at the zone edge)."""
-    if not PENDING.exists():
+    """Turn waiting plans into trades when real prices reached the zone."""
+    pend = _read(PENDING)
+    if not len(pend):
         return
-    pend = pd.read_csv(PENDING)
     end = int(time.time() * 1000)
-    for i, r in pend[pend.status == "waiting"].iterrows():
-        start = int(pd.Timestamp(r.created_utc).timestamp() * 1000)
-        bars = F.fetch(r.symbol, start, end).iloc[:-1]
-        bars = bars[(bars.index > pd.Timestamp(r.created_utc)) & (bars.index <= pd.Timestamp(r.expires_utc))]
-        hit = bars[(bars.low <= r.high) & (bars.high >= r.low)]
-        if len(hit):
-            t = hit.index[0]
-            o = float(hit.open.iloc[0])
-            px = min(o, r.high) if r.side == "long" else max(o, r.low)   # long fills at the zone top or better
-            hp = [None if pd.isna(x) or x == "" else x for x in (r.get("hstop"), r.get("htarget"), r.get("hhold"))]
-            add(r.symbol, r.side, r.atlas, r.hawk, r.sage, r.setup, *hp, entry=px, when=t + pd.Timedelta(minutes=59))
-            pend.loc[i, "status"] = f"filled {t}"
-        elif pd.Timestamp.now(tz="UTC") > pd.Timestamp(r.expires_utc):
-            pend.loc[i, "status"] = "expired"
-    pend.to_csv(PENDING, index=False)
+    for i in pend.index[pend.status == "waiting"]:
+        r = pend.loc[i]
+        try:
+            created, expires = pd.Timestamp(r.created_utc), pd.Timestamp(r.expires_utc)
+            lo, hi = float(r.low), float(r.high)
+            bars = F.fetch(r.symbol, int(created.timestamp() * 1000), end).iloc[:-1]      # finished hours only
+            bars = bars[(bars.index >= created.floor("h")) & (bars.index < expires)]
+            hit = bars[(bars.low <= hi) & (bars.high >= lo)]
+            if len(hit):
+                t, o = hit.index[0], float(hit.open.iloc[0])
+                px = min(max(o, lo), hi)        # opened inside the zone: the open; otherwise the zone edge reached
+                hp = [x if x != "" else None for x in (r.hstop, r.htarget, r.hhold)]
+                done = add(r.symbol, r.side, r.atlas, r.hawk, r.sage, r.setup, *hp, entry=px, when=t)
+                pend.loc[i, "status"] = f"filled {t}" if done else f"skipped {t} (coin already has an open idea)"
+            elif pd.Timestamp.now(tz="UTC") > expires:
+                pend.loc[i, "status"] = "expired"
+        except Exception as e:
+            print(f"pending row {i} ({r.symbol}): will retry next update — {e}")
+        pend.to_csv(PENDING, index=False)          # save after every row, so a later failure can't double-fill
 
 
 def add(symbol, side, atlas_reason, hawk_plan, sage_reason, setup="", hstop=None, htarget=None, hhold=None,
         entry=None, when=None):
-    a, _ = atr4h(symbol)
-    end = int(time.time() * 1000)
+    """Record one agreed idea. `when` = start of the hour it was entered (fills); default: now."""
+    if symbol in open_symbols():
+        print(f"skipped: {symbol} already has an open idea (one at a time per coin)")
+        return False
+    opened = pd.Timestamp(when) if when is not None else pd.Timestamp.now(tz="UTC").floor("min")
+    a = atr4h(symbol, before=opened)
     if entry is None:
+        end = int(time.time() * 1000)
         entry = float(F.fetch(symbol, end - 3 * 3600 * 1000, end).close.iloc[-1])
-    now = (when or pd.Timestamp.now(tz="UTC")).floor("min")
     s = 1 if side == "long" else -1
+    idea_id = f"{opened:%Y%m%d%H%M}-{symbol}-{side}"
+    ideas = _read(IDEAS)
+    if len(ideas) and idea_id in set(ideas.idea_id):
+        print(f"skipped: {idea_id} already recorded"); return False
     IDEAS.parent.mkdir(exist_ok=True)
-    new = not IDEAS.exists()
-    idea_id = f"{now:%Y%m%d%H%M}-{symbol}"
     with open(IDEAS, "a", newline="") as fh:
         w = csv.writer(fh)
-        if new:
+        if not len(ideas):
             w.writerow(["idea_id", "opened_utc", "symbol", "side", "entry", "atr4h", "setup", "atlas", "hawk", "sage"])
-        w.writerow([idea_id, now, symbol, side, entry, a, setup, atlas_reason, hawk_plan, sage_reason])
+        w.writerow([idea_id, opened, symbol, side, entry, a, setup, atlas_reason, hawk_plan, sage_reason])
+    try:
+        from gate import allowed
+        ok = set(allowed(setup, side, symbol)) if setup else set(VERSIONS)
+    except Exception:
+        ok = set(VERSIONS)
+    rows = []
+    if hstop and htarget and hhold:                              # Hawk's own exact plan
+        hs, ht = float(hstop), float(htarget)
+        if s * (entry - hs) > 0 and s * (ht - entry) > 0:
+            rows.append([idea_id, "HWK", opened, symbol, side, entry, hs, ht, int(float(hhold)), a, "", "",
+                         "open", "", "", ""])
+        else:
+            print(f"HWK not recorded: stop {hs} / target {ht} are on the wrong side of entry {entry}")
+    for name, p in VERSIONS.items():
+        if name not in ok:
+            continue                                             # known loser for this kind of trade
+        if p["target"] and p["target"] * a / entry < MIN_TARGET_PCT:
+            continue                                             # target too small to beat fees
+        tgt = entry + s * p["target"] * a if p["target"] else ""
+        rows.append([idea_id, name, opened, symbol, side, entry, entry - s * p["stop"] * a, tgt, p["hold"], a,
+                     p.get("breakeven", ""), p.get("trail", ""), "open", "", "", ""])
     new = not TRADES.exists()
     with open(TRADES, "a", newline="") as fh:
         w = csv.writer(fh)
         if new:
-            w.writerow(["idea_id", "version", "opened_utc", "symbol", "side", "entry", "stop", "target",
-                        "hold_hours", "status", "closed_utc", "exit", "result_pct"])
-        try:
-            from gate import allowed
-            ok = set(allowed(setup, side, symbol)) if setup else set(VERSIONS)
-        except Exception:
-            ok = set(VERSIONS)
-        if hstop:                                                # Hawk's own exact plan
-            w.writerow([idea_id, "HWK", now, symbol, side, entry, float(hstop), float(htarget), int(float(hhold)),
-                        "open", "", "", ""])
-        for name, p in VERSIONS.items():
-            if name not in ok:
-                continue                                         # known loser for this kind of trade
-            tgt = entry + s * p["target"] * a if p["target"] else ""
-            if p["target"] and p["target"] * a / entry < MIN_TARGET_PCT:
-                continue
-            w.writerow([idea_id, name, now, symbol, side, entry, entry - s * p["stop"] * a, tgt, p["hold"],
-                        "open", "", "", ""])
-    print(f"recorded {idea_id}: {side} {symbol} at {entry} (4h range {a / entry:.2%})")
+            w.writerow(TRADE_COLS)
+        w.writerows(rows)
+    print(f"recorded {idea_id}: {side} {symbol} at {entry} (4h range {a / entry:.2%}); versions: "
+          f"{', '.join(r[1] for r in rows) or 'none'}")
+    return True
 
 
-def resolve(row, p, bars):
-    """Walk the hourly bars after entry; same pessimistic rules as the backtests."""
+def resolve(row, bars):
+    """Walk hourly bars from the entry hour; pessimistic rules (see module notes)."""
     s = 1 if row.side == "long" else -1
     e, stop = float(row.entry), float(row.stop)
-    tgt = float(row.target) if row.target == row.target and row.target != "" else None
-    a = abs(e - stop) / p["stop"]
-    best, armed = e, False
-    after = bars[bars.index > pd.Timestamp(row.opened_utc)]
+    tgt = float(row.target) if row.target not in ("", None) else None
+    a = float(row.atr) if row.get("atr", "") not in ("", None) else None
+    be = float(row.breakeven) if row.get("breakeven", "") not in ("", None) else None
+    tr = float(row.trail) if row.get("trail", "") not in ("", None) else None
+    opened = pd.Timestamp(row.opened_utc)
+    after = bars[bars.index >= opened.floor("h")]
     hold = int(float(row.hold_hours))
-    for t, b in after.head(hold).iterrows():
+    best = e
+    for k, (t, b) in enumerate(after.head(hold).iterrows()):
         if (b.low <= stop) if s > 0 else (b.high >= stop):
-            px = b.open if ((b.open < stop) if s > 0 else (b.open > stop)) else stop
-            return "closed", t, px
+            gap = (b.open < stop) if s > 0 else (b.open > stop)
+            return "closed", t + pd.Timedelta(hours=1), (b.open if gap and k > 0 else stop)
+        if k == 0:
+            continue                       # entry hour: we don't know if the high/low came before entry
         if tgt is not None and ((b.high >= tgt) if s > 0 else (b.low <= tgt)):
-            return "closed", t, tgt
+            return "closed", t + pd.Timedelta(hours=1), tgt
         best = max(best, b.high) if s > 0 else min(best, b.low)
-        if p.get("breakeven") and s * (best - e) >= p["breakeven"] * a:
+        if be and a and s * (best - e) >= be * a:                 # takes effect from the next hour
             lock = e * (1 + s * 2.5 * COST)
-            lock = (max if s > 0 else min)(lock, best - s * p["trail"] * a)
+            lock = (max if s > 0 else min)(lock, best - s * tr * a)
             stop = (max if s > 0 else min)(stop, lock)
-            armed = True
     if len(after) >= hold:
-        return "closed", after.index[hold - 1], float(after.close.iloc[hold - 1])
+        return "closed", after.index[hold - 1] + pd.Timedelta(hours=1), float(after.close.iloc[hold - 1])
     return "open", None, None
 
 
 def update():
     fill_pending()
-    if not TRADES.exists():
+    t = _read(TRADES)
+    if not len(t):
         print("no trades yet"); return
-    t = pd.read_csv(TRADES, dtype={"target": object, "closed_utc": object, "exit": object, "result_pct": object})
     open_ = t[t.status == "open"]
     end = int(time.time() * 1000)
     cache = {}
+    for sym, g in open_.groupby("symbol"):                 # one download per coin, from its oldest open trade
+        start = int(pd.to_datetime(g.opened_utc).min().timestamp() * 1000) - 3600 * 1000
+        cache[sym] = F.fetch(sym, start, end).iloc[:-1]
     for i, r in open_.iterrows():
-        if r.symbol not in cache:
-            start = int(pd.Timestamp(r.opened_utc).timestamp() * 1000) - 3600 * 1000
-            cache[r.symbol] = F.fetch(r.symbol, min(start, end - 5 * 86400 * 1000), end).iloc[:-1]
-        params = VERSIONS.get(r.version, {"stop": 1.0})              # HWK: Hawk's own stop/target/hold
-        status, when, px = resolve(r, params, cache[r.symbol])
+        status, when, px = resolve(r, cache[r.symbol])
         if status == "closed":
             s = 1 if r.side == "long" else -1
-            t.loc[i, ["status", "closed_utc", "exit"]] = ["closed", str(when), px]
-            t.loc[i, "result_pct"] = round(100 * (s * (px / float(r.entry) - 1) - 2 * COST), 3)
+            t.loc[i, ["status", "closed_utc", "exit"]] = ["closed", str(when), str(px)]
+            t.loc[i, "result_pct"] = str(round(100 * (s * (px / float(r.entry) - 1) - 2 * COST), 3))
     t.to_csv(TRADES, index=False)
     print(f"open trades checked: {len(open_)}, still open: {(t.status == 'open').sum()}")
 
 
+def stats(r):
+    """r = results as fractions, in closing order."""
+    wins, losses = r[r > 0], r[r <= 0]
+    won = r > WIN_MIN_PCT / 100
+    eq = 10_000 * np.cumprod(1 + 0.10 * r.values) if len(r) else np.array([10_000.0])   # 10% of account per trade
+    dd = float((1 - eq / np.maximum.accumulate(eq)).max() * 100)
+    pf = float(wins.sum() / -losses.sum()) if len(losses) and losses.sum() else (99.0 if len(wins) else 0.0)
+    return won, eq, dd, pf
+
+
 def score():
-    if not TRADES.exists():
+    t = _read(TRADES)
+    if not len(t):
         print("no trades yet"); return
-    t = pd.read_csv(TRADES)
     rows = []
     for v, g in t.groupby("version"):
         c = g[g.status == "closed"].sort_values("closed_utc")
         r = c.result_pct.astype(float) / 100
-        wins, losses = r[r > 0], r[r <= 0]
-        won = r > WIN_MIN_PCT / 100
-        eq = 10_000 * np.cumprod(1 + 0.10 * r.values) if len(r) else np.array([10_000.0])
-        dd = float((1 - eq / np.maximum.accumulate(eq)).max() * 100)
-        pf = float(wins.sum() / -losses.sum()) if len(losses) and losses.sum() else (99.0 if len(wins) else 0.0)
-        ok = len(c) >= 100 and won.head(100).sum() >= 80 and r.sum() > 0 and pf >= 1.2 and dd <= 10
+        won, eq, dd, pf = stats(r)
+        first = r.head(100)                                   # the pass test judges the SAME first 100 trades
+        w100, eq100, dd100, pf100 = stats(first)
+        ok = bool(len(c) >= 100 and w100.sum() >= 80 and first.sum() > 0 and pf100 >= 1.2 and dd100 <= 10)
         rows.append({"version": v, "closed": len(c), "open": int((g.status == "open").sum()),
                      "wins": int(won.sum()), "win_rate": round(float(won.mean()), 3) if len(r) else None,
                      "profit_%": round(100 * (eq[-1] / 10_000 - 1), 2), "profit_per_$1_lost": round(pf, 2),
                      "biggest_drop_%": round(dd, 2), "PASSED": ok})
     print(pd.DataFrame(rows).to_string(index=False))
+    print("Note: several versions are scored on the same ideas, so one passing can partly be luck; a pass is "
+          "reported to the owner together with how many versions were running.")
 
 
 if __name__ == "__main__":

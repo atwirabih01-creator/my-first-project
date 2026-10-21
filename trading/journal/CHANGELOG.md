@@ -5,3 +5,21 @@
   - A "win" now means more than +0.10% after fees.
   - Rules updated to the owner's final target: 80 wins of 100, profit after fees, profit factor ≥ 1.2, biggest drop ≤ 10%. The old "average loss ≤ 1.5× average win" rule was retired.
 - **21 Oct 2026 — session 2:** added waiting "enter if price reaches a zone" plans (`desk_journal.py limit`), filled automatically from real prices. Backtests show D11–D14 alone don't meet the bar on meme dips.
+- **21 Oct 2026 — desk rebuild (owner said "go"):**
+  - One locked goal.
+  - Cheap 40-coin scanner every 4 hours; the agents meet only on candidates.
+  - The gate blocks only known losers. Judgment is proven forward.
+  - New version HWK records Hawk's exact plan.
+- **21 Oct 2026 — fixes after the Reality Checker audit:**
+  - Versions no longer share exit settings. The gate had tested every version with D14's trailing stop; it was rebuilt, and 59 of 224 combinations now pass, with a stricter $1.05 bar and no rounding.
+  - Waiting plans with no setup now record all versions instead of none.
+  - Each fill is saved straight away, so it can't be recorded twice.
+  - One open idea per coin.
+  - A fill's typical range is measured from bars finished before the fill.
+  - In the fill hour only the stop counts.
+  - Realistic fill price.
+  - Hawk plans with the stop or target on the wrong side are rejected.
+  - Each trade stores its own version settings.
+  - The scanner uses the same agreement and tide rules as the backtests.
+  - The pass test judges the same first 100 trades for every measure.
+  - Known-answer tests matched hand calculations.
