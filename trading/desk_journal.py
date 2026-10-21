@@ -5,7 +5,10 @@ Each of the 10 desk versions turns that idea into its own trade (its own stop, t
 so all versions are judged on exactly the same ideas. Outcomes are worked out from Binance hourly
 prices: stop first if both are touched in the same hour, 0.30% costs per trade.
 
-  python3 desk_journal.py add SYMBOL long|short "atlas reason" "hawk plan" "sage reason" [setup]
+  python3 desk_journal.py add SYMBOL long|short "atlas reason" "hawk plan" "sage reason" SETUP [STOP TARGET HOLD_H]
+      SETUP decides which versions are recorded: only those the gate (gate.py) does not mark as known
+      losers for this setup/side/coin group. STOP/TARGET/HOLD_H (prices, hours) add version "HWK" =
+      Hawk's own exact plan.
   python3 desk_journal.py limit SYMBOL long|short LOW HIGH EXPIRES_HOURS "atlas" "hawk" "sage" [setup]
                                       # Sage-approved "enter only if price reaches LOW-HIGH" plan; waits in
                                       # journal/pending.csv and fills automatically on the next update
@@ -57,16 +60,18 @@ def atr4h(symbol):
 PENDING = HERE / "journal" / "pending.csv"
 
 
-def limit(symbol, side, low, high, expires_hours, atlas_reason, hawk_plan, sage_reason, setup=""):
+def limit(symbol, side, low, high, expires_hours, atlas_reason, hawk_plan, sage_reason, setup="",
+          hstop="", htarget="", hhold=""):
     now = pd.Timestamp.now(tz="UTC").floor("min")
     new = not PENDING.exists()
     PENDING.parent.mkdir(exist_ok=True)
     with open(PENDING, "a", newline="") as fh:
         w = csv.writer(fh)
         if new:
-            w.writerow(["created_utc", "expires_utc", "symbol", "side", "low", "high", "setup", "atlas", "hawk", "sage", "status"])
+            w.writerow(["created_utc", "expires_utc", "symbol", "side", "low", "high", "setup", "atlas", "hawk", "sage",
+                        "status", "hstop", "htarget", "hhold"])
         w.writerow([now, now + pd.Timedelta(hours=float(expires_hours)), symbol, side, float(low), float(high), setup,
-                    atlas_reason, hawk_plan, sage_reason, "waiting"])
+                    atlas_reason, hawk_plan, sage_reason, "waiting", hstop, htarget, hhold])
     print(f"waiting: {side} {symbol} if price reaches {low}-{high} before {now + pd.Timedelta(hours=float(expires_hours))}")
 
 
@@ -85,14 +90,16 @@ def fill_pending():
             t = hit.index[0]
             o = float(hit.open.iloc[0])
             px = min(o, r.high) if r.side == "long" else max(o, r.low)   # long fills at the zone top or better
-            add(r.symbol, r.side, r.atlas, r.hawk, r.sage, r.setup, entry=px, when=t + pd.Timedelta(minutes=59))
+            hp = [None if pd.isna(x) or x == "" else x for x in (r.get("hstop"), r.get("htarget"), r.get("hhold"))]
+            add(r.symbol, r.side, r.atlas, r.hawk, r.sage, r.setup, *hp, entry=px, when=t + pd.Timedelta(minutes=59))
             pend.loc[i, "status"] = f"filled {t}"
         elif pd.Timestamp.now(tz="UTC") > pd.Timestamp(r.expires_utc):
             pend.loc[i, "status"] = "expired"
     pend.to_csv(PENDING, index=False)
 
 
-def add(symbol, side, atlas_reason, hawk_plan, sage_reason, setup="", entry=None, when=None):
+def add(symbol, side, atlas_reason, hawk_plan, sage_reason, setup="", hstop=None, htarget=None, hhold=None,
+        entry=None, when=None):
     a, _ = atr4h(symbol)
     end = int(time.time() * 1000)
     if entry is None:
@@ -113,7 +120,17 @@ def add(symbol, side, atlas_reason, hawk_plan, sage_reason, setup="", entry=None
         if new:
             w.writerow(["idea_id", "version", "opened_utc", "symbol", "side", "entry", "stop", "target",
                         "hold_hours", "status", "closed_utc", "exit", "result_pct"])
+        try:
+            from gate import allowed
+            ok = set(allowed(setup, side, symbol)) if setup else set(VERSIONS)
+        except Exception:
+            ok = set(VERSIONS)
+        if hstop:                                                # Hawk's own exact plan
+            w.writerow([idea_id, "HWK", now, symbol, side, entry, float(hstop), float(htarget), int(float(hhold)),
+                        "open", "", "", ""])
         for name, p in VERSIONS.items():
+            if name not in ok:
+                continue                                         # known loser for this kind of trade
             tgt = entry + s * p["target"] * a if p["target"] else ""
             if p["target"] and p["target"] * a / entry < MIN_TARGET_PCT:
                 continue
@@ -130,7 +147,8 @@ def resolve(row, p, bars):
     a = abs(e - stop) / p["stop"]
     best, armed = e, False
     after = bars[bars.index > pd.Timestamp(row.opened_utc)]
-    for t, b in after.head(p["hold"]).iterrows():
+    hold = int(float(row.hold_hours))
+    for t, b in after.head(hold).iterrows():
         if (b.low <= stop) if s > 0 else (b.high >= stop):
             px = b.open if ((b.open < stop) if s > 0 else (b.open > stop)) else stop
             return "closed", t, px
@@ -142,8 +160,8 @@ def resolve(row, p, bars):
             lock = (max if s > 0 else min)(lock, best - s * p["trail"] * a)
             stop = (max if s > 0 else min)(stop, lock)
             armed = True
-    if len(after) >= p["hold"]:
-        return "closed", after.index[p["hold"] - 1], float(after.close.iloc[p["hold"] - 1])
+    if len(after) >= hold:
+        return "closed", after.index[hold - 1], float(after.close.iloc[hold - 1])
     return "open", None, None
 
 
@@ -159,7 +177,8 @@ def update():
         if r.symbol not in cache:
             start = int(pd.Timestamp(r.opened_utc).timestamp() * 1000) - 3600 * 1000
             cache[r.symbol] = F.fetch(r.symbol, min(start, end - 5 * 86400 * 1000), end).iloc[:-1]
-        status, when, px = resolve(r, VERSIONS[r.version], cache[r.symbol])
+        params = VERSIONS.get(r.version, {"stop": 1.0})              # HWK: Hawk's own stop/target/hold
+        status, when, px = resolve(r, params, cache[r.symbol])
         if status == "closed":
             s = 1 if r.side == "long" else -1
             t.loc[i, ["status", "closed_utc", "exit"]] = ["closed", str(when), px]

@@ -113,6 +113,15 @@ def hawk(df, v: Version):
         lo = l.shift(1).rolling(v.breakout_hours).min()
         sig[(c > hi) & (vz > v.vol_z) & (sig == 0)] = 1
         sig[(c < lo) & (vz > v.vol_z) & (sig == 0)] = -1
+    if "hold" in v.setups:          # trend, dip to the 20-bar average, close back on the trend side
+        e20, e50 = ema(c, 20), ema(c, 50)
+        up = (c > e50) & (e20 > e50)
+        dn = (c < e50) & (e20 < e50)
+        touch_up = (l <= e20 + 0.3 * a).rolling(2).max().astype(bool)
+        touch_dn = (h >= e20 - 0.3 * a).rolling(2).max().astype(bool)
+        mid = (r >= 38) & (r <= 62)
+        sig[up & touch_up & (c > e20) & mid & (sig == 0)] = 1
+        sig[dn & touch_dn & (c < e20) & mid & (sig == 0)] = -1
     if "shock" in v.setups:         # sudden jump with huge volume (the kind a big tweet causes)
         sig[(ret_z > 3) & (vz > v.vol_z + 1) & (sig == 0)] = 1
         sig[(ret_z < -3) & (vz > v.vol_z + 1) & (sig == 0)] = -1

@@ -1,0 +1,1349 @@
+{
+ "built_utc": "2026-10-21 20:09:05.545017+00:00",
+ "table": {
+  "dip|long|meme|D01": {
+   "trades": 68,
+   "win_rate": 0.6471,
+   "profit_factor": 0.73,
+   "blocked": true
+  },
+  "dip|short|meme|D01": {
+   "trades": 203,
+   "win_rate": 0.7094,
+   "profit_factor": 1.26,
+   "blocked": false
+  },
+  "dip|long|major|D01": {
+   "trades": 132,
+   "win_rate": 0.6667,
+   "profit_factor": 1.1,
+   "blocked": false
+  },
+  "dip|short|major|D01": {
+   "trades": 257,
+   "win_rate": 0.7237,
+   "profit_factor": 1.38,
+   "blocked": false
+  },
+  "dip|long|meme|D02": {
+   "trades": 71,
+   "win_rate": 0.662,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "dip|short|meme|D02": {
+   "trades": 223,
+   "win_rate": 0.7175,
+   "profit_factor": 1.29,
+   "blocked": false
+  },
+  "dip|long|major|D02": {
+   "trades": 130,
+   "win_rate": 0.6769,
+   "profit_factor": 1.0,
+   "blocked": false
+  },
+  "dip|short|major|D02": {
+   "trades": 257,
+   "win_rate": 0.7393,
+   "profit_factor": 1.27,
+   "blocked": false
+  },
+  "dip|long|meme|D03": {
+   "trades": 67,
+   "win_rate": 0.7015,
+   "profit_factor": 0.84,
+   "blocked": true
+  },
+  "dip|short|meme|D03": {
+   "trades": 203,
+   "win_rate": 0.7488,
+   "profit_factor": 1.14,
+   "blocked": false
+  },
+  "dip|long|major|D03": {
+   "trades": 131,
+   "win_rate": 0.7252,
+   "profit_factor": 1.35,
+   "blocked": false
+  },
+  "dip|short|major|D03": {
+   "trades": 256,
+   "win_rate": 0.75,
+   "profit_factor": 1.39,
+   "blocked": false
+  },
+  "dip|long|meme|D04": {
+   "trades": 71,
+   "win_rate": 0.6056,
+   "profit_factor": 0.91,
+   "blocked": true
+  },
+  "dip|short|meme|D04": {
+   "trades": 224,
+   "win_rate": 0.6607,
+   "profit_factor": 1.09,
+   "blocked": false
+  },
+  "dip|long|major|D04": {
+   "trades": 133,
+   "win_rate": 0.6241,
+   "profit_factor": 0.96,
+   "blocked": true
+  },
+  "dip|short|major|D04": {
+   "trades": 256,
+   "win_rate": 0.6953,
+   "profit_factor": 1.12,
+   "blocked": false
+  },
+  "dip|long|meme|D05": {
+   "trades": 60,
+   "win_rate": 0.7,
+   "profit_factor": 1.1,
+   "blocked": false
+  },
+  "dip|short|meme|D05": {
+   "trades": 183,
+   "win_rate": 0.7213,
+   "profit_factor": 1.52,
+   "blocked": false
+  },
+  "dip|long|major|D05": {
+   "trades": 135,
+   "win_rate": 0.6889,
+   "profit_factor": 1.43,
+   "blocked": false
+  },
+  "dip|short|major|D05": {
+   "trades": 238,
+   "win_rate": 0.7101,
+   "profit_factor": 1.34,
+   "blocked": false
+  },
+  "dip|long|meme|D06": {
+   "trades": 68,
+   "win_rate": 0.6324,
+   "profit_factor": 0.85,
+   "blocked": true
+  },
+  "dip|short|meme|D06": {
+   "trades": 204,
+   "win_rate": 0.6912,
+   "profit_factor": 1.23,
+   "blocked": false
+  },
+  "dip|long|major|D06": {
+   "trades": 132,
+   "win_rate": 0.6288,
+   "profit_factor": 0.95,
+   "blocked": true
+  },
+  "dip|short|major|D06": {
+   "trades": 256,
+   "win_rate": 0.6836,
+   "profit_factor": 1.21,
+   "blocked": false
+  },
+  "dip|long|meme|D07": {
+   "trades": 69,
+   "win_rate": 0.6232,
+   "profit_factor": 0.71,
+   "blocked": true
+  },
+  "dip|short|meme|D07": {
+   "trades": 193,
+   "win_rate": 0.7047,
+   "profit_factor": 0.93,
+   "blocked": true
+  },
+  "dip|long|major|D07": {
+   "trades": 108,
+   "win_rate": 0.7407,
+   "profit_factor": 1.02,
+   "blocked": false
+  },
+  "dip|short|major|D07": {
+   "trades": 152,
+   "win_rate": 0.8421,
+   "profit_factor": 1.46,
+   "blocked": false
+  },
+  "dip|long|meme|D08": {
+   "trades": 62,
+   "win_rate": 0.7097,
+   "profit_factor": 1.16,
+   "blocked": false
+  },
+  "dip|short|meme|D08": {
+   "trades": 192,
+   "win_rate": 0.7396,
+   "profit_factor": 1.21,
+   "blocked": false
+  },
+  "dip|long|major|D08": {
+   "trades": 132,
+   "win_rate": 0.7348,
+   "profit_factor": 1.61,
+   "blocked": false
+  },
+  "dip|short|major|D08": {
+   "trades": 244,
+   "win_rate": 0.7459,
+   "profit_factor": 1.38,
+   "blocked": false
+  },
+  "dip|long|meme|D09": {
+   "trades": 55,
+   "win_rate": 0.6909,
+   "profit_factor": 1.2,
+   "blocked": false
+  },
+  "dip|short|meme|D09": {
+   "trades": 163,
+   "win_rate": 0.7055,
+   "profit_factor": 1.38,
+   "blocked": false
+  },
+  "dip|long|major|D09": {
+   "trades": 125,
+   "win_rate": 0.696,
+   "profit_factor": 1.82,
+   "blocked": false
+  },
+  "dip|short|major|D09": {
+   "trades": 223,
+   "win_rate": 0.6996,
+   "profit_factor": 1.46,
+   "blocked": false
+  },
+  "dip|long|meme|D10": {
+   "trades": 58,
+   "win_rate": 0.6897,
+   "profit_factor": 0.95,
+   "blocked": true
+  },
+  "dip|short|meme|D10": {
+   "trades": 171,
+   "win_rate": 0.7193,
+   "profit_factor": 1.46,
+   "blocked": false
+  },
+  "dip|long|major|D10": {
+   "trades": 127,
+   "win_rate": 0.7087,
+   "profit_factor": 1.64,
+   "blocked": false
+  },
+  "dip|short|major|D10": {
+   "trades": 228,
+   "win_rate": 0.7149,
+   "profit_factor": 1.47,
+   "blocked": false
+  },
+  "dip|long|meme|D11": {
+   "trades": 69,
+   "win_rate": 0.6087,
+   "profit_factor": 0.79,
+   "blocked": true
+  },
+  "dip|short|meme|D11": {
+   "trades": 195,
+   "win_rate": 0.6513,
+   "profit_factor": 1.0,
+   "blocked": false
+  },
+  "dip|long|major|D11": {
+   "trades": 108,
+   "win_rate": 0.6852,
+   "profit_factor": 1.04,
+   "blocked": false
+  },
+  "dip|short|major|D11": {
+   "trades": 153,
+   "win_rate": 0.7647,
+   "profit_factor": 1.55,
+   "blocked": false
+  },
+  "dip|long|meme|D12": {
+   "trades": 69,
+   "win_rate": 0.5507,
+   "profit_factor": 0.75,
+   "blocked": true
+  },
+  "dip|short|meme|D12": {
+   "trades": 222,
+   "win_rate": 0.6126,
+   "profit_factor": 1.05,
+   "blocked": false
+  },
+  "dip|long|major|D12": {
+   "trades": 136,
+   "win_rate": 0.6176,
+   "profit_factor": 1.2,
+   "blocked": false
+  },
+  "dip|short|major|D12": {
+   "trades": 255,
+   "win_rate": 0.6667,
+   "profit_factor": 1.2,
+   "blocked": false
+  },
+  "dip|long|meme|D13": {
+   "trades": 73,
+   "win_rate": 0.6164,
+   "profit_factor": 1.05,
+   "blocked": false
+  },
+  "dip|short|meme|D13": {
+   "trades": 234,
+   "win_rate": 0.5897,
+   "profit_factor": 1.05,
+   "blocked": false
+  },
+  "dip|long|major|D13": {
+   "trades": 137,
+   "win_rate": 0.5912,
+   "profit_factor": 1.05,
+   "blocked": false
+  },
+  "dip|short|major|D13": {
+   "trades": 260,
+   "win_rate": 0.6115,
+   "profit_factor": 1.18,
+   "blocked": false
+  },
+  "dip|long|meme|D14": {
+   "trades": 55,
+   "win_rate": 0.5636,
+   "profit_factor": 1.13,
+   "blocked": false
+  },
+  "dip|short|meme|D14": {
+   "trades": 164,
+   "win_rate": 0.6159,
+   "profit_factor": 1.04,
+   "blocked": false
+  },
+  "dip|long|major|D14": {
+   "trades": 128,
+   "win_rate": 0.5938,
+   "profit_factor": 1.35,
+   "blocked": false
+  },
+  "dip|short|major|D14": {
+   "trades": 224,
+   "win_rate": 0.6295,
+   "profit_factor": 1.37,
+   "blocked": false
+  },
+  "spike|long|meme|D01": {
+   "trades": 529,
+   "win_rate": 0.6106,
+   "profit_factor": 0.82,
+   "blocked": true
+  },
+  "spike|short|meme|D01": {
+   "trades": 492,
+   "win_rate": 0.6402,
+   "profit_factor": 0.9,
+   "blocked": true
+  },
+  "spike|long|major|D01": {
+   "trades": 443,
+   "win_rate": 0.6027,
+   "profit_factor": 0.77,
+   "blocked": true
+  },
+  "spike|short|major|D01": {
+   "trades": 642,
+   "win_rate": 0.6807,
+   "profit_factor": 1.24,
+   "blocked": false
+  },
+  "spike|long|meme|D02": {
+   "trades": 375,
+   "win_rate": 0.664,
+   "profit_factor": 0.81,
+   "blocked": true
+  },
+  "spike|short|meme|D02": {
+   "trades": 377,
+   "win_rate": 0.7162,
+   "profit_factor": 0.93,
+   "blocked": true
+  },
+  "spike|long|major|D02": {
+   "trades": 262,
+   "win_rate": 0.6641,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "spike|short|major|D02": {
+   "trades": 427,
+   "win_rate": 0.7307,
+   "profit_factor": 1.26,
+   "blocked": false
+  },
+  "spike|long|meme|D03": {
+   "trades": 530,
+   "win_rate": 0.6302,
+   "profit_factor": 0.79,
+   "blocked": true
+  },
+  "spike|short|meme|D03": {
+   "trades": 492,
+   "win_rate": 0.6728,
+   "profit_factor": 0.95,
+   "blocked": true
+  },
+  "spike|long|major|D03": {
+   "trades": 444,
+   "win_rate": 0.6441,
+   "profit_factor": 0.85,
+   "blocked": true
+  },
+  "spike|short|major|D03": {
+   "trades": 642,
+   "win_rate": 0.7009,
+   "profit_factor": 1.19,
+   "blocked": false
+  },
+  "spike|long|meme|D04": {
+   "trades": 367,
+   "win_rate": 0.564,
+   "profit_factor": 0.59,
+   "blocked": true
+  },
+  "spike|short|meme|D04": {
+   "trades": 375,
+   "win_rate": 0.6453,
+   "profit_factor": 0.74,
+   "blocked": true
+  },
+  "spike|long|major|D04": {
+   "trades": 260,
+   "win_rate": 0.6077,
+   "profit_factor": 0.7,
+   "blocked": true
+  },
+  "spike|short|major|D04": {
+   "trades": 427,
+   "win_rate": 0.6768,
+   "profit_factor": 1.15,
+   "blocked": false
+  },
+  "spike|long|meme|D05": {
+   "trades": 607,
+   "win_rate": 0.5667,
+   "profit_factor": 0.9,
+   "blocked": true
+  },
+  "spike|short|meme|D05": {
+   "trades": 576,
+   "win_rate": 0.5781,
+   "profit_factor": 0.89,
+   "blocked": true
+  },
+  "spike|long|major|D05": {
+   "trades": 625,
+   "win_rate": 0.5376,
+   "profit_factor": 0.74,
+   "blocked": true
+  },
+  "spike|short|major|D05": {
+   "trades": 875,
+   "win_rate": 0.5829,
+   "profit_factor": 1.12,
+   "blocked": false
+  },
+  "spike|long|meme|D06": {
+   "trades": 521,
+   "win_rate": 0.5374,
+   "profit_factor": 0.66,
+   "blocked": true
+  },
+  "spike|short|meme|D06": {
+   "trades": 490,
+   "win_rate": 0.5755,
+   "profit_factor": 0.74,
+   "blocked": true
+  },
+  "spike|long|major|D06": {
+   "trades": 439,
+   "win_rate": 0.5558,
+   "profit_factor": 0.71,
+   "blocked": true
+  },
+  "spike|short|major|D06": {
+   "trades": 641,
+   "win_rate": 0.6303,
+   "profit_factor": 1.14,
+   "blocked": false
+  },
+  "spike|long|meme|D07": {
+   "trades": 157,
+   "win_rate": 0.6369,
+   "profit_factor": 0.49,
+   "blocked": true
+  },
+  "spike|short|meme|D07": {
+   "trades": 175,
+   "win_rate": 0.7257,
+   "profit_factor": 0.63,
+   "blocked": true
+  },
+  "spike|long|major|D07": {
+   "trades": 63,
+   "win_rate": 0.6032,
+   "profit_factor": 0.41,
+   "blocked": true
+  },
+  "spike|short|major|D07": {
+   "trades": 159,
+   "win_rate": 0.7673,
+   "profit_factor": 0.93,
+   "blocked": true
+  },
+  "spike|long|meme|D08": {
+   "trades": 596,
+   "win_rate": 0.6292,
+   "profit_factor": 0.86,
+   "blocked": true
+  },
+  "spike|short|meme|D08": {
+   "trades": 550,
+   "win_rate": 0.6455,
+   "profit_factor": 0.85,
+   "blocked": true
+  },
+  "spike|long|major|D08": {
+   "trades": 547,
+   "win_rate": 0.6015,
+   "profit_factor": 0.83,
+   "blocked": true
+  },
+  "spike|short|major|D08": {
+   "trades": 789,
+   "win_rate": 0.6641,
+   "profit_factor": 1.13,
+   "blocked": false
+  },
+  "spike|long|meme|D09": {
+   "trades": 545,
+   "win_rate": 0.5119,
+   "profit_factor": 0.81,
+   "blocked": true
+  },
+  "spike|short|meme|D09": {
+   "trades": 554,
+   "win_rate": 0.5686,
+   "profit_factor": 1.13,
+   "blocked": false
+  },
+  "spike|long|major|D09": {
+   "trades": 724,
+   "win_rate": 0.5028,
+   "profit_factor": 0.82,
+   "blocked": true
+  },
+  "spike|short|major|D09": {
+   "trades": 909,
+   "win_rate": 0.5314,
+   "profit_factor": 1.33,
+   "blocked": false
+  },
+  "spike|long|meme|D10": {
+   "trades": 605,
+   "win_rate": 0.5355,
+   "profit_factor": 0.86,
+   "blocked": true
+  },
+  "spike|short|meme|D10": {
+   "trades": 583,
+   "win_rate": 0.5746,
+   "profit_factor": 0.94,
+   "blocked": true
+  },
+  "spike|long|major|D10": {
+   "trades": 696,
+   "win_rate": 0.5273,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "spike|short|major|D10": {
+   "trades": 935,
+   "win_rate": 0.5594,
+   "profit_factor": 1.13,
+   "blocked": false
+  },
+  "spike|long|meme|D11": {
+   "trades": 153,
+   "win_rate": 0.5425,
+   "profit_factor": 0.38,
+   "blocked": true
+  },
+  "spike|short|meme|D11": {
+   "trades": 175,
+   "win_rate": 0.68,
+   "profit_factor": 0.63,
+   "blocked": true
+  },
+  "spike|long|major|D11": {
+   "trades": 63,
+   "win_rate": 0.5556,
+   "profit_factor": 0.41,
+   "blocked": true
+  },
+  "spike|short|major|D11": {
+   "trades": 158,
+   "win_rate": 0.6962,
+   "profit_factor": 0.8,
+   "blocked": true
+  },
+  "spike|long|meme|D12": {
+   "trades": 352,
+   "win_rate": 0.4517,
+   "profit_factor": 0.48,
+   "blocked": true
+  },
+  "spike|short|meme|D12": {
+   "trades": 370,
+   "win_rate": 0.5568,
+   "profit_factor": 0.72,
+   "blocked": true
+  },
+  "spike|long|major|D12": {
+   "trades": 254,
+   "win_rate": 0.5118,
+   "profit_factor": 0.65,
+   "blocked": true
+  },
+  "spike|short|major|D12": {
+   "trades": 424,
+   "win_rate": 0.5755,
+   "profit_factor": 0.97,
+   "blocked": true
+  },
+  "spike|long|meme|D13": {
+   "trades": 359,
+   "win_rate": 0.5125,
+   "profit_factor": 0.52,
+   "blocked": true
+  },
+  "spike|short|meme|D13": {
+   "trades": 373,
+   "win_rate": 0.6059,
+   "profit_factor": 0.75,
+   "blocked": true
+  },
+  "spike|long|major|D13": {
+   "trades": 257,
+   "win_rate": 0.5642,
+   "profit_factor": 0.68,
+   "blocked": true
+  },
+  "spike|short|major|D13": {
+   "trades": 428,
+   "win_rate": 0.6285,
+   "profit_factor": 1.05,
+   "blocked": false
+  },
+  "spike|long|meme|D14": {
+   "trades": 543,
+   "win_rate": 0.4383,
+   "profit_factor": 0.71,
+   "blocked": true
+  },
+  "spike|short|meme|D14": {
+   "trades": 555,
+   "win_rate": 0.4883,
+   "profit_factor": 1.07,
+   "blocked": false
+  },
+  "spike|long|major|D14": {
+   "trades": 725,
+   "win_rate": 0.4372,
+   "profit_factor": 0.75,
+   "blocked": true
+  },
+  "spike|short|major|D14": {
+   "trades": 908,
+   "win_rate": 0.4692,
+   "profit_factor": 1.31,
+   "blocked": false
+  },
+  "hold|long|meme|D01": {
+   "trades": 2084,
+   "win_rate": 0.6339,
+   "profit_factor": 0.77,
+   "blocked": true
+  },
+  "hold|short|meme|D01": {
+   "trades": 3122,
+   "win_rate": 0.6579,
+   "profit_factor": 0.79,
+   "blocked": true
+  },
+  "hold|long|major|D01": {
+   "trades": 3644,
+   "win_rate": 0.6386,
+   "profit_factor": 0.77,
+   "blocked": true
+  },
+  "hold|short|major|D01": {
+   "trades": 4199,
+   "win_rate": 0.6552,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "hold|long|meme|D02": {
+   "trades": 2132,
+   "win_rate": 0.6585,
+   "profit_factor": 0.75,
+   "blocked": true
+  },
+  "hold|short|meme|D02": {
+   "trades": 3123,
+   "win_rate": 0.6894,
+   "profit_factor": 0.79,
+   "blocked": true
+  },
+  "hold|long|major|D02": {
+   "trades": 3348,
+   "win_rate": 0.6688,
+   "profit_factor": 0.77,
+   "blocked": true
+  },
+  "hold|short|major|D02": {
+   "trades": 3804,
+   "win_rate": 0.6838,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "hold|long|meme|D03": {
+   "trades": 2012,
+   "win_rate": 0.6615,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "hold|short|meme|D03": {
+   "trades": 2999,
+   "win_rate": 0.7006,
+   "profit_factor": 0.86,
+   "blocked": true
+  },
+  "hold|long|major|D03": {
+   "trades": 3510,
+   "win_rate": 0.6584,
+   "profit_factor": 0.76,
+   "blocked": true
+  },
+  "hold|short|major|D03": {
+   "trades": 4042,
+   "win_rate": 0.6947,
+   "profit_factor": 0.83,
+   "blocked": true
+  },
+  "hold|long|meme|D04": {
+   "trades": 2249,
+   "win_rate": 0.5989,
+   "profit_factor": 0.74,
+   "blocked": true
+  },
+  "hold|short|meme|D04": {
+   "trades": 3306,
+   "win_rate": 0.6234,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "hold|long|major|D04": {
+   "trades": 3457,
+   "win_rate": 0.6063,
+   "profit_factor": 0.75,
+   "blocked": true
+  },
+  "hold|short|major|D04": {
+   "trades": 3978,
+   "win_rate": 0.6134,
+   "profit_factor": 0.74,
+   "blocked": true
+  },
+  "hold|long|meme|D05": {
+   "trades": 1989,
+   "win_rate": 0.636,
+   "profit_factor": 0.74,
+   "blocked": true
+  },
+  "hold|short|meme|D05": {
+   "trades": 2976,
+   "win_rate": 0.6647,
+   "profit_factor": 0.82,
+   "blocked": true
+  },
+  "hold|long|major|D05": {
+   "trades": 3810,
+   "win_rate": 0.6302,
+   "profit_factor": 0.77,
+   "blocked": true
+  },
+  "hold|short|major|D05": {
+   "trades": 4214,
+   "win_rate": 0.6602,
+   "profit_factor": 0.82,
+   "blocked": true
+  },
+  "hold|long|meme|D06": {
+   "trades": 2134,
+   "win_rate": 0.6101,
+   "profit_factor": 0.77,
+   "blocked": true
+  },
+  "hold|short|meme|D06": {
+   "trades": 3194,
+   "win_rate": 0.6318,
+   "profit_factor": 0.8,
+   "blocked": true
+  },
+  "hold|long|major|D06": {
+   "trades": 3699,
+   "win_rate": 0.6094,
+   "profit_factor": 0.76,
+   "blocked": true
+  },
+  "hold|short|major|D06": {
+   "trades": 4321,
+   "win_rate": 0.6262,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "hold|long|meme|D07": {
+   "trades": 2051,
+   "win_rate": 0.6889,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "hold|short|meme|D07": {
+   "trades": 2507,
+   "win_rate": 0.6984,
+   "profit_factor": 0.84,
+   "blocked": true
+  },
+  "hold|long|major|D07": {
+   "trades": 2666,
+   "win_rate": 0.7078,
+   "profit_factor": 0.84,
+   "blocked": true
+  },
+  "hold|short|major|D07": {
+   "trades": 2494,
+   "win_rate": 0.7017,
+   "profit_factor": 0.84,
+   "blocked": true
+  },
+  "hold|long|meme|D08": {
+   "trades": 1919,
+   "win_rate": 0.6774,
+   "profit_factor": 0.81,
+   "blocked": true
+  },
+  "hold|short|meme|D08": {
+   "trades": 2834,
+   "win_rate": 0.7075,
+   "profit_factor": 0.88,
+   "blocked": true
+  },
+  "hold|long|major|D08": {
+   "trades": 3519,
+   "win_rate": 0.6738,
+   "profit_factor": 0.79,
+   "blocked": true
+  },
+  "hold|short|major|D08": {
+   "trades": 3946,
+   "win_rate": 0.7045,
+   "profit_factor": 0.84,
+   "blocked": true
+  },
+  "hold|long|meme|D09": {
+   "trades": 1947,
+   "win_rate": 0.6287,
+   "profit_factor": 0.8,
+   "blocked": true
+  },
+  "hold|short|meme|D09": {
+   "trades": 2944,
+   "win_rate": 0.6603,
+   "profit_factor": 0.8,
+   "blocked": true
+  },
+  "hold|long|major|D09": {
+   "trades": 3945,
+   "win_rate": 0.6213,
+   "profit_factor": 0.8,
+   "blocked": true
+  },
+  "hold|short|major|D09": {
+   "trades": 4226,
+   "win_rate": 0.6533,
+   "profit_factor": 0.82,
+   "blocked": true
+  },
+  "hold|long|meme|D10": {
+   "trades": 1939,
+   "win_rate": 0.6343,
+   "profit_factor": 0.77,
+   "blocked": true
+  },
+  "hold|short|meme|D10": {
+   "trades": 2925,
+   "win_rate": 0.6626,
+   "profit_factor": 0.81,
+   "blocked": true
+  },
+  "hold|long|major|D10": {
+   "trades": 3863,
+   "win_rate": 0.6267,
+   "profit_factor": 0.77,
+   "blocked": true
+  },
+  "hold|short|major|D10": {
+   "trades": 4187,
+   "win_rate": 0.6604,
+   "profit_factor": 0.81,
+   "blocked": true
+  },
+  "hold|long|meme|D11": {
+   "trades": 2050,
+   "win_rate": 0.5966,
+   "profit_factor": 0.74,
+   "blocked": true
+  },
+  "hold|short|meme|D11": {
+   "trades": 2542,
+   "win_rate": 0.6082,
+   "profit_factor": 0.77,
+   "blocked": true
+  },
+  "hold|long|major|D11": {
+   "trades": 2701,
+   "win_rate": 0.6335,
+   "profit_factor": 0.83,
+   "blocked": true
+  },
+  "hold|short|major|D11": {
+   "trades": 2505,
+   "win_rate": 0.618,
+   "profit_factor": 0.8,
+   "blocked": true
+  },
+  "hold|long|meme|D12": {
+   "trades": 2289,
+   "win_rate": 0.5526,
+   "profit_factor": 0.72,
+   "blocked": true
+  },
+  "hold|short|meme|D12": {
+   "trades": 3345,
+   "win_rate": 0.5767,
+   "profit_factor": 0.74,
+   "blocked": true
+  },
+  "hold|long|major|D12": {
+   "trades": 3483,
+   "win_rate": 0.5607,
+   "profit_factor": 0.72,
+   "blocked": true
+  },
+  "hold|short|major|D12": {
+   "trades": 4033,
+   "win_rate": 0.5681,
+   "profit_factor": 0.72,
+   "blocked": true
+  },
+  "hold|long|meme|D13": {
+   "trades": 2338,
+   "win_rate": 0.5342,
+   "profit_factor": 0.77,
+   "blocked": true
+  },
+  "hold|short|meme|D13": {
+   "trades": 3421,
+   "win_rate": 0.5419,
+   "profit_factor": 0.7,
+   "blocked": true
+  },
+  "hold|long|major|D13": {
+   "trades": 3597,
+   "win_rate": 0.5516,
+   "profit_factor": 0.76,
+   "blocked": true
+  },
+  "hold|short|major|D13": {
+   "trades": 4169,
+   "win_rate": 0.5426,
+   "profit_factor": 0.71,
+   "blocked": true
+  },
+  "hold|long|meme|D14": {
+   "trades": 2084,
+   "win_rate": 0.5518,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "hold|short|meme|D14": {
+   "trades": 3224,
+   "win_rate": 0.5701,
+   "profit_factor": 0.75,
+   "blocked": true
+  },
+  "hold|long|major|D14": {
+   "trades": 4203,
+   "win_rate": 0.5468,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "hold|short|major|D14": {
+   "trades": 4598,
+   "win_rate": 0.5615,
+   "profit_factor": 0.75,
+   "blocked": true
+  },
+  "breakout|long|meme|D01": {
+   "trades": 461,
+   "win_rate": 0.5727,
+   "profit_factor": 0.82,
+   "blocked": true
+  },
+  "breakout|short|meme|D01": {
+   "trades": 116,
+   "win_rate": 0.4914,
+   "profit_factor": 0.36,
+   "blocked": true
+  },
+  "breakout|long|major|D01": {
+   "trades": 796,
+   "win_rate": 0.6068,
+   "profit_factor": 0.84,
+   "blocked": true
+  },
+  "breakout|short|major|D01": {
+   "trades": 346,
+   "win_rate": 0.5838,
+   "profit_factor": 0.62,
+   "blocked": true
+  },
+  "breakout|long|meme|D02": {
+   "trades": 466,
+   "win_rate": 0.6459,
+   "profit_factor": 0.83,
+   "blocked": true
+  },
+  "breakout|short|meme|D02": {
+   "trades": 114,
+   "win_rate": 0.5088,
+   "profit_factor": 0.33,
+   "blocked": true
+  },
+  "breakout|long|major|D02": {
+   "trades": 750,
+   "win_rate": 0.6733,
+   "profit_factor": 0.82,
+   "blocked": true
+  },
+  "breakout|short|major|D02": {
+   "trades": 329,
+   "win_rate": 0.6353,
+   "profit_factor": 0.56,
+   "blocked": true
+  },
+  "breakout|long|meme|D03": {
+   "trades": 465,
+   "win_rate": 0.6,
+   "profit_factor": 0.83,
+   "blocked": true
+  },
+  "breakout|short|meme|D03": {
+   "trades": 115,
+   "win_rate": 0.5043,
+   "profit_factor": 0.33,
+   "blocked": true
+  },
+  "breakout|long|major|D03": {
+   "trades": 798,
+   "win_rate": 0.6303,
+   "profit_factor": 0.83,
+   "blocked": true
+  },
+  "breakout|short|major|D03": {
+   "trades": 346,
+   "win_rate": 0.6012,
+   "profit_factor": 0.56,
+   "blocked": true
+  },
+  "breakout|long|meme|D04": {
+   "trades": 448,
+   "win_rate": 0.5982,
+   "profit_factor": 0.8,
+   "blocked": true
+  },
+  "breakout|short|meme|D04": {
+   "trades": 114,
+   "win_rate": 0.4912,
+   "profit_factor": 0.47,
+   "blocked": true
+  },
+  "breakout|long|major|D04": {
+   "trades": 729,
+   "win_rate": 0.6159,
+   "profit_factor": 0.78,
+   "blocked": true
+  },
+  "breakout|short|major|D04": {
+   "trades": 329,
+   "win_rate": 0.6109,
+   "profit_factor": 0.71,
+   "blocked": true
+  },
+  "breakout|long|meme|D05": {
+   "trades": 431,
+   "win_rate": 0.5151,
+   "profit_factor": 0.83,
+   "blocked": true
+  },
+  "breakout|short|meme|D05": {
+   "trades": 114,
+   "win_rate": 0.4825,
+   "profit_factor": 0.32,
+   "blocked": true
+  },
+  "breakout|long|major|D05": {
+   "trades": 783,
+   "win_rate": 0.5581,
+   "profit_factor": 0.83,
+   "blocked": true
+  },
+  "breakout|short|major|D05": {
+   "trades": 352,
+   "win_rate": 0.5426,
+   "profit_factor": 0.68,
+   "blocked": true
+  },
+  "breakout|long|meme|D06": {
+   "trades": 445,
+   "win_rate": 0.5326,
+   "profit_factor": 0.81,
+   "blocked": true
+  },
+  "breakout|short|meme|D06": {
+   "trades": 116,
+   "win_rate": 0.4914,
+   "profit_factor": 0.38,
+   "blocked": true
+  },
+  "breakout|long|major|D06": {
+   "trades": 783,
+   "win_rate": 0.5658,
+   "profit_factor": 0.81,
+   "blocked": true
+  },
+  "breakout|short|major|D06": {
+   "trades": 346,
+   "win_rate": 0.5723,
+   "profit_factor": 0.67,
+   "blocked": true
+  },
+  "breakout|long|meme|D07": {
+   "trades": 402,
+   "win_rate": 0.7413,
+   "profit_factor": 0.79,
+   "blocked": true
+  },
+  "breakout|short|meme|D07": {
+   "trades": 102,
+   "win_rate": 0.5588,
+   "profit_factor": 0.44,
+   "blocked": true
+  },
+  "breakout|long|major|D07": {
+   "trades": 538,
+   "win_rate": 0.7007,
+   "profit_factor": 0.67,
+   "blocked": true
+  },
+  "breakout|short|major|D07": {
+   "trades": 256,
+   "win_rate": 0.6992,
+   "profit_factor": 0.7,
+   "blocked": true
+  },
+  "breakout|long|meme|D08": {
+   "trades": 449,
+   "win_rate": 0.5746,
+   "profit_factor": 0.84,
+   "blocked": true
+  },
+  "breakout|short|meme|D08": {
+   "trades": 115,
+   "win_rate": 0.5043,
+   "profit_factor": 0.4,
+   "blocked": true
+  },
+  "breakout|long|major|D08": {
+   "trades": 801,
+   "win_rate": 0.618,
+   "profit_factor": 0.92,
+   "blocked": true
+  },
+  "breakout|short|major|D08": {
+   "trades": 353,
+   "win_rate": 0.5807,
+   "profit_factor": 0.66,
+   "blocked": true
+  },
+  "breakout|long|meme|D09": {
+   "trades": 354,
+   "win_rate": 0.4774,
+   "profit_factor": 0.85,
+   "blocked": true
+  },
+  "breakout|short|meme|D09": {
+   "trades": 112,
+   "win_rate": 0.4554,
+   "profit_factor": 0.19,
+   "blocked": true
+  },
+  "breakout|long|major|D09": {
+   "trades": 670,
+   "win_rate": 0.5343,
+   "profit_factor": 0.83,
+   "blocked": true
+  },
+  "breakout|short|major|D09": {
+   "trades": 314,
+   "win_rate": 0.4904,
+   "profit_factor": 0.42,
+   "blocked": true
+  },
+  "breakout|long|meme|D10": {
+   "trades": 413,
+   "win_rate": 0.4939,
+   "profit_factor": 0.83,
+   "blocked": true
+  },
+  "breakout|short|meme|D10": {
+   "trades": 113,
+   "win_rate": 0.4867,
+   "profit_factor": 0.27,
+   "blocked": true
+  },
+  "breakout|long|major|D10": {
+   "trades": 739,
+   "win_rate": 0.5426,
+   "profit_factor": 0.83,
+   "blocked": true
+  },
+  "breakout|short|major|D10": {
+   "trades": 341,
+   "win_rate": 0.5132,
+   "profit_factor": 0.59,
+   "blocked": true
+  },
+  "breakout|long|meme|D11": {
+   "trades": 388,
+   "win_rate": 0.6804,
+   "profit_factor": 0.73,
+   "blocked": true
+  },
+  "breakout|short|meme|D11": {
+   "trades": 101,
+   "win_rate": 0.4752,
+   "profit_factor": 0.34,
+   "blocked": true
+  },
+  "breakout|long|major|D11": {
+   "trades": 523,
+   "win_rate": 0.6463,
+   "profit_factor": 0.66,
+   "blocked": true
+  },
+  "breakout|short|major|D11": {
+   "trades": 251,
+   "win_rate": 0.5936,
+   "profit_factor": 0.46,
+   "blocked": true
+  },
+  "breakout|long|meme|D12": {
+   "trades": 417,
+   "win_rate": 0.494,
+   "profit_factor": 0.66,
+   "blocked": true
+  },
+  "breakout|short|meme|D12": {
+   "trades": 114,
+   "win_rate": 0.4474,
+   "profit_factor": 0.51,
+   "blocked": true
+  },
+  "breakout|long|major|D12": {
+   "trades": 695,
+   "win_rate": 0.5439,
+   "profit_factor": 0.75,
+   "blocked": true
+  },
+  "breakout|short|major|D12": {
+   "trades": 322,
+   "win_rate": 0.528,
+   "profit_factor": 0.6,
+   "blocked": true
+  },
+  "breakout|long|meme|D13": {
+   "trades": 437,
+   "win_rate": 0.5561,
+   "profit_factor": 0.76,
+   "blocked": true
+  },
+  "breakout|short|meme|D13": {
+   "trades": 113,
+   "win_rate": 0.4425,
+   "profit_factor": 0.38,
+   "blocked": true
+  },
+  "breakout|long|major|D13": {
+   "trades": 716,
+   "win_rate": 0.581,
+   "profit_factor": 0.79,
+   "blocked": true
+  },
+  "breakout|short|major|D13": {
+   "trades": 320,
+   "win_rate": 0.5125,
+   "profit_factor": 0.49,
+   "blocked": true
+  },
+  "breakout|long|meme|D14": {
+   "trades": 353,
+   "win_rate": 0.4249,
+   "profit_factor": 0.92,
+   "blocked": true
+  },
+  "breakout|short|meme|D14": {
+   "trades": 112,
+   "win_rate": 0.4196,
+   "profit_factor": 0.35,
+   "blocked": true
+  },
+  "breakout|long|major|D14": {
+   "trades": 676,
+   "win_rate": 0.4882,
+   "profit_factor": 0.9,
+   "blocked": true
+  },
+  "breakout|short|major|D14": {
+   "trades": 321,
+   "win_rate": 0.4579,
+   "profit_factor": 0.56,
+   "blocked": true
+  }
+ }
+}

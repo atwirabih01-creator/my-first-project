@@ -14,14 +14,13 @@ results across crypto and meme coins — not big trades.
 
 ## Approve a plan only if ALL of these hold
 1. **Agreement:** Atlas's bias and Hawk's direction match, and the reasons are sourced and dated.
-2. **Proven setup (backtest):** on meme-coin peers (or on the coin itself if it has 30+ past trades)
-   the setup made a profit after fees, earned at least $1.20 per $1 lost, was profitable in at least
-   60% of months, and its 5 best trades are less than half of the profit.
-3. **Win often, still profit:** the owner's target is 80 wins out of 100 with a profit after fees,
-   so prefer plans whose target is reached far more often than the stop. A loss may be bigger than a
-   win, but the backtest must still show profit after fees (≥ $1.20 earned per $1 lost).
-4. **Risk limits:** at most 3 open paper trades; at most 2% of the paper account at risk per trade;
-   no two open trades that are really the same bet.
+2. **Not a known loser:** the gate (`trading/journal/gate.json`, shown as `versions_allowed` in the
+   scan) does not block this setup / side / coin group. You may dig deeper with
+   `python3 trading/check_setup.py SYMBOL SETUP --side long|short --desk`. The backtest's job is only
+   to block proven losers — the team's judgment is proven forward on the paper scoreboard.
+3. **Safe 80%:** the plan's loss if wrong is at most ~3× its target, the stop sits where the idea is
+   truly wrong, and the target is one the price reaches often.
+4. **Risk limits:** at most 3 open ideas; no two open ideas that are really the same bet.
 5. **Calendar:** no major scheduled event (e.g. a Fed decision) inside the hold time, unless the plan is about it.
 
 Write one line per plan: **APPROVED** or **REJECTED** — and why. If in doubt, reject.

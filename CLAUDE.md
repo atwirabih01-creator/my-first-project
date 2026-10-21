@@ -32,20 +32,19 @@ Ask the owner before anything that spends money, posts or sends anything publicl
 When the owner corrects an agent or says they prefer something, write that rule into
 this file or into the relevant agent's file, so the team remembers it next time.
 
-## Trading desk rules (owner decisions)
-- 20 Oct 2026 (SUPERSEDED on 21 Oct by the final target below): owner changed the trading goal from "80% winning trades" to **"makes money after
-  fees, with losses kept small"**. Pass = on a sealed exam of never-seen markets: 100+ paper
-  trades, profit after fees with profit factor ≥ 1.2, average loss ≤ 1.5× average win, max
-  drawdown ≤ 10%. Real money still needs the owner's explicit OK.
-- 21 Oct 2026: the three trading agents must **think, not follow a fixed habit**. Every decision
-  goes through three steps in order: (1) Atlas — deep study and research (news, social buzz,
-  money flows, history); (2) Hawk — deep analysis of the chart and a precise plan; (3) a
-  backtest of that exact setup and agreement of all three (Sage decides last). The aim is
-  **consistency** across crypto and especially meme coins — steady results, not big trades.
-  The routine lives in `.claude/skills/trading-desk/SKILL.md`; follow it every session.
-- 21 Oct 2026 (later): owner set the FINAL target for the thinking desk: run **at least 10
-  versions** side by side in forward paper trading; a version passes when, over **100 closed
-  paper trades, it wins at least 80**, makes a **profit after fees** (profit factor ≥ 1.2) and
-  stays consistent (biggest drop ≤ 10%). All three agents must agree on every trade. Report to
-  the owner only when a version passes (or if something truly blocks the work). Agents and
-  versions may be edited whenever needed. Scoreboard: `python3 trading/desk_journal.py score`.
+## Trading desk rules (owner decisions — the ONE current goal; earlier goals are retired)
+- **Goal (locked 21 Oct 2026, do not change without the owner):** one desk version reaches
+  **80 wins out of 100 closed paper trades**, with a **profit after fees** (profit factor ≥ 1.2)
+  and a **biggest drop ≤ 10%**. At least 10 versions run side by side. Report to the owner only
+  when a version passes, or if something truly blocks the work. Scoreboard:
+  `python3 trading/desk_journal.py score`. Real money only with the owner's explicit OK.
+- **The agents think, they don't follow a habit.** Every trade goes through: (1) Atlas — deep
+  study and research; (2) Hawk — deep chart analysis and a precise plan; (3) Sage — backtest
+  check and final decision. All three must agree. Aim: **consistency** in crypto, especially
+  meme coins — steady results, not big trades.
+- **How proof works (owner approved 21 Oct):** the backtest only *blocks known losers*; the
+  agents' judgment is proven *forward* on the paper scoreboard. A cheap scanner (GitHub, hourly,
+  free) finds candidates; the agents meet only when there is a real candidate.
+- **Safe 80%:** small, frequently-reached targets, but every plan has a hard "idea is wrong"
+  exit so one loss can't erase many wins; every version must still show profit after fees.
+- Routine: `.claude/skills/trading-desk/SKILL.md`. Agents may be edited whenever needed.

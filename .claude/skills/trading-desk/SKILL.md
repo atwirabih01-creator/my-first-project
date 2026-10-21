@@ -1,84 +1,74 @@
 ---
 name: trading-desk
-description: Run one session of the 3-agent crypto / meme-coin trading desk — Atlas studies, Hawk analyses, then the setup is backtested and all three must agree (Sage decides last). Use when the owner asks to run the desk, research the market, find trades, or paper trade. PAPER ONLY.
+description: Run one session of the 3-agent crypto / meme-coin trading desk — scanner finds candidates, Atlas studies, Hawk analyses, the gate blocks known losers, Sage decides; all three must agree. Use when the owner asks to run the desk, research the market, find trades, or paper trade, and on every scheduled desk wake-up. PAPER ONLY.
 ---
 
 # Trading Desk — one session
 
-The owner's rule (CLAUDE.md, 21 Oct 2026): the agents **think, they don't follow a habit**.
-Every idea goes through three steps, in order. The aim is **consistency** — steady results
-across crypto and especially meme coins — **not big trades**.
+Owner's locked goal (CLAUDE.md): one desk version reaches **80 wins out of 100 closed paper trades**,
+with **profit after fees** (≥ $1.20 earned per $1 lost) and a **biggest drop ≤ 10%**. The agents
+**think**: Atlas studies → Hawk analyses → Sage checks and decides. All three must agree. Aim: consistency.
 
-You (the main assistant) are the team leader. Subagents can't call each other, so you run the
-steps one after another and pass each agent the previous agent's full written output.
+How proof works: the backtest only **blocks known losers** (`trading/journal/gate.json`); the agents'
+judgment is proven **forward** on the paper scoreboard.
 
 ## Safety (never bend these)
-- **Paper only.** Never call any Co-Invest order tool (`execute_order`, `execute_orders_batch`,
-  `close_position`, `modify_position`, `execute_tpsl`, `enable_trading`, `enable_automated_trading`, …).
-  If the owner later asks for real orders, stop and ask first (CLAUDE.md "Always ask first").
+- **Paper only.** Never call any Co-Invest order or enable tool (`execute_*`, `close_*`, `modify_*`,
+  `enable_*`, `update_leverage`, deposit/withdraw). Never spend money or sign up for anything.
 - Never invent a headline, number or source. If a connector is limited or fails, say so.
-- Ideas are recorded in the desk journal (`trading/journal/`), not sent anywhere.
 
-## Step 1 — Atlas studies (subagent type "Atlas (Trading Researcher)")
-Brief Atlas to produce a **research brief**:
-1. **Market weather:** Bitcoin trend and mood; big news of the last 24–48h (Fed / rates, regulation,
-   ETF flows, liquidations, exchange events). Sources: Bigdata.com `bigdata_search` (best news source),
-   Co-Invest `get_news` (also lists unusual-volume coins), WebSearch.
-2. **Meme-coin scan:** which meme coins have unusual volume, social buzz or news. Sources:
-   LunarCrush `cryptocurrencies` (sector "meme"; free plan is limited — ignore coins with ~zero volume),
-   Co-Invest `get_news` unusual activity, Twelve Data / Binance prices.
-3. **Where money is flowing:** ETF inflows/outflows, stablecoin volume, large liquidations
-   (from Bigdata.com news), Coinversa Pulse where the free plan allows.
-4. **Shortlist 3–6 coins** (meme coins first, plus BTC/ETH/SOL for context), each with: bias
-   (bullish/bearish/neutral), the 3 strongest reasons **with sources and dates**, and what would prove
-   the view wrong. Label anything thin as thin. No price targets yet.
+## Step 0 — housekeeping and scan (cheap, no AI agents)
+```
+cd trading
+python3 desk_journal.py update     # fill waiting plans, close finished paper trades from real prices
+python3 desk_journal.py score      # scoreboard
+python3 scanner.py                 # 40 coins; writes journal/latest_scan.json
+```
+- If `journal/gate.json` is missing or older than 7 days: `python3 gate.py` (a few minutes).
+- **If the scan has no candidates and no waiting plan needs a decision: stop here.** Write one line in
+  `journal/scan_log.md` and end the session. Most sessions end here; that is normal.
+- Count open ideas (`journal/paper_trades.csv`, status `open`, distinct `idea_id`). If 3 are open, stop:
+  no new ideas until one closes.
 
-## Step 2 — Hawk analyses (subagent type "Hawk (Trading Sniper)")
-Give Hawk the full research brief. For each shortlisted coin Hawk produces an **analysis**:
-1. Look at real price data (Twelve Data `get_time_series` / `get_quote`, or
-   `python3 trading/live_desk.py` output): trend on 4-hour and daily charts, recent high/low,
-   typical 4-hour range, volume vs normal.
-2. Name which known setup (if any) fits right now: `dip` (buy/sell the dip in a trend, 4h),
-   `spike` (follow a sudden volume spike with a trailing stop), `breakout` (new 4h high/low on volume).
-   Check whether it is actually firing: `cd trading && python3 check_setup.py SYMBOL SETUP --live`.
-3. If a setup fits: a precise **trade plan** — direction, entry (now, or a limit price with an expiry
-   time), stop-loss, profit target, maximum hold time — with the target at least 3× the 0.30% cost.
-4. If nothing fits cleanly: say "no trade" for that coin. Waiting is a valid answer.
+## Step 1 — Atlas studies (agent "Atlas (Trading Researcher)")
+Give Atlas the scan candidates. Atlas researches **each candidate coin** and the market weather:
+news of the last 24–48h (Bigdata.com `bigdata_search`, one topic per search), unusual volume
+(Co-Invest `get_news`, read-only), social buzz (LunarCrush meme sector), money flows. For each
+candidate: bias, 3 sourced reasons with dates, what would prove it wrong, and a clear
+"supports / doesn't support the scanner's direction". Thin evidence is flagged.
 
-## Step 3 — Backtest and agreement (Sage decides; subagent type "Sage (Trading Professor)")
-1. For every trade plan, run the backtest of that exact setup:
-   `cd trading && python3 check_setup.py SYMBOL SETUP --side long|short` (≈1 minute each).
-   It reports past results on the coin, on meme-coin peers and on all coins: trades, win rate,
-   profit per $1 lost, profitable months, share of profit from the 5 best trades, biggest drop.
-2. Give Sage the research brief, Hawk's analysis and the backtest output. Sage approves a plan only if
-   **all** of these hold:
-   - Atlas's bias and Hawk's direction agree, and the reasons are sourced.
-   - **Consistency:** on meme peers (or the coin itself if it has 30+ past trades) the setup made a
-     profit after fees, earned ≥ $1.20 per $1 lost, was profitable in at least 60% of months, and the
-     5 best trades are less than half of the profit.
-   - The owner's target is 80 wins of 100 with profit after fees, so favour plans whose target is hit far
-     more often than the stop, as long as the backtest still shows a profit.
-   - Risk: at most 3 paper trades open at once, at most 2% of the paper account at risk per trade,
-     no two open trades that are really the same bet (e.g. three meme coins all long at once).
-   - No major scheduled event (e.g. Fed decision) inside the hold time, unless the plan is about it.
-3. **All three must agree.** If any one says no, there is no trade. Sage writes one line per plan:
-   APPROVED or REJECTED, with the reason.
+## Step 2 — Hawk analyses (agent "Hawk (Trading Sniper)")
+Give Hawk the scan and Atlas's brief. Only for candidates Atlas supports, Hawk studies the real
+4-hour and daily chart and writes a plan: direction, entry (now, or a zone with an expiry time),
+stop-loss at the price where the idea is **truly wrong** (the hard exit), a **small target the price
+reaches often**, and a max hold time. Everything else: "no trade — wait".
 
-## Recording approved plans
-- Enter-now plans: `python3 trading/desk_journal.py add SYMBOL long|short "atlas" "hawk" "sage" SETUP`
-- "Enter only if price reaches a zone" plans (Sage-approved in advance):
-  `python3 trading/desk_journal.py limit SYMBOL long|short LOW HIGH EXPIRES_HOURS "atlas" "hawk" "sage" SETUP`
-  — they wait in `journal/pending.csv` and fill automatically from real prices on the next `update`.
+## Step 3 — Sage checks and decides (agent "Sage (Trading Professor)")
+Give Sage the scan, Atlas's brief and Hawk's plans. Sage approves a plan only if:
+- Atlas and Hawk agree on direction, with sourced, dated reasons.
+- The gate does **not** mark this setup/side/coin group as a known loser (the scan row's
+  `versions_allowed` is not empty). For a deeper look Sage may run
+  `python3 check_setup.py SYMBOL SETUP --side long|short --desk`.
+- The plan's loss if wrong is no more than ~3× its target (so 80% wins still leaves a profit after fees).
+- Risk: at most 3 open ideas; no two open ideas that are really the same bet; no major scheduled
+  event (e.g. a Fed decision) inside the hold time unless the plan is about it.
+One line per plan: APPROVED or REJECTED, and why.
 
-## Record it (always, even when there is no trade)
-Write `trading/journal/YYYY-MM-DD-HHMM.md` with: the research brief (short), Hawk's plans, the
-backtest numbers, each agent's vote, and Sage's decision. For approved plans also append one row to
-`trading/journal/paper_trades.csv`:
-`opened_utc,symbol,side,entry,stop,target,max_hold_hours,setup,atlas_reason,sage_reason,status`
-with status `open`. At the start of each session, update open rows: mark `win` / `loss` / `expired`
-using current prices, and add the result in %.
+## Record approved plans
+- Enter now:
+  `python3 desk_journal.py add SYMBOL long|short "atlas" "hawk" "sage" SETUP STOP TARGET HOLD_HOURS`
+- Enter only if price reaches a zone:
+  `python3 desk_journal.py limit SYMBOL long|short LOW HIGH EXPIRES_HOURS "atlas" "hawk" "sage" SETUP STOP TARGET HOLD_HOURS`
+SETUP is the scan's `situation`. The journal records Hawk's exact plan as version **HWK**, plus every
+desk version (D01…) that is not a known loser for this setup. All are scored automatically from real prices.
+
+## Write it down, save it
+- Session file `journal/YYYY-MM-DD-HHMM-session.md`: scan, brief, plans, votes, decisions.
+- Every 5th session with trades: review the scoreboard. You may improve the agents' files or this skill,
+  or add NEW versions (D15, …) in `desk_journal.py`. Never change an existing version's numbers; log
+  the change in `journal/CHANGELOG.md`.
+- Commit and push to the working branch.
 
 ## Report to the owner
-Plain words, no jargon: what the team studied, what it found, what (if anything) it would paper
-trade and why, and the running paper record (trades, wins, profit). Never claim something works
-without the journal numbers to back it.
+Only when a version shows PASSED=True in `desk_journal.py score`, or something truly blocks the work.
+Then in plain words: what passed, the numbers, and that real money still needs the owner's OK.

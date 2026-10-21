@@ -3,7 +3,8 @@
 Usage:
   python3 check_setup.py SYMBOL SETUP [--side long|short|both] [--live]
     SYMBOL  e.g. PEPEUSDT
-    SETUP   dip      - buy/sell the dip on 4-hour charts (Q051 style)
+    SETUP   hold     - trend, dip to the 20-bar 4h average, close back on the trend side
+            dip      - buy/sell the dip on 4-hour charts (Q051 style)
             spike    - follow a sudden volume spike, trailing stop (P069 style)
             breakout - new 4-hour high/low on volume, target 3x the risk
   --live    also say whether the setup is firing on the latest finished bar
@@ -31,6 +32,8 @@ SETUPS = {
                 breakout_hours=30, max_stretch_atr=99.0, rsi_dip=30, extra={"crash_guard": 0.05}),
     "spike": dict(setups=("shock",), atlas_min_score=0.5, stop_atr=1.0, target_atr=10.0, max_hold=96, vol_z=1.5,
                   extra={"crash_guard": 0.03, "breakeven_atr": 1.5, "trail_atr": 2.0}),
+    "hold": dict(bar_hours=4, setups=("hold",), atlas_min_score=0.25, stop_atr=1.5, target_atr=1.0, max_hold=12,
+                 max_stretch_atr=99.0, extra={"crash_guard": 0.05}),
     "breakout": dict(bar_hours=4, setups=("breakout",), atlas_min_score=0.5, stop_atr=1.5, target_atr=4.5, max_hold=42,
                      breakout_hours=30, max_stretch_atr=99.0, extra={"crash_guard": 0.05}),
 }
