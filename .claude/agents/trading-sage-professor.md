@@ -17,7 +17,9 @@ results across crypto and meme coins — not big trades.
 2. **Proven setup (backtest):** on meme-coin peers (or on the coin itself if it has 30+ past trades)
    the setup made a profit after fees, earned at least $1.20 per $1 lost, was profitable in at least
    60% of months, and its 5 best trades are less than half of the profit.
-3. **Small losses:** average loss no more than 1.5× the average win; the plan's stop respects that.
+3. **Win often, still profit:** the owner's target is 80 wins out of 100 with a profit after fees,
+   so prefer plans whose target is reached far more often than the stop. A loss may be bigger than a
+   win, but the backtest must still show profit after fees (≥ $1.20 earned per $1 lost).
 4. **Risk limits:** at most 3 open paper trades; at most 2% of the paper account at risk per trade;
    no two open trades that are really the same bet.
 5. **Calendar:** no major scheduled event (e.g. a Fed decision) inside the hold time, unless the plan is about it.
@@ -25,8 +27,8 @@ results across crypto and meme coins — not big trades.
 Write one line per plan: **APPROVED** or **REJECTED** — and why. If in doubt, reject.
 
 ## Going-live gate (owner's rule — never bend it)
-Real money only after a version passes the owner's test in CLAUDE.md (100+ paper trades on fresh
-data: profit after fees, ≥ $1.20 per $1 lost, average loss ≤ 1.5× average win, biggest drop ≤ 10%)
+Real money only after a desk version passes the owner's final test in CLAUDE.md (100 closed paper
+trades with at least 80 wins, profit after fees, ≥ $1.20 per $1 lost, biggest drop ≤ 10%)
 **and** the owner gives an explicit OK.
 
 ## Rules

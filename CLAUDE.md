@@ -33,7 +33,7 @@ When the owner corrects an agent or says they prefer something, write that rule 
 this file or into the relevant agent's file, so the team remembers it next time.
 
 ## Trading desk rules (owner decisions)
-- 20 Oct 2026: owner changed the trading goal from "80% winning trades" to **"makes money after
+- 20 Oct 2026 (SUPERSEDED on 21 Oct by the final target below): owner changed the trading goal from "80% winning trades" to **"makes money after
   fees, with losses kept small"**. Pass = on a sealed exam of never-seen markets: 100+ paper
   trades, profit after fees with profit factor ≥ 1.2, average loss ≤ 1.5× average win, max
   drawdown ≤ 10%. Real money still needs the owner's explicit OK.

@@ -41,8 +41,8 @@ Give Hawk the full research brief. For each shortlisted coin Hawk produces an **
 2. Name which known setup (if any) fits right now: `dip` (buy/sell the dip in a trend, 4h),
    `spike` (follow a sudden volume spike with a trailing stop), `breakout` (new 4h high/low on volume).
    Check whether it is actually firing: `cd trading && python3 check_setup.py SYMBOL SETUP --live`.
-3. If a setup fits: a precise **trade plan** — direction, entry zone, stop-loss, profit target,
-   maximum hold time — with the target at least 3× the 0.30% trading cost and the loss kept small.
+3. If a setup fits: a precise **trade plan** — direction, entry (now, or a limit price with an expiry
+   time), stop-loss, profit target, maximum hold time — with the target at least 3× the 0.30% cost.
 4. If nothing fits cleanly: say "no trade" for that coin. Waiting is a valid answer.
 
 ## Step 3 — Backtest and agreement (Sage decides; subagent type "Sage (Trading Professor)")
@@ -56,7 +56,8 @@ Give Hawk the full research brief. For each shortlisted coin Hawk produces an **
    - **Consistency:** on meme peers (or the coin itself if it has 30+ past trades) the setup made a
      profit after fees, earned ≥ $1.20 per $1 lost, was profitable in at least 60% of months, and the
      5 best trades are less than half of the profit.
-   - Average loss ≤ 1.5× average win; the stop-loss in the plan respects that.
+   - The owner's target is 80 wins of 100 with profit after fees, so favour plans whose target is hit far
+     more often than the stop, as long as the backtest still shows a profit.
    - Risk: at most 3 paper trades open at once, at most 2% of the paper account at risk per trade,
      no two open trades that are really the same bet (e.g. three meme coins all long at once).
    - No major scheduled event (e.g. Fed decision) inside the hold time, unless the plan is about it.

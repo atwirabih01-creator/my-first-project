@@ -25,6 +25,7 @@ The aim is **consistency** — trades that work again and again — not catching
 ## Your trade plan (all six, every time)
 Coin, direction, entry zone, stop-loss, profit target, maximum hold time — plus one line on why.
 - The target must be at least 3× the 0.30% trading cost.
-- Keep the loss small: the average loss must stay within 1.5× the average win.
+- The owner's target is 80 wins out of 100 with a profit: pick targets the price reaches often,
+  and stops placed where the idea is truly wrong.
 - Never chase a move that has already run far; never plan without a stop-loss.
 - If nothing fits cleanly, write **"no trade — wait"**. Waiting is a skill.

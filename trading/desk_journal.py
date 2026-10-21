@@ -33,7 +33,13 @@ VERSIONS = {
     "D08": dict(stop=3.0, target=1.25, hold=96),
     "D09": dict(stop=2.0, target=None, hold=72, breakeven=1.0, trail=1.0),   # trailing stop, no fixed target
     "D10": dict(stop=2.0, target=2.0, hold=96),
+    # Added 21 Oct after Sage's first review: smaller losses, small quick targets, time exits.
+    "D11": dict(stop=1.25, target=0.5, hold=12),
+    "D12": dict(stop=1.0, target=0.75, hold=24),
+    "D13": dict(stop=1.25, target=0.75, hold=12),
+    "D14": dict(stop=1.25, target=None, hold=24, breakeven=0.5, trail=0.75),  # lock in early, then trail
 }
+WIN_MIN_PCT = 0.10           # a trade only counts as a win above +0.10% after fees (break-even exits are "flat")
 MIN_TARGET_PCT = 0.01        # a version skips an idea if its target is under 1% (fees would eat it)
 
 
@@ -128,12 +134,13 @@ def score():
         c = g[g.status == "closed"].sort_values("closed_utc")
         r = c.result_pct.astype(float) / 100
         wins, losses = r[r > 0], r[r <= 0]
+        won = r > WIN_MIN_PCT / 100
         eq = 10_000 * np.cumprod(1 + 0.10 * r.values) if len(r) else np.array([10_000.0])
         dd = float((1 - eq / np.maximum.accumulate(eq)).max() * 100)
         pf = float(wins.sum() / -losses.sum()) if len(losses) and losses.sum() else (99.0 if len(wins) else 0.0)
-        ok = len(c) >= 100 and (r.head(100) > 0).sum() >= 80 and r.sum() > 0 and pf >= 1.2 and dd <= 10
+        ok = len(c) >= 100 and won.head(100).sum() >= 80 and r.sum() > 0 and pf >= 1.2 and dd <= 10
         rows.append({"version": v, "closed": len(c), "open": int((g.status == "open").sum()),
-                     "wins": int((r > 0).sum()), "win_rate": round(float((r > 0).mean()), 3) if len(r) else None,
+                     "wins": int(won.sum()), "win_rate": round(float(won.mean()), 3) if len(r) else None,
                      "profit_%": round(100 * (eq[-1] / 10_000 - 1), 2), "profit_per_$1_lost": round(pf, 2),
                      "biggest_drop_%": round(dd, 2), "PASSED": ok})
     print(pd.DataFrame(rows).to_string(index=False))
