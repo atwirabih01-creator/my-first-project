@@ -7,6 +7,7 @@ Usage:
             spike    - follow a sudden volume spike, trailing stop (P069 style)
             breakout - new 4-hour high/low on volume, target 3x the risk
   --live    also say whether the setup is firing on the latest finished bar
+  --desk    backtest all 10 desk versions (desk_journal.VERSIONS exits) on this coin and its meme peers
 
 It reports, for the coin, its meme peers and all coins: number of past trades, wins,
 profit after fees, profit per $1 lost, how many months were profitable (consistency),
@@ -55,16 +56,65 @@ def stats(t):
             "top5_share_of_profit": round(float(t.pnl.nlargest(5).sum() / t.pnl.sum()), 2) if t.pnl.sum() > 0 else None}
 
 
+def ensure_data(symbols):
+    """Download 3 years of hourly prices for any coin we don't have yet (fresh sessions start empty)."""
+    import fetch_data as Fd
+    from concurrent.futures import ThreadPoolExecutor
+    have = {p.stem for f in FOLDERS for p in (L.HERE / f).glob("*.pkl")}
+    need = [s for s in symbols if s not in have]
+    if not need:
+        return
+    (L.HERE / "data").mkdir(exist_ok=True)
+    end = int(time.time() * 1000); start = end - 1095 * 86400 * 1000
+
+    def get(s):
+        try:
+            Fd.fetch(s, start, end).to_pickle(L.HERE / "data" / f"{s}.pkl")
+        except Exception as e:
+            print("could not download", s, e)
+    with ThreadPoolExecutor(8) as ex:
+        list(ex.map(get, need))
+
+
+def desk_versions(setup, side):
+    import desk_journal as DJ
+    out = []
+    for name, p in DJ.VERSIONS.items():
+        v = version(setup, side)
+        v.name = name
+        v.stop_atr, v.max_hold = p["stop"], max(p["hold"] // v.bar_hours, 1)
+        if p["target"]:
+            v.target_atr = p["target"]
+        else:
+            v.target_atr = 10.0
+            v.extra.update(breakeven_atr=p["breakeven"], trail_atr=p["trail"])
+        out.append(v)
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("symbol"); ap.add_argument("setup", choices=SETUPS)
     ap.add_argument("--side", default="both", choices=["long", "short", "both"])
     ap.add_argument("--live", action="store_true")
+    ap.add_argument("--desk", action="store_true")
     a = ap.parse_args()
     v = version(a.setup, a.side)
-    d, btc = L.load()
-    for f in FOLDERS[1:]:
+    ensure_data(["BTCUSDT", a.symbol] + sorted(MEMES))
+    d = {}
+    for f in FOLDERS:
         d.update(R.load_dir(L.HERE / f))
+    btc = d["BTCUSDT"]
+    if a.desk:
+        d = {k: x for k, x in d.items() if k in MEMES or k == a.symbol}
+        print(f"DESK VERSIONS on setup '{a.setup}' ({a.side}) — {a.symbol} and meme peers, after 0.30% costs\n")
+        for dv in desk_versions(a.setup, a.side):
+            ideas = L.build(d, btc, dv)
+            if a.side != "both":
+                ideas = ideas[ideas.dir == (1 if a.side == "long" else -1)]
+            print(f"{dv.name}  coin: {stats(L.trade(ideas[ideas.symbol == a.symbol], dv))}")
+            print(f"      peers: {stats(L.trade(ideas[ideas.symbol.isin(MEMES)], dv))}")
+        return
     ideas = L.build(d, btc, v)                                 # every past signal with its real outcome
     if a.side == "short":
         ideas = ideas[ideas.dir < 0]

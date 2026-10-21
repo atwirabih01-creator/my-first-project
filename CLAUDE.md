@@ -43,3 +43,9 @@ this file or into the relevant agent's file, so the team remembers it next time.
   backtest of that exact setup and agreement of all three (Sage decides last). The aim is
   **consistency** across crypto and especially meme coins — steady results, not big trades.
   The routine lives in `.claude/skills/trading-desk/SKILL.md`; follow it every session.
+- 21 Oct 2026 (later): owner set the FINAL target for the thinking desk: run **at least 10
+  versions** side by side in forward paper trading; a version passes when, over **100 closed
+  paper trades, it wins at least 80**, makes a **profit after fees** (profit factor ≥ 1.2) and
+  stays consistent (biggest drop ≤ 10%). All three agents must agree on every trade. Report to
+  the owner only when a version passes (or if something truly blocks the work). Agents and
+  versions may be edited whenever needed. Scoreboard: `python3 trading/desk_journal.py score`.
