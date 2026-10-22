@@ -1,34 +1,20 @@
 {
- "scanned_utc": "2026-10-22 16:13:00+00:00",
+ "scanned_utc": "2026-10-22 20:11:00+00:00",
  "coins_checked": 40,
  "market_tide": "down",
  "candidates": [
   {
-   "scanned_utc": "2026-10-22 16:13:00+00:00",
-   "bar_utc": "2026-10-22 12:00:00+00:00",
-   "symbol": "TRUMPUSDT",
-   "meme": true,
-   "side": "short",
-   "situation": "dip",
-   "price": 1.745,
-   "atr4h_pct": 2.45,
-   "rsi4h": 43.3,
-   "buy_share_24h": 0.465,
-   "vol24h_musd": 13.6,
-   "versions_allowed": "D01 D02 D03 D04 D05 D06 D08 D09 D10 D12 D13"
-  },
-  {
-   "scanned_utc": "2026-10-22 16:13:00+00:00",
-   "bar_utc": "2026-10-22 12:00:00+00:00",
+   "scanned_utc": "2026-10-22 20:11:00+00:00",
+   "bar_utc": "2026-10-22 16:00:00+00:00",
    "symbol": "XRPUSDT",
    "meme": false,
    "side": "short",
    "situation": "dip",
-   "price": 1.3222,
-   "atr4h_pct": 1.65,
-   "rsi4h": 46.8,
-   "buy_share_24h": 0.44,
-   "vol24h_musd": 136.2,
+   "price": 1.3057,
+   "atr4h_pct": 1.68,
+   "rsi4h": 42.0,
+   "buy_share_24h": 0.464,
+   "vol24h_musd": 126.7,
    "versions_allowed": "D01 D02 D03 D04 D05 D06 D07 D08 D09 D10 D11 D12 D13 D14"
   }
  ]

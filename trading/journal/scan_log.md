@@ -6,3 +6,5 @@
   - 12:10: TRUMP short filled at 1.758 (09:00 bar) and is open. Repeat candidates: TRUMP already has an open idea (one per coin), and XRP is the same falling-BTC bet that Sage declined at 08:10. No new meeting held: Sage's no-duplicate-bets rule applies and nothing has changed.
 - 2026-10-22 16:13 UTC — scan: 2 candidate(s)
   - 16:10: HWK (Hawk's TRUMP plan) reached its target, 1.737: first closed paper trade, a WIN. The other 11 versions are still open. Repeat candidates (TRUMP open; XRP is the same bet), so no meeting was held.
+- 2026-10-22 20:11 UTC — scan: 1 candidate(s)
+  - 20:10: TRUMP short: 5 versions closed, all wins (HWK, D02, D04, D12, D13); 7 still open. XRP short reappeared, but it is the same falling-BTC bet as the TRUMP idea that is still open, so it was skipped under the no-duplicate-bets rule.
