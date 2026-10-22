@@ -2,3 +2,5 @@
 - 2026-10-22 00:11 UTC — scan: 0 candidate(s)
 - 2026-10-22 04:11 UTC — scan: 0 candidate(s)
 - 2026-10-22 08:12 UTC — scan: 2 candidate(s)
+- 2026-10-22 12:16 UTC — scan: 2 candidate(s)
+  - 12:10: TRUMP short filled at 1.758 (09:00 bar) and is open. Repeat candidates: TRUMP already has an open idea (one per coin), and XRP is the same falling-BTC bet that Sage declined at 08:10. No new meeting held: Sage's no-duplicate-bets rule applies and nothing has changed.
