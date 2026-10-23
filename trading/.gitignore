@@ -3,3 +3,4 @@ data_fresh/
 __pycache__/
 data_holdout_*/
 data_practice/
+data_futures/
