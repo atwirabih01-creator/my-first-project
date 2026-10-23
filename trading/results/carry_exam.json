@@ -1,0 +1,13 @@
+{
+ "trades": 1,
+ "win_rate": 1.0,
+ "profit_factor": 99.0,
+ "return_pct": 0.02,
+ "max_drawdown_pct": 0.0,
+ "avg_trade_pct": 0.249,
+ "worst_trade_pct": 0.25,
+ "avg_days": 14.0,
+ "profitable_months": "1/1",
+ "name": "CARRY k9 in0.2 out0.0 max14",
+ "passed": false
+}

@@ -23,3 +23,13 @@
   - The scanner uses the same agreement and tide rules as the backtests.
   - The pass test judges the same first 100 trades for every measure.
   - Known-answer tests matched hand calculations.
+- **23 Oct 2026 — new strategy families (owner: "keep researching, find the skills"):**
+  - Deep research: funding carry is the only family where a high win rate comes from the trade's structure; others rest on prediction.
+  - **Funding carry** (buy spot, short futures, collect funding):
+    - Design, 2023–25: 85–98% wins with tiny losses, mostly in 2023–24.
+    - Sealed 2026 exam: only 1 trade (a win). Funding in 2026 is too low on Binance and Hyperliquid.
+    - Verdict: works, but only while the market is "hot".
+  - **Crash bounce:** coins crashing alone keep falling (67% wins, PF 0.81). Market-wide flushes bounce (84% wins, PF 1.68 in design).
+  - **Market-flush bounce (causal test):**
+    - Design: 242 trades, 84% wins, PF 1.39, biggest drop 4%.
+    - Sealed 2026 exam: 47 trades, 70% wins, PF 0.72. 6 of 7 flushes won; on 22 Aug all 13 trades lost together. **Failed.**

@@ -71,16 +71,30 @@ def simulate(df, sig, a, t, s, h):
     return out
 
 
+_cache = {}
+
+
 def run(d, params, period):
-    m, up, t, s, h = params
-    rows = []
-    for sym, df in d.items():
-        sig, a = signals(df, m, up)
-        for opened, closed, pnl in simulate(df, sig, a, t, s, h):
-            if (period == "design" and opened < SPLIT) or (period == "exam" and opened >= SPLIT):
-                rows.append((sym, opened, closed, pnl))
-    t_ = pd.DataFrame(rows, columns=["symbol", "time", "exit_time", "pnl"]).sort_values("exit_time")
-    return t_
+    m, up, t, s, h = params[:5]
+    cap = params[5] if len(params) > 5 else None      # most trades open at the same time (whole account)
+    key = (m, up, t, s, h, period)
+    if key not in _cache:
+        rows = []
+        for sym, df in d.items():
+            sig, a = signals(df, m, up)
+            for opened, closed, pnl in simulate(df, sig, a, t, s, h):
+                if (period == "design" and opened < SPLIT) or (period == "exam" and opened >= SPLIT):
+                    rows.append((sym, opened, closed, pnl))
+        _cache[key] = pd.DataFrame(rows, columns=["symbol", "time", "exit_time", "pnl"]).sort_values("time")
+    t_ = _cache[key]
+    if cap:                                           # take signals in time order while a slot is free
+        keep, open_exits = [], []
+        for r in t_.itertuples():
+            open_exits = [x for x in open_exits if x > r.time]
+            if len(open_exits) < cap:
+                keep.append(r.Index); open_exits.append(r.exit_time)
+        t_ = t_.loc[keep]
+    return t_.sort_values("exit_time")
 
 
 def score(t):
@@ -99,25 +113,27 @@ def score(t):
 
 
 GRID = list(itertools.product([3, 4, 5], [False, True], [1.0, 1.5, 2.0], [3, 5, 8], [6, 12, 24]))
+# Round 2 (after seeing design results only): cap open trades to stop crash-day pile-ups
+GRID2 = [g + (c,) for g in itertools.product([4, 5, 6], [False, True], [0.75, 1.0], [5, 8], [12, 24]) for c in (2, 3, 5)]
 
 
 def name(p):
-    return f"CB m{p[0]} up{int(p[1])} t{p[2]} s{p[3]} h{p[4]}"
+    return f"CB m{p[0]} up{int(p[1])} t{p[2]} s{p[3]} h{p[4]}" + (f" cap{p[5]}" if len(p) > 5 else "")
 
 
 if __name__ == "__main__":
     mode = sys.argv[1]
     d = load_all()
-    if mode == "design":
+    if mode in ("design", "design2"):
         board = []
-        for p in GRID:
+        for p in (GRID if mode == "design" else GRID2):
             sc = score(run(d, p, "design")); sc["name"] = name(p); board.append(sc)
         board.sort(key=lambda x: (-(x.get("win_rate", 0) >= 0.8 and x.get("profit_factor", 0) >= 1.2), -x.get("profit_factor", 0)))
-        json.dump(board, open(OUT / "crash_bounce_design.json", "w"), indent=1)
+        json.dump(board, open(OUT / f"crash_bounce_{mode}.json", "w"), indent=1)
         for b in board[:25]:
             print(b)
     else:
-        p = [g for g in GRID if name(g) == " ".join(sys.argv[2:])][0]
+        p = [g for g in GRID + GRID2 if name(g) == " ".join(sys.argv[2:])][0]
         t = run(d, p, "exam")
         sc = score(t); sc["name"] = name(p)
         sc["passed"] = bool(sc["trades"] >= 100 and sc["win_rate"] >= 0.8 and sc["profit_factor"] >= 1.2

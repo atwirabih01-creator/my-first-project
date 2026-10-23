@@ -1,0 +1,13 @@
+{
+ "trades": 47,
+ "events": 8,
+ "win_rate": 0.7021,
+ "profit_factor": 0.723,
+ "return_pct": -0.48,
+ "max_drawdown_pct": 1.6,
+ "avg_win_pct": 1.25,
+ "avg_loss_pct": -4.09,
+ "profitable_months": "3/4",
+ "name": "FLUSH m5 t0.75 s5 h24 k11 max10",
+ "passed": false
+}
