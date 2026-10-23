@@ -10,3 +10,4 @@
   - 20:10: TRUMP short: 5 versions closed, all wins (HWK, D02, D04, D12, D13); 7 still open. XRP short reappeared, but it is the same falling-BTC bet as the TRUMP idea that is still open, so it was skipped under the no-duplicate-bets rule.
 - 2026-10-23 00:12 UTC — scan: 0 candidate(s)
 - 2026-10-23 04:12 UTC — scan: 0 candidate(s)
+- 2026-10-23 08:13 UTC — scan: 0 candidate(s)
