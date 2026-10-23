@@ -8,3 +8,4 @@
   - 16:10: HWK (Hawk's TRUMP plan) reached its target, 1.737: first closed paper trade, a WIN. The other 11 versions are still open. Repeat candidates (TRUMP open; XRP is the same bet), so no meeting was held.
 - 2026-10-22 20:11 UTC — scan: 1 candidate(s)
   - 20:10: TRUMP short: 5 versions closed, all wins (HWK, D02, D04, D12, D13); 7 still open. XRP short reappeared, but it is the same falling-BTC bet as the TRUMP idea that is still open, so it was skipped under the no-duplicate-bets rule.
+- 2026-10-23 00:12 UTC — scan: 0 candidate(s)
