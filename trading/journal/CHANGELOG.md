@@ -42,3 +42,7 @@
   - "Background-rate" carry (enter at 8–10%/yr) wins only 35–79%: rejected.
   - C4 (12%/yr, hold 30 days): design 92% wins; sealed 2026 exam 2 of 2 wins (too few to count).
   - Live paper playbook: `carry_live.py`, versions C1–C4. Binance spot leg plus OKX or Hyperliquid futures leg. It runs inside the 4-hourly desk check, and agents meet on any carry candidate.
+- **23 Oct 2026 — carry on all 377 Binance coins (funding-only screen):**
+  - Design years: 82–93% wins, lower than on the 39 liquid coins.
+  - 2026: 68–158 trades but only 44–60% wins. On small coins, hot funding bursts are short and often flip negative.
+  - Decision: the live carry stays on the 39 liquid coins.
