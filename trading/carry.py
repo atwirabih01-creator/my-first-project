@@ -55,9 +55,14 @@ def periods_per_year(rate):
     return 24 * 365 / gap
 
 
-def trades(rate, px, k, enter, exit_, max_days):
+def trades(rate, px, k, enter, exit_, max_days, stop=None, research=False):
     ppy = periods_per_year(rate)
     avg = rate.rolling(k).mean() * ppy                       # yearly rate, known at that funding time
+    if research:   # research rule set: last 3 prints all >= 0.03%/8h; exit after 2 prints < 0.005%/8h
+        per8 = rate * (ppy / (365 * 3))                      # rate scaled to an 8-hour period
+        avg = pd.Series(np.where(per8.rolling(3).min() >= 0.0003, 1.0, 0.0), index=rate.index)
+        low2 = (per8 < 0.00005).rolling(2).sum() >= 2
+        enter, exit_ = 0.5, None
     times = rate.index.intersection(px.index)
     rows, pos = [], None
     for t in times:
@@ -67,20 +72,23 @@ def trades(rate, px, k, enter, exit_, max_days):
             continue
         pos["fund"] += rate[t]                               # short futures receives positive funding
         held = (t - pos["t0"]).total_seconds() / 86400
-        if avg[t] < exit_ or held >= max_days:
-            spot_ret = px.spot[t] / pos["spot0"] - 1
-            perp_ret = px.perp[t] / pos["perp0"] - 1
-            pnl = pos["fund"] + spot_ret - perp_ret - COST
+        spot_ret = px.spot[t] / pos["spot0"] - 1
+        perp_ret = px.perp[t] / pos["perp0"] - 1
+        pnl = pos["fund"] + spot_ret - perp_ret - COST          # value of both legs right now
+        cooled = bool(low2[t]) if research else avg[t] < exit_
+        if cooled or held >= max_days or (stop is not None and pnl <= -stop):
             rows.append((pos["t0"], t, pnl, pos["fund"], spot_ret - perp_ret))
             pos = None
     return rows
 
 
 def run(d, params, period):
-    k, enter, exit_, max_days = params
+    k, enter, exit_, max_days = params[:4]
+    stop = params[4] if len(params) > 4 else None
+    research = len(params) > 5 and params[5]
     rows = []
     for perp, (rate, px) in d.items():
-        for t0, t1, pnl, fund, basis in trades(rate, px, k, enter, exit_, max_days):
+        for t0, t1, pnl, fund, basis in trades(rate, px, k, enter, exit_, max_days, stop, research):
             if (period == "design" and t0 < SPLIT) or (period == "exam" and t0 >= SPLIT):
                 rows.append((perp, t0, t1, pnl, fund, basis))
     return pd.DataFrame(rows, columns=["symbol", "time", "exit_time", "pnl", "funding", "basis"]).sort_values("exit_time")
@@ -103,10 +111,14 @@ def score(t):
 
 
 GRID = list(itertools.product([3, 9], [0.10, 0.20, 0.40], [0.0, 0.05], [7, 14, 30]))
+GRID += [(3, 0, 0, md, st, True) for md in (7, 14) for st in (None, 0.015)]          # the research's rule set
+GRID += [(k, e, x, md, 0.015) for k in (3, 9) for e in (0.20, 0.40) for x in (0.0, 0.05) for md in (14, 30)]
 
 
 def name(p):
-    return f"CARRY k{p[0]} in{p[1]} out{p[2]} max{p[3]}"
+    if len(p) > 5 and p[5]:
+        return f"CARRY research max{p[3]} stop{p[4]}"
+    return f"CARRY k{p[0]} in{p[1]} out{p[2]} max{p[3]}" + (f" stop{p[4]}" if len(p) > 4 else "")
 
 
 if __name__ == "__main__":
