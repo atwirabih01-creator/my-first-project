@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # One cheap scanner run (no AI agents): update the paper journal, refresh the gate weekly, scan 40 coins.
-# Prints "CANDIDATES=<n>" and "PASSED=<yes|no>" as its last two lines.
+# Prints CANDIDATES=<n>, CARRY_CANDIDATES=<n> and PASSED=<yes|no> as its last three lines.
 set -u
 cd "$(dirname "$0")"
 python3 desk_journal.py update
@@ -11,6 +11,11 @@ if [ "$stale" = "1" ]; then
 fi
 python3 scanner.py | tee /tmp/desk_scan.txt
 n=$(python3 -c "import json; print(len(json.load(open('journal/latest_scan.json'))['candidates']))")
-echo "- $(date -u '+%Y-%m-%d %H:%M') UTC — scan: ${n} candidate(s)" >> journal/scan_log.md
+python3 carry_live.py update
+python3 carry_live.py scan | tee /tmp/desk_carry.txt
+python3 carry_live.py score | tee -a /tmp/desk_score.txt
+c=$(python3 -c "import json; print(len(json.load(open('journal/carry_scan.json'))['candidates']))")
+echo "- $(date -u '+%Y-%m-%d %H:%M') UTC — scan: ${n} candidate(s), carry: ${c} candidate(s)" >> journal/scan_log.md
 echo "CANDIDATES=${n}"
+echo "CARRY_CANDIDATES=${c}"
 if grep -q "True" /tmp/desk_score.txt; then echo "PASSED=yes"; else echo "PASSED=no"; fi

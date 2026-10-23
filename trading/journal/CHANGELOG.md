@@ -33,3 +33,12 @@
   - **Market-flush bounce (causal test):**
     - Design: 242 trades, 84% wins, PF 1.39, biggest drop 4%.
     - Sealed 2026 exam: 47 trades, 70% wins, PF 0.72. 6 of 7 flushes won; on 22 Aug all 13 trades lost together. **Failed.**
+- **23 Oct 2026 — carry becomes a live playbook:**
+  - Reality Checker audit of carry: the maths is correct, with no look-ahead. Cautions:
+    - The evidence comes from only 4–5 hot periods (2023–24).
+    - Win rate drops to about 80% with realistic slippage.
+    - Futures price spikes need spare margin.
+    - Funding has been cold since early 2025.
+  - "Background-rate" carry (enter at 8–10%/yr) wins only 35–79%: rejected.
+  - C4 (12%/yr, hold 30 days): design 92% wins; sealed 2026 exam 2 of 2 wins (too few to count).
+  - Live paper playbook: `carry_live.py`, versions C1–C4. Binance spot leg plus OKX or Hyperliquid futures leg. It runs inside the 4-hourly desk check, and agents meet on any carry candidate.

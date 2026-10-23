@@ -30,6 +30,17 @@ python3 scanner.py                 # 40 coins; writes journal/latest_scan.json
 - Count open ideas (`journal/paper_trades.csv`, status `open`, distinct `idea_id`). If 3 are open, stop:
   no new ideas until one closes.
 
+## Carry playbook (market-neutral; added 23 Oct 2026)
+When `journal/carry_scan.json` lists candidates (funding is hot on a coin), the team meets on each one:
+- **Atlas:** why is funding high (hype, listing, squeeze)? Any token unlock, delisting or exchange risk
+  in the next 14 days? Is there a Binance spot market with real volume?
+- **Hawk:** how far has the futures price already run (a short futures leg can be forced closed by a
+  sudden spike); recent daily range; is the spot/futures price gap normal?
+- **Sage:** approve only if the reasons are sourced, the coin is liquid, there's no known event that could
+  crash the funding or freeze the coin, and no other open carry on the same coin.
+Record with `python3 carry_live.py add COIN VENUE "atlas" "hawk" "sage"`. The journal then
+collects funding and closes the trade on its own (design-tested rules C1–C3).
+
 ## Step 1 — Atlas studies (agent "Atlas (Trading Researcher)")
 Give Atlas the scan candidates. Atlas researches **each candidate coin** and the market weather:
 news of the last 24–48h (Bigdata.com `bigdata_search`, one topic per search), unusual volume
