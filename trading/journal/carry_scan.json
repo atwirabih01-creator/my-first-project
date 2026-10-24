@@ -1,26 +1,15 @@
 {
- "scanned_utc": "2026-10-24 04:12:00+00:00",
+ "scanned_utc": "2026-10-24 08:12:00+00:00",
  "candidates": [],
  "hottest": [
   {
    "coin": "PEPE",
    "venue": "HL",
-   "yearly_last9": 0.1279,
+   "yearly_last9": 0.1132,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "NEAR",
-   "venue": "HL",
-   "yearly_last9": 0.1114,
-   "last3_per8h": [
-    0.0001,
-    3.9e-05,
-    -8.5e-05
+    4e-06
    ],
    "versions": []
   },
@@ -49,44 +38,55 @@
   {
    "coin": "ENA",
    "venue": "HL",
-   "yearly_last9": 0.1074,
+   "yearly_last9": 0.1013,
    "last3_per8h": [
     0.0001,
-    0.0001,
-    5.9e-05
+    9.6e-05,
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "FLOKI",
    "venue": "HL",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "ORDI",
    "venue": "HL",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "PNUT",
    "venue": "HL",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "TURBO",
+   "venue": "HL",
+   "yearly_last9": 0.0989,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    1.3e-05
    ],
    "versions": []
   }
