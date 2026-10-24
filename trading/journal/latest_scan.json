@@ -1,6 +1,21 @@
 {
- "scanned_utc": "2026-10-24 12:11:00+00:00",
+ "scanned_utc": "2026-10-24 16:11:00+00:00",
  "coins_checked": 40,
  "market_tide": "down",
- "candidates": []
+ "candidates": [
+  {
+   "scanned_utc": "2026-10-24 16:11:00+00:00",
+   "bar_utc": "2026-10-24 15:00:00+00:00",
+   "symbol": "ETHUSDT",
+   "meme": false,
+   "side": "short",
+   "situation": "spike",
+   "price": 2306.41,
+   "atr4h_pct": 1.54,
+   "rsi4h": 27.4,
+   "buy_share_24h": 0.468,
+   "vol24h_musd": 484.0,
+   "versions_allowed": "D01 D02 D03 D04 D05 D06 D09 D10 D13 D14"
+  }
+ ]
 }
