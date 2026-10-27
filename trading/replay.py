@@ -55,7 +55,7 @@ def make(rnd, n, src="walkforward_30m_withbtc_trades.csv", until="2026-01-01"):
     DIR.mkdir(parents=True, exist_ok=True); ANS.mkdir(exist_ok=True)
     rng = np.random.default_rng(int(rnd))
     t = pd.read_csv(S.OUT / src, parse_dates=["t_in", "t_out"])
-    t = t[t.t_in < pd.Timestamp(until, tz="UTC")]
+    t = t[t.t_in < pd.Timestamp(until, tz="UTC")].drop_duplicates(["sym", "t_in"])   # both breakout versions can fire at once
     used = set()
     for f in ANS.glob("round*.json"):                    # never show the same case twice
         used |= {(a["sym"], a["time"]) for a in json.load(open(f)).values()}
