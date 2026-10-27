@@ -49,3 +49,13 @@ cannot overrule him either way. Sage blocks a Hawk TAKE only for a hard limit:
 **Fact (team leader, 27 Oct):** replay outcomes (pnl_pct) are AFTER futures fees: about 0.08% when the
 target is hit and 0.13% when stopped, plus 0.01–0.02% slippage. The old "target ≥ 0.90%" rule was for
 0.30% spot fees and does not apply to the futures breakout setup.
+
+## PRE-DECLARED TEAM RULE for the confirmation rounds 6-11 (fixed 27 Oct 2026, before those rounds are made)
+Owner's rule: the team trades only when all three agree.
+- **Hawk says TAKE** (chart).
+- **Atlas does NOT say "warns"** (context: supports or neutral).
+- **Sage's hard limits pass:** at most one coin per BTC moment, at most 3 open at once, loss if wrong ≤ 3× target.
+
+Evidence before fixing it (rounds 1–5, 202 blind cases): this rule gave 38 trades, 82% wins and $1.88 per $1 lost,
+against 77% wins and $0.92 for all cases. Rounds 6–11 (360 new blind cases) are the confirmation. No rule
+changes until they are scored.

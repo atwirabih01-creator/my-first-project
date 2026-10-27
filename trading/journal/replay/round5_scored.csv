@@ -1,0 +1,61 @@
+case,decision,reason,sym,time,pnl_pct,win,prob,approved_by_model,tf,setup,meme,dir
+R5-01,TAKE,Hawk decides; Sage hard-limit check passed,SHIBUSDT,2026-02-23 01:30:00+00:00,-1.768,False,0.8979,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R5-02,SKIP,Hawk decides; Sage hard-limit check passed,BTCUSDT,2026-02-03 18:30:00+00:00,0.668,True,0.9387,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-03,SKIP,Hawk decides; Sage hard-limit check passed,LINKUSDT,2025-10-20 05:00:00+00:00,-2.092,False,0.8784,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,-1
+R5-04,SKIP,Hawk decides; Sage hard-limit check passed,PEPEUSDT,2026-02-03 18:00:00+00:00,1.322,True,0.8962,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R5-05,SKIP,Hawk decides; Sage hard-limit check passed,HBARUSDT,2026-01-31 14:30:00+00:00,0.79,True,0.8941,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-06,TAKE,Hawk decides; Sage hard-limit check passed,BTCUSDT,2026-01-21 17:00:00+00:00,-1.66,False,0.9186,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R5-07,SKIP,Hawk decides; Sage hard-limit check passed,PEPEUSDT,2026-02-02 03:30:00+00:00,-4.643,False,0.8357,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R5-08,SKIP,Hawk decides; Sage hard-limit check passed,BNBUSDT,2026-01-31 17:30:00+00:00,0.733,True,0.8405,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-09,SKIP,Hawk decides; Sage hard-limit check passed,WIFUSDT,2026-01-29 03:00:00+00:00,0.974,True,0.9095,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R5-10,SKIP,Hawk decides; Sage hard-limit check passed,BOMEUSDT,2026-01-25 16:30:00+00:00,0.814,True,0.9325,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R5-11,TAKE,Hawk decides; Sage hard-limit check passed,ORDIUSDT,2026-01-29 03:00:00+00:00,0.753,True,0.9047,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R5-12,TAKE,Hawk decides; Sage hard-limit check passed,BNBUSDT,2026-02-04 15:00:00+00:00,0.465,True,0.8898,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-13,SKIP,Hawk decides; Sage hard-limit check passed,RENDERUSDT,2026-02-09 11:00:00+00:00,-2.113,False,0.8644,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R5-14,SKIP,Hawk decides; Sage hard-limit check passed,TIAUSDT,2025-09-05 08:00:00+00:00,0.357,True,0.8302,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,-1
+R5-15,TAKE,Hawk decides; Sage hard-limit check passed,1000SATSUSDT,2026-03-27 11:00:00+00:00,0.48,True,0.9282,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R5-16,TAKE,Hawk decides; Sage hard-limit check passed,NEIROUSDT,2026-02-17 15:00:00+00:00,-2.169,False,0.8936,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R5-17,TAKE,Hawk decides; Sage hard-limit check passed,WLDUSDT,2026-01-25 16:30:00+00:00,0.639,True,0.9382,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R5-18,TAKE,Hawk decides; Sage hard-limit check passed,OPUSDT,2026-03-26 19:00:00+00:00,0.747,True,0.9006,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R5-19,SKIP,Hawk decides; Sage hard-limit check passed,TIAUSDT,2026-01-29 15:30:00+00:00,0.797,True,0.8859,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-20,SKIP,Hawk decides; Sage hard-limit check passed,INJUSDT,2025-06-05 21:00:00+00:00,-4.403,False,0.8296,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-21,SKIP,Hawk decides; Sage hard-limit check passed,SOLUSDT,2025-06-20 17:30:00+00:00,0.691,True,0.8819,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-22,TAKE,Hawk decides; Sage hard-limit check passed,PNUTUSDT,2026-01-29 15:00:00+00:00,0.547,True,0.8883,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R5-23,SKIP,Hawk decides; Sage hard-limit check passed,XRPUSDT,2026-01-29 03:00:00+00:00,0.364,True,0.9561,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-24,SKIP,Hawk decides; Sage hard-limit check passed,TURBOUSDT,2026-02-18 20:00:00+00:00,0.856,True,0.9354,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R5-25,SKIP,Hawk decides; Sage hard-limit check passed,RENDERUSDT,2025-06-20 08:00:00+00:00,0.486,True,0.9025,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,-1
+R5-26,SKIP,Hawk decides; Sage hard-limit check passed,MEMEUSDT,2026-02-03 18:30:00+00:00,-3.091,False,0.905,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R5-27,SKIP,Hawk decides; Sage hard-limit check passed,TURBOUSDT,2025-05-01 22:00:00+00:00,1.37,True,0.863,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,1
+R5-28,SKIP,Hawk decides; Sage hard-limit check passed,SOLUSDT,2026-03-27 11:00:00+00:00,0.547,True,0.8738,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R5-29,SKIP,Hawk decides; Sage hard-limit check passed,WLDUSDT,2026-01-31 14:30:00+00:00,0.981,True,0.8759,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R5-30,SKIP,Hawk decides; Sage hard-limit check passed,NEARUSDT,2025-06-03 13:30:00+00:00,0.452,True,0.8266,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,-1
+R5-31,SKIP,Hawk decides; Sage hard-limit check passed,BTCUSDT,2026-02-23 01:30:00+00:00,0.295,True,0.9207,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-32,SKIP,Hawk decides; Sage hard-limit check passed,PEPEUSDT,2025-06-20 17:30:00+00:00,1.05,True,0.8296,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R5-33,SKIP,Hawk decides; Sage hard-limit check passed,FLOKIUSDT,2025-11-20 13:00:00+00:00,0.443,True,0.851,True,30m,"revert (2.0, 'with') T0.75 S2.0 H36",True,-1
+R5-34,SKIP,Hawk decides; Sage hard-limit check passed,1000SATSUSDT,2026-03-28 01:30:00+00:00,0.368,True,0.9047,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R5-35,SKIP,Hawk decides; Sage hard-limit check passed,ARBUSDT,2025-06-24 05:30:00+00:00,-2.055,False,0.9158,True,30m,"revert (3.0, 'with') T0.75 S2.0 H36",False,-1
+R5-36,SKIP,Hawk decides; Sage hard-limit check passed,APTUSDT,2025-10-01 01:30:00+00:00,0.514,True,0.8845,True,30m,"revert (3.0, 'with') T0.75 S2.0 H36",False,-1
+R5-37,SKIP,Hawk decides; Sage hard-limit check passed,BONKUSDT,2026-04-02 02:30:00+00:00,0.604,True,0.9631,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R5-38,SKIP,Hawk decides; Sage hard-limit check passed,ORDIUSDT,2025-09-14 01:30:00+00:00,0.402,True,0.8964,True,30m,"rsi3 (5,) T0.75 S2.0 H12",True,1
+R5-39,TAKE,Hawk decides; Sage hard-limit check passed,JUPUSDT,2026-02-28 06:30:00+00:00,0.509,True,0.8998,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-40,SKIP,Hawk decides; Sage hard-limit check passed,ADAUSDT,2025-07-23 13:00:00+00:00,-2.229,False,0.8486,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,1
+R5-41,TAKE,Hawk decides; Sage hard-limit check passed,LTCUSDT,2026-01-25 19:30:00+00:00,0.787,True,0.912,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R5-42,SKIP,Hawk decides; Sage hard-limit check passed,TURBOUSDT,2026-08-28 19:30:00+00:00,-6.207,False,0.8604,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,1
+R5-43,SKIP,Hawk decides; Sage hard-limit check passed,XRPUSDT,2025-06-10 06:00:00+00:00,0.256,True,0.8253,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,1
+R5-44,SKIP,Hawk decides; Sage hard-limit check passed,DOGEUSDT,2026-01-23 15:00:00+00:00,0.306,True,0.8712,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R5-45,SKIP,Hawk decides; Sage hard-limit check passed,DOTUSDT,2025-07-23 14:00:00+00:00,0.888,True,0.9572,True,30m,"revert (3.0, 'with') T0.75 S2.0 H36",False,1
+R5-46,SKIP,Hawk decides; Sage hard-limit check passed,BNBUSDT,2025-06-22 14:30:00+00:00,0.352,True,0.9083,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R5-47,TAKE,Hawk decides; Sage hard-limit check passed,INJUSDT,2025-06-05 19:30:00+00:00,1.37,True,0.9226,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-48,SKIP,Hawk decides; Sage hard-limit check passed,PEOPLEUSDT,2025-06-22 13:30:00+00:00,-3.4,False,0.9056,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R5-49,SKIP,Hawk decides; Sage hard-limit check passed,NEIROUSDT,2026-02-17 15:00:00+00:00,-2.169,False,0.933,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R5-50,SKIP,Hawk decides; Sage hard-limit check passed,BTCUSDT,2025-05-07 00:30:00+00:00,0.253,True,0.9266,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,1
+R5-51,SKIP,Hawk decides; Sage hard-limit check passed,PNUTUSDT,2026-03-27 11:00:00+00:00,0.545,True,0.9073,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R5-52,TAKE,Hawk decides; Sage hard-limit check passed,HBARUSDT,2025-12-15 15:00:00+00:00,0.502,True,0.9539,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-53,SKIP,Hawk decides; Sage hard-limit check passed,ADAUSDT,2026-01-13 16:00:00+00:00,0.543,True,0.8497,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,1
+R5-54,SKIP,Hawk decides; Sage hard-limit check passed,BOMEUSDT,2025-06-21 18:00:00+00:00,0.838,True,0.9361,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R5-55,SKIP,Hawk decides; Sage hard-limit check passed,TRUMPUSDT,2026-01-29 15:00:00+00:00,0.254,True,0.892,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R5-56,SKIP,Hawk decides; Sage hard-limit check passed,APTUSDT,2026-09-23 14:30:00+00:00,-1.822,False,0.8681,True,30m,"rsi3 (10,) T0.75 S2.0 H12",False,1
+R5-57,SKIP,Hawk decides; Sage hard-limit check passed,BTCUSDT,2025-06-22 14:30:00+00:00,0.323,True,0.9739,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-58,SKIP,Hawk decides; Sage hard-limit check passed,ETHUSDT,2026-01-31 17:00:00+00:00,0.83,True,0.8308,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R5-59,SKIP,Hawk decides; Sage hard-limit check passed,JUPUSDT,2026-02-05 13:30:00+00:00,0.907,True,0.9635,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R5-60,SKIP,Hawk decides; Sage hard-limit check passed,SOLUSDT,2026-03-27 11:00:00+00:00,0.547,True,0.9062,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
