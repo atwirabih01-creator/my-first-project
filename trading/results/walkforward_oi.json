@@ -1,0 +1,55 @@
+{
+ "A chart only": {
+  "2025 May-Dec": {
+   "trades": 111,
+   "win_rate": 0.7928,
+   "pf": 0.986,
+   "avg_pct": -0.0105,
+   "balance": 520.36,
+   "max_drop_pct": 5.44
+  },
+  "2026 Jan-Sep": {
+   "trades": 265,
+   "win_rate": 0.6906,
+   "pf": 0.6,
+   "avg_pct": -0.2985,
+   "balance": 405.96,
+   "max_drop_pct": 21.62
+  },
+  "all": {
+   "trades": 376,
+   "win_rate": 0.7207,
+   "pf": 0.715,
+   "avg_pct": -0.2135,
+   "balance": 422.5,
+   "max_drop_pct": 21.62
+  }
+ },
+ "B chart + positioning": {
+  "2025 May-Dec": {
+   "trades": 191,
+   "win_rate": 0.7435,
+   "pf": 0.976,
+   "avg_pct": -0.0189,
+   "balance": 488.24,
+   "max_drop_pct": 10.16
+  },
+  "2026 Jan-Sep": {
+   "trades": 264,
+   "win_rate": 0.6894,
+   "pf": 0.628,
+   "avg_pct": -0.2814,
+   "balance": 406.61,
+   "max_drop_pct": 19.91
+  },
+  "all": {
+   "trades": 455,
+   "win_rate": 0.7121,
+   "pf": 0.776,
+   "avg_pct": -0.1712,
+   "balance": 397.04,
+   "max_drop_pct": 24.04
+  }
+ },
+ "PASSED": false
+}

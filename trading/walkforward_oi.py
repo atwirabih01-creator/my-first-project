@@ -52,10 +52,10 @@ def add_oi(t):
         tab = oi_table(sym)
         if tab is None:
             continue
-        snap = g.t_in - pd.Timedelta(minutes=5)          # t_in = signal bar close; snapshot 5 min before
-        v = tab.reindex(tab.index.union(snap)).sort_index().ffill().reindex(snap)
-        v.index = g.index
-        out.append(pd.concat([g, v[OI_FEATS]], axis=1))
+        g = g.assign(_snap=pd.to_datetime(g.t_in) - pd.Timedelta(minutes=5)).sort_values("_snap")
+        v = pd.merge_asof(g[["_snap"]].reset_index(), tab[OI_FEATS].reset_index().rename(columns={tab.index.name or "index": "_t"}),
+                          left_on="_snap", right_on="_t", direction="backward").set_index("index")
+        out.append(pd.concat([g.drop(columns="_snap"), v[OI_FEATS]], axis=1))
     return pd.concat(out).dropna(subset=OI_FEATS)
 
 

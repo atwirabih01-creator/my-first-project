@@ -46,3 +46,18 @@
   - Design years: 82–93% wins, lower than on the 39 liquid coins.
   - 2026: 68–158 trades but only 44–60% wins. On small coins, hot funding bursts are short and often flip negative.
   - Decision: the live carry stays on the 39 liquid coins.
+
+## 27 Oct 2026: history study and agent training (owner's 70% goal)
+- **Data:** 1m/5m history for 40 coins (2024–Sep 2026) and futures positioning data (open interest, long/short ratios).
+- **Raw setups (1m/5m/30m/1h):** many win 70–80%, but every one loses money after fees ($0.92–0.98 per $1 lost).
+- **Selection model + monthly learning:** a 30m breakout result first looked like a pass (80% wins, $1.23).
+  - An independent audit found a look-ahead bug in the account simulation.
+  - With the bug fixed it loses ($0.92).
+- **Blind history training for Atlas/Hawk/Sage:** 11 rounds, 562 cases.
+  - Rounds 1–5 (rules tuned as they went): the team rule gave $1.88.
+  - Confirmation rounds 6–11 (rule fixed in advance): 40 trades, 80% wins, $1.03. Break-even, not proven.
+- **Adding positioning data:** $0.78 vs $0.72 without. Fails.
+- **Limit-order entries:** $0.92. Fails.
+- **Conclusion:** the 70% win rate is easy; profit after fees is not. On these coins and timeframes, chart and
+  positioning information cannot separate winners from the big losers well enough. Live 30m desk NOT started
+  (no proven edge). The 4-hourly desk and carry watch keep running.
