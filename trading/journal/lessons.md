@@ -22,26 +22,29 @@ more times get copied into the agent files.
     24 hours or more, or skip it.
   - Over a weekend, prices move slowly.
 
-## History training (rounds 1-2, 27 Oct 2026)
-Reviews: `trading/journal/replay/round1_review.md`, `round2_review.md`. Round 2: team TAKE 5 (4 wins, PF 2.03),
-Hawk TAKE 8 (7 wins); two rounds Hawk TAKE 15/17. Team took too few trades (5/30). Small samples: a rule is
-proven only after holding in 3 rounds.
+## History training - TEAM DECISION RULE (after rounds 1-3, 27 Oct 2026)
+Reviews: `trading/journal/replay/round1_review.md`, `round2_review.md`, `round3_review.md`.
+Three rounds (84 cases): Hawk TAKE 22 = 86% wins, PF 3.42; Hawk SKIP 62 = 69%, PF 0.62; Team TAKE 24 =
+75%, PF 0.98. Hawk's call is the edge; every Sage overlay cost money.
 
-1. **Hawk SKIP is final** - held 2/2 rounds. Hawk SKIP group lost money both rounds (R2: -4.48%, PF 0.75).
-2. **Warns + Hawk SKIP = hard skip** - held 2/2 rounds (R2 avoided 02, 09, 13: -12.6%). Warns + Hawk TAKE
-   is still allowed (untested in R2).
-3. **No fade of a bar closing in its top/bottom 10% while BTC moved >=0.9% against in 3 bars** - unclear
-   (R1: 3 hits lost; R2: 04, 16 hits won small). Keep testing.
-4. **No dip buy while BTC is down >1% over 24 bars without a reversal bar** - unclear (R2: blocked 14, 21
-   won; let 23 through, lost). Keep testing.
-5. **Flush shorts** - "fresh BTC break within 3 bars" **failed - dropped** (R2: all 6 "not fresh" cases won,
-   incl. vetoed Hawk TAKEs 15, 19, 29). Kept: never short when BTC is already down >3% over 24 bars
-   (09, 13 lost big); one coin per BTC moment stays as a risk limit (same bet).
-6. **NEW trial: Hawk TAKE stands** unless a hard limit hits: loss >3x target, BTC 24-bar >3% against the
-   idea, a scheduled event in the hold time, or the open-ideas/same-bet limit. No soft vetoes by Sage.
-7. **NEW trial: Atlas "supports" + Hawk SKIP with low or medium confidence = may take** if all hard limits
-   pass (R1-21, R2-03, R2-08 all won). High-confidence Hawk SKIP stays final. Aim: more volume.
-Open: confirm whether replay `pnl_pct` includes fees before counting targets under 0.5%.
+**The rule:** Hawk decides. Hawk TAKE = take; Hawk SKIP = skip (any confidence). Atlas informs Hawk but
+cannot overrule him either way. Sage blocks a Hawk TAKE only for a hard limit:
+- same bet: one coin per BTC moment, and at most 3 open ideas at once;
+- loss if wrong more than 3x the target, a gate block, or a scheduled major event inside the hold time;
+- any new limit only after it has blocked Hawk-TAKE losers in 3 rounds (proven), never on a hunch.
+
+**Record of old rules (1-2 lines each):**
+- Hawk SKIP is final - held 3/3 rounds (Hawk SKIP group lost money every round). Adopted.
+- Warns + Hawk SKIP = skip - held 3/3 (warns PF 0.52); now covered by "Hawk decides".
+- No fade vs BTC push (old 3) / no dip buy in a BTC slide (old 4) - mixed results; left to Hawk's judgment, not a gate.
+- "Fresh BTC break" veto on flush shorts - failed R2 (threw away Hawk winners 15, 19, 29). Dropped.
+- BTC 24-bar >3% against the idea - R2 09/13 and R3-05 lost, R3-19/25 won; all were Hawk skips anyway.
+  Unproven as a block; Hawk weighs it.
+- Trial "Hawk TAKE stands" (old 6) - held R3 (5 trades, 4 wins, PF 1.20). Adopted as the rule above.
+- Trial "Atlas supports rescues Hawk med/low SKIP" (old 7) - failed R3: case 18 lost -3.50 (a late 5% flush
+  Hawk had rightly skipped). Dropped.
+- Lesson from 18 (Hawk's own; seen in R3-02 and 18, not yet proven): skip a short when the signal bar alone is >5% or is the second
+  big flush bar, and the stop sits inside the old range.
 
 **Fact (team leader, 27 Oct):** replay outcomes (pnl_pct) are AFTER futures fees: about 0.08% when the
 target is hit and 0.13% when stopped, plus 0.01–0.02% slippage. The old "target ≥ 0.90%" rule was for

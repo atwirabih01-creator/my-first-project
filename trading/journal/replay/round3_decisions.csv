@@ -1,0 +1,31 @@
+case,decision,reason
+R3-01,SKIP,Warns + Hawk high SKIP (rule 2); fade against rising BTC
+R3-02,SKIP,Hawk med SKIP final (rule 1); Atlas neutral; second bar of climax flush
+R3-03,SKIP,Hawk med SKIP final (rule 1); Atlas neutral; dip buy closing at low
+R3-04,TAKE,Hawk TAKE high + Atlas supports; fresh BTC break; BTC 24-bar -2.6% ok; stop 2.7x target (rule 6)
+R3-05,SKIP,Hard limit: BTC down >3% over 24 bars on a short (rule 5); warns + Hawk SKIP
+R3-06,TAKE,Hawk TAKE med + Atlas supports; quiet base breaks on 5x vol; hard limits pass (rule 6)
+R3-07,TAKE,Hawk TAKE med + Atlas supports; chosen one coin for BTC moment 07/10/14; hard limits pass (rule 6)
+R3-08,SKIP,Warns + Hawk high SKIP (rule 2); fade while BTC rises
+R3-09,SKIP,Hawk med SKIP final (rule 1); Atlas neutral; coin-only spike
+R3-10,SKIP,Same bet as 07 (one coin per BTC moment); Hawk SKIP
+R3-11,SKIP,Hawk med SKIP final (rule 1); Atlas neutral; thin target inside wick
+R3-12,SKIP,Warns + Hawk high SKIP (rule 2); rule 3 hit
+R3-13,SKIP,Warns + Hawk high SKIP (rule 2); same bet as 08
+R3-14,SKIP,Same bet as 07 (one coin per BTC moment); Hawk SKIP
+R3-15,SKIP,Hawk med SKIP final (rule 1); Atlas neutral not supports; volume fading
+R3-16,SKIP,Warns + Hawk high SKIP (rule 2); rule 4 dip buy without reversal
+R3-17,SKIP,Warns + Hawk SKIP (rule 2); rule 4 dip buy without reversal
+R3-18,TAKE,Rule 7 trial: Atlas supports + Hawk medium SKIP; BTC 24-bar -1.3% ok; stop 2.7x target; no same-bet clash
+R3-19,SKIP,Hard limit: BTC 24-bar -3.5% against a long (rule 6); warns + Hawk high SKIP
+R3-20,TAKE,Hawk TAKE med + Atlas supports; stair-step breakdown with fresh BTC drop; hard limits pass (rule 6)
+R3-21,SKIP,Warns + Hawk high SKIP (rule 2); falling-knife dip buy
+R3-22,TAKE,Hawk TAKE med + Atlas supports; tight-range break with fresh BTC break; hard limits pass (rule 6)
+R3-23,SKIP,Warns + Hawk high SKIP (rule 2); fading bar closed at its high
+R3-24,SKIP,Warns + Hawk high SKIP (rule 2); fade into fresh BTC jump
+R3-25,SKIP,Hard limit: BTC down 5.7% over 24 bars on a short (rule 5); warns + Hawk high SKIP
+R3-26,SKIP,Warns + Hawk high SKIP (rule 2); dip buy closing at low
+R3-27,SKIP,Hawk med SKIP final (rule 1); Atlas neutral; tiny target and no rejection
+R3-28,SKIP,Hawk low SKIP but Atlas neutral not supports so rule 7 does not apply; rule 1 SKIP
+R3-29,SKIP,Warns + Hawk high SKIP (rule 2); rule 4 dip buy
+R3-30,SKIP,Warns + Hawk high SKIP (rule 2); fade into BTC +1.15% jump
