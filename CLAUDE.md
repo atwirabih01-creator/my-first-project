@@ -48,3 +48,11 @@ this file or into the relevant agent's file, so the team remembers it next time.
 - **Safe 80%:** small, frequently-reached targets, but every plan has a hard "idea is wrong"
   exit so one loss can't erase many wins; every version must still show profit after fees.
 - Routine: `.claude/skills/trading-desk/SKILL.md`. Agents may be edited whenever needed.
+- **Training first (owner decision 27 Oct 2026):** before any real money, the three agents must be
+  properly trained.
+  - **Phase 1:** they study the market and paper trade *together* on a **$500 paper account**
+    (`trading/account.py`, 1% risk per trade).
+  - **Daily practice:** a daily study session with scored forecast calls, a review after every
+    closed trade, and lessons kept in `trading/journal/lessons.md`.
+  - **Phase 2:** only after Phase 1 graduates do they also work individually.
+  - Routine: `.claude/skills/desk-training/SKILL.md`.
