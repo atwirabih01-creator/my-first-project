@@ -1,0 +1,31 @@
+case,decision,reason
+R2-01,SKIP,Hawk SKIP is final (rule 1); coin-only flush with no BTC break (rule 5)
+R2-02,SKIP,Hawk SKIP plus Atlas warns = hard skip (rule 2); no BTC break (rule 5)
+R2-03,SKIP,Hawk SKIP (rule 1); BTC slide began ~7 bars ago so not fresh (rule 5)
+R2-04,SKIP,Rule 3 hit: fade closes at bar high while BTC +1.51% against; Hawk SKIP + Atlas warns
+R2-05,SKIP,Hawk SKIP plus Atlas warns = hard skip (rule 2); shorting a strong uptrend
+R2-06,TAKE,Hawk TAKE + Atlas supports; fresh BTC break and BTC 24-bar -2.70% under 3% (rule 5 passes); stop 2.7x target
+R2-07,SKIP,Hawk SKIP (rule 1); BTC slide 7 bars old so not fresh (rule 5)
+R2-08,SKIP,Hawk SKIP (rule 1); same BTC moment as R2-20 - one coin per moment (rule 5)
+R2-09,SKIP,Hawk SKIP + Atlas warns (rule 2); BTC already down 4.08% over 24 bars (rule 5)
+R2-10,SKIP,Hawk SKIP (rule 1); chasing a meme breakout with stop 2.7x target and no edge
+R2-11,SKIP,Hawk SKIP plus Atlas warns = hard skip (rule 2)
+R2-12,SKIP,Hawk SKIP with low confidence but Atlas only neutral so rule 1 exception does not apply
+R2-13,SKIP,Hawk SKIP + Atlas warns (rule 2); BTC down 11.8% over 24 bars (rule 5)
+R2-14,SKIP,Rule 4 hit: dip buy into BTC slide with no reversal bar; Hawk SKIP + Atlas warns
+R2-15,SKIP,Rule 5: BTC already down 3.03% over 24 bars (over the 3% line) despite Hawk TAKE
+R2-16,SKIP,Rule 3 hit: fade closes in top 10% while BTC +1.53% against; Hawk SKIP + Atlas warns
+R2-17,SKIP,Hawk SKIP + Atlas warns (rule 2); coin-only crash with BTC rising (rule 5)
+R2-18,TAKE,Hawk TAKE + Atlas supports; fresh BTC dip from flat (rule 5 passes); target 0.49% net of fees; stop 2.7x target
+R2-19,SKIP,Rule 5: BTC slide began ~7 bars ago so not a fresh break despite Hawk TAKE
+R2-20,TAKE,Hawk TAKE + Atlas supports; fresh BTC break in last bar; only coin taken for this moment (08 skipped)
+R2-21,SKIP,Hawk SKIP high confidence + Atlas warns (rule 2); rule 4 edge with no rejection bar
+R2-22,TAKE,Hawk TAKE high confidence + Atlas supports; fresh BTC push and 24-bar -1.09% (rule 5 passes)
+R2-23,TAKE,Hawk TAKE + Atlas supports; dip buy at prior base with low rejected and BTC 24-bar -0.78% (rule 4 passes)
+R2-24,SKIP,Hawk SKIP (rule 1); coin-only breakdown with no BTC break (rule 5)
+R2-25,SKIP,Hawk SKIP plus Atlas warns = hard skip (rule 2)
+R2-26,SKIP,Hawk SKIP (rule 1); messy whipsaw and BTC 24-bar at the 3% edge
+R2-27,SKIP,Hawk SKIP with low confidence but Atlas only neutral so rule 1 exception does not apply
+R2-28,SKIP,Hawk SKIP (rule 1); late in BTC slide so not fresh (rule 5)
+R2-29,SKIP,Rule 5: BTC decline began ~6 bars ago so not fresh despite Hawk TAKE (low confidence)
+R2-30,SKIP,Hawk SKIP (rule 1); coin-only breakdown with no BTC break (rule 5)
