@@ -50,49 +50,43 @@ def packet(df, f, btc, i, tf, plan, meme):
     return {"bars": rows, "btc": btxt, "context": ctx, "plan": plan, "kind": "meme coin" if meme else "big coin", "tf": tf}
 
 
-def make(rnd, n):
+def make(rnd, n, src="walkforward_30m_withbtc_trades.csv", until="2026-01-01"):
+    """Cases = real trades the selection skill approved (what the desk would have faced), before `until`."""
     DIR.mkdir(parents=True, exist_ok=True); ANS.mkdir(exist_ok=True)
     rng = np.random.default_rng(int(rnd))
-    cases, answers = [], {}
-    sets = setups()
-    for tf, c in sets:
-        b = c["base"]
-        val0 = S.VAL_START.get(tf, S.VAL_DEFAULT)
-        t = X.gather(tf, b, "design")
-        tr, va = t[t.t_in < val0], t[t.t_in >= val0]
-        m = X.fit(tr, tr.pnl > S.WIN_MIN)
-        va = va.assign(prob=m.predict_proba(va[X.FEATS].astype(float))[:, 1])
-        # mostly model-approved cases (what the desk would really face) plus some near-misses
-        hi, near = va[va.prob >= c["cut"]], va[(va.prob < c["cut"]) & (va.prob >= c["cut"] - 0.08)]
-        k = max(1, n // len(sets))
-        pick = pd.concat([hi.sample(min(len(hi), int(k * 0.75)), random_state=int(rng.integers(1e9))),
-                          near.sample(min(len(near), k - int(k * 0.75)), random_state=int(rng.integers(1e9)))])
-        btc = S.load("BTCUSDT", tf)
-        frames = {}
-        for r in pick.itertuples():
-            if r.sym not in frames:
-                df = S.load(r.sym, tf)
-                frames[r.sym] = (df, S.features(df, S.btc_context(tf)))
-            df, f = frames[r.sym]
-            i = df.index.get_loc(r.t_in) - 1                 # signal bar = bar before entry
-            e = df.open.iloc[i + 1] * 100 / df.close.iloc[i]
-            a = f.atr.iloc[i] * 100 / df.close.iloc[i]
-            d = int(r.dir)
-            plan = (f"{'BUY' if d > 0 else 'SELL'} at next bar open (~{e:.3f}); target {e + d*b['target_atr']*a:.3f}; "
-                    f"stop {e - d*b['stop_atr']*a:.3f}; max hold {b['hold_bars']} bars; model win-probability {r.prob:.2f} "
-                    f"(desk cut-off {c['cut']:.2f})")
-            cid = f"R{rnd}-{len(cases)+1:02d}"
-            cases.append((cid, packet(df, f, btc, i, tf, plan, r.meme)))
-            answers[cid] = {"sym": r.sym, "time": str(r.t_in), "pnl_pct": round(100 * r.pnl, 3), "win": bool(r.pnl > S.WIN_MIN),
-                            "prob": round(float(r.prob), 4), "approved_by_model": bool(r.prob >= c["cut"]), "tf": tf,
-                            "setup": f"{b['family']} {b['params']}"}
-    order = rng.permutation(len(cases))
-    lines = [f"# Replay round {rnd}: {len(cases)} blind historical cases\n",
+    t = pd.read_csv(S.OUT / src, parse_dates=["t_in", "t_out"])
+    t = t[t.t_in < pd.Timestamp(until, tz="UTC")]
+    used = set()
+    for f in ANS.glob("round*.json"):                    # never show the same case twice
+        used |= {(a["sym"], a["time"]) for a in json.load(open(f)).values()}
+    t = t[[(s_, str(x)) not in used for s_, x in zip(t.sym, t.t_in)]]
+    pick = t.sample(min(n, len(t)), random_state=int(rng.integers(1e9)))
+    tf = "30m"
+    btc = S.load("BTCUSDT", tf)
+    ctxb = S.btc_context(tf)
+    cases, answers, frames = [], {}, {}
+    for r in pick.itertuples():
+        if r.sym not in frames:
+            df = S.load(r.sym, tf)
+            frames[r.sym] = (df, S.features(df, ctxb))
+        df, f = frames[r.sym]
+        i = df.index.get_loc(r.t_in) - 1                 # signal bar = bar before entry
+        T, St, H = [float(x[1:]) for x in r.setup.split()[-3:]]
+        e = df.open.iloc[i + 1] * 100 / df.close.iloc[i]
+        a = f.atr.iloc[i] * 100 / df.close.iloc[i]
+        d = int(r.dir)
+        plan = (f"{'BUY' if d > 0 else 'SELL'} at next bar open (~{e:.3f}); target {e + d*T*a:.3f}; "
+                f"stop {e - d*St*a:.3f}; max hold {int(H)} bars; selection-skill win probability {r.prob:.2f}")
+        cid = f"R{rnd}-{len(cases)+1:02d}"
+        cases.append((cid, packet(df, f, btc, i, tf, plan, bool(r.meme))))
+        answers[cid] = {"sym": r.sym, "time": str(r.t_in), "pnl_pct": round(100 * r.pnl, 3), "win": bool(r.pnl > S.WIN_MIN),
+                        "prob": round(float(r.prob), 4), "approved_by_model": True, "tf": tf, "setup": r.setup,
+                        "meme": bool(r.meme), "dir": d}
+    lines = [f"# Replay round {rnd}: {len(cases)} blind historical cases (30-minute breakouts)\n",
              "Each case: the last 40 bars (bar 0 = the signal bar; columns: bar, open, high, low, close, volume vs normal),",
              "prices rescaled so the signal bar closes at 100; BTC closes for the last 24 bars (rescaled, last = 100).",
-             "Decide TAKE or SKIP for each plan. Outcomes are hidden until the team has decided.\n"]
-    for j in order:
-        cid, p = cases[j]
+             "Every case was approved by the selection skill. Decide TAKE or SKIP. Outcomes are hidden.\n"]
+    for cid, p in cases:
         lines += [f"## {cid} - {p['kind']}, {p['tf']} chart", f"Context: {p['context']}", f"Plan: {p['plan']}",
                   "```", "bar     open     high      low    close   vol"] + p["bars"] + ["```", f"BTC: {p['btc']}", ""]
     (DIR / f"round{rnd}_cases.md").write_text("\n".join(lines))
@@ -108,13 +102,13 @@ def score(rnd, path):
     d = d.merge(pd.DataFrame.from_dict(ans, orient="index").rename_axis("case").reset_index(), on="case")
     out = []
     for name, part in [("team TAKE", d[d.decision == "TAKE"]), ("team SKIP", d[d.decision == "SKIP"]),
-                       ("model alone (approved)", d[d.approved_by_model]), ("all cases", d)]:
+                       ("all cases", d)]:
         p = part.pnl_pct.values / 100
         st = S.stats(p)
         out.append(f"{name:24s} {st}")
     d.to_csv(DIR / f"round{rnd}_scored.csv", index=False)
     print("\n".join(out))
-    print(d[["case", "decision", "win", "pnl_pct", "prob", "approved_by_model", "kind" if "kind" in d else "tf"]].to_string(index=False))
+    print(d[["case", "decision", "win", "pnl_pct", "prob", "meme", "dir"]].to_string(index=False))
 
 
 if __name__ == "__main__":
