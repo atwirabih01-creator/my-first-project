@@ -1,0 +1,61 @@
+case,decision,reason,sym,time,pnl_pct,win,prob,approved_by_model,tf,setup,meme,dir
+R8-01,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),ARBUSDT,2026-02-25 12:30:00+00:00,-1.727,False,0.8499,True,30m,"rsi3 (10,) T0.75 S2.0 H12",False,-1
+R8-02,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),1000SATSUSDT,2026-02-23 01:30:00+00:00,-2.247,False,0.8482,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R8-03,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),DOGEUSDT,2026-09-23 14:30:00+00:00,1.107,True,0.8454,True,30m,"rsi3 (10,) T0.75 S2.0 H12",True,1
+R8-04,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),1000SATSUSDT,2025-06-22 13:30:00+00:00,1.156,True,0.8866,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R8-05,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),ORDIUSDT,2025-11-18 23:00:00+00:00,0.771,True,0.8225,True,30m,"revert (2.0, 'with') T0.75 S2.0 H36",True,-1
+R8-06,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),BTCUSDT,2026-02-03 17:00:00+00:00,0.467,True,0.8023,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R8-07,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),RENDERUSDT,2025-08-18 03:00:00+00:00,0.58,True,0.8747,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,1
+R8-08,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),TRUMPUSDT,2026-01-09 19:00:00+00:00,-1.875,False,0.8367,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,1
+R8-09,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),PENGUUSDT,2025-11-20 13:00:00+00:00,0.618,True,0.8492,True,30m,"revert (2.0, 'with') T0.75 S2.0 H36",True,-1
+R8-10,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),AVAXUSDT,2026-01-25 19:30:00+00:00,0.659,True,0.9155,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R8-11,TAKE,Hawk TAKE / Atlas supports (pre-declared rule),TRUMPUSDT,2026-01-25 16:30:00+00:00,0.288,True,0.9049,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R8-12,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),DOTUSDT,2026-02-06 11:00:00+00:00,-3.063,False,0.883,True,30m,"revert (2.0, 'with') T0.75 S2.0 H36",False,-1
+R8-13,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),TURBOUSDT,2026-02-28 06:30:00+00:00,0.526,True,0.8684,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R8-14,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),SUIUSDT,2025-05-01 10:30:00+00:00,0.749,True,0.8528,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,1
+R8-15,TAKE,Hawk TAKE / Atlas supports (pre-declared rule),APTUSDT,2026-01-29 03:00:00+00:00,0.693,True,0.9562,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R8-16,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),XRPUSDT,2025-06-21 19:00:00+00:00,0.327,True,0.8682,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R8-17,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),LINKUSDT,2025-09-02 03:00:00+00:00,-1.257,False,0.9243,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,-1
+R8-18,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),NEIROUSDT,2025-07-24 06:00:00+00:00,1.371,True,0.8257,True,30m,"rsi3 (5,) T0.75 S2.0 H12",True,1
+R8-19,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),JUPUSDT,2026-08-14 07:00:00+00:00,0.284,True,0.881,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R8-20,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),FETUSDT,2026-02-22 00:30:00+00:00,0.334,True,0.8769,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R8-21,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),OPUSDT,2025-11-05 19:30:00+00:00,0.757,True,0.8403,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,-1
+R8-22,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),FLOKIUSDT,2025-06-05 21:00:00+00:00,-3.99,False,0.8212,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R8-23,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),SEIUSDT,2025-12-15 17:00:00+00:00,0.852,True,0.9399,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R8-24,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),PEPEUSDT,2026-01-31 14:30:00+00:00,0.868,True,0.9018,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R8-25,TAKE,Hawk TAKE / Atlas supports (pre-declared rule),TRUMPUSDT,2025-12-15 15:30:00+00:00,0.32,True,0.9561,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R8-26,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),PEPEUSDT,2025-09-12 10:30:00+00:00,0.42,True,0.8532,True,30m,"rsi3 (5,) T0.75 S2.0 H12",True,1
+R8-27,TAKE,Hawk TAKE / Atlas supports (pre-declared rule),OPUSDT,2026-02-28 06:30:00+00:00,0.667,True,0.8968,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R8-28,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),PEOPLEUSDT,2026-08-06 19:30:00+00:00,0.51,True,0.8679,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,1
+R8-29,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),WLDUSDT,2026-07-29 01:30:00+00:00,0.636,True,0.8915,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R8-30,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),NEARUSDT,2026-01-31 17:30:00+00:00,1.401,True,0.9103,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R8-31,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),NEIROUSDT,2025-12-15 15:30:00+00:00,0.931,True,0.9191,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R8-32,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),PEPEUSDT,2026-02-11 06:30:00+00:00,0.758,True,0.8714,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R8-33,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),NEARUSDT,2026-08-19 00:30:00+00:00,-1.26,False,0.8699,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R8-34,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),DOGEUSDT,2025-07-04 08:00:00+00:00,0.425,True,0.939,True,30m,"revert (3.0, 'with') T0.75 S2.0 H36",True,1
+R8-35,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),PEOPLEUSDT,2025-09-01 08:00:00+00:00,0.732,True,0.8864,True,30m,"rsi3 (5,) T0.75 S2.0 H12",True,-1
+R8-36,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),RENDERUSDT,2026-02-14 10:00:00+00:00,0.737,True,0.8564,True,30m,"rsi3 (10,) T0.75 S2.0 H12",False,-1
+R8-37,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),LINKUSDT,2026-01-13 22:30:00+00:00,0.559,True,0.8579,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,1
+R8-38,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),SUIUSDT,2026-02-28 06:30:00+00:00,0.502,True,0.8846,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R8-39,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),LINKUSDT,2025-06-20 17:30:00+00:00,0.706,True,0.8092,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R8-40,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),ARBUSDT,2026-01-29 03:00:00+00:00,0.706,True,0.9641,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R8-41,TAKE,Hawk TAKE / Atlas supports (pre-declared rule),TURBOUSDT,2026-02-17 15:00:00+00:00,-2.042,False,0.9006,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R8-42,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),JUPUSDT,2026-01-25 16:30:00+00:00,0.759,True,0.9307,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R8-43,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),OPUSDT,2025-09-22 01:00:00+00:00,0.561,True,0.8468,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,1
+R8-44,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),WIFUSDT,2025-09-01 09:00:00+00:00,0.887,True,0.895,True,30m,"revert (2.0, 'with') T0.75 S2.0 H36",True,-1
+R8-45,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),FLOKIUSDT,2025-08-07 11:30:00+00:00,0.537,True,0.9098,True,30m,"rsi3 (5,) T0.75 S2.0 H12",True,-1
+R8-46,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),LINKUSDT,2025-10-07 08:00:00+00:00,0.595,True,0.8776,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,1
+R8-47,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),ADAUSDT,2026-01-29 03:00:00+00:00,0.54,True,0.9492,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R8-48,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),BTCUSDT,2026-03-15 23:00:00+00:00,0.294,True,0.8748,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,1
+R8-49,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),OPUSDT,2026-01-13 22:30:00+00:00,1.383,True,0.848,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,1
+R8-50,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),FETUSDT,2025-12-31 17:00:00+00:00,0.749,True,0.9388,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R8-51,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),PENGUUSDT,2026-02-03 18:30:00+00:00,-3.416,False,0.885,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R8-52,TAKE,Hawk TAKE / Atlas supports (pre-declared rule),TURBOUSDT,2026-02-23 01:30:00+00:00,-2.282,False,0.9153,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R8-53,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),XRPUSDT,2026-01-05 02:00:00+00:00,-1.55,False,0.8296,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,1
+R8-54,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),WIFUSDT,2026-01-25 19:30:00+00:00,0.961,True,0.8949,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R8-55,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),SUIUSDT,2025-08-07 10:30:00+00:00,-1.583,False,0.9209,True,30m,"revert (3.0, 'with') T0.75 S2.0 H36",False,-1
+R8-56,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),ORDIUSDT,2026-02-11 15:30:00+00:00,-2.648,False,0.8382,True,30m,"breakout (2.0,) T0.75 S2.0 H36",True,-1
+R8-57,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),1000SATSUSDT,2025-11-05 17:00:00+00:00,-2.699,False,0.8532,True,30m,"revert (2.0, 'with') T0.75 S2.0 H36",True,-1
+R8-58,SKIP,Hawk SKIP / Atlas neutral (pre-declared rule),DOGEUSDT,2025-06-05 21:00:00+00:00,-4.124,False,0.9248,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R8-59,SKIP,Hawk SKIP / Atlas supports (pre-declared rule),BNBUSDT,2025-12-01 00:30:00+00:00,0.442,True,0.9186,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R8-60,SKIP,Hawk SKIP / Atlas warns (pre-declared rule),NEARUSDT,2025-10-04 10:00:00+00:00,0.481,True,0.8686,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,1
