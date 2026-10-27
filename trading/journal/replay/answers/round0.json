@@ -1,0 +1,62 @@
+{
+ "R0-01": {
+  "sym": "SOLUSDT",
+  "time": "2025-06-13 01:00:00+00:00",
+  "pnl_pct": 0.856,
+  "win": true,
+  "prob": 0.9526,
+  "approved_by_model": true,
+  "tf": "1h",
+  "setup": "breakout (3.0,)"
+ },
+ "R0-02": {
+  "sym": "MEMEUSDT",
+  "time": "2025-08-20 13:00:00+00:00",
+  "pnl_pct": 1.528,
+  "win": true,
+  "prob": 0.9244,
+  "approved_by_model": false,
+  "tf": "1h",
+  "setup": "breakout (3.0,)"
+ },
+ "R0-03": {
+  "sym": "BONKUSDT",
+  "time": "2025-06-21 21:30:00+00:00",
+  "pnl_pct": 1.002,
+  "win": true,
+  "prob": 0.9106,
+  "approved_by_model": true,
+  "tf": "30m",
+  "setup": "breakout (3.0,)"
+ },
+ "R0-04": {
+  "sym": "TIAUSDT",
+  "time": "2025-12-14 17:30:00+00:00",
+  "pnl_pct": 0.71,
+  "win": true,
+  "prob": 0.834,
+  "approved_by_model": false,
+  "tf": "30m",
+  "setup": "breakout (3.0,)"
+ },
+ "R0-05": {
+  "sym": "TRUMPUSDT",
+  "time": "2025-06-20 05:30:00+00:00",
+  "pnl_pct": -1.57,
+  "win": false,
+  "prob": 0.8902,
+  "approved_by_model": true,
+  "tf": "30m",
+  "setup": "breakout (2.0,)"
+ },
+ "R0-06": {
+  "sym": "SOLUSDT",
+  "time": "2025-05-13 20:00:00+00:00",
+  "pnl_pct": 0.711,
+  "win": true,
+  "prob": 0.7892,
+  "approved_by_model": false,
+  "tf": "30m",
+  "setup": "breakout (2.0,)"
+ }
+}

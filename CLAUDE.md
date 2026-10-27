@@ -33,11 +33,20 @@ When the owner corrects an agent or says they prefer something, write that rule 
 this file or into the relevant agent's file, so the team remembers it next time.
 
 ## Trading desk rules (owner decisions — the ONE current goal; earlier goals are retired)
-- **Goal (locked 21 Oct 2026, do not change without the owner):** one desk version reaches
-  **80 wins out of 100 closed paper trades**, with a **profit after fees** (profit factor ≥ 1.2)
-  and a **biggest drop ≤ 10%**. At least 10 versions run side by side. Report to the owner only
-  when a version passes, or if something truly blocks the work. Scoreboard:
-  `python3 trading/desk_journal.py score`. Real money only with the owner's explicit OK.
+- **Goal (changed by the owner 27 Oct 2026; the old 80% goal is retired):**
+  - **What a pass needs:** 70 or more wins out of 100 closed paper trades, a profit after fees
+    ($1.20+ earned per $1 lost), and a biggest drop of 10% or less.
+  - **Be selective:** take only the highest-probability setup after studying it, not every setup found.
+  - **Timeframes:** 1m, 5m, 30m and 1h are all allowed.
+  - **Reporting:** report to the owner only with proven results, or with bugs and issues that need
+    work. Never "it doesn't work". Scoreboard: `python3 trading/desk_journal.py score`.
+  - **Real money:** only with the owner's explicit OK.
+- **Training order (owner, 27 Oct 2026):**
+  1. Give the agents the skills to train.
+  2. They study meme-coin and crypto history slowly, take practice trades and fix their own system,
+     working together like a company.
+  3. Once results are proven, each agent improves his own skill and part of the system.
+  4. Then back to the first rule: research → chart plan → final check, and trade only when all three agree.
 - **The agents think, they don't follow a habit.** Every trade goes through: (1) Atlas — deep
   study and research; (2) Hawk — deep chart analysis and a precise plan; (3) Sage — backtest
   check and final decision. All three must agree. Aim: **consistency** in crypto, especially

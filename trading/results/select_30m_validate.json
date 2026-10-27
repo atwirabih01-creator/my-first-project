@@ -1,0 +1,790 @@
+{
+ "report": [
+  {
+   "base": "revert (2.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.5,
+   "cut": 0.7405,
+   "val": {
+    "trades": 4866,
+    "win_rate": 0.7345,
+    "pf": 0.877,
+    "avg_pct": -0.0768
+   },
+   "val_account": {
+    "trades": 2876,
+    "win_rate": 0.7521,
+    "pf": 0.974,
+    "avg_pct": -0.0145,
+    "balance": 316.29,
+    "max_drop_pct": 43.16
+   }
+  },
+  {
+   "base": "revert (2.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.3,
+   "cut": 0.7756,
+   "val": {
+    "trades": 2920,
+    "win_rate": 0.7445,
+    "pf": 0.941,
+    "avg_pct": -0.0361
+   },
+   "val_account": {
+    "trades": 1875,
+    "win_rate": 0.7611,
+    "pf": 1.044,
+    "avg_pct": 0.0244,
+    "balance": 471.71,
+    "max_drop_pct": 32.39
+   }
+  },
+  {
+   "base": "revert (2.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.2,
+   "cut": 0.7962,
+   "val": {
+    "trades": 1947,
+    "win_rate": 0.7468,
+    "pf": 0.967,
+    "avg_pct": -0.0208
+   },
+   "val_account": {
+    "trades": 1334,
+    "win_rate": 0.7616,
+    "pf": 1.08,
+    "avg_pct": 0.0447,
+    "balance": 491.34,
+    "max_drop_pct": 24.34
+   }
+  },
+  {
+   "base": "revert (2.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.1,
+   "cut": 0.8271,
+   "val": {
+    "trades": 974,
+    "win_rate": 0.7598,
+    "pf": 1.059,
+    "avg_pct": 0.0381
+   },
+   "val_account": {
+    "trades": 684,
+    "win_rate": 0.7807,
+    "pf": 1.212,
+    "avg_pct": 0.1195,
+    "balance": 596.14,
+    "max_drop_pct": 13.65
+   }
+  },
+  {
+   "base": "revert (2.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.05,
+   "cut": 0.8508,
+   "val": {
+    "trades": 487,
+    "win_rate": 0.7413,
+    "pf": 0.993,
+    "avg_pct": -0.005
+   },
+   "val_account": {
+    "trades": 348,
+    "win_rate": 0.7557,
+    "pf": 1.14,
+    "avg_pct": 0.0884,
+    "balance": 494.23,
+    "max_drop_pct": 16.42
+   }
+  },
+  {
+   "base": "revert (2.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.02,
+   "cut": 0.8718,
+   "val": {
+    "trades": 195,
+    "win_rate": 0.7487,
+    "pf": 1.171,
+    "avg_pct": 0.1214
+   },
+   "val_account": {
+    "trades": 155,
+    "win_rate": 0.7548,
+    "pf": 1.244,
+    "avg_pct": 0.1598,
+    "balance": 494.85,
+    "max_drop_pct": 8.0
+   }
+  },
+  {
+   "base": "rsi3 (10,) T0.75 S2.0 H12",
+   "top_share": 0.5,
+   "cut": 0.7217,
+   "val": {
+    "trades": 5447,
+    "win_rate": 0.7055,
+    "pf": 0.859,
+    "avg_pct": -0.078
+   },
+   "val_account": {
+    "trades": 3312,
+    "win_rate": 0.718,
+    "pf": 0.892,
+    "avg_pct": -0.0587,
+    "balance": 156.91,
+    "max_drop_pct": 75.59
+   }
+  },
+  {
+   "base": "rsi3 (10,) T0.75 S2.0 H12",
+   "top_share": 0.3,
+   "cut": 0.7585,
+   "val": {
+    "trades": 3268,
+    "win_rate": 0.7271,
+    "pf": 0.939,
+    "avg_pct": -0.0313
+   },
+   "val_account": {
+    "trades": 2102,
+    "win_rate": 0.7284,
+    "pf": 0.917,
+    "avg_pct": -0.0432,
+    "balance": 295.67,
+    "max_drop_pct": 53.89
+   }
+  },
+  {
+   "base": "rsi3 (10,) T0.75 S2.0 H12",
+   "top_share": 0.2,
+   "cut": 0.7804,
+   "val": {
+    "trades": 2179,
+    "win_rate": 0.7352,
+    "pf": 0.982,
+    "avg_pct": -0.0089
+   },
+   "val_account": {
+    "trades": 1513,
+    "win_rate": 0.7462,
+    "pf": 0.983,
+    "avg_pct": -0.0085,
+    "balance": 450.12,
+    "max_drop_pct": 40.02
+   }
+  },
+  {
+   "base": "rsi3 (10,) T0.75 S2.0 H12",
+   "top_share": 0.1,
+   "cut": 0.8099,
+   "val": {
+    "trades": 1090,
+    "win_rate": 0.7303,
+    "pf": 0.999,
+    "avg_pct": -0.0006
+   },
+   "val_account": {
+    "trades": 793,
+    "win_rate": 0.7491,
+    "pf": 1.051,
+    "avg_pct": 0.0248,
+    "balance": 470.48,
+    "max_drop_pct": 26.73
+   }
+  },
+  {
+   "base": "rsi3 (10,) T0.75 S2.0 H12",
+   "top_share": 0.05,
+   "cut": 0.8327,
+   "val": {
+    "trades": 545,
+    "win_rate": 0.7284,
+    "pf": 0.977,
+    "avg_pct": -0.0117
+   },
+   "val_account": {
+    "trades": 407,
+    "win_rate": 0.7518,
+    "pf": 1.087,
+    "avg_pct": 0.0401,
+    "balance": 507.49,
+    "max_drop_pct": 20.29
+   }
+  },
+  {
+   "base": "rsi3 (10,) T0.75 S2.0 H12",
+   "top_share": 0.02,
+   "cut": 0.8578,
+   "val": {
+    "trades": 218,
+    "win_rate": 0.6972,
+    "pf": 0.789,
+    "avg_pct": -0.1223
+   },
+   "val_account": {
+    "trades": 170,
+    "win_rate": 0.7176,
+    "pf": 0.826,
+    "avg_pct": -0.0938,
+    "balance": 464.36,
+    "max_drop_pct": 15.46
+   }
+  },
+  {
+   "base": "breakout (3.0,) T0.75 S2.0 H36",
+   "top_share": 0.5,
+   "cut": 0.7485,
+   "val": {
+    "trades": 1604,
+    "win_rate": 0.7643,
+    "pf": 0.984,
+    "avg_pct": -0.0112
+   },
+   "val_account": {
+    "trades": 1188,
+    "win_rate": 0.771,
+    "pf": 1.029,
+    "avg_pct": 0.0189,
+    "balance": 608.21,
+    "max_drop_pct": 22.03
+   }
+  },
+  {
+   "base": "breakout (3.0,) T0.75 S2.0 H36",
+   "top_share": 0.3,
+   "cut": 0.8079,
+   "val": {
+    "trades": 963,
+    "win_rate": 0.8006,
+    "pf": 1.14,
+    "avg_pct": 0.0844
+   },
+   "val_account": {
+    "trades": 721,
+    "win_rate": 0.7906,
+    "pf": 1.055,
+    "avg_pct": 0.0345,
+    "balance": 679.38,
+    "max_drop_pct": 15.44
+   }
+  },
+  {
+   "base": "breakout (3.0,) T0.75 S2.0 H36",
+   "top_share": 0.2,
+   "cut": 0.8421,
+   "val": {
+    "trades": 642,
+    "win_rate": 0.8131,
+    "pf": 1.272,
+    "avg_pct": 0.1454
+   },
+   "val_account": {
+    "trades": 485,
+    "win_rate": 0.8,
+    "pf": 1.174,
+    "avg_pct": 0.0976,
+    "balance": 657.71,
+    "max_drop_pct": 10.2
+   }
+  },
+  {
+   "base": "breakout (3.0,) T0.75 S2.0 H36",
+   "top_share": 0.1,
+   "cut": 0.8882,
+   "val": {
+    "trades": 321,
+    "win_rate": 0.8442,
+    "pf": 1.611,
+    "avg_pct": 0.2711
+   },
+   "val_account": {
+    "trades": 223,
+    "win_rate": 0.8072,
+    "pf": 1.29,
+    "avg_pct": 0.1561,
+    "balance": 579.67,
+    "max_drop_pct": 11.13
+   }
+  },
+  {
+   "base": "breakout (3.0,) T0.75 S2.0 H36",
+   "top_share": 0.05,
+   "cut": 0.9222,
+   "val": {
+    "trades": 161,
+    "win_rate": 0.8944,
+    "pf": 2.559,
+    "avg_pct": 0.4281
+   },
+   "val_account": {
+    "trades": 102,
+    "win_rate": 0.8333,
+    "pf": 1.675,
+    "avg_pct": 0.2926,
+    "balance": 553.06,
+    "max_drop_pct": 4.9
+   }
+  },
+  {
+   "base": "breakout (3.0,) T0.75 S2.0 H36",
+   "top_share": 0.02,
+   "cut": 0.9516,
+   "val": {
+    "trades": 65,
+    "win_rate": 0.9231,
+    "pf": 4.218,
+    "avg_pct": 0.4962
+   },
+   "val_account": {
+    "trades": 36,
+    "win_rate": 0.8611,
+    "pf": 2.188,
+    "avg_pct": 0.3309,
+    "balance": 523.82,
+    "max_drop_pct": 3.22
+   }
+  },
+  {
+   "base": "rsi3 (5,) T0.75 S2.0 H12",
+   "top_share": 0.5,
+   "cut": 0.7405,
+   "val": {
+    "trades": 2090,
+    "win_rate": 0.7258,
+    "pf": 0.912,
+    "avg_pct": -0.0487
+   },
+   "val_account": {
+    "trades": 1484,
+    "win_rate": 0.723,
+    "pf": 0.901,
+    "avg_pct": -0.0555,
+    "balance": 307.15,
+    "max_drop_pct": 50.5
+   }
+  },
+  {
+   "base": "rsi3 (5,) T0.75 S2.0 H12",
+   "top_share": 0.3,
+   "cut": 0.7913,
+   "val": {
+    "trades": 1254,
+    "win_rate": 0.7456,
+    "pf": 0.988,
+    "avg_pct": -0.0066
+   },
+   "val_account": {
+    "trades": 952,
+    "win_rate": 0.7395,
+    "pf": 0.948,
+    "avg_pct": -0.0287,
+    "balance": 430.73,
+    "max_drop_pct": 38.87
+   }
+  },
+  {
+   "base": "rsi3 (5,) T0.75 S2.0 H12",
+   "top_share": 0.2,
+   "cut": 0.8189,
+   "val": {
+    "trades": 836,
+    "win_rate": 0.7512,
+    "pf": 1.06,
+    "avg_pct": 0.0298
+   },
+   "val_account": {
+    "trades": 679,
+    "win_rate": 0.7364,
+    "pf": 0.961,
+    "avg_pct": -0.0214,
+    "balance": 450.25,
+    "max_drop_pct": 28.23
+   }
+  },
+  {
+   "base": "rsi3 (5,) T0.75 S2.0 H12",
+   "top_share": 0.1,
+   "cut": 0.8525,
+   "val": {
+    "trades": 418,
+    "win_rate": 0.756,
+    "pf": 1.115,
+    "avg_pct": 0.0541
+   },
+   "val_account": {
+    "trades": 368,
+    "win_rate": 0.7446,
+    "pf": 1.023,
+    "avg_pct": 0.0116,
+    "balance": 499.88,
+    "max_drop_pct": 18.03
+   }
+  },
+  {
+   "base": "rsi3 (5,) T0.75 S2.0 H12",
+   "top_share": 0.05,
+   "cut": 0.8767,
+   "val": {
+    "trades": 209,
+    "win_rate": 0.7608,
+    "pf": 1.154,
+    "avg_pct": 0.0709
+   },
+   "val_account": {
+    "trades": 193,
+    "win_rate": 0.7513,
+    "pf": 1.09,
+    "avg_pct": 0.0436,
+    "balance": 512.88,
+    "max_drop_pct": 11.85
+   }
+  },
+  {
+   "base": "rsi3 (5,) T0.75 S2.0 H12",
+   "top_share": 0.02,
+   "cut": 0.9014,
+   "val": {
+    "trades": 84,
+    "win_rate": 0.8214,
+    "pf": 1.362,
+    "avg_pct": 0.1468
+   },
+   "val_account": {
+    "trades": 81,
+    "win_rate": 0.8148,
+    "pf": 1.307,
+    "avg_pct": 0.1289,
+    "balance": 533.69,
+    "max_drop_pct": 3.9
+   }
+  },
+  {
+   "base": "breakout (2.0,) T0.75 S2.0 H36",
+   "top_share": 0.5,
+   "cut": 0.7281,
+   "val": {
+    "trades": 2595,
+    "win_rate": 0.7464,
+    "pf": 0.926,
+    "avg_pct": -0.0512
+   },
+   "val_account": {
+    "trades": 1871,
+    "win_rate": 0.775,
+    "pf": 1.077,
+    "avg_pct": 0.0464,
+    "balance": 725.42,
+    "max_drop_pct": 29.63
+   }
+  },
+  {
+   "base": "breakout (2.0,) T0.75 S2.0 H36",
+   "top_share": 0.3,
+   "cut": 0.7789,
+   "val": {
+    "trades": 1557,
+    "win_rate": 0.7585,
+    "pf": 0.965,
+    "avg_pct": -0.0236
+   },
+   "val_account": {
+    "trades": 1120,
+    "win_rate": 0.7786,
+    "pf": 1.081,
+    "avg_pct": 0.0486,
+    "balance": 661.35,
+    "max_drop_pct": 16.62
+   }
+  },
+  {
+   "base": "breakout (2.0,) T0.75 S2.0 H36",
+   "top_share": 0.2,
+   "cut": 0.81,
+   "val": {
+    "trades": 1038,
+    "win_rate": 0.7697,
+    "pf": 1.013,
+    "avg_pct": 0.0082
+   },
+   "val_account": {
+    "trades": 743,
+    "win_rate": 0.786,
+    "pf": 1.147,
+    "avg_pct": 0.0855,
+    "balance": 653.09,
+    "max_drop_pct": 11.69
+   }
+  },
+  {
+   "base": "breakout (2.0,) T0.75 S2.0 H36",
+   "top_share": 0.1,
+   "cut": 0.8523,
+   "val": {
+    "trades": 519,
+    "win_rate": 0.815,
+    "pf": 1.374,
+    "avg_pct": 0.1873
+   },
+   "val_account": {
+    "trades": 372,
+    "win_rate": 0.8199,
+    "pf": 1.476,
+    "avg_pct": 0.2198,
+    "balance": 669.49,
+    "max_drop_pct": 7.06
+   }
+  },
+  {
+   "base": "breakout (2.0,) T0.75 S2.0 H36",
+   "top_share": 0.05,
+   "cut": 0.8861,
+   "val": {
+    "trades": 260,
+    "win_rate": 0.85,
+    "pf": 1.716,
+    "avg_pct": 0.2899
+   },
+   "val_account": {
+    "trades": 175,
+    "win_rate": 0.8229,
+    "pf": 1.398,
+    "avg_pct": 0.1915,
+    "balance": 577.07,
+    "max_drop_pct": 6.2
+   }
+  },
+  {
+   "base": "breakout (2.0,) T0.75 S2.0 H36",
+   "top_share": 0.02,
+   "cut": 0.9152,
+   "val": {
+    "trades": 104,
+    "win_rate": 0.8558,
+    "pf": 2.04,
+    "avg_pct": 0.3557
+   },
+   "val_account": {
+    "trades": 74,
+    "win_rate": 0.8108,
+    "pf": 1.51,
+    "avg_pct": 0.2294,
+    "balance": 524.97,
+    "max_drop_pct": 3.78
+   }
+  },
+  {
+   "base": "revert (3.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.5,
+   "cut": 0.7577,
+   "val": {
+    "trades": 1314,
+    "win_rate": 0.7215,
+    "pf": 0.789,
+    "avg_pct": -0.1442
+   },
+   "val_account": {
+    "trades": 945,
+    "win_rate": 0.7238,
+    "pf": 0.804,
+    "avg_pct": -0.1287,
+    "balance": 305.68,
+    "max_drop_pct": 45.07
+   }
+  },
+  {
+   "base": "revert (3.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.3,
+   "cut": 0.8186,
+   "val": {
+    "trades": 789,
+    "win_rate": 0.725,
+    "pf": 0.812,
+    "avg_pct": -0.1256
+   },
+   "val_account": {
+    "trades": 617,
+    "win_rate": 0.7147,
+    "pf": 0.753,
+    "avg_pct": -0.1721,
+    "balance": 335.81,
+    "max_drop_pct": 38.46
+   }
+  },
+  {
+   "base": "revert (3.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.2,
+   "cut": 0.8461,
+   "val": {
+    "trades": 526,
+    "win_rate": 0.7281,
+    "pf": 0.796,
+    "avg_pct": -0.1401
+   },
+   "val_account": {
+    "trades": 438,
+    "win_rate": 0.7032,
+    "pf": 0.699,
+    "avg_pct": -0.2258,
+    "balance": 355.65,
+    "max_drop_pct": 31.79
+   }
+  },
+  {
+   "base": "revert (3.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.1,
+   "cut": 0.8797,
+   "val": {
+    "trades": 263,
+    "win_rate": 0.7414,
+    "pf": 0.8,
+    "avg_pct": -0.1338
+   },
+   "val_account": {
+    "trades": 235,
+    "win_rate": 0.7191,
+    "pf": 0.72,
+    "avg_pct": -0.2031,
+    "balance": 433.61,
+    "max_drop_pct": 16.36
+   }
+  },
+  {
+   "base": "revert (3.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.05,
+   "cut": 0.9017,
+   "val": {
+    "trades": 132,
+    "win_rate": 0.7652,
+    "pf": 0.861,
+    "avg_pct": -0.0862
+   },
+   "val_account": {
+    "trades": 115,
+    "win_rate": 0.7304,
+    "pf": 0.721,
+    "avg_pct": -0.1993,
+    "balance": 473.61,
+    "max_drop_pct": 8.24
+   }
+  },
+  {
+   "base": "revert (3.0, 'with') T0.75 S2.0 H36",
+   "top_share": 0.02,
+   "cut": 0.9262,
+   "val": {
+    "trades": 53,
+    "win_rate": 0.7547,
+    "pf": 0.886,
+    "avg_pct": -0.0769
+   },
+   "val_account": {
+    "trades": 48,
+    "win_rate": 0.7292,
+    "pf": 0.752,
+    "avg_pct": -0.1853,
+    "balance": 489.16,
+    "max_drop_pct": 5.71
+   }
+  }
+ ],
+ "chosen": [
+  {
+   "base": {
+    "tf": "30m",
+    "family": "breakout",
+    "params": "(3.0,)",
+    "target_atr": 0.75,
+    "stop_atr": 2.0,
+    "hold_bars": 36,
+    "costs": "futures",
+    "train": {
+     "trades": 6069,
+     "win_rate": 0.7319,
+     "pf": 0.918,
+     "avg_pct": -0.0734
+    },
+    "val": {
+     "trades": 3208,
+     "win_rate": 0.7403,
+     "pf": 0.798,
+     "avg_pct": -0.1661
+    },
+    "meme_train": {
+     "trades": 2232,
+     "win_rate": 0.7464,
+     "pf": 1.014,
+     "avg_pct": 0.0143
+    },
+    "meme_val": {
+     "trades": 1337,
+     "win_rate": 0.7405,
+     "pf": 0.809,
+     "avg_pct": -0.1865
+    }
+   },
+   "cut": 0.8882,
+   "val": {
+    "trades": 321,
+    "win_rate": 0.8442,
+    "pf": 1.611,
+    "avg_pct": 0.2711
+   },
+   "val_account": {
+    "trades": 223,
+    "win_rate": 0.8072,
+    "pf": 1.29,
+    "avg_pct": 0.1561,
+    "balance": 579.67,
+    "max_drop_pct": 11.13
+   }
+  },
+  {
+   "base": {
+    "tf": "30m",
+    "family": "breakout",
+    "params": "(2.0,)",
+    "target_atr": 0.75,
+    "stop_atr": 2.0,
+    "hold_bars": 36,
+    "costs": "futures",
+    "train": {
+     "trades": 9600,
+     "win_rate": 0.7234,
+     "pf": 0.871,
+     "avg_pct": -0.1123
+    },
+    "val": {
+     "trades": 5189,
+     "win_rate": 0.7371,
+     "pf": 0.815,
+     "avg_pct": -0.141
+    },
+    "meme_train": {
+     "trades": 3437,
+     "win_rate": 0.7376,
+     "pf": 0.963,
+     "avg_pct": -0.0366
+    },
+    "meme_val": {
+     "trades": 2125,
+     "win_rate": 0.7496,
+     "pf": 0.876,
+     "avg_pct": -0.1057
+    }
+   },
+   "cut": 0.8523,
+   "val": {
+    "trades": 519,
+    "win_rate": 0.815,
+    "pf": 1.374,
+    "avg_pct": 0.1873
+   },
+   "val_account": {
+    "trades": 372,
+    "win_rate": 0.8199,
+    "pf": 1.476,
+    "avg_pct": 0.2198,
+    "balance": 669.49,
+    "max_drop_pct": 7.06
+   }
+  }
+ ]
+}

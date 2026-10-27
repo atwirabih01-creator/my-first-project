@@ -1,0 +1,53 @@
+[
+ {
+  "setup": "breakout (3.0,) T0.75 S2.0 H36",
+  "exam": {
+   "trades": 394,
+   "win_rate": 0.7792,
+   "pf": 1.174,
+   "avg_pct": 0.0835
+  },
+  "exam_account": {
+   "trades": 271,
+   "win_rate": 0.7528,
+   "pf": 0.911,
+   "avg_pct": -0.048,
+   "balance": 479.98,
+   "max_drop_pct": 15.19
+  }
+ },
+ {
+  "setup": "breakout (2.0,) T0.75 S2.0 H36",
+  "exam": {
+   "trades": 563,
+   "win_rate": 0.7496,
+   "pf": 0.825,
+   "avg_pct": -0.1109
+  },
+  "exam_account": {
+   "trades": 385,
+   "win_rate": 0.7662,
+   "pf": 0.999,
+   "avg_pct": -0.0006,
+   "balance": 510.13,
+   "max_drop_pct": 11.52
+  }
+ },
+ {
+  "setup": "ALL CHOSEN TOGETHER",
+  "exam": {
+   "trades": 957,
+   "win_rate": 0.7618,
+   "pf": 0.946,
+   "avg_pct": -0.0309
+  },
+  "exam_account": {
+   "trades": 550,
+   "win_rate": 0.7964,
+   "pf": 1.159,
+   "avg_pct": 0.0725,
+   "balance": 629.01,
+   "max_drop_pct": 11.87
+  }
+ }
+]

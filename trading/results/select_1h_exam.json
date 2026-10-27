@@ -1,0 +1,36 @@
+[
+ {
+  "setup": "breakout (3.0,) T0.5 S2.0 H12",
+  "exam": {
+   "trades": 343,
+   "win_rate": 0.6822,
+   "pf": 0.508,
+   "avg_pct": -0.4411
+  },
+  "exam_account": {
+   "trades": 253,
+   "win_rate": 0.7787,
+   "pf": 0.816,
+   "avg_pct": -0.12,
+   "balance": 446.05,
+   "max_drop_pct": 26.48
+  }
+ },
+ {
+  "setup": "ALL CHOSEN TOGETHER",
+  "exam": {
+   "trades": 343,
+   "win_rate": 0.6822,
+   "pf": 0.508,
+   "avg_pct": -0.4411
+  },
+  "exam_account": {
+   "trades": 253,
+   "win_rate": 0.7787,
+   "pf": 0.816,
+   "avg_pct": -0.12,
+   "balance": 446.05,
+   "max_drop_pct": 26.48
+  }
+ }
+]

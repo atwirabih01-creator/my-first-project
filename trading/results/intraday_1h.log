@@ -1,0 +1,55 @@
+1h DOGEUSDT done
+1h SHIBUSDT done
+1h PEPEUSDT done
+1h WIFUSDT done
+1h BONKUSDT done
+1h FLOKIUSDT done
+1h PENGUUSDT done
+1h TRUMPUSDT done
+1h BOMEUSDT done
+1h NEIROUSDT done
+1h TURBOUSDT done
+1h MEMEUSDT done
+1h PEOPLEUSDT done
+1h 1000SATSUSDT done
+1h ORDIUSDT done
+1h PNUTUSDT done
+1h BTCUSDT done
+1h ETHUSDT done
+1h SOLUSDT done
+1h XRPUSDT done
+1h BNBUSDT done
+1h ADAUSDT done
+1h AVAXUSDT done
+1h LINKUSDT done
+1h DOTUSDT done
+1h LTCUSDT done
+1h TRXUSDT done
+1h NEARUSDT done
+1h SUIUSDT done
+1h APTUSDT done
+1h ARBUSDT done
+1h OPUSDT done
+1h INJUSDT done
+1h TIAUSDT done
+1h SEIUSDT done
+1h FETUSDT done
+1h RENDERUSDT done
+1h WLDUSDT done
+1h JUPUSDT done
+1h HBARUSDT done
+revert (2.0, 'with') 1.0 2.0 12 TRAIN {'trades': 8230, 'win_rate': 0.6374, 'pf': 0.983, 'avg_pct': -0.0183} VAL {'trades': 4749, 'win_rate': 0.6286, 'pf': 0.849, 'avg_pct': -0.1451}
+rsi3 (10,) 1.0 2.0 12 TRAIN {'trades': 9937, 'win_rate': 0.6388, 'pf': 0.978, 'avg_pct': -0.0235} VAL {'trades': 5636, 'win_rate': 0.6396, 'pf': 0.934, 'avg_pct': -0.0596}
+rsi3 (10,) 0.5 2.0 36 TRAIN {'trades': 10279, 'win_rate': 0.8086, 'pf': 0.977, 'avg_pct': -0.0156} VAL {'trades': 5771, 'win_rate': 0.8108, 'pf': 0.912, 'avg_pct': -0.0531}
+rsi3 (10,) 0.75 2.0 12 TRAIN {'trades': 10128, 'win_rate': 0.71, 'pf': 0.977, 'avg_pct': -0.02} VAL {'trades': 5690, 'win_rate': 0.7104, 'pf': 0.925, 'avg_pct': -0.0582}
+revert (2.0, 'with') 1.0 1.5 12 TRAIN {'trades': 8938, 'win_rate': 0.5905, 'pf': 0.974, 'avg_pct': -0.0259} VAL {'trades': 5142, 'win_rate': 0.5854, 'pf': 0.842, 'avg_pct': -0.1449}
+rsi3 (10,) 1.0 2.0 36 TRAIN {'trades': 9737, 'win_rate': 0.6664, 'pf': 0.973, 'avg_pct': -0.0311} VAL {'trades': 5521, 'win_rate': 0.6751, 'pf': 0.934, 'avg_pct': -0.0652}
+revert (2.0, 'with') 0.75 2.0 12 TRAIN {'trades': 8742, 'win_rate': 0.7075, 'pf': 0.972, 'avg_pct': -0.0252} VAL {'trades': 4975, 'win_rate': 0.6933, 'pf': 0.816, 'avg_pct': -0.1558}
+rsi3 (5,) 0.75 2.0 12 TRAIN {'trades': 3688, 'win_rate': 0.7118, 'pf': 0.971, 'avg_pct': -0.0269} VAL {'trades': 2165, 'win_rate': 0.7307, 'pf': 1.048, 'avg_pct': 0.0346}
+rsi3 (10,) 0.5 2.0 12 TRAIN {'trades': 10344, 'win_rate': 0.7962, 'pf': 0.971, 'avg_pct': -0.0193} VAL {'trades': 5807, 'win_rate': 0.7975, 'pf': 0.929, 'avg_pct': -0.0411}
+rsi3 (10,) 0.75 2.0 36 TRAIN {'trades': 10001, 'win_rate': 0.7305, 'pf': 0.97, 'avg_pct': -0.0285} VAL {'trades': 5613, 'win_rate': 0.7372, 'pf': 0.922, 'avg_pct': -0.0642}
+revert (2.0, 'with') 0.5 2.0 12 TRAIN {'trades': 9446, 'win_rate': 0.794, 'pf': 0.963, 'avg_pct': -0.0251} VAL {'trades': 5370, 'win_rate': 0.7736, 'pf': 0.774, 'avg_pct': -0.1514}
+revert (2.0, 'with') 0.5 2.0 36 TRAIN {'trades': 9391, 'win_rate': 0.8031, 'pf': 0.963, 'avg_pct': -0.0253} VAL {'trades': 5331, 'win_rate': 0.7905, 'pf': 0.776, 'avg_pct': -0.1533}
+revert (2.0, 'with') 1.0 1.5 36 TRAIN {'trades': 8849, 'win_rate': 0.5987, 'pf': 0.963, 'avg_pct': -0.0385} VAL {'trades': 5074, 'win_rate': 0.5964, 'pf': 0.839, 'avg_pct': -0.1546}
+revert (2.0, 'with') 1.0 2.0 36 TRAIN {'trades': 8070, 'win_rate': 0.6611, 'pf': 0.963, 'avg_pct': -0.0421} VAL {'trades': 4615, 'win_rate': 0.657, 'pf': 0.843, 'avg_pct': -0.1657}
+breakout (3.0,) 0.5 2.0 12 TRAIN {'trades': 2840, 'win_rate': 0.7965, 'pf': 0.963, 'avg_pct': -0.0342} VAL {'trades': 1559, 'win_rate': 0.7903, 'pf': 0.94, 'avg_pct': -0.0444}

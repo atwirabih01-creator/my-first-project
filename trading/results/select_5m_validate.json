@@ -1,0 +1,119 @@
+{
+ "report": [
+  {
+   "base": "rsi3 (5,) T0.5 S2.0 H36",
+   "top_share": 0.5,
+   "cut": 0.8247,
+   "val": {
+    "trades": 2001,
+    "win_rate": 0.8131,
+    "pf": 0.843,
+    "avg_pct": -0.0518
+   },
+   "val_account": {
+    "trades": 1623,
+    "win_rate": 0.8213,
+    "pf": 0.885,
+    "avg_pct": -0.0361,
+    "balance": 313.99,
+    "max_drop_pct": 43.04
+   }
+  },
+  {
+   "base": "rsi3 (5,) T0.5 S2.0 H36",
+   "top_share": 0.3,
+   "cut": 0.8472,
+   "val": {
+    "trades": 1201,
+    "win_rate": 0.811,
+    "pf": 0.829,
+    "avg_pct": -0.0587
+   },
+   "val_account": {
+    "trades": 982,
+    "win_rate": 0.8177,
+    "pf": 0.867,
+    "avg_pct": -0.0434,
+    "balance": 363.12,
+    "max_drop_pct": 33.95
+   }
+  },
+  {
+   "base": "rsi3 (5,) T0.5 S2.0 H36",
+   "top_share": 0.2,
+   "cut": 0.8595,
+   "val": {
+    "trades": 801,
+    "win_rate": 0.8165,
+    "pf": 0.845,
+    "avg_pct": -0.0534
+   },
+   "val_account": {
+    "trades": 643,
+    "win_rate": 0.8165,
+    "pf": 0.855,
+    "avg_pct": -0.0488,
+    "balance": 403.22,
+    "max_drop_pct": 26.19
+   }
+  },
+  {
+   "base": "rsi3 (5,) T0.5 S2.0 H36",
+   "top_share": 0.1,
+   "cut": 0.879,
+   "val": {
+    "trades": 401,
+    "win_rate": 0.818,
+    "pf": 0.863,
+    "avg_pct": -0.0472
+   },
+   "val_account": {
+    "trades": 334,
+    "win_rate": 0.8084,
+    "pf": 0.794,
+    "avg_pct": -0.0743,
+    "balance": 433.81,
+    "max_drop_pct": 22.31
+   }
+  },
+  {
+   "base": "rsi3 (5,) T0.5 S2.0 H36",
+   "top_share": 0.05,
+   "cut": 0.8965,
+   "val": {
+    "trades": 201,
+    "win_rate": 0.8109,
+    "pf": 0.815,
+    "avg_pct": -0.0703
+   },
+   "val_account": {
+    "trades": 170,
+    "win_rate": 0.8059,
+    "pf": 0.802,
+    "avg_pct": -0.0768,
+    "balance": 464.77,
+    "max_drop_pct": 12.48
+   }
+  },
+  {
+   "base": "rsi3 (5,) T0.5 S2.0 H36",
+   "top_share": 0.02,
+   "cut": 0.9144,
+   "val": {
+    "trades": 81,
+    "win_rate": 0.8765,
+    "pf": 1.36,
+    "avg_pct": 0.0848
+   },
+   "val_account": {
+    "trades": 65,
+    "win_rate": 0.8769,
+    "pf": 1.448,
+    "avg_pct": 0.0995,
+    "balance": 513.35,
+    "max_drop_pct": 2.97
+   }
+  }
+ ],
+ "chosen": []
+}
