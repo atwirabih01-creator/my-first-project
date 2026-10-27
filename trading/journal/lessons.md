@@ -59,3 +59,17 @@ Owner's rule: the team trades only when all three agree.
 Evidence before fixing it (rounds 1–5, 202 blind cases): this rule gave 38 trades, 82% wins and $1.88 per $1 lost,
 against 77% wins and $0.92 for all cases. Rounds 6–11 (360 new blind cases) are the confirmation. No rule
 changes until they are scored.
+
+## CONFIRMATION RESULT, rounds 6–11 (scored 27 Oct 2026; rule fixed in advance)
+- **Result:** 360 new blind cases. The pre-declared team rule (Hawk TAKE + Atlas not "warns") gave 40 trades,
+  80% wins and $1.03 per $1 lost (90% range $0.57–2.38): about break-even. All cases: 77% wins, $0.98.
+- **The win rate target (70%) was met. The profit target ($1.20) was NOT.**
+- **Atlas's labels flipped:** "warns" made money here ($1.52) and "supports" lost ($0.86). His context read
+  from the blind charts is noise, not skill.
+- **Hawk's TAKEs:** 80% wins, $1.03. A small edge at best, not proven.
+- **Why:** with a 2× ATR stop and a 0.75× ATR target, a loss is about 2.7× a win, so ~73% wins only breaks
+  even. The charts alone don't tell the winners from the big losers well enough.
+- **Lesson:** rounds 1–5 looked great partly because the rules were tuned on cases already seen. Only fixed
+  rules on new cases count.
+- **Next:** add new information the charts lack (futures open interest and the long/short ratios, free from
+  Binance), then confirm the same way.
