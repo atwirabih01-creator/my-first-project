@@ -1,0 +1,25 @@
+case,decision,reason
+R1-01,TAKE,Hawk skip is low confidence and context neutral; base rate 80% beats 73% break-even
+R1-02,SKIP,Both agents against: fade into BTC jump plus 3.6x volume thrust and squeeze risk
+R1-03,TAKE,Stop sits beyond a real ceiling that held before; Atlas BTC warning noted but chart structure wins
+R1-04,TAKE,Hawk take with neutral context; fade into drop origin with level overhead
+R1-05,TAKE,Hawk take with neutral context; signal volume fading and clear space to target
+R1-06,TAKE,Both agree: fresh BTC drop and clean break of a floor tested four times
+R1-07,SKIP,Hawk medium: target sits in a wick zone where buyers already showed up after a climactic bar
+R1-08,SKIP,Second flush bar needs a new low; sellers look spent and 18h hold breaks the 24 Oct lesson; cluster 08/09/18 skipped
+R1-09,SKIP,Hawk medium: 9x volume second flush and entry gapped lower; late in cluster 08/09/18
+R1-10,SKIP,Atlas warns on strongest up-slope and Hawk only low confidence with no level above; no real agreement
+R1-11,SKIP,Both against: 7% one-bar crash and stop inside a normal retest; cluster 11/17 skipped
+R1-12,TAKE,Hawk medium take: shrinking ranges after an 11% rally with target inside the last two bars
+R1-13,TAKE,Hawk skip is low confidence and context neutral; base rate wins without a stronger reason
+R1-14,SKIP,Both against with high confidence: third flush bar and sellers likely exhausted
+R1-15,TAKE,Hawk take on weak 0.9x break with wick; neutral context; shelf risk is minor
+R1-16,SKIP,Both against: clean breakdown from a tight base while BTC makes lower lows
+R1-17,SKIP,Hawk medium: stop below broken floor so a retest hits it; coin already -13% over 48 bars
+R1-18,SKIP,Both against with high confidence: 15.6x capitulation volume in cluster 08/09/18
+R1-19,SKIP,Both against with high confidence: buying into a BTC crash with a 5% stop
+R1-20,TAKE,Both agree: quiet pullback in strong uptrend with a rejected low and inside bar
+R1-21,TAKE,Atlas supports a coin-only pump with BTC flat; Hawk skip only low confidence
+R1-22,TAKE,Hawk skip is low confidence and context neutral; base rate wins
+R1-23,TAKE,Hawk skip is low confidence and coin still in uptrend; base rate wins
+R1-24,TAKE,Hawk take with neutral context; 0.42% target passes this setup's 0.30% futures rule

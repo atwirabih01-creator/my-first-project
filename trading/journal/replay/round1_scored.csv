@@ -1,0 +1,25 @@
+case,decision,reason,sym,time,pnl_pct,win,prob,approved_by_model,tf,setup,meme,dir
+R1-01,TAKE,Hawk skip is low confidence and context neutral; base rate 80% beats 73% break-even,SEIUSDT,2025-07-22 05:00:00+00:00,1.119,True,0.8324,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,1
+R1-02,SKIP,Both agents against: fade into BTC jump plus 3.6x volume thrust and squeeze risk,NEIROUSDT,2025-08-07 11:00:00+00:00,-2.08,False,0.9044,True,30m,"rsi3 (5,) T0.75 S2.0 H12",True,-1
+R1-03,TAKE,Stop sits beyond a real ceiling that held before; Atlas BTC warning noted but chart structure wins,INJUSDT,2025-09-01 08:00:00+00:00,0.678,True,0.8895,True,30m,"revert (2.0, 'with') T0.75 S2.0 H36",False,-1
+R1-04,TAKE,Hawk take with neutral context; fade into drop origin with level overhead,SEIUSDT,2025-09-02 03:00:00+00:00,-0.273,False,0.855,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,-1
+R1-05,TAKE,Hawk take with neutral context; signal volume fading and clear space to target,BOMEUSDT,2025-10-24 05:00:00+00:00,0.419,True,0.8964,True,30m,"rsi3 (5,) T0.75 S2.0 H12",True,-1
+R1-06,TAKE,Both agree: fresh BTC drop and clean break of a floor tested four times,JUPUSDT,2025-12-15 15:00:00+00:00,0.689,True,0.9661,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R1-07,SKIP,Hawk medium: target sits in a wick zone where buyers already showed up after a climactic bar,PEPEUSDT,2025-06-21 21:30:00+00:00,1.285,True,0.8072,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R1-08,SKIP,Second flush bar needs a new low; sellers look spent and 18h hold breaks the 24 Oct lesson; cluster 08/09/18 skipped,PENGUUSDT,2025-12-15 15:30:00+00:00,0.978,True,0.9386,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R1-09,SKIP,Hawk medium: 9x volume second flush and entry gapped lower; late in cluster 08/09/18,WLDUSDT,2025-12-15 15:30:00+00:00,0.938,True,0.9542,True,30m,"breakout (3.0,) T0.75 S2.0 H36",False,-1
+R1-10,SKIP,Atlas warns on strongest up-slope and Hawk only low confidence with no level above; no real agreement,JUPUSDT,2025-10-25 12:30:00+00:00,0.569,True,0.8758,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,-1
+R1-11,SKIP,Both against: 7% one-bar crash and stop inside a normal retest; cluster 11/17 skipped,PEPEUSDT,2025-06-22 13:30:00+00:00,1.275,True,0.864,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R1-12,TAKE,Hawk medium take: shrinking ranges after an 11% rally with target inside the last two bars,AVAXUSDT,2025-11-07 18:30:00+00:00,1.148,True,0.8269,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,-1
+R1-13,TAKE,Hawk skip is low confidence and context neutral; base rate wins without a stronger reason,XRPUSDT,2025-11-23 02:30:00+00:00,-1.744,False,0.8582,True,30m,"revert (2.0, 'with') T0.75 S2.0 H36",False,-1
+R1-14,SKIP,Both against with high confidence: third flush bar and sellers likely exhausted,BOMEUSDT,2025-06-05 21:00:00+00:00,-4.587,False,0.897,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R1-15,TAKE,Hawk take on weak 0.9x break with wick; neutral context; shelf risk is minor,FLOKIUSDT,2025-11-05 19:00:00+00:00,0.752,True,0.8913,True,30m,"revert (2.0, 'with') T0.75 S2.0 H36",True,-1
+R1-16,SKIP,Both against: clean breakdown from a tight base while BTC makes lower lows,PENGUUSDT,2025-06-12 11:30:00+00:00,0.832,True,0.9459,True,30m,"revert (3.0, 'with') T0.75 S2.0 H36",True,1
+R1-17,SKIP,Hawk medium: stop below broken floor so a retest hits it; coin already -13% over 48 bars,FLOKIUSDT,2025-06-22 13:30:00+00:00,-3.109,False,0.8308,True,30m,"breakout (3.0,) T0.75 S2.0 H36",True,-1
+R1-18,SKIP,Both against with high confidence: 15.6x capitulation volume in cluster 08/09/18,LINKUSDT,2025-12-15 15:30:00+00:00,0.752,True,0.9317,True,30m,"breakout (2.0,) T0.75 S2.0 H36",False,-1
+R1-19,SKIP,Both against with high confidence: buying into a BTC crash with a 5% stop,NEARUSDT,2025-10-10 21:00:00+00:00,-5.341,False,0.9209,True,30m,"revert (3.0, 'with') T0.75 S2.0 H36",False,1
+R1-20,TAKE,Both agree: quiet pullback in strong uptrend with a rejected low and inside bar,DOGEUSDT,2025-07-12 13:30:00+00:00,0.667,True,0.8713,True,30m,"rsi3 (5,) T0.75 S2.0 H12",True,1
+R1-21,TAKE,Atlas supports a coin-only pump with BTC flat; Hawk skip only low confidence,1000SATSUSDT,2025-08-23 07:30:00+00:00,0.966,True,0.9133,True,30m,"rsi3 (5,) T0.75 S2.0 H12",True,-1
+R1-22,TAKE,Hawk skip is low confidence and context neutral; base rate wins,AVAXUSDT,2025-10-20 05:00:00+00:00,0.594,True,0.861,True,30m,"rsi3 (5,) T0.75 S2.0 H12",False,-1
+R1-23,TAKE,Hawk skip is low confidence and coin still in uptrend; base rate wins,ORDIUSDT,2025-07-28 14:30:00+00:00,-3.902,False,0.8286,True,30m,"rsi3 (5,) T0.75 S2.0 H12",True,1
+R1-24,TAKE,Hawk take with neutral context; 0.42% target passes this setup's 0.30% futures rule,PNUTUSDT,2025-09-28 20:30:00+00:00,0.336,True,0.9145,True,30m,"revert (2.0, 'with') T0.75 S2.0 H36",True,-1

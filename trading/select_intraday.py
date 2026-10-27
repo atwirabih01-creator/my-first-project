@@ -63,18 +63,29 @@ def gather(tf, base, period):
     return pd.concat(rows).sort_values("t_in") if rows else pd.DataFrame()
 
 
-def account(t, start=500.0, risk=0.01, max_open=3):
-    """Take trades in time order: one per coin, at most max_open at once, 1% risk sizing incl. fees."""
+def account(t, start=500.0, risk=0.01, max_open=3, bar=None):
+    """Take trades in time order: one per coin, at most max_open at once, 1% risk sizing incl. fees.
+    Fixed 27 Oct after an independent audit: a trade stays OPEN until its exit bar has finished
+    (t_out is the exit bar's START time), and profit is booked when the trade closes."""
+    if bar is None:
+        bar = pd.Timedelta(minutes=30)
     bal, peak, dd, open_, res = start, start, 0.0, [], []
     order = ["t_in", "prob"] if "prob" in t else ["t_in"]          # same bar: highest model probability first
     for r in t.sort_values(order, ascending=[True, False][:len(order)]).itertuples():
-        open_ = [(s, e) for s, e in open_ if e > r.t_in]
-        if len(open_) >= max_open or any(s == r.sym for s, _ in open_):
+        still = []
+        for o in open_:                                          # settle trades whose exit bar is over
+            if o["end"] <= r.t_in:
+                bal += o["size"] * o["pnl"]
+                peak = max(peak, bal); dd = max(dd, 1 - bal / peak)
+            else:
+                still.append(o)
+        open_ = still
+        if len(open_) >= max_open or any(o["sym"] == r.sym for o in open_):
             continue
         size = min(bal * risk / (r.stop_pct + 0.0013), bal)
-        bal += size * r.pnl
-        peak = max(peak, bal); dd = max(dd, 1 - bal / peak)
-        open_.append((r.sym, r.t_out)); res.append(r.pnl)
+        open_.append({"sym": r.sym, "end": r.t_out + bar, "size": size, "pnl": r.pnl}); res.append(r.pnl)
+    for o in open_:
+        bal += o["size"] * o["pnl"]; peak = max(peak, bal); dd = max(dd, 1 - bal / peak)
     p = np.array(res)
     st = S.stats(p)
     st.update({"balance": round(bal, 2), "max_drop_pct": round(100 * dd, 2)})
