@@ -52,7 +52,7 @@ def score():
         p1 = float(bar.close.iloc[0])
         move = 100 * (p1 / float(r.start_price) - 1)
         right = (move > 0) if r.call == "up" else (move < 0)
-        c.loc[i, ["status", "end_price", "move_pct", "right"]] = ["scored", p1, f"{move:.3f}", str(bool(right))]
+        c.loc[i, ["status", "end_price", "move_pct", "right"]] = ["scored", str(p1), f"{move:.3f}", str(bool(right))]
     if len(c):
         c.to_csv(CALLS, index=False)
     sc = scored()

@@ -3,7 +3,7 @@
 Only the team's own agreed plans count here (version HWK in journal/paper_trades.csv - the exact plan
 Atlas, Hawk and Sage agreed on), in the order they closed. Sizing rule, fixed in advance:
   - risk 1% of the current balance per trade: if the stop is hit, the loss is about 1% of the account
-  - position size = (1% of balance) / (distance to stop), never more than the whole balance (no leverage)
+  - position size = (1% of balance) / (distance to stop + 0.30% fees), never more than the whole balance (no leverage)
   - result_pct in the journal is already after 0.30% round-trip fees
 Graduation from Phase 1 (team training) to Phase 2 (agents also work individually) - see
 .claude/skills/desk-training/SKILL.md:
@@ -30,7 +30,7 @@ def ledger():
     bal, rows = START, []
     for r in t.itertuples():
         stop_dist = abs(float(r.stop) / float(r.entry) - 1)
-        size = min(bal * RISK / stop_dist, bal) if stop_dist > 0 else bal * 0.2
+        size = min(bal * RISK / (stop_dist + 0.003), bal) if stop_dist > 0 else bal * 0.2      # fees counted in the 1%
         pnl = size * float(r.result_pct) / 100
         bal += pnl
         rows.append({"closed": r.closed.strftime("%Y-%m-%d %H:%M"), "coin": r.symbol, "side": r.side,
