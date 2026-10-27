@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # One cheap scanner run (no AI agents): update the paper journal, refresh the gate weekly, scan 40 coins.
-# Prints CANDIDATES=<n>, CARRY_CANDIDATES=<n> and PASSED=<yes|no> as its last three lines.
+# Prints STUDY_SESSION, GRADUATED, CANDIDATES=<n>, CARRY_CANDIDATES=<n> and PASSED=<yes|no> as its last five lines.
+# STUDY_SESSION=yes on the 12:xx UTC run: hold the daily study session (.claude/skills/desk-training/SKILL.md).
 set -u
 cd "$(dirname "$0")"
 python3 desk_journal.py update
@@ -15,7 +16,11 @@ python3 carry_live.py update
 python3 carry_live.py scan | tee /tmp/desk_carry.txt
 python3 carry_live.py score | tee -a /tmp/desk_score.txt
 c=$(python3 -c "import json; print(len(json.load(open('journal/carry_scan.json'))['candidates']))")
+python3 calls.py score
+python3 account.py | tee /tmp/desk_account.txt
 echo "- $(date -u '+%Y-%m-%d %H:%M') UTC — scan: ${n} candidate(s), carry: ${c} candidate(s)" >> journal/scan_log.md
+if [ "$(date -u +%H)" = "12" ]; then echo "STUDY_SESSION=yes"; else echo "STUDY_SESSION=no"; fi
+grep "^GRADUATED=" /tmp/desk_account.txt || echo "GRADUATED=no"
 echo "CANDIDATES=${n}"
 echo "CARRY_CANDIDATES=${c}"
 if grep -q "True" /tmp/desk_score.txt; then echo "PASSED=yes"; else echo "PASSED=no"; fi
