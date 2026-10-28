@@ -18,6 +18,7 @@ export function localSafetyCheck(raw: string): HelpKind | null {
   if (cat === 'self_harm') return 'self_harm';
   if (cat === 'disclosure_harm') return 'home';
   if (cat === 'violence_fear') return 'fear';
+  if (cat === 'help_request') return 'general';
   return null;
 }
 

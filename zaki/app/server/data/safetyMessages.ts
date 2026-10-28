@@ -58,8 +58,8 @@ export const FIXED_MESSAGES: Record<FixedMessageKey, Record<Lang, string>> = {
     ar: "أنا ذكي، معلّمك الآلي، وقواعدي لا تتغيّر.\nلنواصل التعلّم معًا!",
   },
   reply_blocked: {
-    en: "Let's try that another way.\nTell me what you think the first step is.",
-    ar: "لنجرّب طريقة أخرى.\nأخبرني: ما الخطوة الأولى في رأيك؟",
+    en: "Let's go back to our lesson.\nFor other questions, ask a grown-up you trust.\nWhat do you think the first step is?",
+    ar: "لنعد إلى درسنا.\nللأسئلة الأخرى، اسأل شخصًا كبيرًا تثق به.\nما الخطوة الأولى في رأيك؟",
   },
   answer_protected: {
     en: "I can't tell you the answer, but I know you can find it!\nLet's look at it one small step at a time.",

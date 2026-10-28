@@ -10,7 +10,24 @@ own login and strips it ("won't be used to authenticate requests"). Zaki now rea
 first (server/config/models.ts anthropicApiKey()). The founder was asked to rename the variable.
 Work branch is now claude/eloquent-cori-9fleqt.
 
-## First thing to do in the new session
+## DONE on 2026-10-28 (session 2)
+- Key works (ZAKI_ANTHROPIC_API_KEY). Lesson pack + tutor turns tested live.
+- Red-team suite with the real AI: PASS 666/666, 0 false alarms (reports in zaki/app/redteam/results/, not saved in git).
+- New safety category "help_request" (child asks for a helpline / who to call). Supabase migration 0004 widens the flags table: APPLY 0004 BEFORE deploying this server code, or help_request flags are rejected by the database.
+- Spend so far: about US$0.43 of the $5 credit.
+
+## Next
+1. Expo access token (EXPO_TOKEN, saved like the Claude key) -> Android APK (EAS build, internal distribution) for the family + hosted web link for iPhones (EAS Hosting). Then Supabase (free).
+2. Re-run the red-team suite after ANY change to prompts, keyword lists or models (a phase cannot ship if any test fails). The AI check is not fully repeatable, so run it twice before shipping.
+3. Safety gate G5 still open: two Lebanese native speakers must review the keyword lists.
+
+## How to run
+- Check key: `[ -n "$ZAKI_ANTHROPIC_API_KEY" ] && echo yes` (never print it).
+- `cd zaki/app && npm ci`, then server: `CI=1 ZAKI_DAILY_BUDGET_USD=1 ZAKI_RATE_LIMIT_OFF=1 npx expo start --web --port 8081` (restart after editing server code: it keeps old code in memory).
+- Tests: `npm run test:server`; red team: `cd redteam && node run.mjs --concurrency=6 --timeout=90000`.
+
+## (Older) first steps from session 1
+
 1. Check the key is visible WITHOUT printing it: `[ -n "$ZAKI_ANTHROPIC_API_KEY" ] && echo yes`.
    Never print, grep or scan the environment for the key value (the safety system blocks it, rightly).
    If missing: guide him back to the environment settings (gear next to AI TUTOR → Environment variables), check the line is `ZAKI_ANTHROPIC_API_KEY=sk-ant-...real key...`, saved, and that the chat was started AFTER saving.

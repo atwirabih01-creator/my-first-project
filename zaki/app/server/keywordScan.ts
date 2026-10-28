@@ -28,12 +28,18 @@ function compileArabicPhrase(phrase: string): KwWord[] {
   return words.map((w, i) => ({ skel: skels[i], lit: w, litStripped: stripClitic(w) }));
 }
 
-function compile(group: KeywordGroup): CompiledGroup {
+/**
+ * `exactShortWords`: a one-word keyword whose skeleton is under 4 letters matches only its
+ * exact spelling. Used for low-stakes groups where short skeletons collide with everyday
+ * Arabizi ("ra2me" my number vs "ra2m" number, "3enwane" vs "ya3ne", "siyese" vs "sa7").
+ */
+function compile(group: KeywordGroup, opts: { exactShortWords?: boolean } = {}): CompiledGroup {
   const latin = [...(group.en ?? []), ...(group.fr ?? []), ...(group.arabizi ?? [])]
     .map(normalizeBase)
     .filter(Boolean);
   const arabic = [...(group.ar ?? []), ...(group.arabizi ?? [])]
     .map(compileArabicPhrase)
+    .map((p) => (opts.exactShortWords && p.length === 1 && p[0].skel.length < 4 ? [{ ...p[0], skel: "" }] : p))
     .filter((s) => s.length > 0);
   return { latin: Array.from(new Set(latin)), arabic };
 }
@@ -41,13 +47,14 @@ function compile(group: KeywordGroup): CompiledGroup {
 const COMPILED = {
   selfHarm: compile(KW.SELF_HARM),
   disclosure: compile(KW.DISCLOSURE_HARM),
+  helpSeeking: compile(KW.HELP_SEEKING),
   secrecy: compile(KW.SECRECY),
   fear: compile(KW.FEAR_DISTRESS),
   home: compile(KW.HOME_TERMS),
   outside: compile(KW.OUTSIDE_TERMS),
-  personal: compile(KW.PERSONAL_DATA),
+  personal: compile(KW.PERSONAL_DATA, { exactShortWords: true }),
   adult: compile(KW.ADULT_TOPIC),
-  politics: compile(KW.POLITICS),
+  politics: compile(KW.POLITICS, { exactShortWords: true }),
   injection: compile(KW.PROMPT_INJECTION),
   war: compile(KW.WAR_WORDS),
   threatIdiom: compile(KW.THREAT_IDIOMS),
@@ -130,6 +137,8 @@ export type KeywordScan = {
   disclosure: boolean;
   secrecy: boolean;
   fear: boolean;
+  /** Asks for a helpline / who to call / "I need help now". */
+  helpSeeking: boolean;
   home: boolean;
   outside: boolean;
   personal: boolean;
@@ -179,6 +188,7 @@ function scanStrong(text: string) {
     disclosure: groupIn(views, COMPILED.disclosure),
     secrecy: groupIn(views, COMPILED.secrecy),
     fear: groupIn(views, COMPILED.fear),
+    helpSeeking: groupIn(views, COMPILED.helpSeeking),
     war: groupIn(views, COMPILED.war),
     threatIdiom: groupIn(views, COMPILED.threatIdiom),
     death: groupIn(views, COMPILED.death),
@@ -216,6 +226,7 @@ export function keywordScan(text: string): KeywordScan {
     disclosure: any("disclosure") || threat,
     secrecy: any("secrecy"),
     fear: strongFear || warFear || grief,
+    helpSeeking: any("helpSeeking"),
     home,
     outside: wordListIn(views.base, words, KW.OUTSIDE_TERMS),
     personal: groupIn(views, COMPILED.personal) || containsPhoneNumber(text) || EMAIL_RE.test(text),
@@ -230,6 +241,7 @@ export function keywordCategory(scan: KeywordScan): SafetyCategory {
   if (scan.selfHarm) return "self_harm";
   if (scan.disclosure || scan.secrecy) return "disclosure_harm";
   if (scan.fear) return "violence_fear";
+  if (scan.helpSeeking) return "help_request";
   if (scan.adult) return "adult_topic";
   if (scan.personal) return "personal_data";
   if (scan.injection) return "prompt_injection";

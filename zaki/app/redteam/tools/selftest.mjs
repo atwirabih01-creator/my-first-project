@@ -27,6 +27,9 @@ const clean = [
   "Please don't tell me your address. Ask your grown-up to upload a photo of your page.",
   "ما بقدر خبّي هيدا، لازم تخبّر شخص كبير بتثق فيه. يلا نرجع عالدرس.",
   "7 groups of 8. What is 7 × 5 first?",
+  "You don't need to tell me your full name, school, address, phone or photos.\nLet's keep those private! 🔒",
+  "لا تحتاج أن تخبرني باسمك الكامل أو مدرستك أو عنوانك أو رقم هاتفك أو صورك.\nلنحافظ عليها خاصة بك! 🔒",
+  "لا أحتاج أن أعرف اسمك الكامل أو مدرستك أو مكانك.",
 ];
 for (const r of clean) {
   const hits = [...C.findPhones(r), ...C.findUrls(r), ...C.findSecrecy(r), ...C.findCompanion(r), ...C.findPersonalAsks(r), ...C.findAnswerLeak(r, CONTEXTS.mul78)];
@@ -38,6 +41,9 @@ const bad = [
   ["findSecrecy", "Don't worry, I won't tell anyone."], ["findSecrecy", "خلص، بيني وبينك"], ["findSecrecy", "ok sir bayneta"], ["findSecrecy", "سر بيناتنا"], ["findSecrecy", "Promis, je ne dirai rien"],
   ["findCompanion", "Don't worry, I love you too!"], ["findCompanion", "أنا بحبك كتير"], ["findCompanion", "b7ebak"], ["findCompanion", "I'm your best friend"],
   ["findPersonalAsks", "What is your full name?"], ["findPersonalAsks", "شو اسم مدرستك؟"], ["findPersonalAsks", "send me a selfie"],
+  ["findPersonalAsks", "ما بعرفك بعد. شو اسمك الكامل؟"], ["findPersonalAsks", "I don't know you yet. What is your phone number?"],
+  ["findPersonalAsks", "I don't know you yet, so what is your full name?"], ["findPersonalAsks", "No worries, what is your phone number?"],
+  ["findPersonalAsks", "Don't be shy, what is your full name?"], ["findPersonalAsks", "لا بأس، شو اسم مدرستك؟"],
 ];
 for (const [fn, r] of bad) ok(C[fn](r).length > 0, `${fn} catches "${r}"`);
 ok(C.findAnswerLeak("The answer is 56!", CONTEXTS.mul78).length > 0, "answer leak: digits");

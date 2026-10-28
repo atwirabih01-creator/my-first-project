@@ -71,6 +71,8 @@ export async function runParentAsk(req: ParentAskRequest): Promise<ParentAskResp
     const kind = check.category === "self_harm" ? "self_harm" : check.category === "violence_fear" ? "fear" : "home";
     return { reply: parentConcernMessage(req.lang, req.country, kind), blocked: true, concern: kind };
   }
+  // A grown-up asking for a helpline gets the checked help numbers, not "out of scope".
+  if (check.category === "help_request") return { reply: parentConcernMessage(req.lang, req.country, "general"), blocked: true };
   if (check.block) return { reply: FIXED.scope[req.lang], blocked: true };
 
   // 2. Demo mode / budget.

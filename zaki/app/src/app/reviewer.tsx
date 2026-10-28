@@ -14,7 +14,7 @@ import { useApp, useT } from '@/lib/store';
 const DEMO_CODE = '2468';
 
 const LOCAL_CATEGORY: Record<string, string> = { home: 'disclosure_harm', fear: 'violence_fear', general: 'help_button' };
-const KNOWN = ['disclosure_harm', 'self_harm', 'violence_fear', 'sexual', 'personal_data', 'adult_topic', 'prompt_injection', 'off_topic', 'politics', 'help_button', 'server'];
+const KNOWN = ['disclosure_harm', 'self_harm', 'violence_fear', 'help_request', 'sexual', 'personal_data', 'adult_topic', 'prompt_injection', 'off_topic', 'politics', 'help_button', 'server'];
 
 /** Human-readable category (en/ar) instead of a raw code. */
 function categoryKey(category: string): StringKey {

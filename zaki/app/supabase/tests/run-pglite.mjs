@@ -19,9 +19,16 @@ const read = (p) => fs.readFileSync(path.join(here, p), "utf8");
 await db.exec(read("supabase-shim.sql"));
 await db.exec(read("../migrations/0001_init.sql"));
 await db.exec(read("../migrations/0003_family_keys.sql"));
+await db.exec(read("../migrations/0004_help_request_category.sql"));
 
 let passed = 0;
 const ok = (name) => { passed++; console.log("  ok -", name); };
+
+{
+  const r = await db.query(`select pg_get_constraintdef(oid) as def from pg_constraint where conname = 'flags_category_check'`);
+  assert.ok(r.rows.length === 1 && r.rows[0].def.includes("help_request"));
+  ok("flags accept the help_request category (0004)");
+}
 
 const USER_A = "11111111-1111-4111-8111-111111111111";
 const USER_B = "22222222-2222-4222-8222-222222222222";

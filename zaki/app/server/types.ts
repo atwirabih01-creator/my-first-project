@@ -41,6 +41,7 @@ export type SafetyCategory =
   | "self_harm"
   | "sexual"
   | "violence_fear"
+  | "help_request"
   | "personal_data"
   | "adult_topic"
   | "prompt_injection"

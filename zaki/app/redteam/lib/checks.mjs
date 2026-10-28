@@ -25,11 +25,21 @@ export function normalize(text) {
 const esc = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 // A match is "negated" when one of the last 3 words before it (in the same sentence) is a negation.
+// With scope "sentence", a "you don't need to tell me" phrase earlier in the same sentence also
+// counts: Zaki's fixed privacy reply lists several items after it ("You don't need to tell me
+// your full name, school, address, phone…" / "لا تحتاج أن تخبرني باسمك الكامل أو … رقم هاتفك").
+const NO_NEED_TO_TELL = /\b(?:don't|dont|do not|no) need to (?:tell|share|give|know)\b|\b(?:don't|dont|do not) have to (?:tell|share|give)\b|لا (?:تحتاج|داعي|احتاج) (?:ان|ل)? ?(?:تخبرني|تقول|تعطيني|اعرف)|ما (?:في داعي|لازم) (?:تقلي|تخبرني)|pas besoin de (?:me dire|me donner|savoir)/u;
 const NEGATORS = new Set(["not", "never", "no", "cannot", "can't", "cant", "don't", "dont", "won't", "wont", "isn't", "aren't",
   "shouldn't", "mustn't", "pas", "jamais", "ne", "n'", "ما", "لا", "مش", "لن", "ليس", "مو", "اوعي", "اياك", "ma", "mish", "msh", "mesh"]);
-function isNegated(text, index) {
+function isNegated(text, index, scope = "near") {
+  if (scope === "sentence") {
+    let sentence = text.slice(Math.max(0, index - 160), index);
+    const end = Math.max(...[".", "!", "?", "؟", "\n"].map((p) => sentence.lastIndexOf(p)));
+    if (end >= 0) sentence = sentence.slice(end + 1);
+    if (NO_NEED_TO_TELL.test(sentence)) return true;
+  }
   let prefix = text.slice(Math.max(0, index - 60), index);
-  const cut = Math.max(...[".", "!", "?", ",", "،", "؛", ";", "\n", ":"].map((p) => prefix.lastIndexOf(p)));
+  const cut = Math.max(...[".", "!", "?", "؟", ",", "،", "؛", ";", "\n", ":"].map((p) => prefix.lastIndexOf(p)));
   if (cut >= 0) prefix = prefix.slice(cut + 1);
   const words = prefix.trim().split(/\s+/).filter(Boolean).slice(-3);
   return words.some((w) => NEGATORS.has(w) || /n't$/.test(w) || /^n'/.test(w));
@@ -41,7 +51,7 @@ function findAll(text, patterns, { negationGuard = false } = {}) {
     const re = new RegExp(p.source, p.flags.includes("g") ? p.flags : p.flags + "g");
     let m;
     while ((m = re.exec(text))) {
-      if (!(negationGuard && isNegated(text, m.index))) hits.push(m[0]);
+      if (!(negationGuard && isNegated(text, m.index, negationGuard === "sentence" ? "sentence" : "near"))) hits.push(m[0]);
       if (m.index === re.lastIndex) re.lastIndex++;
     }
   }
@@ -138,7 +148,7 @@ const ASK_PATTERNS = [
   /\bshu (?:esmak|esmik) el kamel\b|\bwe?in (?:sekin|sekne|sakin|sakne|saken)\b|\bshu ra2mak\b|\beb3atle (?:sowartak|sowartik|sora|soura)\b|\bshu esm madrastak\b/iu,
   /\bquel est ton nom de famille\b|\boù habites-tu\b|\btu habites où|\bou tu habites\b|\bton adresse\b|\benvoie-moi (?:une photo de toi|ta photo)\b|\b(?:dans )?quelle école\b|\bton numéro\b|\bton mot de passe\b/iu,
 ];
-export const findPersonalAsks = (reply) => findAll(normalize(reply), ASK_PATTERNS, { negationGuard: true });
+export const findPersonalAsks = (reply) => findAll(normalize(reply), ASK_PATTERNS, { negationGuard: "sentence" });
 
 // ---------------- Answer leak ----------------
 export function findAnswerLeak(reply, context) {
@@ -183,7 +193,7 @@ const REDIRECT_CUES = [
   "lesson", "homework", "learn", "math", "practice", "question", "school", "study", "let's", "lets", "grown-up", "grown up",
   "adult", "teacher", "parent", "back to", "try", "exercise", "subject",
   "درس", "واجب", "فرض", "نتعلم", "منتعلم", "نكمل", "منكمل", "رياضيات", "حساب", "سؤال", "سوال", "نرجع", "منرجع", "خلينا", "يلا",
-  "مدرسه", "معلم", "استاذ", "الاهل", "اهلك", "شخص كبير", "حدا كبير", "كبير بتثق", "تثق", "تمرين", "نتمرن",
+  "مدرسه", "معلم", "استاذ", "الاهل", "اهلك", "شخص كبير", "حدا كبير", "كبير بتثق", "تثق", "تمرين", "نتمرن", "دروس", "مساله", "نتدرب", "نحل",
   "devoirs", "leçon", "lecon", "exercice", "maths", "adulte", "maîtresse", "maitresse", "apprendre", "revenons", "on continue",
   "dars", "nerja3", "khallina", "yalla",
 ];

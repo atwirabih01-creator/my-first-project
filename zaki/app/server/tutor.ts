@@ -230,7 +230,9 @@ export async function runTutorTurn(req: TutorRequest): Promise<TutorResponse> {
   // 5. Moderate the reply itself.
   const replyCheck = await moderate(reply, { speaker: "tutor", lang: req.lang, country: req.country, childRef: req.childRef });
   if (replyCheck.block) {
-    return { reply: fixedMessage("reply_blocked", req.lang), hintLevel, safety: childCheck.safety };
+    // A reply that drifted into politics gets the clear "ask a grown-up" redirect instead.
+    const key = replyCheck.politics && replyCheck.category === "off_topic" ? "politics" : "reply_blocked";
+    return { reply: fixedMessage(key, req.lang), hintLevel, safety: childCheck.safety };
   }
   return { reply, hintLevel, safety: childCheck.safety };
 }

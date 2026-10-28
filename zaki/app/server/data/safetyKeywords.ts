@@ -21,16 +21,23 @@ export const SELF_HARM: KeywordGroup = {
     "kill myself", "killing myself", "want to die", "i want to die", "wanna die", "want to die", "wanna die", "want to be dead", "wish i was dead",
     "wish i were dead", "hurt myself", "hurting myself", "cut myself", "end my life", "suicide",
     "don't want to live", "dont want to live", "do not want to live", "better off dead", "die tonight",
+    "i hate myself", "hate myself",
+    "nobody would miss me", "no one would miss me", "nobody will miss me", "no one will miss me",
+    "go to sleep and never wake up", "sleep forever and never wake",
   ],
   fr: [
     "me tuer", "je veux mourir", "envie de mourir", "me faire du mal", "suicide", "me suicider",
     "plus envie de vivre", "je veux mourir", "je vais me tuer",
+    "je me deteste", "je me hais",
   ],
   ar: [
     "اقتل نفسي", "بقتل نفسي", "انتحر", "انتحار", "بدي موت", "بدي اموت", "ابي اموت", "ابغى اموت",
     "اريد ان اموت", "اريد الموت", "اذي نفسي", "اؤذي نفسي", "ما بدي عيش", "لا اريد ان اعيش",
     "نفسي اموت", "اجرح نفسي", "اقتل حالي", "بدي اقتل حالي", "بقتل حالي", "اذي حالي", "بدي اذي حالي",
     "ما عاد بدي عيش", "لو متت", "اذا متت", "احسن لو متت", "بتمنى موت", "اتمنى الموت", "اريد ان انتحر",
+    "انا بكره حالي", "بكره نفسي", "اكره نفسي", "اكره حالي",
+    "بدي روح لعند تيتا بالسما", "بدي روح عند تيتا بالسما", "بدي روح لعند جدو بالسما", "بدي روح عند جدو بالسما",
+    "ما حدا رح يشتقلي", "ما حدا رح يشتاقلي", "ما حدا بيشتقلي", "لا احد سيشتاق لي",
   ],
   arabizi: [
     "a2tol nafse", "a2tol nafsi", "bi2tol nafse", "ente7ar", "bade mout", "badde mout", "bdde mout",
@@ -39,6 +46,32 @@ export const SELF_HARM: KeywordGroup = {
     "ma 3ad bade 3ish", "ma3ad bade 3ish", "ma3ad badde 3ish", "2azze 7ale", "2azi 7ale", "low mitt", "iza mitt",
     "ma 3ad badde 3ich", "ma 3ad bade 3ich", "ma3ad badde 3ich", "ma3ad bade 3ich", "ma bade 3ich", "ma badde 3ich",
     "ma 3ad bade 3eesh", "ma 3ad badde 3eesh", "ma3ad bade 3eesh",
+    "ana bekrah 7ale", "ana bekra 7ale", "ana bikrah 7ale", "ana bekreh 7ale", "bekrah nafse", "akrah nafsi", "ekrah nafse",
+    "rou7 3and teta bel sama", "rou7 la3and teta bel sama", "rou7 3and jeddo bel sama",
+    "ma 7ada rah yeshta2le", "ma 7ada ra7 yeshta2le", "ma 7ada ra7 yesht2le", "ma 7ada bisht2le",
+  ],
+};
+
+/**
+ * Child asks where to get help, a helpline or who to call, or says they need help now (not
+ * about schoolwork). Shown the help screen from the app's checked table, never AI numbers.
+ */
+export const HELP_SEEKING: KeywordGroup = {
+  en: [
+    "helpline", "help line", "hotline", "kids helpline", "child helpline", "number for kids", "number for children",
+    "who do kids call", "who can i call", "who do i call", "who should i call", "who can i talk to",
+    "i need help now", "need help now", "i need help right now",
+  ],
+  fr: ["qui j'appelle", "qui appeler", "qui je peux appeler", "numero pour les enfants", "j'ai besoin d'aide maintenant", "ligne d'ecoute"],
+  ar: [
+    "خط مساعدة", "خط المساعدة", "خط مساعده", "رقم المساعدة", "رقم مساعدة", "خط نجدة", "مين بحكي", "مين بتصل", "لمين بحكي",
+    "بدي احكي مع حدا", "بدي مساعدة هلق", "بدي مساعده هلق", "احتاج مساعدة الان", "بمن اتصل", "من اكلم",
+    "رقم للاطفال", "رقم الاطفال", "116 111",
+  ],
+  arabizi: [
+    "meen be7ki", "min be7ki", "la meen be7ki", "meen bettesel", "min bettasel",
+    "bade msa3de hala2", "badde msa3de halla2", "ra2m el msa3de",
+    "ra2m la wlad", "ra2m lal wlad", "ra2m lal atfal", "7ada redd 3al ra2m", "7ada byerod 3al ra2m",
   ],
 };
 
@@ -54,11 +87,14 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "send her a photo", "asked me for pictures", "wants to meet me", "touched my private", "touched my privates",
     "touchd me", "touchd my", "said i should die", "told me to die", "told me to kill myself", "go die",
     "someone hurts me", "someone is hurting me",
+    "boy bit me", "girl bit me", "kid bit me", "he bit me", "she bit me", "brother bit me", "sister bit me", "bit me and it bled", "made me bleed",
+    "no food at home", "nothing to eat at home",
   ],
   fr: [
     "me frappe", "m'a frappe", "me bat", "me touche", "m'a touche", "me fait mal", "m'a fait mal",
     "m'enferme", "me tue", "va me tuer", "me menace", "veut ma photo", "me tape", "me tapent", "me frappent",
     "me fait du mal", "m'a tape", "me touche la",
+    "m'a mordu", "me mord", "rien a manger a la maison",
   ],
   ar: [
     "يضربني", "بيضربني", "ضربني", "عم يضربني", "يلمسني", "بيلمسني", "لمسني", "يؤذيني", "بيأذيني",
@@ -66,6 +102,7 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "يشلحني", "يتحرش", "تحرش", "يهددني", "بيهددني", "طلب صورتي",
     "بدو صورتي", "بدها صورتي", "طلب مني صورة", "ضربتني", "بتضربني", "تضربني", "عم تضربني", "وجعني",
     "بيوجعني", "بتوجعني", "عم يوجعني", "عم توجعني", "اذتني", "بتأذيني", "لمستني", "بتلمسني",
+    "ما في اكل بالبيت", "ما اكلت من يومين", "ما اكلنا من يومين", "ما في شي ناكل", "لا يوجد طعام في البيت",
   ],
   arabizi: [
     "byedrabne", "byedrabni", "yedrabne", "yedrabni", "darabne", "darabni", "byelmesne", "byelmesni",
@@ -73,6 +110,7 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "yetharash", "ta7arosh", "bihaddedne",
     "talab soorte", "talab sourte", "baddo soorte", "baddo sourte", "darbetne", "darabetne", "darbitne",
     "btedrabne", "btidrabne", "wajja3ne", "bewaj3ne", "btewaj3ne", "btwaj3ne", "lamasetne", "btelmesne",
+    "ma fi akel bel bet", "ma fi akel bel beit", "ma akalet men yomen", "ma akalna men yomen",
   ],
 };
 
@@ -177,8 +215,8 @@ export const ADULT_TOPIC: KeywordGroup = {
 export const POLITICS: KeywordGroup = {
   en: ["hezbollah", "politics", "political party", "election", "elections", "israel", "sunni", "shia", "shiite", "sect", "civil war", "militia"],
   fr: ["politique", "hezbollah", "israel", "guerre civile", "milice"],
-  ar: ["حزب الله", "سياسة", "السياسة", "انتخابات", "اسرائيل", "طائفة", "طائفي", "طائفية", "الحرب الاهلية", "ميليشيا"],
-  arabizi: ["7ezb", "7ezbollah", "siyese", "siyasa", "isra2il", "isra2eel"],
+  ar: ["حزب الله", "سياسة", "السياسة", "احزاب", "الاحزاب", "انتخابات", "اسرائيل", "طائفة", "طائفي", "طائفية", "الحرب الاهلية", "ميليشيا"],
+  arabizi: ["7ezb", "7ezbollah", "siyese", "siyasa", "isra2il", "isra2eel", "ahzeb", "ahzab", "a7zeb", "a7zab", "el ahzeb", "el a7zeb"],
 };
 
 /** Attempts to change Zaki's rules. */
@@ -197,7 +235,7 @@ export const PROMPT_INJECTION: KeywordGroup = {
 /** War words. WEAK: they trigger the fear route only when the message is not school talk
  *  ("we learned about the war of 1812 in history", "volcanoes explode like bombs"). */
 export const WAR_WORDS: KeywordGroup = {
-  en: ["bomb", "bombs", "bombing", "bombed", "airstrike", "air strike", "airstrikes", "drone", "drones", "missile", "missiles", "explosion", "explosions", "the war", "war", "shelling", "jets", "warplanes", "the planes came"],
+  en: ["bomb", "bombs", "bom", "boms", "bombing", "bombed", "airstrike", "air strike", "airstrikes", "drone", "drones", "missile", "missiles", "explosion", "explosions", "the war", "war", "shelling", "jets", "warplanes", "the planes came"],
   fr: ["les bombes", "bombe", "la guerre", "bombardement", "explosion", "les drones", "les avions"],
   ar: ["قصف", "القصف", "صاروخ", "صواريخ", "انفجار", "غارة", "غارات", "الحرب", "حرب", "الدرون", "قنبلة", "قنابل", "الطائرات", "الطيارات", "الطيران", "المسيرات", "ام كامل"],
   arabizi: ["2asf", "el 2asf", "sarou5", "sawarikh", "sawari5", "infijar", "ghara", "el 7arb", "7arb", "2anbale", "el tayyarat", "drone", "el drone", "um kamel", "em kemel"],
