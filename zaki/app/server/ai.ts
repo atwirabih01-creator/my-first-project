@@ -26,7 +26,12 @@ export function __setClaudeForTests(impl: ClaudeImpl | null): void {
 function getClient(): Anthropic {
   if (!client) {
     // Reads ANTHROPIC_API_KEY from the environment. Never pass a key in code.
-    client = new Anthropic({ maxRetries: 2, timeout: 120_000 });
+    // baseURL is set explicitly so a stray ANTHROPIC_BASE_URL (e.g. a dev tool's proxy) is ignored.
+    client = new Anthropic({
+      baseURL: process.env.ZAKI_ANTHROPIC_BASE_URL || "https://api.anthropic.com",
+      maxRetries: 2,
+      timeout: 120_000,
+    });
   }
   return client;
 }
