@@ -20,8 +20,16 @@ export const PRICES_USD_PER_MTOK: Record<string, { input: number; output: number
 /** Web search: US$10 per 1,000 searches. */
 export const WEB_SEARCH_USD_EACH = 10 / 1000;
 
+/**
+ * The Claude API key. ZAKI_ANTHROPIC_API_KEY comes first because cloud dev environments
+ * reserve ANTHROPIC_API_KEY for their own login and strip it.
+ */
+export function anthropicApiKey(): string | undefined {
+  return process.env.ZAKI_ANTHROPIC_API_KEY || process.env.ANTHROPIC_API_KEY || undefined;
+}
+
 export function aiEnabled(): boolean {
-  return Boolean(process.env.ANTHROPIC_API_KEY);
+  return Boolean(anthropicApiKey());
 }
 
 /**

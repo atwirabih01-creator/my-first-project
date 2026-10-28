@@ -31,7 +31,7 @@ This is where the project is stored. Nothing to do.
 1. Go to **console.anthropic.com** → sign up with the Zaki email.
 2. Create an **organisation** called "Zaki".
 3. **Billing → Add credits.** 💳 Start small: **$10–20** is enough for all of Phase 1 testing. Turn **auto-reload off** so it can never charge more than you added. *(Claude will ask you before this step.)*
-4. **API keys → Create key**, name it `zaki-dev`. Paste it only into the environment settings as `ANTHROPIC_API_KEY`.
+4. **API keys → Create key**, name it `zaki-dev`. Paste it only into the environment settings as `ZAKI_ANTHROPIC_API_KEY` (the plain `ANTHROPIC_API_KEY` name is reserved by the cloud environment and gets removed).
 5. Later (before real children): email Anthropic sales to ask for **zero data retention** and their child-safety system prompt. Claude will draft that email for you.
 
 ### 5. OpenAI: only for the free safety filter

@@ -6,6 +6,7 @@
 
 import Anthropic from "@anthropic-ai/sdk";
 import { assertCanSpend, recordUsage, type SpendPurpose } from "./budget";
+import { anthropicApiKey } from "./config/models";
 import type {
   BetaMessage,
   MessageCreateParamsNonStreaming,
@@ -25,9 +26,10 @@ export function __setClaudeForTests(impl: ClaudeImpl | null): void {
 
 function getClient(): Anthropic {
   if (!client) {
-    // Reads ANTHROPIC_API_KEY from the environment. Never pass a key in code.
+    // Key comes from the environment (ZAKI_ANTHROPIC_API_KEY or ANTHROPIC_API_KEY). Never put a key in code.
     // baseURL is set explicitly so a stray ANTHROPIC_BASE_URL (e.g. a dev tool's proxy) is ignored.
     client = new Anthropic({
+      apiKey: anthropicApiKey(),
       baseURL: process.env.ZAKI_ANTHROPIC_BASE_URL || "https://api.anthropic.com",
       maxRetries: 2,
       timeout: 120_000,

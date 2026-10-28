@@ -84,7 +84,7 @@ type Question = { id: string; q: string; choices: string[]; answerIndex: number;
 ```
 
 ## Secrets (environment variables, server only)
-`ANTHROPIC_API_KEY` (required for real AI), `OPENAI_API_KEY` (optional, moderation). Never in code, never in the app.
+`ZAKI_ANTHROPIC_API_KEY` or `ANTHROPIC_API_KEY` (required for real AI; the ZAKI_ name wins, for cloud dev environments that reserve the plain name), `OPENAI_API_KEY` (optional, moderation). Never in code, never in the app.
 Spending/limits: `ZAKI_DAILY_BUDGET_USD`, `ZAKI_CHILD_DAILY_AI_TURNS`. Rate limiter: `TRUST_PROXY=1` only behind a proxy that overwrites `X-Forwarded-For`; `ZAKI_RATE_LIMIT_OFF=1` works only when `NODE_ENV` is not production (local tests).
 `OPENAI_ZDR_APPROVED=true` must ALSO be set before any child text goes to OpenAI moderation (safety review gate G4). Optional: `ZAKI_FLAG_FILE` (path of the reviewer flag log, default `server/data/flags.jsonl`; `off` = memory only), `ZAKI_DISABLE_FALLBACKS=true`.
 

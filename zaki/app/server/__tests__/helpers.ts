@@ -42,6 +42,7 @@ export function demoMode(): void {
   __resetBudgetForTests(null);
   __resetLibraryForTests(null);
   delete process.env.ANTHROPIC_API_KEY;
+  delete process.env.ZAKI_ANTHROPIC_API_KEY;
   delete process.env.OPENAI_API_KEY;
   delete process.env.OPENAI_ZDR_APPROVED;
 }
