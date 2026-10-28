@@ -61,3 +61,17 @@
 - **Conclusion:** the 70% win rate is easy; profit after fees is not. On these coins and timeframes, chart and
   positioning information cannot separate winners from the big losers well enough. Live 30m desk NOT started
   (no proven edge). The 4-hourly desk and carry watch keep running.
+
+## 28 Oct 2026: low-fee study (owner: "lower the fees")
+- **Fee sets added** (base-tier published rates plus the same slippage):
+  - Hyperliquid: 0.045% to enter at once, 0.015% for a waiting order.
+  - MEXC app/web: 0.02% to enter at once, 0% for a waiting order. MEXC's API orders cost more: 0.01% / 0.05%.
+- **Same monthly-learning procedure, May 2025–Sep 2026, $500 at 0.75% risk:**
+  - 30m breakout with BTC trend: MEXC 74% wins, $1.04, $533, drop 17%. Hyperliquid $0.91.
+  - 5m at MEXC: $0.91, drop 45%. A good 2026 but a crash in 2025.
+  - 1h at MEXC: $0.85.
+  - 1m at MEXC: 251 trades, 77% wins, $1.21 but balance $451, drop 13%.
+- **Note:** for 1h, the account's occupancy check used a 30-minute bar, which is too short (optimistic).
+  It failed anyway.
+- **Conclusion:** lower fees help (30m goes from losing to about break-even) but nothing passes. Results
+  swing between years, so there is no robust edge.

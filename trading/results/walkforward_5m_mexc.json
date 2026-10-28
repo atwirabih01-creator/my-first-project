@@ -1,0 +1,140 @@
+{
+ "2025 May-Dec": {
+  "signals": {
+   "trades": 1204,
+   "win_rate": 0.7085,
+   "pf": 0.802,
+   "avg_pct": -0.089
+  },
+  "account": {
+   "trades": 439,
+   "win_rate": 0.6743,
+   "pf": 0.619,
+   "avg_pct": -0.1816,
+   "balance": 294.92,
+   "max_drop_pct": 41.83
+  }
+ },
+ "2026 Jan-Sep": {
+  "signals": {
+   "trades": 1628,
+   "win_rate": 0.8157,
+   "pf": 1.176,
+   "avg_pct": 0.0564
+  },
+  "account": {
+   "trades": 756,
+   "win_rate": 0.8267,
+   "pf": 1.196,
+   "avg_pct": 0.0553,
+   "balance": 596.27,
+   "max_drop_pct": 9.38
+  }
+ },
+ "all": {
+  "signals": {
+   "trades": 2832,
+   "win_rate": 0.7701,
+   "pf": 0.986,
+   "avg_pct": -0.0054
+  },
+  "account": {
+   "trades": 1195,
+   "win_rate": 0.7707,
+   "pf": 0.91,
+   "avg_pct": -0.0318,
+   "balance": 351.71,
+   "max_drop_pct": 45.49
+  }
+ },
+ "by_month_account": {
+  "2025-06": {
+   "trades": 20,
+   "win_rate": 0.55,
+   "pf": 0.332,
+   "avg_pct": -0.425,
+   "balance": 473.98,
+   "max_drop_pct": 5.48
+  },
+  "2025-07": {
+   "trades": 17,
+   "win_rate": 1.0,
+   "pf": 99.0,
+   "avg_pct": 0.3442,
+   "balance": 518.16,
+   "max_drop_pct": 0.0
+  },
+  "2025-09": {
+   "trades": 18,
+   "win_rate": 0.7778,
+   "pf": 0.89,
+   "avg_pct": -0.0332,
+   "balance": 501.66,
+   "max_drop_pct": 3.17
+  },
+  "2025-10": {
+   "trades": 55,
+   "win_rate": 0.7455,
+   "pf": 0.862,
+   "avg_pct": -0.0589,
+   "balance": 479.78,
+   "max_drop_pct": 5.74
+  },
+  "2025-11": {
+   "trades": 229,
+   "win_rate": 0.7205,
+   "pf": 0.822,
+   "avg_pct": -0.0712,
+   "balance": 441.87,
+   "max_drop_pct": 12.08
+  },
+  "2025-12": {
+   "trades": 101,
+   "win_rate": 0.505,
+   "pf": 0.282,
+   "avg_pct": -0.5126,
+   "balance": 362.32,
+   "max_drop_pct": 28.78
+  },
+  "2026-05": {
+   "trades": 84,
+   "win_rate": 0.7738,
+   "pf": 0.809,
+   "avg_pct": -0.0704,
+   "balance": 477.43,
+   "max_drop_pct": 6.37
+  },
+  "2026-06": {
+   "trades": 307,
+   "win_rate": 0.8241,
+   "pf": 1.381,
+   "avg_pct": 0.1006,
+   "balance": 560.22,
+   "max_drop_pct": 7.0
+  },
+  "2026-07": {
+   "trades": 67,
+   "win_rate": 0.8507,
+   "pf": 1.17,
+   "avg_pct": 0.042,
+   "balance": 511.44,
+   "max_drop_pct": 2.38
+  },
+  "2026-08": {
+   "trades": 73,
+   "win_rate": 0.7945,
+   "pf": 0.858,
+   "avg_pct": -0.0641,
+   "balance": 489.69,
+   "max_drop_pct": 5.8
+  },
+  "2026-09": {
+   "trades": 225,
+   "win_rate": 0.8533,
+   "pf": 1.361,
+   "avg_pct": 0.083,
+   "balance": 556.33,
+   "max_drop_pct": 3.54
+  }
+ }
+}
