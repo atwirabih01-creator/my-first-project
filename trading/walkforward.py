@@ -61,7 +61,7 @@ def run(tf):
             picks.append(now.assign(prob=p)[p >= cut].assign(month=str(m0.date())[:7], top=round(1 - q_ok, 2)))
         print(tf, b["family"], b["params"], "done", flush=True)
     t = pd.concat(picks).sort_values("t_in")
-    tag = f"{tf}_withbtc" if WITH_BTC else tf
+    tag = (f"{tf}_withbtc" if WITH_BTC else tf) + ("" if S.LIVE_COST == "futures" else f"_{S.LIVE_COST}")
     t.to_csv(S.OUT / f"walkforward_{tag}_trades.csv", index=False)
     rep = {}
     for name, part in [("2025 May-Dec", t[t.t_in < S.EXAM_START]), ("2026 Jan-Sep", t[t.t_in >= S.EXAM_START]), ("all", t)]:

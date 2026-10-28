@@ -31,7 +31,12 @@ VAL_START = {"1m": pd.Timestamp("2025-09-01", tz="UTC")}
 VAL_DEFAULT = pd.Timestamp("2025-05-01", tz="UTC")
 MIN_TARGET = 0.003
 WIN_MIN = 0.001
-COSTS = {"futures": dict(entry=0.0006, tgt=0.0002, stop=0.0007), "spot": dict(entry=0.0015, tgt=0.0015, stop=0.0015)}
+COSTS = {"futures": dict(entry=0.0006, tgt=0.0002, stop=0.0007), "spot": dict(entry=0.0015, tgt=0.0015, stop=0.0015),
+         # added 28 Oct 2026 (owner: "lower the fees"); base-tier published rates + the same slippage as above
+         "hyperliquid": dict(entry=0.00055, tgt=0.00015, stop=0.00065),   # taker 0.045%, maker 0.015%
+         "mexc": dict(entry=0.0003, tgt=0.0, stop=0.0004)}                 # app/web: taker 0.02%, maker 0%
+import os
+LIVE_COST = os.environ.get("DESK_COSTS", "futures")                       # cost set used by select/walkforward
 
 
 def load(sym, tf):

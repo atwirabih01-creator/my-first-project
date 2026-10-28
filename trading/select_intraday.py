@@ -42,7 +42,7 @@ def bases(tf):
 
 def gather(tf, base, period):
     fam, p = FAM[f"{base['family']}|{base['params']}"]
-    cc = S.COSTS["futures"]
+    cc = S.COSTS[S.LIVE_COST]
     rows = []
     for sym, df, f in S.coin_frames(tf):
         m = (df.index < S.EXAM_START) if period == "design" else (df.index >= S.EXAM_START)
