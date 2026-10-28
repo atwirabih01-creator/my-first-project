@@ -32,7 +32,7 @@ def run(tf):
     for b in X.bases(tf):
         t = pd.concat([X.gather(tf, b, "design"), X.gather(tf, b, "exam")]).sort_values("t_in")
         t["setup"] = f"{b['family']} {b['params']} T{b['target_atr']} S{b['stop_atr']} H{b['hold_bars']}"
-        if WITH_BTC:                                   # rule confirmed on TRAIN, VALIDATE and 2026 alike (30m)
+        if WITH_BTC and tf == "30m" or "--with-btc-any" in sys.argv:                                   # rule confirmed on TRAIN, VALIDATE and 2026 alike (30m)
             t = t[t.dir == t.btc_trend]
         months = pd.date_range("2025-05-01", "2026-09-01", freq="MS", tz="UTC")
         for m0 in months:

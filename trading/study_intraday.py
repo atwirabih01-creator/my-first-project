@@ -211,7 +211,7 @@ def design(tf):
         for part in ("train", "val", "meme_train", "meme_val"):
             row[part] = stats(np.concatenate(a[part]) if a[part] else np.array([]))
         board.append(row)
-    json.dump(board, open(OUT / f"intraday_{tf}_design.json", "w"), indent=1)
+    json.dump(board, open(OUT / f"intraday_{tf}_design.json", "w"), indent=1)      # holds every cost set
     ok = [b for b in board if b["costs"] == "futures" and b["train"].get("trades", 0) >= 300]
     ok.sort(key=lambda b: (-(b["train"]["win_rate"] >= 0.7 and b["train"]["pf"] >= 1.2), -b["train"]["pf"]))
     for b in ok[:15]:

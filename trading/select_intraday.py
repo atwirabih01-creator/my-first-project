@@ -29,7 +29,7 @@ FAM = {f"{fam}|{p}": (fam, p) for fam, p in S.FAMILIES}
 
 def bases(tf):
     board = json.load(open(S.OUT / f"intraday_{tf}_design.json"))
-    ok = [b for b in board if b["costs"] == "futures" and b["train"].get("trades", 0) >= 1000
+    ok = [b for b in board if b["costs"] == S.LIVE_COST and b["train"].get("trades", 0) >= 1000
           and b["train"]["win_rate"] >= 0.70 and b["train"]["pf"] >= 0.85]
     ok.sort(key=lambda b: -b["train"]["pf"])
     picked, seen = [], set()
