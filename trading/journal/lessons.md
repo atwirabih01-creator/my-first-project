@@ -73,3 +73,19 @@ changes until they are scored.
   rules on new cases count.
 - **Next:** add new information the charts lack (futures open interest and the long/short ratios, free from
   Binance), then confirm the same way.
+
+## 2026-10-27 · Call "ETH down 24h" from 2,316 · WRONG (ETH 2,362, +2.0%)
+- **Expected:** a fall, driven by ETF outflows, lower highs and risk-off before the Fed.
+- **Happened:** a broad risk-on bounce. Oil eased, earnings were strong and chip stocks rallied. BTC got back
+  above $80k and ETH led the rebound (Moneycontrol, BitcoinInsider, CoinDesk, 27–28 Oct).
+- **Verdict:** bad decision. We bet against a rising BTC while ETH was already oversold, which breaks our own
+  24 Oct lesson ("sellers exhausted → skip the short").
+- **Lessons:**
+  - ETF flows lag price. Don't use them alone as a 24h signal.
+  - Don't call a coin down when it is oversold and BTC is turning up.
+
+## 2026-10-28 · Study session 2: no calls
+- Atlas had no clear view on BTC, ETH or PEPE. PEPE was +14.6% on a single whale; the Fed decided at 18:00
+  UTC and PCE was due Thursday.
+- No call could be unanimous, and trades held across a major scheduled event are blocked, so the session
+  ended after Atlas.
