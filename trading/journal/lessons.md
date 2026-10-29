@@ -89,3 +89,5 @@ changes until they are scored.
   UTC and PCE was due Thursday.
 - No call could be unanimous, and trades held across a major scheduled event are blocked, so the session
   ended after Atlas.
+
+## 2026-10-29 · Study session 3: no calls (Atlas: no clear view after the Fed and PCE; BTC in a tight range)
