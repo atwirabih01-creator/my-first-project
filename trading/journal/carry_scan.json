@@ -1,92 +1,92 @@
 {
- "scanned_utc": "2026-10-28 20:15:00+00:00",
+ "scanned_utc": "2026-10-29 00:17:00+00:00",
  "candidates": [],
  "hottest": [
   {
-   "coin": "FLOKI",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
+   "coin": "TURBO",
+   "venue": "OKX",
+   "yearly_last9": 0.1065,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    0.0001
+   ],
+   "versions": []
+  },
+  {
+   "coin": "PENGU",
+   "venue": "OKX",
+   "yearly_last9": 0.1063,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    7.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "PNUT",
+   "venue": "OKX",
+   "yearly_last9": 0.1058,
+   "last3_per8h": [
+    7e-05,
+    0.0001,
+    0.0001
+   ],
+   "versions": []
+  },
+  {
+   "coin": "BTC",
+   "venue": "OKX",
+   "yearly_last9": 0.105,
+   "last3_per8h": [
+    0.0001,
+    6.6e-05,
+    0.0001
+   ],
+   "versions": []
+  },
+  {
+   "coin": "XRP",
+   "venue": "OKX",
+   "yearly_last9": 0.0996,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    0.0001
+   ],
+   "versions": []
+  },
+  {
+   "coin": "FET",
+   "venue": "OKX",
+   "yearly_last9": 0.0995,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    0.0001
+   ],
+   "versions": []
+  },
+  {
+   "coin": "FLOKI",
+   "venue": "HL",
+   "yearly_last9": 0.0989,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "MEME",
    "venue": "HL",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "ORDI",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "PNUT",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "TURBO",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "WIF",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "XRP",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "BONK",
-   "venue": "HL",
-   "yearly_last9": 0.1048,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": []
   }
