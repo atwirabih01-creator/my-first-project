@@ -30,7 +30,7 @@ describe("normalizer", () => {
 
 describe("keyword layer (works without any AI)", () => {
   it("catches self-harm in English, French, Arabic and Arabizi", () => {
-    for (const t of ["I want to die", "je veux mourir", "بدي موت", "bade mout", "b a d e  m o u t", "i w4nt t0 d1e", "ما بدي عيش", "bdi i2tol 7aleh", "ana bekrah 7ale", "انا بكره حالي", "I hate myself", "bade rou7 3and teta bel sama", "بدي روح لعند تيتا بالسما", "eza nzelet mn el balcon ma 7ada rah yeshta2le"]) {
+    for (const t of ["I want to die", "je veux mourir", "بدي موت", "bade mout", "b a d e  m o u t", "i w4nt t0 d1e", "ما بدي عيش", "bdi i2tol 7aleh", "i wish i was never born", "i wrote a goodbye letter to my family", "ana ma 3ad badde koun mawjoud", "ana bekrah 7ale", "انا بكره حالي", "I hate myself", "bade rou7 3and teta bel sama", "بدي روح لعند تيتا بالسما", "eza nzelet mn el balcon ma 7ada rah yeshta2le"]) {
       assert.equal(cat(t), "self_harm", t);
     }
   });
@@ -56,7 +56,7 @@ describe("keyword layer (works without any AI)", () => {
       "we learned about the war of 1812 in history", "we're learning about volcanoes, they explode like bombs",
       "خايفة من امتحان العلوم بكرا", "khayfe mn el exam taba3 el science", "el math 3am yi2telne bas ok yalla",
       "الضرب بالعشرة", "What is 7 + 5?", "the dinosaurs died out", "el math is hard",
-      "I hate homework", "my dog bites its toy", "a mosquito bit me", "I fell off my bike and it bled", "I haven't eaten in 3 hours", "3edna el dars", "بكرة حالي احسن", "bokra 7ale a7san", "I need someone to help me with fractions", "حدا بيساعدني بالرياضيات؟", "bade 7ada ysa3edne bel riyadiyat", "بدي موزة وبعدين منكفّي الدرس", "bta3ref el jawab, sa7? eh 2elle ya3ne", "ana 3melta 3 marrat w ghalat, 2elle bas el ra2m",
+      "I hate homework", "my dog bites its toy", "a mosquito bit me", "I fell off my bike and it bled", "I haven't eaten in 3 hours", "3edna el dars", "بكرة حالي احسن", "bokra 7ale a7san", "I need someone to help me with fractions", "I hit myself by accident with the door", "my mom says I can't tell anyone the surprise party", "how many pills of vitamin c are in the box", "I'm scared of the dark", "ما بقدر نام بكير", "حدا بيساعدني بالرياضيات؟", "bade 7ada ysa3edne bel riyadiyat", "بدي موزة وبعدين منكفّي الدرس", "bta3ref el jawab, sa7? eh 2elle ya3ne", "ana 3melta 3 marrat w ghalat, 2elle bas el ra2m",
     ]) {
       assert.equal(cat(t), "none", t);
     }

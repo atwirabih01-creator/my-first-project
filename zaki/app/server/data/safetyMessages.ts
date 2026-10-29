@@ -70,8 +70,8 @@ export const FIXED_MESSAGES: Record<FixedMessageKey, Record<Lang, string>> = {
     ar: "وضع التجربة: ذكاء ذكي الاصطناعي غير متصل بعد.\nأنا ذكي، مساعد آلي (لست إنسانًا).\nجرّب أسئلة هذا الدرس واضغط على التلميح إذا احتجت إليه.",
   },
   ai_unavailable: {
-    en: "Zaki can't think right now. Your work is saved.\nTry again in a little while.",
-    ar: "لا يستطيع ذكي التفكير الآن. عملك محفوظ.\nحاول مرة أخرى بعد قليل.",
+    en: "Zaki can't think right now. Your work is saved.\nTry again in a little while.\nIf something is worrying you, tell a grown-up you trust or tap \"I need help\".",
+    ar: "لا يستطيع ذكي التفكير الآن. عملك محفوظ.\nحاول مرة أخرى بعد قليل.\nإذا كان شيء يقلقك، أخبر شخصًا كبيرًا تثق به أو اضغط «أحتاج إلى مساعدة».",
   },
   budget_tutor: {
     en: "Zaki has done a lot of thinking today!\nLet's keep practising with your flashcards and practice questions.\nWe can chat again tomorrow.",

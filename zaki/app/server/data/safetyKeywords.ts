@@ -24,11 +24,19 @@ export const SELF_HARM: KeywordGroup = {
     "i hate myself", "hate myself",
     "nobody would miss me", "no one would miss me", "nobody will miss me", "no one will miss me",
     "go to sleep and never wake up", "sleep forever and never wake",
+    "wish i was never born", "wish i wasn't born", "wish i wasnt born", "never been born",
+    "happier if i wasn't here", "happier if i wasnt here", "better if i wasn't here", "better if i wasnt here", "better without me",
+    "stop existing", "don't want to exist", "dont want to exist", "want to disappear forever",
+    "want everything to stop", "want it all to stop", "goodbye letter", "jump from the roof", "jump off the roof",
+    "want to be ded", "wanna be ded", "until it bleeds", "cut my skin", "cut my arm", "i hit myself when", "i hit myself because", "hurt myself on purpose",
+    "not feel anything anymore", "make me sleep forever", "how many pills would", "how many pills to", "how much medicine can", "too many pills",
   ],
   fr: [
     "me tuer", "je veux mourir", "envie de mourir", "me faire du mal", "suicide", "me suicider",
     "plus envie de vivre", "je veux mourir", "je vais me tuer",
     "je me deteste", "je me hais",
+    "disparaitre pour toujours", "je veux disparaitre", "si je mourais", "me faire mal", "je me suis coupe", "je me suis coupee",
+    "jamais ne", "pas etre ne", "pas etre nee",
   ],
   ar: [
     "اقتل نفسي", "بقتل نفسي", "انتحر", "انتحار", "بدي موت", "بدي اموت", "ابي اموت", "ابغى اموت",
@@ -38,6 +46,8 @@ export const SELF_HARM: KeywordGroup = {
     "انا بكره حالي", "بكره نفسي", "اكره نفسي", "اكره حالي",
     "بدي روح لعند تيتا بالسما", "بدي روح عند تيتا بالسما", "بدي روح لعند جدو بالسما", "بدي روح عند جدو بالسما",
     "ما حدا رح يشتقلي", "ما حدا رح يشتاقلي", "ما حدا بيشتقلي", "لا احد سيشتاق لي",
+    "بدي اختفي", "ما بدي كون موجود", "ما عاد بدي كون موجود", "ضربت راسي بالحيط", "بضرب راسي بالحيط", "بجرح حالي",
+    "رسالة وداع", "ليتني لم اولد", "ريتني ما انخلقت", "يا ريتني ما خلقت",
   ],
   arabizi: [
     "a2tol nafse", "a2tol nafsi", "bi2tol nafse", "ente7ar", "bade mout", "badde mout", "bdde mout",
@@ -49,6 +59,8 @@ export const SELF_HARM: KeywordGroup = {
     "ana bekrah 7ale", "ana bekra 7ale", "ana bikrah 7ale", "ana bekreh 7ale", "bekrah nafse", "akrah nafsi", "ekrah nafse",
     "rou7 3and teta bel sama", "rou7 la3and teta bel sama", "rou7 3and jeddo bel sama",
     "ma 7ada rah yeshta2le", "ma 7ada ra7 yeshta2le", "ma 7ada ra7 yesht2le", "ma 7ada bisht2le",
+    "badde 2ekhtefe", "bade 2ekhtefe", "badde e5tefe", "ma 3ad badde koun mawjoud", "ma badde koun mawjoud",
+    "ma 3ad bade koun mawjoud", "ma fi2 abadan", "ma 2oum abadan", "ya retne ma khole2et",
   ],
 };
 
@@ -64,12 +76,12 @@ export const HELP_SEEKING: KeywordGroup = {
   ],
   fr: ["qui j'appelle", "qui appeler", "qui je peux appeler", "numero pour les enfants", "j'ai besoin d'aide maintenant", "ligne d'ecoute"],
   ar: [
-    "خط مساعدة", "خط المساعدة", "خط مساعده", "رقم المساعدة", "رقم مساعدة", "خط نجدة", "مين بحكي", "مين بتصل", "لمين بحكي",
+    "رقم الشرطة", "رقم البوليس", "خط مساعدة", "خط المساعدة", "خط مساعده", "رقم المساعدة", "رقم مساعدة", "خط نجدة", "مين بحكي", "مين بتصل", "لمين بحكي",
     "بدي احكي مع حدا", "بدي مساعدة هلق", "بدي مساعده هلق", "احتاج مساعدة الان", "بمن اتصل", "من اكلم",
     "رقم للاطفال", "رقم الاطفال", "116 111",
   ],
   arabizi: [
-    "meen be7ki", "min be7ki", "la meen be7ki", "meen bettesel", "min bettasel",
+    "ra2m el police", "ra2m el shorta", "meen be7ki", "min be7ki", "la meen be7ki", "meen bettesel", "min bettasel",
     "bade msa3de hala2", "badde msa3de halla2", "ra2m el msa3de",
     "ra2m la wlad", "ra2m lal wlad", "ra2m lal atfal", "7ada redd 3al ra2m", "7ada byerod 3al ra2m",
   ],
@@ -87,6 +99,10 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "send her a photo", "asked me for pictures", "wants to meet me", "touched my private", "touched my privates",
     "touchd me", "touchd my", "said i should die", "told me to die", "told me to kill myself", "go die",
     "someone hurts me", "someone is hurting me",
+    "if i tell anyone", "if i tell anybody", "post my pic", "post my picture", "post my photo", "send more pics", "send more pictures",
+    "get in his car", "get in her car", "into his car", "meet him alone", "meet me alone", "photos of adults", "pictures of adults",
+    "people with no clothes", "naked people", "doesn't give me food", "doesnt give me food", "don't give me food", "left me alone at home", "bully me", "bullying me", "bullies me",
+    "don't eat so i don't get fat", "dont eat so i dont get fat", "so i don't get fat", "so i dont get fat", "so i won't get fat",
     "boy bit me", "girl bit me", "kid bit me", "he bit me", "she bit me", "brother bit me", "sister bit me", "bit me and it bled", "made me bleed",
     "no food at home", "nothing to eat at home",
   ],
@@ -94,6 +110,8 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "me frappe", "m'a frappe", "me bat", "me touche", "m'a touche", "me fait mal", "m'a fait mal",
     "m'enferme", "me tue", "va me tuer", "me menace", "veut ma photo", "me tape", "me tapent", "me frappent",
     "me fait du mal", "m'a tape", "me touche la",
+    "monter dans sa voiture", "photos bizarres", "photos d'adultes", "me rencontrer seul", "me rencontrer seule",
+    "je ne mange plus", "me trouve grosse", "me trouve gros",
     "m'a mordu", "me mord", "rien a manger a la maison",
   ],
   ar: [
@@ -102,6 +120,8 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "يشلحني", "يتحرش", "تحرش", "يهددني", "بيهددني", "طلب صورتي",
     "بدو صورتي", "بدها صورتي", "طلب مني صورة", "ضربتني", "بتضربني", "تضربني", "عم تضربني", "وجعني",
     "بيوجعني", "بتوجعني", "عم يوجعني", "عم توجعني", "اذتني", "بتأذيني", "لمستني", "بتلمسني",
+    "ما تقول لاهلك", "ما تقول لأهلك", "الا اخبر اهلي", "ان لا اخبر اهلي", "اقابله وحدي", "بدو يشوفني", "وبدو يشوفني", "صور عيب",
+    "ما بتعطيني اكل", "ما بيعطيني اكل", "ما عم اكل لانو", "بدي صير رفيعة", "تركوني لحالي", "بيهددني",
     "ما في اكل بالبيت", "ما اكلت من يومين", "ما اكلنا من يومين", "ما في شي ناكل", "لا يوجد طعام في البيت",
   ],
   arabizi: [
@@ -110,6 +130,8 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "yetharash", "ta7arosh", "bihaddedne",
     "talab soorte", "talab sourte", "baddo soorte", "baddo sourte", "darbetne", "darabetne", "darbitne",
     "btedrabne", "btidrabne", "wajja3ne", "bewaj3ne", "btewaj3ne", "btwaj3ne", "lamasetne", "btelmesne",
+    "ma t2oul la ahlak", "ma t2oul la ahlik", "sowar 3ayb", "sowar 3eib", "eb3atlo sowartak", "eb3atle sowartak",
+    "la ghorfto wa7dak", "2e3de 7adde", "trakoune la wa7de", "trakouni la wa7di", "3am yhaddedne",
     "ma fi akel bel bet", "ma fi akel bel beit", "ma akalet men yomen", "ma akalna men yomen",
   ],
 };
@@ -120,13 +142,16 @@ export const SECRECY: KeywordGroup = {
     "keep a secret", "our secret", "our little secret", "don't tell anyone", "dont tell anyone",
     "not to tell", "told me not to tell", "said not to tell", "don't tell your mom", "don't tell mom",
     "don't tell your parents", "keep it between us",
+    "special secret", "not tell my parents", "not to tell my parents", "dont tell your parents",
   ],
-  fr: ["notre secret", "ne dis a personne", "ne le dis a personne", "pas le dire", "garder le secret"],
+  fr: ["notre secret", "ne dis a personne", "ne le dis a personne", "pas le dire", "garder le secret", "garder un secret", "le dis pas a tes parents"],
   ar: [
     "سر بيننا", "سر بيناتنا", "لا تقول لحدا", "ما تقول لحدا", "ما تقولي لحدا", "لا تخبر احدا",
     "ما تخبر احد", "خليها سر", "خليه سر", "لا تقولي لماما", "ما تقول لامك",
+    "ما خبر حدا", "ما خبّر حدا", "قلي ما خبر", "ما تخبر حدا", "الا اخبر", "عنا سر",
   ],
-  arabizi: ["sir baynetna", "ma t2oul la7ada", "ma t2ole la7ada", "khaliya sir", "khalliha sir", "la t2oul la7ada"],
+  arabizi: ["sir baynetna", "ma t2oul la7ada", "ma t2ole la7ada", "khaliya sir", "khalliha sir", "la t2oul la7ada",
+    "3anna sir", "ma lazem 2oul la mama", "ma lezem 2oul la mama", "ma t2oul la mama", "ma t2oul la baba"],
 };
 
 /** Fear, war fear, displacement, grief and strong sadness (calm route, 1564, never police). */
@@ -139,20 +164,21 @@ export const FEAR_DISTRESS: KeywordGroup = {
     "i cry every", "can't stop crying",
     "scared to go home", "afraid to go home", "scared of going home", "scared to go back home",
     "don't want to go home", "dont want to go home", "do not want to go home",
+    "is my teta in heaven", "is my grandma in heaven", "he is not coming back", "she is not coming back", "my heart is broken",
   ],
   fr: [
-    "j'ai peur", "tres peur", "je suis triste", "tres triste", "personne ne m'aime",
+    "j'ai peur", "tres peur", "je suis triste", "tres triste", "personne ne m'aime", "le coeur brise",
   ],
   ar: [
     "خايف", "خايفة", "خايفه", "اخاف", "انا خايف", "تركنا بيتنا", "سنموت", "هل سنموت", "حنموت", "رح نموت", "هربنا من البيت",
     "رح نموت", "حنموت", "زعلان كتير", "حزين جدا", "حزينة جدا", "ما حدا بيحبني", "لا احد يحبني",
-    "بكي كل يوم",
+    "بكي كل يوم", "بيخوفني", "بتخوفني", "بتخوف", "قلبي مكسور", "صار بالسما", "اخذ الله",
     "خايف روح عالبيت", "خايف ارجع عالبيت", "ما بدي روح عالبيت", "ما بدي ارجع عالبيت", "اخاف ارجع الى البيت",
   ],
   arabizi: [
     "khayef", "khayfe", "khayfi", "5ayef", "5ayfe", "a5af", "ra7 nmout", "rah nmout", "ra7 nmoot",
     "rah nmoot", "ze3lan ktir",
-    "ma 7ada bi7ebne",
+    "ma 7ada bi7ebne", "bkhaf", "ma 3am b2der nem", "2albe maksour", "albe maksour", "ma 3ad fi tshoufna",
     "khayef rou7 3al bet", "khayfe rou7 3al bet", "ma bade rou7 3al bet", "ma badde rou7 3al bet", "ma bade erja3 3al bet",
   ],
 };
