@@ -1,37 +1,26 @@
 {
- "scanned_utc": "2026-10-29 00:17:00+00:00",
+ "scanned_utc": "2026-10-29 04:13:00+00:00",
  "candidates": [],
  "hottest": [
-  {
-   "coin": "TURBO",
-   "venue": "OKX",
-   "yearly_last9": 0.1065,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    0.0001
-   ],
-   "versions": []
-  },
-  {
-   "coin": "PENGU",
-   "venue": "OKX",
-   "yearly_last9": 0.1063,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    7.3e-05
-   ],
-   "versions": []
-  },
   {
    "coin": "PNUT",
    "venue": "OKX",
    "yearly_last9": 0.1058,
    "last3_per8h": [
-    7e-05,
+    0.0001,
     0.0001,
     0.0001
+   ],
+   "versions": []
+  },
+  {
+   "coin": "PEPE",
+   "venue": "HL",
+   "yearly_last9": 0.1053,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    6.5e-05
    ],
    "versions": []
   },
@@ -47,46 +36,57 @@
    "versions": []
   },
   {
-   "coin": "XRP",
-   "venue": "OKX",
-   "yearly_last9": 0.0996,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    0.0001
-   ],
-   "versions": []
-  },
-  {
-   "coin": "FET",
-   "venue": "OKX",
-   "yearly_last9": 0.0995,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    0.0001
-   ],
-   "versions": []
-  },
-  {
    "coin": "FLOKI",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "MEME",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "ORDI",
+   "venue": "HL",
+   "yearly_last9": 0.1049,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    6.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "PNUT",
+   "venue": "HL",
+   "yearly_last9": 0.1049,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    6.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "TURBO",
+   "venue": "HL",
+   "yearly_last9": 0.1049,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    6.3e-05
    ],
    "versions": []
   }
