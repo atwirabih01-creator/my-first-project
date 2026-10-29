@@ -75,7 +75,7 @@ export type Health = { ok: boolean; ai: boolean; moderation?: string };
 
 export async function getHealth(): Promise<Health | null> {
   try {
-    const h = await request<Health>('/api/health', undefined, 5000);
+    const h = await request<Health>('/api/health', undefined, 10000); // phones on slow networks
     if (typeof h?.ai !== 'boolean') return null;
     return h;
   } catch {

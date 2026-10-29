@@ -16,6 +16,12 @@ Work branch is now claude/eloquent-cori-9fleqt.
 - New safety category "help_request" (child asks for a helpline / who to call). Supabase migration 0004 widens the flags table: APPLY 0004 BEFORE deploying this server code, or help_request flags are rejected by the database.
 - Spend so far: about US$0.43 of the $5 credit.
 
+## Android app (prepared 2026-10-29)
+- Ready in the code: android package com.zaki.tutor, eas.json profile "preview" (APK, internal), app.config.js reads ZAKI_SERVER_URL into expo-router `origin` (the phone sends /api/* there). Android bundle and server export both build.
+- Waiting on the founder: EXPO_TOKEN in the AI TUTOR environment, then a NEW chat.
+- Then (builder): `npx eas-cli init` -> set server env on EAS (ZAKI_ANTHROPIC_API_KEY from this session's env without printing it, ZAKI_DAILY_BUDGET_USD=1, ZAKI_REVIEWER_CODE) -> `npx expo export -p web && npx eas-cli deploy --prod` -> test /api/health + one tutor turn on the live URL -> put the URL in eas.json ZAKI_SERVER_URL -> `npx eas-cli build -p android --profile preview` -> give the founder the install link.
+- Before the family uses it: Supabase (without it, the hosted server keeps safety flags and the spending cap only in memory) + the open safety gates (G2, G3, G5, G6, G7).
+
 ## Next
 1. Expo access token (EXPO_TOKEN, saved like the Claude key) -> Android APK (EAS build, internal distribution) for the family + hosted web link for iPhones (EAS Hosting). Then Supabase (free).
 2. Re-run the red-team suite after ANY change to prompts, keyword lists or models (a phase cannot ship if any test fails). The AI check is not fully repeatable, so run it twice before shipping.
