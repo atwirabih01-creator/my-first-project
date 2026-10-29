@@ -244,7 +244,8 @@ export async function moderate(text: string, opts: ModerateOptions): Promise<Mod
     // Parent route only when it is clearly safe to tell the parent; otherwise reviewer only.
     const toParent = result.safety.alertParent === true && result.safety.involvesHome !== true;
     result.safety = { ...result.safety, alertParent: toParent, route: toParent ? "parent" : "reviewer" };
-    void logFlag({
+    // Awaited: on serverless hosting a write left running after the reply can be cut off.
+    await logFlag({
       category: result.category,
       involvesHome: result.safety.involvesHome ?? false,
       alertParent: result.safety.alertParent ?? false,
@@ -441,6 +442,41 @@ export function getFlagQueue(): readonly FlagRecord[] {
 
 export function __clearFlagsForTests(): void {
   flagQueue.length = 0;
+}
+
+/** What the phone caught on its own (offline word list, or the "I don't feel safe" button). */
+export type DeviceReportKind = "home" | "self_harm" | "fear" | "general";
+
+/**
+ * A worry caught ON THE PHONE (the message never reached the AI): make sure the independent
+ * reviewer sees it. The text is re-checked here; if the server's checks don't flag it, it is
+ * still logged from the phone's verdict, always on the reviewer route (never parent-only).
+ */
+export async function reportFromDevice(r: {
+  kind: DeviceReportKind;
+  text?: string;
+  lang: Lang;
+  country?: Country;
+  childRef?: string;
+}): Promise<void> {
+  if (r.text) {
+    const m = await moderate(r.text, { speaker: "child", lang: r.lang, country: r.country, childRef: r.childRef });
+    if (m.safety.flagged) return; // moderate() already logged it
+  }
+  const category: SafetyCategory =
+    r.kind === "self_harm" ? "self_harm" : r.kind === "fear" ? "violence_fear" : r.kind === "home" ? "disclosure_harm" : "help_request";
+  await logFlag({
+    category,
+    involvesHome: r.kind === "home" || r.kind === "general",
+    alertParent: false,
+    route: "reviewer",
+    speaker: "child",
+    lang: r.lang,
+    country: r.country,
+    layers: [r.text ? "device-keywords" : "device-help-button"],
+    childRef: r.childRef,
+    excerpt: r.text ? excerptForReviewer(r.text) : "(pressed \"I don't feel safe\")",
+  });
 }
 
 async function logFlag(f: Omit<FlagRecord, "id" | "ts" | "status">): Promise<void> {

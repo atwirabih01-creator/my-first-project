@@ -5,6 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Modal, View } from 'react-native';
 
 import { Mascot } from '@/components/Mascot';
+import { ReadAloud } from '@/components/ReadAloud';
 import { Screen } from '@/components/Screen';
 import { AskZaki, Choice, LessonHelpBar, QuestionWithHints } from '@/components/lesson';
 import { Btn, Card, ProgressBar, Row, Txt } from '@/components/ui';
@@ -338,6 +339,7 @@ export default function Lesson() {
               {pack.recap[idx].q}
             </Txt>
           </Card>
+          <ReadAloud text={[pack.recap[idx].q, ...pack.recap[idx].choices].join('. ')} />
           {pack.recap[idx].choices.map((c, i) => (
             <Choice
               key={`r${idx}-${i}`}
@@ -378,6 +380,7 @@ export default function Lesson() {
               </Txt>
             </Card>
           </Row>
+          <ReadAloud text={[pack.teachSteps[idx].text, pack.teachSteps[idx].example].filter(Boolean).join('. ')} />
           {pack.teachSteps[idx].example ? (
             <Card tone="sun">
               <Txt>✨ {pack.teachSteps[idx].example}</Txt>
@@ -498,6 +501,7 @@ export default function Lesson() {
               {testQs[testIdx].q}
             </Txt>
           </Card>
+          <ReadAloud text={[testQs[testIdx].q, ...testQs[testIdx].choices].join('. ')} />
           {testQs[testIdx].choices.map((c, i) => (
             <Choice key={`${testQs[testIdx].id}-${i}`} testID={`choice-${i}`} label={c} big={young} onPress={() => answerTest(i)} />
           ))}

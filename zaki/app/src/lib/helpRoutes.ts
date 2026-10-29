@@ -73,7 +73,7 @@ export const HELP_ROUTES: Record<HelpCountry, HelpRoute[]> = {
       intlNumber: "+961 1564",
       text: {
         en: "Very sad, or scared? Call 1564 (Embrace). Kind people answer all day and all night.",
-        ar: "إذا كنت حزينًا جدًّا أو خائفًا، اتصل بالرقم 1564 (إمبريس). يجيبك أشخاص لطفاء طوال النهار والليل.",
+        ar: "إذا كنت حزينًا جدًّا أو خائفًا، اتصل بالرقم 1564 (Embrace). يجيبك أشخاص لطفاء طوال النهار والليل.",
       },
       available247: true,
       kinds: ["home", "self_harm", "fear", "general"],
@@ -121,17 +121,30 @@ export function isHelpTableStale(country: HelpCountry, now: Date = new Date()): 
  * The routes a child should see, in display order.
  * Unknown country => trusted adult only. Stale table => trusted adult + emergency line only.
  */
+/**
+ * "Someone at home is hurting me": the trusted-adult line must not send the child back to the
+ * family member who may be the one hurting them, so it names people outside the home first.
+ */
+const TRUSTED_ADULT_HOME: HelpRoute = {
+  ...TRUSTED_ADULT,
+  text: {
+    en: "Tell a grown-up you trust who is NOT hurting you: a teacher, the school nurse, a neighbour, or another grown-up you feel safe with. Ask them to help you call.",
+    ar: "أخبِر شخصًا كبيرًا تثق به ولا يؤذيك: معلّمك، أو ممرّضة المدرسة، أو جارًا، أو شخصًا كبيرًا آخر تشعر معه بالأمان. اطلب منه أن يساعدك في الاتصال.",
+  },
+};
+
 export function getChildHelpRoutes(
   country: HelpCountry | string | null | undefined,
   kind: HelpKind = "general",
   now: Date = new Date(),
 ): HelpRoute[] {
-  if (country !== "LB" && country !== "QA") return [TRUSTED_ADULT];
+  const forKind = (r: HelpRoute) => (kind === "home" && r.id === "trusted_adult" ? TRUSTED_ADULT_HOME : r);
+  if (country !== "LB" && country !== "QA") return [forKind(TRUSTED_ADULT)];
   const all = HELP_ROUTES[country];
   if (isHelpTableStale(country, now)) {
-    return all.filter((r) => r.id === "trusted_adult" || r.emergency);
+    return all.filter((r) => r.id === "trusted_adult" || r.emergency).map(forKind);
   }
-  return all.filter((r) => r.kinds.includes(kind));
+  return all.filter((r) => r.kinds.includes(kind)).map(forKind);
 }
 
 // ---------------------------------------------------------------------------------------

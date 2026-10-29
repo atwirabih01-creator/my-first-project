@@ -31,9 +31,10 @@ export function Mascot({ size = 120, mood = 'happy', animate = true }: { size?: 
 
   return (
     <View
-      accessible
-      accessibilityRole="image"
-      accessibilityLabel="Zaki, a friendly robot owl"
+      // Decorative (the screen text says who Zaki is): hidden from TalkBack / VoiceOver.
+      accessible={false}
+      importantForAccessibility="no-hide-descendants"
+      accessibilityElementsHidden
       style={{ width: size, height: size * 1.15, alignItems: 'center', justifyContent: 'center' }}>
       <Animated.View style={{ transform: [{ translateY: dy }, { rotate: rot }] }}>
         <Svg width={size} height={size * 1.15} viewBox="0 0 120 138">

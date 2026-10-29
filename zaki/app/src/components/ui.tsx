@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, View, type StyleProp, type TextStyle, type ViewStyle } from 'react-native';
 
 import { C, DyslexiaFont, R, S } from '@/constants/theme';
+import { countNoun } from '@/lib/i18n';
 import { useT } from '@/lib/store';
 
 type TxtVariant = 'title' | 'h2' | 'body' | 'small' | 'big';
@@ -59,13 +60,14 @@ const variants = StyleSheet.create({
   small: { fontSize: 14, color: C.textSoft, lineHeight: 20 },
 });
 
-type BtnVariant = 'primary' | 'secondary' | 'ghost' | 'help' | 'success' | 'sun';
+type BtnVariant = 'primary' | 'secondary' | 'ghost' | 'help' | 'calm' | 'success' | 'sun';
 
 const BTN: Record<BtnVariant, { bg: string; fg: string; border: string }> = {
   primary: { bg: C.primary, fg: '#FFFFFF', border: C.primary },
   secondary: { bg: C.card, fg: C.primary, border: C.primary },
   ghost: { bg: 'transparent', fg: C.primary, border: 'transparent' },
   help: { bg: C.coral, fg: '#FFFFFF', border: C.coral },
+  calm: { bg: C.lilac, fg: '#FFFFFF', border: C.lilac }, // feelings: calm, not alarm-red
   success: { bg: C.mint, fg: '#FFFFFF', border: C.mint },
   sun: { bg: C.sun, fg: C.text, border: '#E8B21C' },
 };
@@ -159,11 +161,15 @@ export function ProgressBar({ value, color = C.mint, height = 18, label }: { val
 }
 
 export function Stars({ n }: { n: number }) {
+  const { lang } = useT();
   return (
-    <Row gap={4} style={{ backgroundColor: C.sunSoft, paddingHorizontal: S.md, paddingVertical: 6, borderRadius: R.pill }}>
+    <View
+      accessible
+      accessibilityLabel={countNoun(lang, n, 'star')}
+      style={{ flexDirection: 'row', alignItems: 'center', gap: 4, backgroundColor: C.sunSoft, paddingHorizontal: S.md, paddingVertical: 6, borderRadius: R.pill }}>
       <Text style={{ fontSize: 18 }}>⭐</Text>
       <Text style={{ fontSize: 18, fontWeight: '800', color: C.text }}>{n}</Text>
-    </Row>
+    </View>
   );
 }
 

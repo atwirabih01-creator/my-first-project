@@ -77,7 +77,7 @@ export default function AddLesson() {
       app.addPlanItem(child.id, { ...planBase, pending: true });
       setDemoUsed(null);
       setFromLibrary(false);
-      setMsg(t('budgetQueued'));
+      setMsg(res.unavailable ? t('lessonUnavailableQueued') : t('budgetQueued'));
     } else {
       app.savePack(child.id, key, { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo });
       app.addPlanItem(child.id, planBase);

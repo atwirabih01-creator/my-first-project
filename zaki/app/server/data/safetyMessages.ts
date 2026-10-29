@@ -24,8 +24,8 @@ export type FixedMessageKey =
 export const FIXED_MESSAGES: Record<FixedMessageKey, Record<Lang, string>> = {
   // Disclosure of harm / abuse / secrecy. Honest in both routes: it does NOT say "Mom will see this".
   safety_disclosure: {
-    en: "Thank you for telling me. You did the right thing.\nWhat happened is not your fault.\nPlease tell a grown-up you trust right now.\nI'm going to let a grown-up whose job is to keep kids safe know.",
-    ar: "شكرًا لأنك أخبرتني. لقد فعلت الصواب.\nما حدث ليس ذنبك.\nأخبِر الآن شخصًا كبيرًا تثق به.\nسأُعلِم شخصًا كبيرًا عمله أن يحافظ على سلامة الأطفال.",
+    en: "Thank you for telling me. You did the right thing.\nWhat happened is not your fault.\nPlease tell a grown-up you trust who is not hurting you, right now.\nI'm going to let a grown-up whose job is to keep kids safe know.",
+    ar: "شكرًا لأنك أخبرتني. لقد فعلت الصواب.\nما حدث ليس ذنبك.\nأخبِر الآن شخصًا كبيرًا تثق به ولا يؤذيك.\nسأُعلِم شخصًا كبيرًا عمله أن يحافظ على سلامة الأطفال.",
   },
   safety_self_harm: {
     en: "Thank you for telling me. You matter a lot.\nPlease tell a grown-up you trust right now.\nYou can also call one of the numbers on this screen.\nI'm going to let a grown-up whose job is to keep kids safe know.",

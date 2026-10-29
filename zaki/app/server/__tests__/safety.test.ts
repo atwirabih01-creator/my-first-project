@@ -2,7 +2,7 @@ import { demoMode, fakeMessage, mockClaude } from "./helpers";
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { arabiziWordToArabic, normalizeBase, toArabicish } from "../normalize";
-import { __clearFlagsForTests, despace, getFlagQueue, keywordCategory, keywordScan, moderate, scrubPii, unleet } from "../safety";
+import { __clearFlagsForTests, despace, getFlagQueue, keywordCategory, keywordScan, moderate, reportFromDevice, scrubPii, unleet } from "../safety";
 
 const cat = (t: string) => keywordCategory(keywordScan(t));
 
@@ -127,6 +127,25 @@ describe("moderate() decisions", () => {
     for (const t of ["I need help with question 3", "who can help me with fractions", "what number comes after 919?"]) {
       assert.equal((await moderate(t, { speaker: "child", lang: "en", country: "LB" })).category, "none", t);
     }
+  });
+
+  it("phone-caught worries reach the reviewer (text re-checked, button press logged)", async () => {
+    demoMode();
+    await reportFromDevice({ kind: "home", text: "my uncle hits me", lang: "en", country: "LB", childRef: "kid_123456" });
+    let f = getFlagQueue().at(-1)!;
+    assert.equal(f.category, "disclosure_harm");
+    assert.equal(f.route, "reviewer");
+    assert.equal(f.childRef, "kid_123456");
+    // the phone flagged it but the server's checks would not: still logged, reviewer only
+    await reportFromDevice({ kind: "self_harm", text: "a misspelled worry the server misses", lang: "en", childRef: "kid_123456" });
+    f = getFlagQueue().at(-1)!;
+    assert.equal(f.category, "self_harm");
+    assert.equal(f.route, "reviewer");
+    assert.ok(f.layers.includes("device-keywords"));
+    await reportFromDevice({ kind: "general", lang: "ar", childRef: "kid_123456" });
+    f = getFlagQueue().at(-1)!;
+    assert.equal(f.category, "help_request");
+    assert.ok(f.layers.includes("device-help-button"));
   });
 
   it("no food at home is a possible-harm disclosure", async () => {

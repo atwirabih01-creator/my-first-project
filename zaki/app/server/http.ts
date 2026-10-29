@@ -64,6 +64,7 @@ export const RATE_LIMITS = {
   review: { limit: 60, windowMs: 60_000 },
   deleteFamily: { limit: 5, windowMs: 60_000 },
   family: { limit: 30, windowMs: 60_000 },
+  safetyReport: { limit: 30, windowMs: 60_000 },
 } as const;
 
 /**

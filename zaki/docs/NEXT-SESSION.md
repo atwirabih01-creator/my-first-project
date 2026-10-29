@@ -16,6 +16,11 @@ Work branch is now claude/eloquent-cori-9fleqt.
 - New safety category "help_request" (child asks for a helpline / who to call). Supabase migration 0004 widens the flags table: APPLY 0004 BEFORE deploying this server code, or help_request flags are rejected by the database.
 - Spend so far: about US$0.43 of the $5 credit.
 
+## 2026-10-29 status
+- The Claude key in ZAKI_ANTHROPIC_API_KEY became INVALID (401) on 2026-10-29. Founder must create a new key and replace it, and add EXPO_TOKEN. Then: re-run the red-team suite WITH the AI (twice) before building.
+- Child-safety fixes done (see PROGRESS.md). Open, needs people not code: Arabic child texts speak to boys only (needs a Lebanese reviewer or a girl/boy setting); Supabase so the hosted server keeps safety alerts.
+- The founder decided: no lawyer checks for the family test (DECISIONS.md).
+
 ## Android app (prepared 2026-10-29)
 - Ready in the code: android package com.zaki.tutor, eas.json profile "preview" (APK, internal), app.config.js reads ZAKI_SERVER_URL into expo-router `origin` (the phone sends /api/* there). Android bundle and server export both build.
 - Waiting on the founder: EXPO_TOKEN in the AI TUTOR environment, then a NEW chat.

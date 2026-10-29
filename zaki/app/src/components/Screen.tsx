@@ -1,6 +1,6 @@
 // Screen frame used by every page: language direction, demo banner, header,
 // "grown-up can see" indicator, daily time tracking and the parental-gate guard.
-import { Redirect, useFocusEffect, type Href } from 'expo-router';
+import { Redirect, router, useFocusEffect, type Href } from 'expo-router';
 import { useCallback, useEffect, useState, type ReactNode } from 'react';
 import { AppState, Platform, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { C, MaxWidth, R, S } from '@/constants/theme';
 import { goTo } from '@/lib/nav';
 import { todayStr, useApp, useChild, useT } from '@/lib/store';
-import { Txt } from './ui';
+import { Btn, Txt } from './ui';
 
 export function LangToggle({ alsoChild }: { alsoChild?: boolean }) {
   const { uiLang, setUiLang } = useApp();
@@ -89,6 +89,7 @@ export function Screen({
   headerRight,
   bg = C.bg,
   showLang = true,
+  helpButton = true,
 }: {
   children: ReactNode;
   title?: string;
@@ -103,6 +104,8 @@ export function Screen({
   headerRight?: ReactNode;
   bg?: string;
   showLang?: boolean;
+  /** Child screens show a big "I need help" button unless they have their own (footer) or are the help page. */
+  helpButton?: boolean;
 }) {
   const app = useApp();
   const { rtl, t } = useT();
@@ -144,7 +147,13 @@ export function Screen({
         ) : (
           <View style={[styles.scroll, { flex: 1 }]}>{body}</View>
         )}
-        {footer ? <View style={styles.footer}>{footer}</View> : null}
+        {footer ? (
+          <View style={styles.footer}>{footer}</View>
+        ) : child && helpButton ? (
+          <View style={styles.footer}>
+            <Btn title={t('needHelp')} icon="🆘" variant="help" onPress={() => router.push('/help')} testID="need-help" />
+          </View>
+        ) : null}
         {child ? <WatchIndicator /> : null}
       </View>
     </SafeAreaView>
@@ -165,7 +174,7 @@ const styles = StyleSheet.create({
   },
   backBtn: { width: 48, height: 48, borderRadius: 24, alignItems: 'center', justifyContent: 'center', backgroundColor: C.card },
   langBtn: {
-    minHeight: 44,
+    minHeight: 48,
     paddingHorizontal: S.md,
     borderRadius: R.pill,
     backgroundColor: C.card,

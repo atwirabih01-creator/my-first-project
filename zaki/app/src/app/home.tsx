@@ -1,5 +1,5 @@
 // Home / Today: today's plan from the grown-up, one big Start, stars, and the other sections.
-import { router } from 'expo-router';
+import { Redirect, router } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
 import { Avatar } from '@/components/Avatar';
@@ -17,7 +17,7 @@ export default function Home() {
   const { child, settings, progress, plan } = useChild();
   const { t, lang } = useT();
   useHelpReturn(null);
-  if (!child) return <Screen child>{null}</Screen>;
+  if (!child) return <Redirect href="/" />;
 
   const young = child.grade <= 3;
   const used = progress.usage[todayStr()] ?? 0;

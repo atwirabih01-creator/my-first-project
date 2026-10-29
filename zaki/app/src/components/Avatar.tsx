@@ -18,7 +18,9 @@ export function Avatar({ id, size = 64 }: { id: AvatarId; size?: number }) {
   const a = AVATARS.find((x) => x.id === id) ?? AVATARS[0];
   return (
     <View
-      accessibilityLabel={a.label}
+      // Decorative: the child's nickname is shown next to it.
+      importantForAccessibility="no-hide-descendants"
+      accessibilityElementsHidden
       style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: a.bg, alignItems: 'center', justifyContent: 'center' }}>
       <Text style={{ fontSize: size * 0.55 }}>{a.emoji}</Text>
     </View>

@@ -70,6 +70,19 @@ async function request<T>(path: string, body?: unknown, timeoutMs = 20000): Prom
   }
 }
 
+// ---------- safety report (phone-caught worries) ----------
+/**
+ * Tell the server's safety reviewer about a worry the phone caught on its own. Fire and
+ * forget: it never blocks the safety screen, and it is skipped in demo mode (no server).
+ * Not gated on consent: a child's safety report must always get through.
+ */
+export function reportSafety(r: { kind: HelpKind; message?: string; childRef: string; lang: Lang; country?: Country }): void {
+  if (demoMode) return;
+  request('/api/safety-report', r, 15000).catch(() => {
+    // Offline: the flag is still kept on this device (reviewer inbox, local view).
+  });
+}
+
 // ---------- health ----------
 export type Health = { ok: boolean; ai: boolean; moderation?: string };
 
@@ -88,8 +101,11 @@ type Common = { childRef: string; grade: number; lang: Lang; country: Country };
 // ---------- lesson pack ----------
 export type LessonPackResult =
   | { pack: LessonPack; sources: Source[]; demo: boolean; safetyStopped?: boolean; fromLibrary?: boolean; budgetReached?: undefined }
-  /** Today's AI limit is reached: the lesson will be prepared tomorrow (the app queues it). */
-  | { budgetReached: true; pack?: undefined };
+  /**
+   * Not ready: today's AI limit is reached, or (real server) Zaki couldn't build it right now.
+   * The app queues it and prepares it later. A different sample lesson is never swapped in.
+   */
+  | { budgetReached: true; unavailable?: boolean; pack?: undefined };
 
 function isValidPack(p: unknown): p is LessonPack {
   const x = p as LessonPack;
@@ -121,8 +137,11 @@ export async function fetchLessonPack(
         };
       }
     } catch {
-      // fall through to demo
+      // Real server, but the lesson couldn't be built (no internet, AI down): queue it.
+      return { budgetReached: true, unavailable: true };
     }
+    // Real server answered without a usable lesson: queue it too.
+    return { budgetReached: true, unavailable: true };
   }
   // Small pause so the friendly "researching" animation is visible in demo mode too.
   await new Promise((r) => setTimeout(r, 1200));

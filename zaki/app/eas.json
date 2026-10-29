@@ -6,8 +6,13 @@
   "build": {
     "preview": {
       "distribution": "internal",
-      "android": { "buildType": "apk" },
-      "env": { "ZAKI_SERVER_URL": "https://SET-AFTER-FIRST-DEPLOY.expo.app" }
+      "android": {
+        "buildType": "apk"
+      },
+      "env": {
+        "ZAKI_SERVER_URL": "https://SET-AFTER-FIRST-DEPLOY.expo.app",
+        "EXPO_PUBLIC_ZAKI_FAMILY_BUILD": "1"
+      }
     }
   }
 }

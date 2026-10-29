@@ -4,12 +4,13 @@ import { useState } from 'react';
 import { Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { C, R, S } from '@/constants/theme';
-import { askTutor, checkAnswer, type ChatTurn, type FeedbackKey } from '@/lib/api';
+import { askTutor, checkAnswer, reportSafety, type ChatTurn, type FeedbackKey } from '@/lib/api';
 import { localSafetyCheck } from '@/lib/localSafety';
 import { keywordScan } from '../../server/keywordScan';
 import { useChild, useT } from '@/lib/store';
 import type { LessonPack, Question } from '@/lib/types';
 import { Mascot } from './Mascot';
+import { ReadAloud } from './ReadAloud';
 import { Btn, Card, Row, Txt } from './ui';
 
 export function goToSafety(kind: string) {
@@ -137,6 +138,7 @@ export function QuestionWithHints({
           {question.q}
         </Txt>
       </Card>
+      <ReadAloud text={[question.q, ...question.choices].join('. ')} />
       <View style={{ gap: S.sm }}>
         {question.choices.map((c, i) => (
           <Choice
@@ -208,6 +210,7 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
       setText('');
       // Kept on this device for the safety reviewer (demo/offline). Reviewer-route flags are never shown to parents.
       app.addLocalFlag({ category: kind, ...flagRouteFor(kind, message), childRef: child.id, excerpt: scrubExcerpt(message) });
+      reportSafety({ kind, message, childRef: child.id, lang, country: settings.country });
       goToSafety(kind);
       return;
     }
@@ -244,21 +247,6 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
         <Mascot size={44} mood={busy ? 'thinking' : 'happy'} />
         <Txt variant="h2">{t('askTitle')}</Txt>
       </Row>
-      <View style={{ gap: S.sm }} testID="chat-log">
-        {history.map((m, i) => (
-          <View
-            key={i}
-            style={[
-              styles.bubble,
-              m.role === 'child'
-                ? { alignSelf: 'flex-end', backgroundColor: C.primarySoft }
-                : { alignSelf: 'flex-start', backgroundColor: C.mintSoft },
-            ]}>
-            <Txt>{m.text}</Txt>
-          </View>
-        ))}
-        {busy ? <Txt variant="small">{t('thinking')}</Txt> : null}
-      </View>
       <Row style={{ width: '100%' }}>
         <TextInput
           testID="chat-input"
@@ -275,6 +263,23 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
         />
         <Btn title={t('send')} onPress={send} disabled={busy || !text.trim()} testID="chat-send" style={{ flexShrink: 0, paddingHorizontal: S.md }} />
       </Row>
+      <View style={{ gap: S.sm }} testID="chat-log">
+        {/* Newest first, right under the typing box: a young child never has to scroll to find Zaki's answer. */}
+        {busy ? <Txt variant="small">{t('thinking')}</Txt> : null}
+        {[...history].reverse().map((m, i) => (
+          <View
+            key={history.length - i}
+            style={[
+              styles.bubble,
+              m.role === 'child'
+                ? { alignSelf: 'flex-end', backgroundColor: C.primarySoft }
+                : { alignSelf: 'flex-start', backgroundColor: C.mintSoft },
+            ]}>
+            <Txt>{m.text}</Txt>
+            {m.role === 'zaki' && i === 0 ? <ReadAloud text={m.text} testID="read-reply" /> : null}
+          </View>
+        ))}
+      </View>
     </Card>
   );
 }

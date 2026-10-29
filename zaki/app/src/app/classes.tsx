@@ -12,9 +12,9 @@ import { accessForKey } from '@/lib/unlock';
 import type { LessonStatus } from '@/lib/types';
 
 const STATUS_COLOR: Record<LessonStatus, { bg: string; fg: string }> = {
-  new: { bg: C.primarySoft, fg: C.primary },
+  new: { bg: C.primarySoft, fg: '#17656E' }, // 4.5:1 on the soft background
   learning: { bg: C.sunSoft, fg: '#8A6100' },
-  learned: { bg: C.mintSoft, fg: C.mint },
+  learned: { bg: C.mintSoft, fg: '#1E6B41' },
   mastered: { bg: C.lilacSoft, fg: C.lilac },
 };
 

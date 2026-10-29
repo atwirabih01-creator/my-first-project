@@ -87,6 +87,10 @@ type Persisted = {
   family?: FamilyLink | null;
 };
 
+/** Family build (real server): start with no sample children; the grown-up adds their own. */
+const FAMILY_BUILD = process.env.EXPO_PUBLIC_ZAKI_FAMILY_BUILD === '1';
+const emptyState = (): Persisted => ({ version: 1, profiles: [], settings: {}, progress: {}, plans: {}, packs: {} });
+
 function seed(): Persisted {
   const now = new Date().toISOString();
   const ali: ChildProfile = { id: randomId('c'), nickname: 'Ali', grade: 3, lang: 'ar', avatar: 'lion', createdAt: now };
@@ -213,7 +217,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     let alive = true;
     (async () => {
       const saved = await loadJSON<Persisted | null>('state', null);
-      const data = saved && saved.version === 1 && Array.isArray(saved.profiles) ? { exams: {}, ...saved } : { exams: {}, ...seed() };
+      const data = saved && saved.version === 1 && Array.isArray(saved.profiles) ? { exams: {}, ...saved } : { exams: {}, ...(FAMILY_BUILD ? emptyState() : seed()) };
       if (!saved) await saveJSON('state', data);
       const lastLang = await loadJSON<Lang>('uiLang', 'en');
       if (alive) setState((s) => ({ ...s, ...data, uiLang: lastLang, loaded: true }));

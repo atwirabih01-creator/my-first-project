@@ -4,6 +4,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { View } from 'react-native';
 
 import { Mascot } from '@/components/Mascot';
+import { ReadAloud } from '@/components/ReadAloud';
 import { Screen } from '@/components/Screen';
 import { Btn, Card, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
@@ -35,6 +36,7 @@ export default function Safety() {
           {t('safetyTitle')}
         </Txt>
         <Txt center>{t('safetyBody')}</Txt>
+        <ReadAloud text={[t('safetyTitle'), t('safetyBody'), t('safetyNoSecret'), ...routes.map((r) => r.text[lang])].join(' ')} />
       </View>
 
       <Card tone="lilac">
@@ -63,7 +65,7 @@ export default function Safety() {
         </Card>
       ))}
       {fallbacks.map((f) => (
-        <Card key={f} tone="coral">
+        <Card key={f} tone="lilac">
           <Txt variant="big" bold>
             {f}
           </Txt>

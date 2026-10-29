@@ -11,7 +11,7 @@ import { useT } from '@/lib/store';
 export default function Break() {
   const { t } = useT();
   return (
-    <Screen child back="/">
+    <Screen child back="/" helpButton={false}>
       <View style={{ alignItems: 'center', gap: S.lg, paddingTop: S.xl }} testID="break-screen">
         <Mascot size={170} mood="calm" />
         <Txt variant="title" center>

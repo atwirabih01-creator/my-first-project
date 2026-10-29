@@ -99,6 +99,8 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "send her a photo", "asked me for pictures", "wants to meet me", "touched my private", "touched my privates",
     "touchd me", "touchd my", "said i should die", "told me to die", "told me to kill myself", "go die",
     "someone hurts me", "someone is hurting me",
+    "send me ur foto", "send me ur pic", "send me ur photo", "send me ur picture", "send ur foto", "send me a foto", "send him ur pic",
+    "send me your foto", "asked for my foto", "wants my foto",
     "if i tell anyone", "if i tell anybody", "post my pic", "post my picture", "post my photo", "send more pics", "send more pictures",
     "get in his car", "get in her car", "into his car", "meet him alone", "meet me alone", "photos of adults", "pictures of adults",
     "people with no clothes", "naked people", "doesn't give me food", "doesnt give me food", "don't give me food", "left me alone at home", "bully me", "bullying me", "bullies me",
