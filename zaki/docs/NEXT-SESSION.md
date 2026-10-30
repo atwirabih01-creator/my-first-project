@@ -16,6 +16,16 @@ Work branch is now claude/eloquent-cori-9fleqt.
 - New safety category "help_request" (child asks for a helpline / who to call). Supabase migration 0004 widens the flags table: APPLY 0004 BEFORE deploying this server code, or help_request flags are rejected by the database.
 - Spend so far: about US$0.43 of the $5 credit.
 
+## 2026-10-30: BUILD THE ANDROID APP IN DEMO MODE (AI connects later)
+- The founder's Claude (Anthropic) account is ON HOLD since 2026-10-29 for "unusual activity", most likely the large red-team runs (3,000+ child-safety test messages). The founder requested a review (about 10 days).
+- So: do NOT use ZAKI_ANTHROPIC_API_KEY, do NOT put it on the hosted server, do NOT run the red-team suite with the AI. When the account is back: run safety tests in SMALL batches only, and tell the founder first.
+- Plan now (needs EXPO_TOKEN in the environment):
+  1. `cd zaki/app && npm ci`; `npx eas-cli whoami` to check the token.
+  2. `npx eas-cli init` (project "zaki"), then put the server online WITHOUT the AI key: set ZAKI_REVIEWER_CODE (random, tell the founder) and ZAKI_DAILY_BUDGET_USD=1 on EAS; `npx expo export -p web && npx eas-cli deploy --prod`. Check /api/health says ai:false.
+  3. Put that URL in eas.json `ZAKI_SERVER_URL`; `npx eas-cli build -p android --profile preview --non-interactive`; give the founder the install link (Android: allow install from this source).
+  4. Later, when the account is back: `eas env:create` the key on the server + redeploy. Phones switch to the real AI with no reinstall.
+- Founder tests as a child first, then shares with family and his brother.
+
 ## 2026-10-29 status
 - The Claude key in ZAKI_ANTHROPIC_API_KEY became INVALID (401) on 2026-10-29. Founder must create a new key and replace it, and add EXPO_TOKEN. Then: re-run the red-team suite WITH the AI (twice) before building.
 - Child-safety fixes done (see PROGRESS.md). Open, needs people not code: Arabic child texts speak to boys only (needs a Lebanese reviewer or a girl/boy setting); Supabase so the hosted server keeps safety alerts.
