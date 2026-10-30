@@ -2,3 +2,4 @@ trading/data_intraday/
 trading/data_metrics/
 trading/results/*_v2.log
 trading/results/wf_*_mexc.log
+trading/results/wipeout_*.log
