@@ -101,3 +101,13 @@ changes until they are scored.
 - 2026-10-30 16:20 · Session 5: no calls. Hawk rejected Atlas's PEPE short: the stop needed (about 7.5%)
   was too big for a small target, which applies our "loss ≤ 3× target" limit. Atlas and Hawk agreed that
   oversold BTC and ETH are not shorts.
+
+## 2026-10-30 · History study "buy the bounce after a wipe-out": looked like a pass, failed the audit
+- The first run said PASS for 2026 (73.6% wins, $1.27 per $1 lost).
+- Reality Checker found a timing bug: the futures data was read 5 minutes too early. With honest timing,
+  no setting passed even the training years. Details: `results/wipeout_AUDIT.md`.
+- **Lessons:**
+  - Every "pass" gets an independent audit before it is believed. This is the second time the audit has
+    caught a flattering bug.
+  - Free futures data is stamped at the START of its 5-minute window.
+  - An edge of about 0.15% per trade disappears with normal crash-time slippage.
