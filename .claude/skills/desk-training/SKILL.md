@@ -26,7 +26,7 @@ Paper only. Never call any Co-Invest order or enable tool. Never invent a headli
 Proven lessons, meaning ones confirmed 3 or more times, are copied into the relevant agent's file in
 `.claude/agents/`, so they become part of that agent's skill.
 
-## 1. Daily study session (once a day, the 12:10 UTC desk run)
+## 1. Study session (every 4-hourly desk run; was daily until 30 Oct 2026)
 Run it even when the scanner has no candidate. This is the practice that builds the skill.
 1. **Atlas** reads `lessons.md`, then studies the market. Cover:
    - BTC and ETH trend, and money flows (ETF flows, stablecoins).

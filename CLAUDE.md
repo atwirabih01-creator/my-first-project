@@ -61,7 +61,7 @@ this file or into the relevant agent's file, so the team remembers it next time.
   properly trained.
   - **Phase 1:** they study the market and paper trade *together* on a **$500 paper account**
     (`trading/account.py`, 1% risk per trade).
-  - **Daily practice:** a daily study session with scored forecast calls, a review after every
+  - **Daily practice:** a study session on every 4-hourly check (from 30 Oct 2026) with scored forecast calls, a review after every
     closed trade, and lessons kept in `trading/journal/lessons.md`.
   - **Phase 2:** only after Phase 1 graduates do they also work individually.
   - Routine: `.claude/skills/desk-training/SKILL.md`.

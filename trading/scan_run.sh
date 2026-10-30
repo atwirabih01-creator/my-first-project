@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # One cheap scanner run (no AI agents): update the paper journal, refresh the gate weekly, scan 40 coins.
 # Prints STUDY_SESSION, GRADUATED, CANDIDATES=<n>, CARRY_CANDIDATES=<n> and PASSED=<yes|no> as its last five lines.
-# STUDY_SESSION=yes on the 12:xx UTC run: hold the daily study session (.claude/skills/desk-training/SKILL.md).
+# STUDY_SESSION=yes on every run (owner, 30 Oct 2026: faster practice): hold a study session (.claude/skills/desk-training/SKILL.md).
 set -u
 cd "$(dirname "$0")"
 python3 desk_journal.py update
@@ -19,7 +19,7 @@ c=$(python3 -c "import json; print(len(json.load(open('journal/carry_scan.json')
 python3 calls.py score
 python3 account.py | tee /tmp/desk_account.txt
 echo "- $(date -u '+%Y-%m-%d %H:%M') UTC — scan: ${n} candidate(s), carry: ${c} candidate(s)" >> journal/scan_log.md
-if [ "$(date -u +%H)" = "12" ]; then echo "STUDY_SESSION=yes"; else echo "STUDY_SESSION=no"; fi
+echo "STUDY_SESSION=yes"
 grep "^GRADUATED=" /tmp/desk_account.txt || echo "GRADUATED=no"
 echo "CANDIDATES=${n}"
 echo "CARRY_CANDIDATES=${c}"
