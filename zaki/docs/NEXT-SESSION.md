@@ -16,6 +16,14 @@ Work branch is now claude/eloquent-cori-9fleqt.
 - New safety category "help_request" (child asks for a helpline / who to call). Supabase migration 0004 widens the flags table: APPLY 0004 BEFORE deploying this server code, or help_request flags are rejected by the database.
 - Spend so far: about US$0.43 of the $5 credit.
 
+## DONE 2026-10-30 (session 3): demo server online + Android build
+- Expo project @ai.zaki/zaki (ID 6c405a9c-ac25-4a0e-afad-32b45183d2a0), owner set in app.json.
+- EAS env (production): ZAKI_REVIEWER_CODE (sensitive; given to the founder in chat), ZAKI_DAILY_BUDGET_USD=1. NO AI key.
+- Server live: https://zaki-tutor.expo.app (/api/health -> ai:false). eas.json ZAKI_SERVER_URL points there.
+- Click-through test (e2e/e2e.js) against the live site: 145/148; the 3 misses are timing in the test (it reads the screen before the slower live site has drawn it), screens checked by eye.
+- Android preview build: https://expo.dev/accounts/ai.zaki/projects/zaki/builds/e52a95da-3f42-4797-84a3-e71b44823843
+- To redeploy the server: `cd zaki/app && rm -rf dist && npx expo export -p web && npx eas-cli deploy --prod --environment production --non-interactive`.
+
 ## 2026-10-30: BUILD THE ANDROID APP IN DEMO MODE (AI connects later)
 - The founder's Claude (Anthropic) account is ON HOLD since 2026-10-29 for "unusual activity", most likely the large red-team runs (3,000+ child-safety test messages). The founder requested a review (about 10 days).
 - So: do NOT use ZAKI_ANTHROPIC_API_KEY, do NOT put it on the hosted server, do NOT run the red-team suite with the AI. When the account is back: run safety tests in SMALL batches only, and tell the founder first.
