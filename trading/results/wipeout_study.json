@@ -1,0 +1,3664 @@
+{
+ "events_per_signal_definition": {
+  "D3 P2 none": {
+   "train": 14160,
+   "validate": 5865
+  },
+  "D3 P2 btc": {
+   "train": 5354,
+   "validate": 1517
+  },
+  "D3 P3 none": {
+   "train": 9000,
+   "validate": 3403
+  },
+  "D3 P3 btc": {
+   "train": 4014,
+   "validate": 1127
+  },
+  "D3 P5 none": {
+   "train": 2683,
+   "validate": 878
+  },
+  "D3 P5 btc": {
+   "train": 1489,
+   "validate": 455
+  },
+  "D5 P2 none": {
+   "train": 5842,
+   "validate": 2068
+  },
+  "D5 P2 btc": {
+   "train": 2607,
+   "validate": 706
+  },
+  "D5 P3 none": {
+   "train": 5003,
+   "validate": 1766
+  },
+  "D5 P3 btc": {
+   "train": 2377,
+   "validate": 650
+  },
+  "D5 P5 none": {
+   "train": 2293,
+   "validate": 764
+  },
+  "D5 P5 btc": {
+   "train": 1303,
+   "validate": 399
+  },
+  "D8 P2 none": {
+   "train": 1582,
+   "validate": 505
+  },
+  "D8 P2 btc": {
+   "train": 816,
+   "validate": 220
+  },
+  "D8 P3 none": {
+   "train": 1509,
+   "validate": 492
+  },
+  "D8 P3 btc": {
+   "train": 804,
+   "validate": 219
+  },
+  "D8 P5 none": {
+   "train": 1173,
+   "validate": 371
+  },
+  "D8 P5 btc": {
+   "train": 688,
+   "validate": 188
+  }
+ },
+ "data_notes": {
+  "DOGEUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0013
+  },
+  "SHIBUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "PEPEUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0012
+  },
+  "WIFUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0004
+  },
+  "BONKUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "FLOKIUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "PENGUUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0012
+  },
+  "TRUMPUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0005
+  },
+  "BOMEUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0009
+  },
+  "NEIROUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0007
+  },
+  "TURBOUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0004
+  },
+  "MEMEUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0012
+  },
+  "PEOPLEUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "ORDIUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "PNUTUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "BTCUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0036
+  },
+  "ETHUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0014
+  },
+  "SOLUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0013
+  },
+  "XRPUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0013
+  },
+  "BNBUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0012
+  },
+  "ADAUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0014
+  },
+  "AVAXUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.001
+  },
+  "LINKUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0012
+  },
+  "DOTUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0012
+  },
+  "LTCUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "TRXUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "NEARUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0012
+  },
+  "SUIUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "APTUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "ARBUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "OPUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.001
+  },
+  "INJUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "TIAUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0013
+  },
+  "SEIUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0014
+  },
+  "FETUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "WLDUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0011
+  },
+  "JUPUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0012
+  },
+  "HBARUSDT": {
+   "price_gaps": 0,
+   "oi_missing_share": 0.0014
+  }
+ },
+ "by_cost": {
+  "futures": {
+   "train_qualifiers": 9,
+   "train_qualifiers_list": [
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.7766,
+      "pf": 1.205,
+      "avg_pct": 0.1364
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.7618,
+      "pf": 1.962,
+      "avg_pct": 0.5291
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.8858,
+      "pf": 1.233,
+      "avg_pct": 0.1427
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.8194,
+      "pf": 0.843,
+      "avg_pct": -0.1422
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7783,
+      "pf": 1.251,
+      "avg_pct": 0.1951
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7197,
+      "pf": 1.234,
+      "avg_pct": 0.1977
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      36,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.8142,
+      "pf": 1.237,
+      "avg_pct": 0.2009
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7655,
+      "pf": 1.136,
+      "avg_pct": 0.1338
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.838,
+      "pf": 1.271,
+      "avg_pct": 0.2335
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7817,
+      "pf": 1.089,
+      "avg_pct": 0.0933
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7221,
+      "pf": 1.27,
+      "avg_pct": 0.2506
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.6631,
+      "pf": 1.36,
+      "avg_pct": 0.3383
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      36,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.757,
+      "pf": 1.222,
+      "avg_pct": 0.2379
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7062,
+      "pf": 1.248,
+      "avg_pct": 0.2819
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7792,
+      "pf": 1.206,
+      "avg_pct": 0.235
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7278,
+      "pf": 1.196,
+      "avg_pct": 0.2406
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "btc",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "btc",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 688,
+      "win_rate": 0.7645,
+      "pf": 1.22,
+      "avg_pct": 0.2313
+     },
+     "val": {
+      "trades": 188,
+      "win_rate": 0.6383,
+      "pf": 1.292,
+      "avg_pct": 0.3591
+     }
+    }
+   ],
+   "pass_train_and_validate": 4,
+   "chosen": [
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7783,
+      "pf": 1.251,
+      "avg_pct": 0.1951
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7197,
+      "pf": 1.234,
+      "avg_pct": 0.1977
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.7766,
+      "pf": 1.205,
+      "avg_pct": 0.1364
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.7618,
+      "pf": 1.962,
+      "avg_pct": 0.5291
+     }
+    }
+   ],
+   "near_misses_train": [
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.838,
+      "pf": 1.271,
+      "avg_pct": 0.2335
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7817,
+      "pf": 1.089,
+      "avg_pct": 0.0933
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7783,
+      "pf": 1.251,
+      "avg_pct": 0.1951
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7197,
+      "pf": 1.234,
+      "avg_pct": 0.1977
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7221,
+      "pf": 1.27,
+      "avg_pct": 0.2506
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.6631,
+      "pf": 1.36,
+      "avg_pct": 0.3383
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      36,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.8142,
+      "pf": 1.237,
+      "avg_pct": 0.2009
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7655,
+      "pf": 1.136,
+      "avg_pct": 0.1338
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.8858,
+      "pf": 1.233,
+      "avg_pct": 0.1427
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.8194,
+      "pf": 0.843,
+      "avg_pct": -0.1422
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      36,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.757,
+      "pf": 1.222,
+      "avg_pct": 0.2379
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7062,
+      "pf": 1.248,
+      "avg_pct": 0.2819
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "btc",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "btc",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 688,
+      "win_rate": 0.7645,
+      "pf": 1.22,
+      "avg_pct": 0.2313
+     },
+     "val": {
+      "trades": 188,
+      "win_rate": 0.6383,
+      "pf": 1.292,
+      "avg_pct": 0.3591
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7792,
+      "pf": 1.206,
+      "avg_pct": 0.235
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7278,
+      "pf": 1.196,
+      "avg_pct": 0.2406
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.7766,
+      "pf": 1.205,
+      "avg_pct": 0.1364
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.7618,
+      "pf": 1.962,
+      "avg_pct": 0.5291
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.8268,
+      "pf": 1.197,
+      "avg_pct": 0.1462
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8168,
+      "pf": 1.713,
+      "avg_pct": 0.483
+     }
+    }
+   ],
+   "top_train_pf": [
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.838,
+      "pf": 1.271,
+      "avg_pct": 0.2335
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7817,
+      "pf": 1.089,
+      "avg_pct": 0.0933
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7221,
+      "pf": 1.27,
+      "avg_pct": 0.2506
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.6631,
+      "pf": 1.36,
+      "avg_pct": 0.3383
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7783,
+      "pf": 1.251,
+      "avg_pct": 0.1951
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7197,
+      "pf": 1.234,
+      "avg_pct": 0.1977
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      36,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.8142,
+      "pf": 1.237,
+      "avg_pct": 0.2009
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7655,
+      "pf": 1.136,
+      "avg_pct": 0.1338
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.8858,
+      "pf": 1.233,
+      "avg_pct": 0.1427
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.8194,
+      "pf": 0.843,
+      "avg_pct": -0.1422
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      36,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.757,
+      "pf": 1.222,
+      "avg_pct": 0.2379
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7062,
+      "pf": 1.248,
+      "avg_pct": 0.2819
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "btc",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "btc",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 688,
+      "win_rate": 0.7645,
+      "pf": 1.22,
+      "avg_pct": 0.2313
+     },
+     "val": {
+      "trades": 188,
+      "win_rate": 0.6383,
+      "pf": 1.292,
+      "avg_pct": 0.3591
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 2.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      2.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.6795,
+      "pf": 1.208,
+      "avg_pct": 0.1927
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.6604,
+      "pf": 1.64,
+      "avg_pct": 0.498
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7792,
+      "pf": 1.206,
+      "avg_pct": 0.235
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7278,
+      "pf": 1.196,
+      "avg_pct": 0.2406
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "futures",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "futures"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.7766,
+      "pf": 1.205,
+      "avg_pct": 0.1364
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.7618,
+      "pf": 1.962,
+      "avg_pct": 0.5291
+     }
+    }
+   ],
+   "top_train_win": [
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.8858,
+      "pf": 1.233,
+      "avg_pct": 0.1427
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.8194,
+      "pf": 0.843,
+      "avg_pct": -0.1422
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 2680,
+      "win_rate": 0.8825,
+      "pf": 1.139,
+      "avg_pct": 0.0706
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.8736,
+      "pf": 1.518,
+      "avg_pct": 0.2558
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 2291,
+      "win_rate": 0.8817,
+      "pf": 1.161,
+      "avg_pct": 0.0841
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8665,
+      "pf": 1.439,
+      "avg_pct": 0.2361
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      3,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1495,
+      "win_rate": 0.8789,
+      "pf": 1.16,
+      "avg_pct": 0.094
+     },
+     "val": {
+      "trades": 491,
+      "win_rate": 0.833,
+      "pf": 0.874,
+      "avg_pct": -0.0974
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "futures",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      36,
+      "futures"
+     ],
+     "train": {
+      "trades": 2680,
+      "win_rate": 0.875,
+      "pf": 1.131,
+      "avg_pct": 0.0659
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.8667,
+      "pf": 1.609,
+      "avg_pct": 0.2813
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 2,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      2,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 1550,
+      "win_rate": 0.8742,
+      "pf": 1.097,
+      "avg_pct": 0.059
+     },
+     "val": {
+      "trades": 501,
+      "win_rate": 0.8323,
+      "pf": 0.876,
+      "avg_pct": -0.0949
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 2,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      5,
+      2,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 5353,
+      "win_rate": 0.8739,
+      "pf": 1.027,
+      "avg_pct": 0.0119
+     },
+     "val": {
+      "trades": 1845,
+      "win_rate": 0.845,
+      "pf": 0.988,
+      "avg_pct": -0.0058
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      5,
+      3,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 4813,
+      "win_rate": 0.8735,
+      "pf": 1.036,
+      "avg_pct": 0.0163
+     },
+     "val": {
+      "trades": 1681,
+      "win_rate": 0.8471,
+      "pf": 0.995,
+      "avg_pct": -0.0027
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "futures",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      36,
+      "futures"
+     ],
+     "train": {
+      "trades": 2291,
+      "win_rate": 0.8734,
+      "pf": 1.137,
+      "avg_pct": 0.072
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8573,
+      "pf": 1.507,
+      "avg_pct": 0.2576
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "btc",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "futures",
+     "key": [
+      8,
+      3,
+      "btc",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "futures"
+     ],
+     "train": {
+      "trades": 796,
+      "win_rate": 0.8731,
+      "pf": 1.011,
+      "avg_pct": 0.0073
+     },
+     "val": {
+      "trades": 219,
+      "win_rate": 0.7854,
+      "pf": 0.802,
+      "avg_pct": -0.1983
+     }
+    }
+   ],
+   "settings_with_150_train_trades": 972,
+   "settings_total": 972
+  },
+  "mexc": {
+   "train_qualifiers": 49,
+   "train_qualifiers_list": [
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2680,
+      "win_rate": 0.8519,
+      "pf": 1.264,
+      "avg_pct": 0.1227
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.8394,
+      "pf": 1.919,
+      "avg_pct": 0.364
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2680,
+      "win_rate": 0.8754,
+      "pf": 1.236,
+      "avg_pct": 0.1171
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.8667,
+      "pf": 1.733,
+      "avg_pct": 0.3327
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2680,
+      "win_rate": 0.8825,
+      "pf": 1.244,
+      "avg_pct": 0.1218
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.8736,
+      "pf": 1.632,
+      "avg_pct": 0.3071
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2682,
+      "win_rate": 0.7804,
+      "pf": 1.268,
+      "avg_pct": 0.1695
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.7733,
+      "pf": 2.179,
+      "avg_pct": 0.5884
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2682,
+      "win_rate": 0.8166,
+      "pf": 1.228,
+      "avg_pct": 0.1601
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.8132,
+      "pf": 1.979,
+      "avg_pct": 0.5682
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2682,
+      "win_rate": 0.8281,
+      "pf": 1.233,
+      "avg_pct": 0.1669
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.8257,
+      "pf": 1.9,
+      "avg_pct": 0.5527
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2682,
+      "win_rate": 0.7155,
+      "pf": 1.239,
+      "avg_pct": 0.1843
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.7118,
+      "pf": 2.321,
+      "avg_pct": 0.765
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2682,
+      "win_rate": 0.7606,
+      "pf": 1.209,
+      "avg_pct": 0.1846
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.7528,
+      "pf": 1.948,
+      "avg_pct": 0.6987
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2291,
+      "win_rate": 0.8494,
+      "pf": 1.269,
+      "avg_pct": 0.1301
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8325,
+      "pf": 1.853,
+      "avg_pct": 0.3601
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2291,
+      "win_rate": 0.8734,
+      "pf": 1.238,
+      "avg_pct": 0.1233
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8573,
+      "pf": 1.619,
+      "avg_pct": 0.309
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2291,
+      "win_rate": 0.8817,
+      "pf": 1.263,
+      "avg_pct": 0.1353
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8665,
+      "pf": 1.543,
+      "avg_pct": 0.2874
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.7775,
+      "pf": 1.29,
+      "avg_pct": 0.1888
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.7644,
+      "pf": 2.086,
+      "avg_pct": 0.5816
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.8137,
+      "pf": 1.257,
+      "avg_pct": 0.1848
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.801,
+      "pf": 1.858,
+      "avg_pct": 0.5444
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.8272,
+      "pf": 1.271,
+      "avg_pct": 0.1979
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8168,
+      "pf": 1.803,
+      "avg_pct": 0.5348
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.7138,
+      "pf": 1.26,
+      "avg_pct": 0.2055
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.7094,
+      "pf": 2.269,
+      "avg_pct": 0.7731
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.7592,
+      "pf": 1.242,
+      "avg_pct": 0.2174
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.7461,
+      "pf": 1.893,
+      "avg_pct": 0.6964
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.7727,
+      "pf": 1.215,
+      "avg_pct": 0.2043
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.767,
+      "pf": 1.822,
+      "avg_pct": 0.6901
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 2,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      2,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1577,
+      "win_rate": 0.7603,
+      "pf": 1.244,
+      "avg_pct": 0.1755
+     },
+     "val": {
+      "trades": 504,
+      "win_rate": 0.7242,
+      "pf": 1.28,
+      "avg_pct": 0.2047
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 2,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      8,
+      2,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1577,
+      "win_rate": 0.7952,
+      "pf": 1.202,
+      "avg_pct": 0.161
+     },
+     "val": {
+      "trades": 504,
+      "win_rate": 0.7679,
+      "pf": 1.209,
+      "avg_pct": 0.1748
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 2,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      2,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1577,
+      "win_rate": 0.8167,
+      "pf": 1.216,
+      "avg_pct": 0.1777
+     },
+     "val": {
+      "trades": 504,
+      "win_rate": 0.7917,
+      "pf": 1.169,
+      "avg_pct": 0.1493
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 2,
+     "btc_filter": "btc",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      2,
+      "btc",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 816,
+      "win_rate": 0.7463,
+      "pf": 1.21,
+      "avg_pct": 0.2096
+     },
+     "val": {
+      "trades": 219,
+      "win_rate": 0.6484,
+      "pf": 1.336,
+      "avg_pct": 0.3737
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      3,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1495,
+      "win_rate": 0.8789,
+      "pf": 1.25,
+      "avg_pct": 0.1453
+     },
+     "val": {
+      "trades": 491,
+      "win_rate": 0.833,
+      "pf": 0.94,
+      "avg_pct": -0.0458
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 2.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      3,
+      "none",
+      "next",
+      0.75,
+      2.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1508,
+      "win_rate": 0.7275,
+      "pf": 1.202,
+      "avg_pct": 0.1466
+     },
+     "val": {
+      "trades": 492,
+      "win_rate": 0.7053,
+      "pf": 1.46,
+      "avg_pct": 0.2957
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 2.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      8,
+      3,
+      "none",
+      "next",
+      0.75,
+      2.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1508,
+      "win_rate": 0.7493,
+      "pf": 1.202,
+      "avg_pct": 0.1551
+     },
+     "val": {
+      "trades": 492,
+      "win_rate": 0.7398,
+      "pf": 1.44,
+      "avg_pct": 0.3072
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 2.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      3,
+      "none",
+      "next",
+      0.75,
+      2.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1508,
+      "win_rate": 0.7619,
+      "pf": 1.206,
+      "avg_pct": 0.1624
+     },
+     "val": {
+      "trades": 492,
+      "win_rate": 0.75,
+      "pf": 1.354,
+      "avg_pct": 0.2659
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      3,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1508,
+      "win_rate": 0.7666,
+      "pf": 1.26,
+      "avg_pct": 0.1887
+     },
+     "val": {
+      "trades": 492,
+      "win_rate": 0.7215,
+      "pf": 1.276,
+      "avg_pct": 0.2054
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      8,
+      3,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1508,
+      "win_rate": 0.8011,
+      "pf": 1.236,
+      "avg_pct": 0.1874
+     },
+     "val": {
+      "trades": 492,
+      "win_rate": 0.7663,
+      "pf": 1.215,
+      "avg_pct": 0.1815
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      3,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1508,
+      "win_rate": 0.8223,
+      "pf": 1.258,
+      "avg_pct": 0.2092
+     },
+     "val": {
+      "trades": 492,
+      "win_rate": 0.7907,
+      "pf": 1.167,
+      "avg_pct": 0.1505
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      3,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1509,
+      "win_rate": 0.7051,
+      "pf": 1.254,
+      "avg_pct": 0.2199
+     },
+     "val": {
+      "trades": 492,
+      "win_rate": 0.6504,
+      "pf": 1.366,
+      "avg_pct": 0.3058
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      8,
+      3,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1509,
+      "win_rate": 0.7455,
+      "pf": 1.217,
+      "avg_pct": 0.2148
+     },
+     "val": {
+      "trades": 492,
+      "win_rate": 0.7053,
+      "pf": 1.278,
+      "avg_pct": 0.2784
+     }
+    }
+   ],
+   "pass_train_and_validate": 36,
+   "chosen": [
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7809,
+      "pf": 1.324,
+      "avg_pct": 0.2476
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7224,
+      "pf": 1.302,
+      "avg_pct": 0.2507
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.7775,
+      "pf": 1.29,
+      "avg_pct": 0.1888
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.7644,
+      "pf": 2.086,
+      "avg_pct": 0.5816
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2682,
+      "win_rate": 0.7804,
+      "pf": 1.268,
+      "avg_pct": 0.1695
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.7733,
+      "pf": 2.179,
+      "avg_pct": 0.5884
+     }
+    }
+   ],
+   "near_misses_train": [
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.838,
+      "pf": 1.334,
+      "avg_pct": 0.2852
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7817,
+      "pf": 1.141,
+      "avg_pct": 0.1455
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7809,
+      "pf": 1.324,
+      "avg_pct": 0.2476
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7224,
+      "pf": 1.302,
+      "avg_pct": 0.2507
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.8858,
+      "pf": 1.32,
+      "avg_pct": 0.1938
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.8194,
+      "pf": 0.899,
+      "avg_pct": -0.0904
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.815,
+      "pf": 1.302,
+      "avg_pct": 0.2528
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7655,
+      "pf": 1.192,
+      "avg_pct": 0.1862
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.7775,
+      "pf": 1.29,
+      "avg_pct": 0.1888
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.7644,
+      "pf": 2.086,
+      "avg_pct": 0.5816
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7579,
+      "pf": 1.275,
+      "avg_pct": 0.2905
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7116,
+      "pf": 1.299,
+      "avg_pct": 0.3349
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "btc",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "btc",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 688,
+      "win_rate": 0.7674,
+      "pf": 1.274,
+      "avg_pct": 0.2842
+     },
+     "val": {
+      "trades": 188,
+      "win_rate": 0.6383,
+      "pf": 1.342,
+      "avg_pct": 0.4132
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.8272,
+      "pf": 1.271,
+      "avg_pct": 0.1979
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8168,
+      "pf": 1.803,
+      "avg_pct": 0.5348
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2291,
+      "win_rate": 0.8494,
+      "pf": 1.269,
+      "avg_pct": 0.1301
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8325,
+      "pf": 1.853,
+      "avg_pct": 0.3601
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2682,
+      "win_rate": 0.7804,
+      "pf": 1.268,
+      "avg_pct": 0.1695
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.7733,
+      "pf": 2.179,
+      "avg_pct": 0.5884
+     }
+    }
+   ],
+   "top_train_pf": [
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.838,
+      "pf": 1.334,
+      "avg_pct": 0.2852
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7817,
+      "pf": 1.141,
+      "avg_pct": 0.1455
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7246,
+      "pf": 1.333,
+      "avg_pct": 0.304
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.6658,
+      "pf": 1.426,
+      "avg_pct": 0.3923
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7809,
+      "pf": 1.324,
+      "avg_pct": 0.2476
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7224,
+      "pf": 1.302,
+      "avg_pct": 0.2507
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.8858,
+      "pf": 1.32,
+      "avg_pct": 0.1938
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.8194,
+      "pf": 0.899,
+      "avg_pct": -0.0904
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.815,
+      "pf": 1.302,
+      "avg_pct": 0.2528
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7655,
+      "pf": 1.192,
+      "avg_pct": 0.1862
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.7775,
+      "pf": 1.29,
+      "avg_pct": 0.1888
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.7644,
+      "pf": 2.086,
+      "avg_pct": 0.5816
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.7579,
+      "pf": 1.275,
+      "avg_pct": 0.2905
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.7116,
+      "pf": 1.299,
+      "avg_pct": 0.3349
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "btc",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 3.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "btc",
+      "next",
+      1.0,
+      3.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 688,
+      "win_rate": 0.7674,
+      "pf": 1.274,
+      "avg_pct": 0.2842
+     },
+     "val": {
+      "trades": 188,
+      "win_rate": 0.6383,
+      "pf": 1.342,
+      "avg_pct": 0.4132
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.75,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.75,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2292,
+      "win_rate": 0.8272,
+      "pf": 1.271,
+      "avg_pct": 0.1979
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8168,
+      "pf": 1.803,
+      "avg_pct": 0.5348
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 1.0,
+     "stop_atr": 2.0,
+     "hold_bars": 12,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      1.0,
+      2.0,
+      12,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.6812,
+      "pf": 1.271,
+      "avg_pct": 0.2464
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.6631,
+      "pf": 1.728,
+      "avg_pct": 0.5519
+     }
+    }
+   ],
+   "top_train_win": [
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1173,
+      "win_rate": 0.8858,
+      "pf": 1.32,
+      "avg_pct": 0.1938
+     },
+     "val": {
+      "trades": 371,
+      "win_rate": 0.8194,
+      "pf": 0.899,
+      "avg_pct": -0.0904
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2680,
+      "win_rate": 0.8825,
+      "pf": 1.244,
+      "avg_pct": 0.1218
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.8736,
+      "pf": 1.632,
+      "avg_pct": 0.3071
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2291,
+      "win_rate": 0.8817,
+      "pf": 1.263,
+      "avg_pct": 0.1353
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8665,
+      "pf": 1.543,
+      "avg_pct": 0.2874
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      3,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1495,
+      "win_rate": 0.8789,
+      "pf": 1.25,
+      "avg_pct": 0.1453
+     },
+     "val": {
+      "trades": 491,
+      "win_rate": 0.833,
+      "pf": 0.94,
+      "avg_pct": -0.0458
+     }
+    },
+    {
+     "oi_drop_pct": 3,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      3,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2680,
+      "win_rate": 0.8754,
+      "pf": 1.236,
+      "avg_pct": 0.1171
+     },
+     "val": {
+      "trades": 878,
+      "win_rate": 0.8667,
+      "pf": 1.733,
+      "avg_pct": 0.3327
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 2,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      2,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 1550,
+      "win_rate": 0.8742,
+      "pf": 1.183,
+      "avg_pct": 0.1103
+     },
+     "val": {
+      "trades": 501,
+      "win_rate": 0.8323,
+      "pf": 0.943,
+      "avg_pct": -0.0433
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 2,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      5,
+      2,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 5353,
+      "win_rate": 0.8741,
+      "pf": 1.144,
+      "avg_pct": 0.0632
+     },
+     "val": {
+      "trades": 1845,
+      "win_rate": 0.845,
+      "pf": 1.094,
+      "avg_pct": 0.0458
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 3,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      5,
+      3,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 4813,
+      "win_rate": 0.8737,
+      "pf": 1.152,
+      "avg_pct": 0.0676
+     },
+     "val": {
+      "trades": 1681,
+      "win_rate": 0.8471,
+      "pf": 1.097,
+      "avg_pct": 0.0489
+     }
+    },
+    {
+     "oi_drop_pct": 5,
+     "price_drop_pct": 5,
+     "btc_filter": "none",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 36,
+     "costs": "mexc",
+     "key": [
+      5,
+      5,
+      "none",
+      "next",
+      0.5,
+      3.0,
+      36,
+      "mexc"
+     ],
+     "train": {
+      "trades": 2291,
+      "win_rate": 0.8734,
+      "pf": 1.238,
+      "avg_pct": 0.1233
+     },
+     "val": {
+      "trades": 764,
+      "win_rate": 0.8573,
+      "pf": 1.619,
+      "avg_pct": 0.309
+     }
+    },
+    {
+     "oi_drop_pct": 8,
+     "price_drop_pct": 3,
+     "btc_filter": "btc",
+     "entry": "next",
+     "target_atr": 0.5,
+     "stop_atr": 3.0,
+     "hold_bars": 72,
+     "costs": "mexc",
+     "key": [
+      8,
+      3,
+      "btc",
+      "next",
+      0.5,
+      3.0,
+      72,
+      "mexc"
+     ],
+     "train": {
+      "trades": 796,
+      "win_rate": 0.8731,
+      "pf": 1.086,
+      "avg_pct": 0.0586
+     },
+     "val": {
+      "trades": 219,
+      "win_rate": 0.7854,
+      "pf": 0.852,
+      "avg_pct": -0.1461
+     }
+    }
+   ],
+   "settings_with_150_train_trades": 972,
+   "settings_total": 972
+  }
+ },
+ "exam": {
+  "futures": {
+   "ran": true,
+   "per_setting": {
+    "(5, 5, 'none', 'next', 0.75, 3.0, 12, 'futures')": {
+     "trades": 650,
+     "win_rate": 0.7615,
+     "pf": 1.198,
+     "avg_pct": 0.1174
+    },
+    "(8, 5, 'none', 'next', 0.75, 3.0, 12, 'futures')": {
+     "trades": 392,
+     "win_rate": 0.7296,
+     "pf": 1.288,
+     "avg_pct": 0.1841
+    }
+   },
+   "raw_all": {
+    "trades": 1042,
+    "win_rate": 0.7495,
+    "pf": 1.233,
+    "avg_pct": 0.1425
+   },
+   "account": {
+    "trades": 405,
+    "win_rate": 0.7358,
+    "pf": 1.265,
+    "avg_pct": 0.1607,
+    "balance": 570.7,
+    "max_drop_pct": 5.93
+   },
+   "PASS": true
+  },
+  "mexc": {
+   "ran": true,
+   "per_setting": {
+    "(3, 5, 'none', 'next', 0.75, 3.0, 12, 'mexc')": {
+     "trades": 696,
+     "win_rate": 0.7557,
+     "pf": 1.264,
+     "avg_pct": 0.1525
+    },
+    "(5, 5, 'none', 'next', 0.75, 3.0, 12, 'mexc')": {
+     "trades": 650,
+     "win_rate": 0.7631,
+     "pf": 1.293,
+     "avg_pct": 0.1699
+    },
+    "(8, 5, 'none', 'next', 0.75, 3.0, 12, 'mexc')": {
+     "trades": 392,
+     "win_rate": 0.7321,
+     "pf": 1.381,
+     "avg_pct": 0.2369
+    }
+   },
+   "raw_all": {
+    "trades": 1738,
+    "win_rate": 0.7532,
+    "pf": 1.302,
+    "avg_pct": 0.1781
+   },
+   "account": {
+    "trades": 427,
+    "win_rate": 0.726,
+    "pf": 1.333,
+    "avg_pct": 0.1972,
+    "balance": 602.58,
+    "max_drop_pct": 6.31
+   },
+   "PASS": true
+  }
+ }
+}
