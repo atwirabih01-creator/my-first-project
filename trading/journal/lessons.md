@@ -98,3 +98,6 @@ changes until they are scored.
 - Atlas held no clear view: oversold, but not turning up.
 - **Lesson:** an unconfirmed headline is not a reason to trade. Wait for a major-outlet or official
   confirmation and for price to show its hand.
+- 2026-10-30 16:20 · Session 5: no calls. Hawk rejected Atlas's PEPE short: the stop needed (about 7.5%)
+  was too big for a small target, which applies our "loss ≤ 3× target" limit. Atlas and Hawk agreed that
+  oversold BTC and ETH are not shorts.
