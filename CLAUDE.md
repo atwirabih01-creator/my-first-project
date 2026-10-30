@@ -65,3 +65,5 @@ this file or into the relevant agent's file, so the team remembers it next time.
     closed trade, and lessons kept in `trading/journal/lessons.md`.
   - **Phase 2:** only after Phase 1 graduates do they also work individually.
   - Routine: `.claude/skills/desk-training/SKILL.md`.
+  - **Data (owner decision 30 Oct 2026):** paper trade on FREE data only until the team and agents are
+    proven. No paid data or new paid connectors. Don't ask about paid options again unless the owner raises them.
