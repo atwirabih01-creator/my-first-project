@@ -10,7 +10,7 @@
         "buildType": "apk"
       },
       "env": {
-        "ZAKI_SERVER_URL": "https://SET-AFTER-FIRST-DEPLOY.expo.app",
+        "ZAKI_SERVER_URL": "https://zaki-tutor.expo.app",
         "EXPO_PUBLIC_ZAKI_FAMILY_BUILD": "1"
       }
     }
