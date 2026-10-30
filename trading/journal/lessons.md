@@ -91,3 +91,10 @@ changes until they are scored.
   ended after Atlas.
 
 ## 2026-10-29 · Study session 3: no calls (Atlas: no clear view after the Fed and PCE; BTC in a tight range)
+
+## 2026-10-30 · Study session 4: no calls
+- A sharp risk-off move (BTC −3.2%, about $1.5B of rise bets force-closed) came with an unconfirmed
+  report of a Binance breach.
+- Atlas held no clear view: oversold, but not turning up.
+- **Lesson:** an unconfirmed headline is not a reason to trade. Wait for a major-outlet or official
+  confirmation and for price to show its hand.

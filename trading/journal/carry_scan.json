@@ -1,92 +1,92 @@
 {
- "scanned_utc": "2026-10-30 08:15:00+00:00",
+ "scanned_utc": "2026-10-30 12:13:00+00:00",
  "candidates": [],
  "hottest": [
   {
    "coin": "PEPE",
    "venue": "HL",
-   "yearly_last9": 0.1187,
+   "yearly_last9": 0.1344,
    "last3_per8h": [
     -0.000346,
     0.0007,
-    1.3e-05
+    0.000143
    ],
    "versions": []
   },
   {
    "coin": "ENA",
    "venue": "HL",
-   "yearly_last9": 0.1168,
+   "yearly_last9": 0.1229,
    "last3_per8h": [
     2e-05,
     0.000376,
-    2.8e-05
+    7.8e-05
    ],
    "versions": []
   },
   {
    "coin": "MEME",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "ORDI",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "PNUT",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "WIF",
    "venue": "HL",
-   "yearly_last9": 0.0988,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     9.9e-05,
     0.0001,
-    1.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "WIF",
-   "venue": "OKX",
-   "yearly_last9": 0.097,
-   "last3_per8h": [
-    7.5e-05,
-    0.0001,
-    2.2e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "BTC",
    "venue": "HL",
-   "yearly_last9": 0.095,
+   "yearly_last9": 0.0991,
    "last3_per8h": [
     0.0001,
     7.5e-05,
-    6e-06
+    4e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "NEAR",
+   "venue": "HL",
+   "yearly_last9": 0.0987,
+   "last3_per8h": [
+    0.0001,
+    4.9e-05,
+    6.3e-05
    ],
    "versions": []
   }
