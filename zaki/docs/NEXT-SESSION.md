@@ -20,7 +20,7 @@ Work branch is now claude/eloquent-cori-9fleqt.
 - Founder added ZAKI_ANTHROPIC_API_KEY on Expo (key "zaki-server", visibility SENSITIVE: "Secret" does NOT reach EAS Hosting, only EAS Build). Redeployed, /api/health ai:true.
 - 4 live checks passed (Roblox stranger -> help screen, Arabizi self-harm -> help screen, answer begging -> hint, off-topic -> back to lesson).
 - WARNING: the hosted /api/health showed spentUsd 0 after AI calls: the daily cap is counted in memory per server copy, so it is NOT a reliable cap on EAS Hosting. Real limit = Claude credit (~US$1.60, auto top-up OFF). Supabase fixes this: do it next.
-- Next: Supabase (free) so the cap + safety flags persist; then fix the "meet my friend" false alarm.
+- Founder: the US$0.50 daily limit is ONLY for his own trial. Before sharing with family: raise the limit (ask him how much), set up Supabase, fix the "meet my friend" false alarm.
 
 ## 2026-10-31 (session 3, later): account back, AI safety suite passed
 - Credit left: about US$1.69 (founder). Founder said: use it for the trial, no top-up.
