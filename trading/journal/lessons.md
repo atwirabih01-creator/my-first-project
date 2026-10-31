@@ -113,3 +113,9 @@ changes until they are scored.
   - An edge of about 0.15% per trade disappears with normal crash-time slippage.
 - 2026-10-31 16:15 · The PEPE "short squeeze" lean (negative funding while price held) failed within
   4 hours. One or two funding readings are not a signal; it was right not to make a call on it.
+- 2026-10-31 20:15 · First carry candidate (TURBO, C4) rejected by Atlas.
+  - **System issue found:** C4's entry level (12%/yr) sits barely above the venues' default funding
+    (about 11%/yr, also on Binance and OKX). So C4 can fire on a coin that only pays the default rate.
+  - The team also needs a liquidity floor for carry trades (TURBO traded about $100k a day).
+  - **To test before changing any rule:** C4 with a minimum daily volume, and an entry level clearly
+    above the default rate.
