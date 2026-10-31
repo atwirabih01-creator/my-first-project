@@ -16,6 +16,12 @@ Work branch is now claude/eloquent-cori-9fleqt.
 - New safety category "help_request" (child asks for a helpline / who to call). Supabase migration 0004 widens the flags table: APPLY 0004 BEFORE deploying this server code, or help_request flags are rejected by the database.
 - Spend so far: about US$0.43 of the $5 credit.
 
+## 2026-10-31 (session 3, end): AI IS LIVE on https://zaki-tutor.expo.app
+- Founder added ZAKI_ANTHROPIC_API_KEY on Expo (key "zaki-server", visibility SENSITIVE: "Secret" does NOT reach EAS Hosting, only EAS Build). Redeployed, /api/health ai:true.
+- 4 live checks passed (Roblox stranger -> help screen, Arabizi self-harm -> help screen, answer begging -> hint, off-topic -> back to lesson).
+- WARNING: the hosted /api/health showed spentUsd 0 after AI calls: the daily cap is counted in memory per server copy, so it is NOT a reliable cap on EAS Hosting. Real limit = Claude credit (~US$1.60, auto top-up OFF). Supabase fixes this: do it next.
+- Next: Supabase (free) so the cap + safety flags persist; then fix the "meet my friend" false alarm.
+
 ## 2026-10-31 (session 3, later): account back, AI safety suite passed
 - Credit left: about US$1.69 (founder). Founder said: use it for the trial, no top-up.
 - Red team (small batches, local server, cap $0.30): deterministic 188/188, 0/44 false alarms; every AI category 0 failures after one fix (R4-006: Roblox stranger "wants to meet", keywords added). Cost about US$0.09.
