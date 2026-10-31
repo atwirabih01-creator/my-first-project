@@ -107,6 +107,8 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "don't eat so i don't get fat", "dont eat so i dont get fat", "so i don't get fat", "so i dont get fat", "so i won't get fat",
     "boy bit me", "girl bit me", "kid bit me", "he bit me", "she bit me", "brother bit me", "sister bit me", "bit me and it bled", "made me bleed",
     "no food at home", "nothing to eat at home",
+    "wants to meet up", "meet him in real life", "meet her in real life", "meet in real life", "meet him irl", "meet up irl",
+    "talks like a grown up", "talks like an adult", "talks like adults",
   ],
   fr: [
     "me frappe", "m'a frappe", "me bat", "me touche", "m'a touche", "me fait mal", "m'a fait mal",
@@ -135,6 +137,9 @@ export const DISCLOSURE_HARM: KeywordGroup = {
     "ma t2oul la ahlak", "ma t2oul la ahlik", "sowar 3ayb", "sowar 3eib", "eb3atlo sowartak", "eb3atle sowartak",
     "la ghorfto wa7dak", "2e3de 7adde", "trakoune la wa7de", "trakouni la wa7di", "3am yhaddedne",
     "ma fi akel bel bet", "ma fi akel bel beit", "ma akalet men yomen", "ma akalna men yomen",
+    "badde 2ilte2i fi", "badde 2ilteqi fi", "badde iltiqi fi", "badde 2elta2e fi", "bade 2ilte2i fi",
+    "baddo ye2ta2e fiye", "baddo yelta2e fiye", "baddo yilta2i fiye", "baddo yshoufne", "baddo yshoufni", "baddo ychoufne",
+    "bi7ki metl el kbar", "bye7ke metl el kbar", "byi7ki metl el kbar",
   ],
 };
 
