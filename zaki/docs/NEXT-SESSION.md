@@ -34,6 +34,7 @@ Work branch is now claude/eloquent-cori-9fleqt.
 - Server live: https://zaki-tutor.expo.app (/api/health -> ai:false). eas.json ZAKI_SERVER_URL points there.
 - Click-through test (e2e/e2e.js) against the live site: 145/148; the 3 misses are timing in the test (it reads the screen before the slower live site has drawn it), screens checked by eye.
 - Android preview build: https://expo.dev/accounts/ai.zaki/projects/zaki/builds/e52a95da-3f42-4797-84a3-e71b44823843
+- 2026-10-31: v1.0.1 APK (teach-first lessons, big wrong-answer panel, no help button, lively UI): https://expo.dev/artifacts/eas/H4u8SW2xOJ_pTREbl38BJE-Ko1x8ldyyGa3tcUxTltY.apk
 - To redeploy the server: `cd zaki/app && rm -rf dist && npx expo export -p web && npx eas-cli deploy --prod --environment production --non-interactive`.
 
 ## 2026-10-30: BUILD THE ANDROID APP IN DEMO MODE (AI connects later)
