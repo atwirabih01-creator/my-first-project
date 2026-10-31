@@ -1,70 +1,26 @@
 {
- "scanned_utc": "2026-10-30 20:14:00+00:00",
+ "scanned_utc": "2026-10-31 00:13:00+00:00",
  "candidates": [],
  "hottest": [
   {
    "coin": "PEPE",
    "venue": "HL",
-   "yearly_last9": 0.1402,
+   "yearly_last9": 0.14,
    "last3_per8h": [
-    0.0007,
     0.000201,
-    8.9e-05
+    0.000169,
+    1.9e-05
    ],
    "versions": []
   },
   {
    "coin": "ENA",
    "venue": "HL",
-   "yearly_last9": 0.1236,
+   "yearly_last9": 0.1175,
    "last3_per8h": [
-    0.000376,
     0.000116,
-    6.9e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "MEME",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "ORDI",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "PNUT",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "WIF",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
+    0.000106,
+    1.3e-05
    ],
    "versions": []
   },
@@ -73,20 +29,64 @@
    "venue": "OKX",
    "yearly_last9": 0.1007,
    "last3_per8h": [
-    0.0001,
     5.8e-05,
+    0.0001,
     0.0001
    ],
    "versions": []
   },
   {
-   "coin": "TURBO",
+   "coin": "MEME",
    "venue": "HL",
-   "yearly_last9": 0.0997,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
-    4.3e-05,
     0.0001,
-    7.7e-05
+    0.0001,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "ORDI",
+   "venue": "HL",
+   "yearly_last9": 0.0989,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "PNUT",
+   "venue": "HL",
+   "yearly_last9": 0.0989,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "WIF",
+   "venue": "HL",
+   "yearly_last9": 0.0988,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "SHIB",
+   "venue": "HL",
+   "yearly_last9": 0.0959,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    1.3e-05
    ],
    "versions": []
   }
