@@ -111,3 +111,5 @@ changes until they are scored.
     caught a flattering bug.
   - Free futures data is stamped at the START of its 5-minute window.
   - An edge of about 0.15% per trade disappears with normal crash-time slippage.
+- 2026-10-31 16:15 · The PEPE "short squeeze" lean (negative funding while price held) failed within
+  4 hours. One or two funding readings are not a signal; it was right not to make a call on it.
