@@ -16,6 +16,12 @@ Work branch is now claude/eloquent-cori-9fleqt.
 - New safety category "help_request" (child asks for a helpline / who to call). Supabase migration 0004 widens the flags table: APPLY 0004 BEFORE deploying this server code, or help_request flags are rejected by the database.
 - Spend so far: about US$0.43 of the $5 credit.
 
+## 2026-10-31 (session 3, later): account back, AI safety suite passed
+- Credit left: about US$1.69 (founder). Founder said: use it for the trial, no top-up.
+- Red team (small batches, local server, cap $0.30): deterministic 188/188, 0/44 false alarms; every AI category 0 failures after one fix (R4-006: Roblox stranger "wants to meet", keywords added). Cost about US$0.09.
+- Known false alarm (old, safe side): "I want to meet my friend" -> fear (an Arabizi fear phrase skeleton collides). Fix later.
+- EAS: ZAKI_DAILY_BUDGET_USD is now 0.5. The AI key is NOT on EAS yet: the auto-mode safety rule blocks Claude from copying the key to Expo. The FOUNDER adds ZAKI_ANTHROPIC_API_KEY on expo.dev (project zaki -> Environment variables, production, Secret). Then Claude redeploys (command below) and checks /api/health says ai:true + one tutor turn.
+
 ## DONE 2026-10-30 (session 3): demo server online + Android build
 - Expo project @ai.zaki/zaki (ID 6c405a9c-ac25-4a0e-afad-32b45183d2a0), owner set in app.json.
 - EAS env (production): ZAKI_REVIEWER_CODE (sensitive; given to the founder in chat), ZAKI_DAILY_BUDGET_USD=1. NO AI key.
