@@ -17,6 +17,7 @@ export const ARABIC_NUMBER_AR: LessonPack = {
     { text: "المثنى: اسم يدلّ على اثنين. نزيد على المفرد «ان» أو «ين».", example: "كتاب ← كتابان، بنت ← بنتان" },
     { text: "الجمع: اسم يدلّ على ثلاثة أو أكثر.", example: "كتاب ← كتب، ولد ← أولاد" },
     { text: "بعض الكلمات نجمعها بزيادة «ات».", example: "معلّمة ← معلّمات، شجرة ← شجرات" },
+    { text: "الآن تعرف العدد! المفرد يدلّ على شيء واحد، والمثنى يدلّ على اثنين ونزيد «ان» أو «ين»، والجمع يدلّ على ثلاثة أو أكثر.", example: "قمر ← قمران ← أقمار، سيارة ← سيارتان ← سيارات" },
   ],
   checks: [
     Q("c1", "ما مثنى كلمة «كتاب»؟", ["كتابان", "كتب", "كتابات"], 0,
@@ -92,6 +93,7 @@ export const ARABIC_NUMBER_EN: LessonPack = {
     { text: "Muthanna (المثنى) means two things. Add «ان» (or «ين») to the end.", example: "كتاب ← كتابان (two books)" },
     { text: "Jam' (الجمع) means three or more.", example: "كتاب ← كتب, ولد ← أولاد" },
     { text: "Some words make the plural by adding «ات».", example: "معلّمة ← معلّمات (teachers)" },
+    { text: "Now you know! Mufrad (المفرد) is one thing, muthanna (المثنى) is two things (add «ان» or «ين»), and jam' (الجمع) is three or more.", example: "قلم (a pen) ← قلمان (two pens) ← أقلام (pens)" },
   ],
   checks: [
     Q("c1", "What is the dual (مثنى) of «كتاب»?", ["كتابان", "كتب", "كتابات"], 0,

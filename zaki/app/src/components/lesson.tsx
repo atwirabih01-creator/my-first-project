@@ -1,7 +1,7 @@
 // Lesson building blocks shared by the lesson loop and practice screens.
 import { router } from 'expo-router';
-import { useState } from 'react';
-import { Modal, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useEffect, useRef, useState, type ComponentRef, type ReactNode } from 'react';
+import { Modal, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { C, R, S } from '@/constants/theme';
 import { askTutor, checkAnswer, reportSafety, type ChatTurn, type FeedbackKey } from '@/lib/api';
@@ -112,10 +112,12 @@ export function QuestionWithHints({
   const [wrong, setWrong] = useState<number[]>([]);
   const [feedback, setFeedback] = useState<FeedbackKey | null>(null);
   const [busy, setBusy] = useState(false);
+  const [taps, setTaps] = useState(0); // new panel (and scroll) after every answer
 
   async function tap(i: number) {
     if (busy || feedback === 'right') return;
     setBusy(true);
+    setTaps((n) => n + 1);
     const res = await checkAnswer(pack, question, i, wrong.length);
     setBusy(false);
     if (res.correct) {
@@ -141,47 +143,84 @@ export function QuestionWithHints({
       <ReadAloud text={[question.q, ...question.choices].join('. ')} />
       <View style={{ gap: S.sm }}>
         {question.choices.map((c, i) => (
-          <Choice
-            key={`${question.id}-${i}`}
-            testID={`choice-${i}`}
-            label={c}
-            big={young}
-            state={feedback === 'right' && i === question.answerIndex ? 'right' : i === lastWrong ? 'wrong' : 'idle'}
-            onPress={() => tap(i)}
-          />
+          <View key={`${question.id}-${i}`} style={{ gap: S.sm }}>
+            <Choice
+              testID={`choice-${i}`}
+              label={c}
+              big={young}
+              state={feedback === 'right' && i === question.answerIndex ? 'right' : i === lastWrong ? 'wrong' : 'idle'}
+              onPress={() => tap(i)}
+            />
+            {/* The help appears DIRECTLY under the answer the child tapped, so it can't be missed. */}
+            {feedback === 'right' && i === question.answerIndex ? (
+              <FeedbackPanel kind="right" key={`fb-right-${taps}`} title={t('right')} titleTestID="feedback-right">
+                <Btn title={nextLabel ?? t('next')} onPress={onDone} big testID="next-btn" />
+              </FeedbackPanel>
+            ) : feedback && feedback !== 'right' && i === lastWrong ? (
+              <FeedbackPanel kind="help" key={`fb-help-${taps}`} title={t('lookTogether')} titleTestID="feedback-title">
+                <View style={{ gap: S.sm }} testID="feedback-hint">
+                  {feedback === 'example' ? (
+                    <>
+                      <Txt bold color={FB_HELP_TEXT}>
+                        💡 {t('similarExample')}
+                      </Txt>
+                      <Txt variant="big">{question.similarExample}</Txt>
+                      <Txt variant="big" bold color={C.primary}>
+                        👉 {t('tryAgainNow')}
+                      </Txt>
+                    </>
+                  ) : (
+                    <>
+                      <Txt bold color={FB_HELP_TEXT}>
+                        💡 {t('hint')}
+                      </Txt>
+                      <Txt variant="big">{feedback === 'hint1' ? question.hint1 : question.hint2}</Txt>
+                      <Txt bold color={C.primary}>
+                        👉 {t('tryAnother')}
+                      </Txt>
+                    </>
+                  )}
+                </View>
+                <ReadAloud text={feedback === 'example' ? `${question.similarExample}. ${t('tryAgainNow')}` : feedback === 'hint1' ? question.hint1 : question.hint2} />
+              </FeedbackPanel>
+            ) : null}
+          </View>
         ))}
       </View>
-      {feedback === 'right' ? (
-        <Card tone="mint">
-          <Row>
-            <Mascot size={56} mood="cheer" />
-            <Txt variant="big" style={{ flex: 1 }} testID="feedback-right">
-              {t('right')}
-            </Txt>
-          </Row>
-          <Btn title={nextLabel ?? t('next')} onPress={onDone} big testID="next-btn" />
-        </Card>
-      ) : feedback ? (
-        <Card tone="sun" style={{ gap: S.sm }}>
-          <Row style={{ alignItems: 'flex-start' }}>
-            <Mascot size={48} mood="thinking" animate={false} />
-            <View style={{ flex: 1, gap: 4 }} testID="feedback-hint">
-              {feedback === 'example' ? (
-                <>
-                  <Txt bold>💡 {t('similarExample')}</Txt>
-                  <Txt>{question.similarExample}</Txt>
-                  <Txt bold>{t('tryAgainNow')}</Txt>
-                </>
-              ) : (
-                <>
-                  <Txt bold>💡 {t('hint')}</Txt>
-                  <Txt>{feedback === 'hint1' ? question.hint1 : question.hint2}</Txt>
-                </>
-              )}
-            </View>
-          </Row>
-        </Card>
-      ) : null}
+    </View>
+  );
+}
+
+const FB_HELP_TEXT = '#8A4B00';
+
+/**
+ * Big, warm feedback panel with the owl: "Let's look at it together" after a wrong answer,
+ * a smaller green praise panel after a right one. Scrolls itself into view when it appears.
+ */
+function FeedbackPanel({ kind, title, titleTestID, children }: { kind: 'help' | 'right'; title: string; titleTestID: string; children: ReactNode }) {
+  const ref = useRef<ComponentRef<typeof View>>(null);
+  useEffect(() => {
+    if (Platform.OS !== 'web') return;
+    const el = ref.current as unknown as { scrollIntoView?: (o: object) => void } | null;
+    // Let the layout settle first, then bring the whole panel on screen.
+    const id = setTimeout(() => el?.scrollIntoView?.({ behavior: 'smooth', block: 'nearest' }), 60);
+    return () => clearTimeout(id);
+  }, []);
+  const help = kind === 'help';
+  return (
+    <View
+      ref={ref}
+      testID={help ? 'feedback-panel' : 'feedback-panel-right'}
+      accessibilityRole="alert"
+      accessibilityLiveRegion="polite"
+      style={[styles.panel, help ? styles.panelHelp : styles.panelRight]}>
+      <Row style={{ alignItems: 'center' }}>
+        <Mascot size={help ? 76 : 56} mood={help ? 'thinking' : 'cheer'} />
+        <Txt variant={help ? 'h2' : 'big'} bold style={{ flex: 1 }} color={help ? FB_HELP_TEXT : C.text} testID={titleTestID}>
+          {title}
+        </Txt>
+      </Row>
+      {children}
     </View>
   );
 }
@@ -284,14 +323,13 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
   );
 }
 
-/** "I need help" (big) + "Report this answer" (small), shown on lesson screens. */
+/** Small "Report this answer" link shown on lesson screens (no "I need help" button for children). */
 export function LessonHelpBar({ lessonKey, context }: { lessonKey?: string; context?: string }) {
   const { t } = useT();
   const { child, app } = useChild();
   const [reported, setReported] = useState(false);
   return (
     <View style={{ gap: S.sm }}>
-      <Btn title={t('needHelp')} icon="🆘" variant="help" big onPress={() => router.push('/help')} testID="need-help" />
       <Pressable
         testID="report-answer"
         accessibilityRole="button"
@@ -318,6 +356,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  panel: { borderRadius: R.lg, borderWidth: 3, padding: S.lg, gap: S.md, minWidth: 0 },
+  panelHelp: { backgroundColor: '#FFF1D0', borderColor: '#F0A830' },
+  panelRight: { backgroundColor: C.mintSoft, borderColor: C.mint },
   bubble: { maxWidth: '85%', flexShrink: 1, minWidth: 0, borderRadius: R.md, paddingHorizontal: S.md, paddingVertical: S.sm },
   input: {
     flex: 1,
@@ -335,7 +376,7 @@ const styles = StyleSheet.create({
   },
 });
 
-/** "Leave the test?" box. "I need help" is always inside it too (never blocked). */
+/** "Leave the test?" box. */
 export function LeaveTestModal({ visible, onStay, onLeave }: { visible: boolean; onStay: () => void; onLeave: () => void }) {
   const { t } = useT();
   return (
@@ -348,17 +389,6 @@ export function LeaveTestModal({ visible, onStay, onLeave }: { visible: boolean;
           <Txt center>{t('leaveText')}</Txt>
           <Btn title={t('stay')} big onPress={onStay} testID="leave-stay" />
           <Btn title={t('leave')} variant="secondary" onPress={onLeave} testID="leave-go" />
-          <Btn
-            title={t('needHelp')}
-            icon="🆘"
-            variant="help"
-            big
-            onPress={() => {
-              onStay();
-              router.push('/help');
-            }}
-            testID="leave-need-help"
-          />
         </Card>
       </View>
     </Modal>

@@ -3,7 +3,7 @@
 Plain version: the phone app (what the child and parent see) talks only to Zaki's own server. The server holds the secret AI keys, runs every safety check, and talks to the AI companies. The phone never holds a key.
 
 ## Parts
-- `src/app/` screens (Expo Router). Child: start/ready check, home (today), lesson loop, classes (with full review), tests (+ exams), exam, flashcards, practice, help, safety, break. Parent (behind parental gate): settings (incl. lesson order / unlock), add lesson (typed name or photo), exam builder, Ask Zaki for grown-ups, progress, WhatsApp simulator.
+- `src/app/` screens (Expo Router). Child: start/ready check, home (today), lesson loop, classes (with full review), tests (+ exams), exam, flashcards, practice, help (lesson help only, not linked), safety, break. Parent (behind parental gate): settings (incl. lesson order / unlock), add lesson (typed name or photo), exam builder, Ask Zaki for grown-ups, progress, WhatsApp simulator.
 - Shared pure code that both the server and the app's offline/demo mode use (no AI, no secrets, no Node APIs): `server/keywordScan.ts` + `server/normalize.ts` + `server/data/safetyKeywords.ts` (safety words), `server/shuffle.ts`, `server/examMix.ts`, `server/samples/` (demo packs), `src/lib/helpRoutes.ts` (help numbers).
 - `src/app/api/*+api.ts` server routes (run on the server, deployable to EAS Hosting). They only call code in `server/`.
 - `server/` all AI + safety logic (never imported by screens).
@@ -50,7 +50,7 @@ When a fixed safety text applies, `reply` already contains it (en/ar, from `serv
 
 ## Consent, reviewer, export/delete (app)
 - CONSENT (once per family, before any lesson or AI call): `/parent/consent` behind the gate, plain-language sections in en/ar (`src/lib/consentText.ts`, `CONSENT_VERSION`). Two guardians each type a first name + relationship and tick "I agree", OR one guardian ticks an explicit "the other parent/guardian agrees (or I am the only legal guardian)". Stored: version, time, date, mode, first names + relationship only. `api.ts` refuses lesson/tutor calls without active consent; the child's Ready screen and lessons show "A grown-up needs to set up Zaki first". Settings shows the status and can withdraw (AI stops until consent is given again).
-- REVIEWER INBOX `/reviewer` (start screen → "Safety reviewer"): code-protected; online it uses the routes above, in demo/offline it shows the flags kept on this device. Local flags follow the same rule: route "reviewer" for possible home involvement/unclear/help-button, never shown in the parent area (Progress shows only route-"parent" notes, without the child's words) and never included in the family export.
+- REVIEWER INBOX `/reviewer` (start screen → "Safety reviewer"): code-protected; online it uses the routes above, in demo/offline it shows the flags kept on this device. Local flags follow the same rule: route "reviewer" for possible home involvement/unclear, never shown in the parent area (Progress shows only route-"parent" notes, without the child's words) and never included in the family export.
 - EXPORT/DELETE `/parent/data` behind the gate: download a JSON file (web download / phone share sheet) of profiles, settings, plans, progress, lessons, exams, consent and parent safety notes. Delete needs the typed word DELETE / احذف, calls `/api/delete-family` with the family key (if registered), then wipes the device (local flags kept only without child link or text).
 
 ## Daily spending cap (`server/budget.ts`)
@@ -67,7 +67,8 @@ When a fixed safety text applies, `reply` already contains it (en/ar, from `serv
 ## App rules (client)
 - PASS-TO-UNLOCK (`src/lib/unlock.ts`): within each subject the grown-up's lessons are an ordered queue. Only the first lesson not yet passed (test >= 80%) is open; later ones show "Pass the "X" test to unlock". Passed lessons stay open for full review (teach steps, checks, test retake with a new shuffle; all from the saved pack, no AI). The grown-up can reorder or unlock early in Settings (behind the gate). Home "Start" opens the current open lesson.
 - Exams built by the grown-up are stored on the device; the child takes them in Tests (practice runs before the date), same timing rules as tests; results are broken down per lesson and weak lessons are offered for review.
-- "I need help" is never blocked (it is also inside the "Leave the test?" box).
+- No "I need help" / "I don't feel safe" button for children (founder decision, round 2). Safety stays automatic: worrying words a child types (Ask Zaki, practice) open the fixed safety screen and create a flag. `/help` still exists as a lesson-help page but nothing links to it.
+- LESSON ORDER: intro -> teach (5-8 steps, the whole topic, before any question) -> check questions (hint1 -> hint2 -> similar example in a big panel under the tapped answer) -> Ask Zaki -> summary -> test. `recap` stays in the pack shape but is not shown.
 
 ## LessonPack shape
 ```ts

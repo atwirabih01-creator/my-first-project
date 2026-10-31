@@ -18,6 +18,7 @@ export const SOCIAL_MAPS_EN: LessonPack = {
     { text: "The map key (legend) explains the symbols on the map.", example: "A small blue line might mean a river. A green triangle might mean a mountain." },
     { text: "The scale tells us how far things really are.", example: "If 1 cm on the map stands for 1 km, then 4 cm on the map is 4 km in real life." },
     { text: "Between the main directions we have north-east, north-west, south-east and south-west." },
+    { text: "Now you know how to read a map! Look at the compass rose for the directions, the key for the symbols, and the scale for how far things really are.", example: "On a map of your town, the compass rose shows where north is, a small tree in the key means a park, and the scale tells you how far your house is from the park." },
   ],
   checks: [
     Q("c1", "On most maps, which direction is at the top?", ["North", "South", "West"], 0,
@@ -94,6 +95,7 @@ export const SOCIAL_MAPS_AR: LessonPack = {
     { text: "مفتاح الخريطة يشرح الرموز المرسومة عليها.", example: "خط أزرق صغير قد يعني نهرًا، ومثلث أخضر قد يعني جبلًا." },
     { text: "مقياس الرسم يخبرنا عن المسافة الحقيقية.", example: "إذا كان 1 سم على الخريطة يساوي 1 كم، فإن 4 سم على الخريطة تساوي 4 كم في الحقيقة." },
     { text: "بين الاتجاهات الأصلية توجد اتجاهات فرعية: الشمال الشرقي والشمال الغربي والجنوب الشرقي والجنوب الغربي." },
+    { text: "الآن تعرف كيف تقرأ الخريطة! انظرْ إلى وردة الاتجاهات لتعرف الاتجاهات، وإلى المفتاح لتفهم الرموز، وإلى مقياس الرسم لتعرف المسافات الحقيقية.", example: "على خريطة بلدتك، تُظهر وردة الاتجاهات أين الشمال، وشجرة صغيرة في المفتاح تعني حديقة، ومقياس الرسم يخبرك كم يبعد بيتك عن الحديقة." },
   ],
   checks: [
     Q("c1", "في معظم الخرائط، أيّ اتجاه يكون في الأعلى؟", ["الشمال", "الجنوب", "الغرب"], 0,

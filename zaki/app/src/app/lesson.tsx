@@ -1,15 +1,18 @@
-// LESSON LOOP: loading -> intro -> recap -> teach -> check -> ask Zaki -> summary -> test
+// LESSON LOOP: loading -> intro -> teach (the full explanation, step by step) -> check questions
+// (hints / similar example where the child is stuck) -> ask Zaki -> summary -> test
 // -> pass ("Learned!") or fail (summary again -> retest from retestPool, max 2 retries a day).
-import { router, useLocalSearchParams } from 'expo-router';
+// Teaching always comes FIRST: no questions before the lesson is explained. (Packs may still
+// contain "recap" warm-up questions; they are kept in the data but not shown in the flow.)
+import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
-import { Modal, View } from 'react-native';
+import { Modal, StyleSheet, View } from 'react-native';
 
 import { Mascot } from '@/components/Mascot';
 import { ReadAloud } from '@/components/ReadAloud';
 import { Screen } from '@/components/Screen';
 import { AskZaki, Choice, LessonHelpBar, QuestionWithHints } from '@/components/lesson';
 import { Btn, Card, ProgressBar, Row, Txt } from '@/components/ui';
-import { C, S } from '@/constants/theme';
+import { C, R, S } from '@/constants/theme';
 import { fetchLessonPack } from '@/lib/api';
 import { clearInProgress, loadInProgress, saveInProgress } from '@/lib/inProgress';
 import { accessForKey } from '@/lib/unlock';
@@ -22,7 +25,6 @@ type Phase =
   | 'loading'
   | 'error'
   | 'intro'
-  | 'recap'
   | 'teach'
   | 'check'
   | 'ask'
@@ -47,7 +49,7 @@ export default function Lesson() {
   const { t } = useT();
 
   const [cp, setCp] = useState<CachedPack | null>(packs[key] ?? null);
-  // Resume an unfinished test (e.g. after "I need help") at the same question.
+  // Resume an unfinished test (e.g. after leaving the app) at the same question.
   const progressKey = `test:${child?.id}:${key}`;
   type SavedTest = { testQs: Question[]; testIdx: number; correct: number; startedAt: number };
   const [savedTest] = useState(() => (packs[key] ? loadInProgress<SavedTest>(progressKey) : null));
@@ -55,7 +57,6 @@ export default function Lesson() {
     packs[key] ? (savedTest ? 'test' : params.mode === 'test' ? 'testIntro' : params.mode === 'review' ? 'teach' : 'intro') : 'loading',
   );
   const [idx, setIdx] = useState(0);
-  const [recapWrong, setRecapWrong] = useState<number | null>(null);
   const [reload, setReload] = useState(0);
   const [askLeave, setAskLeave] = useState(false);
 
@@ -126,7 +127,6 @@ export default function Lesson() {
     if (!pack) return '';
     if (phase === 'teach') return pack.teachSteps[idx]?.text ?? '';
     if (phase === 'check') return pack.checks[idx]?.q ?? '';
-    if (phase === 'recap') return pack.recap[idx]?.q ?? '';
     if (phase === 'summary' || phase === 'resummary') return pack.summary.join(' ');
     return '';
   }, [pack, phase, idx]);
@@ -232,18 +232,6 @@ export default function Lesson() {
               }}
               testID="leave-go"
             />
-            {/* Safety rule: "I need help" is never dimmed or blocked, even in this box. */}
-            <Btn
-              title={t('needHelp')}
-              icon="🆘"
-              variant="help"
-              big
-              onPress={() => {
-                setAskLeave(false);
-                router.push('/help');
-              }}
-              testID="leave-need-help"
-            />
           </Card>
         </View>
       </Modal>
@@ -324,70 +312,44 @@ export default function Lesson() {
             testID="intro-start"
             onPress={() => {
               setIdx(0);
-              setPhase(pack.recap.length ? 'recap' : 'teach');
+              setPhase('teach');
             }}
           />
         </View>
       ) : null}
 
-      {!settings.paused && pack && phase === 'recap' && pack.recap[idx] ? (
-        <View style={{ gap: S.md }}>
-          <Txt variant="h2">🧠 {t('recapTitle')}</Txt>
-          <ProgressBar value={(idx + 1) / pack.recap.length} color={C.lilac} label={t('stepOf', { n: idx + 1, m: pack.recap.length })} />
-          <Card tone="primary">
-            <Txt variant="big" testID="question-text">
-              {pack.recap[idx].q}
-            </Txt>
-          </Card>
-          <ReadAloud text={[pack.recap[idx].q, ...pack.recap[idx].choices].join('. ')} />
-          {pack.recap[idx].choices.map((c, i) => (
-            <Choice
-              key={`r${idx}-${i}`}
-              testID={`choice-${i}`}
-              label={c}
-              big={young}
-              state={recapWrong === i ? 'wrong' : 'idle'}
-              onPress={() => {
-                if (i === pack.recap[idx].answerIndex) {
-                  setRecapWrong(null);
-                  if (idx + 1 < pack.recap.length) setIdx(idx + 1);
-                  else {
-                    setIdx(0);
-                    setPhase('teach');
-                  }
-                } else setRecapWrong(i);
-              }}
-            />
-          ))}
-          {recapWrong !== null ? (
-            <Card tone="sun">
-              <Txt>{t('recapWrong')}</Txt>
-            </Card>
-          ) : null}
-        </View>
-      ) : null}
-
       {!settings.paused && pack && phase === 'teach' && pack.teachSteps[idx] ? (
-        <View style={{ gap: S.md }}>
+        <View style={{ gap: S.md }} testID="teach-step">
           <Txt variant="h2">📘 {t('teachTitle')}</Txt>
           <ProgressBar value={(idx + 1) / pack.teachSteps.length} label={t('stepOf', { n: idx + 1, m: pack.teachSteps.length })} />
-          <Txt variant="small">{t('stepOf', { n: idx + 1, m: pack.teachSteps.length })}</Txt>
+          <Txt variant="small" bold>
+            {t('stepOf', { n: idx + 1, m: pack.teachSteps.length })}
+          </Txt>
           <Row style={{ alignItems: 'flex-start' }}>
-            <Mascot size={70} />
-            <Card style={{ flex: 1 }}>
-              <Txt variant="big" testID="teach-text">
+            <Mascot size={64} />
+            <Card style={{ flex: 1, minWidth: 0, borderWidth: 2, borderColor: C.primary }}>
+              <Txt variant="big" testID="teach-text" style={{ fontSize: 24, lineHeight: 34 }}>
                 {pack.teachSteps[idx].text}
               </Txt>
             </Card>
           </Row>
-          <ReadAloud text={[pack.teachSteps[idx].text, pack.teachSteps[idx].example].filter(Boolean).join('. ')} />
           {pack.teachSteps[idx].example ? (
-            <Card tone="sun">
-              <Txt>✨ {pack.teachSteps[idx].example}</Txt>
+            <View style={styles.example} testID="teach-example">
+              <Txt bold color="#8A4B00">
+                ✨ {t('forExample')}
+              </Txt>
+              <Txt variant="big">{pack.teachSteps[idx].example}</Txt>
+            </View>
+          ) : null}
+          <ReadAloud text={[pack.teachSteps[idx].text, pack.teachSteps[idx].example].filter(Boolean).join('. ')} />
+          {idx + 1 === pack.teachSteps.length ? (
+            <Card tone="mint">
+              <Txt center>🎉 {t('teachDoneNote')}</Txt>
             </Card>
           ) : null}
           <Btn
-            title={t('next')}
+            title={idx + 1 < pack.teachSteps.length ? t('understoodNext') : t('teachToQuestions')}
+            icon={idx + 1 < pack.teachSteps.length ? '✅' : '✏️'}
             big
             testID="next-btn"
             onPress={() => {
@@ -398,6 +360,10 @@ export default function Lesson() {
               }
             }}
           />
+          {/* "Explain again": go back to the step before (no new AI call). */}
+          {idx > 0 ? (
+            <Btn title={t('stepBack')} icon="🔁" variant="secondary" testID="prev-btn" onPress={() => setIdx(idx - 1)} />
+          ) : null}
         </View>
       ) : null}
 
@@ -557,3 +523,8 @@ export default function Lesson() {
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({
+  // The example sits in its own warm, highlighted card so it stands out from the explanation.
+  example: { backgroundColor: '#FFF1D0', borderColor: '#F0A830', borderWidth: 3, borderRadius: R.lg, padding: S.lg, gap: S.xs },
+});

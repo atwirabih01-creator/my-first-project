@@ -160,8 +160,12 @@ SAFETY AND DATA RULES
 CONTENT RULES
 - Teach exactly the requested topic at the requested grade, matching the photos when given and the research notes. Facts must be correct and standard.
 - Language: write the whole pack in the requested language. For Arabic use clear, simple Modern Standard Arabic (no dialect), with Western digits (0-9).
-- recap: 2 quick questions on easier, earlier skills of the same subject.
-- teachSteps: 3 to 5 small steps, each one idea, each with a short example from the child's life.
+- recap: return an empty list [] (the app no longer asks warm-up questions before teaching).
+- teachSteps: 5 to 8 steps that TOGETHER explain the WHOLE topic from zero, as if the child has never heard of it. Zaki teaches all of this BEFORE asking any question, so nothing the checks or test need may be missing.
+  - Very simple words for the child's grade; short sentences. Each step is ONE idea.
+  - Every step has an "example": a concrete example from a child's everyday life in the country context given (Lebanon by default: food like manousheh, ka'ak or olives, family, school, the sea, the mountains, a football match, the souk).
+  - Build up gradually: start with the easiest idea, each step uses the one before it.
+  - The LAST step pulls everything together in one short "now you know" explanation with a full worked example.
 - checks: 3 questions. test: 5 questions for grades 1-3, 8 for grades 4-6. retestPool: 5 NEW questions (different from test) for a second try.
 - Each question: 3 choices (2 for yes/no), exactly ONE correct, distractors are common mistakes. hint1 is a gentle nudge, hint2 is a stronger hint; neither hint may state the answer. similarExample solves a SIMILAR question with DIFFERENT numbers or words, step by step; it must not give the answer to the real question.
 - summary: 3 to 5 short sentences. flashcards: 4 to 8 front/back pairs.

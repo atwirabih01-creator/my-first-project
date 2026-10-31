@@ -11,7 +11,7 @@ import { useT } from '@/lib/store';
 export default function Break() {
   const { t } = useT();
   return (
-    <Screen child back="/" helpButton={false}>
+    <Screen child back="/">
       <View style={{ alignItems: 'center', gap: S.lg, paddingTop: S.xl }} testID="break-screen">
         <Mascot size={170} mood="calm" />
         <Txt variant="title" center>
@@ -24,7 +24,6 @@ export default function Break() {
         </Card>
       </View>
       <View style={{ flexGrow: 1 }} />
-      <Btn title={t('needHelp')} icon="🆘" variant="help" onPress={() => router.push('/help')} />
       <Btn title={t('breakParent')} icon="🔒" variant="secondary" onPress={() => router.push({ pathname: '/parent/gate', params: { next: 'settings' } })} />
     </Screen>
   );

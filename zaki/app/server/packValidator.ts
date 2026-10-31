@@ -12,7 +12,7 @@ import { SUBJECTS, type Lang, type LessonPack, type Question, type RecapItem, ty
 
 export const PACK_LIMITS = {
   recap: { min: 0, max: 3 },
-  teachSteps: { min: 1, max: 8 },
+  teachSteps: { min: 1, max: 10 }, // the AI is asked for 5-8; a little extra is kept, not cut mid-explanation
   checks: { min: 1, max: 9 },
   test: { min: 3, max: 10 },
   retestPool: { min: 0, max: 15 },

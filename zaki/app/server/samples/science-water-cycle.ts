@@ -18,6 +18,7 @@ export const SCIENCE_WATER_EN: LessonPack = {
     { text: "Condensation: high in the sky the air is cold. The water vapour cools and turns into tiny drops. The drops make clouds.", example: "Drops form on a cold glass of juice. That is condensation." },
     { text: "Precipitation: when the drops in a cloud get big and heavy, they fall as rain, snow or hail.", example: "In winter, snow falls on the mountains." },
     { text: "Collection: the water gathers in seas, rivers, lakes and under the ground. Then the cycle starts again." },
+    { text: "Now you know the water cycle! The Sun warms the water (evaporation), the vapour cools into clouds (condensation), drops fall (precipitation), and the water gathers again (collection). Round and round!", example: "A puddle in the school yard dries in the sun, becomes part of a cloud, and later falls again as rain on the mountains." },
   ],
   checks: [
     Q("c1", "The Sun warms the sea and water goes up into the air. What is this called?", ["Evaporation", "Condensation", "Collection"], 0,
@@ -95,6 +96,7 @@ export const SCIENCE_WATER_AR: LessonPack = {
     { text: "التكاثف: الهواء في الأعلى بارد. يبرد بخار الماء ويتحوّل إلى قطرات صغيرة جدًّا تكوّن الغيوم.", example: "تتكوّن قطرات على كأس عصير بارد. هذا تكاثف." },
     { text: "الهطول: عندما تكبر القطرات في الغيمة وتصبح ثقيلة، تسقط مطرًا أو ثلجًا أو بَرَدًا.", example: "في الشتاء يتساقط الثلج على الجبال." },
     { text: "التجمّع: يتجمّع الماء في البحار والأنهار والبحيرات وتحت الأرض، ثم تبدأ الدورة من جديد." },
+    { text: "الآن تعرف دورة الماء! تُسخّن الشمس الماء (التبخّر)، يبرد البخار ويصنع الغيوم (التكاثف)، تسقط القطرات (الهطول)، ثم يتجمّع الماء من جديد (التجمّع). وهكذا تدور الدورة!", example: "بركة ماء صغيرة في ملعب المدرسة تجفّ تحت الشمس، فيصير ماؤها جزءًا من غيمة، ثم يسقط مطرًا على الجبال." },
   ],
   checks: [
     Q("c1", "تُسخّن الشمس البحر فيصعد الماء إلى الهواء. ماذا نسمّي ذلك؟", ["التبخّر", "التكاثف", "التجمّع"], 0,

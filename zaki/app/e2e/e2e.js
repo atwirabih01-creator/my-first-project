@@ -47,6 +47,8 @@ const fromWords = (w) => {
     await page.waitForTimeout(250);
   };
   const visible = async (id, timeout = 5000) => tid(id).waitFor({ state: 'visible', timeout }).then(() => true, () => false);
+  // Round 2: the child-facing "I need help" button was removed (safety stays automatic).
+  const noHelpBtn = async () => !(await visible('need-help', 300)) && !/I need help|أحتاج إلى مساعدة/.test(await page.locator('body').innerText());
   const noHScroll = async () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1);
   const inApp = () => (isFile ? page.url().startsWith('file:') : page.url().startsWith(BASE));
   const home = async () => {
@@ -129,28 +131,56 @@ const fromWords = (w) => {
   await shot('en-ready-check');
   await tap('ready-yes');
   check('watch indicator on home', await visible('watch-indicator'));
+  check('Round 2: no "I need help" button on Home', await noHelpBtn());
   await shot('en-home-today');
 
   await tap('start-lesson');
   check('loading shows researching animation', await visible('lesson-loading', 3000));
   check('intro says AI', (await tid('ai-intro').innerText({ timeout: 8000 })).includes('an AI'));
+  check('Round 2: no "I need help" button in the lesson', await noHelpBtn());
   await tap('intro-start');
-  // Recap: one wrong, then right answers
-  await answerCurrent(false);
-  check('recap wrong gives gentle retry', (await page.getByText('Not quite').count()) > 0);
-  while (await visible('question-text', 800)) {
-    if (await visible('teach-text', 300)) break;
-    await answerCurrent(true);
-  }
-  check('teach step visible', await visible('teach-text'));
+  // Round 2: teaching comes FIRST (no warm-up questions), and it is a full explanation.
+  check('Round 2: lesson starts with teaching, not questions', (await visible('teach-text')) && !(await visible('question-text', 300)));
+  const teachCount = await page.evaluate(() => {
+    const s = JSON.parse(localStorage.getItem('zaki:v1:state'));
+    const cps = Object.values(s.packs).flatMap((byKey) => Object.values(byKey));
+    return Math.max(...cps.map((cp) => cp.pack.teachSteps.length));
+  });
+  check('Round 2: the lesson explains the topic in 5-8 steps', teachCount >= 5 && teachCount <= 8, `steps=${teachCount}`);
+  check('Round 2: each teach step shows its example in a highlighted card', await visible('teach-example', 2000));
   await shot('en-teach-step');
-  while (await visible('teach-text', 800)) await tap('next-btn');
+  const step1 = await tid('teach-text').innerText();
+  await tap('next-btn');
+  await tap('prev-btn');
+  check('Round 2: "explain again" goes back to the step before', (await tid('teach-text').innerText()) === step1);
+  let teachSeen = 0;
+  while (await visible('teach-text', 800)) {
+    teachSeen++;
+    await tap('next-btn');
+  }
+  check('Round 2: all teach steps shown before the first question', teachSeen === teachCount && (await visible('question-text', 2000)), `seen=${teachSeen}`);
   // Check 1: wrong -> hint1 -> hint2 -> similar example -> retry
   const rightIdx = await answerFor();
   const rightText = await tid(`choice-${rightIdx}`).innerText();
-  await answerCurrent(false);
+  const wrongIdx = await wrongFor();
+  await tap(`choice-${wrongIdx}`);
   const h1 = await tid('feedback-hint').innerText();
   check('wrong #1 shows a hint', h1.includes('Hint'));
+  // Round 2: big, eye-catching help panel right under the tapped answer.
+  check('Round 2: help panel has the title "Let\'s look at it together"', (await tid('feedback-title').innerText()).includes("Let's look at it together"));
+  await page.waitForTimeout(500);
+  const geo = await page.evaluate((wi) => {
+    const vis = (sel) => [...document.querySelectorAll(sel)].find((e) => e.offsetParent !== null);
+    const choice = vis(`[data-testid="choice-${wi}"]`).getBoundingClientRect();
+    const panel = vis('[data-testid="feedback-panel"]').getBoundingClientRect();
+    const q = parseFloat(getComputedStyle(vis('[data-testid="question-text"]')).fontSize);
+    const hintTexts = [...vis('[data-testid="feedback-hint"]').querySelectorAll('div[dir], div')].filter((e) => e.childElementCount === 0 && e.innerText.trim());
+    const biggest = Math.max(...hintTexts.map((e) => parseFloat(getComputedStyle(e).fontSize)));
+    return { gap: panel.top - choice.bottom, top: panel.top, bottom: panel.bottom, vh: window.innerHeight, q, biggest, border: parseFloat(getComputedStyle(vis('[data-testid="feedback-panel"]')).borderTopWidth) };
+  }, wrongIdx);
+  check('Round 2: panel sits directly under the chosen answer', geo.gap >= 0 && geo.gap <= 20, JSON.stringify(geo));
+  check('Round 2: panel is scrolled into view', geo.top >= 0 && geo.top < geo.vh, JSON.stringify(geo));
+  check('Round 2: hint text as big as the question, strong border', geo.biggest >= geo.q && geo.border >= 3, JSON.stringify(geo));
   await shot('en-check-hint1');
   await answerCurrent(false);
   const h2 = await tid('feedback-hint').innerText();
@@ -193,16 +223,7 @@ const fromWords = (w) => {
   await tap('back-btn');
   check('N5: back mid-test shows in-app "Leave the test?"', (await visible('leave-title', 3000)) && (await tid('leave-title').innerText()).includes('Leave the test'));
   await shot('en-test-leave-confirm');
-  const helpBox = await tid('leave-need-help').boundingBox();
-  check('Safety: full-size "I need help" inside the leave box', !!helpBox && helpBox.height >= 60 && helpBox.width >= 250);
-  await tap('leave-need-help');
-  check('Safety: "I need help" from the leave box opens help (no gate)', inApp() && (await visible('help-feel', 3000)));
-  await tap('help-lesson');
-  check('E8: help during a test talks about the question, not hints', (await page.locator('body').innerText()).includes('Read the question again'));
-  await tap('back-btn');
-  check('E4: back from help resumes the SAME test question', inApp() && (await visible('test-timer', 5000)) && (await tid('question-text').innerText()) === firstTestQ);
-  await tap('back-btn');
-  await visible('leave-title', 3000);
+  check('Round 2: no "I need help" button in the leave box', !(await visible('leave-need-help', 500)) && (await noHelpBtn()));
   await tap('leave-stay');
   check('N5: Stay keeps the same test question', inApp() && (await tid('question-text').innerText()) === firstTestQ && (await visible('test-timer', 2000)));
   // Fail: 2 right, 3 wrong
@@ -269,19 +290,26 @@ const fromWords = (w) => {
   await tap('back-btn');
   if (await visible('tab-ask', 500)) await tap('back-btn');
   await tap('back-btn');
+  // A disclosure where it is UNCLEAR who is involved: reviewer only (typed; there is no help button any more).
+  await tap('tile-practice');
+  await page.getByTestId(/practice-/).locator('visible=true').first().click();
+  await tap('tab-ask');
+  await tid('chat-input').fill('someone touched me');
+  await tap('chat-send');
+  check('Unclear disclosure (typed) -> safety screen', await visible('safety-screen'));
+  await tap('back-btn');
+  if (await visible('tab-ask', 500)) await tap('back-btn');
+  await tap('back-btn');
 
-  // I need help from inside a lesson; back returns to the lesson
+  // Round 2: no "I need help" button anywhere on the child's screens (safety stays automatic)
+  for (const tile of ['classes', 'tests', 'flashcards', 'practice']) {
+    await tap(`tile-${tile}`);
+    await page.waitForTimeout(300);
+    check(`Round 2: no "I need help" button on ${tile}`, await noHelpBtn());
+    await tap('back-btn');
+  }
   await tap('start-lesson');
   await visible('intro-start', 8000);
-  await tap('need-help');
-  await shot('en-need-help');
-  await tap('back-btn');
-  check('B1: help back returns to the lesson', inApp() && (await visible('intro-start', 3000)));
-  await tap('need-help');
-  await tap('help-feel');
-  check('help -> safety without parental gate', await visible('safety-screen'));
-  await tap('safety-back');
-  check('B1: safety "Go back" returns to the lesson the child was in', inApp() && (await visible('intro-start', 5000)));
   await tap('back-btn');
   check('B1: lesson back arrow lands on Home', inApp() && (await visible('start-lesson', 3000)));
   await tap('start-lesson');
@@ -452,15 +480,12 @@ const fromWords = (w) => {
   await answerCurrent(true);
   await answerCurrent(true);
   const examQ3 = await tid('question-text').innerText();
-  await tap('need-help');
-  await tap('help-lesson');
-  check('E8: exam help text has no hint advice', !(await page.locator('body').innerText()).includes('Tap Hint'));
-  await tap('back-btn');
-  check('E4: back from help resumes the exam at the same question', (await visible('test-timer', 5000)) && (await tid('question-text').innerText()) === examQ3);
+  check('Round 2: no "I need help" button in the exam', await noHelpBtn());
   check('Exam: grade 5 count-up timer', await visible('test-timer'));
   await tap('back-btn');
-  check('Exam: leave box keeps "I need help"', (await visible('leave-title', 3000)) && (await visible('leave-need-help', 1000)));
+  check('Exam: leave box asks first, without an "I need help" button', (await visible('leave-title', 3000)) && !(await visible('leave-need-help', 500)));
   await tap('leave-stay');
+  check('Exam: Stay keeps the same question', (await tid('question-text').innerText()) === examQ3);
   for (let i = 0; i < 8; i++) await answerCurrent(true);
   check('Exam: 10 of 10', (await tid('exam-score').innerText()).includes('10 of 10'));
   check('Exam: result broken down per lesson', (await page.getByTestId('exam-lesson-row').locator('visible=true').count()) === 2);
@@ -495,6 +520,7 @@ const fromWords = (w) => {
   await tap('profile-Maya');
   await tap('ready-yes');
   check('daily cap -> friendly break screen', await visible('break-screen', 5000));
+  check('Round 2: no "I need help" button on the break screen', await noHelpBtn());
   await shot('en-break-screen');
 
   // ---------- Arabic: Ali grade 3 ----------
@@ -519,6 +545,8 @@ const fromWords = (w) => {
   while (await visible('teach-text', 800)) await tap('next-btn');
   await answerCurrent(false);
   check('Arabic hint', (await tid('feedback-hint').innerText()).includes('تلميح'));
+  check('Round 2: Arabic help panel title', (await tid('feedback-title').innerText()).includes('هيّا ننظر إليه معًا'));
+  check('Round 2: no horizontal scroll with the help panel (ar)', await noHScroll());
   await shot('ar-check-hint');
   while (await visible('question-text', 800)) {
     await answerCurrent(true);
@@ -568,7 +596,7 @@ const fromWords = (w) => {
   await tap('back-btn');
   await tap('pchild-Maya');
   await tap('p-progress');
-  check('Maya: only the outside-home note is shown; reviewer-route flags ("my dad hits me", help button) are NOT, and no child words', (await page.getByTestId('safety-note').locator('visible=true').count()) === 1 && !/dad|stranger|photo/i.test(await tid('safety-notes').innerText()));
+  check('Maya: only the outside-home note is shown; reviewer-route flags ("my dad hits me", "someone touched me") are NOT, and no child words', (await page.getByTestId('safety-note').locator('visible=true').count()) === 1 && !/dad|stranger|photo|touched/i.test(await tid('safety-notes').innerText()));
   await tap('back-btn');
   await tap('p-settings');
   check('Settings shows consent status', (await tid('consent-status-text').innerText()).includes('Rami (father), Lina (mother)'));
@@ -595,7 +623,7 @@ const fromWords = (w) => {
   check('Reviewer: sees all flags with route, childRef and scrubbed excerpt', inbox.includes('my dad hits me') && inbox.includes('Reviewer only') && inbox.includes('Parent also told') && inbox.includes('childRef: c_') && !inbox.includes('Maya'));
   const cats = await page.getByTestId('reviewer-category').locator('visible=true').allInnerTexts();
   check('Reviewer: human-readable categories (no raw codes)', cats.length >= 4 && cats.every((c) => !/^(home|general|fear|self_harm|disclosure_harm|server)$/.test(c)) && cats.includes('Possible harm (child told something)'), cats.join(' | '));
-  check('Reviewer: stranger online is labelled outside the home; help button is "unclear"', inbox.includes('Parent also told (outside the home)') && inbox.includes('unclear who is involved') && inbox.includes('possible home involvement'));
+  check('Reviewer: stranger online is labelled outside the home; "someone touched me" is "unclear"', inbox.includes('Parent also told (outside the home)') && inbox.includes('unclear who is involved') && inbox.includes('possible home involvement'));
   check('Reviewer: local date format (not US m/d/yyyy)', !/\d{1,2}\/\d{1,2}\/20\d\d/.test(inbox));
   await page.getByTestId('flag-note').locator('visible=true').first().fill('Called the school counsellor.');
   await page.getByTestId('flag-status-resolved').locator('visible=true').first().click();
