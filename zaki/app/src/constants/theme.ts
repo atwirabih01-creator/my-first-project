@@ -24,6 +24,16 @@ export const C = {
   beak: '#FF9F43',
   owlDark: '#1F7F8A',
   cheek: '#FF8A65',
+  // Darker "shadow" edges for the chunky, press-down buttons on child screens.
+  primaryDeep: '#145860',
+  mintDeep: '#1A5E3A',
+  sunDeep: '#C9930F',
+  lilacDeep: '#4B3B80',
+  coralDeep: '#8F3129',
+  // Soft, warm background shapes on child screens (behind white cards; text never sits on them alone).
+  blobSun: '#FFF1C9',
+  blobLilac: '#ECE6FB',
+  blobMint: '#DDF3E6',
   waGreen: '#075E54',
   waBubble: '#DCF8C6',
   waBg: '#ECE5DD',

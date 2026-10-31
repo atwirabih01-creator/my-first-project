@@ -5,6 +5,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
+import { Burst } from '@/components/Celebrate';
 import { Mascot } from '@/components/Mascot';
 import { Screen } from '@/components/Screen';
 import { Choice, LeaveTestModal, LessonHelpBar } from '@/components/lesson';
@@ -176,6 +177,7 @@ export default function ExamScreen() {
             <Txt variant="big" center testID="exam-score">
               {t('passedText', { score: result.score, total: result.total })}
             </Txt>
+            {result.score / result.total >= 0.8 ? <Burst big originY="30%" /> : null}
           </View>
           <Card>
             <Txt bold>{t('examPerLesson')}</Txt>

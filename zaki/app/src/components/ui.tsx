@@ -1,10 +1,18 @@
 // Small shared UI kit: text, big buttons, cards, chips, progress bar.
-import type { ReactNode } from 'react';
+import { createContext, useContext, type ReactNode } from 'react';
 import { Pressable, StyleSheet, Text, View, type StyleProp, type TextStyle, type ViewStyle } from 'react-native';
 
 import { C, DyslexiaFont, R, S } from '@/constants/theme';
 import { countNoun } from '@/lib/i18n';
 import { useT } from '@/lib/store';
+
+/**
+ * Child screens are "playful": chunky buttons that press down, soft card shadows.
+ * Parent, reviewer and safety screens keep the plain, calm look (no provider there).
+ */
+const PlayfulCtx = createContext(false);
+export const PlayfulProvider = PlayfulCtx.Provider;
+export const usePlayful = () => useContext(PlayfulCtx);
 
 type TxtVariant = 'title' | 'h2' | 'body' | 'small' | 'big';
 
@@ -72,6 +80,16 @@ const BTN: Record<BtnVariant, { bg: string; fg: string; border: string }> = {
   sun: { bg: C.sun, fg: C.text, border: '#E8B21C' },
 };
 
+// The darker bottom edge that makes a playful button look pressable (ghost buttons stay flat).
+const DEEP: Partial<Record<BtnVariant, string>> = {
+  primary: C.primaryDeep,
+  secondary: C.primaryDeep,
+  help: C.coralDeep,
+  calm: C.lilacDeep,
+  success: C.mintDeep,
+  sun: C.sunDeep,
+};
+
 export function Btn({
   title,
   onPress,
@@ -97,6 +115,8 @@ export function Btn({
 }) {
   const v = BTN[variant];
   const { dyslexia } = useT();
+  const playful = usePlayful();
+  const deep = playful ? DEEP[variant] : undefined;
   return (
     <Pressable
       testID={testID}
@@ -108,7 +128,9 @@ export function Btn({
         styles.btn,
         { backgroundColor: v.bg, borderColor: v.border, minHeight: big ? 68 : small ? 44 : 56 },
         small && { paddingHorizontal: S.md, paddingVertical: S.xs },
-        pressed && !disabled && { transform: [{ scale: 0.97 }], opacity: 0.92 },
+        deep && { borderBottomWidth: small ? 4 : 6, borderBottomColor: deep },
+        // Playful: the button sinks into its edge (same total height, nothing below moves).
+        pressed && !disabled && (deep ? { borderBottomWidth: 2, marginTop: small ? 2 : 4 } : { transform: [{ scale: 0.97 }], opacity: 0.92 }),
         disabled && { opacity: 0.45 },
         style,
       ]}>
@@ -126,7 +148,20 @@ export function Btn({
 
 export function Card({ children, style, tone, testID }: { children: ReactNode; style?: StyleProp<ViewStyle>; tone?: 'mint' | 'sun' | 'lilac' | 'coral' | 'primary'; testID?: string }) {
   const bg = tone ? { mint: C.mintSoft, sun: C.sunSoft, lilac: C.lilacSoft, coral: C.coralSoft, primary: C.primarySoft }[tone] : C.card;
-  return <View testID={testID} style={[styles.card, { backgroundColor: bg }, style]}>{children}</View>;
+  const playful = usePlayful();
+  return <View testID={testID} style={[styles.card, { backgroundColor: bg }, playful && styles.lift, style]}>{children}</View>;
+}
+
+/** Zaki's speech bubble, with a little tail pointing back at the owl (start side; flips in Arabic). */
+export function Bubble({ children, style, testID, tone = 'card' }: { children: ReactNode; style?: StyleProp<ViewStyle>; testID?: string; tone?: 'card' | 'lilac' }) {
+  const bg = tone === 'lilac' ? C.lilacSoft : C.card;
+  const { rtl } = useT();
+  return (
+    <View testID={testID} style={[styles.bubble, { backgroundColor: bg }, style]}>
+      <View style={[styles.tail, rtl ? styles.tailRtl : styles.tailLtr, { backgroundColor: bg }]} />
+      {children}
+    </View>
+  );
 }
 
 export function Row({ children, style, gap = S.sm, wrap, testID }: { children: ReactNode; style?: StyleProp<ViewStyle>; gap?: number; wrap?: boolean; testID?: string }) {
@@ -191,6 +226,19 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: C.border,
   },
+  lift: { boxShadow: '0px 4px 14px rgba(30, 58, 76, 0.08)' },
+  bubble: {
+    borderRadius: R.lg,
+    padding: S.md,
+    paddingHorizontal: S.lg,
+    gap: S.xs,
+    borderWidth: 2,
+    borderColor: C.border,
+    minWidth: 0,
+  },
+  tail: { position: 'absolute', top: 24, width: 16, height: 16, borderColor: C.border, transform: [{ rotate: '45deg' }] },
+  tailLtr: { left: -9, borderLeftWidth: 2, borderBottomWidth: 2 },
+  tailRtl: { right: -9, borderRightWidth: 2, borderTopWidth: 2 },
   chip: {
     minHeight: 48,
     minWidth: 48,

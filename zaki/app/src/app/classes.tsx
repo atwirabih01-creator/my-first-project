@@ -50,9 +50,11 @@ export default function Classes() {
       {all.length === 0 ? <Txt>{t('noLessons')}</Txt> : null}
       {SUBJECTS.filter((s) => all.some((x) => x.subject === s.id)).map((s) => (
         <View key={s.id} style={{ gap: S.sm }}>
-          <Txt variant="h2">
-            {s.icon} {t(s.key)}
-          </Txt>
+          <View style={{ alignSelf: 'flex-start', backgroundColor: s.soft, borderColor: s.accent, borderWidth: 2, borderRadius: R.pill, paddingHorizontal: S.lg, paddingVertical: S.xs }}>
+            <Txt variant="h2">
+              {s.icon} {t(s.key)}
+            </Txt>
+          </View>
           {all
             .filter((x) => x.subject === s.id)
             .map((x) => {

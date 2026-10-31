@@ -122,6 +122,26 @@ const en = {
   readyNotYet: 'Not yet',
   readyLater: "No problem! Find a quiet spot, then tap I'm ready.",
   aiIntro: "I'm Zaki, a computer helper (an AI), not a person. Let's learn together!",
+  // Round 3: a livelier child side (greetings, Zaki's tips, cheers)
+  greetMorning: 'Good morning, {name}! ☀️',
+  greetAfternoon: 'Good afternoon, {name}! 🌤️',
+  greetEvening: 'Good evening, {name}! 🌙',
+  streakDays: '🔥 {n|day} in a row!',
+  zakiHello: "Hi! I'm Zaki 👋",
+  owlTapA11y: 'Zaki the owl. Tap for another tip.',
+  tip1: 'Every question you try makes your brain stronger! 💪',
+  tip2: "Mistakes help us learn. Even I make them sometimes!",
+  tip3: "Ready for a new adventure? Let's go! 🚀",
+  tip4: "Take a deep breath. You've got this! 🌟",
+  tip5: 'Did you know? An owl can turn its head almost all the way round! 🦉',
+  tip6: 'Small steps every day add up to big things.',
+  tip7: 'Your brain grows each time you learn something new! 🌱',
+  tip8: 'Psst… tap me for another tip!',
+  praise2: 'You got it! 🎉',
+  praise3: 'Brilliant work! ✨',
+  praise4: 'Exactly right! 🌟',
+  praise5: 'Super! Keep going! 🚀',
+  lessonCheer: 'You finished the whole lesson. Zaki is proud of you!',
 
   // Home
   todayPlan: "Today's plan",
@@ -527,6 +547,25 @@ const ar: Record<StringKey, string> = {
   readyNotYet: 'ليس بعد',
   readyLater: 'لا بأس! ابحثْ عن مكان هادئ، ثم اضغطْ "أنا مستعدّ".',
   aiIntro: 'أنا ذكي، مساعد حاسوبي (ذكاء اصطناعي)، ولستُ إنسانًا. هيّا نتعلّم معًا!',
+  greetMorning: 'صباح الخير يا {name}! ☀️',
+  greetAfternoon: 'نهارك سعيد يا {name}! 🌤️',
+  greetEvening: 'مساء الخير يا {name}! 🌙',
+  streakDays: '🔥 {n|day} على التوالي!',
+  zakiHello: 'مرحبًا! أنا ذكي 👋',
+  owlTapA11y: 'البومة ذكي. اضغطْ لنصيحة أخرى.',
+  tip1: 'كلّ سؤال تحاول حلّه يجعل دماغك أقوى! 💪',
+  tip2: 'الأخطاء تساعدنا على التعلّم، وأنا أيضًا أخطئ أحيانًا!',
+  tip3: 'هل أنت مستعدّ لمغامرة جديدة؟ هيّا بنا! 🚀',
+  tip4: 'خذْ نفَسًا عميقًا. أنت قادر على ذلك! 🌟',
+  tip5: 'هل تعلم؟ تستطيع البومة أن تُدير رأسها إلى الخلف تقريبًا! 🦉',
+  tip6: 'خطوات صغيرة كلّ يوم تصنع أشياء كبيرة.',
+  tip7: 'دماغك ينمو كلّما تعلّمت شيئًا جديدًا! 🌱',
+  tip8: 'سرّ صغير: اضغطْ عليّ لنصيحة أخرى!',
+  praise2: 'أصبت! 🎉',
+  praise3: 'عمل رائع! ✨',
+  praise4: 'إجابة صحيحة تمامًا! 🌟',
+  praise5: 'ممتاز! تابعْ هكذا! 🚀',
+  lessonCheer: 'أنهيت الدرس كلّه. ذكي فخور بك!',
 
   todayPlan: 'خطة اليوم',
   noPlan: 'لا توجد خطة بعد. اطلبْ من أحد الكبار إضافة درس.',
@@ -803,12 +842,13 @@ const ar: Record<StringKey, string> = {
 export const STRINGS: Record<Lang, Record<StringKey, string>> = { en, ar };
 
 // Counted nouns: "{n|q}" in a string becomes "3 questions" / "3 أسئلة" with correct plurals.
-type Noun = 'q' | 'lesson' | 'star' | 'min';
+type Noun = 'q' | 'lesson' | 'star' | 'min' | 'day';
 const NOUNS_EN: Record<Noun, [string, string]> = {
   q: ['question', 'questions'],
   lesson: ['lesson', 'lessons'],
   star: ['star', 'stars'],
   min: ['min', 'min'],
+  day: ['day', 'days'],
 };
 // Arabic: [1, 2, 3-10 (plural), 11-99 (accusative singular), 0 / 100+ (genitive singular)]
 const NOUNS_AR: Record<Noun, [string, string, string, string, string]> = {
@@ -816,6 +856,7 @@ const NOUNS_AR: Record<Noun, [string, string, string, string, string]> = {
   lesson: ['درس واحد', 'درسان', 'دروس', 'درسًا', 'درس'],
   star: ['نجمة واحدة', 'نجمتان', 'نجوم', 'نجمةً', 'نجمة'],
   min: ['دقيقة واحدة', 'دقيقتان', 'دقائق', 'دقيقةً', 'دقيقة'],
+  day: ['يوم واحد', 'يومان', 'أيام', 'يومًا', 'يوم'],
 };
 
 /** "3 questions" / "3 أسئلة" / "11 سؤالًا" / "سؤالان" with the right plural rule. */
@@ -839,7 +880,7 @@ export function translate(lang: Lang, key: StringKey, params?: Record<string, st
   let s = STRINGS[lang][key] ?? STRINGS.en[key] ?? key;
   if (params) {
     for (const [k, v] of Object.entries(params)) {
-      s = s.replace(new RegExp(`\\{${k}\\|(q|lesson|star|min)\\}`, 'g'), (_m, noun: Noun) => countNoun(lang, Number(v), noun));
+      s = s.replace(new RegExp(`\\{${k}\\|(q|lesson|star|min|day)\\}`, 'g'), (_m, noun: Noun) => countNoun(lang, Number(v), noun));
       s = s.split(`{${k}}`).join(String(v));
     }
   }

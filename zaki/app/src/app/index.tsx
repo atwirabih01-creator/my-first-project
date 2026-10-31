@@ -2,10 +2,10 @@
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import { Avatar } from '@/components/Avatar';
+import { Avatar, AVATARS } from '@/components/Avatar';
 import { Mascot } from '@/components/Mascot';
 import { Screen } from '@/components/Screen';
-import { Btn, Txt } from '@/components/ui';
+import { Bubble, Btn, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
 import { useApp, useT } from '@/lib/store';
 
@@ -14,13 +14,17 @@ export default function StartScreen() {
   const { t } = useT();
 
   return (
-    <Screen>
-      <View style={{ alignItems: 'center', gap: S.sm }}>
-        <Mascot size={130} />
-        <Txt variant="title" center>
-          {t('whoIsLearning')}
-        </Txt>
-      </View>
+    <Screen playful>
+      {/* Zaki waves hello and asks who is learning. */}
+      <Row style={{ alignItems: 'center', justifyContent: 'center' }}>
+        <Mascot size={112} action="wave" />
+        <Bubble style={{ flexShrink: 1 }}>
+          <Txt variant="small" bold color={C.primary}>
+            {t('zakiHello')}
+          </Txt>
+          <Txt variant="h2">{t('whoIsLearning')}</Txt>
+        </Bubble>
+      </Row>
 
       <View style={styles.grid}>
         {app.profiles.map((p) => (
@@ -33,8 +37,14 @@ export default function StartScreen() {
               app.setActiveChild(p.id);
               router.push('/ready');
             }}
-            style={({ pressed }) => [styles.tile, pressed && { transform: [{ scale: 0.97 }] }]}>
-            <Avatar id={p.avatar} size={84} />
+            style={({ pressed }) => [
+              styles.tile,
+              { backgroundColor: AVATARS.find((a) => a.id === p.avatar)?.bg ?? C.card },
+              pressed && styles.tilePressed,
+            ]}>
+            <View style={styles.avatarRing}>
+              <Avatar id={p.avatar} size={76} />
+            </View>
             <Txt variant="h2" center>
               {p.nickname}
             </Txt>
@@ -73,17 +83,21 @@ export default function StartScreen() {
 const styles = StyleSheet.create({
   grid: { flexDirection: 'row', flexWrap: 'wrap', gap: S.md, justifyContent: 'center' },
   tile: {
-    width: 160,
-    minHeight: 180,
+    width: 148, // two side by side on a 360px phone
+    minHeight: 176,
     backgroundColor: C.card,
     borderRadius: R.lg,
     borderWidth: 2,
-    borderColor: C.border,
+    borderBottomWidth: 6,
+    borderColor: 'rgba(30, 58, 76, 0.16)',
     alignItems: 'center',
     justifyContent: 'center',
     gap: S.xs,
     padding: S.md,
   },
-  newTile: { borderStyle: 'dashed', borderColor: C.primary, backgroundColor: C.primarySoft },
+  // Press down into the darker edge (same total height).
+  tilePressed: { borderBottomWidth: 2, marginTop: 4 },
+  avatarRing: { padding: 4, borderRadius: 50, backgroundColor: C.card },
+  newTile: { borderStyle: 'dashed', borderColor: C.primary, borderBottomWidth: 2, backgroundColor: C.primarySoft },
   plus: { width: 84, height: 84, borderRadius: 42, backgroundColor: C.card, alignItems: 'center', justifyContent: 'center' },
 });

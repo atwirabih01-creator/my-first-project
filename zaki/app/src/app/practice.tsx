@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { Pressable, View } from 'react-native';
 
+import { Burst } from '@/components/Celebrate';
 import { Mascot } from '@/components/Mascot';
 import { Screen } from '@/components/Screen';
 import { AskZaki, LessonHelpBar, QuestionWithHints } from '@/components/lesson';
@@ -100,6 +101,7 @@ export default function Practice() {
                   {t('allDone')}
                 </Txt>
                 <Btn title={t('fcAgain')} onPress={() => setQi(0)} />
+                <Burst originY="25%" />
               </Card>
             )
           ) : (

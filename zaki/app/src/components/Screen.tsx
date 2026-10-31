@@ -8,7 +8,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { C, MaxWidth, R, S } from '@/constants/theme';
 import { goTo } from '@/lib/nav';
 import { todayStr, useApp, useChild, useT } from '@/lib/store';
-import { Txt } from './ui';
+import { PlayfulProvider, Txt } from './ui';
 
 export function LangToggle({ alsoChild }: { alsoChild?: boolean }) {
   const { uiLang, setUiLang } = useApp();
@@ -76,6 +76,17 @@ function useTimeTracking(enabled: boolean, lessonKey?: string) {
   }, [over, focused]);
 }
 
+/** Soft, warm shapes behind child screens (cheap plain views; never behind text on their own). */
+function Backdrop() {
+  return (
+    <View style={[StyleSheet.absoluteFill, { overflow: 'hidden', pointerEvents: 'none' }]} aria-hidden importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
+      <View style={[styles.blob, { width: 260, height: 260, top: -90, right: -80, backgroundColor: C.blobSun }]} />
+      <View style={[styles.blob, { width: 200, height: 200, top: '38%', left: -110, backgroundColor: C.blobLilac }]} />
+      <View style={[styles.blob, { width: 300, height: 300, bottom: -140, right: -90, backgroundColor: C.blobMint }]} />
+    </View>
+  );
+}
+
 export function Screen({
   children,
   title,
@@ -89,6 +100,7 @@ export function Screen({
   headerRight,
   bg = C.bg,
   showLang = true,
+  playful,
 }: {
   children: ReactNode;
   title?: string;
@@ -103,6 +115,8 @@ export function Screen({
   headerRight?: ReactNode;
   bg?: string;
   showLang?: boolean;
+  /** Bright child look (chunky buttons, soft shapes). On by default for child screens. */
+  playful?: boolean;
 }) {
   const app = useApp();
   const { rtl, t } = useT();
@@ -119,36 +133,40 @@ export function Screen({
     else if (back) goTo(back);
   };
 
+  const fun = playful ?? !!child;
   const body = <View style={styles.inner}>{children}</View>;
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: bg }} edges={['top', 'bottom', 'left', 'right']}>
-      <View style={{ flex: 1, direction: dir }} {...webDir}>
-        <DemoBanner />
-        {title || back || showLang || headerRight ? (
-          <View style={styles.header}>
-            {back ? (
-              <Pressable onPress={onBack} accessibilityRole="button" accessibilityLabel={t('back')} style={styles.backBtn} testID="back-btn">
-                <Text style={{ fontSize: 26, color: C.primary, fontWeight: '800' }}>{rtl ? '→' : '←'}</Text>
-              </Pressable>
-            ) : null}
-            <View style={{ flex: 1 }}>{title ? <Txt variant="h2">{title}</Txt> : null}</View>
-            {headerRight}
-            {showLang ? <LangToggle alsoChild={child} /> : null}
-          </View>
-        ) : null}
-        {scroll ? (
-          <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
-            {body}
-          </ScrollView>
-        ) : (
-          <View style={[styles.scroll, { flex: 1 }]}>{body}</View>
-        )}
-        {/* No "I need help" button for children (founder's decision). Safety still works
-            automatically: worrying words a child types open the safety screen. */}
-        {footer ? <View style={styles.footer}>{footer}</View> : null}
-        {child ? <WatchIndicator /> : null}
-      </View>
+      {fun ? <Backdrop /> : null}
+      <PlayfulProvider value={fun}>
+        <View style={{ flex: 1, direction: dir }} {...webDir}>
+          <DemoBanner />
+          {title || back || showLang || headerRight ? (
+            <View style={styles.header}>
+              {back ? (
+                <Pressable onPress={onBack} accessibilityRole="button" accessibilityLabel={t('back')} style={styles.backBtn} testID="back-btn">
+                  <Text style={{ fontSize: 26, color: C.primary, fontWeight: '800' }}>{rtl ? '→' : '←'}</Text>
+                </Pressable>
+              ) : null}
+              <View style={{ flex: 1 }}>{title ? <Txt variant="h2">{title}</Txt> : null}</View>
+              {headerRight}
+              {showLang ? <LangToggle alsoChild={child} /> : null}
+            </View>
+          ) : null}
+          {scroll ? (
+            <ScrollView contentContainerStyle={styles.scroll} keyboardShouldPersistTaps="handled">
+              {body}
+            </ScrollView>
+          ) : (
+            <View style={[styles.scroll, { flex: 1 }]}>{body}</View>
+          )}
+          {/* No "I need help" button for children (founder's decision). Safety still works
+              automatically: worrying words a child types open the safety screen. */}
+          {footer ? <View style={styles.footer}>{footer}</View> : null}
+          {child ? <WatchIndicator /> : null}
+        </View>
+      </PlayfulProvider>
     </SafeAreaView>
   );
 }
@@ -179,6 +197,7 @@ const styles = StyleSheet.create({
   scroll: { paddingHorizontal: S.lg, paddingVertical: S.md, flexGrow: 1 },
   inner: { width: '100%', maxWidth: MaxWidth, alignSelf: 'center', gap: S.lg, flexGrow: 1 },
   footer: { paddingHorizontal: S.lg, paddingBottom: S.sm, width: '100%', maxWidth: MaxWidth, alignSelf: 'center', gap: S.sm },
+  blob: { position: 'absolute', borderRadius: 999, opacity: 0.9 },
   watch: { backgroundColor: C.lilacSoft, paddingVertical: 8, paddingHorizontal: S.lg },
   demo: { backgroundColor: C.sunSoft, paddingVertical: 6, paddingHorizontal: S.lg, borderBottomWidth: 1, borderBottomColor: '#F2D27A' },
 });

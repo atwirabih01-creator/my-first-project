@@ -7,6 +7,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
 import { Modal, StyleSheet, View } from 'react-native';
 
+import { Burst, PopIn } from '@/components/Celebrate';
 import { Mascot } from '@/components/Mascot';
 import { ReadAloud } from '@/components/ReadAloud';
 import { Screen } from '@/components/Screen';
@@ -19,6 +20,7 @@ import { accessForKey } from '@/lib/unlock';
 import { shuffleChoices } from '../../server/shuffle';
 import { goTo, useHelpReturn } from '@/lib/nav';
 import { consentActive, lessonKeyOf, MAX_TESTS_PER_DAY, todayStr, useChild, useT } from '@/lib/store';
+import { subjectInfo } from '@/lib/subjects';
 import type { CachedPack, Question, Subject } from '@/lib/types';
 
 type Phase =
@@ -198,6 +200,7 @@ export default function Lesson() {
     !!cp?.demo && !!pack && norm(pack.topic) !== norm(topic) && !norm(pack.topic).includes(norm(topic)) && !norm(topic).includes(norm(pack.topic));
   const onBack = () => (phase === 'test' ? setAskLeave(true) : goHome());
   const sources = cp?.sources ?? [];
+  const subj = subjectInfo(subject);
 
   return (
     <Screen
@@ -298,8 +301,18 @@ export default function Lesson() {
 
       {!settings.paused && pack && phase === 'intro' ? (
         <View style={{ alignItems: 'center', gap: S.lg }}>
-          <Mascot size={150} />
+          <Mascot size={150} action="wave" />
+          <PopIn bounce delay={150}>
+            <View style={[styles.subjectBadge, { backgroundColor: subj.soft, borderColor: subj.accent }]}>
+              <Txt bold>
+                {subj.icon} {t(subj.key)}
+              </Txt>
+            </View>
+          </PopIn>
           <Card tone="lilac" style={{ alignSelf: 'stretch' }}>
+            <Txt variant="h2" center>
+              {t('readyHi', { name: child.nickname })} 👋
+            </Txt>
             <Txt variant="big" center testID="ai-intro">
               {t('aiIntro')}
             </Txt>
@@ -321,7 +334,7 @@ export default function Lesson() {
       {!settings.paused && pack && phase === 'teach' && pack.teachSteps[idx] ? (
         <View style={{ gap: S.md }} testID="teach-step">
           <Txt variant="h2">📘 {t('teachTitle')}</Txt>
-          <ProgressBar value={(idx + 1) / pack.teachSteps.length} label={t('stepOf', { n: idx + 1, m: pack.teachSteps.length })} />
+          <ProgressBar value={(idx + 1) / pack.teachSteps.length} color={subj.accent} label={t('stepOf', { n: idx + 1, m: pack.teachSteps.length })} />
           <Txt variant="small" bold>
             {t('stepOf', { n: idx + 1, m: pack.teachSteps.length })}
           </Txt>
@@ -343,9 +356,11 @@ export default function Lesson() {
           ) : null}
           <ReadAloud text={[pack.teachSteps[idx].text, pack.teachSteps[idx].example].filter(Boolean).join('. ')} />
           {idx + 1 === pack.teachSteps.length ? (
-            <Card tone="mint">
-              <Txt center>🎉 {t('teachDoneNote')}</Txt>
-            </Card>
+            <PopIn bounce>
+              <Card tone="mint">
+                <Txt center>🎉 {t('teachDoneNote')}</Txt>
+              </Card>
+            </PopIn>
           ) : null}
           <Btn
             title={idx + 1 < pack.teachSteps.length ? t('understoodNext') : t('teachToQuestions')}
@@ -478,17 +493,26 @@ export default function Lesson() {
         lastResult.passed ? (
           <View style={{ alignItems: 'center', gap: S.lg }} testID="result-pass">
             <Mascot size={160} mood="cheer" />
-            <Txt variant="title" center>
-              🎉 {t('learned')}
-            </Txt>
+            <PopIn bounce>
+              <Txt variant="title" center>
+                🎉 {t('learned')}
+              </Txt>
+            </PopIn>
             <Txt variant="big" center>
               {t('passedText', { score: lastResult.score, total: lastResult.total })}
             </Txt>
-            <Txt variant="h2" center color="#9A6B00">
-              ⭐ {t('starsEarned', { n: lastResult.score + 2 })}
-            </Txt>
+            <PopIn bounce delay={350}>
+              <View style={styles.starsBadge}>
+                <Txt variant="h2" center color="#7A5500">
+                  ⭐ {t('starsEarned', { n: lastResult.score + 2 })}
+                </Txt>
+              </View>
+            </PopIn>
+            <Txt center>{t('lessonCheer')}</Txt>
             {lastResult.record ? <Txt center>🏅 {t('newRecord')}</Txt> : null}
             <Btn title={t('backHome')} big style={{ alignSelf: 'stretch' }} onPress={goHome} testID="back-home" />
+            {/* The big celebration on top (never takes taps): confetti + stars while Zaki hops. */}
+            <Burst big originY="22%" />
           </View>
         ) : (
           <View style={{ alignItems: 'center', gap: S.lg }} testID="result-fail">
@@ -527,4 +551,6 @@ export default function Lesson() {
 const styles = StyleSheet.create({
   // The example sits in its own warm, highlighted card so it stands out from the explanation.
   example: { backgroundColor: '#FFF1D0', borderColor: '#F0A830', borderWidth: 3, borderRadius: R.lg, padding: S.lg, gap: S.xs },
+  subjectBadge: { borderRadius: R.pill, borderWidth: 2, paddingHorizontal: S.lg, paddingVertical: S.xs },
+  starsBadge: { backgroundColor: C.sunSoft, borderColor: C.sun, borderWidth: 3, borderRadius: R.pill, paddingHorizontal: S.xl, paddingVertical: S.sm },
 });

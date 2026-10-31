@@ -51,7 +51,7 @@ export default function Tests() {
       {upcoming.map((p) => {
         const s = subjectInfo(p.subject);
         return (
-          <Card key={p.id} tone="sun">
+          <Card key={p.id} style={{ backgroundColor: s.soft, borderColor: s.accent, borderWidth: 2 }}>
             <Row>
               <Txt variant="big">{s.icon}</Txt>
               <View style={{ flex: 1 }}>

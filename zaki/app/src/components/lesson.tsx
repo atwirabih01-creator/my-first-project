@@ -8,7 +8,9 @@ import { askTutor, checkAnswer, reportSafety, type ChatTurn, type FeedbackKey } 
 import { localSafetyCheck } from '@/lib/localSafety';
 import { keywordScan } from '../../server/keywordScan';
 import { useChild, useT } from '@/lib/store';
+import type { StringKey } from '@/lib/i18n';
 import type { LessonPack, Question } from '@/lib/types';
+import { Burst, PopIn } from './Celebrate';
 import { Mascot } from './Mascot';
 import { ReadAloud } from './ReadAloud';
 import { Btn, Card, Row, Txt } from './ui';
@@ -64,6 +66,8 @@ export function Choice({
   const { dyslexia } = useT();
   const bg = state === 'wrong' ? C.wrongSoft : state === 'right' ? C.mintSoft : C.card;
   const border = state === 'wrong' ? '#F2B57A' : state === 'right' ? C.mint : C.border;
+  // A chunky lower edge so answers look like real buttons you can press down.
+  const edge = state === 'wrong' ? '#E3964F' : state === 'right' ? C.mintDeep : '#BFD3DA';
   return (
     <Pressable
       testID={testID}
@@ -73,8 +77,8 @@ export function Choice({
       accessibilityState={{ selected: state === 'right' }}
       style={({ pressed }) => [
         styles.choice,
-        { backgroundColor: bg, borderColor: border, minHeight: big ? 72 : 60 },
-        pressed && { transform: [{ scale: 0.98 }] },
+        { backgroundColor: bg, borderColor: border, borderBottomColor: edge, minHeight: big ? 72 : 60 },
+        pressed && { borderBottomWidth: 2, marginTop: 3 },
       ]}>
       <Text
         style={[
@@ -113,6 +117,7 @@ export function QuestionWithHints({
   const [feedback, setFeedback] = useState<FeedbackKey | null>(null);
   const [busy, setBusy] = useState(false);
   const [taps, setTaps] = useState(0); // new panel (and scroll) after every answer
+  const [praise] = useState<StringKey>(() => PRAISE[Math.floor(Math.random() * PRAISE.length)]);
 
   async function tap(i: number) {
     if (busy || feedback === 'right') return;
@@ -153,7 +158,7 @@ export function QuestionWithHints({
             />
             {/* The help appears DIRECTLY under the answer the child tapped, so it can't be missed. */}
             {feedback === 'right' && i === question.answerIndex ? (
-              <FeedbackPanel kind="right" key={`fb-right-${taps}`} title={t('right')} titleTestID="feedback-right">
+              <FeedbackPanel kind="right" key={`fb-right-${taps}`} title={t(praise)} titleTestID="feedback-right">
                 <Btn title={nextLabel ?? t('next')} onPress={onDone} big testID="next-btn" />
               </FeedbackPanel>
             ) : feedback && feedback !== 'right' && i === lastWrong ? (
@@ -192,6 +197,7 @@ export function QuestionWithHints({
 }
 
 const FB_HELP_TEXT = '#8A4B00';
+const PRAISE: StringKey[] = ['right', 'praise2', 'praise3', 'praise4', 'praise5'];
 
 /**
  * Big, warm feedback panel with the owl: "Let's look at it together" after a wrong answer,
@@ -199,6 +205,7 @@ const FB_HELP_TEXT = '#8A4B00';
  */
 function FeedbackPanel({ kind, title, titleTestID, children }: { kind: 'help' | 'right'; title: string; titleTestID: string; children: ReactNode }) {
   const ref = useRef<ComponentRef<typeof View>>(null);
+  const { rtl } = useT();
   useEffect(() => {
     if (Platform.OS !== 'web') return;
     const el = ref.current as unknown as { scrollIntoView?: (o: object) => void } | null;
@@ -207,21 +214,25 @@ function FeedbackPanel({ kind, title, titleTestID, children }: { kind: 'help' | 
     return () => clearTimeout(id);
   }, []);
   const help = kind === 'help';
+  // Help slides in softly (it stays big and clear); praise pops in with a little burst of stars.
   return (
-    <View
-      ref={ref}
-      testID={help ? 'feedback-panel' : 'feedback-panel-right'}
-      accessibilityRole="alert"
-      accessibilityLiveRegion="polite"
-      style={[styles.panel, help ? styles.panelHelp : styles.panelRight]}>
-      <Row style={{ alignItems: 'center' }}>
-        <Mascot size={help ? 76 : 56} mood={help ? 'thinking' : 'cheer'} />
-        <Txt variant={help ? 'h2' : 'big'} bold style={{ flex: 1 }} color={help ? FB_HELP_TEXT : C.text} testID={titleTestID}>
-          {title}
-        </Txt>
-      </Row>
-      {children}
-    </View>
+    <PopIn bounce={!help}>
+      <View
+        ref={ref}
+        testID={help ? 'feedback-panel' : 'feedback-panel-right'}
+        accessibilityRole="alert"
+        accessibilityLiveRegion="polite"
+        style={[styles.panel, help ? styles.panelHelp : styles.panelRight]}>
+        {help ? null : <Burst originX={rtl ? '85%' : '15%'} originY="30%" />}
+        <Row style={{ alignItems: 'center' }}>
+          <Mascot size={help ? 76 : 60} mood={help ? 'thinking' : 'cheer'} />
+          <Txt variant={help ? 'h2' : 'big'} bold style={{ flex: 1 }} color={help ? FB_HELP_TEXT : C.text} testID={titleTestID}>
+            {title}
+          </Txt>
+        </Row>
+        {children}
+      </View>
+    </PopIn>
   );
 }
 
@@ -351,6 +362,7 @@ const styles = StyleSheet.create({
   choice: {
     borderRadius: R.lg,
     borderWidth: 2,
+    borderBottomWidth: 5,
     paddingHorizontal: S.lg,
     paddingVertical: S.md,
     alignItems: 'center',
