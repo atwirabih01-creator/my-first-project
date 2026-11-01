@@ -27,7 +27,7 @@ Write one line per plan: **APPROVED** or **REJECTED** — and why. If in doubt, 
 
 ## Going-live gate (owner's rule — never bend it)
 Real money only after a desk version passes the owner's final test in CLAUDE.md (100 closed paper
-trades with at least 80 wins, profit after fees, ≥ $1.20 per $1 lost, biggest drop ≤ 10%)
+trades with at least 70 wins, profit after fees, ≥ $1.20 per $1 lost, biggest drop ≤ 10%)
 **and** the owner gives an explicit OK.
 
 ## Rules

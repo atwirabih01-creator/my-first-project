@@ -192,7 +192,7 @@ def score():
         dd = float((1 - eq / np.maximum.accumulate(eq)).max() * 100)
         pf = float(r[r > 0].sum() / -r[r <= 0].sum()) if (r <= 0).any() and r[r <= 0].sum() < 0 else (99.0 if len(r) else 0.0)
         first = r[:100]
-        ok = bool(len(r) >= 100 and (first > WIN_MIN).sum() >= 80 and first.sum() > 0 and pf >= 1.2 and dd <= 10)
+        ok = bool(len(r) >= 100 and (first > WIN_MIN).sum() >= 70 and first.sum() > 0 and pf >= 1.2 and dd <= 10)
         rows.append({"version": n, "closed": len(r), "open": int(((t.version == n) & (t.status == "open")).sum()) if len(t) else 0,
                      "wins": int((r > WIN_MIN).sum()), "profit_%": round(100 * (eq[-1] - 1), 2),
                      "profit_per_$1_lost": round(pf, 2), "biggest_drop_%": round(dd, 2), "PASSED": ok})

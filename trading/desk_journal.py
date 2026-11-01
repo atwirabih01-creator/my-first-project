@@ -245,7 +245,7 @@ def score():
         won, eq, dd, pf = stats(r)
         first = r.head(100)                                   # the pass test judges the SAME first 100 trades
         w100, eq100, dd100, pf100 = stats(first)
-        ok = bool(len(c) >= 100 and w100.sum() >= 80 and first.sum() > 0 and pf100 >= 1.2 and dd100 <= 10)
+        ok = bool(len(c) >= 100 and w100.sum() >= 70 and first.sum() > 0 and pf100 >= 1.2 and dd100 <= 10)
         rows.append({"version": v, "closed": len(c), "open": int((g.status == "open").sum()),
                      "wins": int(won.sum()), "win_rate": round(float(won.mean()), 3) if len(r) else None,
                      "profit_%": round(100 * (eq[-1] / 10_000 - 1), 2), "profit_per_$1_lost": round(pf, 2),

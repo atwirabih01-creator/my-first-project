@@ -5,7 +5,7 @@ description: Run one session of the 3-agent crypto / meme-coin trading desk — 
 
 # Trading Desk — one session
 
-Owner's locked goal (CLAUDE.md): one desk version reaches **80 wins out of 100 closed paper trades**,
+Owner's locked goal (CLAUDE.md): one desk version reaches **70 wins out of 100 closed paper trades (changed from 80 by the owner, 27 Oct 2026)**,
 with **profit after fees** (≥ $1.20 earned per $1 lost) and a **biggest drop ≤ 10%**. The agents
 **think**: Atlas studies → Hawk analyses → Sage checks and decides. All three must agree. Aim: consistency.
 

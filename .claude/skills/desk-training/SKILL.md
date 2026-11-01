@@ -77,5 +77,5 @@ Sage writes `journal/YYYY-MM-DD-week.md` with:
 Edit agent files or this skill when a lesson is proven, and log each change in `journal/CHANGELOG.md`.
 
 ## Reporting to the owner
-Only when `account.py` prints `GRADUATED=yes`, when a desk version passes the 80/100 goal, or when
+Only when `account.py` prints `GRADUATED=yes`, when a desk version passes the 70/100 goal, or when
 something truly blocks the work.
