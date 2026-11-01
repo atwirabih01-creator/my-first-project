@@ -47,6 +47,18 @@ Run it even when the scanner has no candidate. This is the practice that builds 
    - **Approved plans:** `python3 desk_journal.py add` or `limit`, as in the trading-desk skill.
    - **Session file:** `journal/YYYY-MM-DD-study.md`.
 
+### Trial from 2 Nov 2026 (Sage's weekly card, 1 Nov): trigger calls
+- **Writing triggers:** each session Hawk writes, per coin, one "up" and one "down" trigger in advance.
+  A trigger is an hourly close outside the range.
+- **Recording a call:** if a trigger has fired AND price is still beyond the level at the next session
+  (a break that has already failed does not count; see the 1 Nov false break), record a 24h call in
+  that direction at medium confidence. Use `calls.py add`, with "trigger" in the reason.
+- **Exceptions:** skip the call when Atlas gives a sourced, dated reason against it, or when a major
+  scheduled event falls inside the 24h.
+- **Review on Sun 8 Nov:**
+  - Target: 8 or more scored calls.
+  - Drop the trial if trigger calls are right less than 50% of the time after 20 calls.
+
 ## 2. Review after every closed team trade (version HWK) or scored call
 Within the next desk run, the team answers in 4 lines. Append the answers to `lessons.md`:
 - What we expected and why.

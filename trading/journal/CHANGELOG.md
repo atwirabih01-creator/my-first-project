@@ -75,3 +75,11 @@
   It failed anyway.
 - **Conclusion:** lower fees help (30m goes from losing to about break-even) but nothing passes. Results
   swing between years, so there is no robust edge.
+
+## 2026-11-01 · Weekly report card 1 (Sage) and the "trigger calls" trial
+- **Week:** 1 call in 15 sessions (wrong); no new team trades; account $498.76.
+  See `journal/2026-11-01-week.md`.
+- **Trial from 2 Nov:** a pre-set range-break trigger can produce a medium-confidence 24h call, but only
+  if price is still beyond the level when the call is recorded.
+  - Added to desk-training/SKILL.md section 1.
+  - Reviewed on 8 Nov.
