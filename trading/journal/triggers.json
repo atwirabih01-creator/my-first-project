@@ -1,0 +1,10 @@
+{"set": "trial-1", "frozen_utc": "2026-11-02 00:10", "rule": "two consecutive Binance 1h closes beyond the level; still beyond at recording time",
+ "author": "Hawk (levels), Sage (PEPE down moved 0.00000479 -> 0.00000465 for balance; ISM is not a major event)",
+ "triggers": [
+  {"symbol": "BTCUSDT", "dir": "up",   "level": 78300},
+  {"symbol": "BTCUSDT", "dir": "down", "level": 77100},
+  {"symbol": "ETHUSDT", "dir": "up",   "level": 2280},
+  {"symbol": "ETHUSDT", "dir": "down", "level": 2236},
+  {"symbol": "PEPEUSDT", "dir": "up",   "level": 0.00000515},
+  {"symbol": "PEPEUSDT", "dir": "down", "level": 0.00000465}
+ ]}

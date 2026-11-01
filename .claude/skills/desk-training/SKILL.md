@@ -55,6 +55,10 @@ Run it even when the scanner has no candidate. This is the practice that builds 
   that direction at medium confidence. Use `calls.py add`, with "trigger" in the reason.
 - **Exceptions:** skip the call when Atlas gives a sourced, dated reason against it, or when a major
   scheduled event falls inside the 24h.
+- **Trigger set:** frozen in `journal/triggers.json` (set "trial-1", 1 Nov).
+  - Each trigger needs two consecutive 1h closes beyond its level.
+  - `python3 triggers.py` (run by scan_run.sh) prints FIRED and `TRIGGERS_FIRED=<n>`.
+  - Sage ruled that ISM is not a major event. Major events: Fed, CPI, the jobs report, PCE.
 - **Review on Sun 8 Nov:**
   - Target: 8 or more scored calls.
   - Drop the trial if trigger calls are right less than 50% of the time after 20 calls.

@@ -18,6 +18,7 @@ python3 carry_live.py score | tee -a /tmp/desk_score.txt
 c=$(python3 -c "import json; print(len(json.load(open('journal/carry_scan.json'))['candidates']))")
 python3 calls.py score
 python3 account.py | tee /tmp/desk_account.txt
+python3 triggers.py || echo "TRIGGERS_FIRED=0"
 echo "- $(date -u '+%Y-%m-%d %H:%M') UTC — scan: ${n} candidate(s), carry: ${c} candidate(s)" >> journal/scan_log.md
 echo "STUDY_SESSION=yes"
 grep "^GRADUATED=" /tmp/desk_account.txt || echo "GRADUATED=no"
