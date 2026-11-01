@@ -119,3 +119,5 @@ changes until they are scored.
   - The team also needs a liquidity floor for carry trades (TURBO traded about $100k a day).
   - **To test before changing any rule:** C4 with a minimum daily volume, and an entry level clearly
     above the default rate.
+- 2026-11-01 12:15 · BTC closed two hours above the 78,110 range top, then fell back inside.
+  A one-close breakout trigger would have been a false signal; prefer two closes or a retest that holds.
