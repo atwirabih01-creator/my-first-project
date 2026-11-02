@@ -22,6 +22,8 @@ if __name__ == "__main__":
     cfg = json.load(open(HERE / "journal" / "triggers.json"))
     fired = 0
     for t in cfg["triggers"]:
+        if t.get("used_utc"):                                            # one call per trigger
+            print(f'{t["symbol"]:9s} {t["dir"]:4s} {t["level"]:<12g} used {t["used_utc"]}'); continue
         c = closes(t["symbol"])
         beyond = [x > t["level"] if t["dir"] == "up" else x < t["level"] for x in c]
         ok = len(c) == 2 and all(beyond)
