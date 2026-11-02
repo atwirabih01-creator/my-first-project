@@ -1,14 +1,14 @@
 {
- "scanned_utc": "2026-11-02 08:28:00+00:00",
+ "scanned_utc": "2026-11-02 12:24:00+00:00",
  "candidates": [
   {
    "coin": "TURBO",
    "venue": "HL",
-   "yearly_last9": 0.1874,
+   "yearly_last9": 0.1937,
    "last3_per8h": [
     0.000155,
     0.0001,
-    1.3e-05
+    6.4e-05
    ],
    "versions": [
     "C4"
@@ -19,11 +19,11 @@
   {
    "coin": "TURBO",
    "venue": "HL",
-   "yearly_last9": 0.1874,
+   "yearly_last9": 0.1937,
    "last3_per8h": [
     0.000155,
     0.0001,
-    1.3e-05
+    6.4e-05
    ],
    "versions": [
     "C4"
@@ -31,17 +31,6 @@
   },
   {
    "coin": "JUP",
-   "venue": "OKX",
-   "yearly_last9": 0.1095,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    0.0001
-   ],
-   "versions": []
-  },
-  {
-   "coin": "ORDI",
    "venue": "OKX",
    "yearly_last9": 0.1095,
    "last3_per8h": [
@@ -74,35 +63,46 @@
    "versions": []
   },
   {
-   "coin": "BTC",
-   "venue": "OKX",
-   "yearly_last9": 0.1033,
-   "last3_per8h": [
-    9.5e-05,
-    0.0001,
-    8.6e-05
-   ],
-   "versions": []
-  },
-  {
    "coin": "ENA",
    "venue": "HL",
-   "yearly_last9": 0.0996,
+   "yearly_last9": 0.1057,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
-   "coin": "APT",
-   "venue": "HL",
-   "yearly_last9": 0.0989,
+   "coin": "ORDI",
+   "venue": "OKX",
+   "yearly_last9": 0.1055,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.7e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "AVAX",
+   "venue": "HL",
+   "yearly_last9": 0.1049,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    6.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "BONK",
+   "venue": "HL",
+   "yearly_last9": 0.1049,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    6.3e-05
    ],
    "versions": []
   }
