@@ -59,6 +59,11 @@ Run it even when the scanner has no candidate. This is the practice that builds 
   - Each trigger needs two consecutive 1h closes beyond its level.
   - `python3 triggers.py` (run by scan_run.sh) prints FIRED and `TRIGGERS_FIRED=<n>`.
   - Sage ruled that ISM is not a major event. Major events: Fed, CPI, the jobs report, PCE.
+- **One open call per coin (Sage, 2 Nov):** if an opposite trigger fires while a call on that coin is still
+  open, skip the call and mark the trigger used. Write a shadow result (start price and time) in
+  triggers.json, so the 8 Nov review can still score it.
+- **What counts as a reason against:** it must predict the direction over the next 24h. "Could go
+  either way" events don't count (Sage, 2 Nov).
 - **Review on Sun 8 Nov:**
   - Target: 8 or more scored calls.
   - Drop the trial if trigger calls are right less than 50% of the time after 20 calls.
