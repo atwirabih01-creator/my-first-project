@@ -1,5 +1,12 @@
 # Next session: start here
 
+## 2026-11-03 (night): v1.2.0 — homework photos, story lessons, calm sensitive topics
+- APK: https://expo.dev/artifacts/eas/KBtXVd6jhtKmizsnImIl2ambLqtkC6VCWKwGK1JgeTM.apk (new native module expo-image-manipulator + camera permission). Server redeployed.
+- Live red team after fixes: tutor all categories + homework priority pass (re-run of changed groups 203/203 + 105/105).
+- BLOCKER: Anthropic credit EXHAUSTED (API 400 "credit balance is too low"). App now shows the friendly budget message. Founder asked to buy ~US$10, auto top-up OFF. After "done": test one live lesson-pack (story style) + one homework turn, then tell the founder to install.
+- Server 500s now include `kind` (error name:status, no content) for debugging.
+
+
 ## 2026-11-03 (later): v1.1.0 live — grades 1-9 + age, curriculum, Help me with today's lesson, Homework help
 - APK: https://expo.dev/artifacts/eas/jTBA9guyPco8jLg_ATh2DEIcNLxq4X-K-0d-fVXsUL4.apk ; server redeployed.
 - Red team with real AI: tutor all AI categories pass (after R8-015 fix: never repeat haram/sect words when declining); homework priority categories 200/200 (+R8/answer-begging 60/60). Spent ~US$0.36 on tests today.
