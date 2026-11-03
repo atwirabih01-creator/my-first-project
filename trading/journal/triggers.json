@@ -60,7 +60,10 @@
       "start": 76926,
       "start_utc": "2026-11-02 20:25",
       "score_utc": "2026-11-03 20:25",
-      "note": "skipped: opposite BTC up call open (Sage one-call-per-coin rule)"
+      "note": "skipped: opposite BTC up call open (Sage one-call-per-coin rule)",
+      "end": 77642.0,
+      "result_pct": 0.931,
+      "right": false
      }
     },
     {
