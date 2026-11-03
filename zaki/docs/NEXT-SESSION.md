@@ -1,4 +1,9 @@
-# Next session: start here (written 2026-10-28)
+# Next session: start here
+
+## 2026-11-03: lesson cost fix (live)
+- Founder hit "Zaki will prepare this lesson soon": one lesson build cost ~US$0.3-0.9 (Sonnet research with 4 web searches + 32k-token pack with medium thinking, up to 2 tries) and the 0.50 cap stopped it halfway (paid, then thrown away).
+- Fixed: research on Haiku, max 2 searches; pack effort low; cap checked once at build start (capCheckedByCaller). Measured: Fractions 8 steps, 30 s, US$0.043. Live water-cycle build OK (7 steps, 24 s). No app reinstall needed.
+ (written 2026-10-28)
 
 The founder (Rabih, not a programmer, wants very simple step-by-step guidance "like a kid", one step at a time) has just:
 - created a Zaki Gmail, a Claude Console account (personal), and an Expo account (personal, free)
