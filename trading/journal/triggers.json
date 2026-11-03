@@ -19,7 +19,8 @@
    "dir": "up",
    "level": 2280,
    "needs_retest": true,
-   "note": "2,280 broke on 2 Nov and failed within 48h: a call also needs a retest that holds"
+   "note": "2,280 broke on 2 Nov and failed within 48h: a call also needs a retest that holds",
+   "used_utc": "2026-11-03 16:20"
   },
   {
    "symbol": "ETHUSDT",
