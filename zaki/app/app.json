@@ -3,7 +3,7 @@
     "name": "Zaki",
     "slug": "zaki",
     "owner": "ai.zaki",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "zaki",
@@ -22,7 +22,7 @@
       },
       "predictiveBackGestureEnabled": false,
       "package": "com.zaki.tutor",
-      "versionCode": 2
+      "versionCode": 3
     },
     "web": {
       "output": "server",
