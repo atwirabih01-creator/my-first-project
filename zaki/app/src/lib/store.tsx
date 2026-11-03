@@ -165,7 +165,7 @@ type AppState = Persisted & {
 type Actions = {
   setActiveChild: (id: string | null, keepLang?: boolean) => void;
   setUiLang: (lang: Lang, alsoChild?: boolean) => void;
-  addChild: (p: { nickname: string; grade: number; lang: Lang; avatar: AvatarId }) => ChildProfile;
+  addChild: (p: { nickname: string; grade: number; age?: number; lang: Lang; avatar: AvatarId }) => ChildProfile;
   deleteChild: (id: string) => void;
   updateChild: (id: string, patch: Partial<ChildProfile>) => void;
   updateSettings: (id: string, patch: Partial<ChildSettings>) => void;
@@ -262,14 +262,14 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   // when a real server is connected. Each one stays queued if the limit is still reached.
   const queueRan = useRef(false);
   useEffect(() => {
-    if (!state.loaded || state.demo !== false || queueRan.current || !state.consent || state.consent.withdrawnAt) return;
+    if (!state.loaded || state.demo !== false || queueRan.current || !consentActive(state.consent)) return;
     queueRan.current = true;
     (async () => {
       const snap = stateRef.current;
       for (const child of snap.profiles) {
         const settingsFor = snap.settings[child.id] ?? DEFAULT_SETTINGS;
         for (const item of (snap.plans[child.id] ?? []).filter((p) => p.pending)) {
-          const res = await fetchLessonPack({ childRef: child.id, grade: child.grade, lang: child.lang, country: settingsFor.country, subject: item.subject, topic: item.topic });
+          const res = await fetchLessonPack({ childRef: child.id, grade: child.grade, age: child.age, lang: child.lang, country: settingsFor.country, subject: item.subject, topic: item.topic });
           if (res.budgetReached) return; // still over today's limit: stop, try another day
           if ('safetyStopped' in res && res.safetyStopped) continue;
           const key = lessonKeyOf(item.subject, item.topic);
@@ -284,7 +284,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   }, [state.loaded, state.demo, state.consent]);
 
   // No lesson or AI request before a grown-up has given consent (and not withdrawn it).
-  const consentOn = !!state.consent && !state.consent.withdrawnAt;
+  const consentOn = consentActive(state.consent);
   useEffect(() => {
     setConsentActive(consentOn);
   }, [consentOn]);
@@ -566,9 +566,17 @@ export function useChild() {
 }
 
 /** Translation helpers for the current UI language. */
-/** Consent given and not withdrawn: lessons and AI may be used. */
+/**
+ * Consent given for the CURRENT consent text and not withdrawn: lessons and AI may be used.
+ * When CONSENT_VERSION changes (the meaning changed), families are asked to agree again.
+ */
 export function consentActive(c: ConsentRecord | null | undefined): boolean {
-  return !!c && !c.withdrawnAt;
+  return !!c && !c.withdrawnAt && c.version === CONSENT_VERSION;
+}
+
+/** Consent was given, but for an older consent text: the grown-up must read it and agree again. */
+export function consentOutdated(c: ConsentRecord | null | undefined): boolean {
+  return !!c && !c.withdrawnAt && c.version !== CONSENT_VERSION;
 }
 
 export function useT() {

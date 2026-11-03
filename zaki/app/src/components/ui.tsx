@@ -124,6 +124,7 @@ export function Btn({
       accessibilityRole="button"
       accessibilityLabel={a11yLabel ?? title}
       accessibilityState={{ disabled: !!disabled }}
+      disabled={!!disabled}
       style={({ pressed }) => [
         styles.btn,
         { backgroundColor: v.bg, borderColor: v.border, minHeight: big ? 68 : small ? 44 : 56 },
@@ -175,9 +176,10 @@ export function Chip({ label, selected, onPress, a11yLabel, testID }: { label: s
       onPress={onPress}
       accessibilityRole="button"
       accessibilityState={{ selected: !!selected }}
+      aria-selected={!!selected}
       accessibilityLabel={a11yLabel ?? label}
       style={[styles.chip, selected && { backgroundColor: C.primary, borderColor: C.primary }]}>
-      <Text style={{ color: selected ? '#FFFFFF' : C.primary, fontWeight: '700', fontSize: 16 }}>{label}</Text>
+      <Text style={{ color: selected ? '#FFFFFF' : C.primary, fontWeight: '700', fontSize: 16, textAlign: 'center', flexShrink: 1 }}>{label}</Text>
     </Pressable>
   );
 }
@@ -242,6 +244,8 @@ const styles = StyleSheet.create({
   chip: {
     minHeight: 48,
     minWidth: 48,
+    maxWidth: '100%', // long topic names wrap inside the chip instead of running off the screen
+    paddingVertical: 6,
     paddingHorizontal: S.lg,
     borderRadius: R.pill,
     borderWidth: 2,

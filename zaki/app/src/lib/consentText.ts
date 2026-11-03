@@ -2,7 +2,7 @@
 // Bump CONSENT_VERSION whenever the meaning changes (families are then asked again).
 import type { Lang } from './types';
 
-export const CONSENT_VERSION = '2026-10-20.1';
+export const CONSENT_VERSION = '2026-11-03.1'; // round 4: the child's age is now kept
 
 export const CONSENT_SECTIONS: Record<Lang, { title: string; body: string }[]> = {
   en: [

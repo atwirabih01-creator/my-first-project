@@ -45,6 +45,11 @@ const TILE_COLORS: Record<string, { bg: string; edge: string }> = {
   practice: { bg: C.mintSoft, edge: C.mint },
 };
 
+const BIG_TILES: { key: string; icon: string; label: StringKey; href: '/today-lesson' | '/homework'; bg: string; edge: string }[] = [
+  { key: 'today-help', icon: '🎒', label: 'tileTodayHelp', href: '/today-lesson', bg: '#FFE9D2', edge: '#E07B12' },
+  { key: 'homework', icon: '✏️', label: 'tileHomework', href: '/homework', bg: '#E6E8FF', edge: '#5457C9' },
+];
+
 export default function Home() {
   const { child, settings, progress, plan } = useChild();
   const { t, lang } = useT();
@@ -177,6 +182,28 @@ export default function Home() {
               testID="start-lesson"
             />
           </View>
+
+          {/* Two big helpers: today's class again (teach-first lesson) and homework help (no answers given). */}
+          <View style={{ gap: S.md }}>
+            {BIG_TILES.map((x) => (
+              <Pressable
+                key={x.key}
+                testID={`tile-${x.key}`}
+                onPress={() => router.push(x.href)}
+                accessibilityRole="button"
+                accessibilityLabel={t(x.label)}
+                style={({ pressed }) => [styles.bigTile, { backgroundColor: x.bg, borderColor: x.edge }, pressed && styles.tilePressed]}>
+                <View style={[styles.bigTileIcon, { borderColor: x.edge }]}>
+                  <Txt variant="title" center>
+                    {x.icon}
+                  </Txt>
+                </View>
+                <Txt variant="h2" style={{ flex: 1, minWidth: 0 }}>
+                  {t(x.label)}
+                </Txt>
+              </Pressable>
+            ))}
+          </View>
         </>
       )}
 
@@ -236,5 +263,17 @@ const styles = StyleSheet.create({
   },
   // Press down into the coloured edge (same total height, so nothing jumps).
   tilePressed: { borderBottomWidth: 2, marginTop: 4 },
+  bigTile: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: S.md,
+    minHeight: 92,
+    borderRadius: R.lg,
+    borderWidth: 2,
+    borderBottomWidth: 6,
+    paddingHorizontal: S.lg,
+    paddingVertical: S.md,
+  },
+  bigTileIcon: { width: 60, height: 60, borderRadius: 30, borderWidth: 2, backgroundColor: C.card, alignItems: 'center', justifyContent: 'center' },
   tileIcon: { width: 58, height: 58, borderRadius: 29, backgroundColor: C.card, alignItems: 'center', justifyContent: 'center' },
 });

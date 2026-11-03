@@ -5,6 +5,7 @@
 const { chromium } = require('playwright');
 const fs = require('fs');
 const path = require('path');
+const { writeTestConsent } = require('./consent-helper');
 
 const BASE = process.env.BASE || 'http://localhost:8090';
 const OUT = process.env.OUT || path.join(__dirname, '..', 'test-screenshots');
@@ -679,12 +680,7 @@ const fromWords = (w) => {
   await shot('en-after-delete');
   await tap('restore-demo');
   check('Demo children can be restored after delete', await visible('profile-Maya', 3000));
-  await page.evaluate(() => {
-    const k = 'zaki:v1:state';
-    const s = JSON.parse(localStorage.getItem(k));
-    s.consent = { version: 'test', at: new Date().toISOString(), date: new Date().toISOString().slice(0, 10), mode: 'two-guardians', guardians: [{ firstName: 'A', relationship: 'p' }, { firstName: 'B', relationship: 'p' }] };
-    localStorage.setItem(k, JSON.stringify(s));
-  });
+  await writeTestConsent(page);
 
   // ---------- Create a learner ----------
   await home();
@@ -693,6 +689,7 @@ const fromWords = (w) => {
   check('B1: new learner back -> Start', inApp() && (await visible('new-learner', 3000)));
   await tap('new-learner');
   await tid('nickname-input').fill('Sami');
+  await tap('age-7');
   await tap('grade-2');
   await tap('lang-ar');
   await tap('avatar-turtle');

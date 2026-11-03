@@ -12,7 +12,7 @@ import { C, R, S } from '@/constants/theme';
 import { buildExamQuestions } from '@/lib/api';
 import { formatDate } from '@/lib/nav';
 import { randomId, useChild, useT } from '@/lib/store';
-import { SUBJECTS, subjectInfo } from '@/lib/subjects';
+import { SUBJECTS, subjectInfo, subjectsForChild } from '@/lib/subjects';
 import { accessForKey } from '@/lib/unlock';
 import { examDateFrom } from '@/lib/examDate';
 
@@ -107,7 +107,7 @@ export default function ExamBuilder() {
           <Card>
             <Txt bold>{t('subject')}</Txt>
             <Row wrap>
-              {SUBJECTS.map((s) => (
+              {SUBJECTS.filter((s) => subjectsForChild(child?.grade ?? 1).includes(s) || subject === s.id).map((s) => (
                 <Chip
                   key={s.id}
                   label={`${s.icon} ${t(s.key)}`}

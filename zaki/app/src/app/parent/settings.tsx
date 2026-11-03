@@ -8,7 +8,8 @@ import { Screen } from '@/components/Screen';
 import { Btn, Card, Chip, Row, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
 import { formatDate } from '@/lib/nav';
-import { useChild, useT } from '@/lib/store';
+import { CONSENT_VERSION } from '@/lib/consentText';
+import { consentActive, consentOutdated, useChild, useT } from '@/lib/store';
 import { SUBJECTS } from '@/lib/subjects';
 import { planAccess } from '@/lib/unlock';
 
@@ -26,7 +27,7 @@ export default function Settings() {
   return (
     <Screen parent back="/parent" title={`⚙️ ${t('pSettings')}`}>
       <ParentChildPicker />
-      <Card tone={consent && !consent.withdrawnAt ? 'mint' : 'sun'} testID="consent-status">
+      <Card tone={consentActive(consent) ? 'mint' : 'sun'} testID="consent-status">
         <Txt bold>📝 {t('consentStatus')}</Txt>
         <Txt testID="consent-status-text">
           {!consent
@@ -35,6 +36,11 @@ export default function Settings() {
               ? t('consentWithdrawn', { date: formatDate(consent.withdrawnAt.slice(0, 10), lang) })
               : t('consentGiven', { date: formatDate(consent.date, lang), names: consent.guardians.map((g) => `${g.firstName} (${g.relationship})`).join(', '), v: consent.version })}
         </Txt>
+        {consentOutdated(consent) ? (
+          <Txt bold testID="consent-outdated">
+            ⚠️ {t('consentOutdated', { v: CONSENT_VERSION })}
+          </Txt>
+        ) : null}
         <Row wrap>
           <Btn small title={t('consentReview')} onPress={() => router.push('/parent/consent')} testID="consent-open" />
           {consent && !consent.withdrawnAt ? (
@@ -52,6 +58,7 @@ export default function Settings() {
       </Card>
       {child ? (
         <View style={{ gap: S.md }}>
+          <Btn icon="✏️" variant="secondary" title={t('editChild')} onPress={() => router.push('/parent/edit-child')} testID="edit-child" />
           <Card testID="lesson-order">
             <Txt bold>🔐 {t('pLessonOrder')}</Txt>
             <Txt variant="small">{t('pLessonOrderHint')}</Txt>

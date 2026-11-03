@@ -237,7 +237,7 @@ function FeedbackPanel({ kind, title, titleTestID, children }: { kind: 'help' | 
 }
 
 /** Make sure no AI reply ever shows something that looks like a phone number or a link. */
-function sanitizeReply(text: string, lang: 'en' | 'ar'): string {
+export function sanitizeReply(text: string, lang: 'en' | 'ar'): string {
   if (/(\d[\d\s-]{5,}\d)|(https?:\/\/)|(www\.)/i.test(text)) {
     return lang === 'ar' ? 'هيّا نعود إلى درسنا.' : "Let's get back to our lesson.";
   }
@@ -272,6 +272,7 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
       res = await askTutor({
         childRef: child.id,
         grade: child.grade,
+        age: child.age,
         lang,
         country: settings.country,
         pack,

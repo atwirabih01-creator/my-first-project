@@ -298,7 +298,10 @@ export async function askHomework(
     return { reply: '', demo: true, safetyStopped: true };
   }
   await new Promise((r) => setTimeout(r, 500));
-  const reply = `${translate(req.lang, 'demoChatAnswer')}\n${translate(req.lang, 'demoNote')}`;
+  // Scripted helper replies: they never contain an answer (fixed text, no numbers from the question).
+  const msg = (req.message ?? '').trim();
+  const key = !msg ? 'hwDemoStart' : ANSWER_BEGGING.test(msg) ? 'demoChatAnswer' : 'hwDemoHint';
+  const reply = `${translate(req.lang, key)}\n${translate(req.lang, 'demoNote')}`;
   return { reply, demo: true, safetyStopped: false };
 }
 

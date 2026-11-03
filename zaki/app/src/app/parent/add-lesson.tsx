@@ -1,4 +1,6 @@
-// Add a lesson: subject + typed lesson name + optional up to 3 page photos -> /api/lesson-pack.
+// Add a lesson: subject (for the child's grade) + typed lesson name + optional up to 3 photos of
+// today's class -> /api/lesson-pack. Zaki re-explains the page simply, then asks questions.
+// A topic that fails the safety check is never saved.
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import { Image, StyleSheet, TextInput, View } from 'react-native';
@@ -10,7 +12,7 @@ import { Btn, Card, Chip, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
 import { fetchLessonPack } from '@/lib/api';
 import { lessonKeyOf, todayStr, useChild, useT } from '@/lib/store';
-import { SUBJECTS } from '@/lib/subjects';
+import { subjectsForChild } from '@/lib/subjects';
 import type { Subject } from '@/lib/types';
 
 type Photo = { uri: string; base64: string };
@@ -18,7 +20,7 @@ type Photo = { uri: string; base64: string };
 export default function AddLesson() {
   const { child, settings, app } = useChild();
   const { t, align } = useT();
-  const [subject, setSubject] = useState<Subject>('math');
+  const [chosen, setSubject] = useState<Subject>('math');
   const [topic, setTopic] = useState('');
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [hasTest, setHasTest] = useState(false);
@@ -31,6 +33,10 @@ export default function AddLesson() {
   const [msg, setMsg] = useState<string | null>(null);
   const [demoUsed, setDemoUsed] = useState<string | null>(null);
   const [fromLibrary, setFromLibrary] = useState(false);
+  const [blockedMsg, setBlockedMsg] = useState<string | null>(null);
+  const subjectList = subjectsForChild(child?.grade ?? 1);
+  // Switching to a younger child: keep the chosen subject only if that grade has it.
+  const subject: Subject = subjectList.some((s) => s.id === chosen) ? chosen : 'math';
 
   async function pick() {
     try {
@@ -59,10 +65,12 @@ export default function AddLesson() {
     }
     setBusy(true);
     setMsg(null);
+    setBlockedMsg(null);
     const name = topic.trim();
     const res = await fetchLessonPack({
       childRef: child.id,
       grade: child.grade,
+      age: child.age,
       lang: child.lang,
       country: settings.country,
       subject,
@@ -72,6 +80,15 @@ export default function AddLesson() {
     const key = lessonKeyOf(subject, name);
     const planBase = { subject, topic: name, kind: hasTest ? ('test' as const) : ('lesson' as const), dueDate: hasTest ? dueDate : undefined, packKey: key };
     setBusy(false);
+    if (!res.budgetReached && res.safetyStopped) {
+      // The topic did not pass the safety check: the placeholder pack is NOT saved, nothing is
+      // added to the plan. (If the safety screen applies, it is already showing.)
+      setDemoUsed(null);
+      setFromLibrary(false);
+      setBlockedMsg(res.blockedReply ?? t('lessonBlockedParent'));
+      setTopic('');
+      return;
+    }
     if (res.budgetReached) {
       // Daily AI limit: queue it; the app prepares it automatically on a later day.
       app.addPlanItem(child.id, { ...planBase, pending: true });
@@ -103,8 +120,9 @@ export default function AddLesson() {
         <>
           <Card>
             <Txt bold>{t('subject')}</Txt>
+            {child ? <Txt variant="small">{t('subjectsForGradeN', { n: child.grade })}</Txt> : null}
             <Row wrap>
-              {SUBJECTS.map((s) => (
+              {subjectList.map((s) => (
                 <Chip key={s.id} label={`${s.icon} ${t(s.key)}`} selected={subject === s.id} onPress={() => setSubject(s.id)} testID={`subject-${s.id}`} />
               ))}
             </Row>
@@ -136,7 +154,10 @@ export default function AddLesson() {
             ) : null}
           </Card>
           <Card>
-            <Txt bold>📷 {t('photos')}</Txt>
+            <Txt bold testID="photos-label">
+              📷 {t('photosClass')}
+            </Txt>
+            <Txt variant="small">{t('photosClassHint')}</Txt>
             <Card tone="coral">
               <Txt bold testID="photo-reminder">
                 ⚠️ {t('photosReminder')}
@@ -152,6 +173,12 @@ export default function AddLesson() {
             </Row>
             {photos.length < 3 ? <Btn small variant="secondary" icon="🖼️" title={t('addPhoto')} onPress={pick} testID="add-photo" /> : null}
           </Card>
+          {blockedMsg ? (
+            <Card tone="lilac" testID="add-lesson-blocked">
+              <Txt bold>{t('lessonBlockedParent')}</Txt>
+              {blockedMsg !== t('lessonBlockedParent') ? <Txt testID="add-lesson-blocked-reply">{blockedMsg}</Txt> : null}
+            </Card>
+          ) : null}
           {msg ? (
             <Card tone="mint">
               <Txt bold testID="add-lesson-msg">

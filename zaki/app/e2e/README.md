@@ -7,6 +7,9 @@ Env for every command: `NODE_PATH=/opt/node22/lib/node_modules PLAYWRIGHT_BROWSE
 3. Main flow + QA checks against the single file (file://):
    `BASE=file:///home/user/my-first-project/zaki/demo/zaki-demo.html node e2e/e2e.js`
    `BASE=file:///home/user/my-first-project/zaki/demo/zaki-demo.html node e2e/qa-checks.js`
+   `BASE=file:///home/user/my-first-project/zaki/demo/zaki-demo.html node e2e/round4.js` (age + grade, grade subjects, today's lesson, homework help, 360px EN/AR; screenshots in `test-screenshots/round4/`)
 4. Mocked-API test (needs http): `node e2e/serve.js /tmp/claude-0/zdist 8090 &` then `BASE=http://localhost:8090 node e2e/e2e-api.js`
 
 Screenshots go to `test-screenshots/`.
+
+Consent: `consent-helper.js` reads `CONSENT_VERSION` from `src/lib/consentText.ts`, so the test consent always matches the current consent text (an older version makes the app ask the family again).

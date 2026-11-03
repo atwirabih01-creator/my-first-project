@@ -36,7 +36,8 @@ type Phase =
   | 'result'
   | 'resummary'
   | 'limit'
-  | 'notReady';
+  | 'notReady'
+  | 'blocked';
 
 const TEST_SIZE = 5;
 const nowMs = () => Date.now();
@@ -48,7 +49,7 @@ export default function Lesson() {
   const topic = params.topic ?? '';
   const key = lessonKeyOf(subject, topic);
   const { child, settings, progress, packs, plan, app } = useChild();
-  const { t } = useT();
+  const { t, rtl } = useT();
 
   const [cp, setCp] = useState<CachedPack | null>(packs[key] ?? null);
   // Resume an unfinished test (e.g. after leaving the app) at the same question.
@@ -61,6 +62,7 @@ export default function Lesson() {
   const [idx, setIdx] = useState(0);
   const [reload, setReload] = useState(0);
   const [askLeave, setAskLeave] = useState(false);
+  const [blocked, setBlocked] = useState<string | null>(null);
 
   // Test state
   const [testQs, setTestQs] = useState<Question[]>(savedTest?.testQs ?? []);
@@ -90,14 +92,22 @@ export default function Lesson() {
   useEffect(() => {
     if (!child || cp || locked) return;
     let alive = true;
-    fetchLessonPack({ childRef: child.id, grade: child.grade, lang: child.lang, country: settings.country, subject, topic })
+    fetchLessonPack({ childRef: child.id, grade: child.grade, age: child.age, lang: child.lang, country: settings.country, subject, topic })
       .then((res) => {
         if (!alive) return;
         if (res.budgetReached) {
           setPhase('notReady'); // today's AI limit: the lesson is prepared tomorrow
           return;
         }
-        if (res.safetyStopped) return; // safety screen already shown
+        if (res.safetyStopped) {
+          // The topic didn't pass the safety check: nothing is saved. If the safety screen
+          // applies it is already open; otherwise show the calm fixed reply with a Back button.
+          if (res.blockedReply) {
+            setBlocked(res.blockedReply);
+            setPhase('blocked');
+          }
+          return;
+        }
         const cached: CachedPack = { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo };
         app.savePack(child.id, key, cached);
         setCp(cached);
@@ -193,7 +203,7 @@ export default function Lesson() {
     }
   }
 
-  const showHelpBar = phase !== 'loading' && phase !== 'error' && !locked;
+  const showHelpBar = phase !== 'loading' && phase !== 'error' && phase !== 'blocked' && !locked;
   // Demo mode: if the sample lesson isn't what the grown-up typed, show the sample's real topic.
   const norm = (x: string) => x.trim().toLowerCase();
   const sampleMismatch =
@@ -270,6 +280,19 @@ export default function Lesson() {
           </Txt>
           <Txt center>{t('notReadyText')}</Txt>
           <Btn title={t('backHome')} onPress={goHome} />
+        </Card>
+      ) : null}
+
+      {!locked && phase === 'blocked' ? (
+        <Card tone="lilac" style={{ alignItems: 'center' }} testID="lesson-blocked">
+          <Mascot size={100} mood="calm" />
+          <Txt variant="h2" center>
+            {t('blockedTitle')}
+          </Txt>
+          <Txt center testID="blocked-reply">
+            {blocked ?? t('blockedText')}
+          </Txt>
+          <Btn title={t('back')} icon={rtl ? '→' : '←'} onPress={goHome} testID="blocked-back" />
         </Card>
       ) : null}
 
