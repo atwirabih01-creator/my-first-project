@@ -53,12 +53,13 @@ function withFallback(params: ClaudeParams): ClaudeParams {
  */
 export async function callClaude(
   params: ClaudeParams,
-  opts: { stream?: boolean; purpose?: SpendPurpose } = {},
+  opts: { stream?: boolean; purpose?: SpendPurpose; capCheckedByCaller?: boolean } = {},
 ): Promise<ClaudeMessage> {
   const stream = opts.stream ?? false;
   const purpose = opts.purpose ?? "tutor";
-  // Daily spending cap: throws BudgetExceededError before any money is spent.
-  await assertCanSpend(purpose);
+  // Daily spending cap: throws BudgetExceededError before any money is spent. A lesson
+  // build checks the cap once at its start, so a half-built (already paid) lesson is not thrown away.
+  if (!opts.capCheckedByCaller) await assertCanSpend(purpose);
   const p = withFallback(params);
   let msg: ClaudeMessage;
   if (testImpl) msg = await testImpl(p, { stream });

@@ -96,25 +96,23 @@ export async function researchTopic(subject: Subject, topic: string, grade: numb
     },
   ];
   let msg: ClaudeMessage | null = null;
-  for (let turn = 0; turn < 3; turn++) {
+  for (let turn = 0; turn < 2; turn++) {
     msg = await callClaude(
       {
-      model: MODELS.lessonPack,
-      max_tokens: 8000,
-      thinking: { type: "adaptive" },
-      output_config: { effort: "low" },
+      model: MODELS.light,
+      max_tokens: 4000,
       system: RESEARCH_SYSTEM,
       tools: [
         {
           type: "web_search_20250305",
           name: "web_search",
-          max_uses: 4,
+          max_uses: 2,
           allowed_domains: TRUSTED_RESEARCH_DOMAINS,
         },
       ],
       messages,
       },
-      { purpose: "lesson" },
+      { purpose: "lesson", capCheckedByCaller: true },
     );
     if (msg.stop_reason !== "pause_turn") break;
     messages.push({ role: "assistant", content: msg.content });
@@ -235,11 +233,11 @@ async function writePack(req: LessonPackRequest, notes: string, extra: string): 
       model: MODELS.lessonPack,
       max_tokens: 32000,
       thinking: { type: "adaptive" },
-      output_config: { effort: "medium", format: { type: "json_schema", schema: packSchemaWithPageText() } },
+      output_config: { effort: "low", format: { type: "json_schema", schema: packSchemaWithPageText() } },
       system: [{ type: "text", text: PACK_SYSTEM, cache_control: { type: "ephemeral" } }],
       messages: [{ role: "user", content: buildUserContent(req, notes, extra) }],
     },
-    { stream: true, purpose: "lesson" },
+    { stream: true, purpose: "lesson", capCheckedByCaller: true },
   );
   if (msg.stop_reason === "refusal") throw new LessonPackError("AI declined to write this pack", "ai_refused");
   return jsonOf<Record<string, unknown>>(msg);
