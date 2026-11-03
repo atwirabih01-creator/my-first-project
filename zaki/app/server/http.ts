@@ -171,7 +171,9 @@ export async function handle(fn: () => Promise<Response>): Promise<Response> {
   } catch (e) {
     if (e instanceof HttpError) return json({ error: e.message, code: e.code }, e.status);
     // Log only the error type, never request content.
-    console.error("[zaki] route error:", (e as Error)?.name ?? "Error");
-    return json({ error: "something went wrong", code: "server_error" }, 500);
+    // Only the error type and HTTP status (never request content or messages).
+    const kind = `${(e as Error)?.name ?? "Error"}${(e as { status?: number })?.status ? `:${(e as { status?: number }).status}` : ""}`;
+    console.error("[zaki] route error:", kind);
+    return json({ error: "something went wrong", code: "server_error", kind }, 500);
   }
 }
