@@ -99,7 +99,10 @@ const check = (n, ok, extra = '') => {
   // S1: offline safety words (incl. the R12 spellings from the safety review)
   const page = await (await browser.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true })).newPage();
   const tid = (id) => page.getByTestId(id).locator('visible=true').first();
-  const phrases = ["I'm scared", "I'm scared of my dad", 'scared to go home', 'im scared of the bombs', 'baba darabne', 'bayye darabne', 'baba darabni', 'بابا ضربني', 'my dad hits me', 'someone touched me', 'I want to die', 'bade mout', 'khayef ktir'];
+  // Round 5 (server rules): the child's own fear with nobody named ("I'm scared", "scared of the
+  // bombs", "khayef ktir") no longer opens the screen; fear with someone at home / outside,
+  // "scared to go home" or a help request still does.
+  const phrases = ["I'm scared of my dad", 'scared to go home', 'I am scared of a stranger online', "I'm scared, who can I call?", 'khayef ktir mn shab bel madrase', 'baba darabne', 'bayye darabne', 'baba darabni', 'بابا ضربني', 'my dad hits me', 'someone touched me', 'I want to die', 'bade mout'];
   const safe = ['I am scared of spiders in the science book', "I'm scared of the dark", 'أنا خايف من العنكبوت', 'What is evaporation?', 'I am scared of the science exam', 'is 3/4 bigger than 1/2'];
   const open = async () => {
     await page.goto(BASE);
@@ -127,6 +130,44 @@ const check = (n, ok, extra = '') => {
     await page.waitForTimeout(1200);
     check(`S1 normal school text "${p}" -> no safety screen`, (await page.getByTestId('safety-screen').count()) === 0);
   }
+  // Round 5: own fear, nobody named -> no screen, the fixed calm line; sensitive subject -> the
+  // fixed "not part of our lessons" line, no screen (same texts as server/data/safetyMessages.ts).
+  const calm = [
+    ["I'm scared", 'Please tell a grown-up at home how you feel'],
+    ['im scared of the bombs', 'Please tell a grown-up at home how you feel'],
+    ['khayef ktir', 'Please tell a grown-up at home how you feel'],
+    ['Who is right in the war?', "That's not part of our lessons. Let's get back to our lesson!"],
+  ];
+  for (const [p, line] of calm) {
+    await open();
+    await tid('chat-input').fill(p);
+    await tid('chat-send').click();
+    await page.waitForTimeout(1300);
+    const log = await tid('chat-log').innerText();
+    check(`S1 "${p}" -> no safety screen, calm line instead (offline)`, (await page.getByTestId('safety-screen').count()) === 0 && log.includes(line));
+  }
+  const st = await page.evaluate(() => JSON.parse(localStorage.getItem('zaki:v1:state')));
+  const maya = st.profiles.find((x) => x.nickname === 'Maya').id;
+  const calmFlags = (st.flags || []).filter((f) => f.childRef === maya && f.noScreen && f.route === 'parent');
+  check('S1 calm cases: a parent note is kept (own fear + sensitive topic), no child words shown to parents', calmFlags.some((f) => f.category === 'violence_fear') && calmFlags.some((f) => f.category === 'sensitive_topic'));
+  await page.goto(BASE);
+  await tid('grownups-btn').click();
+  await tid('gate-words').waitFor({ timeout: 5000 });
+  {
+    const ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    const tens = ['', 'ten', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+    const w = (n) => (n % 10 === 0 ? tens[n / 10] : `${tens[Math.floor(n / 10)]}-${ones[n % 10]}`);
+    const g = (await tid('gate-words').innerText()).trim();
+    let n = 21;
+    while (n < 100 && w(n) !== g) n++;
+    await tid('gate-input').fill(String(n));
+    await tid('gate-open').click();
+  }
+  await tid('pchild-Maya').click();
+  await tid('p-progress').click();
+  await page.waitForTimeout(500);
+  const notes = await page.getByTestId('safety-note').locator('visible=true').allInnerTexts();
+  check('S1 parent notes: own fear = "Said they felt scared or upset" (no help screen), sensitive topic label, no child words', notes.some((x) => x.includes('Said they felt scared or upset') && x.includes('no help screen')) && notes.some((x) => x.includes('Asked about a topic outside the lessons')) && !notes.some((x) => /bombs|khayef|who is right/i.test(x)), JSON.stringify(notes));
   await browser.close();
   const failed = results.filter((x) => !x).length;
   console.log(`\n${results.length - failed}/${results.length} QA checks passed`);

@@ -1,5 +1,5 @@
 import re,base64,os,sys
-d='/tmp/claude-0/zdist'
+d=os.environ.get('ZDIST','/tmp/claude-0/zdist')  # build folder (override with ZDIST)
 html=open(d+'/index.html').read()
 m=re.search(r'<script src="(/_expo/[^"]+)" defer></script>',html)
 js=open(d+m.group(1)).read()

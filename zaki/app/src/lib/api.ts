@@ -6,7 +6,7 @@ import { parentConcernScan } from '../../server/keywordScan';
 import { adultSafetyMessage } from './helpRoutes';
 import { getDemoPack } from './demoPacks';
 import type { HelpKind } from './helpRoutes';
-import { kindFromCategory, localSafetyCheck } from './localSafety';
+import { calmReply, kindFromCategory, localSafetyDecision } from './localSafety';
 import { translate } from './i18n';
 import type { Country, ExamQuestion, Lang, LessonPack, Question, Safety, Source, Subject } from './types';
 
@@ -40,6 +40,37 @@ export function setDemoMode(on: boolean) {
 }
 export function isDemoMode() {
   return demoMode;
+}
+
+/**
+ * Lessons saved on the phone with an OLDER lesson-rules version than this are re-made (once)
+ * when the child opens them, as long as the child has not passed that lesson's test yet
+ * (src/app/lesson.tsx). The server sends `packVersion` with every lesson pack (missing = 1).
+ */
+export const MIN_PACK_VERSION = 3;
+
+/**
+ * The server flagged a message WITHOUT showing the safety screen (e.g. category
+ * "sensitive_topic": the child only sees Zaki's calm reply). The app keeps a note: route
+ * "parent" notes appear in the grown-ups' safety notes (category + time only, no child words).
+ */
+export type QuietFlag = { category: string; route: 'reviewer' | 'parent'; involvesHome?: boolean; /** no safety screen was shown */ noScreen?: boolean };
+
+function quietFlagOf(safety: Safety | undefined): QuietFlag | undefined {
+  if (!safety?.flagged || safety.showSafetyScreen) return undefined;
+  // Unclear or home involvement always stays with the reviewer only (routing rule R3/R4).
+  const route = safety.route === 'parent' && !safety.involvesHome ? 'parent' : 'reviewer';
+  return { category: safety.category || 'server', route, involvesHome: safety.involvesHome, noScreen: true };
+}
+
+/**
+ * Same note for a safety STOP (the safety screen was shown), when the server says who should
+ * hear about it. Missing route (older server): undefined, the app then uses its own routing.
+ */
+function stopFlagOf(safety: Safety | undefined): QuietFlag | undefined {
+  if (!safety?.flagged || !safety.route) return undefined;
+  const route = safety.route === 'parent' && !safety.involvesHome ? 'parent' : 'reviewer';
+  return { category: safety.category || 'server', route, involvesHome: safety.involvesHome };
 }
 
 /** Call for every API response. Returns true when the safety screen was triggered. */
@@ -113,7 +144,11 @@ export type LessonPackResult =
        */
       safetyStopped?: boolean;
       blockedReply?: string;
+      /** Set with safetyStopped when the server flagged the topic quietly (no safety screen). */
+      flag?: QuietFlag;
       fromLibrary?: boolean;
+      /** Lesson rules version of this pack (server `packVersion`, missing = 1; demo samples = current). */
+      packVersion: number;
       budgetReached?: undefined;
     }
   /**
@@ -141,13 +176,14 @@ export async function fetchLessonPack(
         fromLibrary?: boolean;
         blocked?: boolean;
         reply?: string;
+        packVersion?: number;
       }>('/api/lesson-pack', withFamily(req), 90000);
       if (data.budgetReached) return { budgetReached: true };
       // The topic went through the same safety check as a chat message.
       const screen = handleSafety(data.safety);
       if (screen || data.blocked) {
         const d = getDemoPack(req.subject, req.lang, req.grade);
-        return { ...d, demo: true, safetyStopped: true, blockedReply: screen ? undefined : data.reply };
+        return { ...d, demo: true, packVersion: MIN_PACK_VERSION, safetyStopped: true, blockedReply: screen ? undefined : data.reply, flag: quietFlagOf(data.safety) };
       }
       if (isValidPack(data.pack)) {
         return {
@@ -155,6 +191,7 @@ export async function fetchLessonPack(
           sources: (data.sources ?? []).map((s) => ({ title: s.title })),
           demo: false,
           fromLibrary: !!data.fromLibrary,
+          packVersion: typeof data.packVersion === 'number' && data.packVersion >= 1 ? data.packVersion : 1,
         };
       }
     } catch {
@@ -165,17 +202,23 @@ export async function fetchLessonPack(
     return { budgetReached: true, unavailable: true };
   }
   // Demo/offline: the phone's own safety word check on the typed topic.
-  const local = localSafetyCheck(req.topic);
-  if (local) {
-    safetyHandler?.(local);
-    reportSafety({ kind: local, message: req.topic, childRef: req.childRef, lang: req.lang, country: req.country });
+  const local = localSafetyDecision(req.topic, { asTopic: true });
+  if (local?.action === 'screen') {
+    safetyHandler?.(local.kind);
+    reportSafety({ kind: local.kind, message: req.topic, childRef: req.childRef, lang: req.lang, country: req.country });
     const d = getDemoPack(req.subject, req.lang, req.grade);
-    return { ...d, demo: true, safetyStopped: true };
+    return { ...d, demo: true, packVersion: MIN_PACK_VERSION, safetyStopped: true };
+  }
+  if (local?.action === 'calm') {
+    // Same as the server: no lesson, no safety screen, the fixed calm line + a parent note.
+    const d = getDemoPack(req.subject, req.lang, req.grade);
+    return { ...d, demo: true, packVersion: MIN_PACK_VERSION, safetyStopped: true, blockedReply: calmReply(local.category, req.lang, 'lesson'), flag: { category: local.category, route: 'parent', noScreen: true } };
   }
   // Small pause so the friendly "researching" animation is visible in demo mode too.
   await new Promise((r) => setTimeout(r, 1200));
+  // The bundled samples are always the current server samples (current lesson rules).
   const d = getDemoPack(req.subject, req.lang, req.grade);
-  return { ...d, demo: true };
+  return { ...d, demo: true, packVersion: MIN_PACK_VERSION };
 }
 
 // ---------- check answer (deterministic) ----------
@@ -238,7 +281,7 @@ function hash(s: string): number {
 
 export async function askTutor(
   req: Common & { pack: LessonPack | null; step: 'recap' | 'teach' | 'check' | 'chat'; history: ChatTurn[]; message: string },
-): Promise<{ reply: string; demo: boolean; safetyStopped: boolean }> {
+): Promise<{ reply: string; demo: boolean; safetyStopped: boolean; flag?: QuietFlag }> {
   if (!consentOk) throw new ConsentRequiredError();
   if (!demoMode && req.pack) {
     try {
@@ -247,17 +290,27 @@ export async function askTutor(
         withFamily({ ...req, packId: req.pack.id }),
         30000,
       );
-      if (handleSafety(data.safety)) return { reply: '', demo: false, safetyStopped: true };
-      if (typeof data.reply === 'string' && data.reply.trim()) return { reply: data.reply, demo: false, safetyStopped: false };
+      if (handleSafety(data.safety)) return { reply: '', demo: false, safetyStopped: true, flag: stopFlagOf(data.safety) };
+      if (typeof data.reply === 'string' && data.reply.trim()) return { reply: data.reply, demo: false, safetyStopped: false, flag: quietFlagOf(data.safety) };
     } catch {
       // fall back to demo reply
     }
   }
   await new Promise((r) => setTimeout(r, 500));
+  // Demo/offline: a sensitive subject or the child's own fear (nobody named) gets the server's
+  // fixed calm line, no safety screen, and a calm note for the parent.
+  const calm = localSafetyDecision(req.message);
+  if (calm?.action === 'calm') {
+    return { reply: calmReply(calm.category, req.lang, 'lesson'), demo: true, safetyStopped: false, flag: { category: calm.category, route: 'parent', noScreen: true } };
+  }
   return { reply: demoTutorReply(req.message, req.pack, req.lang), demo: true, safetyStopped: false };
 }
 
 // ---------- homework help ----------
+/** Grown-up homework photos: at most 3 per task, note at most 300 letters (server contract C4). */
+export const MAX_HOMEWORK_PHOTOS = 3;
+export const MAX_PARENT_NOTE = 300;
+
 /**
  * One homework-help turn (POST /api/homework). Zaki never gives the final answer.
  * First turn: send `question` with no `message` and an empty history.
@@ -270,37 +323,47 @@ export async function askHomework(
     question: string;
     message?: string;
     history: ChatTurn[];
-    /** Up to 2 base64 JPEG photos of the homework page (from a grown-up). */
+    /** Up to 3 base64 JPEG photos of the homework page (taken by a grown-up). Sent with EVERY turn. */
     pageImages?: string[];
+    /** The grown-up's note for Zaki (max 300), e.g. "only exercise 3". Sent with every turn. */
+    parentNote?: string;
   },
-): Promise<{ reply: string; demo: boolean; safetyStopped: boolean; budgetReached?: boolean; hintLevel?: number }> {
+): Promise<{ reply: string; demo: boolean; safetyStopped: boolean; budgetReached?: boolean; hintLevel?: number; flag?: QuietFlag }> {
   if (!consentOk) throw new ConsentRequiredError();
   if (!demoMode) {
     try {
+      const body = {
+        ...req,
+        pageImages: req.pageImages?.length ? req.pageImages.slice(0, MAX_HOMEWORK_PHOTOS) : undefined,
+        parentNote: req.parentNote?.trim() ? req.parentNote.trim().slice(0, MAX_PARENT_NOTE) : undefined,
+      };
       const data = await request<{ reply: string; safety?: Safety; budgetReached?: boolean; hintLevel?: number; demo?: boolean }>(
         '/api/homework',
-        withFamily(req),
-        30000,
+        withFamily(body),
+        body.pageImages ? 60000 : 30000,
       );
-      if (handleSafety(data.safety)) return { reply: '', demo: false, safetyStopped: true };
+      if (handleSafety(data.safety)) return { reply: '', demo: false, safetyStopped: true, flag: stopFlagOf(data.safety) };
       if (typeof data.reply === 'string' && data.reply.trim()) {
-        return { reply: data.reply, demo: !!data.demo, safetyStopped: false, budgetReached: data.budgetReached, hintLevel: data.hintLevel };
+        return { reply: data.reply, demo: !!data.demo, safetyStopped: false, budgetReached: data.budgetReached, hintLevel: data.hintLevel, flag: quietFlagOf(data.safety) };
       }
     } catch {
       // fall back to the demo reply
     }
   }
   // Demo/offline: the phone's own safety word check, then a scripted helper reply.
-  const local = localSafetyCheck(`${req.question}\n${req.message ?? ''}`);
-  if (local) {
-    safetyHandler?.(local);
-    reportSafety({ kind: local, message: req.message || req.question, childRef: req.childRef, lang: req.lang, country: req.country });
+  const local = localSafetyDecision(`${req.question}\n${req.message ?? ''}`);
+  if (local?.action === 'screen') {
+    safetyHandler?.(local.kind);
+    reportSafety({ kind: local.kind, message: req.message || req.question, childRef: req.childRef, lang: req.lang, country: req.country });
     return { reply: '', demo: true, safetyStopped: true };
   }
   await new Promise((r) => setTimeout(r, 500));
+  if (local?.action === 'calm') {
+    return { reply: calmReply(local.category, req.lang, 'homework'), demo: true, safetyStopped: false, flag: { category: local.category, route: 'parent', noScreen: true } };
+  }
   // Scripted helper replies: they never contain an answer (fixed text, no numbers from the question).
   const msg = (req.message ?? '').trim();
-  const key = !msg ? 'hwDemoStart' : ANSWER_BEGGING.test(msg) ? 'demoChatAnswer' : 'hwDemoHint';
+  const key = !msg ? (req.pageImages?.length ? 'hwDemoStartPhoto' : 'hwDemoStart') : ANSWER_BEGGING.test(msg) ? 'demoChatAnswer' : 'hwDemoHint';
   const reply = `${translate(req.lang, key)}\n${translate(req.lang, 'demoNote')}`;
   return { reply, demo: true, safetyStopped: false };
 }

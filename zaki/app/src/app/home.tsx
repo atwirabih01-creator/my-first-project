@@ -51,8 +51,8 @@ const BIG_TILES: { key: string; icon: string; label: StringKey; href: '/today-le
 ];
 
 export default function Home() {
-  const { child, settings, progress, plan } = useChild();
-  const { t, lang } = useT();
+  const { child, settings, progress, plan, homework } = useChild();
+  const { t, lang, rtl } = useT();
   const [tip, setTip] = useState(() => Math.floor(Math.random() * (TIPS.length - 1)));
   const [hops, setHops] = useState(0);
   useHelpReturn(null);
@@ -114,6 +114,47 @@ export default function Home() {
         </Card>
       ) : (
         <>
+          {/* Homework photos from the grown-up: one bright card each, on top so it can't be missed. */}
+          {homework.map((task, i) => {
+            const s = subjectInfo(task.subject);
+            return (
+              <PopIn key={task.id} bounce delay={i * 120}>
+                <Pressable
+                  testID="hw-task-card"
+                  onPress={() => router.push({ pathname: '/homework', params: { taskId: task.id } })}
+                  accessibilityRole="button"
+                  accessibilityLabel={`${t('hwCardTitle')}: ${t(s.key)}${task.note ? `. ${task.note}` : ''}`}
+                  style={({ pressed }) => [styles.hwCard, pressed && styles.hwPressed]}>
+                  <Row style={{ alignItems: 'center' }}>
+                    <View style={styles.hwIcon}>
+                      <Txt variant="title" center>
+                        📸
+                      </Txt>
+                    </View>
+                    <Txt variant="h2" style={{ flex: 1, minWidth: 0 }}>
+                      {t('hwCardTitle')}
+                    </Txt>
+                  </Row>
+                  <View style={[styles.hwSubject, { backgroundColor: s.soft, borderColor: s.accent }]}>
+                    <Txt bold testID="hw-task-subject">
+                      {s.icon} {t(s.key)}
+                    </Txt>
+                  </View>
+                  {task.note ? (
+                    <Txt testID="hw-task-note" style={{ fontStyle: 'italic' }}>
+                      {lang === 'ar' ? `«${task.note}»` : `“${task.note}”`}
+                    </Txt>
+                  ) : null}
+                  <View style={styles.hwGo}>
+                    <Txt bold color="#FFFFFF">
+                      {t('hwCardGo')} {rtl ? '←' : '→'}
+                    </Txt>
+                  </View>
+                </Pressable>
+              </PopIn>
+            );
+          })}
+
           <Card>
             <Txt variant="h2">📅 {t('todayPlan')}</Txt>
             {plan.length === 0 ? <Txt>{t('noPlan')}</Txt> : null}
@@ -274,6 +315,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: S.lg,
     paddingVertical: S.md,
   },
+  hwCard: {
+    gap: S.sm,
+    padding: S.md,
+    borderRadius: R.lg,
+    borderWidth: 3,
+    borderBottomWidth: 7,
+    backgroundColor: '#FFF4C7',
+    borderColor: '#E0A800',
+  },
+  hwPressed: { borderBottomWidth: 3, marginTop: 4 },
+  hwIcon: { width: 60, height: 60, borderRadius: 30, borderWidth: 2, borderColor: '#E0A800', backgroundColor: C.card, alignItems: 'center', justifyContent: 'center' },
+  hwSubject: { alignSelf: 'flex-start', borderRadius: R.pill, borderWidth: 2, paddingHorizontal: S.md, paddingVertical: 4 },
+  hwGo: { alignSelf: 'flex-end', backgroundColor: '#1F7F8A', borderRadius: R.pill, paddingHorizontal: S.lg, paddingVertical: S.sm },
   bigTileIcon: { width: 60, height: 60, borderRadius: 30, borderWidth: 2, backgroundColor: C.card, alignItems: 'center', justifyContent: 'center' },
   tileIcon: { width: 58, height: 58, borderRadius: 29, backgroundColor: C.card, alignItems: 'center', justifyContent: 'center' },
 });

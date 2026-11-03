@@ -5,8 +5,24 @@ import { ParentChildPicker } from '@/components/ParentChildPicker';
 import { Screen } from '@/components/Screen';
 import { Card, Row, Txt } from '@/components/ui';
 import { C, S } from '@/constants/theme';
+import type { StringKey } from '@/lib/i18n';
 import { formatDate } from '@/lib/nav';
 import { statusOf, useChild, useT } from '@/lib/store';
+
+/**
+ * Parent wording for a safety note: what happened in calm words, never the child's own words.
+ * Categories come from the phone's check (fear, self_harm, home, general) or the server
+ * (violence_fear, self_harm, sensitive_topic, ...).
+ */
+function parentNoteText(category: string, noScreen: boolean, date: string, t: ReturnType<typeof useT>['t']): string {
+  const c = category.toLowerCase();
+  // Asked about war / politics / religion: no help screen was shown, Zaki just steered back.
+  if (c === 'sensitive_topic') return t('safetyNoteRowCalm', { date, kind: t('kind_sensitive_topic') });
+  const kind: StringKey =
+    c === 'fear' || c === 'violence_fear' ? 'kind_fear' : c === 'self_harm' ? 'kind_self_harm' : c === 'general' || c === 'help_request' ? 'kind_general' : 'kind_home';
+  // The child's own fear with nobody named: a calm line only, no help screen.
+  return t(noScreen ? 'safetyNoteRowCalm' : 'safetyNoteRow', { date, kind: t(kind) });
+}
 
 function Stat({ label, value, testID }: { label: string; value: string | number; testID?: string }) {
   return (
@@ -74,10 +90,7 @@ export default function Progress() {
             {notes.length === 0 ? <Txt>{t('safetyNotesNone')}</Txt> : null}
             {notes.map((f) => (
               <Txt key={f.id} variant="small" testID="safety-note">
-                {t('safetyNoteRow', {
-                  date: formatDate(f.ts.slice(0, 10), lang),
-                  kind: t(f.category === 'fear' ? 'kind_fear' : f.category === 'self_harm' ? 'kind_self_harm' : f.category === 'general' ? 'kind_general' : 'kind_home'),
-                })}
+                {parentNoteText(f.category, !!f.noScreen, formatDate(f.ts.slice(0, 10), lang), t)}
               </Txt>
             ))}
           </Card>

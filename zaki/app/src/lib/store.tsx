@@ -2,9 +2,10 @@
 // Local only (Phase 1). Saved to device storage after every change.
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { consentRemote, fetchLessonPack, getHealth, registerFamilyRemote, setConsentActive, setDemoMode, setFamilyAuth, syncFamilyRemote, type FamilyLink } from './api';
+import { consentRemote, fetchLessonPack, getHealth, MIN_PACK_VERSION, registerFamilyRemote, setConsentActive, setDemoMode, setFamilyAuth, syncFamilyRemote, type FamilyLink } from './api';
 import { CONSENT_VERSION } from './consentText';
 import { getDemoPack } from './demoPacks';
+import { deletePhotos } from './homeworkPhotos';
 import { isRTLLang, textAlignFor, translate, type StringKey } from './i18n';
 import { loadJSON, saveJSON } from './storage';
 import type {
@@ -14,6 +15,7 @@ import type {
   ConsentRecord,
   Exam,
   ExamResult,
+  HomeworkTask,
   ChildProgress,
   ChildSettings,
   Lang,
@@ -53,6 +55,9 @@ export function statusOf(rec: LessonRecord | undefined): LessonStatus {
   return 'learning';
 }
 export const MAX_TESTS_PER_DAY = 3; // first test + 2 retries
+/** Grown-up homework photos are deleted this many days after they were added (consent text: ~30 days). */
+export const HOMEWORK_KEEP_DAYS = 30;
+const homeworkExpired = (t: HomeworkTask, now = Date.now()) => now - new Date(t.createdAt).getTime() > HOMEWORK_KEEP_DAYS * 24 * 3600 * 1000;
 
 export const DEFAULT_SETTINGS: ChildSettings = {
   dailyLimitMin: 30,
@@ -85,6 +90,8 @@ type Persisted = {
   flags?: LocalFlag[]; // safety flags kept on this device (demo/offline)
   /** Server family link: id + SECRET key issued at consent (never exported, never shown). */
   family?: FamilyLink | null;
+  /** childId -> homework photo tasks from the grown-up (photos themselves are stored separately). */
+  homework?: Record<string, HomeworkTask[]>;
 };
 
 /** Family build (real server): start with no sample children; the grown-up adds their own. */
@@ -147,8 +154,8 @@ function seed(): Persisted {
       ],
     },
     packs: {
-      [ali.id]: { [keyWaterAr]: { pack: waterAr.pack, sources: waterAr.sources, savedAt: now, demo: true } },
-      [maya.id]: { [keyWaterEn]: { pack: waterEn.pack, sources: waterEn.sources, savedAt: now, demo: true } },
+      [ali.id]: { [keyWaterAr]: { pack: waterAr.pack, sources: waterAr.sources, savedAt: now, demo: true, packVersion: MIN_PACK_VERSION } },
+      [maya.id]: { [keyWaterEn]: { pack: waterEn.pack, sources: waterEn.sources, savedAt: now, demo: true, packVersion: MIN_PACK_VERSION } },
     },
   };
 }
@@ -193,6 +200,10 @@ type Actions = {
   unlockParent: () => void;
   lockParent: () => void;
   recheckHealth: () => Promise<void>;
+  /** Grown-up saved homework photos for a child (photos already stored via homeworkPhotos.savePhotos). */
+  addHomeworkTask: (id: string, task: HomeworkTask) => void;
+  /** Child finished it, or the grown-up deleted it: the task AND its photos are removed for good. */
+  removeHomeworkTask: (id: string, taskId: string) => void;
 };
 
 const Ctx = createContext<(AppState & Actions) | null>(null);
@@ -220,7 +231,18 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       const data = saved && saved.version === 1 && Array.isArray(saved.profiles) ? { exams: {}, ...saved } : { exams: {}, ...(FAMILY_BUILD ? emptyState() : seed()) };
       if (!saved) await saveJSON('state', data);
       const lastLang = await loadJSON<Lang>('uiLang', 'en');
-      if (alive) setState((s) => ({ ...s, ...data, uiLang: lastLang, loaded: true }));
+      // Homework photos older than 30 days are deleted (with their pictures) when the app starts.
+      const expired: string[] = [];
+      const homework: Record<string, HomeworkTask[]> = {};
+      for (const [cid, list] of Object.entries(data.homework ?? {})) {
+        homework[cid] = (list ?? []).filter((t) => {
+          if (!homeworkExpired(t)) return true;
+          expired.push(...t.photos);
+          return false;
+        });
+      }
+      if (expired.length) void deletePhotos(expired);
+      if (alive) setState((s) => ({ ...s, ...data, homework, uiLang: lastLang, loaded: true }));
     })();
     return () => {
       alive = false;
@@ -230,8 +252,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   // Persist after changes.
   useEffect(() => {
     if (!state.loaded) return;
-    const { version, profiles, settings, progress, plans, packs, exams, consent, flags, family } = state;
-    saveJSON('state', { version, profiles, settings, progress, plans, packs, exams, consent, flags, family });
+    const { version, profiles, settings, progress, plans, packs, exams, consent, flags, family, homework } = state;
+    saveJSON('state', { version, profiles, settings, progress, plans, packs, exams, consent, flags, family, homework });
   }, [state]);
 
   useEffect(() => {
@@ -275,7 +297,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           const key = lessonKeyOf(item.subject, item.topic);
           setState((s) => ({
             ...s,
-            packs: { ...s.packs, [child.id]: { ...(s.packs[child.id] ?? {}), [key]: { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo } } },
+            packs: { ...s.packs, [child.id]: { ...(s.packs[child.id] ?? {}), [key]: { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo, packVersion: res.packVersion } } },
             plans: { ...s.plans, [child.id]: (s.plans[child.id] ?? []).map((p) => (p.id === item.id ? { ...p, pending: false } : p)) },
           }));
         }
@@ -389,6 +411,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       },
       deleteChild: (id) =>
         setState((s) => {
+          void deletePhotos((s.homework?.[id] ?? []).flatMap((t) => t.photos));
           const omit = <T,>(r: Record<string, T>) => {
             const c = { ...r };
             delete c[id];
@@ -401,6 +424,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
             progress: omit(s.progress),
             plans: omit(s.plans),
             packs: omit(s.packs),
+            homework: omit(s.homework ?? {}),
             activeChildId: s.activeChildId === id ? null : s.activeChildId,
           };
         }),
@@ -438,7 +462,8 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
         setState((s) => ({ ...s, flags: [...(s.flags ?? []), { ...f, id: randomId('f'), ts: new Date().toISOString(), status: 'new' as const }].slice(-200) })),
       reviewLocalFlag: (id, status, note) =>
         setState((s) => ({ ...s, flags: (s.flags ?? []).map((f) => (f.id === id ? { ...f, status, note: note ?? f.note } : f)) })),
-      wipeAll: () =>
+      wipeAll: () => {
+        void deletePhotos(Object.values(stateRef.current.homework ?? {}).flatMap((l) => l.flatMap((t) => t.photos)));
         setState((s) => ({
           ...s,
           ...emptyPersisted(),
@@ -447,8 +472,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
           flags: (s.flags ?? []).map((f) => ({ ...f, childRef: undefined, excerpt: f.status === 'resolved' ? '[removed at the family\'s request]' : f.excerpt })),
           activeChildId: null,
           parentUnlocked: false,
-        })),
-      restoreDemoChildren: () => setState((s) => ({ ...s, ...seed(), consent: s.consent ?? null, flags: s.flags ?? [] })),
+        }));
+      },
+      restoreDemoChildren: () => setState((s) => ({ ...s, ...seed(), consent: s.consent ?? null, flags: s.flags ?? [], homework: s.homework ?? {} })),
+      addHomeworkTask: (id, task) =>
+        setState((s) => ({ ...s, homework: { ...(s.homework ?? {}), [id]: [...(s.homework?.[id] ?? []), task] } })),
+      removeHomeworkTask: (id, taskId) => {
+        const task = (stateRef.current.homework?.[id] ?? []).find((t) => t.id === taskId);
+        if (task) void deletePhotos(task.photos);
+        setState((s) => ({ ...s, homework: { ...(s.homework ?? {}), [id]: (s.homework?.[id] ?? []).filter((t) => t.id !== taskId) } }));
+      },
       addExam: (id, exam) => setState((s) => ({ ...s, exams: { ...(s.exams ?? {}), [id]: [...(s.exams?.[id] ?? []), exam] } })),
       recordExamResult: (id, r) => updateProgress(id, (p) => ({ ...p, examResults: [...(p.examResults ?? []), r] })),
       movePlanItem: (id, itemId, dir) =>
@@ -544,7 +577,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 }
 
 function emptyPersisted(): Persisted {
-  return { version: 1, profiles: [], settings: {}, progress: {}, plans: {}, packs: {}, exams: {}, consent: null, flags: [], family: null };
+  return { version: 1, profiles: [], settings: {}, progress: {}, plans: {}, packs: {}, exams: {}, consent: null, flags: [], family: null, homework: {} };
 }
 
 export function useApp() {
@@ -562,7 +595,9 @@ export function useChild() {
   const plan = child ? (app.plans[child.id] ?? []) : [];
   const packs = child ? (app.packs[child.id] ?? {}) : {};
   const exams = child ? (app.exams?.[child.id] ?? []) : [];
-  return { app, child, settings, progress, plan, packs, exams };
+  // Homework from the grown-up that is still waiting (older than 30 days never shows).
+  const homework = child ? (app.homework?.[child.id] ?? []).filter((t) => !homeworkExpired(t)) : [];
+  return { app, child, settings, progress, plan, packs, exams, homework };
 }
 
 /** Translation helpers for the current UI language. */

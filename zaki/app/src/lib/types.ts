@@ -24,7 +24,8 @@ export type LessonPack = {
   grade: number;
   lang: Lang;
   recap: { q: string; choices: string[]; answerIndex: number }[];
-  teachSteps: { text: string; example?: string }[];
+  /** `title` (optional): a short heading for the step, e.g. "What is a fraction?" (server C1). */
+  teachSteps: { title?: string; text: string; example?: string }[];
   checks: Question[];
   test: Question[];
   retestPool: Question[];
@@ -34,7 +35,7 @@ export type LessonPack = {
 
 export type Source = { title: string; url?: string };
 
-export type Safety = { flagged: boolean; category?: string; showSafetyScreen?: boolean };
+export type Safety = { flagged: boolean; category?: string; showSafetyScreen?: boolean; route?: 'reviewer' | 'parent'; involvesHome?: boolean };
 
 export type AvatarId = 'lion' | 'fox' | 'cat' | 'panda' | 'turtle' | 'rocket' | 'star' | 'owl';
 
@@ -110,7 +111,33 @@ export type ChildProgress = {
   examResults?: ExamResult[];
 };
 
-export type CachedPack = { pack: LessonPack; sources: Source[]; savedAt: string; demo: boolean };
+export type CachedPack = {
+  pack: LessonPack;
+  sources: Source[];
+  savedAt: string;
+  demo: boolean;
+  /** Lesson rules version the pack was made with (server `packVersion`). Missing = 1 (made before versions). */
+  packVersion?: number;
+  /** Already re-made once under these rules (MIN_PACK_VERSION): never re-fetched again for the same rules. */
+  refreshedFor?: number;
+  /** Made from page photos: the photos are not kept, so it is never re-made from the topic name alone. */
+  fromPhotos?: boolean;
+};
+
+/**
+ * Homework photos a grown-up took for one child (parent area -> child home).
+ * Kept ON THIS DEVICE only. `photos` are storage refs (see src/lib/homeworkPhotos.ts), never the
+ * pictures themselves, so the main saved state stays small. Removed when the child taps
+ * "I finished", when the grown-up deletes it, or 30 days after it was added.
+ */
+export type HomeworkTask = {
+  id: string;
+  subject: Subject;
+  /** Optional note from the grown-up for Zaki (max 300), e.g. "only exercise 3". */
+  note?: string;
+  photos: string[];
+  createdAt: string; // ISO time
+};
 
 export type LessonStatus = 'new' | 'learning' | 'learned' | 'mastered';
 
@@ -164,4 +191,6 @@ export type LocalFlag = {
   excerpt: string;
   status: 'new' | 'seen' | 'referred' | 'resolved';
   note?: string;
+  /** No safety screen was shown (calm line only: sensitive topic, or the child's own fear). */
+  noScreen?: boolean;
 };

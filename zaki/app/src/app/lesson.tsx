@@ -11,10 +11,10 @@ import { Burst, PopIn } from '@/components/Celebrate';
 import { Mascot } from '@/components/Mascot';
 import { ReadAloud } from '@/components/ReadAloud';
 import { Screen } from '@/components/Screen';
-import { AskZaki, Choice, LessonHelpBar, QuestionWithHints } from '@/components/lesson';
+import { AskZaki, Choice, LessonHelpBar, QuestionWithHints, recordQuietFlag } from '@/components/lesson';
 import { Btn, Card, ProgressBar, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
-import { fetchLessonPack } from '@/lib/api';
+import { fetchLessonPack, MIN_PACK_VERSION } from '@/lib/api';
 import { clearInProgress, loadInProgress, saveInProgress } from '@/lib/inProgress';
 import { accessForKey } from '@/lib/unlock';
 import { shuffleChoices } from '../../server/shuffle';
@@ -51,14 +51,23 @@ export default function Lesson() {
   const { child, settings, progress, packs, plan, app } = useChild();
   const { t, rtl } = useT();
 
-  const [cp, setCp] = useState<CachedPack | null>(packs[key] ?? null);
   // Resume an unfinished test (e.g. after leaving the app) at the same question.
   const progressKey = `test:${child?.id}:${key}`;
   type SavedTest = { testQs: Question[]; testIdx: number; correct: number; startedAt: number };
   const [savedTest] = useState(() => (packs[key] ? loadInProgress<SavedTest>(progressKey) : null));
-  const [phase, setPhase] = useState<Phase>(
-    packs[key] ? (savedTest ? 'test' : params.mode === 'test' ? 'testIntro' : params.mode === 'review' ? 'teach' : 'intro') : 'loading',
-  );
+  // A lesson saved under OLDER lesson rules is re-made once (fresh pack) if the child has not
+  // passed it yet. Passed lessons keep their pack so scores and history stay consistent.
+  // Photo lessons are never re-made (the photos are not kept); nor is a test in progress.
+  const [stale] = useState(() => {
+    const old = packs[key];
+    if (!old || savedTest || old.fromPhotos) return null;
+    const passed = (progress.lessons[key]?.passDates.length ?? 0) > 0 || progress.tests.some((x) => x.lessonKey === key && x.passed);
+    const outdated = (old.packVersion ?? 1) < MIN_PACK_VERSION && (old.refreshedFor ?? 0) < MIN_PACK_VERSION;
+    return outdated && !passed ? old : null;
+  });
+  const [cp, setCp] = useState<CachedPack | null>(stale ? null : (packs[key] ?? null));
+  const startPhase: Phase = savedTest ? 'test' : params.mode === 'test' ? 'testIntro' : params.mode === 'review' ? 'teach' : 'intro';
+  const [phase, setPhase] = useState<Phase>(packs[key] && !stale ? startPhase : 'loading');
   const [idx, setIdx] = useState(0);
   const [reload, setReload] = useState(0);
   const [askLeave, setAskLeave] = useState(false);
@@ -92,9 +101,21 @@ export default function Lesson() {
   useEffect(() => {
     if (!child || cp || locked) return;
     let alive = true;
+    /** Re-making an old lesson didn't work (limit, offline, error): quietly keep the old one. */
+    const keepOld = () => {
+      if (!stale) return false;
+      setCp(stale);
+      setPhase(startPhase);
+      return true;
+    };
     fetchLessonPack({ childRef: child.id, grade: child.grade, age: child.age, lang: child.lang, country: settings.country, subject, topic })
       .then((res) => {
         if (!alive) return;
+        // Old lesson + limit / offline / demo sample / refused: quietly keep the old lesson.
+        if (stale && (res.budgetReached || res.safetyStopped || (res.demo && !stale.demo))) {
+          keepOld();
+          return;
+        }
         if (res.budgetReached) {
           setPhase('notReady'); // today's AI limit: the lesson is prepared tomorrow
           return;
@@ -102,18 +123,28 @@ export default function Lesson() {
         if (res.safetyStopped) {
           // The topic didn't pass the safety check: nothing is saved. If the safety screen
           // applies it is already open; otherwise show the calm fixed reply with a Back button.
+          if (res.flag) recordQuietFlag(app, child.id, res.flag, topic);
           if (res.blockedReply) {
             setBlocked(res.blockedReply);
             setPhase('blocked');
           }
           return;
         }
-        const cached: CachedPack = { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo };
+        const cached: CachedPack = {
+          pack: res.pack,
+          sources: res.sources,
+          savedAt: new Date().toISOString(),
+          demo: res.demo,
+          packVersion: res.packVersion,
+          refreshedFor: stale ? MIN_PACK_VERSION : undefined,
+        };
         app.savePack(child.id, key, cached);
         setCp(cached);
-        setPhase(params.mode === 'test' ? 'testIntro' : params.mode === 'review' ? 'teach' : 'intro');
+        setPhase(startPhase);
       })
-      .catch(() => alive && setPhase('error'));
+      .catch(() => {
+        if (alive && !keepOld()) setPhase('error');
+      });
     return () => {
       alive = false;
     };
@@ -364,6 +395,11 @@ export default function Lesson() {
           <Row style={{ alignItems: 'flex-start' }}>
             <Mascot size={64} />
             <Card style={{ flex: 1, minWidth: 0, borderWidth: 2, borderColor: C.primary }}>
+              {pack.teachSteps[idx].title?.trim() ? (
+                <Txt variant="h2" bold accessibilityRole="header" testID="teach-title" color={C.primary} style={{ fontSize: 26, lineHeight: 34 }}>
+                  {pack.teachSteps[idx].title?.trim()}
+                </Txt>
+              ) : null}
               <Txt variant="big" testID="teach-text" style={{ fontSize: 24, lineHeight: 34 }}>
                 {pack.teachSteps[idx].text}
               </Txt>
@@ -377,7 +413,7 @@ export default function Lesson() {
               <Txt variant="big">{pack.teachSteps[idx].example}</Txt>
             </View>
           ) : null}
-          <ReadAloud text={[pack.teachSteps[idx].text, pack.teachSteps[idx].example].filter(Boolean).join('. ')} />
+          <ReadAloud text={[pack.teachSteps[idx].title?.trim(), pack.teachSteps[idx].text, pack.teachSteps[idx].example].filter(Boolean).join('. ')} />
           {idx + 1 === pack.teachSteps.length ? (
             <PopIn bounce>
               <Card tone="mint">

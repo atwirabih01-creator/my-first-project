@@ -145,7 +145,9 @@ const fromWords = (w) => {
   const teachCount = await page.evaluate(() => {
     const s = JSON.parse(localStorage.getItem('zaki:v1:state'));
     const cps = Object.values(s.packs).flatMap((byKey) => Object.values(byKey));
-    return Math.max(...cps.map((cp) => cp.pack.teachSteps.length));
+    // The lesson just opened = the pack saved last (other saved packs may have a different length).
+    const latest = cps.reduce((a, b) => (a.savedAt >= b.savedAt ? a : b));
+    return latest.pack.teachSteps.length;
   });
   check('Round 2: the lesson explains the topic in 5-8 steps', teachCount >= 5 && teachCount <= 8, `steps=${teachCount}`);
   check('Round 2: each teach step shows its example in a highlighted card', await visible('teach-example', 2000));
@@ -570,13 +572,15 @@ const fromWords = (w) => {
   await shot('ar-test-pass');
   await tap('back-home');
   check('Unlock: passing الكسور opens Decimals', !(await visible('locked-Decimals', 1000)) && (await tid('start-lesson').innerText()).includes('Decimals'));
-  // Arabic fear screen (Arabizi): trusted adult first, 1564 and the 112 danger line
+  // Arabic fear screen (Arabizi): trusted adult first, 1564 and the 112 danger line.
+  // Round 5: fear alone ("khayef ktir") now gets a calm line (qa-checks.js); fear naming someone
+  // outside the home (a boy at school) still opens the fear screen.
   await tap('tile-practice');
   await page.getByTestId(/practice-/).locator('visible=true').first().click();
   await tap('tab-ask');
-  await tid('chat-input').fill('khayef ktir');
+  await tid('chat-input').fill('khayef ktir mn shab bel madrase');
   await tap('chat-send');
-  check('Arabizi fear word -> safety screen', await visible('safety-screen'));
+  check('Arabizi fear word with someone outside named -> safety screen', await visible('safety-screen'));
   body = await page.locator('body').innerText();
   const iAdult = body.indexOf('أخبِر الآن شخصًا كبيرًا');
   check('S2 fear screen: trusted adult first + 1564 + 112 danger line', iAdult >= 0 && body.includes('1564') && body.includes('112') && iAdult < body.indexOf('1564'));

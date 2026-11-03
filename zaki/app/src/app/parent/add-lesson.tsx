@@ -1,7 +1,6 @@
 // Add a lesson: subject (for the child's grade) + typed lesson name + optional up to 3 photos of
 // today's class -> /api/lesson-pack. Zaki re-explains the page simply, then asks questions.
 // A topic that fails the safety check is never saved.
-import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
 import { Image, StyleSheet, TextInput, View } from 'react-native';
 
@@ -11,11 +10,10 @@ import { Screen } from '@/components/Screen';
 import { Btn, Card, Chip, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
 import { fetchLessonPack } from '@/lib/api';
+import { pickHomeworkPhotos, type Photo } from '@/lib/homeworkPhotos';
 import { lessonKeyOf, todayStr, useChild, useT } from '@/lib/store';
 import { subjectsForChild } from '@/lib/subjects';
 import type { Subject } from '@/lib/types';
-
-type Photo = { uri: string; base64: string };
 
 export default function AddLesson() {
   const { child, settings, app } = useChild();
@@ -39,22 +37,10 @@ export default function AddLesson() {
   const subject: Subject = subjectList.some((s) => s.id === chosen) ? chosen : 'math';
 
   async function pick() {
-    try {
-      const res = await ImagePicker.launchImageLibraryAsync({
-        mediaTypes: ['images'],
-        allowsMultipleSelection: true,
-        selectionLimit: 3 - photos.length,
-        base64: true,
-        quality: 0.5,
-      });
-      if (res.canceled) return;
-      const added = res.assets
-        .filter((a) => a.base64)
-        .map((a) => ({ uri: a.uri, base64: (a.base64 as string).replace(/^data:image\/\w+;base64,/, '') }));
-      setPhotos((p) => [...p, ...added].slice(0, 3));
-    } catch {
-      // picker unavailable: ignore
-    }
+    // Same as homework photos: resized to max 1600px and saved as a JPEG (quality 0.7).
+    const res = await pickHomeworkPhotos('library', 3 - photos.length);
+    if (res.skipped) setMsg(t('hwpSkipped'));
+    if (res.photos.length) setPhotos((p) => [...p, ...res.photos].slice(0, 3));
   }
 
   async function prepare() {
@@ -96,7 +82,7 @@ export default function AddLesson() {
       setFromLibrary(false);
       setMsg(res.unavailable ? t('lessonUnavailableQueued') : t('budgetQueued'));
     } else {
-      app.savePack(child.id, key, { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo });
+      app.savePack(child.id, key, { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo, packVersion: res.packVersion, fromPhotos: photos.length > 0 || undefined });
       app.addPlanItem(child.id, planBase);
       setDemoUsed(res.demo ? res.pack.topic : null);
       setFromLibrary(!!res.fromLibrary);

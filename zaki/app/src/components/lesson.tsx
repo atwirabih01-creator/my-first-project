@@ -4,10 +4,10 @@ import { useEffect, useRef, useState, type ComponentRef, type ReactNode } from '
 import { Modal, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { C, R, S } from '@/constants/theme';
-import { askTutor, checkAnswer, reportSafety, type ChatTurn, type FeedbackKey } from '@/lib/api';
+import { askTutor, checkAnswer, reportSafety, type ChatTurn, type FeedbackKey, type QuietFlag } from '@/lib/api';
 import { localSafetyCheck } from '@/lib/localSafety';
 import { keywordScan } from '../../server/keywordScan';
-import { useChild, useT } from '@/lib/store';
+import { useApp, useChild, useT } from '@/lib/store';
 import type { StringKey } from '@/lib/i18n';
 import type { LessonPack, Question } from '@/lib/types';
 import { Burst, PopIn } from './Celebrate';
@@ -237,6 +237,29 @@ function FeedbackPanel({ kind, title, titleTestID, children }: { kind: 'help' | 
 }
 
 /** Make sure no AI reply ever shows something that looks like a phone number or a link. */
+/**
+ * The server flagged a message quietly (no safety screen, e.g. "sensitive_topic"): the child just
+ * sees Zaki's calm reply. A note is kept on this device: route "parent" shows in the grown-ups'
+ * safety notes as category + date only (never the child's words); the scrubbed excerpt is for
+ * the independent reviewer only.
+ */
+export function recordQuietFlag(app: Pick<ReturnType<typeof useApp>, 'addLocalFlag' | 'flags'>, childRef: string, flag: QuietFlag, text: string) {
+  // The same quiet worry again within 30 minutes (e.g. every turn of one chat): one note is enough.
+  const since = Date.now() - 30 * 60 * 1000;
+  const repeat = (app.flags ?? []).some(
+    (f) => f.childRef === childRef && f.category === flag.category && f.route === flag.route && new Date(f.ts).getTime() > since,
+  );
+  if (repeat && flag.noScreen) return;
+  app.addLocalFlag({
+    category: flag.category,
+    route: flag.route,
+    involvement: flag.involvesHome ? 'home' : undefined,
+    noScreen: flag.noScreen || undefined,
+    childRef,
+    excerpt: scrubExcerpt(text),
+  });
+}
+
 export function sanitizeReply(text: string, lang: 'en' | 'ar'): string {
   if (/(\d[\d\s-]{5,}\d)|(https?:\/\/)|(www\.)/i.test(text)) {
     return lang === 'ar' ? 'هيّا نعود إلى درسنا.' : "Let's get back to our lesson.";
@@ -286,9 +309,12 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
     }
     setBusy(false);
     if (res.safetyStopped) {
-      app.addLocalFlag({ category: 'server', ...flagRouteFor('home', message), childRef: child.id, excerpt: scrubExcerpt(message) });
+      // The server says who should hear about it (category + route); otherwise our own routing rule.
+      if (res.flag) recordQuietFlag(app, child.id, res.flag, message);
+      else app.addLocalFlag({ category: 'server', ...flagRouteFor('home', message), childRef: child.id, excerpt: scrubExcerpt(message) });
       return;
     }
+    if (res.flag) recordQuietFlag(app, child.id, res.flag, message);
     setHistory((h) => [...h, { role: 'zaki', text: sanitizeReply(res.reply, lang) }]);
   }
 

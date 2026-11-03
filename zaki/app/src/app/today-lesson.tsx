@@ -11,7 +11,7 @@ import { StyleSheet, TextInput, View } from 'react-native';
 import { Mascot } from '@/components/Mascot';
 import { Screen } from '@/components/Screen';
 import { SubjectBadge, SubjectPicker } from '@/components/SubjectPicker';
-import { flagRouteFor, goToSafety, scrubExcerpt } from '@/components/lesson';
+import { flagRouteFor, goToSafety, recordQuietFlag, scrubExcerpt } from '@/components/lesson';
 import { Bubble, Btn, Card, Chip, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
 import { ConsentRequiredError, fetchLessonPack, reportSafety } from '@/lib/api';
@@ -50,7 +50,7 @@ export default function TodayLesson() {
     setNote(null);
     setBlocked(null);
     // The phone's own safety word check first (works offline), exactly like Ask Zaki.
-    const kind = localSafetyCheck(name);
+    const kind = localSafetyCheck(name, { asTopic: true });
     if (kind) {
       setTyped('');
       app.addLocalFlag({ category: kind, ...flagRouteFor(kind, name), childRef: child.id, excerpt: scrubExcerpt(name) });
@@ -71,6 +71,7 @@ export default function TodayLesson() {
     if (!res.budgetReached && res.safetyStopped) {
       // Not a lesson: nothing is saved. The safety screen is already open, or we show the calm reply.
       setTyped('');
+      if (res.flag) recordQuietFlag(app, child.id, res.flag, name);
       if (res.blockedReply) setBlocked(res.blockedReply);
       return;
     }
@@ -83,7 +84,7 @@ export default function TodayLesson() {
       setQueued(true);
       return;
     }
-    app.savePack(child.id, key, { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo });
+    app.savePack(child.id, key, { pack: res.pack, sources: res.sources, savedAt: new Date().toISOString(), demo: res.demo, packVersion: res.packVersion });
     if (same) app.setPlanItem(child.id, same.id, { unlocked: true, pending: false });
     else app.addPlanItem(child.id, item);
     openLesson({ subject, topic: name });

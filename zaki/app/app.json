@@ -47,8 +47,8 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Zaki uses photos of school book pages that a parent chooses, to prepare a lesson. Please do not include faces or names.",
-          "cameraPermission": false,
+          "photosPermission": "Zaki uses photos of school book or homework pages that a grown-up chooses, to prepare a lesson or help with homework. Please do not include faces or names.",
+          "cameraPermission": "Zaki uses the camera only when a grown-up takes a photo of a homework or book page.",
           "microphonePermission": false
         }
       ]
