@@ -121,3 +121,17 @@ changes until they are scored.
     above the default rate.
 - 2026-11-01 12:15 · BTC closed two hours above the 78,110 range top, then fell back inside.
   A one-close breakout trigger would have been a false signal; prefer two closes or a retest that holds.
+
+## 2026-11-03 · Trigger calls "BTC up" and "ETH up" (trial-1) · both WRONG
+- **Expected:** a 24h rise after two 1h closes above 78,300 and 2,280. The reasons were the weekend
+  recovery, Binance outflows calming, and easing crowding.
+- **Happened:** BTC 78,634 → 76,937 (−2.16%) and ETH 2,309 → 2,253 (−2.42%). Both peaked within an hour,
+  then fell while rise bets crowded in (BTC 2.26 → 2.58, ETH 2.06 → 2.43).
+- **Verdict:** mostly a bad decision, and the chart plan was the weak part.
+  - The BTC level sat inside the range: the 1 Nov high was 78,422, and two breaks near 78,110 had
+    already failed.
+  - A breakout trigger may be the wrong tool in a range-bound market after a shock.
+  - Research and the final check held. The two calls move together, so this is about one bet; don't
+    over-learn.
+- **Rule (Hawk):** a breakout level must sit beyond the current range edge. If a break at that level
+  failed in the last 48h, the call also needs a retest that holds.

@@ -28,5 +28,6 @@ if __name__ == "__main__":
         beyond = [x > t["level"] if t["dir"] == "up" else x < t["level"] for x in c]
         ok = len(c) == 2 and all(beyond)
         fired += ok
-        print(f'{t["symbol"]:9s} {t["dir"]:4s} {t["level"]:<12g} last closes {c}  {"FIRED" if ok else "-"}')
+        print(f'{t["symbol"]:9s} {t["dir"]:4s} {t["level"]:<12g} last closes {c}  {"FIRED" if ok else "-"}'
+              + ("  (needs a retest that holds)" if ok and t.get("needs_retest") else ""))
     print(f"TRIGGERS_FIRED={fired}")

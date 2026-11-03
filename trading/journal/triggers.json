@@ -1,37 +1,30 @@
 {
- "set": "trial-1",
- "frozen_utc": "2026-11-02 00:10",
- "rule": "two consecutive Binance 1h closes beyond the level; still beyond at recording time",
- "author": "Hawk (levels), Sage (PEPE down moved 0.00000479 -> 0.00000465 for balance; ISM is not a major event)",
+ "set": "trial-2 (BTC, ETH) + trial-1 (PEPE)",
+ "frozen_utc": "2026-11-03 04:30",
+ "rule": "two consecutive Binance 1h closes beyond the level; level beyond the current range edge; if a break at that level failed in the last 48h, also needs a retest that holds",
+ "author": "Hawk (levels); team leader checked balance and flagged the ETH 2,280 failed break",
  "triggers": [
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 78300,
-   "used_utc": "2026-11-02 04:15"
+   "level": 77700
   },
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 77100,
-   "used_utc": "2026-11-02 20:25",
-   "shadow": {
-    "start": 76926,
-    "start_utc": "2026-11-02 20:25",
-    "score_utc": "2026-11-03 20:25",
-    "note": "skipped: opposite BTC up call open (Sage one-call-per-coin rule)"
-   }
+   "level": 76300
   },
   {
    "symbol": "ETHUSDT",
    "dir": "up",
    "level": 2280,
-   "used_utc": "2026-11-02 04:15"
+   "needs_retest": true,
+   "note": "2,280 broke on 2 Nov and failed within 48h: a call also needs a retest that holds"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 2236
+   "level": 2232
   },
   {
    "symbol": "PEPEUSDT",
@@ -42,6 +35,55 @@
    "symbol": "PEPEUSDT",
    "dir": "down",
    "level": 4.65e-06
+  }
+ ],
+ "history": [
+  {
+   "set": "trial-1",
+   "frozen_utc": "2026-11-02 00:10",
+   "rule": "two consecutive Binance 1h closes beyond the level; still beyond at recording time",
+   "author": "Hawk (levels), Sage (PEPE down moved 0.00000479 -> 0.00000465 for balance; ISM is not a major event)",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 78300,
+     "used_utc": "2026-11-02 04:15"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "dir": "down",
+     "level": 77100,
+     "used_utc": "2026-11-02 20:25",
+     "shadow": {
+      "start": 76926,
+      "start_utc": "2026-11-02 20:25",
+      "score_utc": "2026-11-03 20:25",
+      "note": "skipped: opposite BTC up call open (Sage one-call-per-coin rule)"
+     }
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 2280,
+     "used_utc": "2026-11-02 04:15"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "down",
+     "level": 2236
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 5.15e-06
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 4.65e-06
+    }
+   ]
   }
  ]
 }
