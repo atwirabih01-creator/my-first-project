@@ -1,4 +1,4 @@
-// Sample pack: Arabic, المفرد والمثنى والجمع (singular, dual, plural), grade 3 (ar + en explanations).
+// Sample pack (v3 story-lesson teach steps with titles): Arabic, المفرد والمثنى والجمع (singular, dual, plural), grade 3 (ar + en explanations).
 import type { LessonPack } from "../types";
 import { Q } from "./helpers";
 
@@ -13,11 +13,13 @@ export const ARABIC_NUMBER_AR: LessonPack = {
     { q: "ما الحرف الأول في كلمة «قمر»؟", choices: ["ق", "م", "ر"], answerIndex: 0 },
   ],
   teachSteps: [
-    { text: "المفرد: اسم يدلّ على شيء واحد.", example: "كتاب، بنت، شجرة" },
-    { text: "المثنى: اسم يدلّ على اثنين. نزيد على المفرد «ان» أو «ين».", example: "كتاب ← كتابان، بنت ← بنتان" },
-    { text: "الجمع: اسم يدلّ على ثلاثة أو أكثر.", example: "كتاب ← كتب، ولد ← أولاد" },
-    { text: "بعض الكلمات نجمعها بزيادة «ات».", example: "معلّمة ← معلّمات، شجرة ← شجرات" },
-    { text: "الآن تعرف العدد! المفرد يدلّ على شيء واحد، والمثنى يدلّ على اثنين ونزيد «ان» أو «ين»، والجمع يدلّ على ثلاثة أو أكثر.", example: "قمر ← قمران ← أقمار، سيارة ← سيارتان ← سيارات" },
+    { title: "هل عددت ألعابك يومًا؟", text: "هل عددت ألعابك يومًا؟ مرة معك كرة واحدة، ومرة كرتان، ومرة كرات كثيرة. الكلمة تتغيّر عندما يتغيّر العدد!", example: "معي كرة. مع سارة كرتان. وفي الملعب كرات كثيرة." },
+    { title: "ما المفرد؟", text: "انظر إلى شيء واحد فقط. الكلمة التي تدلّ على شيء واحد نسمّيها المفرد.", example: "قمر، سيارة، عصفور: كل كلمة تدلّ على شيء واحد." },
+    { title: "كيف نصنع المثنى؟", text: "عندما يصبح الشيء اثنين، نزيد في آخر الكلمة «ان» أو «ين». الكلمة التي تدلّ على اثنين نسمّيها المثنى.", example: "قمر ← قمران، سيارة ← سيارتان." },
+    { title: "وكيف نصنع الجمع؟", text: "إذا صار العدد ثلاثة أو أكثر، تتغيّر الكلمة مرة أخرى. نسمّيها الجمع. بعض الكلمات نزيد في آخرها «ات»، وبعضها يتغيّر شكلها.", example: "سيارة ← سيارات، عصفور ← عصافير." },
+    { title: "أين نستعمل ذلك؟", text: "نستعمل المفرد والمثنى والجمع كل يوم: في السوق، وفي الصف، وفي الحديقة.", example: "اشترت أمي تفاحة. ثم اشترت تفاحتين. وفي البيت تفاحات كثيرة." },
+    { title: "حيلة سهلة", text: "حيلة سهلة: عُدّ على أصابعك. إصبع واحد: مفرد. إصبعان: مثنى. ثلاثة أصابع أو أكثر: جمع.", example: "نجمة (واحدة)، نجمتان (اثنتان)، نجوم (ثلاث أو أكثر)." },
+    { title: "الآن تعرف!", text: "الآن تعرف المفرد والمثنى والجمع! المفرد لشيء واحد. المثنى لاثنين، ونزيد «ان» أو «ين». والجمع لثلاثة أو أكثر.", example: "حصان ← حصانان ← أحصنة، فراشة ← فراشتان ← فراشات." },
   ],
   checks: [
     Q("c1", "ما مثنى كلمة «كتاب»؟", ["كتابان", "كتب", "كتابات"], 0,
@@ -89,11 +91,13 @@ export const ARABIC_NUMBER_EN: LessonPack = {
     { q: "What is the first letter of «قمر»?", choices: ["ق", "م", "ر"], answerIndex: 0 },
   ],
   teachSteps: [
-    { text: "Mufrad (المفرد) means one thing.", example: "كتاب (a book), بنت (a girl)" },
-    { text: "Muthanna (المثنى) means two things. Add «ان» (or «ين») to the end.", example: "كتاب ← كتابان (two books)" },
-    { text: "Jam' (الجمع) means three or more.", example: "كتاب ← كتب, ولد ← أولاد" },
-    { text: "Some words make the plural by adding «ات».", example: "معلّمة ← معلّمات (teachers)" },
-    { text: "Now you know! Mufrad (المفرد) is one thing, muthanna (المثنى) is two things (add «ان» or «ين»), and jam' (الجمع) is three or more.", example: "قلم (a pen) ← قلمان (two pens) ← أقلام (pens)" },
+    { title: "Have you ever counted your toys?", text: "Have you ever counted your toys? Sometimes you have one ball, sometimes two, sometimes lots. In Arabic, the word changes when the number changes!", example: "كرة (one ball), كرتان (two balls), كرات (many balls)." },
+    { title: "One thing: mufrad", text: "Look at just one thing. An Arabic word for one thing is called mufrad (المفرد).", example: "قمر (a moon), سيارة (a car), عصفور (a bird): each word means one thing." },
+    { title: "Two things: muthanna", text: "Now look at two things. We add «ان» (or «ين») to the end. A word for two things is called muthanna (المثنى).", example: "قمر ← قمران (two moons), سيارة ← سيارتان (two cars)." },
+    { title: "Three or more: jam'", text: "For three or more, the word changes again. We call it jam' (الجمع). Some words add «ات» at the end. Other words change their shape.", example: "سيارة ← سيارات (cars), عصفور ← عصافير (birds)." },
+    { title: "How do we use it?", text: "You use one, two and many every day. You use them at the shop and in class.", example: "تفاحة (an apple), تفاحتان (two apples), تفاحات (apples)." },
+    { title: "An easy trick", text: "Easy trick: count on your fingers. One finger: mufrad. Two fingers: muthanna. Three or more fingers: jam'.", example: "نجمة (one star), نجمتان (two stars), نجوم (stars)." },
+    { title: "Now you know!", text: "Now you know! Mufrad (المفرد) is one thing. Muthanna (المثنى) is two things: add «ان» or «ين». Jam' (الجمع) is three or more.", example: "حصان ← حصانان ← أحصنة (horse, two horses, horses)." },
   ],
   checks: [
     Q("c1", "What is the dual (مثنى) of «كتاب»?", ["كتابان", "كتب", "كتابات"], 0,

@@ -20,9 +20,34 @@ export type FixedMessageKey =
   | "demo_homework"
   | "ai_unavailable"
   | "ai_intro"
-  | "budget_tutor";
+  | "budget_tutor"
+  | "sensitive_topic"
+  | "sensitive_topic_homework"
+  | "fear_calm"
+  | "photo_rejected";
 
 export const FIXED_MESSAGES: Record<FixedMessageKey, Record<Lang, string>> = {
+  // Sensitive subjects (politics, war as a subject, armed groups, religion/sect rulings, adult
+  // subjects). Founder decision: one calm line, no "are you OK?", no safety screen.
+  sensitive_topic: {
+    en: "That's not part of our lessons. Let's get back to our lesson! 📘",
+    ar: "هذا ليس من دروسنا. هيّا نعود إلى درسنا! 📘",
+  },
+  sensitive_topic_homework: {
+    en: "That's not part of our lessons. Let's get back to your homework! ✏️",
+    ar: "هذا ليس من دروسنا. هيّا نعود إلى واجبك! ✏️",
+  },
+  // The child's OWN fear or sadness (war noise, bombs, grief) with nobody at home involved.
+  // Founder decision: no safety screen, one calm line; the parent gets a calm note.
+  fear_calm: {
+    en: "Thank you for telling me. Please tell a grown-up at home how you feel. 💛",
+    ar: "شكرًا لأنك أخبرتني. أخبِر شخصًا كبيرًا في البيت بما تشعر به. 💛",
+  },
+  // A homework photo whose text is not suitable for a child (never AI-written).
+  photo_rejected: {
+    en: "I can't use this photo. Please ask a grown-up to take a photo of the homework page only. 📷",
+    ar: "لا أستطيع استخدام هذه الصورة. اطلب من شخص كبير أن يصوّر صفحة الواجب فقط. 📷",
+  },
   // Disclosure of harm / abuse / secrecy. Honest in both routes: it does NOT say "Mom will see this".
   safety_disclosure: {
     en: "Thank you for telling me. You did the right thing.\nWhat happened is not your fault.\nPlease tell a grown-up you trust who is not hurting you, right now.\nI'm going to let a grown-up whose job is to keep kids safe know.",

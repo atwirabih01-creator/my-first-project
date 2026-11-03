@@ -1,4 +1,4 @@
-// Sample pack: English, adjectives, grade 2 (en + ar explanations).
+// Sample pack (v3 story-lesson teach steps with titles): English, adjectives, grade 2 (en + ar explanations).
 import type { LessonPack } from "../types";
 import { Q } from "./helpers";
 
@@ -13,11 +13,12 @@ export const ENGLISH_ADJ_EN: LessonPack = {
     { q: "Which letter is a vowel?", choices: ["a", "b", "t"], answerIndex: 0 },
   ],
   teachSteps: [
-    { text: "An adjective is a word that tells us more about a noun.", example: "a red ball. 'Red' tells us about the ball." },
-    { text: "Adjectives can tell us the colour, size or shape.", example: "a big tree, a small cat, a round plate" },
-    { text: "Adjectives can tell us how something feels, tastes or looks.", example: "soft bread, sweet cake, a happy boy" },
-    { text: "The adjective usually comes before the noun.", example: "a tall building: 'tall' comes before 'building'." },
-    { text: "Now you know adjectives! An adjective tells us more about a noun: its colour, size or shape, or how it feels, tastes or looks. To find it, ask: what is the noun like?", example: "Lina has a fluffy grey kitten. The noun is 'kitten'. What is the kitten like? Fluffy and grey: those are the adjectives." },
+    { title: "Have you ever talked about a toy?", text: "Have you ever told a friend about your toy? You say more than its name. You say what it looks like!", example: "Not just \"a ball\". You say \"a shiny blue ball\"." },
+    { title: "What is an adjective?", text: "A noun is a naming word, like \"dog\" or \"bus\". Some words tell us more about a noun. We call them adjectives.", example: "a fluffy dog. \"Fluffy\" tells us about the dog." },
+    { title: "Where does it go?", text: "In English, the adjective comes first. Then comes the noun.", example: "a yellow bus: \"yellow\" comes first, then \"bus\"." },
+    { title: "How do we use adjectives?", text: "Adjectives tell colour, size and shape. They also tell how things feel or taste.", example: "a tiny ant, a square box, cold juice, a funny clown" },
+    { title: "An easy trick", text: "Easy trick: find the noun first. Then ask: what is it like? The answer is the adjective.", example: "a sleepy kitten. What is the kitten like? Sleepy! So \"sleepy\" is the adjective." },
+    { title: "Now you know!", text: "Now you know adjectives! They tell us more about a noun. They come before the noun.", example: "Lina has a fluffy grey kitten. The noun is \"kitten\". \"Fluffy\" and \"grey\" are the adjectives." },
   ],
   checks: [
     Q("c1", "Find the adjective: The big cat sleeps.", ["big", "cat", "sleeps"], 0,
@@ -88,11 +89,12 @@ export const ENGLISH_ADJ_AR: LessonPack = {
     { q: "أيّ حرف من حروف العلّة (vowel)؟", choices: ["a", "b", "t"], answerIndex: 0 },
   ],
   teachSteps: [
-    { text: "الصفة (adjective) كلمة تخبرنا شيئًا عن الاسم (noun).", example: "a red ball: كلمة red تخبرنا عن لون الكرة." },
-    { text: "الصفة قد تخبرنا عن اللون أو الحجم أو الشكل.", example: "a big tree، a small cat، a round plate" },
-    { text: "الصفة قد تخبرنا كيف يبدو الشيء أو كيف طعمه أو ملمسه.", example: "soft bread، sweet cake، a happy boy" },
-    { text: "في الإنجليزية تأتي الصفة عادةً قبل الاسم.", example: "a tall building: كلمة tall جاءت قبل building." },
-    { text: "الآن تعرف الصفات! الصفة تخبرنا شيئًا عن الاسم: لونه أو حجمه أو شكله، أو كيف يبدو أو طعمه أو ملمسه. لنجدها نسأل: كيف هو الاسم؟", example: "Lina has a fluffy grey kitten. الاسم هو kitten. كيف هي القطة؟ fluffy و grey: هاتان هما الصفتان." },
+    { title: "هل وصفت لعبتك لصديق؟", text: "هل حدّثت صديقك عن لعبتك؟ أنت لا تقول اسمها فقط. أنت تقول كيف تبدو!", example: "لا تقول a ball فقط. تقول a shiny blue ball." },
+    { title: "ما الصفة؟", text: "الاسم (noun) كلمة نسمّي بها شيئًا، مثل dog أو bus. بعض الكلمات تخبرنا أكثر عن الاسم. نسمّيها الصفات (adjectives).", example: "a fluffy dog: كلمة fluffy تخبرنا عن الكلب." },
+    { title: "أين نضع الصفة؟", text: "في اللغة الإنجليزية تأتي الصفة أولًا. ثم يأتي الاسم.", example: "a yellow bus: كلمة yellow أولًا، ثم bus." },
+    { title: "كيف نستعمل الصفات؟", text: "الصفات تخبرنا عن اللون والحجم والشكل. وتخبرنا أيضًا عن الملمس والطعم.", example: "a tiny ant، a square box، cold juice، a funny clown" },
+    { title: "حيلة سهلة", text: "حيلة سهلة: جِد الاسم أولًا. ثم اسأل: كيف هو؟ الجواب هو الصفة.", example: "a sleepy kitten: كيف هي القطة؟ sleepy! إذن sleepy هي الصفة." },
+    { title: "الآن تعرف!", text: "الآن تعرف الصفات! الصفة تخبرنا أكثر عن الاسم. وتأتي قبل الاسم في الإنجليزية.", example: "Lina has a fluffy grey kitten. الاسم هو kitten. والصفتان هما fluffy و grey." },
   ],
   checks: [
     Q("c1", "ما الصفة في الجملة؟ The big cat sleeps.", ["big", "cat", "sleeps"], 0,

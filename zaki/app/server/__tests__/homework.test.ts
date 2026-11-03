@@ -43,7 +43,9 @@ describe("homework help", () => {
       "an AI, not a person",
       "Maximum 4 short lines",
       "Never write links",
-      "No politics",
+      "Politics, political parties",
+      "back to your homework",
+      "BOOK'S OWN method",
       "DATA",
       "pizza",
       "Modern Standard Arabic",
@@ -151,7 +153,8 @@ describe("homework help", () => {
       { question: "x", subject: "math", grade: 3, age: 30, lang: "en" },
       { question: "x", subject: "history", grade: 3, lang: "en" },
       { question: "", subject: "math", grade: 3, lang: "en" },
-      { question: "x", subject: "math", grade: 3, lang: "en", pageImages: ["/9j/a", "/9j/b", "/9j/c"] },
+      { question: "x", subject: "math", grade: 3, lang: "en", pageImages: ["/9j/a", "/9j/b", "/9j/c", "/9j/d"] },
+      { question: "x", subject: "math", grade: 3, lang: "en", parentNote: "x".repeat(301) },
     ]) {
       assert.equal((await post(bad)).status, 400, JSON.stringify(bad));
     }

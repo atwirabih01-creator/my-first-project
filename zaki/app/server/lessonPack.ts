@@ -12,15 +12,23 @@
 // Before ANY of this, the topic text (a child may type it: "explain what we did in class
 // today") goes through the same safety check as a chat message. A worrying topic never
 // becomes a lesson: it returns the fixed safety reply + `safety` (same shape as /api/tutor).
+// A SENSITIVE topic (politics, war as a subject, religion rulings...) gets the fixed "not part
+// of our lessons" line + a parent note, EXCEPT a Social Studies topic from the curriculum map
+// (topicsFor(grade, "social")) or one the parent added (`source: "parent"`): that is a normal
+// history/geography lesson, taught calmly.
+// Every response carries `packVersion` (PACK_VERSION). Library entries from an older version
+// are not served (the pack is rebuilt in the current story-lesson style).
 
 import { fixedMessage } from "./data/safetyMessages";
-import { GENERAL_EXAMPLES_RULE, LEVEL_MISMATCH_RULE, levelLine } from "./promptRules";
+import { topicsFor } from "../src/lib/curriculum";
+import { normalizeBase } from "./normalize";
+import { GENERAL_EXAMPLES_RULE, LESSON_STORY_STYLE, LEVEL_MISMATCH_RULE, levelLine } from "./promptRules";
 import { shufflePack } from "./shuffle";
 export { shufflePack };
 import { callClaude, jsonOf, textOf, type ClaudeMessage, type ClaudeParams } from "./ai";
 import { MODELS, aiEnabled } from "./config/models";
 import { TRUSTED_RESEARCH_DOMAINS, isTrustedUrl } from "./config/trustedSources";
-import { LESSON_PACK_JSON_SCHEMA, validatePack } from "./packValidator";
+import { LESSON_PACK_JSON_SCHEMA, replaceRegionalInPack, validatePack } from "./packValidator";
 import { fixedReplyFor, moderate } from "./safety";
 import { BudgetExceededError, canSpend } from "./budget";
 import { getFromLibrary, libraryKey, saveToLibrary } from "./library";
@@ -41,12 +49,24 @@ export type LessonPackRequest = {
   pageImages?: string[];
   /** Random app-side id, only for the reviewer flag log. Never sent to the AI. */
   childRef?: string;
+  /** Who typed the topic: "parent" (parent area, behind the gate) or "child" (default). A
+   *  parent-added Social Studies topic may be a sensitive history topic (e.g. a war). */
+  source?: "parent" | "child";
 };
+
+/**
+ * Lesson pack format version. 3 = story-lesson teach steps with `title`. Sent in every
+ * /api/lesson-pack pack response (pack, demo, library); library entries saved with an older
+ * version are not served (rebuilt instead).
+ */
+export const PACK_VERSION = 3;
 
 export type Source = { title: string; url: string };
 
 export type LessonPackResponse = {
   pack: LessonPack;
+  /** Always PACK_VERSION. */
+  packVersion: number;
   sources: Source[];
   verify: { checked: number; removed: number };
   demo?: boolean;
@@ -163,6 +183,7 @@ SAFETY AND DATA RULES
 - Never copy any person's full name, school name, phone number, address or email from photos. Use simple first names only (Ali, Sara, Omar, Lina, Maya, Karim) in examples.
 - No links, web addresses, phone numbers or emails anywhere.
 - No medical, legal or religious rulings. No politics, war, armed groups, religious sects or contested history. No scary or violent examples.
+  (Exception: when the request says "history topic allowed", teach that school history topic calmly and factually at the child's level: no graphic detail, no blame or sides, no politics of today.)
 - If the photos are not school pages, or are not suitable for a child, return a pack about the requested topic only and set "pageText" to "".
 
 CONTENT RULES
@@ -171,12 +192,9 @@ CONTENT RULES
 - Examples: ${GENERAL_EXAMPLES_RULE}
 - Language: write the whole pack in the requested language. For Arabic use clear, simple Modern Standard Arabic (no dialect), with Western digits (0-9).
 - recap: return an empty list [] (the app no longer asks warm-up questions before teaching).
-- teachSteps: 5 to 8 steps that TOGETHER explain the WHOLE topic from zero, as if the child has never heard of it. Zaki teaches all of this BEFORE asking any question, so nothing the checks or test need may be missing.
-  - Words and sentence length as the "level" in the request says. Each step is ONE idea.
-  - Every step has an "example": a concrete, general everyday example (see Examples above).
-  - Build up gradually: start with the easiest idea, each step uses the one before it.
-  - The LAST step pulls everything together in one short "now you know" explanation with a full worked example.
-- PHOTO LESSONS (photos of today's class page are given): re-explain what is on the page in simpler words with NEW simple examples (do not just copy the page), then the checks and test ask questions that check the child understood the page.
+- teachSteps: they TOGETHER explain the WHOLE topic from zero, as if the child has never heard of it. Zaki teaches all of this BEFORE asking any question, so nothing the checks or test need may be missing. Words and sentence length as the "level" in the request says.
+${LESSON_STORY_STYLE}
+- PHOTO LESSONS (photos of today's class page are given): follow the book's chapter, method and terms EXACTLY (same method, same notation, same words, same order as the page; every school teaches differently). Re-explain the page in the story structure above, in simpler words with NEW simple examples (do not just copy the page), then the checks and test ask questions that check the child understood the page.
 - checks: 3 questions. test: 5 questions for grades 1-3, 8 for grades 4-9. retestPool: 5 NEW questions (different from test) for a second try.
 - Each question: 3 choices (2 for yes/no), exactly ONE correct, distractors are common mistakes. hint1 is a gentle nudge, hint2 is a stronger hint; neither hint may state the answer. similarExample solves a SIMILAR question with DIFFERENT numbers or words, step by step; it must not give the answer to the real question.
 - summary: 3 to 5 short sentences. flashcards: 4 to 8 front/back pairs.
@@ -211,7 +229,7 @@ export function cleanBase64Image(img: string): string {
   return s;
 }
 
-function buildUserContent(req: LessonPackRequest, notes: string, extra: string): ClaudeParams["messages"][number]["content"] {
+function buildUserContent(req: LessonPackRequest & { allowHistoryTopic?: boolean }, notes: string, extra: string): ClaudeParams["messages"][number]["content"] {
   const content: Exclude<ClaudeParams["messages"][number]["content"], string> = [];
   const imgs = (req.pageImages ?? []).slice(0, MAX_PAGE_IMAGES).map(cleanBase64Image);
   if (imgs.length) {
@@ -232,7 +250,8 @@ function buildUserContent(req: LessonPackRequest, notes: string, extra: string):
       `- topic (data): <topic>${req.topic}</topic>`,
       `- level: ${levelLine(req.grade, req.age)}`,
       `- examples: general and international (no local foods, places or dialect words)`,
-      imgs.length ? `- photo lesson: re-explain the page in simpler words with new simple examples, then check understanding` : "",
+      imgs.length ? `- photo lesson: follow the book's chapter, method and terms exactly; re-explain the page in the story structure with new simple examples, then check understanding` : "",
+      req.allowHistoryTopic ? `- history topic allowed: a Social Studies curriculum (or parent-chosen) topic; teach it calmly and factually` : "",
       ``,
       `<research_notes>\n${notes || "(no research notes available; use standard primary-school knowledge)"}\n</research_notes>`,
       extra,
@@ -241,7 +260,7 @@ function buildUserContent(req: LessonPackRequest, notes: string, extra: string):
   return content;
 }
 
-async function writePack(req: LessonPackRequest, notes: string, extra: string): Promise<Record<string, unknown> | null> {
+async function writePack(req: LessonPackRequest & { allowHistoryTopic?: boolean }, notes: string, extra: string): Promise<Record<string, unknown> | null> {
   const msg = await callClaude(
     {
       model: MODELS.lessonPack,
@@ -269,10 +288,37 @@ async function writePack(req: LessonPackRequest, notes: string, extra: string): 
  * Safety check of the topic text, exactly like a child's chat message (keyword layer +
  * classifier + flag log). Returns null when the topic may become a lesson.
  */
-export async function checkTopicSafety(req: Pick<LessonPackRequest, "topic" | "lang" | "country" | "childRef">): Promise<TopicBlockedResponse | null> {
-  const m = await moderate(req.topic, { speaker: "child", lang: req.lang, country: req.country, childRef: req.childRef });
+export async function checkTopicSafety(
+  req: Pick<LessonPackRequest, "topic" | "lang" | "country" | "childRef"> & Partial<Pick<LessonPackRequest, "subject" | "grade" | "source">>,
+): Promise<TopicBlockedResponse | null> {
+  const m = await moderate(req.topic, {
+    speaker: "child",
+    lang: req.lang,
+    country: req.country,
+    childRef: req.childRef,
+    asTopic: true,
+    allowSensitive: sensitiveTopicAllowed(req),
+  });
   if (!m.block) return null;
   return { blocked: true, reply: fixedReplyFor(m, req.lang) ?? fixedMessage("reply_blocked", req.lang), safety: m.safety };
+}
+
+const topicKey = (t: string) =>
+  normalizeBase(t)
+    .replace(/[^\p{L}\p{N} ]+/gu, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+/**
+ * A sensitive-looking topic (e.g. a war in history) is a normal lesson only in Social Studies,
+ * and only when it is a topic of the curriculum map for this grade (either language) or the
+ * parent typed it in the parent area.
+ */
+export function sensitiveTopicAllowed(req: Partial<Pick<LessonPackRequest, "subject" | "grade" | "source" | "topic">>): boolean {
+  if (req.subject !== "social" || !req.topic) return false;
+  if (req.source === "parent") return true;
+  const k = topicKey(req.topic);
+  return topicsFor(req.grade ?? 1, "social").some((t) => topicKey(t.en) === k || topicKey(t.ar) === k);
 }
 
 export async function buildLessonPack(req: LessonPackRequest): Promise<LessonPackResponse | BudgetReachedResponse | TopicBlockedResponse> {
@@ -283,22 +329,25 @@ export async function buildLessonPack(req: LessonPackRequest): Promise<LessonPac
   if (unsafe) return unsafe;
 
   const hasPhotos = (req.pageImages ?? []).length > 0;
-  // Shared library first: typed-topic packs only, never photo packs. No AI cost.
+  // Shared library first: typed-topic packs only, never photo packs. No AI cost. Entries
+  // from an older pack version are skipped (rebuilt in the current style, then replaced).
   const key = libraryKey(req.subject, req.topic, req.grade, req.lang);
   if (!hasPhotos) {
     const hit = await getFromLibrary(key);
-    if (hit) return { pack: hit.pack, sources: hit.sources, verify: hit.verify, fromLibrary: true };
+    if (hit && hit.packVersion === PACK_VERSION) {
+      return { pack: hit.pack, packVersion: PACK_VERSION, sources: hit.sources, verify: hit.verify, fromLibrary: true };
+    }
   }
   if (!aiEnabled()) {
     const sample = { ...getSamplePack(req.subject, req.lang), grade: req.grade };
     const v = verifyPack(sample);
-    return { pack: shufflePack(v.pack), sources: [], verify: { checked: v.checked, removed: v.removed }, demo: true };
+    return { pack: shufflePack(v.pack), packVersion: PACK_VERSION, sources: [], verify: { checked: v.checked, removed: v.removed }, demo: true };
   }
 
   if (!(await canSpend("lesson"))) return { budgetReached: true };
   try {
-    const built = await buildWithAi(req);
-    if (!hasPhotos) await saveToLibrary(key, { pack: built.pack, sources: built.sources, verify: built.verify });
+    const built = await buildWithAi({ ...req, allowHistoryTopic: sensitiveTopicAllowed(req) });
+    if (!hasPhotos) await saveToLibrary(key, { pack: built.pack, sources: built.sources, verify: built.verify, packVersion: PACK_VERSION });
     return built;
   } catch (e) {
     if (e instanceof BudgetExceededError) return { budgetReached: true };
@@ -306,7 +355,7 @@ export async function buildLessonPack(req: LessonPackRequest): Promise<LessonPac
   }
 }
 
-async function buildWithAi(req: LessonPackRequest): Promise<LessonPackResponse> {
+async function buildWithAi(req: LessonPackRequest & { allowHistoryTopic?: boolean }): Promise<LessonPackResponse> {
   let notes = "";
   let sources: Source[] = [];
   try {
@@ -329,25 +378,36 @@ async function buildWithAi(req: LessonPackRequest): Promise<LessonPackResponse> 
     // Moderate the text read from photos (OpenAI's image check misses some categories).
     const pageText = typeof raw.pageText === "string" ? raw.pageText.slice(0, 8000) : "";
     if (pageText) {
-      const m = await moderate(pageText, { speaker: "child", lang: req.lang, country: req.country });
-      if (m.category === "sexual" || m.category === "adult_topic") {
+      const m = await moderate(pageText, { speaker: "child", lang: req.lang, country: req.country, pageText: true });
+      if (m.rawCategory === "sexual" || m.rawCategory === "adult_topic") {
         throw new LessonPackError("photo content is not suitable for a lesson", "photo_rejected");
       }
     }
     delete raw.pageText;
 
     const valid = validatePack(raw, { subject: req.subject, grade: req.grade, lang: req.lang, topic: req.topic });
-    if (!valid.ok || !valid.pack) {
+    let pack = valid.ok ? valid.pack : undefined;
+    if (!valid.ok && valid.regionalOnly && valid.pack) {
+      // Only region-specific words are wrong: the retry rewrites them; after the last try our
+      // code swaps them for general words (a lesson is never failed for this).
+      if (attempt === 0) {
+        lastErrors = valid.errors;
+        continue;
+      }
+      pack = replaceRegionalInPack(valid.pack);
+    }
+    if (!pack) {
       lastErrors = valid.errors;
       continue;
     }
-    const verified = verifyPack(valid.pack);
+    const verified = verifyPack(pack);
     if (verified.pack.checks.length < 1 || verified.pack.test.length < 3) {
       lastErrors = verified.removedItems.map((r) => `${r.id}: ${r.reason}`);
       continue;
     }
     return {
       pack: shufflePack(verified.pack),
+      packVersion: PACK_VERSION,
       sources,
       verify: { checked: verified.checked, removed: verified.removed },
     };

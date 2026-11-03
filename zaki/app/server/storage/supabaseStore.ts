@@ -214,7 +214,7 @@ export function createSupabaseStore(getClient: () => Promise<SupabaseLike>): Zak
       const c = await db();
       const r = await run(c.from("library").select().eq("key", key).maybeSingle(), "library_get");
       if (!r) return null;
-      return { key: r.key, pack: r.pack, sources: r.sources ?? [], verify: r.verify ?? { checked: 0, removed: 0 }, savedAt: r.saved_at };
+      return { key: r.key, pack: r.pack, sources: r.sources ?? [], verify: r.verify ?? { checked: 0, removed: 0 }, savedAt: r.saved_at, packVersion: r.pack_version ?? undefined };
     },
 
     async libraryPut(e: LibraryEntry) {
@@ -232,6 +232,7 @@ export function createSupabaseStore(getClient: () => Promise<SupabaseLike>): Zak
             sources: e.sources ?? [],
             verify: e.verify ?? { checked: 0, removed: 0 },
             saved_at: e.savedAt ?? new Date().toISOString(),
+            pack_version: e.packVersion ?? 1, // migration 0006
           },
           { onConflict: "key" },
         ),

@@ -18,7 +18,7 @@ export class HttpError extends Error {
 export const SIZE_LIMITS = {
   lessonPack: 7_000_000, // up to 3 photos
   tutor: 200_000, // the pack travels with each turn
-  homework: 4_500_000, // up to 2 photos
+  homework: 7_000_000, // up to 3 photos
   checkAnswer: 200_000,
   parent: 4_000,
   exam: 2_000_000, // several saved lessons

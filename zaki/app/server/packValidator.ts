@@ -4,11 +4,16 @@
 //    requested subject/grade/lang; ids are made unique;
 //  - links, emails and phone numbers are stripped from every string;
 //  - a pack is rejected if it falls below the minimum counts, if an Arabic pack is not
-//    mostly Arabic, or if any text trips the hard safety keywords.
+//    mostly Arabic, or if any text trips the hard safety keywords;
+//  - region-specific foods/places/money (server/regionalWords.ts) are an error too, so the
+//    builder's retry rewrites them. The result then still carries the built pack and
+//    `regionalOnly: true`, so the builder can replace the words itself after the last retry
+//    (a lesson is never failed for a regional word).
 
 import { keywordScan } from "./safety";
+import { findRegionalWords, replaceRegionalWords } from "./regionalWords";
 import { stripLinksAndPhones } from "./textGuards";
-import { SUBJECTS, type Lang, type LessonPack, type Question, type RecapItem, type Subject } from "./types";
+import { SUBJECTS, type Lang, type LessonPack, type Question, type RecapItem, type Subject, type TeachStep } from "./types";
 
 export const PACK_LIMITS = {
   recap: { min: 0, max: 3 },
@@ -19,7 +24,7 @@ export const PACK_LIMITS = {
   summary: { min: 1, max: 8 },
   flashcards: { min: 1, max: 12 },
   choices: { min: 2, max: 4 },
-  len: { q: 300, choice: 80, hint: 300, example: 500, teach: 700, summary: 220, card: 160, topic: 80, mathExpr: 200 },
+  len: { q: 300, choice: 80, hint: 300, example: 500, teach: 700, title: 80, summary: 220, card: 160, topic: 80, mathExpr: 200 },
 } as const;
 
 export type ValidationResult = {
@@ -27,6 +32,10 @@ export type ValidationResult = {
   pack?: LessonPack;
   errors: string[];
   repairs: string[];
+  /** Region-specific words found (labels). Non-empty => an error unless lenient. */
+  regionalWords?: string[];
+  /** true when the ONLY errors are regional words: `pack` is still returned (not ok). */
+  regionalOnly?: boolean;
 };
 
 type Expect = {
@@ -150,9 +159,14 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
         return null;
       }
       const example = so.example === undefined ? undefined : str(so.example, PACK_LIMITS.len.example) ?? undefined;
-      return example ? { text, example } : { text };
+      // title: optional short heading (pack version 3+); a bad or too-long title is dropped, not the step
+      const title = so.title === undefined ? undefined : str(so.title, PACK_LIMITS.len.title) ?? undefined;
+      const step: TeachStep = { text };
+      if (title) step.title = title;
+      if (example) step.example = example;
+      return step;
     })
-    .filter((x): x is { text: string; example?: string } => !!x)
+    .filter((x): x is TeachStep => !!x)
     .slice(0, PACK_LIMITS.teachSteps.max);
 
   const qs = (name: "checks" | "test" | "retestPool") =>
@@ -219,7 +233,7 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
   const allText = [
     topic ?? "",
     ...recap.flatMap((r) => [r.q, ...r.choices]),
-    ...teachSteps.flatMap((s) => [s.text, s.example ?? ""]),
+    ...teachSteps.flatMap((s) => [s.title ?? "", s.text, s.example ?? ""]),
     ...allQ.flatMap((q) => [q.q, ...q.choices, q.hint1, q.hint2, q.similarExample]),
     ...summary,
     ...flashcards.flatMap((f) => [f.front, f.back]),
@@ -229,7 +243,14 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
     errors.push("pack text contains blocked safety words");
   }
 
-  if (errors.length) return { ok: false, errors, repairs };
+  // No regional words (founder decision): an error, so the builder's retry rewrites them.
+  const regionalWords = findRegionalWords(allText);
+  const hardErrors = errors.length;
+  if (regionalWords.length) {
+    errors.push(`region-specific words are not allowed (use general international examples instead): ${regionalWords.join(", ")}`);
+  }
+
+  if (hardErrors) return { ok: false, errors, repairs, regionalWords };
 
   const id = expect.id ?? (typeof o.id === "string" && /^[A-Za-z0-9_-]{1,64}$/.test(o.id) ? o.id : `pack_${crypto.randomUUID()}`);
   const pack: LessonPack = {
@@ -246,7 +267,34 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
     summary,
     flashcards,
   };
+  if (regionalWords.length) return { ok: false, pack, errors, repairs, regionalWords, regionalOnly: true };
   return { ok: true, pack, errors, repairs };
+}
+
+/**
+ * Last resort after the retry: every region-specific word in the pack is replaced with a
+ * general one ("manousheh" -> "pizza", "Beirut" -> "the city", "lira" -> "coins"). Choices
+ * that would become identical are left alone by the caller's later checks (verifyPack).
+ */
+export function replaceRegionalInPack(pack: LessonPack): LessonPack {
+  const r = (t: string) => replaceRegionalWords(t, pack.lang);
+  const q = (x: Question): Question => ({ ...x, q: r(x.q), choices: x.choices.map(r), hint1: r(x.hint1), hint2: r(x.hint2), similarExample: r(x.similarExample) });
+  return {
+    ...pack,
+    topic: r(pack.topic),
+    recap: pack.recap.map((x) => ({ ...x, q: r(x.q), choices: x.choices.map(r) })),
+    teachSteps: pack.teachSteps.map((s) => {
+      const out: TeachStep = { text: r(s.text) };
+      if (s.title) out.title = r(s.title);
+      if (s.example) out.example = r(s.example);
+      return out;
+    }),
+    checks: pack.checks.map(q),
+    test: pack.test.map(q),
+    retestPool: pack.retestPool.map(q),
+    summary: pack.summary.map(r),
+    flashcards: pack.flashcards.map((f) => ({ front: r(f.front), back: r(f.back) })),
+  };
 }
 
 /** JSON schema sent to Claude (structured outputs). The validator above still runs after. */
@@ -284,8 +332,10 @@ export const LESSON_PACK_JSON_SCHEMA = (() => {
         type: "array",
         items: {
           type: "object",
-          properties: { text: { type: "string" }, example: { type: "string" } },
-          required: ["text"],
+          // title: short kid-friendly heading ("What is a fraction?"); required for the AI,
+          // optional in the validator (older packs have none).
+          properties: { title: { type: "string" }, text: { type: "string" }, example: { type: "string" } },
+          required: ["title", "text", "example"],
           additionalProperties: false,
         },
       },

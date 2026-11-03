@@ -1,4 +1,4 @@
-// Sample pack: Math, fractions, grade 3 (en + ar). Every math answer is re-checked by verify.ts in tests.
+// Sample pack (v3 story-lesson teach steps with titles): Math, fractions, grade 3 (en + ar). Every math answer is re-checked by verify.ts in tests.
 import type { LessonPack } from "../types";
 import { Q } from "./helpers";
 
@@ -13,14 +13,13 @@ export const MATH_FRACTIONS_EN: LessonPack = {
     { q: "Which shape has 3 sides?", choices: ["Triangle", "Square", "Circle"], answerIndex: 0 },
   ],
   teachSteps: [
-    { text: "A fraction is a part of a whole thing. First we cut the whole into EQUAL parts. Equal means every part is the same size.", example: "Mama cuts a pizza into 4 equal pieces. All the pieces are the same size, so each piece is 1 part out of 4." },
-    { text: "We write a fraction with two numbers and a line between them: one number on top and one at the bottom, like 1/4. We say \"one quarter\".", example: "1/4 is one piece of the pizza that was cut into 4 equal pieces." },
-    { text: "The bottom number tells how many equal parts the whole has in total.", example: "In 3/4, the 4 means the whole has 4 equal parts. A pizza cut into 8 equal slices gives eighths: 1/8, 2/8, 3/8…" },
-    { text: "The top number tells how many of those parts we take.", example: "You eat 3 of the 4 pieces of pizza, so you ate 3/4. If you eat all 4 pieces, you ate 4/4: the whole pizza!" },
-    { text: "Half (1/2) means the whole is cut into 2 equal parts. To find half of a group, share it into 2 equal groups.", example: "Half of 8 apples: share them onto 2 plates, 4 on each plate. So half of 8 is 4." },
-    { text: "Comparing: if the top numbers are the same, the fraction with the SMALLER bottom number is bigger, because fewer pieces means bigger pieces. If the bottom numbers are the same, more pieces means more.", example: "1/3 of a cake is bigger than 1/6 of the same cake. And 3/5 is more than 1/5: same-size pieces, and 3 pieces are more than 1." },
-    { text: "Adding and taking away: when the bottom numbers are the same, the bottom number stays the same. Add or take away only the top numbers.", example: "1/5 + 3/5 = 4/5. And 4/6 − 1/6 = 3/6. The bottom number does not change." },
-    { text: "Now you know fractions! Cut the whole into equal parts. The bottom number says how many parts there are, the top number says how many we take.", example: "A cake has 8 equal slices. Sara eats 2 slices and Karim eats 1 slice. Together they ate 2/8 + 1/8 = 3/8 of the cake." },
+    { title: "Have you ever shared a pizza?", text: "Have you ever shared a pizza with a friend? You both want a fair share. Fair means every piece is the same size. Today you will learn about parts of a whole.", example: "Two friends share one chocolate bar. They break it right in the middle. Each friend gets a part of the same size." },
+    { title: "What is a fraction?", text: "Think of one whole cake. You cut it into pieces that are all the same size. We call them equal parts. One of these parts is a fraction of the cake.", example: "A cake is cut into 3 equal pieces. You take one piece. You have one part out of 3 parts. We write it as 1/3." },
+    { title: "How do we write a fraction?", text: "A fraction has two numbers with a line between them. The bottom number tells how many equal parts the whole has. The top number tells how many parts you take.", example: "A chocolate bar has 6 equal squares. You eat 2 squares. You ate 2/6 of the bar: 2 on top, 6 at the bottom." },
+    { title: "How do we use fractions?", text: "You use fractions every day when you share. Half means the whole is cut into 2 equal parts. We write half as 1/2. To find half of a group, share it into 2 equal groups.", example: "Half of 8 apples: put them on 2 plates. Each plate gets 4 apples. So half of 8 is 4." },
+    { title: "Which fraction is bigger?", text: "Picture two same-size cakes. One is cut into 3 pieces, one into 6 pieces. Fewer pieces means bigger pieces! When the bottom numbers are the same, more pieces means more.", example: "1/3 of a cake is bigger than 1/6 of the same cake. And 3/5 is more than 1/5: the same size pieces, but 3 pieces are more than 1." },
+    { title: "An easy trick for adding", text: "Here is an easy trick. Look at the bottom numbers. Are they the same? Then the bottom number stays. You add or take away only the top numbers.", example: "1/5 + 3/5 = 4/5. And 4/7 − 1/7 = 3/7. The bottom number does not change." },
+    { title: "Now you know!", text: "Now you know fractions! A fraction is a part of a whole cut into equal parts. The bottom number counts all the parts. The top number counts the parts you take.", example: "A cake has 8 equal slices. Sara eats 2 slices and Karim eats 1 slice. Together they ate 2/8 + 1/8 = 3/8 of the cake." },
   ],
   checks: [
     Q("c1", "A pizza is cut into 4 equal pieces. You eat 1 piece. What fraction did you eat?", ["1/4", "1/2", "4/1"], 0,
@@ -97,14 +96,13 @@ export const MATH_FRACTIONS_AR: LessonPack = {
     { q: "أيّ شكل له 3 أضلاع؟", choices: ["المثلث", "المربع", "الدائرة"], answerIndex: 0 },
   ],
   teachSteps: [
-    { text: "الكسر جزء من شيء كامل. أولًا نقسم الشيء الكامل إلى أجزاء متساوية. متساوية تعني أن كل الأجزاء لها الحجم نفسه.", example: "تقسم أمي بيتزا إلى 4 قطع متساوية. كل القطع بالحجم نفسه، فكل قطعة هي جزء واحد من 4 أجزاء." },
-    { text: "نكتب الكسر بعددين بينهما خط: عدد في الأعلى وعدد في الأسفل، مثل 1/4. ونقرؤه «ربع».", example: "1/4 هو قطعة واحدة من البيتزا المقسومة إلى 4 قطع متساوية." },
-    { text: "العدد في الأسفل يخبرنا كم جزءًا متساويًا في الكل.", example: "في الكسر 3/4، العدد 4 يعني أن الكل مقسوم إلى 4 أجزاء متساوية. والبيتزا المقسومة إلى 8 قطع متساوية تعطينا أثمانًا: 1/8، 2/8، 3/8…" },
-    { text: "العدد في الأعلى يخبرنا كم جزءًا أخذنا.", example: "أكلتَ 3 قطع من البيتزا المقسومة إلى 4 قطع، إذن أكلتَ 3/4. وإذا أكلتَ القطع الأربع كلها، فقد أكلتَ 4/4: البيتزا كاملة!" },
-    { text: "النصف (1/2) يعني أن الكل مقسوم إلى جزأين متساويين. لنجد نصف مجموعة، نوزّعها على مجموعتين متساويتين.", example: "نصف 8 تفاحات: نوزّعها على صحنين، في كل صحن 4 تفاحات. إذن نصف 8 هو 4." },
-    { text: "المقارنة: إذا كان العددان في الأعلى متساويين، فالكسر الذي عدده في الأسفل أصغر هو الأكبر، لأن القطع الأقل عددًا تكون أكبر حجمًا. وإذا كان العددان في الأسفل متساويين، فالأكثر قطعًا هو الأكبر.", example: "1/3 الكعكة أكبر من 1/6 الكعكة نفسها. و3/5 أكبر من 1/5: القطع بالحجم نفسه، و3 قطع أكثر من قطعة واحدة." },
-    { text: "الجمع والطرح: إذا كان العددان في الأسفل متساويين، يبقى العدد في الأسفل كما هو، ونجمع أو نطرح العددين في الأعلى فقط.", example: "1/5 + 3/5 = 4/5. و4/6 − 1/6 = 3/6. العدد في الأسفل لا يتغيّر." },
-    { text: "الآن تعرف الكسور! نقسم الكل إلى أجزاء متساوية. العدد في الأسفل يخبرنا كم جزءًا في الكل، والعدد في الأعلى يخبرنا كم جزءًا أخذنا.", example: "كعكة فيها 8 قطع متساوية. أكلت سارة قطعتين وأكل كريم قطعة واحدة. معًا أكلا 2/8 + 1/8 = 3/8 من الكعكة." },
+    { title: "هل تقاسمت بيتزا مع صديق؟", text: "هل تقاسمت بيتزا مع صديق؟ كل واحد منكما يريد حصة عادلة. عادلة تعني أن القطع لها الحجم نفسه. اليوم ستتعلّم عن أجزاء الشيء الكامل.", example: "صديقان معهما لوح شوكولاتة واحد. يكسرانه من الوسط تمامًا. يأخذ كل واحد جزءًا بالحجم نفسه." },
+    { title: "ما الكسر؟", text: "تخيّل كعكة كاملة. تقطعها قطعًا لها الحجم نفسه. نسمّيها أجزاء متساوية. كل جزء منها هو كسر من الكعكة.", example: "قُطِعت كعكة إلى 3 قطع متساوية. أخذتَ قطعة واحدة. معك جزء واحد من 3 أجزاء. نكتبه هكذا: 1/3." },
+    { title: "كيف نكتب الكسر؟", text: "للكسر عددان بينهما خط. العدد في الأسفل يخبرنا كم جزءًا متساويًا في الكل. العدد في الأعلى يخبرنا كم جزءًا أخذتَ.", example: "لوح شوكولاتة فيه 6 مربعات متساوية. أكلتَ مربعين. أكلتَ 2/6 من اللوح: 2 في الأعلى، و6 في الأسفل." },
+    { title: "كيف نستعمل الكسور؟", text: "تستعمل الكسور كل يوم عندما تتقاسم الأشياء. النصف يعني أن الكل مقسوم إلى جزأين متساويين. نكتب النصف هكذا: 1/2. لتجد نصف مجموعة، وزّعها على مجموعتين متساويتين.", example: "نصف 8 تفاحات: نضعها في صحنين. في كل صحن 4 تفاحات. إذن نصف 8 هو 4." },
+    { title: "أيّ الكسرين أكبر؟", text: "تخيّل كعكتين بالحجم نفسه. الأولى قُطِعت إلى 3 قطع، والثانية إلى 6 قطع. القطع الأقل عددًا تكون أكبر حجمًا! وإذا تساوى العددان في الأسفل، فالأكثر قطعًا هو الأكبر.", example: "1/3 الكعكة أكبر من 1/6 الكعكة نفسها. و3/5 أكبر من 1/5: القطع بالحجم نفسه، و3 قطع أكثر من قطعة واحدة." },
+    { title: "حيلة سهلة للجمع", text: "إليك حيلة سهلة. إذا كان العددان في الأسفل متساويين، يبقى العدد في الأسفل كما هو. تجمع أو تطرح العددين في الأعلى فقط.", example: "1/5 + 3/5 = 4/5. و4/7 − 1/7 = 3/7. العدد في الأسفل لا يتغيّر." },
+    { title: "الآن تعرف!", text: "الآن تعرف الكسور! الكسر جزء من شيء كامل مقسوم إلى أجزاء متساوية. العدد في الأسفل يعدّ كل الأجزاء. العدد في الأعلى يعدّ الأجزاء التي أخذتها.", example: "كعكة فيها 8 قطع متساوية. أكلت سارة قطعتين وأكل كريم قطعة واحدة. معًا أكلا 2/8 + 1/8 = 3/8 من الكعكة." },
   ],
   checks: [
     Q("c1", "قُسِمت بيتزا إلى 4 قطع متساوية. أكلت قطعة واحدة. ما الكسر الذي أكلته؟", ["1/4", "1/2", "4/1"], 0,

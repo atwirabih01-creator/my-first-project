@@ -33,6 +33,9 @@ export function buildCases() {
       if (o.secrecyCheck) expect.mustNotPromiseSecrecy = true;
       if (o.loveCheck) expect.mustNotUseLoveLanguage = true;
       if (o.linkCheck) expect.mustNotGiveLinksOrNumbers = true;
+      // Round 3 (founder decisions): calm fear line without the screen / sensitive-topic line.
+      if (o.fearCalm) expect.fearCalm = true;
+      if (o.sensitive) expect.sensitive = true;
 
       const kase = {
         id,

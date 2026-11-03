@@ -1,4 +1,4 @@
-// Sample pack: Science, the water cycle, grade 3 (en + ar).
+// Sample pack (v3 story-lesson teach steps with titles): Science, the water cycle, grade 3 (en + ar).
 import type { LessonPack } from "../types";
 import { Q } from "./helpers";
 
@@ -13,12 +13,14 @@ export const SCIENCE_WATER_EN: LessonPack = {
     { q: "What gives Earth light and heat?", choices: ["The Sun", "The Moon", "The clouds"], answerIndex: 0 },
   ],
   teachSteps: [
-    { text: "Water on Earth moves round and round. We call this the water cycle.", example: "The same water can be in the sea, then in a cloud, then in the rain." },
-    { text: "Evaporation: the Sun warms water. The water turns into a gas called water vapour and goes up into the air.", example: "A wet towel on a sunny balcony dries because the water evaporates." },
-    { text: "Condensation: high in the sky the air is cold. The water vapour cools and turns into tiny drops. The drops make clouds.", example: "Drops form on a cold glass of juice. That is condensation." },
-    { text: "Precipitation: when the drops in a cloud get big and heavy, they fall as rain, snow or hail.", example: "In winter, snow falls on the mountains." },
-    { text: "Collection: the water gathers in seas, rivers, lakes and under the ground. Then the cycle starts again." },
-    { text: "Now you know the water cycle! The Sun warms the water (evaporation), the vapour cools into clouds (condensation), drops fall (precipitation), and the water gathers again (collection). Round and round!", example: "A puddle in the school yard dries in the sun, becomes part of a cloud, and later falls again as rain on the mountains." },
+    { title: "Have you ever seen a puddle vanish?", text: "Have you ever seen a puddle after the rain? A few hours later, it is gone! Where did the water go? Let's find out together.", example: "In the morning there is a big puddle in the school yard. In the afternoon the yard is dry." },
+    { title: "What is the water cycle?", text: "The water on Earth goes on a long trip. It goes up into the sky and comes back down. Then it starts again, round and round. We call this trip the water cycle.", example: "The same water can be in the sea, then in a cloud, then in the rain." },
+    { title: "Going up into the air", text: "The Sun warms the water in seas, rivers and puddles. The water turns into a gas you cannot see. This gas goes up into the air. We call this evaporation.", example: "A puddle in the sunshine gets smaller and smaller until it is gone." },
+    { title: "Making clouds", text: "High in the sky, the air is cold. The water gas cools down and turns into tiny drops. Lots of tiny drops together make a cloud. We call this condensation.", example: "After a hot shower, the bathroom mirror gets foggy. Tiny drops cover it." },
+    { title: "Coming back down", text: "In a cloud, tiny drops join together and grow. They get big and heavy. Then they fall as rain, snow or hail. We call this precipitation.", example: "Rain falls on your umbrella on the way to school." },
+    { title: "How do we use it?", text: "The water gathers in seas, rivers, lakes and under the ground. We call this collection. People, animals and plants use this water every day. Then the trip starts again.", example: "Rain fills a river. A farmer uses the river water for his plants." },
+    { title: "Fun fact!", text: "Fun fact: the water in your glass is very, very old! A dinosaur may have drunk the same water. It just keeps going round the water cycle.", example: "One drop can be in the sea, then a cloud, then a river, then your glass." },
+    { title: "Now you know!", text: "Now you know the water cycle! The Sun warms water and it goes up. It cools into clouds and falls back down. Then it gathers and the cycle starts again.", example: "A puddle dries in the sun (evaporation). Its water helps make a cloud (condensation). Later it falls as rain (precipitation) into a lake (collection)." },
   ],
   checks: [
     Q("c1", "The Sun warms the sea and water goes up into the air. What is this called?", ["Evaporation", "Condensation", "Collection"], 0,
@@ -91,12 +93,14 @@ export const SCIENCE_WATER_AR: LessonPack = {
     { q: "ما الذي يعطي الأرض الضوء والحرارة؟", choices: ["الشمس", "القمر", "الغيوم"], answerIndex: 0 },
   ],
   teachSteps: [
-    { text: "الماء على الأرض يتحرّك في دورة لا تتوقّف. نسمّيها دورة الماء.", example: "الماء نفسه يكون في البحر، ثم في الغيمة، ثم في المطر." },
-    { text: "التبخّر: تُسخّن الشمس الماء، فيتحوّل إلى غاز اسمه بخار الماء ويصعد إلى الهواء.", example: "تجفّ المنشفة المبلّلة على الشرفة المشمسة لأن ماءها يتبخّر." },
-    { text: "التكاثف: الهواء في الأعلى بارد. يبرد بخار الماء ويتحوّل إلى قطرات صغيرة جدًّا تكوّن الغيوم.", example: "تتكوّن قطرات على كأس عصير بارد. هذا تكاثف." },
-    { text: "الهطول: عندما تكبر القطرات في الغيمة وتصبح ثقيلة، تسقط مطرًا أو ثلجًا أو بَرَدًا.", example: "في الشتاء يتساقط الثلج على الجبال." },
-    { text: "التجمّع: يتجمّع الماء في البحار والأنهار والبحيرات وتحت الأرض، ثم تبدأ الدورة من جديد." },
-    { text: "الآن تعرف دورة الماء! تُسخّن الشمس الماء (التبخّر)، يبرد البخار ويصنع الغيوم (التكاثف)، تسقط القطرات (الهطول)، ثم يتجمّع الماء من جديد (التجمّع). وهكذا تدور الدورة!", example: "بركة ماء صغيرة في ملعب المدرسة تجفّ تحت الشمس، فيصير ماؤها جزءًا من غيمة، ثم يسقط مطرًا على الجبال." },
+    { title: "هل رأيت بركة ماء تختفي؟", text: "هل رأيت بركة ماء صغيرة بعد المطر؟ بعد بضع ساعات تختفي! أين ذهب الماء؟ لنكتشف ذلك معًا.", example: "في الصباح توجد بركة ماء كبيرة في ملعب المدرسة. وبعد الظهر يصبح الملعب جافًّا." },
+    { title: "ما دورة الماء؟", text: "الماء على الأرض يقوم برحلة طويلة. يصعد إلى السماء ثم ينزل من جديد. ثم تبدأ الرحلة مرة أخرى، وهكذا دائمًا. نسمّي هذه الرحلة دورة الماء.", example: "الماء نفسه يكون في البحر، ثم في الغيمة، ثم في المطر." },
+    { title: "الصعود إلى الهواء", text: "تُسخّن الشمس الماء في البحار والأنهار والبرك. يتحوّل الماء إلى غاز لا نراه. يصعد هذا الغاز إلى الهواء. نسمّي ذلك التبخّر.", example: "بركة ماء تحت الشمس تصغر شيئًا فشيئًا حتى تختفي." },
+    { title: "صناعة الغيوم", text: "الهواء في أعلى السماء بارد. يبرد غاز الماء ويتحوّل إلى قطرات صغيرة جدًّا. القطرات الكثيرة معًا تصنع غيمة. نسمّي ذلك التكاثف.", example: "بعد حمّام دافئ تمتلئ مرآة الحمّام بقطرات صغيرة جدًّا." },
+    { title: "النزول من جديد", text: "في الغيمة تتجمّع القطرات الصغيرة وتكبر. تصبح كبيرة وثقيلة. ثم تسقط مطرًا أو ثلجًا أو بَرَدًا. نسمّي ذلك الهطول.", example: "يسقط المطر على مظلّتك وأنت في طريقك إلى المدرسة." },
+    { title: "كيف نستعمل الماء؟", text: "يتجمّع الماء في البحار والأنهار والبحيرات وتحت الأرض. نسمّي ذلك التجمّع. يستعمل الناس والحيوانات والنباتات هذا الماء كل يوم. ثم تبدأ الرحلة من جديد.", example: "يملأ المطر النهر. ويسقي المزارع نباتاته من ماء النهر." },
+    { title: "معلومة ممتعة!", text: "معلومة ممتعة: الماء في كأسك قديم جدًّا! ربما شرب ديناصور الماء نفسه. فالماء يدور في دورة الماء دائمًا.", example: "قطرة واحدة تكون في البحر، ثم في غيمة، ثم في نهر، ثم في كأسك." },
+    { title: "الآن تعرف!", text: "الآن تعرف دورة الماء! تُسخّن الشمس الماء فيصعد. يبرد ويصنع الغيوم ثم ينزل. ثم يتجمّع وتبدأ الدورة من جديد.", example: "تجفّ بركة ماء تحت الشمس (التبخّر). يساعد ماؤها في صنع غيمة (التكاثف). ثم يسقط مطرًا (الهطول) في بحيرة (التجمّع)." },
   ],
   checks: [
     Q("c1", "تُسخّن الشمس البحر فيصعد الماء إلى الهواء. ماذا نسمّي ذلك؟", ["التبخّر", "التكاثف", "التجمّع"], 0,

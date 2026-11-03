@@ -14,7 +14,7 @@ describe("tutor", () => {
   afterEach(() => demoMode());
 
   it("system prompt carries the safety rules and the pack has no answer keys", () => {
-    for (const rule of ["an AI, not a person", "Never give the final answer", "Maximum 4 short lines", "At most one emoji", "Never write links", "No medical, legal or religious rulings", "No politics", "SIMILAR example", "DATA"]) {
+    for (const rule of ["an AI, not a person", "Never give the final answer", "Maximum 4 short lines", "At most one emoji", "Never write links", "No medical or legal rulings", "religious or sect rulings", "Politics, political parties", "not part of our lessons", "SIMILAR example", "DATA"]) {
       assert.ok(ZAKI_SYSTEM_PROMPT.includes(rule), rule);
     }
     const shown = packForModel(getSamplePack("math", "en"));

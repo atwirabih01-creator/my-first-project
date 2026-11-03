@@ -21,6 +21,7 @@ await db.exec(read("../migrations/0001_init.sql"));
 await db.exec(read("../migrations/0003_family_keys.sql"));
 await db.exec(read("../migrations/0004_help_request_category.sql"));
 await db.exec(read("../migrations/0005_grades_1_9_new_subjects.sql"));
+await db.exec(read("../migrations/0006_sensitive_topic_pack_version.sql"));
 
 let passed = 0;
 const ok = (name) => { passed++; console.log("  ok -", name); };
@@ -38,6 +39,13 @@ const ok = (name) => { passed++; console.log("  ok -", name); };
     else assert.ok(row.def.includes("9"), row.conname);
   }
   ok("grades 1-9 and the new subjects are accepted (0005)");
+}
+{
+  const r = await db.query(`select pg_get_constraintdef(oid) as def from pg_constraint where conname = 'flags_category_check'`);
+  assert.ok(r.rows[0].def.includes("sensitive_topic") && r.rows[0].def.includes("help_request"));
+  const c = await db.query(`select column_name from information_schema.columns where table_name = 'library' and column_name = 'pack_version'`);
+  assert.equal(c.rows.length, 1);
+  ok("flags accept sensitive_topic; library has pack_version (0006)");
 }
 
 const USER_A = "11111111-1111-4111-8111-111111111111";

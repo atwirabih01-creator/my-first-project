@@ -14,6 +14,8 @@ export type LibraryEntry = {
   sources: { title: string; url: string }[];
   verify: { checked: number; removed: number };
   savedAt: string;
+  /** Pack format version (lessonPack.ts PACK_VERSION) when saved; missing = before version 3. */
+  packVersion?: number;
 };
 
 /** "  Fractions!! " and "fractions" share a key; Arabic is normalized too. */

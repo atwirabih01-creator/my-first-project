@@ -19,6 +19,9 @@ export type Question = {
   mathExpr?: string;
 };
 
+/** One teach step. `title` (pack version 3+) is a short kid-friendly heading, e.g. "What is a fraction?". */
+export type TeachStep = { title?: string; text: string; example?: string };
+
 export type RecapItem = { q: string; choices: string[]; answerIndex: number };
 
 export type LessonPack = {
@@ -28,7 +31,7 @@ export type LessonPack = {
   grade: number;
   lang: Lang;
   recap: RecapItem[];
-  teachSteps: { text: string; example?: string }[];
+  teachSteps: TeachStep[];
   checks: Question[];
   test: Question[];
   retestPool: Question[];
@@ -46,7 +49,11 @@ export type SafetyCategory =
   | "personal_data"
   | "adult_topic"
   | "prompt_injection"
-  | "off_topic";
+  | "off_topic"
+  /** Politics, war as a subject, armed groups, religion/sect rulings, adult subjects: fixed
+   *  "not part of our lessons" line, no safety screen, flagged, route "parent" (reviewer when
+   *  someone at home is involved). */
+  | "sensitive_topic";
 
 /** Which set of help routes the app should show on the safety screen. */
 export type HelpRouteKind = "home" | "self_harm" | "fear" | "general";

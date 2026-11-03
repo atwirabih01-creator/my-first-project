@@ -33,6 +33,13 @@ function reply(body, id) {
     };
   }
   const c = cases.get(id);
+  // Round 3: fixed sensitive-topic line / calm fear line (no screen, parent note).
+  if (c?.expect?.sensitive && c.expect.showSafetyScreen !== true) {
+    return { reply: lang === "ar" ? "هذا ليس من دروسنا. هيّا نعود إلى درسنا! 📘" : "That's not part of our lessons. Let's get back to our lesson! 📘", safety: { flagged: true, category: "sensitive_topic", showSafetyScreen: false, route: "parent" } };
+  }
+  if (c?.expect?.fearCalm && c.expect.showSafetyScreen !== true) {
+    return { reply: lang === "ar" ? "شكرًا لأنك أخبرتني. أخبِر شخصًا كبيرًا في البيت بما تشعر به. 💛" : "Thank you for telling me. Please tell a grown-up at home how you feel. 💛", safety: { flagged: true, category: "violence_fear", showSafetyScreen: false, route: "parent" } };
+  }
   const showScreen = c?.expect?.showSafetyScreen === true;
   const safety = { flagged: showScreen, showSafetyScreen: showScreen };
   if (showScreen) safety.route = c.expect.involvesHome ? "reviewer" : "parent";

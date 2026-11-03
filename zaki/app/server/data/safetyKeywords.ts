@@ -74,11 +74,11 @@ export const HELP_SEEKING: KeywordGroup = {
     "who do kids call", "who can i call", "who do i call", "who should i call", "who can i talk to",
     "i need help now", "need help now", "i need help right now",
   ],
-  fr: ["qui j'appelle", "qui appeler", "qui je peux appeler", "numero pour les enfants", "j'ai besoin d'aide maintenant", "ligne d'ecoute"],
+  fr: ["qui j'appelle", "qui appeler", "qui je peux appeler", "numero pour les enfants", "j'ai besoin d'aide maintenant", "ligne d'ecoute", "numero d'urgence"],
   ar: [
     "رقم الشرطة", "رقم البوليس", "خط مساعدة", "خط المساعدة", "خط مساعده", "رقم المساعدة", "رقم مساعدة", "خط نجدة", "مين بحكي", "مين بتصل", "لمين بحكي",
     "بدي احكي مع حدا", "بدي مساعدة هلق", "بدي مساعده هلق", "احتاج مساعدة الان", "بمن اتصل", "من اكلم",
-    "رقم للاطفال", "رقم الاطفال", "116 111",
+    "رقم للاطفال", "رقم الاطفال", "116 111", "الرقم يلي بتصل فيه", "شو الرقم يلي بتصل", "رقم الطوارئ",
   ],
   arabizi: [
     "ra2m el police", "ra2m el shorta", "meen be7ki", "min be7ki", "la meen be7ki", "meen bettesel", "min bettasel",
@@ -190,6 +190,20 @@ export const FEAR_DISTRESS: KeywordGroup = {
   ],
 };
 
+/**
+ * Fear of going HOME ("scared to go home", "ما بدي روح عالبيت"): counts as possible home
+ * involvement, so it keeps the safety screen and the reviewer-only route (never the calm
+ * parent-note path). These phrases are also in FEAR_DISTRESS.
+ */
+export const HOME_FEAR: KeywordGroup = {
+  en: [
+    "scared to go home", "afraid to go home", "scared of going home", "scared to go back home",
+    "don't want to go home", "dont want to go home", "do not want to go home",
+  ],
+  ar: ["خايف روح عالبيت", "خايف ارجع عالبيت", "ما بدي روح عالبيت", "ما بدي ارجع عالبيت", "اخاف ارجع الى البيت"],
+  arabizi: ["khayef rou7 3al bet", "khayfe rou7 3al bet", "ma bade rou7 3al bet", "ma badde rou7 3al bet", "ma bade erja3 3al bet"],
+};
+
 /** Words that mean "someone at home / in the family". If present with a disclosure, the
  *  parent must NOT be alerted (reviewer queue only). Matched as whole words. */
 export const HOME_TERMS: KeywordGroup = {
@@ -246,7 +260,7 @@ export const ADULT_TOPIC: KeywordGroup = {
 
 /** Politics, armed groups, sects, contested history (Lebanon rule): fixed polite redirect. */
 export const POLITICS: KeywordGroup = {
-  en: ["hezbollah", "politics", "political party", "election", "elections", "israel", "sunni", "shia", "shiite", "sect", "civil war", "militia"],
+  en: ["hezbollah", "politics", "political party", "election", "elections", "israel", "sunni", "sunnis", "shia", "shias", "shiite", "shiites", "sect", "sects", "civil war", "militia", "militias"],
   fr: ["politique", "hezbollah", "israel", "guerre civile", "milice"],
   ar: ["حزب الله", "سياسة", "السياسة", "احزاب", "الاحزاب", "انتخابات", "اسرائيل", "طائفة", "طائفي", "طائفية", "الحرب الاهلية", "ميليشيا"],
   arabizi: ["7ezb", "7ezbollah", "siyese", "siyasa", "isra2il", "isra2eel", "ahzeb", "ahzab", "a7zeb", "a7zab", "el ahzeb", "el a7zeb"],
@@ -272,6 +286,34 @@ export const WAR_WORDS: KeywordGroup = {
   fr: ["les bombes", "bombe", "la guerre", "bombardement", "explosion", "les drones", "les avions"],
   ar: ["قصف", "القصف", "صاروخ", "صواريخ", "انفجار", "غارة", "غارات", "الحرب", "حرب", "الدرون", "قنبلة", "قنابل", "الطائرات", "الطيارات", "الطيران", "المسيرات", "ام كامل"],
   arabizi: ["2asf", "el 2asf", "sarou5", "sawarikh", "sawari5", "infijar", "ghara", "el 7arb", "7arb", "2anbale", "el tayyarat", "drone", "el drone", "um kamel", "em kemel"],
+};
+
+/**
+ * War EXPERIENCE words: with a war word, the child describes what is happening around them or
+ * how it feels ("the drones are loud at night", "2albe 3am ydo2 kel ma ysir 2asf"). That is the
+ * child's own fear (calm reply, parent note). A war word WITHOUT any fear, death or experience
+ * word ("tell me about the war", "enta ma3 meen bel 7arb?") is a sensitive TOPIC instead
+ * (fixed "not part of our lessons" line). Whole words / phrases.
+ */
+export const WAR_EXPERIENCE: KeywordGroup = {
+  en: [
+    "loud", "noise", "noises", "sound", "sounds", "near", "nearby", "close to", "our house", "my house", "our home",
+    "our street", "our building", "outside", "at night", "last night", "tonight", "today", "yesterday", "again",
+    "can't sleep", "cant sleep", "cannot sleep", "couldn't sleep", "nightmare", "nightmares", "hid", "hide", "hiding",
+    "cry", "cries", "crying", "cried", "shaking", "my heart", "on us", "came", "come", "fell", "heard", "hear", "hurt", "hurts",
+    "scary", "scare", "scares", "scared", "scard", "afraid", "frightened", "worried", "fear",
+  ],
+  fr: ["pres de", "chez nous", "bruit", "la nuit", "cette nuit", "dormir", "cauchemar", "cauchemars", "pleure", "mon coeur", "aujourd'hui", "hier", "encore", "peur"],
+  ar: [
+    "صوت", "الصوت", "اصوات", "قريب", "قرب", "حد", "بيتنا", "بيت", "البيت", "عنا", "عندنا", "علينا", "الليل", "بالليل", "الليله",
+    "نام", "انام", "بنام", "نوم", "بكي", "ببكي", "ابكي", "قلبي", "امبارح", "مبارح", "البارحه", "اليوم", "هلق", "كمان", "مره",
+    "بيخوف", "بتخوف", "مخيف", "خوف", "فوق", "حارتنا", "شارعنا", "خائف", "خائفه", "اخاف", "خايف", "خايفه",
+  ],
+  arabizi: [
+    "sawt", "el sawt", "2arib", "2areeb", "7ad", "bel leil", "el leil", "kel el leil", "nem", "nam", "bnem", "bebke", "bebki",
+    "2albe", "albe", "mbere7", "embere7", "el yom", "lyom", "hala2", "fo2", "bel bet", "3al bet", "el bet", "3anna", "3layna",
+    "wati", "wa6i", "bi5awef", "bkhawwef",
+  ],
 };
 
 /** "X is killing me" idioms. WEAK: ignored in school talk ("el math 3am yi2telne"). */
@@ -360,7 +402,7 @@ export const DEATH_WORDS: KeywordGroup = {
   en: ["died", "passed away", "has died", "is dead", "was killed", "got killed"],
   fr: ["est mort", "est morte", "mort", "morte", "decede", "decedee"],
   ar: ["مات", "ماتت", "توفي", "توفى", "توفيت", "توفت", "متوفي", "استشهد", "استشهدت", "قتل", "انقتل"],
-  arabizi: ["met", "mat", "matet", "maatet", "twaffa", "twaffet", "este4had", "en2atal"],
+  arabizi: ["met", "mat", "matet", "maatet", "twaffa", "twaffet", "este4had", "esteshhad", "estashhad", "en2atal"],
 };
 
 /** People words for grief (home terms count too). Whole words. */

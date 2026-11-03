@@ -1,4 +1,4 @@
-// Sample pack: Social Studies, maps and directions, grade 4 (en + ar). No borders or politics.
+// Sample pack (v3 story-lesson teach steps with titles): Social Studies, maps and directions, grade 4 (en + ar). No borders or politics.
 import type { LessonPack } from "../types";
 import { Q } from "./helpers";
 
@@ -13,12 +13,14 @@ export const SOCIAL_MAPS_EN: LessonPack = {
     { q: "Where does the Sun rise?", choices: ["In the east", "In the west", "In the south"], answerIndex: 0 },
   ],
   teachSteps: [
-    { text: "A map is a drawing of a place seen from above. It helps us find our way.", example: "A map of your school shows the classrooms, the playground and the gate." },
-    { text: "The four main directions are north, south, east and west. A compass rose on the map shows them.", example: "On most maps, north is at the top." },
-    { text: "The map key (legend) explains the symbols on the map.", example: "A small blue line might mean a river. A green triangle might mean a mountain." },
-    { text: "The scale tells us how far things really are.", example: "If 1 cm on the map stands for 1 km, then 4 cm on the map is 4 km in real life." },
-    { text: "Between the main directions we have north-east, north-west, south-east and south-west." },
-    { text: "Now you know how to read a map! Look at the compass rose for the directions, the key for the symbols, and the scale for how far things really are.", example: "On a map of your town, the compass rose shows where north is, a small tree in the key means a park, and the scale tells you how far your house is from the park." },
+    { title: "Have you ever been lost?", text: "Have you ever looked for a room in a big new building? A drawing of the building would help you. That drawing is called a map!", example: "A new pupil finds the library by looking at a drawing of the school." },
+    { title: "What is a map?", text: "Imagine you are a bird flying over a park. You look down and see everything from above. A map is a drawing of a place seen from above.", example: "A map of a park shows the paths, the trees and the pond, as a bird sees them." },
+    { title: "Symbols and the key", text: "Real trees and rivers do not fit on paper. So a map uses tiny pictures instead. We call them symbols. A small box tells what each symbol means. We call it the map key, or legend.", example: "In one key, a small blue line means a river. A green triangle means a mountain." },
+    { title: "Which way?", text: "Maps also show which way to go. There are four main directions: north, south, east and west. A little star of arrows shows them. We call it the compass rose. North is usually at the top.", example: "Look for the arrow with the letter N. It points north." },
+    { title: "How do we use a map?", text: "A map is much smaller than the real place. The scale tells you how far things really are. It says what 1 cm on the map means in real life.", example: "On a map, 1 cm stands for 5 km. Two towns are 2 cm apart. So they are 5 + 5 = 10 km apart." },
+    { title: "Directions in between", text: "Between the main directions there are four more. Their names join two directions. They are north-east, north-west, south-east and south-west.", example: "A bird flies halfway between south and west. It flies south-west." },
+    { title: "Fun fact!", text: "Fun fact: the Sun can help you find directions! It rises in the east every morning. It sets in the west every evening.", example: "In the morning, face the Sun. Now you are facing east." },
+    { title: "Now you know!", text: "Now you know how to read a map! The key tells what the symbols mean. The compass rose shows the directions. The scale tells how far things really are.", example: "On a town map, the compass rose shows north, a small tree in the key means a park, and the scale tells you the park is 3 km away." },
   ],
   checks: [
     Q("c1", "On most maps, which direction is at the top?", ["North", "South", "West"], 0,
@@ -90,12 +92,14 @@ export const SOCIAL_MAPS_AR: LessonPack = {
     { q: "من أين تشرق الشمس؟", choices: ["من الشرق", "من الغرب", "من الجنوب"], answerIndex: 0 },
   ],
   teachSteps: [
-    { text: "الخريطة رسم لمكان كما نراه من الأعلى. تساعدنا على معرفة الطريق.", example: "خريطة مدرستك تُظهر الصفوف والملعب والبوابة." },
-    { text: "الاتجاهات الأصلية أربعة: الشمال والجنوب والشرق والغرب. تُظهرها وردة الاتجاهات على الخريطة.", example: "في معظم الخرائط يكون الشمال في الأعلى." },
-    { text: "مفتاح الخريطة يشرح الرموز المرسومة عليها.", example: "خط أزرق صغير قد يعني نهرًا، ومثلث أخضر قد يعني جبلًا." },
-    { text: "مقياس الرسم يخبرنا عن المسافة الحقيقية.", example: "إذا كان 1 سم على الخريطة يساوي 1 كم، فإن 4 سم على الخريطة تساوي 4 كم في الحقيقة." },
-    { text: "بين الاتجاهات الأصلية توجد اتجاهات فرعية: الشمال الشرقي والشمال الغربي والجنوب الشرقي والجنوب الغربي." },
-    { text: "الآن تعرف كيف تقرأ الخريطة! انظرْ إلى وردة الاتجاهات لتعرف الاتجاهات، وإلى المفتاح لتفهم الرموز، وإلى مقياس الرسم لتعرف المسافات الحقيقية.", example: "على خريطة بلدتك، تُظهر وردة الاتجاهات أين الشمال، وشجرة صغيرة في المفتاح تعني حديقة، ومقياس الرسم يخبرك كم يبعد بيتك عن الحديقة." },
+    { title: "هل ضعت في مكان جديد؟", text: "هل بحثت عن غرفة في مبنى كبير جديد؟ رسم للمبنى كان سيساعدك. هذا الرسم اسمه خريطة!", example: "تلميذ جديد يجد المكتبة عندما ينظر إلى رسم للمدرسة." },
+    { title: "ما الخريطة؟", text: "تخيّل أنك عصفور يطير فوق حديقة. تنظر إلى الأسفل فترى كل شيء من الأعلى. الخريطة رسم لمكان كما نراه من الأعلى.", example: "خريطة الحديقة تُظهر الممرّات والأشجار والبركة كما يراها العصفور." },
+    { title: "الرموز والمفتاح", text: "الأشجار والأنهار الحقيقية لا تتّسع لها الورقة. لذلك نرسم صورًا صغيرة بدلًا منها. نسمّيها الرموز. ومربع صغير يشرح معنى كل رمز. نسمّيه مفتاح الخريطة.", example: "في أحد المفاتيح، خط أزرق صغير يعني نهرًا، ومثلث أخضر يعني جبلًا." },
+    { title: "في أيّ اتجاه؟", text: "الخريطة تُظهر أيضًا الطريق الذي نسلكه. هناك أربعة اتجاهات أصلية: الشمال والجنوب والشرق والغرب. تُظهرها نجمة صغيرة من الأسهم. نسمّيها وردة الاتجاهات. ويكون الشمال عادةً في الأعلى.", example: "ابحث عن السهم الذي عليه حرف N. إنه يشير إلى الشمال." },
+    { title: "كيف نستعمل الخريطة؟", text: "الخريطة أصغر بكثير من المكان الحقيقي. مقياس الرسم يخبرك كم تبعد الأشياء في الحقيقة. فهو يقول ماذا يعني 1 سم على الخريطة في الواقع.", example: "على خريطة، 1 سم يساوي 5 كم. بين بلدتين 2 سم. إذن المسافة بينهما 5 + 5 = 10 كم." },
+    { title: "اتجاهات بين الاتجاهات", text: "بين الاتجاهات الأصلية أربعة اتجاهات أخرى. يجمع اسم كل منها اتجاهين. وهي الشمال الشرقي والشمال الغربي والجنوب الشرقي والجنوب الغربي.", example: "يطير عصفور في منتصف المسافة بين الجنوب والغرب. إنه يطير نحو الجنوب الغربي." },
+    { title: "معلومة ممتعة!", text: "معلومة ممتعة: الشمس تساعدك على معرفة الاتجاهات! تشرق من الشرق كل صباح. وتغرب في الغرب كل مساء.", example: "في الصباح، قِف ووجهك نحو الشمس. أنت الآن تنظر نحو الشرق." },
+    { title: "الآن تعرف!", text: "الآن تعرف كيف تقرأ الخريطة! المفتاح يشرح معنى الرموز. وردة الاتجاهات تُظهر الاتجاهات. ومقياس الرسم يخبرك بالمسافات الحقيقية.", example: "على خريطة بلدة، تُظهر وردة الاتجاهات الشمال، وشجرة صغيرة في المفتاح تعني حديقة، ومقياس الرسم يخبرك أن الحديقة تبعد 3 كم." },
   ],
   checks: [
     Q("c1", "في معظم الخرائط، أيّ اتجاه يكون في الأعلى؟", ["الشمال", "الجنوب", "الغرب"], 0,

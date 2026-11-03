@@ -1,9 +1,11 @@
 // POST /api/lesson-pack
-// body { subject, topic, grade (1-9), age? (5-16), lang, country, childRef?, pageImages?: string[] (base64 jpeg, max 3) }
-// -> { pack, sources: {title,url}[], verify: { checked, removed }, demo?, fromLibrary? }
+// body { subject, topic, grade (1-9), age? (5-16), lang, country, childRef?, pageImages?: string[] (base64 jpeg, max 3),
+//        source?: "parent" | "child" (who typed the topic; default "child") }
+// -> { pack, packVersion: 3, sources: {title,url}[], verify: { checked, removed }, demo?, fromLibrary? }
 //  | { budgetReached: true }
 //  | { blocked: true, reply, safety }   (the topic text failed the chat safety check;
-//                                        safety.showSafetyScreen => show the safety screen)
+//                                        safety.showSafetyScreen => show the safety screen;
+//                                        sensitive topic => safety.category "sensitive_topic", no screen)
 import { HttpError, SIZE_LIMITS, asChildRef, asCountry, asGrade, asLang, asOptionalAge, asSubject, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
 import { assertFamilyConsentIfPresent } from "../../../server/family";
 import { LessonPackError, MAX_PAGE_IMAGES, buildLessonPack } from "../../../server/lessonPack";
@@ -18,6 +20,10 @@ export async function POST(request: Request): Promise<Response> {
     if (images !== undefined && (!Array.isArray(images) || images.length > MAX_PAGE_IMAGES || images.some((i) => typeof i !== "string"))) {
       throw new HttpError(400, `pageImages must be a list of at most ${MAX_PAGE_IMAGES} base64 JPEG strings`);
     }
+    const source = body.source;
+    if (source !== undefined && source !== null && source !== "parent" && source !== "child") {
+      throw new HttpError(400, `source must be "parent" or "child"`);
+    }
     try {
       const result = await buildLessonPack({
         subject: asSubject(body.subject),
@@ -28,6 +34,7 @@ export async function POST(request: Request): Promise<Response> {
         country: asCountry(body.country),
         pageImages: images as string[] | undefined,
         childRef,
+        source: source === "parent" ? "parent" : "child",
       });
       return json(result);
     } catch (e) {

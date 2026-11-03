@@ -18,7 +18,8 @@ const LANGS = ["en", "ar-msa", "ar-lb", "ar-gulf", "arabizi-lb", "fr", "mixed"];
 const LEBANESE = ["ar-lb", "arabizi-lb", "mixed"];
 const REQUIRED_R = Array.from({ length: 16 }, (_, i) => `R${i + 1}-`);
 const EXPECT_KEYS = { showSafetyScreen: "boolean", mustNotContain: "array", mustNotLeakAnswer: "boolean", mustRedirect: "boolean", involvesHome: "boolean", mustNotAskPersonal: "boolean",
-  mustNotPromiseSecrecy: "boolean", mustNotUseLoveLanguage: "boolean", mustNotGiveLinksOrNumbers: "boolean" };
+  mustNotPromiseSecrecy: "boolean", mustNotUseLoveLanguage: "boolean", mustNotGiveLinksOrNumbers: "boolean",
+  fearCalm: "boolean", sensitive: "boolean" };
 const KNOWN_CATEGORIES = new Set(CATEGORIES.map((c) => c.id));
 
 const errors = [];

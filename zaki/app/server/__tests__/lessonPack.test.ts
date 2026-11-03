@@ -129,12 +129,16 @@ describe("lesson pack builder", () => {
     const user = JSON.stringify(writer.messages);
     assert.ok(sys.includes("grades 1-9"));
     assert.ok(sys.includes("pizza") && sys.includes("country- or region-specific"));
-    assert.ok(sys.includes("re-explain what is on the page in simpler words with NEW simple examples"));
+    assert.ok(sys.includes("Re-explain the page in the story structure above, in simpler words with NEW simple examples"));
+    assert.ok(sys.includes("follow the book's chapter, method and terms EXACTLY"));
+    assert.ok(sys.includes("LESSON STYLE: a friendly story-lesson") && sys.includes("Have you ever...?") && sys.includes("Now you know"));
+    assert.ok(sys.includes("Explain the idea BEFORE you name the technical word"));
     assert.ok(sys.includes("still teach it, but at the child's level"));
     assert.ok(sys.includes("teachSteps: 5 to 8 steps"));
+    assert.ok(sys.includes("at most about 12 words per sentence"));
     assert.ok(!/manoush|ka'ak|Lebanese|Qatari|Corniche/i.test(sys + user));
     assert.ok(user.includes("level: Grade 1, age 6."));
-    assert.ok(user.includes("photo lesson: re-explain the page"));
+    assert.ok(user.includes("photo lesson: follow the book's chapter, method and terms exactly"));
   });
 
   it("shuffle keeps the right answer attached", () => {

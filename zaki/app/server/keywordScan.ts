@@ -57,6 +57,7 @@ const COMPILED = {
   politics: compile(KW.POLITICS, { exactShortWords: true }),
   injection: compile(KW.PROMPT_INJECTION),
   war: compile(KW.WAR_WORDS),
+  homeFear: compile(KW.HOME_FEAR),
   threatIdiom: compile(KW.THREAT_IDIOMS),
   death: compile(KW.DEATH_WORDS),
 };
@@ -145,6 +146,12 @@ export type KeywordScan = {
   adult: boolean;
   politics: boolean;
   injection: boolean;
+  /** A war word with no fear, death or "it is happening around me" word, outside school
+   *  talk: war as a SUBJECT ("tell me about the war") -> sensitive topic, not fear. */
+  warTopic: boolean;
+  /** Fear was raised ONLY by war words + an experience word (no fear/grief word). Lesson
+   *  TOPICS (noun phrases) use this to treat "the bombs of the war" as a topic, not fear. */
+  warOnlyFear: boolean;
 };
 
 /** Join runs of single letters: "b a d e m o u t" -> "bademout", "k i l l" -> "kill", "م و ت" -> "موت". */
@@ -192,6 +199,7 @@ function scanStrong(text: string) {
     war: groupIn(views, COMPILED.war),
     threatIdiom: groupIn(views, COMPILED.threatIdiom),
     death: groupIn(views, COMPILED.death),
+    homeFear: groupIn(views, COMPILED.homeFear),
   };
 }
 
@@ -199,11 +207,14 @@ export function keywordScan(text: string): KeywordScan {
   const views = normalizeViews(text);
   const words = views.base ? views.base.split(" ") : [];
   // Strong lists are checked on the text, its de-spaced form and its leetspeak-decoded form.
-  const variants = Array.from(new Set([text, despace(text), unleet(text), unleet(despace(text))]));
+  // "@" stands for "a" in tricks like "kh@yfe" (the normalizer would drop it).
+  const at = text.replace(/@/g, "a");
+  const variants = Array.from(new Set([text, despace(text), unleet(text), unleet(despace(text)), at]));
   const hits = variants.map(scanStrong);
   const any = (k: keyof ReturnType<typeof scanStrong>) => hits.some((h) => h[k]);
 
-  const home = wordListIn(views.base, words, KW.HOME_TERMS);
+  // "scared to go home" counts as possible home involvement (screen + reviewer, never parent).
+  const home = wordListIn(views.base, words, KW.HOME_TERMS) || any("homeFear");
   const school = wordListIn(views.base, words, KW.SCHOOL_CONTEXT);
   const exam = wordListIn(views.base, words, KW.EXAM_WORDS);
   const griefPerson = home || wordListIn(views.base, words, KW.GRIEF_PERSON) || wordListIn(views.base, words, KW.OUTSIDE_TERMS);
@@ -217,15 +228,22 @@ export function keywordScan(text: string): KeywordScan {
   const personOrDanger = home || wordListIn(views.base, words, KW.OUTSIDE_TERMS) || any("war") || any("death") || any("disclosure") || any("selfHarm");
   const benignFear = (benignObject || exam) && !personOrDanger;
   const strongFear = any("fear") && !benignFear;
-  const warFear = any("war") && !school;
+  // War words outside school talk: the child's own fear when a fear, death or experience word
+  // is there ("the drones are loud at night"); otherwise war is a sensitive SUBJECT.
+  const warOutsideSchool = any("war") && !school;
+  const warExperience = wordListIn(views.base, words, KW.WAR_EXPERIENCE);
+  const warFear = warOutsideSchool && (warExperience || any("death"));
   const grief = any("death") && griefPerson;
   const threat = any("threatIdiom") && !school;
+  const fear = strongFear || warFear || grief;
 
   return {
     selfHarm: any("selfHarm"),
     disclosure: any("disclosure") || threat,
     secrecy: any("secrecy"),
-    fear: strongFear || warFear || grief,
+    fear,
+    warTopic: warOutsideSchool && !fear,
+    warOnlyFear: warFear && !strongFear && !grief,
     helpSeeking: any("helpSeeking"),
     home,
     outside: wordListIn(views.base, words, KW.OUTSIDE_TERMS),
@@ -245,7 +263,7 @@ export function keywordCategory(scan: KeywordScan): SafetyCategory {
   if (scan.adult) return "adult_topic";
   if (scan.personal) return "personal_data";
   if (scan.injection) return "prompt_injection";
-  if (scan.politics) return "off_topic";
+  if (scan.politics || scan.warTopic) return "sensitive_topic";
   return "none";
 }
 
