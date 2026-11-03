@@ -364,7 +364,7 @@ export function createFileStore(opts: FileStoreOptions = {}): ZakiStore {
       const f = mustFamily(input.familyId);
       const childRef = input.childRef ?? newChildRef();
       assertChildRef(childRef);
-      if (!Number.isInteger(input.grade) || input.grade < 1 || input.grade > 6) throw new StorageError("bad_grade");
+      if (!Number.isInteger(input.grade) || input.grade < 1 || input.grade > 9) throw new StorageError("bad_grade");
       const child: Child = {
         familyId: input.familyId,
         childRef,

@@ -1,7 +1,10 @@
 // POST /api/lesson-pack
-// body { subject, topic, grade, lang, country, childRef?, pageImages?: string[] (base64 jpeg, max 3) }
-// -> { pack, sources: {title,url}[], verify: { checked, removed }, demo? }
-import { HttpError, SIZE_LIMITS, asChildRef, asCountry, asGrade, asLang, asSubject, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
+// body { subject, topic, grade (1-9), age? (5-16), lang, country, childRef?, pageImages?: string[] (base64 jpeg, max 3) }
+// -> { pack, sources: {title,url}[], verify: { checked, removed }, demo?, fromLibrary? }
+//  | { budgetReached: true }
+//  | { blocked: true, reply, safety }   (the topic text failed the chat safety check;
+//                                        safety.showSafetyScreen => show the safety screen)
+import { HttpError, SIZE_LIMITS, asChildRef, asCountry, asGrade, asLang, asOptionalAge, asSubject, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
 import { assertFamilyConsentIfPresent } from "../../../server/family";
 import { LessonPackError, MAX_PAGE_IMAGES, buildLessonPack } from "../../../server/lessonPack";
 
@@ -10,7 +13,7 @@ export async function POST(request: Request): Promise<Response> {
     rateLimit(request, "lessonPack");
     const body = await readJsonBody(request, SIZE_LIMITS.lessonPack);
     await assertFamilyConsentIfPresent(body); // no AI for a family without active consent
-    asChildRef(body.childRef);
+    const childRef = asChildRef(body.childRef);
     const images = body.pageImages;
     if (images !== undefined && (!Array.isArray(images) || images.length > MAX_PAGE_IMAGES || images.some((i) => typeof i !== "string"))) {
       throw new HttpError(400, `pageImages must be a list of at most ${MAX_PAGE_IMAGES} base64 JPEG strings`);
@@ -18,11 +21,13 @@ export async function POST(request: Request): Promise<Response> {
     try {
       const result = await buildLessonPack({
         subject: asSubject(body.subject),
-        topic: asText(body.topic, "topic", 80, 2),
+        topic: asText(body.topic, "topic", 120, 2), // a child may describe "what we did in class today"
         grade: asGrade(body.grade),
+        age: asOptionalAge(body.age),
         lang: asLang(body.lang),
         country: asCountry(body.country),
         pageImages: images as string[] | undefined,
+        childRef,
       });
       return json(result);
     } catch (e) {

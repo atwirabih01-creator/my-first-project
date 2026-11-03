@@ -57,12 +57,13 @@ describe("storage: fileStore", () => {
     await assert.rejects(store.deleteFamily("../x"), /bad_family_id/);
   });
 
-  it("children get a random childRef; grade must be 1-6", async () => {
+  it("children get a random childRef; grade must be 1-9", async () => {
     const { family } = await store.createFamily({ guardian: { firstName: "Omar", relationship: "father" } });
     const child = await store.upsertChild({ familyId: family.id, nickname: "Ali", grade: 3, lang: "ar", avatar: "lion", dailyLimitMin: 30 });
     assert.match(child.childRef, /^[a-f0-9]{32}$/);
-    await assert.rejects(store.upsertChild({ familyId: family.id, nickname: "Ali", grade: 9, lang: "ar", avatar: "lion", dailyLimitMin: 30 }), /bad_grade/);
-    assert.equal((await store.listChildren(family.id)).length, 1);
+    await assert.rejects(store.upsertChild({ familyId: family.id, nickname: "Ali", grade: 10, lang: "ar", avatar: "lion", dailyLimitMin: 30 }), /bad_grade/);
+    await store.upsertChild({ familyId: family.id, nickname: "Maya", grade: 9, lang: "en", avatar: "fox", dailyLimitMin: 30 });
+    assert.equal((await store.listChildren(family.id)).length, 2);
   });
 
   it("progress sync round-trips; photo packs lose any library key", async () => {

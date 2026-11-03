@@ -1,8 +1,8 @@
 // POST /api/tutor
 // body { packId, pack, step: "recap"|"teach"|"check"|"chat", history: {role:"child"|"zaki", text}[],
-//        message, lang, grade, country?, childRef?, questionId? }
+//        message, lang, grade (1-9), age? (5-16), country?, childRef?, questionId? }
 // -> { reply, hintLevel?, safety, demo? }
-import { HttpError, SIZE_LIMITS, asChildRef, asGrade, asLang, asOptionalCountry, asSubject, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
+import { HttpError, SIZE_LIMITS, asChildRef, asGrade, asLang, asOptionalAge, asOptionalCountry, asSubject, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
 import { assertFamilyConsentIfPresent } from "../../../server/family";
 import { validatePack } from "../../../server/packValidator";
 import { TUTOR_STEPS, runTutorTurn, type TutorStep } from "../../../server/tutor";
@@ -14,6 +14,7 @@ export async function POST(request: Request): Promise<Response> {
     await assertFamilyConsentIfPresent(body); // no AI for a family without active consent
     const lang = asLang(body.lang);
     const grade = asGrade(body.grade);
+    const age = asOptionalAge(body.age);
     const country = asOptionalCountry(body.country);
     const childRef = asChildRef(body.childRef);
     const step = body.step as TutorStep;
@@ -44,6 +45,7 @@ export async function POST(request: Request): Promise<Response> {
       message,
       lang,
       grade,
+      age,
       country,
       childRef,
       questionId: typeof body.questionId === "string" ? body.questionId.slice(0, 40) : undefined,

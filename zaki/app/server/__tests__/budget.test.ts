@@ -95,12 +95,13 @@ describe("daily AI budget", () => {
     assert.equal(await takeChildTurn("kid_123456"), false);
   });
 
-  it("lesson pack over budget returns { budgetReached: true } without calling AI", async () => {
+  it("lesson pack over budget returns { budgetReached: true } without calling the lesson AI", async () => {
     const calls = mockClaude(() => textMsg("{}"));
     await spend(1.0);
     const r = await buildLessonPack({ subject: "math", topic: "Decimals", grade: 4, lang: "en", country: "LB" });
     assert.deepEqual(r, { budgetReached: true });
-    assert.equal(calls.length, 0);
+    // Only the topic's safety check may run (it uses the small safety reserve), never research/writing.
+    assert.equal(calls.filter((c) => !isClassifierCall(c)).length, 0);
   });
 
   it("records real spend from replies and keeps a daily total in a JSON file", async () => {

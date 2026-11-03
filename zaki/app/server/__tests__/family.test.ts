@@ -8,6 +8,7 @@ import { getSamplePack } from "../samples";
 import { POST as tutorRoute } from "../../src/app/api/tutor+api";
 import { POST as parentAskRoute } from "../../src/app/api/parent-ask+api";
 import { POST as lessonPackRoute } from "../../src/app/api/lesson-pack+api";
+import { POST as homeworkRoute } from "../../src/app/api/homework+api";
 import { createFileStore, getStore, __setStoreForTests, type ZakiStore } from "../storage";
 import { POST as registerRoute } from "../../src/app/api/family/register+api";
 import { POST as syncRoute } from "../../src/app/api/family/sync+api";
@@ -116,6 +117,7 @@ describe("family identity (server-issued secret key)", () => {
       [tutorRoute, tutorBody],
       [parentAskRoute, { message: "Explain fractions", lang: "en" }],
       [lessonPackRoute, { subject: "math", topic: "Fractions", grade: 3, lang: "en", country: "LB" }],
+      [homeworkRoute, { question: "What is 5 + 3?", subject: "math", grade: 3, age: 8, lang: "en", country: "LB" }],
     ] as const) {
       const res = await post(route, { ...body, ...creds });
       assert.equal(res.status, 403);

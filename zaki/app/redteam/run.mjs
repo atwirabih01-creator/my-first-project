@@ -6,6 +6,8 @@
 //
 // Usage:  node run.mjs [--category=R3-disclosure-home,R7-arabizi-evasion] [--lang=ar-lb,arabizi-lb]
 //                      [--only=deterministic] [--limit=50] [--concurrency=4] [--timeout=30000]
+//                      [--endpoint=tutor|homework]  (homework: each case message is sent to
+//                      /api/homework as the homework question; same reply + safety shape)
 // Env:    ZAKI_BASE_URL (default http://localhost:8081)
 //
 // Exit codes: 0 = full run, everything passed
@@ -42,6 +44,11 @@ const onlyLayer = args.only || null;
 const limit = args.limit ? Number(args.limit) : null;
 const casesFile = args.cases || join(here, "cases.jsonl");
 const outDir = args.out || join(here, "results");
+const ENDPOINT = args.endpoint || "tutor";
+if (!["tutor", "homework"].includes(ENDPOINT)) {
+  console.error(`--endpoint must be "tutor" or "homework" (got "${ENDPOINT}")`);
+  process.exit(3);
+}
 
 // ---------- load cases ----------
 let allCases;
@@ -91,7 +98,27 @@ function samplePack(kase) {
   };
 }
 
+function homeworkBody(kase) {
+  const lang = apiLang(kase.lang);
+  const body = {
+    childRef: `rt-${kase.id.toLowerCase()}`,
+    // A case about a question on screen (e.g. answer-begging) keeps that question as the
+    // homework and sends the case message as the child's message; otherwise the case
+    // message IS the homework question.
+    question: kase.context?.currentQuestion || kase.message,
+    ...(kase.context?.currentQuestion ? { message: kase.message } : {}),
+    history: kase.history || [],
+    subject: kase.context?.correctAnswer && !/\d/.test(kase.context.correctAnswer) ? "science" : "math",
+    lang,
+    grade: kase.grade,
+  };
+  const country = Object.prototype.hasOwnProperty.call(kase, "country") ? kase.country : defaultCountry(kase.lang);
+  if (country) body.country = country;
+  return body;
+}
+
 function requestBody(kase) {
+  if (ENDPOINT === "homework") return homeworkBody(kase);
   const body = {
     childRef: `rt-${kase.id.toLowerCase()}`,
     packId: `redteam-pack-${kase.id}`,
@@ -128,7 +155,7 @@ async function runCase(kase) {
   let lastErr;
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      resp = await fetchJson(`${BASE}/api/tutor`, {
+      resp = await fetchJson(`${BASE}/api/${ENDPOINT}`, {
         method: "POST",
         headers: { "content-type": "application/json", "x-zaki-redteam-case": kase.id },
         body: JSON.stringify(body),
@@ -139,7 +166,7 @@ async function runCase(kase) {
     }
   }
   const base = { id: kase.id, category: kase.category, lang: kase.lang, layer: kase.layer, message: kase.message, ms: Date.now() - started };
-  if (!resp) return { ...base, status: "fail", failures: [`Could not reach /api/tutor: ${lastErr?.name === "AbortError" ? "timed out" : lastErr?.message}`] };
+  if (!resp) return { ...base, status: "fail", failures: [`Could not reach /api/${ENDPOINT}: ${lastErr?.name === "AbortError" ? "timed out" : lastErr?.message}`] };
   if (resp.status < 200 || resp.status >= 300 || !resp.json) {
     return { ...base, status: "fail", httpStatus: resp.status, failures: [`Server answered HTTP ${resp.status}${resp.json ? "" : " (not JSON)"}: ${resp.text.slice(0, 200)}`] };
   }
@@ -185,7 +212,7 @@ try {
 }
 const demoMode = health.ai === false;
 
-console.log(`\nZaki red-team suite v1 -> ${BASE}`);
+console.log(`\nZaki red-team suite v1 -> ${BASE}/api/${ENDPOINT}`);
 console.log(`Server health: ok=${health.ok} ai=${health.ai} moderation=${health.moderation ?? "?"}`);
 if (demoMode) console.log("DEMO MODE: AI is not connected. Only the keyword/normaliser safety cases are run; the rest are marked 'skipped (demo mode)'.");
 
@@ -246,6 +273,7 @@ const stamp = startedAt.toISOString().replace(/[:.]/g, "-");
 const report = {
   suite: "zaki-redteam v1",
   baseUrl: BASE,
+  endpoint: `/api/${ENDPOINT}`,
   startedAt: startedAt.toISOString(),
   finishedAt: new Date().toISOString(),
   health,

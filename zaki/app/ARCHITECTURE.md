@@ -10,7 +10,12 @@ Plain version: the phone app (what the child and parent see) talks only to Zaki'
 - `src/lib/` app-side helpers: API client, local storage of fake profile/progress, i18n (en/ar), help-route table.
 
 ## API contract (JSON over POST)
-All requests include `childRef` (random id, never a name), `grade` (1–6), `lang` ("en"|"ar"), `country` ("LB"|"QA").
+All requests include `childRef` (random id, never a name), `grade` (1–9), `lang` ("en"|"ar"), `country` ("LB"|"QA"). Child-level routes (`/api/lesson-pack`, `/api/tutor`, `/api/homework`) also take an optional `age` (whole number 5–16; missing = old profile, the server assumes grade + 5).
+Subjects: `math`, `science`, `physics`, `chemistry`, `biology`, `english`, `arabic`, `social` (physics/chemistry/biology are for grades 7–9; for grades 1–6 `science` covers them).
+
+**Curriculum map** (`src/lib/curriculum.ts`, plain data shared by app + server): `subjectsForGrade(grade)`, `topicsFor(grade, subject)` → `{en, ar}[]` (6–12 typical topics per grade and subject, general international / Arab-region scope, every topic passes the safety word lists), `levelGuide(grade, age?)` → short level text (vocabulary, sentence length, number range, abstraction) put into every child-facing AI prompt, plus `effectiveAge`, `SUBJECT_LABELS`, `MIN/MAX_GRADE`, `MIN/MAX_AGE`.
+
+**Prompt rules** (`server/promptRules.ts`, used by lesson pack, tutor, homework, parent ask, exam): general, international everyday examples (pizza, apples, a ball, a bus…), no country- or region-specific foods, places, currencies, slang or dialect; Arabic in clear Modern Standard Arabic for children. `country` is used only for help routes and the reviewer log, never for examples.
 All responses may include `safety: { flagged: boolean, category?: string, showSafetyScreen?: boolean }`.
 If `safety.showSafetyScreen` is true the app must immediately show the fixed safety screen (help routes from the table, not from the AI).
 
@@ -32,13 +37,17 @@ safety: {
 When a fixed safety text applies, `reply` already contains it (en/ar, from `server/data/safetyMessages.ts`), never AI-written.
 `country` is optional on `/api/tutor` only: missing = "not set by the parent" (help screen shows "tell a grown-up you trust" only).
 
-1. `POST /api/lesson-pack` body `{ subject, topic, grade, lang, country, pageImages?: string[] (base64 jpeg, max 3) }`
-   → `{ pack: LessonPack, sources: {title,url}[], verify: { checked:number, removed:number }, demo?: true }` (errors: 400 bad input/image, 422 `invalid_pack` / `photo_rejected` / `ai_refused`, 429 rate limit, 413 too large)
+1. `POST /api/lesson-pack` body `{ subject, topic (2-120 chars; a child may type "what we did in class today"), grade, age?, lang, country, childRef?, pageImages?: string[] (base64 jpeg, max 3) }`
+   → `{ pack: LessonPack, sources: {title,url}[], verify: { checked:number, removed:number }, demo?: true, fromLibrary?: true }` | `{ budgetReached: true }` | `{ blocked: true, reply, safety }` (errors: 400 bad input/image, 422 `invalid_pack` / `photo_rejected` / `ai_refused`, 429 rate limit, 413 too large)
+   **Topic safety:** the topic text is moderated exactly like a chat message (keywords + classifier + flag log) BEFORE the library, demo or AI. A worrying topic never becomes a lesson: the route returns the fixed reply + `safety` (`showSafetyScreen` → safety screen). Photo lessons: the AI re-explains the page in simpler words with new simple examples, then checks understanding.
    Builds a lesson pack with research from trusted educational sources (web search restricted to an allow-list), grounded on uploaded page text if given. Every math answer key is re-checked by our own code; disagreeing items are removed.
 2. `POST /api/tutor` body `{ packId, pack, step: "recap"|"teach"|"check"|"chat", history: {role:"child"|"zaki", text}[], message, lang, grade, country?, childRef?, questionId? }`
    → `{ reply: string, hintLevel?: number, safety, demo?: true }`
    `questionId` (optional) = the check/test item on screen, so exactly its answer is protected. `hintLevel` 1/2/3 counts Zaki turns in `history` (send the history of the current question only); 3 = similar worked example.
    Child message moderated first; reply moderated before return. Golden rule enforced (never gives final answers to homework/test items).
+2b. `POST /api/homework` (homework help, `server/homework.ts`) body `{ childRef?, grade, age?, lang, country?, subject, question (1-1000 chars), message? (the child's newest message; empty on the first turn), history?: {role:"child"|"zaki", text}[] (max 50), pageImages?: string[] (base64 jpeg, max 2) }`
+   → `{ reply, hintLevel?, safety, demo?, budgetReached? }` (same shape as `/api/tutor`; red-team: `node redteam/run.mjs --endpoint=homework`).
+   Zaki NEVER gives the final answer: explains the question, breaks it into steps, asks the child to try each one, hints, a similar worked example with different numbers (hint level 3), checks attempts, praises effort, confirms when the child gets there. Same pipeline as the tutor (`runGuardedTurn` in `server/tutor.ts`): rate limit, family consent, moderation of question + message, safety screen/flags, per-child daily turns, daily budget, reply post-checks, reply moderation. Extra guard: a sum in the question that our code can compute (e.g. "45 + 27") is protected, so a reply stating its result is blocked until the child has written it. Same model as the tutor, short `max_tokens`.
 3. `POST /api/check-answer` body `{ pack, questionId, answer, attempt? }` (`answer` = choice index or choice text; `attempt` 1,2,3… = which try; recap items use ids `recap-0`, `recap-1`) → `{ correct: boolean, feedbackKey: "right"|"hint1"|"hint2"|"example" }` (deterministic, no AI).
 4. `POST /api/parent-message` body `{ text, lang, country }` (WhatsApp simulator) → `{ reply, intent, plan?: {subject,topic,dueDate?,sessions,studyTime?}, action?: "send_report"|"show_plan"|"pause_reminders"|"opt_out"|"request_deletion", studyTime? }`. The server never changes data itself; the app performs `action` (deletion must be confirmed behind the parental gate). Only handles parent-service jobs; anything else gets a fixed polite redirect.
 5. `GET /api/health` → `{ ok, ai: boolean, moderation: "openai"|"fallback", budget: { date, limitUsd, spentUsd, remainingUsd, safetyReserveUsd, reached, childTurnLimit } }` (ai=false when no key is set; the app then shows a "demo mode, AI not connected" banner and uses bundled sample packs).
@@ -73,7 +82,7 @@ When a fixed safety text applies, `reply` already contains it (en/ar, from `serv
 ## LessonPack shape
 ```ts
 type LessonPack = {
-  id: string; subject: "math"|"science"|"english"|"arabic"|"social";
+  id: string; subject: "math"|"science"|"physics"|"chemistry"|"biology"|"english"|"arabic"|"social";
   topic: string; grade: number; lang: "en"|"ar";
   recap: { q: string; choices: string[]; answerIndex: number }[];
   teachSteps: { text: string; example?: string }[];

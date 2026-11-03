@@ -3,6 +3,7 @@
 
 import type { Country, Lang, Subject } from "./types";
 import { SUBJECTS } from "./types";
+import { MAX_AGE, MAX_GRADE, MIN_AGE, MIN_GRADE } from "../src/lib/curriculum";
 
 export class HttpError extends Error {
   constructor(
@@ -17,6 +18,7 @@ export class HttpError extends Error {
 export const SIZE_LIMITS = {
   lessonPack: 7_000_000, // up to 3 photos
   tutor: 200_000, // the pack travels with each turn
+  homework: 4_500_000, // up to 2 photos
   checkAnswer: 200_000,
   parent: 4_000,
   exam: 2_000_000, // several saved lessons
@@ -56,6 +58,7 @@ const buckets = new Map<string, Bucket>();
 export const RATE_LIMITS = {
   lessonPack: { limit: 10, windowMs: 60 * 60_000 },
   tutor: { limit: 30, windowMs: 60_000 },
+  homework: { limit: 30, windowMs: 60_000 },
   checkAnswer: { limit: 120, windowMs: 60_000 },
   parent: { limit: 20, windowMs: 60_000 },
   health: { limit: 60, windowMs: 60_000 },
@@ -130,8 +133,15 @@ export function asCountry(v: unknown): Country {
 }
 
 export function asGrade(v: unknown): number {
-  if (typeof v === "number" && Number.isInteger(v) && v >= 1 && v <= 6) return v;
-  throw new HttpError(400, "grade must be a whole number from 1 to 6");
+  if (typeof v === "number" && Number.isInteger(v) && v >= MIN_GRADE && v <= MAX_GRADE) return v;
+  throw new HttpError(400, `grade must be a whole number from ${MIN_GRADE} to ${MAX_GRADE}`);
+}
+
+/** The child's age. Optional (older profiles have none: callers then assume grade + 5). */
+export function asOptionalAge(v: unknown): number | undefined {
+  if (v === undefined || v === null || v === "") return undefined;
+  if (typeof v === "number" && Number.isInteger(v) && v >= MIN_AGE && v <= MAX_AGE) return v;
+  throw new HttpError(400, `age must be a whole number from ${MIN_AGE} to ${MAX_AGE}`);
 }
 
 export function asSubject(v: unknown): Subject {

@@ -20,6 +20,7 @@ await db.exec(read("supabase-shim.sql"));
 await db.exec(read("../migrations/0001_init.sql"));
 await db.exec(read("../migrations/0003_family_keys.sql"));
 await db.exec(read("../migrations/0004_help_request_category.sql"));
+await db.exec(read("../migrations/0005_grades_1_9_new_subjects.sql"));
 
 let passed = 0;
 const ok = (name) => { passed++; console.log("  ok -", name); };
@@ -28,6 +29,15 @@ const ok = (name) => { passed++; console.log("  ok -", name); };
   const r = await db.query(`select pg_get_constraintdef(oid) as def from pg_constraint where conname = 'flags_category_check'`);
   assert.ok(r.rows.length === 1 && r.rows[0].def.includes("help_request"));
   ok("flags accept the help_request category (0004)");
+}
+{
+  const r = await db.query(`select conname, pg_get_constraintdef(oid) as def from pg_constraint where conname in ('children_grade_check', 'lesson_packs_grade_check', 'library_grade_check', 'zaki_subject_check')`);
+  assert.equal(r.rows.length, 4);
+  for (const row of r.rows) {
+    if (row.conname === "zaki_subject_check") assert.ok(row.def.includes("physics") && row.def.includes("biology"));
+    else assert.ok(row.def.includes("9"), row.conname);
+  }
+  ok("grades 1-9 and the new subjects are accepted (0005)");
 }
 
 const USER_A = "11111111-1111-4111-8111-111111111111";

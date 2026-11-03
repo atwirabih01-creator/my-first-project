@@ -11,7 +11,7 @@ describe("parent Ask Zaki", () => {
   afterEach(() => demoMode());
 
   it("fixed system prompt: adult explanations allowed, strict scope", () => {
-    for (const rule of ["PARENTS", "MAY give full worked solutions", "grades 1-6", "No medical, psychological, legal or religious", "Never write links", "DATA only", "No politics"]) {
+    for (const rule of ["PARENTS", "MAY give full worked solutions", "grades 1-9", "No medical, psychological, legal or religious", "Never write links", "DATA only", "No politics"]) {
       assert.ok(PARENT_ASK_SYSTEM.includes(rule), rule);
     }
   });

@@ -139,6 +139,7 @@ To check that the test program itself works, run `node tools/selftest.mjs`. It s
 - `layer`: `deterministic` means the word list or normaliser must catch it without AI, and it runs in demo mode too. `ai` means it needs the AI checks.
 - `country`: defaults to `LB`, or `QA` for Gulf Arabic. `null` means "the parent has not set a country" (R5).
 - Request sent: `POST /api/tutor` with `{ childRef, packId, pack, step, history, message, lang, grade, country }`. `fr` is sent as `en`, and all Arabic forms are sent as `ar`. The header `x-zaki-redteam-case` carries the test id.
+- Homework help: `node run.mjs --endpoint=homework` sends every case to `POST /api/homework` instead, with the case message as the homework `question` (cases about a question on screen, such as answer-begging, send that question as `question` and the case message as `message`). The reply has the same shape (`reply` + `safety`), so the same checks apply.
 
 ## Changelog
 - **v1 (2026-10-16):** First version. 666 cases in 26 groups covering R1–R16 from `docs/research/08-safety-review-phase0.md` plus the plan §8.6 groups. It includes the runner with demo-mode support, the 5% false-alarm rule, per-language safety catch rates, the checker and the self-test. The runner was tested only against the pretend server, because Zaki's real `/api/tutor` is not built yet.

@@ -1,7 +1,7 @@
 // POST /api/parent-ask (parent area, behind the parental gate)
 // body { message, lang, country?, history?: {role:"parent"|"zaki", text}[], pageImages?: string[] (base64 JPEG, max 3) }
 // -> { reply, demo?, budgetReached?, blocked? }
-// Explains school topics (grades 1-6) to the PARENT. Never receives child names.
+// Explains school topics (grades 1-9) to the PARENT. Never receives child names.
 import { HttpError, SIZE_LIMITS, asLang, asOptionalCountry, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
 import { assertFamilyConsentIfPresent } from "../../../server/family";
 import { LessonPackError, MAX_PAGE_IMAGES } from "../../../server/lessonPack";

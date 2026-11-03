@@ -6,7 +6,7 @@ import { parentConcernScan } from '../../server/keywordScan';
 import { adultSafetyMessage } from './helpRoutes';
 import { getDemoPack } from './demoPacks';
 import type { HelpKind } from './helpRoutes';
-import { kindFromCategory } from './localSafety';
+import { kindFromCategory, localSafetyCheck } from './localSafety';
 import { translate } from './i18n';
 import type { Country, ExamQuestion, Lang, LessonPack, Question, Safety, Source, Subject } from './types';
 
@@ -96,11 +96,26 @@ export async function getHealth(): Promise<Health | null> {
   }
 }
 
-type Common = { childRef: string; grade: number; lang: Lang; country: Country };
+/** grade 1-9; age 5-16 (optional: older profiles have none, the server then assumes grade + 5). */
+type Common = { childRef: string; grade: number; age?: number; lang: Lang; country: Country };
 
 // ---------- lesson pack ----------
 export type LessonPackResult =
-  | { pack: LessonPack; sources: Source[]; demo: boolean; safetyStopped?: boolean; fromLibrary?: boolean; budgetReached?: undefined }
+  | {
+      pack: LessonPack;
+      sources: Source[];
+      demo: boolean;
+      /**
+       * The topic text did not pass the safety check: do NOT start or save this lesson.
+       * If the safety screen applies it was already shown; `blockedReply` (when set) is the
+       * fixed text to show the child instead (e.g. "let's keep personal details private").
+       * `pack` is then only a placeholder sample.
+       */
+      safetyStopped?: boolean;
+      blockedReply?: string;
+      fromLibrary?: boolean;
+      budgetReached?: undefined;
+    }
   /**
    * Not ready: today's AI limit is reached, or (real server) Zaki couldn't build it right now.
    * The app queues it and prepares it later. A different sample lesson is never swapped in.
@@ -118,15 +133,21 @@ export async function fetchLessonPack(
   if (!consentOk) throw new ConsentRequiredError();
   if (!demoMode) {
     try {
-      const data = await request<{ pack: LessonPack; sources?: Source[]; safety?: Safety; budgetReached?: boolean; fromLibrary?: boolean }>(
-        '/api/lesson-pack',
-        withFamily(req),
-        90000,
-      );
+      const data = await request<{
+        pack: LessonPack;
+        sources?: Source[];
+        safety?: Safety;
+        budgetReached?: boolean;
+        fromLibrary?: boolean;
+        blocked?: boolean;
+        reply?: string;
+      }>('/api/lesson-pack', withFamily(req), 90000);
       if (data.budgetReached) return { budgetReached: true };
-      if (handleSafety(data.safety)) {
+      // The topic went through the same safety check as a chat message.
+      const screen = handleSafety(data.safety);
+      if (screen || data.blocked) {
         const d = getDemoPack(req.subject, req.lang, req.grade);
-        return { ...d, demo: true, safetyStopped: true };
+        return { ...d, demo: true, safetyStopped: true, blockedReply: screen ? undefined : data.reply };
       }
       if (isValidPack(data.pack)) {
         return {
@@ -142,6 +163,14 @@ export async function fetchLessonPack(
     }
     // Real server answered without a usable lesson: queue it too.
     return { budgetReached: true, unavailable: true };
+  }
+  // Demo/offline: the phone's own safety word check on the typed topic.
+  const local = localSafetyCheck(req.topic);
+  if (local) {
+    safetyHandler?.(local);
+    reportSafety({ kind: local, message: req.topic, childRef: req.childRef, lang: req.lang, country: req.country });
+    const d = getDemoPack(req.subject, req.lang, req.grade);
+    return { ...d, demo: true, safetyStopped: true };
   }
   // Small pause so the friendly "researching" animation is visible in demo mode too.
   await new Promise((r) => setTimeout(r, 1200));
@@ -228,6 +257,51 @@ export async function askTutor(
   return { reply: demoTutorReply(req.message, req.pack, req.lang), demo: true, safetyStopped: false };
 }
 
+// ---------- homework help ----------
+/**
+ * One homework-help turn (POST /api/homework). Zaki never gives the final answer.
+ * First turn: send `question` with no `message` and an empty history.
+ * Same safety handling as askTutor: if the safety screen applies it is shown and
+ * `safetyStopped` is true (reply is then empty).
+ */
+export async function askHomework(
+  req: Common & {
+    subject: Subject;
+    question: string;
+    message?: string;
+    history: ChatTurn[];
+    /** Up to 2 base64 JPEG photos of the homework page (from a grown-up). */
+    pageImages?: string[];
+  },
+): Promise<{ reply: string; demo: boolean; safetyStopped: boolean; budgetReached?: boolean; hintLevel?: number }> {
+  if (!consentOk) throw new ConsentRequiredError();
+  if (!demoMode) {
+    try {
+      const data = await request<{ reply: string; safety?: Safety; budgetReached?: boolean; hintLevel?: number; demo?: boolean }>(
+        '/api/homework',
+        withFamily(req),
+        30000,
+      );
+      if (handleSafety(data.safety)) return { reply: '', demo: false, safetyStopped: true };
+      if (typeof data.reply === 'string' && data.reply.trim()) {
+        return { reply: data.reply, demo: !!data.demo, safetyStopped: false, budgetReached: data.budgetReached, hintLevel: data.hintLevel };
+      }
+    } catch {
+      // fall back to the demo reply
+    }
+  }
+  // Demo/offline: the phone's own safety word check, then a scripted helper reply.
+  const local = localSafetyCheck(`${req.question}\n${req.message ?? ''}`);
+  if (local) {
+    safetyHandler?.(local);
+    reportSafety({ kind: local, message: req.message || req.question, childRef: req.childRef, lang: req.lang, country: req.country });
+    return { reply: '', demo: true, safetyStopped: true };
+  }
+  await new Promise((r) => setTimeout(r, 500));
+  const reply = `${translate(req.lang, 'demoChatAnswer')}\n${translate(req.lang, 'demoNote')}`;
+  return { reply, demo: true, safetyStopped: false };
+}
+
 // ---------- parent message (WhatsApp simulator) ----------
 export type ParentPlan = { subject: Subject; topic: string; dueDate?: string; sessions?: number };
 
@@ -253,6 +327,9 @@ export async function sendParentMessage(
 
 const SUBJECT_WORDS: [Subject, RegExp][] = [
   ['math', /\b(math|maths|mathematics)\b|رياضيات|الرياضيات|حساب/i],
+  ['physics', /\bphysics\b|فيزياء|الفيزياء/i],
+  ['chemistry', /\bchemistry\b|كيمياء|الكيمياء/i],
+  ['biology', /\bbiology\b|الأحياء|علم الأحياء/i],
   ['science', /\bscience\b|علوم|العلوم/i],
   ['english', /\benglish\b|انجليزي|إنجليزي|انكليزي|الإنجليزية|الانجليزية/i],
   ['arabic', /\barabic\b|عربي|العربية/i],

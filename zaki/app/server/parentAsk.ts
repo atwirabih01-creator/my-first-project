@@ -1,7 +1,7 @@
 // PARENT "ASK ZAKI": a grown-up asks Zaki to explain a school topic (optionally with up to
 // 3 textbook page photos) so they can help their child. Adult-level, direct explanations are
 // allowed here (this is not the child's homework chat), but the scope is fixed:
-// school subjects for grades 1-6 + tips on helping with homework. No medical/legal/religious
+// school subjects for grades 1-9 + tips on helping with homework. No medical/legal/religious
 // rulings, no links, no phone numbers. Photo text is DATA. Moderation runs on the parent's
 // message and on the reply. Counts toward the daily budget. Never receives child names.
 import { callClaude, isRefusal, textOf, type ClaudeParams } from "./ai";
@@ -12,21 +12,23 @@ import { containsPhoneNumber, moderate, scrubPii } from "./safety";
 import { adultSafetyMessage, type AdultHelpKind } from "../src/lib/helpRoutes";
 import { parentConcernScan } from "./keywordScan";
 import type { Country, Lang } from "./types";
+import { GENERAL_EXAMPLES_RULE } from "./promptRules";
 
 export type ParentAskTurn = { role: "parent" | "zaki"; text: string };
 export type ParentAskRequest = { message: string; lang: Lang; country?: Country; history: ParentAskTurn[]; pageImages?: string[] };
 export type ParentAskResponse = { reply: string; demo?: boolean; budgetReached?: boolean; blocked?: boolean; concern?: "home" | "self_harm" | "fear" };
 
-export const PARENT_ASK_SYSTEM = `You are Zaki's helper for PARENTS (adults), inside the Zaki app for children in grades 1-6.
+export const PARENT_ASK_SYSTEM = `You are Zaki's helper for PARENTS (adults), inside the Zaki app for children in grades 1-9 (ages about 5 to 16).
 The parent wants to understand a school topic so they can help their child at home.
 
 WHAT YOU DO
-- Explain school topics for grades 1-6 (math, science, English, Arabic language, social studies) clearly and directly, at an adult level. You MAY give full worked solutions and answers here: you are helping the parent, not the child.
+- Explain school topics for grades 1-9 (math, science, physics, chemistry, biology, English, Arabic language, social studies) clearly and directly, at an adult level. You MAY give full worked solutions and answers here: you are helping the parent, not the child.
 - Add one or two practical tips for helping a child learn it at home (a quick activity, a common mistake to watch for).
 - Keep answers short: at most about 10 lines. Use simple words. Reply in the parent's language (Arabic = clear Modern Standard Arabic).
+- Examples: ${GENERAL_EXAMPLES_RULE}
 
 LIMITS (always)
-- Only school subjects for grades 1-6 and tips on helping with homework/study habits. For anything else, say politely that this chat is for school topics.
+- Only school subjects for grades 1-9 and tips on helping with homework/study habits. For anything else, say politely that this chat is for school topics.
 - No medical, psychological, legal or religious rulings or advice. Suggest a qualified professional instead.
 - Never write links, web addresses, email addresses or phone numbers.
 - No politics.
@@ -35,12 +37,12 @@ LIMITS (always)
 
 const FIXED: Record<"scope" | "demo" | "budget" | "blocked", Record<Lang, string>> = {
   scope: {
-    en: "This chat is for school topics (grades 1-6) and tips on helping with homework. I can't help with that here.",
-    ar: "هذه المحادثة مخصّصة لموضوعات المدرسة (الصفوف 1-6) ولنصائح المساعدة في الواجبات. لا أستطيع المساعدة في ذلك هنا.",
+    en: "This chat is for school topics (grades 1-9) and tips on helping with homework. I can't help with that here.",
+    ar: "هذه المحادثة مخصّصة لموضوعات المدرسة (الصفوف 1-9) ولنصائح المساعدة في الواجبات. لا أستطيع المساعدة في ذلك هنا.",
   },
   demo: {
-    en: "Demo mode: Zaki's AI is not connected yet.\nWhen it is, you can ask me to explain any school topic for grades 1-6 (or send up to 3 photos of a book page) and I'll explain it so you can help your child.\nTip for now: ask your child to teach you what they learned today in 3 sentences.",
-    ar: "وضع التجربة: ذكاء ذكي الاصطناعي غير متصل بعد.\nعندما يتصل، يمكنك أن تطلب مني شرح أي موضوع مدرسي للصفوف 1-6 (أو إرسال حتى 3 صور لصفحة من الكتاب) وسأشرحه لك لتساعد طفلك.\nنصيحة الآن: اطلب من طفلك أن يشرح لك ما تعلّمه اليوم في 3 جمل.",
+    en: "Demo mode: Zaki's AI is not connected yet.\nWhen it is, you can ask me to explain any school topic for grades 1-9 (or send up to 3 photos of a book page) and I'll explain it so you can help your child.\nTip for now: ask your child to teach you what they learned today in 3 sentences.",
+    ar: "وضع التجربة: ذكاء ذكي الاصطناعي غير متصل بعد.\nعندما يتصل، يمكنك أن تطلب مني شرح أي موضوع مدرسي للصفوف 1-9 (أو إرسال حتى 3 صور لصفحة من الكتاب) وسأشرحه لك لتساعد طفلك.\nنصيحة الآن: اطلب من طفلك أن يشرح لك ما تعلّمه اليوم في 3 جمل.",
   },
   budget: {
     en: "Today's AI limit is reached. Please ask again tomorrow. Your child's practice and flashcards still work.",

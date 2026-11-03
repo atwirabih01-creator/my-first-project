@@ -2,7 +2,8 @@
 
 export type Lang = 'en' | 'ar';
 export type Country = 'LB' | 'QA';
-export type Subject = 'math' | 'science' | 'english' | 'arabic' | 'social';
+/** physics / chemistry / biology are for grades 7-9 (see src/lib/curriculum.ts). */
+export type Subject = 'math' | 'science' | 'physics' | 'chemistry' | 'biology' | 'english' | 'arabic' | 'social';
 
 export type Question = {
   id: string;
@@ -39,8 +40,10 @@ export type AvatarId = 'lion' | 'fox' | 'cat' | 'panda' | 'turtle' | 'rocket' | 
 
 export type ChildProfile = {
   id: string; // random childRef, never a name
-  nickname: string;
-  grade: number; // 1-6
+  nickname: string; // first name or nickname only, never a full name
+  grade: number; // 1-9
+  /** 5-16. Optional: older profiles have none (then grade + 5 is assumed, see curriculum.effectiveAge). */
+  age?: number;
   lang: Lang;
   avatar: AvatarId;
   createdAt: string;

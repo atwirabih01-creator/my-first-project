@@ -15,7 +15,7 @@ export const ENGLISH_ADJ_EN: LessonPack = {
   teachSteps: [
     { text: "An adjective is a word that tells us more about a noun.", example: "a red ball. 'Red' tells us about the ball." },
     { text: "Adjectives can tell us the colour, size or shape.", example: "a big tree, a small cat, a round plate" },
-    { text: "Adjectives can tell us how something feels, tastes or looks.", example: "soft bread, sweet dates, a happy boy" },
+    { text: "Adjectives can tell us how something feels, tastes or looks.", example: "soft bread, sweet cake, a happy boy" },
     { text: "The adjective usually comes before the noun.", example: "a tall building: 'tall' comes before 'building'." },
     { text: "Now you know adjectives! An adjective tells us more about a noun: its colour, size or shape, or how it feels, tastes or looks. To find it, ask: what is the noun like?", example: "Lina has a fluffy grey kitten. The noun is 'kitten'. What is the kitten like? Fluffy and grey: those are the adjectives." },
   ],
@@ -90,7 +90,7 @@ export const ENGLISH_ADJ_AR: LessonPack = {
   teachSteps: [
     { text: "الصفة (adjective) كلمة تخبرنا شيئًا عن الاسم (noun).", example: "a red ball: كلمة red تخبرنا عن لون الكرة." },
     { text: "الصفة قد تخبرنا عن اللون أو الحجم أو الشكل.", example: "a big tree، a small cat، a round plate" },
-    { text: "الصفة قد تخبرنا كيف يبدو الشيء أو كيف طعمه أو ملمسه.", example: "soft bread، sweet dates، a happy boy" },
+    { text: "الصفة قد تخبرنا كيف يبدو الشيء أو كيف طعمه أو ملمسه.", example: "soft bread، sweet cake، a happy boy" },
     { text: "في الإنجليزية تأتي الصفة عادةً قبل الاسم.", example: "a tall building: كلمة tall جاءت قبل building." },
     { text: "الآن تعرف الصفات! الصفة تخبرنا شيئًا عن الاسم: لونه أو حجمه أو شكله، أو كيف يبدو أو طعمه أو ملمسه. لنجدها نسأل: كيف هو الاسم؟", example: "Lina has a fluffy grey kitten. الاسم هو kitten. كيف هي القطة؟ fluffy و grey: هاتان هما الصفتان." },
   ],

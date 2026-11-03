@@ -2,9 +2,10 @@
 
 export type Lang = "en" | "ar";
 export type Country = "LB" | "QA";
-export type Subject = "math" | "science" | "english" | "arabic" | "social";
+/** physics / chemistry / biology are for grades 7-9 (for grades 1-6 "science" covers them). */
+export type Subject = "math" | "science" | "physics" | "chemistry" | "biology" | "english" | "arabic" | "social";
 
-export const SUBJECTS: readonly Subject[] = ["math", "science", "english", "arabic", "social"];
+export const SUBJECTS: readonly Subject[] = ["math", "science", "physics", "chemistry", "biology", "english", "arabic", "social"];
 
 export type Question = {
   id: string;

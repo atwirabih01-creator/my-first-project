@@ -17,6 +17,7 @@ export type FixedMessageKey =
   | "reply_blocked"
   | "answer_protected"
   | "demo_tutor"
+  | "demo_homework"
   | "ai_unavailable"
   | "ai_intro"
   | "budget_tutor";
@@ -68,6 +69,10 @@ export const FIXED_MESSAGES: Record<FixedMessageKey, Record<Lang, string>> = {
   demo_tutor: {
     en: "Demo mode: Zaki's AI is not connected yet.\nI'm Zaki, an AI helper (not a person).\nTry the questions in this lesson and tap a hint if you need one.",
     ar: "وضع التجربة: ذكاء ذكي الاصطناعي غير متصل بعد.\nأنا ذكي، مساعد آلي (لست إنسانًا).\nجرّب أسئلة هذا الدرس واضغط على التلميح إذا احتجت إليه.",
+  },
+  demo_homework: {
+    en: "Demo mode: Zaki's AI is not connected yet.\nI'm Zaki, an AI helper (not a person).\nRead the question slowly: what is it asking you to find?\nTry the first small step on your own!",
+    ar: "وضع التجربة: ذكاء ذكي الاصطناعي غير متصل بعد.\nأنا ذكي، مساعد آلي (لست إنسانًا).\nاقرأ السؤال ببطء: ماذا يطلب منك أن تجد؟\nجرّب الخطوة الصغيرة الأولى وحدك!",
   },
   ai_unavailable: {
     en: "Zaki can't think right now. Your work is saved.\nTry again in a little while.\nIf something is worrying you, tell a grown-up you trust or tap \"I need help\".",

@@ -83,6 +83,9 @@ const T = {
 
 const SUBJECT_WORDS: [Subject, string[]][] = [
   ["math", ["math", "maths", "mathematics", "رياضيات", "الرياضيات", "حساب", "الحساب", "maths test"]],
+  ["physics", ["physics", "فيزياء", "الفيزياء"]],
+  ["chemistry", ["chemistry", "كيمياء", "الكيمياء"]],
+  ["biology", ["biology", "احياء", "الاحياء", "علم الاحياء"]],
   ["science", ["science", "sciences", "علوم", "العلوم"]],
   ["english", ["english", "انجليزي", "الانجليزي", "الانجليزيه", "انكليزي", "الانكليزي", "الانكليزيه"]],
   ["arabic", ["arabic", "عربي", "العربي", "العربيه", "لغه عربيه", "اللغه العربيه"]],
@@ -228,7 +231,7 @@ function parseTopic(text: string): string | undefined {
   topic = topic
     .replace(/\s+(?:on|next|this|tomorrow|today|in|at|for)\b.*$/i, "")
     .replace(/\s+(?:يوم|بكرا|غدا|اليوم|الساعة|في|بعد)\s.*$/u, "")
-    .replace(/\((?:math|science|english|arabic|social)[^)]*\)/i, "")
+    .replace(/\((?:math|science|physics|chemistry|biology|english|arabic|social)[^)]*\)/i, "")
     .trim();
   return topic.length >= 2 ? topic.slice(0, 60) : undefined;
 }
@@ -242,6 +245,9 @@ function sessionsFor(today: Date, dueDate?: string): number {
 const SUBJECT_LABEL: Record<Subject, Record<Lang, string>> = {
   math: { en: "Math", ar: "الرياضيات" },
   science: { en: "Science", ar: "العلوم" },
+  physics: { en: "Physics", ar: "الفيزياء" },
+  chemistry: { en: "Chemistry", ar: "الكيمياء" },
+  biology: { en: "Biology", ar: "الأحياء" },
   english: { en: "English", ar: "اللغة الإنجليزية" },
   arabic: { en: "Arabic", ar: "اللغة العربية" },
   social: { en: "Social Studies", ar: "الدراسات الاجتماعية" },

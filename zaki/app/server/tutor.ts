@@ -3,13 +3,15 @@
 //  deterministic post-checks (links/phones, forbidden phrases, answer leaks, 4 lines, 1 emoji)
 //  -> moderation of the reply -> child.
 // The AI only ever sees: the lesson pack (answer keys removed), the chat so far with personal
-// details scrubbed, grade, language and country. Never a name or a child id.
+// details scrubbed, grade, age, level guide and language. Never a name or a child id.
+// The safety pipeline (runGuardedTurn) is shared with homework help (server/homework.ts).
 
 import { callClaude, isRefusal, textOf } from "./ai";
 import { BudgetExceededError, takeChildTurn } from "./budget";
 import { MODELS, aiEnabled } from "./config/models";
 import { fixedMessage } from "./data/safetyMessages";
 import { postCheckReply, protectedItems } from "./replyChecks";
+import { GENERAL_EXAMPLES_RULE, levelLine } from "./promptRules";
 import { fixedReplyFor, moderate, scrubPii } from "./safety";
 import type { Country, Lang, LessonPack, Question, SafetyInfo } from "./types";
 
@@ -24,7 +26,9 @@ export type TutorRequest = {
   message: string;
   lang: Lang;
   grade: number;
-  /** Undefined = not set by the parent. */
+  /** 5-16; optional (older profiles): grade + 5 is assumed. */
+  age?: number;
+  /** Undefined = not set by the parent. Used for help routes and the flag log only. */
   country?: Country;
   /** Optional (extension): the check/test item on screen, so its answer is protected exactly. */
   questionId?: string;
@@ -45,7 +49,7 @@ const MAX_HISTORY_TURNS = 12;
 const MAX_TURN_CHARS = 600;
 
 // The static part of the system prompt (cached). Plan Section 6 + safety review rules.
-export const ZAKI_SYSTEM_PROMPT = `You are Zaki, a friendly AI teacher (a cartoon robot-owl character) for children in grades 1-6.
+export const ZAKI_SYSTEM_PROMPT = `You are Zaki, a friendly AI teacher (a cartoon robot-owl character) for children in grades 1-9 (ages about 5 to 16).
 You are an AI, not a person. If this is the start of the session, say so in a friendly way in your first line. Never claim to be human.
 
 GOLDEN RULE
@@ -54,7 +58,7 @@ GOLDEN RULE
 
 LANGUAGE AND FORMAT
 - Reply in the child's language (Arabic or English, as given in turn_context). For Arabic use simple Modern Standard Arabic.
-- Simple, short sentences for the child's grade.
+- Words, sentence length and detail must match "level" in turn_context (very simple for grades 1-2, more detail for grades 7-9).
 - Maximum 4 short lines per message. At most one emoji.
 - Never write links, web addresses, emails or phone numbers. Never invent help lines.
 
@@ -64,11 +68,11 @@ HOW TO TEACH
 3. Give ONE hint or ONE question at a time, then wait.
 4. turn_context gives the hint level. Level 1: a gentle hint. Level 2: a stronger hint. Level 3 or more: show a SIMILAR example with DIFFERENT numbers or words, solved step by step, then ask the child to try the real one.
 5. Right answer: praise the effort and ask them to explain how. Wrong answer: point gently to the step that went wrong.
-6. Use examples from the child's country (see turn_context). For Lebanon never use money or war examples.
+6. ${GENERAL_EXAMPLES_RULE}
 7. Teach ONLY from the lesson pack below. If something is not in the pack, or you are not sure, say "Let's check this with your teacher".
 
 SAFETY
-- Only school subjects for grades 1-6. Gently steer off-topic chat back to the lesson.
+- Only school subjects for grades 1-9. Gently steer off-topic chat back to the lesson.
 - No politics, political parties, armed groups, religious sects, war or contested history. Say it is a question for a grown-up they trust, and go back to the lesson.
 - No medical, legal or religious rulings. Suggest asking a grown-up they trust.
 - Never ask for or repeat a full name, surname, school, address, area, phone number, location or photos.
@@ -121,7 +125,7 @@ function buildMessages(req: TutorRequest, hintLevel: number | undefined) {
     `step: ${req.step}`,
     `language: ${req.lang === "ar" ? "Arabic" : "English"}`,
     `grade: ${req.grade}`,
-    `country: ${req.country === "LB" ? "Lebanon" : req.country === "QA" ? "Qatar" : "not set (use neutral examples, no money or war)"}`,
+    `level: ${levelLine(req.grade, req.age)}`,
     `session start: ${req.history.length === 0 ? "yes (say you are an AI helper)" : "no"}`,
     hintLevel ? `hint level: ${hintLevel}` : "",
     current ? `current question id: ${current.id}` : "",
@@ -170,69 +174,108 @@ function safeHintFallback(req: TutorRequest, leakedId: string | undefined, hintL
   return lvl >= 3 ? item.similarExample : lvl === 2 ? item.hint2 : item.hint1;
 }
 
-export async function runTutorTurn(req: TutorRequest): Promise<TutorResponse> {
-  // 1. Moderate the child's message first.
-  const childCheck = await moderate(req.message, {
-    speaker: "child",
-    lang: req.lang,
-    country: req.country,
-    childRef: req.childRef,
-  });
-  if (childCheck.block) {
-    return { reply: fixedReplyFor(childCheck, req.lang) ?? fixedMessage("reply_blocked", req.lang), safety: childCheck.safety };
-  }
+// ---------------------------------------------------------------------------------------
+// Shared safety pipeline (tutor + homework help)
+// ---------------------------------------------------------------------------------------
 
-  const hintLevel = hintLevelFor(req);
+export type GuardedTurnInput = {
+  /** Text moderated as the child's message (homework: the question + the child's message). */
+  moderatedText: string;
+  lang: Lang;
+  country?: Country;
+  childRef?: string;
+  /** True on the first turn: the reply must say Zaki is an AI. */
+  sessionStart: boolean;
+  /** Items whose final answers the reply must not give away. */
+  items: Question[];
+  /** Ask the model (null = refused). `note` is the retry note after a blocked reply. */
+  ask: (note?: string) => Promise<string | null>;
+  /** Safe text when every attempt leaked an answer. */
+  leakFallback: (leakedId: string | undefined) => string;
+  retryNote: string;
+  demoReply: string;
+};
+
+export type GuardedTurnResult = {
+  reply: string;
+  safety: SafetyInfo;
+  demo?: boolean;
+  budgetReached?: boolean;
+  /** True when the child's message was stopped by moderation (no AI call was made). */
+  childBlocked?: boolean;
+};
+
+/**
+ * The full safety pipeline for one child turn: moderation of the child's text (keywords +
+ * OpenAI + classifier, flag log) -> demo mode -> per-child daily turns -> Claude with
+ * deterministic post-checks and one retry -> AI-identity line -> moderation of the reply.
+ */
+export async function runGuardedTurn(i: GuardedTurnInput): Promise<GuardedTurnResult> {
+  // 1. Moderate the child's message first.
+  const childCheck = await moderate(i.moderatedText, { speaker: "child", lang: i.lang, country: i.country, childRef: i.childRef });
+  if (childCheck.block) {
+    return { reply: fixedReplyFor(childCheck, i.lang) ?? fixedMessage("reply_blocked", i.lang), safety: childCheck.safety, childBlocked: true };
+  }
 
   // 2. Demo mode.
-  if (!aiEnabled()) {
-    return { reply: fixedMessage("demo_tutor", req.lang), hintLevel, safety: childCheck.safety, demo: true };
-  }
+  if (!aiEnabled()) return { reply: i.demoReply, safety: childCheck.safety, demo: true };
 
   // 3. Daily limits (per-child turns + server budget). Safety checks above already ran.
-  if (req.childRef && !(await takeChildTurn(req.childRef))) {
-    return { reply: fixedMessage("budget_tutor", req.lang), hintLevel, safety: childCheck.safety, budgetReached: true };
+  if (i.childRef && !(await takeChildTurn(i.childRef))) {
+    return { reply: fixedMessage("budget_tutor", i.lang), safety: childCheck.safety, budgetReached: true };
   }
 
   // 4. Ask Claude; post-check; one retry if the reply leaked an answer or broke a rule.
-  const items = protectedItems(req.pack, req.step, req.questionId);
   let reply: string | null = null;
   let leakedId: string | undefined;
   try {
     for (let attempt = 0; attempt < 2 && reply === null; attempt++) {
-      const note =
-        attempt === 0
-          ? undefined
-          : "Your last reply was blocked because it gave away the answer or broke a rule. Write a new reply that gives only ONE hint and does not reveal the answer.";
-      const raw = await askClaude(req, hintLevel, note);
+      const raw = await i.ask(attempt === 0 ? undefined : i.retryNote);
       if (raw === null) break;
-      const pc = postCheckReply(raw, items);
+      const pc = postCheckReply(raw, i.items);
       if (pc.blocked === null) reply = pc.text;
       else leakedId = pc.leakedId ?? leakedId;
     }
   } catch (e) {
     if (e instanceof BudgetExceededError) {
-      return { reply: fixedMessage("budget_tutor", req.lang), hintLevel, safety: childCheck.safety, budgetReached: true };
+      return { reply: fixedMessage("budget_tutor", i.lang), safety: childCheck.safety, budgetReached: true };
     }
-    return { reply: fixedMessage("ai_unavailable", req.lang), hintLevel, safety: childCheck.safety };
+    return { reply: fixedMessage("ai_unavailable", i.lang), safety: childCheck.safety };
   }
-  if (reply === null) {
-    reply = leakedId ? safeHintFallback(req, leakedId, hintLevel) : fixedMessage("reply_blocked", req.lang);
-  }
+  if (reply === null) reply = leakedId ? i.leakFallback(leakedId) : fixedMessage("reply_blocked", i.lang);
 
-  // 4. AI identity at the start of every session (deterministic, not left to the model).
-  if (req.history.length === 0 && !AI_WORDS.test(reply)) {
-    const intro = fixedMessage("ai_intro", req.lang);
+  // 5. AI identity at the start of every session (deterministic, not left to the model).
+  if (i.sessionStart && !AI_WORDS.test(reply)) {
+    const intro = fixedMessage("ai_intro", i.lang);
     const lines = reply.split("\n").filter(Boolean).slice(0, 3);
     reply = [intro, ...lines].join("\n");
   }
 
-  // 5. Moderate the reply itself.
-  const replyCheck = await moderate(reply, { speaker: "tutor", lang: req.lang, country: req.country, childRef: req.childRef });
+  // 6. Moderate the reply itself.
+  const replyCheck = await moderate(reply, { speaker: "tutor", lang: i.lang, country: i.country, childRef: i.childRef });
   if (replyCheck.block) {
     // A reply that drifted into politics gets the clear "ask a grown-up" redirect instead.
     const key = replyCheck.politics && replyCheck.category === "off_topic" ? "politics" : "reply_blocked";
-    return { reply: fixedMessage(key, req.lang), hintLevel, safety: childCheck.safety };
+    return { reply: fixedMessage(key, i.lang), safety: childCheck.safety };
   }
-  return { reply, hintLevel, safety: childCheck.safety };
+  return { reply, safety: childCheck.safety };
+}
+
+export async function runTutorTurn(req: TutorRequest): Promise<TutorResponse> {
+  const hintLevel = hintLevelFor(req);
+  const r = await runGuardedTurn({
+    moderatedText: req.message,
+    lang: req.lang,
+    country: req.country,
+    childRef: req.childRef,
+    sessionStart: req.history.length === 0,
+    items: protectedItems(req.pack, req.step, req.questionId),
+    ask: (note) => askClaude(req, hintLevel, note),
+    leakFallback: (leakedId) => safeHintFallback(req, leakedId, hintLevel),
+    retryNote:
+      "Your last reply was blocked because it gave away the answer or broke a rule. Write a new reply that gives only ONE hint and does not reveal the answer.",
+    demoReply: fixedMessage("demo_tutor", req.lang),
+  });
+  const { childBlocked, ...rest } = r;
+  return childBlocked ? rest : { ...rest, hintLevel };
 }
