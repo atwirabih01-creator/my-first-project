@@ -5,7 +5,7 @@
 // Nothing here logs prompt or reply text.
 
 import Anthropic from "@anthropic-ai/sdk";
-import { assertCanSpend, recordUsage, type SpendPurpose } from "./budget";
+import { BudgetExceededError, assertCanSpend, recordUsage, type SpendPurpose } from "./budget";
 import { anthropicApiKey } from "./config/models";
 import type {
   BetaMessage,
@@ -65,10 +65,22 @@ export async function callClaude(
   if (testImpl) msg = await testImpl(p, { stream });
   else {
     const c = getClient();
-    msg = stream ? await c.beta.messages.stream(p).finalMessage() : await c.beta.messages.create(p);
+    try {
+      msg = stream ? await c.beta.messages.stream(p).finalMessage() : await c.beta.messages.create(p);
+    } catch (e) {
+      // Out of prepaid credit: behave like the daily cap (friendly "later" message), not a server error.
+      if (isCreditExhausted(e)) throw new BudgetExceededError(purpose);
+      throw e;
+    }
   }
   await recordUsage(p.model, msg.usage, purpose);
   return msg;
+}
+
+/** The provider says the account has no credit left (HTTP 400 "credit balance is too low"). */
+export function isCreditExhausted(e: unknown): boolean {
+  const err = e as { status?: number; message?: string } | null;
+  return err?.status === 400 && /credit balance/i.test(String(err?.message ?? ""));
 }
 
 /** Concatenate the text blocks of a reply. */
