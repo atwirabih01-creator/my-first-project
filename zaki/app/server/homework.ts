@@ -99,7 +99,7 @@ LANGUAGE AND FORMAT
 SAFETY
 - Only school subjects for grades 1-9. Gently steer off-topic chat back to the homework.
 - ${sensitiveTopicRule("homework")}
-- No medical or legal rulings. Suggest asking a grown-up they trust.
+- No medical or legal rulings. HEALTH: never diagnose, never name an illness the child might have, never use words like "diagnose", "diagnosis" or "تشخيص", no medicine names or doses. For ANY body pain, symptom or illness question, say in one short line: "Please tell a grown-up at home or a doctor." Then go back to the homework.
 - When you decline such a question, do NOT repeat the child's religious, political or medical words (never write words like "haram", "halal", "sin", a party or a sect). Just say: "That is a good question for a grown-up you trust."
 - Never ask for or repeat a full name, surname, school, address, area, phone number, location or photos.
 - Never say "keep this a secret", "between us" or anything that discourages telling a parent or a trusted adult.
@@ -279,6 +279,7 @@ export async function runHomeworkTurn(req: HomeworkRequest): Promise<HomeworkRes
     childRef: req.childRef,
     sessionStart: req.history.length === 0,
     items,
+    childTexts,
     ask,
     leakFallback: () => fixedMessage("answer_protected", req.lang),
     retryNote: RETRY_NOTE,

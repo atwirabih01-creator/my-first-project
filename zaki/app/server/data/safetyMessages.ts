@@ -24,7 +24,10 @@ export type FixedMessageKey =
   | "sensitive_topic"
   | "sensitive_topic_homework"
   | "fear_calm"
-  | "photo_rejected";
+  | "photo_rejected"
+  | "health_tip"
+  | "health_redirect"
+  | "health_redirect_homework";
 
 export const FIXED_MESSAGES: Record<FixedMessageKey, Record<Lang, string>> = {
   // Sensitive subjects (politics, war as a subject, armed groups, religion/sect rulings, adult
@@ -42,6 +45,21 @@ export const FIXED_MESSAGES: Record<FixedMessageKey, Record<Lang, string>> = {
   fear_calm: {
     en: "Thank you for telling me. Please tell a grown-up at home how you feel. 💛",
     ar: "شكرًا لأنك أخبرتني. أخبِر شخصًا كبيرًا في البيت بما تشعر به. 💛",
+  },
+  // Any body pain / symptom / illness the child mentions: added to Zaki's reply when the AI did
+  // not already send the child to a grown-up (red-team R15).
+  health_tip: {
+    en: "If your body hurts or you feel sick, tell a grown-up at home or a doctor.",
+    ar: "إذا كان جسمك يؤلمك أو تشعر بالمرض، أخبِر شخصًا كبيرًا في البيت أو الطبيب.",
+  },
+  // A health reply that kept using diagnosis words: replaced by this fixed line.
+  health_redirect: {
+    en: "That's a question for a grown-up at home or a doctor.\nIf your body hurts or you feel sick, tell them now.\nLet's get back to our lesson! 📘",
+    ar: "هذا سؤال لشخص كبير في البيت أو للطبيب.\nإذا كان جسمك يؤلمك أو تشعر بالمرض، أخبِرهم الآن.\nهيّا نعود إلى درسنا! 📘",
+  },
+  health_redirect_homework: {
+    en: "That's a question for a grown-up at home or a doctor.\nIf your body hurts or you feel sick, tell them now.\nLet's get back to your homework! ✏️",
+    ar: "هذا سؤال لشخص كبير في البيت أو للطبيب.\nإذا كان جسمك يؤلمك أو تشعر بالمرض، أخبِرهم الآن.\nهيّا نعود إلى واجبك! ✏️",
   },
   // A homework photo whose text is not suitable for a child (never AI-written).
   photo_rejected: {

@@ -58,6 +58,8 @@ const COMPILED = {
   injection: compile(KW.PROMPT_INJECTION),
   war: compile(KW.WAR_WORDS),
   homeFear: compile(KW.HOME_FEAR),
+  fearOfDying: compile(KW.FEAR_OF_DYING),
+  griefPhrase: compile(KW.GRIEF_PHRASES),
   threatIdiom: compile(KW.THREAT_IDIOMS),
   death: compile(KW.DEATH_WORDS),
 };
@@ -152,6 +154,16 @@ export type KeywordScan = {
   /** Fear was raised ONLY by war words + an experience word (no fear/grief word). Lesson
    *  TOPICS (noun phrases) use this to treat "the bombs of the war" as a topic, not fear. */
   warOnlyFear: boolean;
+  /** "will we die?", "rah nmout": fear of dying from what happens around the child (not self-harm). */
+  fearOfDying: boolean;
+  /** The fear comes from war, a death or fear of dying (not from a person). A family member or
+   *  someone outside who is just mentioned ("teta is there", "my brother cries too", "my
+   *  classmate died") is then NOT the cause: calm line, no screen. "scared to go home" never. */
+  fearCauseWarOrDeath: boolean;
+  /** Someone at home may be the CAUSE of the fear (home word, and not war/death fear). */
+  fearHomeCause: boolean;
+  /** Someone outside the family may be the CAUSE of the fear (bully, stranger). */
+  fearOutsideCause: boolean;
 };
 
 /** Join runs of single letters: "b a d e m o u t" -> "bademout", "k i l l" -> "kill", "م و ت" -> "موت". */
@@ -200,6 +212,8 @@ function scanStrong(text: string) {
     threatIdiom: groupIn(views, COMPILED.threatIdiom),
     death: groupIn(views, COMPILED.death),
     homeFear: groupIn(views, COMPILED.homeFear),
+    fearOfDying: groupIn(views, COMPILED.fearOfDying),
+    griefPhrase: groupIn(views, COMPILED.griefPhrase),
   };
 }
 
@@ -236,6 +250,9 @@ export function keywordScan(text: string): KeywordScan {
   const grief = any("death") && griefPerson;
   const threat = any("threatIdiom") && !school;
   const fear = strongFear || warFear || grief;
+  const outside = wordListIn(views.base, words, KW.OUTSIDE_TERMS);
+  const fearOfDying = any("fearOfDying");
+  const fearCauseWarOrDeath = (any("war") || any("death") || any("griefPhrase") || fearOfDying) && !any("homeFear") && !any("disclosure") && !threat;
 
   return {
     selfHarm: any("selfHarm"),
@@ -244,9 +261,13 @@ export function keywordScan(text: string): KeywordScan {
     fear,
     warTopic: warOutsideSchool && !fear,
     warOnlyFear: warFear && !strongFear && !grief,
+    fearOfDying,
+    fearCauseWarOrDeath,
+    fearHomeCause: home && !fearCauseWarOrDeath,
+    fearOutsideCause: outside && !fearCauseWarOrDeath,
     helpSeeking: any("helpSeeking"),
     home,
-    outside: wordListIn(views.base, words, KW.OUTSIDE_TERMS),
+    outside,
     personal: groupIn(views, COMPILED.personal) || containsPhoneNumber(text) || EMAIL_RE.test(text),
     adult: groupIn(views, COMPILED.adult),
     politics: groupIn(views, COMPILED.politics),

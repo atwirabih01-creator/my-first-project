@@ -90,6 +90,7 @@ Return JSON only: {"category": <one of the categories>, "involvesHome": <boolean
 Categories:
 - "self_harm": the child talks about wanting to die, kill or hurt themselves, or not wanting to live. This includes indirect child words: wanting to "go to grandma/grandpa in the sky" or "to heaven" (e.g. "bade rou7 3and teta bel sama"), "sleep and never wake up", "nobody would miss me", jumping from a balcony or roof, or hating themselves.
 - "disclosure_harm": the child says someone hurts, hits, touches, threatens, locks up, neglects or abuses them or another child, OR an adult/older person asked them to keep a secret, send photos, or not tell their parents. Also bullying that sounds dangerous. Also: no food at home or not eating for days, being left alone for a long time, someone showing them naked/sexual pictures or videos, and someone met online who wants to meet them in person.
+- Fear of DYING because of war, bombs, drones, explosions or loud sounds ("we will die", "will we die?", "rah nmout", "ra7 nmout", "kel ma ysir sawt bfakker 2enno rah nmout", "on va mourir", "سنموت", "رح نموت") is "violence_fear", NOT "self_harm". It is "self_harm" only when the child says they WANT to die, want to hurt or kill themselves, or do not want to live.
 - "violence_fear": the child says THEY are scared, very sad, grieving, or worried about war, bombs, drones, explosions, having to leave home, someone dying, or violence around them (their own feelings or what is happening around them).
 - "help_request": the child asks for a helpline, a help number (e.g. "fi ra2m la wlad?"), who to call or talk to when something is wrong, what to do if nobody answers a help number, or says they need help now and it is NOT about schoolwork.
 - "sexual": sexual content or questions.
@@ -103,7 +104,8 @@ Categories:
 Rules:
 - When unsure between a safety category and "none", choose the safety category. A missed disclosure is much worse than a false alarm.
 - Priority if several apply: self_harm > disclosure_harm > violence_fear > help_request > sexual > adult_topic > personal_data > prompt_injection > sensitive_topic > off_topic > none.
-- "involvesHome" is true if the message mentions or suggests anyone in the child's home or family (mum, dad, brother, sister, uncle, aunt, grandparent, cousin, step-parent, nanny, maid, driver, "at home"), or if it is UNCLEAR who is involved in a disclosure_harm. It is false only when the person is clearly outside the family (stranger, someone online, a child at school) or when nobody is involved.
+- For "violence_fear", "involvesHome" is true ONLY when someone at home or in the family is the CAUSE of the fear (e.g. "I'm scared of my dad", "scared to go home"). Places ("near our house", "près de chez nous", "fo2 el bet", "at home") and family members who are simply with the child or scared too ("my brother cries when the drones come", "teta is there") are NOT involvesHome.
+- Otherwise "involvesHome" is true if the message mentions or suggests anyone in the child's home or family (mum, dad, brother, sister, uncle, aunt, grandparent, cousin, step-parent, nanny, maid, driver, "at home"), or if it is UNCLEAR who is involved in a disclosure_harm. It is false only when the person is clearly outside the family (stranger, someone online, a child at school) or when nobody is involved.
 - Everyday figures of speech are "none" (only these kinds, never anything about not existing, the sky/heaven, jumping or nobody missing them): "I'm starving" / "je meurs de faim" / "ra7 mout men el jou3" (just hungry), "I'm dying of boredom", "this homework is killing me", and normal worry about an exam or test ("khayfe mn el exam", "scared of the science test"). Real hunger at home ("no food at home for two days") is still "disclosure_harm".
 - Normal school content is "none" even if it contains words like "war" in a history question, "body parts" in science, or "kill" in a game sentence, unless the child expresses fear or harm about themselves.
 - A child who is scared or sad about war is "violence_fear", never "sensitive_topic". A child asking who is right in a war, or about a party or a religious ruling, is "sensitive_topic".
@@ -223,6 +225,12 @@ export async function moderate(text: string, opts: ModerateOptions): Promise<Mod
   const cats: SafetyCategory[] = [kwCat];
   if (oa) cats.push(oa.category);
   if (hk) cats.push(hk.category);
+  // Fear of DYING from war/bombs/sounds ("rah nmout", "will we die?") is war fear, not
+  // self-harm, unless a self-harm word is there ("I want to die"). Corrects the classifier.
+  if (hk?.category === "self_harm" && !scan.selfHarm && scan.fearOfDying && oa?.category !== "self_harm") {
+    cats[cats.lastIndexOf("self_harm")] = "violence_fear";
+    layers.push("classifier:self_harm->violence_fear(fear-of-dying)");
+  }
   // Adult subjects are handled as sensitive topics (founder decision): the category is
   // reported as "sensitive_topic"; the layers list keeps what fired.
   const rawCategory = strongest(cats);
@@ -246,7 +254,12 @@ export async function moderate(text: string, opts: ModerateOptions): Promise<Mod
   // A child asking where to get help while scared keeps the help screen (help routes unchanged).
   const helpNeeded = scan.helpSeeking || hk?.category === "help_request";
   const where = opts.where ?? "lesson";
-  let result = decide(category, involvesHome, scan.outside, opts.speaker, scan.politics, layers, { helpNeeded, where });
+  // The child's own fear: home/outside count only when that person may be the CAUSE. Fear of war,
+  // bombs, sounds or a death with a family member just mentioned ("teta is there", "near our
+  // house") is the calm path. The classifier's involvesHome is not used for war/death fear.
+  const fearHome = scan.fearHomeCause || (Boolean(hk?.involvesHome) && !scan.fearCauseWarOrDeath);
+  const isFear = category === "violence_fear";
+  let result = decide(category, isFear ? fearHome : involvesHome, isFear ? scan.fearOutsideCause : scan.outside, opts.speaker, scan.politics, layers, { helpNeeded, where });
 
   if (opts.allowSensitive && result.category === "sensitive_topic") {
     // Curriculum history topic or a topic the parent added: a normal lesson, nothing to flag.

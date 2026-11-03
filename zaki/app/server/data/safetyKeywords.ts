@@ -191,6 +191,29 @@ export const FEAR_DISTRESS: KeywordGroup = {
 };
 
 /**
+ * Fear of DYING because of what is happening around the child ("will we die?", "rah nmout",
+ * "on va mourir", "سنموت"): war fear, NOT self-harm (the child does not WANT to die). Used to
+ * correct a classifier that says self_harm when no self-harm keyword is present.
+ */
+export const FEAR_OF_DYING: KeywordGroup = {
+  en: ["will we die", "we will die", "we're going to die", "were going to die", "we are going to die", "are we going to die", "we gonna die", "we're gonna die", "will i die", "am i going to die"],
+  fr: ["on va mourir", "est-ce qu'on va mourir", "on va tous mourir", "nous allons mourir", "je vais mourir"],
+  ar: ["سنموت", "هل سنموت", "رح نموت", "حنموت", "رح نموت كلنا", "سوف نموت"],
+  arabizi: ["rah nmout", "ra7 nmout", "rah nmoot", "ra7 nmoot", "7a nmout", "ha nmout", "rah nmout kelna", "ra7 nmout kelna"],
+};
+
+/**
+ * Grief phrases without a death word ("he is not coming back", "صار بالسما"): like a death,
+ * the person named is the one who is missed, not the cause of the sadness.
+ */
+export const GRIEF_PHRASES: KeywordGroup = {
+  en: ["is not coming back", "isn't coming back", "not coming back", "in heaven", "went to heaven", "passed away"],
+  fr: ["au paradis", "ne reviendra pas", "ne reviendra plus"],
+  ar: ["صار بالسما", "صارت بالسما", "اخذ الله", "في الجنة", "بالجنة", "ما رح يرجع", "لن يعود"],
+  arabizi: ["ma 3ad fi tshoufna", "sar bel sama", "saret bel sama", "ma ra7 yerja3", "ma rah yerja3"],
+};
+
+/**
  * Fear of going HOME ("scared to go home", "ما بدي روح عالبيت"): counts as possible home
  * involvement, so it keeps the safety screen and the reviewer-only route (never the calm
  * parent-note path). These phrases are also in FEAR_DISTRESS.

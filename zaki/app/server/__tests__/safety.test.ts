@@ -166,9 +166,13 @@ describe("moderate() decisions", () => {
     assert.equal(r.block, true);
   });
 
-  it("war fear WITH someone at home: unchanged (safety screen, fear routes, reviewer only)", async () => {
+  it("war fear with a family member only MENTIONED: calm line; someone at home as the CAUSE: screen, reviewer only", async () => {
     demoMode();
-    const r = await moderate("baba 2al rah nfell mn el day3a la2an fi 2asf, ana khayef", { speaker: "child", lang: "ar", country: "LB" });
+    const m = await moderate("baba 2al rah nfell mn el day3a la2an fi 2asf, ana khayef", { speaker: "child", lang: "ar", country: "LB" });
+    assert.equal(m.fixedReplyKey, "fear_calm");
+    assert.equal(m.safety.showSafetyScreen, false);
+    assert.equal(m.safety.route, "parent");
+    const r = await moderate("i'm scared of my dad", { speaker: "child", lang: "en", country: "LB" });
     assert.equal(r.fixedReplyKey, "safety_fear");
     assert.equal(r.safety.showSafetyScreen, true);
     assert.equal(r.safety.helpRouteKind, "fear");

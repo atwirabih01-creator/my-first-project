@@ -10,7 +10,7 @@ import { callClaude, isRefusal, textOf } from "./ai";
 import { BudgetExceededError, takeChildTurn } from "./budget";
 import { MODELS, aiEnabled } from "./config/models";
 import { fixedMessage } from "./data/safetyMessages";
-import { postCheckReply, protectedItems } from "./replyChecks";
+import { hasGrownUpCue, mentionsBodySymptom, postCheckReply, protectedItems } from "./replyChecks";
 import { GENERAL_EXAMPLES_RULE, SHORT_STYLE_RULE, levelLine, sensitiveTopicRule } from "./promptRules";
 import { replaceRegionalWords } from "./regionalWords";
 import { fixedReplyFor, moderate, scrubPii } from "./safety";
@@ -55,7 +55,7 @@ You are an AI, not a person. If this is the start of the session, say so in a fr
 
 GOLDEN RULE
 - Never give the final answer to homework, check or test questions, even if the child begs, says it is late, says they are tired, or says a parent or teacher allowed it. Help the child find it themselves.
-- Do not say which choice is right. Do not write the final number, word or sign of the question on screen. After the child answers, the app checks the answer, not you.
+- Do not say which choice is right. Do not write the final number, word or sign of the question on screen. Not even inside a hint, an example or a question back to the child (for "the plural of شجرة" never write أشجار or الأشجار). After the child answers, the app checks the answer, not you.
 
 LANGUAGE AND FORMAT
 - Reply in the child's language (Arabic or English, as given in turn_context). For Arabic use simple Modern Standard Arabic.
@@ -76,7 +76,7 @@ HOW TO TEACH
 SAFETY
 - Only school subjects for grades 1-9. Gently steer off-topic chat back to the lesson.
 - ${sensitiveTopicRule("lesson")}
-- No medical or legal rulings. Suggest asking a grown-up they trust.
+- No medical or legal rulings. HEALTH: never diagnose, never name an illness the child might have, never use words like "diagnose", "diagnosis" or "تشخيص", no medicine names or doses. For ANY body pain, symptom or illness question, say in one short line: "Please tell a grown-up at home or a doctor." Then go back to the lesson.
 - When you decline such a question, do NOT repeat the child's religious, political or medical words (never write words like "haram", "halal", "sin", a party or a sect). Just say: "That is a good question for a grown-up you trust."
 - Never ask for or repeat a full name, surname, school, address, area, phone number, location or photos.
 - Never say "keep this a secret", "between us" or anything that discourages telling a parent or a trusted adult.
@@ -200,7 +200,14 @@ export type GuardedTurnInput = {
   demoReply: string;
   /** Which fixed "not part of our lessons" line applies (default "lesson"). */
   where?: "lesson" | "homework";
+  /** What the child has written so far (history + newest message): an answer the child
+   *  already wrote may be confirmed by Zaki. */
+  childTexts?: string[];
 };
+
+const HEALTH_RETRY_NOTE =
+  "Your last reply was blocked because it used a diagnosis word. Never diagnose and never use words like diagnose or تشخيص. Say in one short line to tell a grown-up at home or a doctor, then go back to the lesson.";
+const LEAK_RETRY_EXTRA = " Do NOT write the answer word itself, not even inside a hint, an example or a question.";
 
 export type GuardedTurnResult = {
   reply: string;
@@ -235,11 +242,14 @@ export async function runGuardedTurn(i: GuardedTurnInput): Promise<GuardedTurnRe
   // 4. Ask Claude; post-check; one retry if the reply leaked an answer or broke a rule.
   let reply: string | null = null;
   let leakedId: string | undefined;
+  let lastBlock: string | null = null;
   try {
     for (let attempt = 0; attempt < 2 && reply === null; attempt++) {
-      const raw = await i.ask(attempt === 0 ? undefined : i.retryNote);
+      const note = attempt === 0 ? undefined : lastBlock === "health" ? HEALTH_RETRY_NOTE : i.retryNote + (lastBlock === "answer_leak" ? LEAK_RETRY_EXTRA : "");
+      const raw = await i.ask(note);
       if (raw === null) break;
-      const pc = postCheckReply(raw, i.items);
+      const pc = postCheckReply(raw, i.items, i.childTexts ?? []);
+      lastBlock = pc.blocked;
       if (pc.blocked === null) reply = pc.text;
       else leakedId = pc.leakedId ?? leakedId;
     }
@@ -249,7 +259,19 @@ export async function runGuardedTurn(i: GuardedTurnInput): Promise<GuardedTurnRe
     }
     return { reply: fixedMessage("ai_unavailable", i.lang), safety: childCheck.safety };
   }
-  if (reply === null) reply = leakedId ? i.leakFallback(leakedId) : fixedMessage("reply_blocked", i.lang);
+  if (reply === null) {
+    reply =
+      lastBlock === "health"
+        ? fixedMessage(where === "homework" ? "health_redirect_homework" : "health_redirect", i.lang)
+        : leakedId
+          ? i.leakFallback(leakedId)
+          : fixedMessage("reply_blocked", i.lang);
+  }
+  // Any body pain / symptom: the reply must send the child to a grown-up at home or a doctor.
+  if (mentionsBodySymptom(i.moderatedText) && !hasGrownUpCue(reply)) {
+    const lines = reply.split("\n").filter(Boolean).slice(0, 3);
+    reply = [...lines, fixedMessage("health_tip", i.lang)].join("\n");
+  }
   // No regional words (founder decision): cheap deterministic swap, no extra AI call.
   reply = replaceRegionalWords(reply, i.lang);
 
@@ -278,6 +300,7 @@ export async function runTutorTurn(req: TutorRequest): Promise<TutorResponse> {
     childRef: req.childRef,
     sessionStart: req.history.length === 0,
     items: protectedItems(req.pack, req.step, req.questionId),
+    childTexts: [...req.history.filter((h) => h.role === "child").map((h) => h.text), req.message],
     ask: (note) => askClaude(req, hintLevel, note),
     leakFallback: (leakedId) => safeHintFallback(req, leakedId, hintLevel),
     retryNote:
