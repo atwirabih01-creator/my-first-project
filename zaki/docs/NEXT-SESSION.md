@@ -1,5 +1,11 @@
 # Next session: start here
 
+## 2026-11-03 (later): v1.1.0 live — grades 1-9 + age, curriculum, Help me with today's lesson, Homework help
+- APK: https://expo.dev/artifacts/eas/jTBA9guyPco8jLg_ATh2DEIcNLxq4X-K-0d-fVXsUL4.apk ; server redeployed.
+- Red team with real AI: tutor all AI categories pass (after R8-015 fix: never repeat haram/sect words when declining); homework priority categories 200/200 (+R8/answer-begging 60/60). Spent ~US$0.36 on tests today.
+- Open: parent homework photos not built; age not synced to server; consent version 2026-11-03.1 (families re-confirm); typed topic "World War 2" gets the gentle check-in; raise daily limit + Supabase before family sharing; "meet my friend" false alarm.
+
+
 ## 2026-11-03: lesson cost fix (live)
 - Founder hit "Zaki will prepare this lesson soon": one lesson build cost ~US$0.3-0.9 (Sonnet research with 4 web searches + 32k-token pack with medium thinking, up to 2 tries) and the 0.50 cap stopped it halfway (paid, then thrown away).
 - Fixed: research on Haiku, max 2 searches; pack effort low; cap checked once at build start (capCheckedByCaller). Measured: Fractions 8 steps, 30 s, US$0.043. Live water-cycle build OK (7 steps, 24 s). No app reinstall needed.
