@@ -135,3 +135,16 @@ changes until they are scored.
     over-learn.
 - **Rule (Hawk):** a breakout level must sit beyond the current range edge. If a break at that level
   failed in the last 48h, the call also needs a retest that holds.
+
+## 2026-11-04 · Trigger call "ETH up 24h" (trial-2) · RIGHT (+5.5%)
+- **Expected:** a 24h rise after ETH broke 2,280 and held a retest. The two hourly lows dipped to
+  2,278 and 2,277 and closed above the level. Crowding was thinning (accounts betting up per account
+  betting down 2.62 → 2.02). Atlas found no valid reason against.
+- **Happened:** 2,299.41 → 2,425.99 (+5.5%). It dipped to about 2,244 during the midterm wobble
+  overnight, then rallied with the market (BTC up to 80.5k).
+- **Verdict:** a good decision with a good result. The chart plan held because the retest filter
+  confirmed buyers at the level, and research correctly found no real reason against. One right call
+  proves little; it was a broad market rally.
+- **Rule (keep):** after a failed break, wait for a retest that holds. Compare the BTC case: the retest
+  rule kept BTC out of a +3% run (a shadow result is kept), so the retest rule has a cost too. Score
+  both before changing anything.

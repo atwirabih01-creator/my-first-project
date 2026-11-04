@@ -9,7 +9,14 @@
    "dir": "up",
    "level": 77700,
    "needs_retest": true,
-   "note": "single close 77,876 at 23:00 3 Nov failed back below within 48h; fired 06:00-07:00 4 Nov without retest -> wait for a 1h bar with low <= 77,700 and close above"
+   "note": "single close 77,876 at 23:00 3 Nov failed back below within 48h; fired 06:00-07:00 4 Nov without retest -> wait for a 1h bar with low <= 77,700 and close above",
+   "used_utc": "2026-11-04 16:15",
+   "shadow": {
+    "start": 78419,
+    "start_utc": "2026-11-04 08:15",
+    "score_utc": "2026-11-05 08:15",
+    "note": "not called: retest never came (lows stayed above 77,700); shadow = price when it first fired"
+   }
   },
   {
    "symbol": "BTCUSDT",

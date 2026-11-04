@@ -2,4 +2,4 @@ made_utc,symbol,call,hours,start_price,reason,status,end_price,move_pct,right
 2026-10-27 12:00:00+00:00,ETHUSDT,down,24,2316.04,"All agree: spot ETH ETF outflows -88.6M Mon, -1.2B Oct (MT Newswires 27 Oct); 4h lower highs 2526>2418>2390>2372>2345>2334; weaker than BTC; pre-Fed risk-off",scored,2361.64,1.969,False
 2026-11-02 04:00:00+00:00,BTCUSDT,up,24,78634.01,"trigger trial-1: BTC up 78,300 fired (1h closes 78,458, 78,634); Atlas no valid reason against; medium confidence",scored,76937.05,-2.158,False
 2026-11-02 04:00:00+00:00,ETHUSDT,up,24,2309.25,"trigger trial-1: ETH up 2,280 fired (1h closes 2,295.7, 2,309.3); Atlas no valid reason against; medium confidence",scored,2253.49,-2.415,False
-2026-11-03 16:00:00+00:00,ETHUSDT,up,24,2299.41,"trigger trial-2: ETH up 2,280 fired with retest held (1h lows 2,278/2,277, closes 2,287/2,299); Atlas no valid reason against; medium confidence",open,,,
+2026-11-03 16:00:00+00:00,ETHUSDT,up,24,2299.41,"trigger trial-2: ETH up 2,280 fired with retest held (1h lows 2,278/2,277, closes 2,287/2,299); Atlas no valid reason against; medium confidence",scored,2425.99,5.505,True
