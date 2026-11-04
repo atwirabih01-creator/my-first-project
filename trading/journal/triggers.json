@@ -1,45 +1,35 @@
 {
- "set": "trial-2 (BTC, ETH) + trial-1 (PEPE)",
- "frozen_utc": "2026-11-03 04:30",
+ "set": "trial-3 (BTC, ETH) + trial-1 (PEPE)",
+ "frozen_utc": "2026-11-04 20:30",
  "rule": "two consecutive Binance 1h closes beyond the level; level beyond the current range edge; if a break at that level failed in the last 48h, also needs a retest that holds",
- "author": "Hawk (levels); team leader checked balance and flagged the ETH 2,280 failed break",
+ "author": "Hawk (levels); team leader flagged PEPE up failed break",
  "triggers": [
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 77700,
-   "needs_retest": true,
-   "note": "single close 77,876 at 23:00 3 Nov failed back below within 48h; fired 06:00-07:00 4 Nov without retest -> wait for a 1h bar with low <= 77,700 and close above",
-   "used_utc": "2026-11-04 16:15",
-   "shadow": {
-    "start": 78419,
-    "start_utc": "2026-11-04 08:15",
-    "score_utc": "2026-11-05 08:15",
-    "note": "not called: retest never came (lows stayed above 77,700); shadow = price when it first fired"
-   }
+   "level": 81400
   },
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 76300
+   "level": 78900
   },
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 2280,
-   "needs_retest": true,
-   "note": "2,280 broke on 2 Nov and failed within 48h: a call also needs a retest that holds",
-   "used_utc": "2026-11-03 16:20"
+   "level": 2480
   },
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 2232
+   "level": 2335
   },
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 5.15e-06
+   "level": 5.15e-06,
+   "needs_retest": true,
+   "note": "single close 0.00000516 at 16:00 4 Nov failed back below: needs retest"
   },
   {
    "symbol": "PEPEUSDT",
@@ -90,6 +80,58 @@
      "symbol": "PEPEUSDT",
      "dir": "up",
      "level": 5.15e-06
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 4.65e-06
+    }
+   ]
+  },
+  {
+   "set": "trial-2 (BTC, ETH) + trial-1 (PEPE)",
+   "frozen_utc": "2026-11-03 04:30",
+   "rule": "two consecutive Binance 1h closes beyond the level; level beyond the current range edge; if a break at that level failed in the last 48h, also needs a retest that holds",
+   "author": "Hawk (levels); team leader checked balance and flagged the ETH 2,280 failed break",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 77700,
+     "needs_retest": true,
+     "note": "single close 77,876 at 23:00 3 Nov failed back below within 48h; fired 06:00-07:00 4 Nov without retest -> wait for a 1h bar with low <= 77,700 and close above",
+     "used_utc": "2026-11-04 16:15",
+     "shadow": {
+      "start": 78419,
+      "start_utc": "2026-11-04 08:15",
+      "score_utc": "2026-11-05 08:15",
+      "note": "not called: retest never came (lows stayed above 77,700); shadow = price when it first fired"
+     }
+    },
+    {
+     "symbol": "BTCUSDT",
+     "dir": "down",
+     "level": 76300
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 2280,
+     "needs_retest": true,
+     "note": "2,280 broke on 2 Nov and failed within 48h: a call also needs a retest that holds",
+     "used_utc": "2026-11-03 16:20"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "down",
+     "level": 2232
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 5.15e-06,
+     "needs_retest": true,
+     "note": "single close 0.00000516 at 16:00 4 Nov failed back below: needs retest"
     },
     {
      "symbol": "PEPEUSDT",
