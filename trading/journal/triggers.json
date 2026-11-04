@@ -7,7 +7,9 @@
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 77700
+   "level": 77700,
+   "needs_retest": true,
+   "note": "single close 77,876 at 23:00 3 Nov failed back below within 48h; fired 06:00-07:00 4 Nov without retest -> wait for a 1h bar with low <= 77,700 and close above"
   },
   {
    "symbol": "BTCUSDT",
