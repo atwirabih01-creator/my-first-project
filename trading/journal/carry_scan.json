@@ -1,14 +1,14 @@
 {
- "scanned_utc": "2026-11-03 20:13:00+00:00",
+ "scanned_utc": "2026-11-04 00:12:00+00:00",
  "candidates": [
   {
    "coin": "TURBO",
    "venue": "HL",
-   "yearly_last9": 0.1343,
+   "yearly_last9": 0.1209,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": [
     "C4"
@@ -19,20 +19,42 @@
   {
    "coin": "TURBO",
    "venue": "HL",
-   "yearly_last9": 0.1343,
+   "yearly_last9": 0.1209,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": [
     "C4"
    ]
   },
   {
+   "coin": "PEPE",
+   "venue": "OKX",
+   "yearly_last9": 0.1131,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    0.000139
+   ],
+   "versions": []
+  },
+  {
    "coin": "TRUMP",
    "venue": "OKX",
    "yearly_last9": 0.1095,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    0.0001
+   ],
+   "versions": []
+  },
+  {
+   "coin": "NEAR",
+   "venue": "OKX",
+   "yearly_last9": 0.1089,
    "last3_per8h": [
     0.0001,
     0.0001,
@@ -52,53 +74,31 @@
    "versions": []
   },
   {
-   "coin": "BTC",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "ENA",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "HBAR",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "MEME",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "NEAR",
+   "coin": "WIF",
    "venue": "OKX",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.1048,
+   "last3_per8h": [
+    0.0001,
+    6.1e-05,
+    0.0001
+   ],
+   "versions": []
+  },
+  {
+   "coin": "FET",
+   "venue": "OKX",
+   "yearly_last9": 0.1034,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    0.0001
+   ],
+   "versions": []
+  },
+  {
+   "coin": "BTC",
+   "venue": "OKX",
+   "yearly_last9": 0.1033,
    "last3_per8h": [
     0.0001,
     0.0001,
