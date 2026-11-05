@@ -1,14 +1,27 @@
 {
- "scanned_utc": "2026-11-05 12:18:00+00:00",
+ "scanned_utc": "2026-11-05 16:14:00+00:00",
  "candidates": [
   {
-   "coin": "TURBO",
+   "coin": "ENA",
    "venue": "HL",
-   "yearly_last9": 0.1054,
+   "yearly_last9": 0.0983,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.6e-05
+    8e-06
+   ],
+   "versions": [
+    "C4"
+   ]
+  },
+  {
+   "coin": "TURBO",
+   "venue": "HL",
+   "yearly_last9": 0.0993,
+   "last3_per8h": [
+    0.0001,
+    0.000104,
+    1.3e-05
    ],
    "versions": [
     "C4"
@@ -39,23 +52,45 @@
    "versions": []
   },
   {
-   "coin": "FET",
+   "coin": "NEAR",
    "venue": "OKX",
-   "yearly_last9": 0.1095,
+   "yearly_last9": 0.1085,
    "last3_per8h": [
-    0.0001,
+    9.2e-05,
     0.0001,
     0.0001
    ],
    "versions": []
   },
   {
-   "coin": "NEAR",
+   "coin": "BTC",
    "venue": "OKX",
-   "yearly_last9": 0.1085,
+   "yearly_last9": 0.1049,
+   "last3_per8h": [
+    7.5e-05,
+    0.0001,
+    0.0001
+   ],
+   "versions": []
+  },
+  {
+   "coin": "FET",
+   "venue": "OKX",
+   "yearly_last9": 0.1044,
    "last3_per8h": [
     0.0001,
-    9.2e-05,
+    0.0001,
+    5.8e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "LINK",
+   "venue": "OKX",
+   "yearly_last9": 0.1028,
+   "last3_per8h": [
+    0.0001,
+    9.3e-05,
     0.0001
    ],
    "versions": []
@@ -63,46 +98,24 @@
   {
    "coin": "TURBO",
    "venue": "HL",
-   "yearly_last9": 0.1054,
+   "yearly_last9": 0.0993,
    "last3_per8h": [
     0.0001,
-    0.0001,
-    6.6e-05
+    0.000104,
+    1.3e-05
    ],
    "versions": [
     "C4"
    ]
   },
   {
-   "coin": "BTC",
+   "coin": "PENGU",
    "venue": "OKX",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    7.5e-05,
-    0.0001
-   ],
-   "versions": []
-  },
-  {
-   "coin": "ENA",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.0991,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "FET",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
+    1.6e-05
    ],
    "versions": []
   }

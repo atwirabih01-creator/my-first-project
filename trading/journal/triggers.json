@@ -12,7 +12,14 @@
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 78900
+   "level": 78900,
+   "used_utc": "2026-11-05 16:20",
+   "shadow": {
+    "start": 76244,
+    "start_utc": "2026-11-05 16:20",
+    "score_utc": "2026-11-06 16:20",
+    "note": "skipped: US jobs report (major event) Fri 6 Nov 12:30 UTC inside the 24h"
+   }
   },
   {
    "symbol": "ETHUSDT",
