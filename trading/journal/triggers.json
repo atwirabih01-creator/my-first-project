@@ -105,7 +105,10 @@
       "start": 78419,
       "start_utc": "2026-11-04 08:15",
       "score_utc": "2026-11-05 08:15",
-      "note": "not called: retest never came (lows stayed above 77,700); shadow = price when it first fired"
+      "note": "not called: retest never came (lows stayed above 77,700); shadow = price when it first fired",
+      "end": 80498.0,
+      "result_pct": 2.651,
+      "right": true
      }
     },
     {
