@@ -29,7 +29,14 @@
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 2335
+   "level": 2335,
+   "used_utc": "2026-11-05 20:15",
+   "shadow": {
+    "start": 2251.94,
+    "start_utc": "2026-11-05 20:15",
+    "score_utc": "2026-11-06 20:15",
+    "note": "skipped: US jobs report (major event) Fri 6 Nov 12:30 UTC inside the 24h"
+   }
   },
   {
    "symbol": "PEPEUSDT",
