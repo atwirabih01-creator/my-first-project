@@ -1,42 +1,28 @@
 {
- "set": "trial-3 (BTC, ETH) + trial-1 (PEPE)",
- "frozen_utc": "2026-11-04 20:30",
+ "set": "trial-4 (BTC, ETH) + trial-1 (PEPE)",
+ "frozen_utc": "2026-11-06 16:30",
  "rule": "two consecutive Binance 1h closes beyond the level; level beyond the current range edge; if a break at that level failed in the last 48h, also needs a retest that holds",
- "author": "Hawk (levels); team leader flagged PEPE up failed break",
+ "author": "Hawk (levels, after the 6 Nov jobs report)",
  "triggers": [
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 81400
+   "level": 77200
   },
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 78900,
-   "used_utc": "2026-11-05 16:20",
-   "shadow": {
-    "start": 76244,
-    "start_utc": "2026-11-05 16:20",
-    "score_utc": "2026-11-06 16:20",
-    "note": "skipped: US jobs report (major event) Fri 6 Nov 12:30 UTC inside the 24h"
-   }
+   "level": 74700
   },
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 2480
+   "level": 2300
   },
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 2335,
-   "used_utc": "2026-11-05 20:15",
-   "shadow": {
-    "start": 2251.94,
-    "start_utc": "2026-11-05 20:15",
-    "score_utc": "2026-11-06 20:15",
-    "note": "skipped: US jobs report (major event) Fri 6 Nov 12:30 UTC inside the 24h"
-   }
+   "level": 2195
   },
   {
    "symbol": "PEPEUSDT",
@@ -142,6 +128,63 @@
      "symbol": "ETHUSDT",
      "dir": "down",
      "level": 2232
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 5.15e-06,
+     "needs_retest": true,
+     "note": "single close 0.00000516 at 16:00 4 Nov failed back below: needs retest"
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 4.65e-06
+    }
+   ]
+  },
+  {
+   "set": "trial-3 (BTC, ETH) + trial-1 (PEPE)",
+   "frozen_utc": "2026-11-04 20:30",
+   "rule": "two consecutive Binance 1h closes beyond the level; level beyond the current range edge; if a break at that level failed in the last 48h, also needs a retest that holds",
+   "author": "Hawk (levels); team leader flagged PEPE up failed break",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 81400
+    },
+    {
+     "symbol": "BTCUSDT",
+     "dir": "down",
+     "level": 78900,
+     "used_utc": "2026-11-05 16:20",
+     "shadow": {
+      "start": 76244,
+      "start_utc": "2026-11-05 16:20",
+      "score_utc": "2026-11-06 16:20",
+      "note": "skipped: US jobs report (major event) Fri 6 Nov 12:30 UTC inside the 24h",
+      "end": 75568.52,
+      "result_pct": -0.886,
+      "right": true
+     }
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 2480
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "down",
+     "level": 2335,
+     "used_utc": "2026-11-05 20:15",
+     "shadow": {
+      "start": 2251.94,
+      "start_utc": "2026-11-05 20:15",
+      "score_utc": "2026-11-06 20:15",
+      "note": "skipped: US jobs report (major event) Fri 6 Nov 12:30 UTC inside the 24h"
+     }
     },
     {
      "symbol": "PEPEUSDT",
