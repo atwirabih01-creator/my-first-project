@@ -6,6 +6,7 @@
 // details scrubbed, grade, age, level guide and language. Never a name or a child id.
 // The safety pipeline (runGuardedTurn) is shared with homework help (server/homework.ts).
 
+import { visualCaption } from "./visuals";
 import { callClaude, isRefusal, textOf } from "./ai";
 import { BudgetExceededError, takeChildTurn } from "./budget";
 import { MODELS, aiEnabled } from "./config/models";
@@ -101,7 +102,14 @@ export function packForModel(pack: LessonPack): string {
     grade: pack.grade,
     lang: pack.lang,
     recap: pack.recap.map((r) => ({ q: r.q, choices: r.choices })),
-    teachSteps: pack.teachSteps,
+    // Pictures become a short caption (what the child sees); tryIt keeps only its question.
+    teachSteps: pack.teachSteps.map((s) => ({
+      title: s.title,
+      text: s.text,
+      example: s.example,
+      picture: s.visual ? visualCaption(s.visual) : undefined,
+      tryIt: s.tryIt ? s.tryIt.q : undefined,
+    })),
     checks: pack.checks.map(strip),
     test: pack.test.map(strip),
     summary: pack.summary,

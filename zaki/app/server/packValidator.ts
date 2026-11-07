@@ -9,11 +9,15 @@
 //    builder's retry rewrites them. The result then still carries the built pack and
 //    `regionalOnly: true`, so the builder can replace the words itself after the last retry
 //    (a lesson is never failed for a regional word).
+//  - teach-step pictures (`visual`) and quick questions (`tryIt`, pack version 4+) are checked
+//    by server/visuals.ts: a bad one is dropped (the step is kept) and counted in
+//    `visualStats`; their text is part of the safety-word and regional-word scans.
 
 import { keywordScan } from "./safety";
 import { findRegionalWords, replaceRegionalWords } from "./regionalWords";
 import { stripLinksAndPhones } from "./textGuards";
 import { SUBJECTS, type Lang, type LessonPack, type Question, type RecapItem, type Subject, type TeachStep } from "./types";
+import { TRY_IT_FIELD_SCHEMA, VISUAL_FIELD_SCHEMA, mapVisualText, tryItTexts, validateTryIt, validateVisual, visualTexts } from "./visuals";
 
 export const PACK_LIMITS = {
   recap: { min: 0, max: 3 },
@@ -36,7 +40,11 @@ export type ValidationResult = {
   regionalWords?: string[];
   /** true when the ONLY errors are regional words: `pack` is still returned (not ok). */
   regionalOnly?: boolean;
+  /** Teach-step pictures and quick questions kept / dropped (pack version 4+). */
+  visualStats: VisualStats;
 };
+
+export type VisualStats = { visuals: number; visualsDropped: number; tryIts: number; tryItsDropped: number };
 
 type Expect = {
   subject: Subject;
@@ -133,7 +141,7 @@ function arr(v: unknown): unknown[] {
 export function validatePack(raw: unknown, expect: Expect): ValidationResult {
   const errors: string[] = [];
   const repairs: string[] = [];
-  if (!raw || typeof raw !== "object") return { ok: false, errors: ["pack is not an object"], repairs };
+  if (!raw || typeof raw !== "object") return { ok: false, errors: ["pack is not an object"], repairs, visualStats: { visuals: 0, visualsDropped: 0, tryIts: 0, tryItsDropped: 0 } };
   const o = raw as Record<string, unknown>;
 
   if (!SUBJECTS.includes(expect.subject)) errors.push("unknown subject");
@@ -150,6 +158,19 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
     .filter((x): x is RecapItem => !!x)
     .slice(0, PACK_LIMITS.recap.max);
 
+  const qs = (name: "checks" | "test" | "retestPool") =>
+    arr(o[name])
+      .map((q, i) => questionOf(q, `${name}[${i}]`, softErrors))
+      .filter((x): x is Question => !!x)
+      .slice(0, PACK_LIMITS[name].max);
+  const checks = qs("checks");
+  const test = qs("test");
+  const retestPool = qs("retestPool");
+
+  // Pictures and quick questions are checked against every question that comes later
+  // (a tryIt or an equation must not give away a check/test answer).
+  const later = [...checks, ...test, ...retestPool];
+  const visualStats: VisualStats = { visuals: 0, visualsDropped: 0, tryIts: 0, tryItsDropped: 0 };
   const teachSteps = arr(o.teachSteps)
     .map((s, i) => {
       const so = (s ?? {}) as Record<string, unknown>;
@@ -164,19 +185,28 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
       const step: TeachStep = { text };
       if (title) step.title = title;
       if (example) step.example = example;
+      const visual = validateVisual(so.visual, later, `${title ?? ""}\n${text}\n${example ?? ""}`);
+      if (visual.value) {
+        step.visual = visual.value;
+        visualStats.visuals++;
+        for (const n of visual.notes ?? []) repairs.push(`teachSteps[${i}].visual: ${n}`);
+      } else if (visual.reason) {
+        visualStats.visualsDropped++;
+        repairs.push(`dropped teachSteps[${i}].visual (${visual.reason})`);
+      }
+      const tryIt = validateTryIt(so.tryIt, later);
+      if (tryIt.value) {
+        step.tryIt = tryIt.value;
+        visualStats.tryIts++;
+      } else if (tryIt.reason) {
+        visualStats.tryItsDropped++;
+        repairs.push(`dropped teachSteps[${i}].tryIt (${tryIt.reason})`);
+      }
       return step;
     })
     .filter((x): x is TeachStep => !!x)
     .slice(0, PACK_LIMITS.teachSteps.max);
 
-  const qs = (name: "checks" | "test" | "retestPool") =>
-    arr(o[name])
-      .map((q, i) => questionOf(q, `${name}[${i}]`, softErrors))
-      .filter((x): x is Question => !!x)
-      .slice(0, PACK_LIMITS[name].max);
-  const checks = qs("checks");
-  const test = qs("test");
-  const retestPool = qs("retestPool");
 
   const summary = arr(o.summary)
     .map((s) => str(s, PACK_LIMITS.len.summary))
@@ -214,7 +244,7 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
   if (expect.lenient) {
     const id = typeof o.id === "string" && /^[A-Za-z0-9_-]{1,80}$/.test(o.id) ? o.id : expect.id ?? `pack_${crypto.randomUUID()}`;
     const pack: LessonPack = { id, subject: expect.subject, topic: topic ?? "lesson", grade: expect.grade, lang: expect.lang, ...counts };
-    return { ok: true, pack, errors, repairs };
+    return { ok: true, pack, errors, repairs, visualStats };
   }
   for (const [k, list] of Object.entries(counts)) {
     const min = PACK_LIMITS[k as keyof typeof counts].min;
@@ -233,7 +263,7 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
   const allText = [
     topic ?? "",
     ...recap.flatMap((r) => [r.q, ...r.choices]),
-    ...teachSteps.flatMap((s) => [s.title ?? "", s.text, s.example ?? ""]),
+    ...teachSteps.flatMap((s) => [s.title ?? "", s.text, s.example ?? "", ...visualTexts(s.visual), ...tryItTexts(s.tryIt)]),
     ...allQ.flatMap((q) => [q.q, ...q.choices, q.hint1, q.hint2, q.similarExample]),
     ...summary,
     ...flashcards.flatMap((f) => [f.front, f.back]),
@@ -250,7 +280,7 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
     errors.push(`region-specific words are not allowed (use general international examples instead): ${regionalWords.join(", ")}`);
   }
 
-  if (hardErrors) return { ok: false, errors, repairs, regionalWords };
+  if (hardErrors) return { ok: false, errors, repairs, regionalWords, visualStats };
 
   const id = expect.id ?? (typeof o.id === "string" && /^[A-Za-z0-9_-]{1,64}$/.test(o.id) ? o.id : `pack_${crypto.randomUUID()}`);
   const pack: LessonPack = {
@@ -267,8 +297,8 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
     summary,
     flashcards,
   };
-  if (regionalWords.length) return { ok: false, pack, errors, repairs, regionalWords, regionalOnly: true };
-  return { ok: true, pack, errors, repairs };
+  if (regionalWords.length) return { ok: false, pack, errors, repairs, regionalWords, regionalOnly: true, visualStats };
+  return { ok: true, pack, errors, repairs, visualStats };
 }
 
 /**
@@ -287,6 +317,8 @@ export function replaceRegionalInPack(pack: LessonPack): LessonPack {
       const out: TeachStep = { text: r(s.text) };
       if (s.title) out.title = r(s.title);
       if (s.example) out.example = r(s.example);
+      if (s.visual) out.visual = mapVisualText(s.visual, r);
+      if (s.tryIt) out.tryIt = { ...s.tryIt, q: r(s.tryIt.q), choices: s.tryIt.choices.map(r), explain: r(s.tryIt.explain) };
       return out;
     }),
     checks: pack.checks.map(q),
@@ -334,8 +366,17 @@ export const LESSON_PACK_JSON_SCHEMA = (() => {
           type: "object",
           // title: short kid-friendly heading ("What is a fraction?"); required for the AI,
           // optional in the validator (older packs have none).
-          properties: { title: { type: "string" }, text: { type: "string" }, example: { type: "string" } },
-          required: ["title", "text", "example"],
+          // visual / tryIt (pack version 4): required for the AI but may be null, so the writer
+          // decides for every step; optional in the validator. `visual` is a JSON STRING here
+          // (a 12-way union made the compiled grammar too large); the validator parses it.
+          properties: {
+            title: { type: "string" },
+            text: { type: "string" },
+            example: { type: "string" },
+            visual: VISUAL_FIELD_SCHEMA,
+            tryIt: TRY_IT_FIELD_SCHEMA,
+          },
+          required: ["title", "text", "example", "visual", "tryIt"],
           additionalProperties: false,
         },
       },

@@ -1,4 +1,4 @@
-// Sample pack (v3 story-lesson teach steps with titles): English, adjectives, grade 2 (en + ar explanations).
+// Sample pack (v4: story-lesson teach steps with titles, pictures and try-it questions): English, adjectives, grade 2 (en + ar explanations).
 import type { LessonPack } from "../types";
 import { Q } from "./helpers";
 
@@ -13,12 +13,12 @@ export const ENGLISH_ADJ_EN: LessonPack = {
     { q: "Which letter is a vowel?", choices: ["a", "b", "t"], answerIndex: 0 },
   ],
   teachSteps: [
-    { title: "Have you ever talked about a toy?", text: "Have you ever told a friend about your toy? You say more than its name. You say what it looks like!", example: "Not just \"a ball\". You say \"a shiny blue ball\"." },
-    { title: "What is an adjective?", text: "A noun is a naming word, like \"dog\" or \"bus\". Some words tell us more about a noun. We call them adjectives.", example: "a fluffy dog. \"Fluffy\" tells us about the dog." },
-    { title: "Where does it go?", text: "In English, the adjective comes first. Then comes the noun.", example: "a yellow bus: \"yellow\" comes first, then \"bus\"." },
-    { title: "How do we use adjectives?", text: "Adjectives tell colour, size and shape. They also tell how things feel or taste.", example: "a tiny ant, a square box, cold juice, a funny clown" },
-    { title: "An easy trick", text: "Easy trick: find the noun first. Then ask: what is it like? The answer is the adjective.", example: "a sleepy kitten. What is the kitten like? Sleepy! So \"sleepy\" is the adjective." },
-    { title: "Now you know!", text: "Now you know adjectives! They tell us more about a noun. They come before the noun.", example: "Lina has a fluffy grey kitten. The noun is \"kitten\". \"Fluffy\" and \"grey\" are the adjectives." },
+    { title: "Have you ever talked about a toy?", text: "Have you ever told a friend about your toy? You say more than its name. You say what it looks like!", example: "Not just \"a ball\". You say \"a shiny blue ball\".", visual: {type: "wordCard", word: "shiny", emoji: "⚽", meaning: "bright, it shines in the light"} },
+    { title: "What is an adjective?", text: "A noun is a naming word, like \"dog\" or \"bus\". Some words tell us more about a noun. We call them adjectives.", example: "a fluffy dog. \"Fluffy\" tells us about the dog.", visual: {type: "wordCard", word: "fluffy", emoji: "🐶", meaning: "full of light, fuzzy fur"}, tryIt: {q: "In \"a fluffy dog\", which word tells us about the dog?", choices: ["fluffy", "dog", "a"], answerIndex: 0, explain: "\"Fluffy\" tells us what the dog is like, so it is the adjective."} },
+    { title: "Where does it go?", text: "In English, the adjective comes first. Then comes the noun.", example: "a yellow bus: \"yellow\" comes first, then \"bus\".", visual: {type: "labeled", items: [{emoji: "🟡", label: "yellow (adjective)"}, {emoji: "🚌", label: "bus (noun)"}]}, tryIt: {q: "Which is right in English?", choices: ["a purple hat", "a hat purple"], answerIndex: 0, explain: "The adjective comes first, then the noun."} },
+    { title: "How do we use adjectives?", text: "Adjectives tell colour, size and shape. They also tell how things feel or taste.", example: "a tiny ant, a square box, cold juice, a funny clown", visual: {type: "labeled", items: [{emoji: "🐜", label: "tiny: size"}, {emoji: "📦", label: "square: shape"}, {emoji: "🧃", label: "cold: feel"}, {emoji: "🟣", label: "purple: colour"}]}, tryIt: {q: "Which adjective tells a colour?", choices: ["blue", "tiny", "loud"], answerIndex: 0, explain: "Blue is a colour word."} },
+    { title: "An easy trick", text: "Easy trick: find the noun first. Then ask: what is it like? The answer is the adjective.", example: "a sleepy kitten. What is the kitten like? Sleepy! So \"sleepy\" is the adjective.", visual: {type: "wordCard", word: "sleepy", emoji: "😴", meaning: "tired, ready to sleep"}, tryIt: {q: "Find the adjective: a wet umbrella.", choices: ["wet", "umbrella", "a"], answerIndex: 0, explain: "Ask: what is the umbrella like? Wet! So \"wet\" is the adjective."} },
+    { title: "Now you know!", text: "Now you know adjectives! They tell us more about a noun. They come before the noun.", example: "Lina has a fluffy grey kitten. The noun is \"kitten\". \"Fluffy\" and \"grey\" are the adjectives.", visual: {type: "labeled", items: [{emoji: "🐱", label: "kitten (noun)"}, {emoji: "☁️", label: "fluffy (adjective)"}, {emoji: "🎨", label: "grey (adjective)"}]} },
   ],
   checks: [
     Q("c1", "Find the adjective: The big cat sleeps.", ["big", "cat", "sleeps"], 0,
@@ -89,12 +89,12 @@ export const ENGLISH_ADJ_AR: LessonPack = {
     { q: "أيّ حرف من حروف العلّة (vowel)؟", choices: ["a", "b", "t"], answerIndex: 0 },
   ],
   teachSteps: [
-    { title: "هل وصفت لعبتك لصديق؟", text: "هل حدّثت صديقك عن لعبتك؟ أنت لا تقول اسمها فقط. أنت تقول كيف تبدو!", example: "لا تقول a ball فقط. تقول a shiny blue ball." },
-    { title: "ما الصفة؟", text: "الاسم (noun) كلمة نسمّي بها شيئًا، مثل dog أو bus. بعض الكلمات تخبرنا أكثر عن الاسم. نسمّيها الصفات (adjectives).", example: "a fluffy dog: كلمة fluffy تخبرنا عن الكلب." },
-    { title: "أين نضع الصفة؟", text: "في اللغة الإنجليزية تأتي الصفة أولًا. ثم يأتي الاسم.", example: "a yellow bus: كلمة yellow أولًا، ثم bus." },
-    { title: "كيف نستعمل الصفات؟", text: "الصفات تخبرنا عن اللون والحجم والشكل. وتخبرنا أيضًا عن الملمس والطعم.", example: "a tiny ant، a square box، cold juice، a funny clown" },
-    { title: "حيلة سهلة", text: "حيلة سهلة: جِد الاسم أولًا. ثم اسأل: كيف هو؟ الجواب هو الصفة.", example: "a sleepy kitten: كيف هي القطة؟ sleepy! إذن sleepy هي الصفة." },
-    { title: "الآن تعرف!", text: "الآن تعرف الصفات! الصفة تخبرنا أكثر عن الاسم. وتأتي قبل الاسم في الإنجليزية.", example: "Lina has a fluffy grey kitten. الاسم هو kitten. والصفتان هما fluffy و grey." },
+    { title: "هل وصفت لعبتك لصديق؟", text: "هل حدّثت صديقك عن لعبتك؟ أنت لا تقول اسمها فقط. أنت تقول كيف تبدو!", example: "لا تقول a ball فقط. تقول a shiny blue ball.", visual: {type: "wordCard", word: "shiny", emoji: "⚽", meaning: "لامع: يلمع في الضوء"} },
+    { title: "ما الصفة؟", text: "الاسم (noun) كلمة نسمّي بها شيئًا، مثل dog أو bus. بعض الكلمات تخبرنا أكثر عن الاسم. نسمّيها الصفات (adjectives).", example: "a fluffy dog: كلمة fluffy تخبرنا عن الكلب.", visual: {type: "wordCard", word: "fluffy", emoji: "🐶", meaning: "ناعم وكثير الفرو"}, tryIt: {q: "في a fluffy dog، أيّ كلمة تخبرنا عن الكلب؟", choices: ["fluffy", "dog", "a"], answerIndex: 0, explain: "كلمة fluffy تخبرنا كيف هو الكلب، إذن هي الصفة."} },
+    { title: "أين نضع الصفة؟", text: "في اللغة الإنجليزية تأتي الصفة أولًا. ثم يأتي الاسم.", example: "a yellow bus: كلمة yellow أولًا، ثم bus.", visual: {type: "labeled", items: [{emoji: "🟡", label: "yellow: الصفة"}, {emoji: "🚌", label: "bus: الاسم"}]}, tryIt: {q: "أيّ ترتيب صحيح في الإنجليزية؟", choices: ["a purple hat", "a hat purple"], answerIndex: 0, explain: "الصفة تأتي أولًا، ثم الاسم."} },
+    { title: "كيف نستعمل الصفات؟", text: "الصفات تخبرنا عن اللون والحجم والشكل. وتخبرنا أيضًا عن الملمس والطعم.", example: "a tiny ant، a square box، cold juice، a funny clown", visual: {type: "labeled", items: [{emoji: "🐜", label: "tiny: الحجم"}, {emoji: "📦", label: "square: الشكل"}, {emoji: "🧃", label: "cold: الملمس"}, {emoji: "🟣", label: "purple: اللون"}]}, tryIt: {q: "أيّ صفة تخبرنا عن اللون؟", choices: ["blue", "tiny", "loud"], answerIndex: 0, explain: "كلمة blue تدلّ على لون."} },
+    { title: "حيلة سهلة", text: "حيلة سهلة: جِد الاسم أولًا. ثم اسأل: كيف هو؟ الجواب هو الصفة.", example: "a sleepy kitten: كيف هي القطة؟ sleepy! إذن sleepy هي الصفة.", visual: {type: "wordCard", word: "sleepy", emoji: "😴", meaning: "نعسان: يريد أن ينام"}, tryIt: {q: "ما الصفة؟ a wet umbrella", choices: ["wet", "umbrella", "a"], answerIndex: 0, explain: "اسأل: كيف هي المظلة؟ wet! إذن wet هي الصفة."} },
+    { title: "الآن تعرف!", text: "الآن تعرف الصفات! الصفة تخبرنا أكثر عن الاسم. وتأتي قبل الاسم في الإنجليزية.", example: "Lina has a fluffy grey kitten. الاسم هو kitten. والصفتان هما fluffy و grey.", visual: {type: "labeled", items: [{emoji: "🐱", label: "kitten: الاسم"}, {emoji: "☁️", label: "fluffy: صفة"}, {emoji: "🎨", label: "grey: صفة"}]} },
   ],
   checks: [
     Q("c1", "ما الصفة في الجملة؟ The big cat sleeps.", ["big", "cat", "sleeps"], 0,

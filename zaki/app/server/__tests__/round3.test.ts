@@ -80,14 +80,14 @@ describe("C1 teach-step titles + story-lesson samples", () => {
 });
 
 describe("C2 packVersion", () => {
-  it("PACK_VERSION is 3; demo responses carry it", async () => {
-    assert.equal(PACK_VERSION, 3);
+  it("PACK_VERSION is 4; demo responses carry it", async () => {
+    assert.equal(PACK_VERSION, 4);
     const r = (await buildLessonPack(lessonReq)) as LessonPackResponse;
     assert.equal(r.demo, true);
-    assert.equal(r.packVersion, 3);
+    assert.equal(r.packVersion, 4);
   });
 
-  it("AI pack + library hit carry packVersion; a library entry from before v3 is NOT served (rebuilt, then replaced)", async () => {
+  it("AI pack + library hit carry packVersion; a library entry from an older version is NOT served (rebuilt, then replaced)", async () => {
     const good = getSamplePack("math", "en");
     const calls = mockClaude((p) => (isClassifierCall(p) ? textMsg(NONE) : p.tools?.length ? textMsg("notes") : textMsg(JSON.stringify({ ...good, pageText: "" }))));
     const writers = () => calls.filter((c) => !isClassifierCall(c) && !c.tools?.length).length;
@@ -97,21 +97,21 @@ describe("C2 packVersion", () => {
 
     const first = (await buildLessonPack(lessonReq)) as LessonPackResponse;
     assert.equal(first.fromLibrary, undefined, "old entry must not be served");
-    assert.equal(first.packVersion, 3);
+    assert.equal(first.packVersion, 4);
     assert.equal(writers(), 1);
-    assert.equal((await getStore().libraryGet(key))!.packVersion, 3);
+    assert.equal((await getStore().libraryGet(key))!.packVersion, 4);
 
     const second = (await buildLessonPack(lessonReq)) as LessonPackResponse;
     assert.equal(second.fromLibrary, true);
-    assert.equal(second.packVersion, 3);
-    assert.equal(writers(), 1, "no new AI call for a v3 library entry");
+    assert.equal(second.packVersion, 4);
+    assert.equal(writers(), 1, "no new AI call for a current-version library entry");
   });
 
-  it("route: demo pack has packVersion 3; bad `source` is a 400", async () => {
+  it("route: demo pack has packVersion 4; bad `source` is a 400", async () => {
     __resetRateLimitsForTests();
     const res = await post(lessonPackRoute, "/api/lesson-pack", { ...lessonReq });
     assert.equal(res.status, 200);
-    assert.equal(((await res.json()) as { packVersion: number }).packVersion, 3);
+    assert.equal(((await res.json()) as { packVersion: number }).packVersion, 4);
     assert.equal((await post(lessonPackRoute, "/api/lesson-pack", { ...lessonReq, source: "teacher" })).status, 400);
   });
 });

@@ -28,6 +28,8 @@ export function shufflePack(pack: LessonPack): LessonPack {
   return {
     ...pack,
     recap: pack.recap.map(shuffleChoices),
+    // Quick "try it" questions after a teach step (pack version 4+) are shuffled too.
+    teachSteps: pack.teachSteps.map((s) => (s.tryIt ? { ...s, tryIt: shuffleChoices(s.tryIt) } : s)),
     checks: qs(pack.checks),
     test: qs(pack.test),
     retestPool: qs(pack.retestPool),

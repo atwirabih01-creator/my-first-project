@@ -58,3 +58,30 @@ export function sensitiveTopicRule(where: "lesson" | "homework"): string {
     `If the child brings one up, do not discuss it, do not give an opinion and do not repeat its words: reply only ${line}`
   );
 }
+
+/**
+ * VISUAL, INTERACTIVE LESSONS (founder decision, pack version 4): pictures the app draws
+ * (`visual`) and quick "try it" questions (`tryIt`) on the teach steps. Our code re-checks
+ * every picture (server/visuals.ts); a wrong one is dropped, so the lesson loses it.
+ */
+export const LESSON_VISUAL_RULES = `PICTURES AND "TRY IT" (every lesson must be visual and interactive for a child)
+- Every teach step has "visual" and "tryIt": give a value or null.
+- "visual" is a STRING holding ONE compact JSON object (or null). Our code parses and checks it; a wrong one is removed. Allowed objects (? = optional):
+  {"type":"fraction","shape":"circle"|"bar","parts":2-12,"shaded":0..parts,"label"?:"3/4","interactive"?:true}   (label exactly "shaded/parts"; circle = pizza, bar = chocolate bar)
+  {"type":"fractionCompare","a":{"parts":3,"shaded":1},"b":{"parts":6,"shaded":1},"shape":"circle"|"bar"}
+  {"type":"objects","emoji":"🍎","count":1-20,"groups"?:n (divides count),"crossedOut"?:0..count,"label"?:"...","interactive"?:true}
+  {"type":"equation","parts":["3","+","4","=","7"],"highlight"?:index}   (max 9 tokens, each max 6 chars; MUST be correct)
+  {"type":"numberLine","from":0,"to":10,"step":1,"marks"?:[3,7],"jumps"?:[{"from":3,"to":7}]}   (at most 20 steps; marks and jumps inside)
+  {"type":"sequence","items":[{"emoji":"☀️","label":"..."}, ...]}   (2-6 steps shown with arrows: processes, life cycles)
+  {"type":"labeled","items":[{"emoji":"🌱","label":"..."}, ...]}   (2-6: parts of something, groups, a set of words)
+  {"type":"bars","bars":[{"label":"...","value":0-100,"emoji"?:"🐱"}, ...]}   (2-6 bars)
+  {"type":"clock","hour":1-12,"minute":0|5|...|55}
+  {"type":"shape","shape":"triangle"|"square"|"rectangle"|"circle"|"pentagon"|"hexagon","sideLabels"?:["3 cm", ...]}
+  {"type":"placeValue","number":1-999}
+  {"type":"wordCard","word":"...","emoji":"🐶","meaning":"..."}
+- At least 4 teach steps have a "visual" that SHOWS the idea with real, concrete numbers or things (not decoration). Examples: fractions: a pizza circle with 4 parts, 3 shaded, label "3/4"; then a bar; then fractionCompare. Addition: objects then an equation. Plants: labeled parts. Water cycle: sequence. Telling time: clock. Place value: placeValue. Vocabulary (English or Arabic lessons): wordCard.
+- The picture shows EXACTLY the numbers named in that step's text or example (if the text says 1/2 and 1/4, the picture shows 1/2 and 1/4, never other fractions); otherwise it is removed. Labels in the lesson language, short (max 30 characters); numbers as plain digits 0-9. One emoji per emoji field; no flags, no weapons, no scary or religious symbols.
+- Math lessons about fractions or counting: make ONE picture "interactive": true (a fraction the child colours by tapping, or objects the child taps to count).
+  An interactive fraction: "shaded" is the TARGET the child colours, so 1 <= shaded < parts (never 0, never all), and that step's text or example says what to colour, e.g. "Colour 2 of the 6 parts." Interactive objects: count at least 2.
+- At least 3 teach steps have a "tryIt": a quick, easy question about the idea of THAT step, just taught (2-4 short unique choices, answerIndex = the right one, "explain" = one short sentence that says why). No score. It must be different from every check, test and retest question (other numbers, other things) and must not give away their answers.
+- Numbers in every step: always concrete ("3 of 4 slices"), never only abstract words.`;

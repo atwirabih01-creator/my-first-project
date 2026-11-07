@@ -22,13 +22,13 @@
 import { fixedMessage } from "./data/safetyMessages";
 import { topicsFor } from "../src/lib/curriculum";
 import { normalizeBase } from "./normalize";
-import { GENERAL_EXAMPLES_RULE, LESSON_STORY_STYLE, LEVEL_MISMATCH_RULE, levelLine } from "./promptRules";
+import { GENERAL_EXAMPLES_RULE, LESSON_STORY_STYLE, LESSON_VISUAL_RULES, LEVEL_MISMATCH_RULE, levelLine } from "./promptRules";
 import { shufflePack } from "./shuffle";
 export { shufflePack };
 import { callClaude, jsonOf, textOf, type ClaudeMessage, type ClaudeParams } from "./ai";
 import { MODELS, aiEnabled } from "./config/models";
 import { TRUSTED_RESEARCH_DOMAINS, isTrustedUrl } from "./config/trustedSources";
-import { LESSON_PACK_JSON_SCHEMA, replaceRegionalInPack, validatePack } from "./packValidator";
+import { LESSON_PACK_JSON_SCHEMA, replaceRegionalInPack, validatePack, type VisualStats } from "./packValidator";
 import { fixedReplyFor, moderate } from "./safety";
 import { BudgetExceededError, canSpend } from "./budget";
 import { getFromLibrary, libraryKey, saveToLibrary } from "./library";
@@ -55,11 +55,13 @@ export type LessonPackRequest = {
 };
 
 /**
- * Lesson pack format version. 3 = story-lesson teach steps with `title`. Sent in every
- * /api/lesson-pack pack response (pack, demo, library); library entries saved with an older
- * version are not served (rebuilt instead).
+ * Lesson pack format version. 3 = story-lesson teach steps with `title`. 4 = teach steps
+ * may carry a `visual` (picture the app draws) and a `tryIt` (quick question, no score).
+ * Sent in every /api/lesson-pack pack response (pack, demo, library); library entries saved
+ * with an older version are not served (rebuilt instead). The app's MIN_PACK_VERSION
+ * (src/lib/api.ts) decides which saved lessons on the phone are re-made.
  */
-export const PACK_VERSION = 3;
+export const PACK_VERSION = 4;
 
 export type Source = { title: string; url: string };
 
@@ -68,7 +70,10 @@ export type LessonPackResponse = {
   /** Always PACK_VERSION. */
   packVersion: number;
   sources: Source[];
-  verify: { checked: number; removed: number };
+  /** checked/removed: math answer keys re-computed / items removed (verify.ts).
+   *  visuals/tryIts: pictures and quick questions kept; *Dropped: removed by our checks
+   *  (pack version 4+; absent on older library entries). */
+  verify: { checked: number; removed: number } & Partial<VisualStats>;
   demo?: boolean;
   /** Served from the shared library (typed-topic packs only): no AI cost. */
   fromLibrary?: boolean;
@@ -194,6 +199,7 @@ CONTENT RULES
 - recap: return an empty list [] (the app no longer asks warm-up questions before teaching).
 - teachSteps: they TOGETHER explain the WHOLE topic from zero, as if the child has never heard of it. Zaki teaches all of this BEFORE asking any question, so nothing the checks or test need may be missing. Words and sentence length as the "level" in the request says.
 ${LESSON_STORY_STYLE}
+${LESSON_VISUAL_RULES}
 - PHOTO LESSONS (photos of today's class page are given): follow the book's chapter, method and terms EXACTLY (same method, same notation, same words, same order as the page; every school teaches differently). Re-explain the page in the story structure above, in simpler words with NEW simple examples (do not just copy the page), then the checks and test ask questions that check the child understood the page.
 - checks: 3 questions. test: 5 questions for grades 1-3, 8 for grades 4-9. retestPool: 5 NEW questions (different from test) for a second try.
 - Each question: 3 choices (2 for yes/no), exactly ONE correct, distractors are common mistakes. hint1 is a gentle nudge, hint2 is a stronger hint; neither hint may state the answer. similarExample solves a SIMILAR question with DIFFERENT numbers or words, step by step; it must not give the answer to the real question.
@@ -340,8 +346,10 @@ export async function buildLessonPack(req: LessonPackRequest): Promise<LessonPac
   }
   if (!aiEnabled()) {
     const sample = { ...getSamplePack(req.subject, req.lang), grade: req.grade };
-    const v = verifyPack(sample);
-    return { pack: shufflePack(v.pack), packVersion: PACK_VERSION, sources: [], verify: { checked: v.checked, removed: v.removed }, demo: true };
+    // The bundled samples pass the validator unchanged (tested); it runs here for the stats.
+    const checked = validatePack(sample, { subject: sample.subject, grade: sample.grade, lang: sample.lang, id: sample.id });
+    const v = verifyPack(checked.ok && checked.pack ? checked.pack : sample);
+    return { pack: shufflePack(v.pack), packVersion: PACK_VERSION, sources: [], verify: { checked: v.checked, removed: v.removed, ...checked.visualStats }, demo: true };
   }
 
   if (!(await canSpend("lesson"))) return { budgetReached: true };
@@ -409,7 +417,7 @@ async function buildWithAi(req: LessonPackRequest & { allowHistoryTopic?: boolea
       pack: shufflePack(verified.pack),
       packVersion: PACK_VERSION,
       sources,
-      verify: { checked: verified.checked, removed: verified.removed },
+      verify: { checked: verified.checked, removed: verified.removed, ...valid.visualStats },
     };
   }
   throw new LessonPackError(`could not build a valid pack: ${lastErrors.slice(0, 5).join("; ")}`, "invalid_pack");
