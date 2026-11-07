@@ -391,7 +391,7 @@
     var foot = h('footer', { class: 'bar foot' }, [
       h('button', { type: 'button', class: 'nav', id: 'prev', disabled: idx === 0, onclick: function () { go(idx - 1); } }, ['← Atrás']),
       h('div', { class: 'counter' }, [h('strong', {}, [String(idx + 1)]), ' / ' + slides.length, h('span', { class: 'keys' }, ['  ·  teclas ', h('kbd', {}, ['←']), ' ', h('kbd', {}, ['→'])])]),
-      h('button', { type: 'button', class: 'nav next', id: 'next', disabled: idx === slides.length - 1, onclick: function () { go(idx + 1); } }, [idx === slides.length - 2 ? 'Ver resultado →' : 'Siguiente →'])
+      h('button', { type: 'button', class: 'nav next', id: 'next', disabled: idx === slides.length - 1, onclick: function () { go(idx + 1); } }, [idx === slides.length - 2 ? '¡Final! →' : 'Siguiente →'])
     ]);
     var stage = h('main', { class: 'stage' }, [slide]);
     var focusedId = document.activeElement && document.activeElement.id;

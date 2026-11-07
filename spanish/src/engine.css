@@ -262,3 +262,18 @@ body{font-size:18px}
   .face .pic{font-size:2.3rem}
   .face .es{font-size:1.05rem}
 }
+/* keep the top bar inside narrow screens whatever the score */
+.brand{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.bar > *{flex-shrink:0}
+.bar > .brand{flex-shrink:1}
+.bar > .progress{flex-shrink:1}
+@media (max-width:640px){ .progress{min-width:16px} .icon-btn{padding:6px 8px} }
+#app{grid-template-columns:minmax(0,1fr)}
+.stage,.slide,.tfrow > span,.crow > *{min-width:0}
+.nav{white-space:nowrap}
+@media (max-width:380px){
+  .bar{gap:6px}
+  .nav{padding:10px 12px;font-size:1.05rem}
+  .counter{font-size:.85rem}
+  .chip{padding:8px 12px}
+}
