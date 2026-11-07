@@ -7,7 +7,8 @@ import { Pressable, Text } from 'react-native';
 import { C, R, S } from '@/constants/theme';
 import { useT } from '@/lib/store';
 
-export function ReadAloud({ text, testID = 'read-aloud' }: { text: string; testID?: string }) {
+/** `label`: what the button says next to 🔊 (default "Read to me"), e.g. the word on a word card. */
+export function ReadAloud({ text, label, testID = 'read-aloud' }: { text: string; label?: string; testID?: string }) {
   const { t, lang } = useT();
   // Stop talking when the child leaves the screen.
   useEffect(() => () => void Speech.stop(), []);
@@ -15,7 +16,7 @@ export function ReadAloud({ text, testID = 'read-aloud' }: { text: string; testI
     <Pressable
       testID={testID}
       accessibilityRole="button"
-      accessibilityLabel={t('readAloud')}
+      accessibilityLabel={label ? `${t('readAloud')}: ${label}` : t('readAloud')}
       onPress={() => {
         Speech.stop();
         Speech.speak(text, { language: lang === 'ar' ? 'ar' : 'en', rate: 0.9 });
@@ -30,7 +31,7 @@ export function ReadAloud({ text, testID = 'read-aloud' }: { text: string; testI
         borderWidth: 2,
         borderColor: C.primary,
       })}>
-      <Text style={{ color: C.primary, fontWeight: '800', fontSize: 17 }}>🔊 {t('readAloud')}</Text>
+      <Text style={{ color: C.primary, fontWeight: '800', fontSize: 17 }}>🔊 {label ?? t('readAloud')}</Text>
     </Pressable>
   );
 }

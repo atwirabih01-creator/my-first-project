@@ -59,10 +59,10 @@ const mkPack = (topic, steps) => ({
       if (url.endsWith('/api/lesson-pack')) {
         const topic = body.topic;
         if (topic === 'old budget') return json({ budgetReached: true });
-        if (topic === 'old unpassed') return json({ pack: mkPack(topic, [{ title: 'Fresh title', text: 'FRESH v3 step one.' }, { text: 'FRESH v3 step two.' }]), sources: [], verify: { checked: 0, removed: 0 }, packVersion: 3 });
+        if (topic === 'old unpassed') return json({ pack: mkPack(topic, [{ title: 'Fresh title', text: 'FRESH v3 step one.' }, { text: 'FRESH v3 step two.' }]), sources: [], verify: { checked: 0, removed: 0 }, packVersion: 4 });
         return json({
           pack: mkPack(topic, [{ title: 'What is a fraction?', text: 'A fraction is a part of a whole thing.', example: 'Half of a pizza is 1/2.' }, { text: 'The bottom number tells how many equal parts.' }]),
-          sources: [], verify: { checked: 0, removed: 0 }, packVersion: 3,
+          sources: [], verify: { checked: 0, removed: 0 }, packVersion: 4,
         });
       }
       if (url.endsWith('/api/homework')) {
@@ -259,7 +259,7 @@ const mkPack = (topic, steps) => ({
     return { title: r('teach-title').top, text: r('teach-text').top, bold: getComputedStyle([...document.querySelectorAll('[data-testid="teach-title"]')].find((e) => e.offsetParent !== null)).fontWeight };
   });
   check('Teach step: title is bold and above the text, example card + owl kept', tpos.title < tpos.text && Number(tpos.bold) >= 700 && (await P.visible('teach-example')), JSON.stringify(tpos));
-  check('Teach step: pack saved with packVersion 3', (await P.state()).packs[mayaId]['math:fractions']?.packVersion === 3);
+  check('Teach step: pack saved with packVersion 4', (await P.state()).packs[mayaId]['math:fractions']?.packVersion === 4);
   await P.shot('teach-step-title-en');
   await P.tap('next-btn');
   check('Teach step without a title: no heading', (await P.visible('teach-text')) && (await P.count('teach-title')) === 0);
@@ -281,7 +281,7 @@ const mkPack = (topic, steps) => ({
   await P.tap('intro-start');
   check('Old lesson NOT passed: the child sees the new text', (await P.tid('teach-text').innerText()).includes('FRESH v3'));
   st = await P.state();
-  check('Old lesson NOT passed: new pack saved with packVersion 3', st.packs[mayaId]['math:old-unpassed'].packVersion === 3 && st.packs[mayaId]['math:old-unpassed'].refreshedFor === 3);
+  check('Old lesson NOT passed: new pack saved with packVersion 4', st.packs[mayaId]['math:old-unpassed'].packVersion === 4 && st.packs[mayaId]['math:old-unpassed'].refreshedFor === 4);
   await P.enterChild('Maya');
   await P.tap('plan-old unpassed');
   await P.tap('intro-start');

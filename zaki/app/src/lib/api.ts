@@ -46,8 +46,9 @@ export function isDemoMode() {
  * Lessons saved on the phone with an OLDER lesson-rules version than this are re-made (once)
  * when the child opens them, as long as the child has not passed that lesson's test yet
  * (src/app/lesson.tsx). The server sends `packVersion` with every lesson pack (missing = 1).
+ * Version 4: teach steps can carry a picture (`visual`) and a "Try it!" question (`tryIt`).
  */
-export const MIN_PACK_VERSION = 3;
+export const MIN_PACK_VERSION = 4;
 
 /**
  * The server flagged a message WITHOUT showing the safety screen (e.g. category

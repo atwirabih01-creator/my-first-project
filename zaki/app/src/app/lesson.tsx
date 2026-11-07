@@ -8,6 +8,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { Modal, StyleSheet, View } from 'react-native';
 
 import { Burst, PopIn } from '@/components/Celebrate';
+import { TryItCard } from '@/components/TryIt';
+import { LessonVisual, useVisualLabel } from '@/components/visuals/LessonVisual';
 import { Mascot } from '@/components/Mascot';
 import { ReadAloud } from '@/components/ReadAloud';
 import { Screen } from '@/components/Screen';
@@ -21,7 +23,8 @@ import { shuffleChoices } from '../../server/shuffle';
 import { goTo, useHelpReturn } from '@/lib/nav';
 import { consentActive, lessonKeyOf, MAX_TESTS_PER_DAY, todayStr, useChild, useT } from '@/lib/store';
 import { subjectInfo } from '@/lib/subjects';
-import type { CachedPack, Question, Subject } from '@/lib/types';
+import type { CachedPack, Question, Subject, TeachStep } from '@/lib/types';
+import { cleanTryIt } from '@/lib/visuals';
 
 type Phase =
   | 'loading'
@@ -386,59 +389,21 @@ export default function Lesson() {
       ) : null}
 
       {!settings.paused && pack && phase === 'teach' && pack.teachSteps[idx] ? (
-        <View style={{ gap: S.md }} testID="teach-step">
-          <Txt variant="h2">📘 {t('teachTitle')}</Txt>
-          <ProgressBar value={(idx + 1) / pack.teachSteps.length} color={subj.accent} label={t('stepOf', { n: idx + 1, m: pack.teachSteps.length })} />
-          <Txt variant="small" bold>
-            {t('stepOf', { n: idx + 1, m: pack.teachSteps.length })}
-          </Txt>
-          <Row style={{ alignItems: 'flex-start' }}>
-            <Mascot size={64} />
-            <Card style={{ flex: 1, minWidth: 0, borderWidth: 2, borderColor: C.primary }}>
-              {pack.teachSteps[idx].title?.trim() ? (
-                <Txt variant="h2" bold accessibilityRole="header" testID="teach-title" color={C.primary} style={{ fontSize: 26, lineHeight: 34 }}>
-                  {pack.teachSteps[idx].title?.trim()}
-                </Txt>
-              ) : null}
-              <Txt variant="big" testID="teach-text" style={{ fontSize: 24, lineHeight: 34 }}>
-                {pack.teachSteps[idx].text}
-              </Txt>
-            </Card>
-          </Row>
-          {pack.teachSteps[idx].example ? (
-            <View style={styles.example} testID="teach-example">
-              <Txt bold color="#8A4B00">
-                ✨ {t('forExample')}
-              </Txt>
-              <Txt variant="big">{pack.teachSteps[idx].example}</Txt>
-            </View>
-          ) : null}
-          <ReadAloud text={[pack.teachSteps[idx].title?.trim(), pack.teachSteps[idx].text, pack.teachSteps[idx].example].filter(Boolean).join('. ')} />
-          {idx + 1 === pack.teachSteps.length ? (
-            <PopIn bounce>
-              <Card tone="mint">
-                <Txt center>🎉 {t('teachDoneNote')}</Txt>
-              </Card>
-            </PopIn>
-          ) : null}
-          <Btn
-            title={idx + 1 < pack.teachSteps.length ? t('understoodNext') : t('teachToQuestions')}
-            icon={idx + 1 < pack.teachSteps.length ? '✅' : '✏️'}
-            big
-            testID="next-btn"
-            onPress={() => {
-              if (idx + 1 < pack.teachSteps.length) setIdx(idx + 1);
-              else {
-                setIdx(0);
-                setPhase(pack.checks.length ? 'check' : 'ask');
-              }
-            }}
-          />
-          {/* "Explain again": go back to the step before (no new AI call). */}
-          {idx > 0 ? (
-            <Btn title={t('stepBack')} icon="🔁" variant="secondary" testID="prev-btn" onPress={() => setIdx(idx - 1)} />
-          ) : null}
-        </View>
+        <TeachStepView
+          key={idx}
+          step={pack.teachSteps[idx]}
+          idx={idx}
+          total={pack.teachSteps.length}
+          subject={subject}
+          onNext={() => {
+            if (idx + 1 < pack.teachSteps.length) setIdx(idx + 1);
+            else {
+              setIdx(0);
+              setPhase(pack.checks.length ? 'check' : 'ask');
+            }
+          }}
+          onBack={() => setIdx(idx - 1)}
+        />
       ) : null}
 
       {!settings.paused && pack && phase === 'check' && pack.checks[idx] ? (
@@ -604,6 +569,85 @@ export default function Lesson() {
         </View>
       ) : null}
     </Screen>
+  );
+}
+
+/**
+ * One teach step: title + text (with the owl) -> the picture (soft card) -> example ->
+ * "Try it!" (if the step has one). "I understand, next" always works; it only becomes the
+ * big main button once the Try it question is answered (or when there is none).
+ */
+function TeachStepView({
+  step,
+  idx,
+  total,
+  subject,
+  onNext,
+  onBack,
+}: {
+  step: TeachStep;
+  idx: number;
+  total: number;
+  subject: Subject;
+  onNext: () => void;
+  onBack: () => void;
+}) {
+  const { t } = useT();
+  const subj = subjectInfo(subject);
+  const tryIt = useMemo(() => cleanTryIt(step.tryIt), [step.tryIt]);
+  const [tried, setTried] = useState(false);
+  const visualLabel = useVisualLabel(step.visual);
+  const last = idx + 1 === total;
+  const nextMain = !tryIt || tried;
+  return (
+    <View style={{ gap: S.md }} testID="teach-step">
+      <Txt variant="h2">📘 {t('teachTitle')}</Txt>
+      <ProgressBar value={(idx + 1) / total} color={subj.accent} label={t('stepOf', { n: idx + 1, m: total })} />
+      <Txt variant="small" bold>
+        {t('stepOf', { n: idx + 1, m: total })}
+      </Txt>
+      <Row style={{ alignItems: 'flex-start' }}>
+        <Mascot size={64} mood={tried ? 'cheer' : 'happy'} />
+        <Card style={{ flex: 1, minWidth: 0, borderWidth: 2, borderColor: C.primary }}>
+          {step.title?.trim() ? (
+            <Txt variant="h2" bold accessibilityRole="header" testID="teach-title" color={C.primary} style={{ fontSize: 26, lineHeight: 34 }}>
+              {step.title?.trim()}
+            </Txt>
+          ) : null}
+          <Txt variant="big" testID="teach-text" style={{ fontSize: 24, lineHeight: 34 }}>
+            {step.text}
+          </Txt>
+        </Card>
+      </Row>
+      <LessonVisual visual={step.visual} subject={subject} />
+      {step.example ? (
+        <View style={styles.example} testID="teach-example">
+          <Txt bold color="#8A4B00">
+            ✨ {t('forExample')}
+          </Txt>
+          <Txt variant="big">{step.example}</Txt>
+        </View>
+      ) : null}
+      <ReadAloud text={[step.title, step.text, visualLabel, step.example].map((x) => x?.trim()).filter(Boolean).map((x) => (/[.!?؟]$/.test(x!) ? x : `${x}.`)).join(' ')} />
+      {tryIt ? <TryItCard tryIt={tryIt} onFinished={() => setTried(true)} /> : null}
+      {last ? (
+        <PopIn bounce>
+          <Card tone="mint">
+            <Txt center>🎉 {t('teachDoneNote')}</Txt>
+          </Card>
+        </PopIn>
+      ) : null}
+      <Btn
+        title={!last ? t('understoodNext') : t('teachToQuestions')}
+        icon={!last ? '✅' : '✏️'}
+        big={nextMain}
+        variant={nextMain ? 'primary' : 'secondary'}
+        testID="next-btn"
+        onPress={onNext}
+      />
+      {/* "Explain again": go back to the step before (no new AI call). */}
+      {idx > 0 ? <Btn title={t('stepBack')} icon="🔁" variant="secondary" testID="prev-btn" onPress={onBack} /> : null}
+    </View>
   );
 }
 

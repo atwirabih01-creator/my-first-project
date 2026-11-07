@@ -1,4 +1,5 @@
 // Shared app-side types. The LessonPack / Question shapes follow ARCHITECTURE.md exactly.
+import type { TeachStep } from '../../server/types';
 
 export type Lang = 'en' | 'ar';
 export type Country = 'LB' | 'QA';
@@ -17,6 +18,13 @@ export type Question = {
   mathExpr?: string;
 };
 
+/**
+ * Teach-step pictures and "Try it!" questions (pack version 4). The shapes come straight from
+ * the server (server/types.ts: plain types, nothing runs). The app checks every field again
+ * before drawing (src/lib/visuals.ts): anything it does not understand is simply not shown.
+ */
+export type { TeachStep, TryIt, Visual, VisualItem } from '../../server/types';
+
 export type LessonPack = {
   id: string;
   subject: Subject;
@@ -24,8 +32,9 @@ export type LessonPack = {
   grade: number;
   lang: Lang;
   recap: { q: string; choices: string[]; answerIndex: number }[];
-  /** `title` (optional): a short heading for the step, e.g. "What is a fraction?" (server C1). */
-  teachSteps: { title?: string; text: string; example?: string }[];
+  /** `title` (optional): a short heading for the step, e.g. "What is a fraction?" (server C1).
+   *  `visual` / `tryIt` (pack version 4): a picture and a small "Try it!" question for the step. */
+  teachSteps: TeachStep[];
   checks: Question[];
   test: Question[];
   retestPool: Question[];
