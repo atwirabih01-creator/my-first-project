@@ -147,3 +147,10 @@ describe("family identity (server-issued secret key)", () => {
     assert.match(done.excerpt, /removed/, "resolved case keeps no words");
   });
 });
+
+describe("hosted server without the online database", () => {
+  it("does not block an unknown family (server forgot it after a restart)", async () => {
+    const { assertFamilyConsentIfPresent } = await import("../family");
+    await assertFamilyConsentIfPresent({ familyId: "fam_forgotten_after_restart", familyKey: "k_abcdefabcdefabcdefabcdef" });
+  });
+});

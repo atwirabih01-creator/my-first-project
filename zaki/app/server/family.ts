@@ -7,7 +7,7 @@ import { createHash, randomBytes, timingSafeEqual } from "node:crypto";
 
 import { forgetChildren } from "./budget";
 import { HttpError } from "./http";
-import { getStore, StorageError, type ProgressSnapshot, type Relationship } from "./storage";
+import { getStore, StorageError, storageKind, type ProgressSnapshot, type Relationship } from "./storage";
 import type { Country, Lang } from "./types";
 
 const hashKey = (key: string) => createHash("sha256").update(key, "utf8").digest("hex");
@@ -44,6 +44,14 @@ export async function registerFamily(input: RegisterInput): Promise<{ familyId: 
 }
 
 /** Throws 401 unless the key matches this family's stored hash (constant-time compare). */
+async function familyKnown(familyId: string): Promise<boolean> {
+  try {
+    return !!(await getStore().getFamilyKeyHash(familyId));
+  } catch {
+    return false;
+  }
+}
+
 export async function verifyFamily(familyId: unknown, familyKey: unknown): Promise<string> {
   if (typeof familyId !== "string" || typeof familyKey !== "string" || familyKey.length < 20 || familyKey.length > 200) {
     throw new HttpError(401, "family key required", "unauthorized");
@@ -68,6 +76,10 @@ export async function verifyFamily(familyId: unknown, familyKey: unknown): Promi
  */
 export async function assertFamilyConsentIfPresent(body: Record<string, unknown>): Promise<void> {
   if (body.familyId === undefined && body.familyKey === undefined) return;
+  // Without the online database (file store on a hosted, restartable server) the server forgets
+  // families after a restart. Then an UNKNOWN family is not blocked: the app checks consent on the
+  // phone before any AI call. A wrong key for a known family is still refused. Supabase restores the full check.
+  if (storageKind() === "file" && typeof body.familyId === "string" && !(await familyKnown(body.familyId))) return;
   const familyId = await verifyFamily(body.familyId, body.familyKey);
   if (!(await getStore().hasActiveConsent(familyId))) {
     throw new HttpError(403, "family consent is missing or withdrawn", "consent_required");
