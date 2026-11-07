@@ -6,7 +6,7 @@
   root.classList.add(L.theme || 'u12');
   root.lang = 'es';
 
-  var PRAISE = ['¡Muy bien!', '¡Genial!', '¡Perfecto!', '¡Fenomenal!', '¡Estupendo!', '¡Bravo!', '¡Olé!'];
+  var PRAISE = ['¡Muy bien! 🎉', '¡Genial! ⭐', '¡Perfecto! 🥳', '¡Fenomenal! 🌟', '¡Estupendo! 🙌', '¡Bravo! 👏', '¡Olé! 💃'];
   var app = document.getElementById('app');
   var slides, st, idx = 0, flash = null;
 
@@ -123,7 +123,7 @@
   }
   function feedback(ok, right, why, extra) {
     if (ok == null) return h('p', { class: 'feedback', 'aria-live': 'polite' });
-    var msg = ok ? pick(PRAISE) + (extra ? ' ' + extra : '') : '¡Casi! La respuesta correcta es: ' + right;
+    var msg = ok ? pick(PRAISE) + (extra ? ' ' + extra : '') : '¡Casi! 💪 Es: ' + right;
     return h('p', { class: 'feedback ' + (ok ? 'ok' : 'bad'), 'aria-live': 'polite' },
       [msg, why ? h('span', { class: 'why' }, [why]) : null]);
   }
@@ -138,17 +138,34 @@
     }
     return w;
   }
-  function done(i, ok, key) { flash = { i: i, ok: ok, key: key }; render(); }
+  function done(i, ok, key) { flash = { i: i, ok: ok, key: key }; render(); if (ok) confetti(); }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function confetti() {
+    if (reduce) return;
+    var c = document.createElement('canvas'); c.className = 'confetti'; c.setAttribute('aria-hidden', 'true');
+    var W = c.width = window.innerWidth, H = c.height = window.innerHeight; document.body.appendChild(c);
+    var x = c.getContext('2d'), cs = getComputedStyle(document.documentElement);
+    var cols = ['--c1', '--c2', '--c3', '--c4', '--c5', '--c6'].map(function (v) { return cs.getPropertyValue(v).trim() || '#f90'; });
+    var parts = []; for (var k = 0; k < 90; k++) parts.push({ x: W / 2 + (Math.random() - .5) * W * .3, y: H * .55, vx: (Math.random() - .5) * 16, vy: -Math.random() * 16 - 6,
+      r: Math.random() * 6 + 4, a: Math.random() * 6, va: (Math.random() - .5) * .4, col: cols[k % cols.length] });
+    var t0 = performance.now();
+    (function step(t) {
+      var dt = t - t0; x.clearRect(0, 0, W, H);
+      parts.forEach(function (p) { p.vy += .45; p.x += p.vx; p.y += p.vy; p.a += p.va; x.save(); x.translate(p.x, p.y); x.rotate(p.a); x.globalAlpha = Math.max(0, 1 - dt / 1400); x.fillStyle = p.col; x.fillRect(-p.r, -p.r / 2, p.r * 2, p.r); x.restore(); });
+      if (dt < 1400) requestAnimationFrame(step); else c.remove();
+    })(t0);
+  }
 
   /* ---------- slide renderers ---------- */
   function rTitle(s) {
     return [
       h('div', { class: 'crayons', 'aria-hidden': 'true' }, ['--c1', '--c2', '--c3', '--c4', '--c5', '--c6'].map(function (c) { return h('i', { style: 'background:var(' + c + ')' }); })),
       h('p', { class: 'eyebrow' }, [s.eyebrow]),
+      s.pics ? h('div', { class: 'titlepics', 'aria-hidden': 'true' }, s.pics.split(' ').map(function (e) { return h('span', {}, [e]); })) : null,
       h('h1', {}, [s.title]),
       h('p', { class: 'lead' }, [s.subtitle]),
       s.chips ? h('ul', { class: 'chips' }, s.chips.map(function (c) { return h('li', {}, [c]); })) : null,
-      h('p', { class: 'hint' }, ['Usa los botones de abajo o las flechas ← → del teclado para pasar de diapositiva.'])
+      h('p', { class: 'hint' }, ['Pulsa «Siguiente →» para empezar. ¡Mucha suerte! 🍀'])
     ];
   }
 
@@ -158,8 +175,8 @@
       var card = h('div', { class: 'card' + (S.flipped[i] ? ' flip' : ''), role: 'button', tabindex: '0', 'aria-pressed': S.flipped[i] ? 'true' : 'false',
         'aria-label': c[0] + ' (toca para ver el significado)' }, [
         h('div', { class: 'in' }, [
-          h('div', { class: 'face front' }, [h('span', { class: 'es' }, [c[0]]), h('span', { class: 'tap' }, ['toca para girar'])]),
-          h('div', { class: 'face back' }, [h('span', { class: 'en' }, [c[1]]), h('span', { class: 'es', style: 'font-size:1rem;opacity:.75' }, [c[0]])])
+          h('div', { class: 'face front' }, [c[2] ? h('span', { class: 'pic' + (/^\d+$/.test(c[2]) ? ' num' : '') }, [c[2]]) : null, h('span', { class: 'es' }, [c[0]]), h('span', { class: 'tap' }, ['👆 toca'])]),
+          h('div', { class: 'face back' }, [c[2] ? h('span', { class: 'pic small' + (/^\d+$/.test(c[2]) ? ' num' : '') }, [c[2]]) : null, h('span', { class: 'en' }, [c[1]]), h('span', { class: 'es2' }, [c[0]])])
         ])
       ]);
       function toggle() { S.flipped[i] = !S.flipped[i]; card.classList.toggle('flip', !!S.flipped[i]); card.setAttribute('aria-pressed', S.flipped[i] ? 'true' : 'false'); if (S.flipped[i]) return; }
@@ -174,7 +191,7 @@
       s.cards.forEach(function (_, i) { S.flipped[i] = any; });
       render();
     } }, ['Girar todas']);
-    return [h('h2', {}, [s.heading || 'Mi vocabulario']), h('p', { class: 'hint' }, [s.hint || 'Lee la palabra en voz alta y después toca la tarjeta para ver qué significa.']), grid, h('div', { class: 'tools' }, [all])];
+    return [h('h2', {}, [s.heading || 'Mi vocabulario']), h('p', { class: 'hint' }, [s.hint || '🗣️ Di la palabra en voz alta. Después toca la tarjeta.']), grid, h('div', { class: 'tools' }, [all])];
   }
 
   function rLearn(s, S) {
@@ -262,8 +279,8 @@
     });
     var all = Object.keys(S.rows).length === s.rowsX.length;
     var allOk = all && pointsOf(i) === s.rowsX.length;
-    var head = h('div', { class: 'verbhead' }, [h('span', { class: 'v' }, [s.verb]), h('span', { class: 'm' }, [s.meaning]), sayBtn(s.forms.join(', '))]);
-    return [h('h2', {}, [s.heading || 'Conjuga el verbo']), head, h('p', { class: 'hint' }, [s.hint || 'Elige la forma correcta para cada persona.']),
+    var head = h('div', { class: 'verbhead' }, [s.pic ? h('span', { class: 'vpic', 'aria-hidden': 'true' }, [s.pic]) : null, h('span', { class: 'v' }, [s.verb]), h('span', { class: 'm' }, [s.meaning]), sayBtn(s.forms.join(', '))]);
+    return [h('h2', {}, [s.heading || 'Conjuga el verbo']), head, h('p', { class: 'hint' }, [s.hint || 'Elige la palabra correcta en cada fila. 👇']),
       h('div', {}, rows), all ? feedback(allOk ? true : false, s.forms.join(' · '), s.explain) : feedback(null)];
   }
 
@@ -324,16 +341,17 @@
     }));
     var missed = [];
     slides.forEach(function (s, i) { if (itemsOf(s) && pointsOf(i) < itemsOf(s)) missed.push(i); });
-    var msg = n === 3 ? '¡Eres una superexploradora!' : n === 2 ? '¡Muy buen trabajo!' : '¡Buen intento! Vamos a repasar.';
+    var msg = n === 3 ? '¡Eres una superexploradora!' : n === 2 ? '¡Muy buen trabajo!' : '¡Buen intento! ¡Vamos a repasar!';
+    if (n >= 2) setTimeout(confetti, 300);
     return [
-      h('p', { class: 'eyebrow' }, ['Fin · ' + L.short]),
+      h('div', { class: 'trophy', 'aria-hidden': 'true' }, [n === 3 ? '🏆' : n === 2 ? '🥈' : '💪']),
+      h('p', { class: 'eyebrow' }, ['¡Has terminado! · ' + L.course]),
       h('h1', {}, [msg]), stars,
       h('p', { class: 'bigscore' }, [t.got + ' / ' + t.max]),
-      h('p', { class: 'hint' }, [t.done < t.max ? 'Respuestas correctas (quedan ' + (t.max - t.done) + ' preguntas sin contestar).' : 'Respuestas correctas.']),
-      missed.length ? h('div', {}, [h('p', { class: 'hint', style: 'margin-bottom:8px' }, ['Para repasar:']),
+      h('p', { class: 'hint' }, [t.done < t.max ? 'respuestas correctas (sin contestar: ' + (t.max - t.done) + ')' : 'respuestas correctas']),
+      missed.length ? h('div', {}, [h('p', { class: 'hint', style: 'margin-bottom:8px' }, ['📚 Para repasar:']),
         h('div', { class: 'review' }, missed.map(function (i) { return h('button', { type: 'button', onclick: function () { go(i); } }, ['Diapositiva ' + (i + 1) + (slides[i].title ? ' · ' + slides[i].title : '')]); }))]) : null,
-      h('div', { class: 'tools' }, [h('button', { type: 'button', class: 'btn', onclick: restart }, ['Jugar otra vez']),
-        h('span', { class: 'hint' }, ['Las respuestas cambian de sitio cada vez.'])])
+      h('div', { class: 'tools' }, [h('button', { type: 'button', class: 'btn', onclick: restart }, ['🔄 Jugar otra vez'])])
     ];
   }
 

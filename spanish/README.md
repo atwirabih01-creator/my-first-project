@@ -5,7 +5,7 @@ It works without internet, though the rounded letters only show when you're onli
 
 | File | Lesson |
 |---|---|
-| `Unidad-12-Me-dejas-una-pintura.html` | Numbers 16–20, borrowing things, un/una + colour, verbs tocar, coger, dejar, ir, volver, andar, parar |
+| `Unidad-12-Me-dejas-una-pintura.html` | Numbers 16–20, school things, colours, un/una + colour, verbs tocar, coger, dejar, ir, volver, andar, parar |
 | `Unidad-15-Tiempo-libre.html` | Free-time activities, mucho / poco / nada, gustar (me / te / le), saber (sé / sabes / sabe) |
 
 ## Presenting

@@ -9,7 +9,7 @@
 <style>
 :root{
   /* Layout: a Spanish cuaderno de cuadrícula desk: header rail, one paper card per slide, footer nav rail */
-  --paper:#f5f7fc; --grid:#e2e8f4; --card:#ffffff; --ink:#18223d; --muted:#535e7a; --line:#d2daea;
+  --paper:#eaf4ff; --grid:#d6e7fb; --card:#ffffff; --ink:#18223d; --muted:#535e7a; --line:#d2daea;
   --accent:#2d55c8; --accent-soft:#e7edfc; --on-accent:#ffffff;
   --ok:#157a45; --ok-soft:#e0f3e7; --bad:#b9302a; --bad-soft:#fbe4e1;
   --c1:#e2483d; --c2:#ee9b14; --c3:#36a253; --c4:#2d6fd6; --c5:#8a4fd1; --c6:#e0588f;
@@ -17,7 +17,7 @@
   --display:"Baloo 2","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   --body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
 }
-:root.u15{ --accent:#bf4418; --accent-soft:#fbeae2; }
+:root.u15{ --accent:#d6400f; --accent-soft:#ffe9df; --paper:#eafaf1; --grid:#cdeedc; }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --paper:#11162a; --grid:#1a2138; --card:#1a2137; --ink:#e9edf8; --muted:#a4adc7; --line:#2f3956;
@@ -27,7 +27,7 @@
     --shadow:0 1px 0 rgba(0,0,0,.3), 0 14px 34px -14px rgba(0,0,0,.6);
     color-scheme:dark;
   }
-  :root.u15:not([data-theme="light"]){ --accent:#ff9c6e; --accent-soft:#3b2319; }
+  :root.u15:not([data-theme="light"]){ --accent:#ff9c6e; --accent-soft:#3b2319; --paper:#0f1d1a; --grid:#17302a; }
 }
 :root[data-theme="dark"]{
   --paper:#11162a; --grid:#1a2138; --card:#1a2137; --ink:#e9edf8; --muted:#a4adc7; --line:#2f3956;
@@ -37,14 +37,14 @@
   --shadow:0 1px 0 rgba(0,0,0,.3), 0 14px 34px -14px rgba(0,0,0,.6);
   color-scheme:dark;
 }
-:root.u15[data-theme="dark"]{ --accent:#ff9c6e; --accent-soft:#3b2319; }
+:root.u15[data-theme="dark"]{ --accent:#ff9c6e; --accent-soft:#3b2319; --paper:#0f1d1a; --grid:#17302a; }
 
 html,body{height:100%}
 *{box-sizing:border-box}
 body{
   margin:0; background-color:var(--paper); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.5;
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
-  background-size:26px 26px;
+  background-size:30px 30px;
 }
 button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:10px}
@@ -237,6 +237,41 @@ table.conj th{font-family:var(--display);color:var(--muted);font-weight:700}
   *{animation:none!important;transition:none!important}
 }
 
+/* ---------- kid-friendly layer ---------- */
+body{font-size:18px}
+.slide{border-radius:30px;border-width:3px}
+.titlepics{display:flex;gap:clamp(8px,2vw,18px);flex-wrap:wrap;font-size:clamp(2.6rem,7vw,4.6rem);line-height:1}
+.titlepics span{display:inline-block;animation:bob 2.4s ease-in-out infinite}
+.titlepics span:nth-child(2){animation-delay:.2s}.titlepics span:nth-child(3){animation-delay:.4s}.titlepics span:nth-child(4){animation-delay:.6s}.titlepics span:nth-child(5){animation-delay:.8s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.opt,.chip,.tile,.btn,.nav{border-bottom-width:6px;border-bottom-style:solid}
+.opt{border-radius:22px;padding:16px 20px;border-width:3px;border-bottom-width:7px}
+.opt:active:not(:disabled),.chip:active:not(:disabled),.tile:active:not(:disabled),.btn:active:not(:disabled),.nav:active:not(:disabled){transform:translateY(3px);border-bottom-width:3px}
+.chip{border-width:3px;border-bottom-width:6px;border-radius:16px;padding:10px 20px}
+.tile{border-width:3px;border-bottom-width:6px;border-radius:16px}
+.btn,.nav{border:0;border-bottom:6px solid rgba(0,0,0,.22);border-radius:18px}
+.nav{font-size:1.25rem;padding:10px 24px}
+.card{min-height:170px}
+.card .in{min-height:170px}
+.face{border-width:3px;border-radius:22px}
+.face.front{border-top-width:10px}
+.face .pic{font-size:clamp(2.6rem,5vw,3.4rem);line-height:1}
+.face .pic.num{font-family:var(--display);font-weight:800;color:var(--k,var(--accent))}
+.face .pic.small{font-size:1.8rem}
+.face .es2{font-size:.95rem;color:var(--muted)}
+.vpic{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1}
+.bigemoji{letter-spacing:.1em}
+.feedback{font-size:clamp(1.25rem,2.4vw,1.7rem)}
+.trophy{font-size:clamp(4rem,12vw,7rem);line-height:1;animation:pop .6s ease both}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+.score svg{width:26px;height:26px}
+.score{font-size:1.3rem}
+@media (max-width:640px){
+  .card,.card .in{min-height:140px}
+  .face .pic{font-size:2.3rem}
+  .face .es{font-size:1.05rem}
+}
+
 </style>
 </head>
 <body>
@@ -244,114 +279,108 @@ table.conj th{font-family:var(--display);color:var(--muted);font-weight:700}
 <noscript><p style="padding:24px">Este juego necesita JavaScript activado.</p></noscript>
 <script>
 /* Unidad 12 · ¿Me dejas una pintura azul? (La Pandilla 1)
-   In every "options" list, the FIRST option is the correct one (the game shuffles them). */
+   Only vocabulary and grammar from the Unit 12 worksheet.
+   In every "options" list, the FIRST option is the correct one (the game shuffles them).
+   Cards: [Spanish, English, picture]. */
 window.LESSON = {
   theme: 'u12',
-  course: 'La Pandilla 1 · Unidad 12',
+  course: 'Unidad 12',
   short: '¿Me dejas una pintura?',
   slides: [
-    { type: 'title', eyebrow: 'La Pandilla 1 · Unidad 12', title: '¿Me dejas una pintura azul?',
-      subtitle: 'Números del 16 al 20, cómo pedir cosas de clase, los colores con un / una y los verbos de «Amanda manda».',
-      chips: ['Vocabulario', 'Números 16–20', 'Un / una + color', 'Verbos: yo · tú · él / ella / usted'] },
+    { type: 'title', eyebrow: 'La Pandilla 1 · Unidad 12', title: '¿Me dejas una pintura azul?', pics: '🖍️ ✏️ 🔢 ☝️ 🛑',
+      subtitle: '¡Vamos a practicar los números, las cosas de clase, los colores y los verbos!' },
 
-    { type: 'cards', title: 'Mi vocabulario', heading: 'Números del 16 al 20',
-      cards: [['dieciséis', '16'], ['diecisiete', '17'], ['dieciocho', '18'], ['diecinueve', '19'], ['veinte', '20']] },
-    { type: 'cards', title: 'Mi vocabulario', heading: 'Los verbos de «Amanda manda»',
-      cards: [['tocar', 'to touch'], ['coger', 'to pick up'], ['dejar', 'to leave / to lend'], ['ir', 'to go'], ['volver', 'to come back'], ['andar', 'to walk'], ['parar', 'to stop']] },
-    { type: 'cards', title: 'Mi vocabulario', heading: 'Frases importantes',
-      cards: [['¿Me dejas un lápiz, por favor?', 'Will you lend me a pencil, please?'], ['Sí, toma.', 'Yes, here you go.'], ['Lo siento, no tengo.', "Sorry, I don't have one."],
-        ['Gracias.', 'Thank you.'], ['¿Cuántas pinturas hay?', 'How many crayons are there?'], ['Hay diecisiete pinturas.', 'There are seventeen crayons.']] },
+    { type: 'cards', title: 'Vocabulario', heading: 'Los números del 16 al 20 🔢',
+      cards: [['dieciséis', 'sixteen', '16'], ['diecisiete', 'seventeen', '17'], ['dieciocho', 'eighteen', '18'], ['diecinueve', 'nineteen', '19'], ['veinte', 'twenty', '20']] },
+    { type: 'cards', title: 'Vocabulario', heading: 'Cosas de clase ✏️',
+      cards: [['un lápiz', 'a pencil', '✏️'], ['una pintura', 'a crayon', '🖍️'], ['una goma', 'a rubber / an eraser', '🧽'], ['un pegamento', 'a glue stick', '🧴']] },
+    { type: 'cards', title: 'Vocabulario', heading: 'Los colores 🎨',
+      cards: [['azul', 'blue', '🔵'], ['verde', 'green', '🟢'], ['amarillo', 'yellow', '🟡'], ['morado', 'purple', '🟣'], ['rosa', 'pink', '🩷']] },
+    { type: 'cards', title: 'Vocabulario', heading: 'Los verbos de «Amanda manda» 🕹️',
+      cards: [['tocar', 'to touch', '☝️'], ['coger', 'to pick up', '🤲'], ['dejar', 'to leave / to lend', '🤝'], ['ir', 'to go', '🚶‍♀️'],
+        ['volver', 'to come back', '🔙'], ['andar', 'to walk', '👣'], ['parar', 'to stop', '🛑']] },
+    { type: 'cards', title: 'Vocabulario', heading: 'Frases importantes 💬',
+      cards: [['¿Me dejas un lápiz, por favor?', 'Will you lend me a pencil, please?', '✏️'], ['Sí, toma.', 'Yes, here you go.', '🤲'],
+        ['Lo siento, no tengo.', "Sorry, I don't have one.", '😔'], ['Gracias.', 'Thank you.', '🙏'],
+        ['¿Cuántas pinturas hay?', 'How many crayons are there?', '🤔'], ['Hay diecisiete pinturas.', 'There are seventeen crayons.', '🖍️']] },
 
-    { type: 'mc', title: 'Reto 2 · Números', prompt: '¿Cómo se dice 18?', big: '18', bigClass: 'bignum',
-      options: ['dieciocho', 'diecisiete', 'diecinueve', 'dieciséis'], say: 'dieciocho' },
-    { type: 'mc', title: 'Reto 2 · Números', prompt: '¿Qué número es «diecinueve»?', say: 'diecinueve',
+    { type: 'mc', title: 'Los números', big: '18', bigClass: 'bignum', prompt: '¿Cómo se dice?', say: 'dieciocho',
+      options: ['dieciocho', 'diecisiete', 'diecinueve', 'dieciséis'] },
+    { type: 'mc', title: 'Los números', prompt: '¿Qué número es «diecinueve»?', say: 'diecinueve',
       options: ['19', '17', '16', '20'] },
-    { type: 'type', title: 'Reto 2 · Escribe el número', prompt: 'Escribe este número en letra:', big: '17',
-      answer: ['diecisiete'], say: 'diecisiete' },
-    { type: 'type', title: 'Reto 2 · Escribe el número', prompt: 'Escribe este número en letra:', big: '16',
-      answer: ['dieciséis'], say: 'dieciséis', explain: 'Dieciséis lleva tilde: dieci-SÉIS.' },
-    { type: 'type', title: 'Reto 2 · Escribe el número', prompt: 'Escribe este número en letra:', big: '20',
-      answer: ['veinte'], say: 'veinte' },
-
-    { type: 'mc', title: '¿Cuántas pinturas hay?', count: 17, prompt: 'Hay ___ pinturas.', sub: 'Cuenta las pinturas.',
+    { type: 'type', title: 'Escribe el número', big: '17', prompt: 'Escribe el número en letra:', answer: ['diecisiete'], say: 'diecisiete' },
+    { type: 'type', title: 'Escribe el número', big: '16', prompt: 'Escribe el número en letra:', answer: ['dieciséis'], say: 'dieciséis',
+      explain: 'Dieciséis lleva tilde: dieci-SÉIS.' },
+    { type: 'type', title: 'Escribe el número', big: '20', prompt: 'Escribe el número en letra:', answer: ['veinte'], say: 'veinte' },
+    { type: 'mc', title: '¿Cuántas pinturas hay? 🖍️', count: 17, prompt: 'Hay ___ pinturas.', sub: '¡Cuéntalas!',
       options: ['diecisiete', 'dieciséis', 'diecinueve', 'veinte'] },
-    { type: 'mc', title: '¿Cuántas pinturas hay?', count: 20, prompt: 'Hay ___ pinturas.', sub: 'Cuenta las pinturas.',
+    { type: 'mc', title: '¿Cuántas pinturas hay? 🖍️', count: 20, prompt: 'Hay ___ pinturas.', sub: '¡Cuéntalas!',
       options: ['veinte', 'dieciocho', 'diecinueve', 'dieciséis'] },
 
-    { type: 'mc', title: 'Reto 1 · ¿Me lo dejas?', prompt: '—¿Me dejas un lápiz, por favor?\n—Sí, ___.',
-      options: ['toma', 'gracias', 'no tengo', 'dejas'] },
-    { type: 'mc', title: 'Reto 1 · ¿Me lo dejas?', prompt: '—¿Me dejas una goma, por favor?\n—Lo siento, no ___.',
-      options: ['tengo', 'toma', 'gracias', 'dejas'] },
-    { type: 'mc', title: 'Reto 1 · ¿Me lo dejas?', prompt: 'Tu amiga te deja una pintura. ¿Qué le dices?',
-      options: ['Gracias.', 'Lo siento.', 'Sí, toma.', 'No tengo.'] },
-    { type: 'mc', title: 'Reto 1 · ¿Me lo dejas?', prompt: '¿Me ___ una pintura azul, por favor?', sub: '(tú + dejar)',
-      options: ['dejas', 'dejo', 'deja', 'dejar'], explain: 'Hablas con tu amiga (tú), por eso decimos «¿me dejas…?».' },
+    { type: 'mc', title: '¿Me lo dejas?', big: '✏️', prompt: '—¿Me dejas un lápiz, por favor?\n—Sí, ___.',
+      options: ['toma', 'gracias', 'no tengo'] },
+    { type: 'mc', title: '¿Me lo dejas?', big: '🧽', prompt: '—¿Me dejas una goma, por favor?\n—Lo siento, no ___.',
+      options: ['tengo', 'toma', 'gracias'] },
+    { type: 'mc', title: '¿Me lo dejas?', big: '🖍️', prompt: 'Tu amiga te deja una pintura. ¿Qué dices?',
+      options: ['Gracias.', 'Lo siento.', 'Sí, toma.'] },
 
-    { type: 'learn', title: 'Gramática', heading: 'Un / una + color', reveal: true,
+    { type: 'learn', title: 'Gramática', heading: 'Un / una + color 🎨', reveal: true,
       html:
-        '<p>El color tiene que <b>combinar</b> con la cosa: si la cosa es masculina (<b>un</b>), el color termina en <b>-o</b>; si es femenina (<b>una</b>), termina en <b>-a</b>.</p>' +
+        '<p>El color combina con la cosa.</p>' +
         '<div class="cols">' +
-        '<div class="box"><h3>un · masculino</h3><ul><li>un pegamento amarill<span class="reveal end-o">o</span></li><li>un lápiz morad<span class="reveal end-o">o</span></li><li>un estuche rojo</li></ul></div>' +
-        '<div class="box"><h3>una · femenino</h3><ul><li>una pintura morad<span class="reveal end-o">a</span></li><li>una goma amarill<span class="reveal end-o">a</span></li><li>una regla roja</li></ul></div>' +
+        '<div class="box"><h3>un 👦</h3><ul><li>un pegamento amarill<span class="reveal end-o">o</span></li><li>un lápiz morad<span class="reveal end-o">o</span></li></ul></div>' +
+        '<div class="box"><h3>una 👧</h3><ul><li>una pintura morad<span class="reveal end-o">a</span></li><li>una goma amarill<span class="reveal end-o">a</span></li></ul></div>' +
         '</div>' +
-        '<p class="note">¡Ojo! <b>azul</b>, <b>verde</b> y <b>rosa</b> no cambian: un lápiz azul · una pintura azul.</p>' },
-    { type: 'mc', title: 'Reto 3 · ¡Que combinen!', prompt: 'Una pintura ___', sub: '(morado)',
-      options: ['morada', 'morado'], explain: 'Una pintura → femenino → morada.' },
-    { type: 'mc', title: 'Reto 3 · ¡Que combinen!', prompt: 'Un pegamento ___', sub: '(amarillo)',
-      options: ['amarillo', 'amarilla'], explain: 'Un pegamento → masculino → amarillo.' },
-    { type: 'mc', title: 'Reto 3 · ¡Que combinen!', prompt: 'Una goma ___', sub: '(amarillo)',
-      options: ['amarilla', 'amarillo'], explain: 'Una goma → femenino → amarilla.' },
-    { type: 'mc', title: 'Reto 3 · ¡Que combinen!', prompt: 'Un lápiz ___', sub: '(azul)',
-      options: ['azul', 'azula', 'azulo'], explain: 'Azul no cambia nunca: un lápiz azul, una pintura azul.' },
-    { type: 'mc', title: 'Reto 3 · ¡Que combinen!', prompt: '¿Cuál está bien?',
-      options: ['una pintura verde', 'una pintura verda', 'un pintura verde'], explain: 'Pintura es femenino (una) y verde no cambia.' },
+        '<p class="note">¡Ojo! 👀 <b>azul</b>, <b>verde</b> y <b>rosa</b> no cambian: un lápiz azul · una pintura azul.</p>' },
+    { type: 'mc', title: '¡Que combinen!', big: '🖍️🟣', prompt: 'Una pintura ___', options: ['morada', 'morado'],
+      explain: 'Una pintura → morada.' },
+    { type: 'mc', title: '¡Que combinen!', big: '🧴🟡', prompt: 'Un pegamento ___', options: ['amarillo', 'amarilla'],
+      explain: 'Un pegamento → amarillo.' },
+    { type: 'mc', title: '¡Que combinen!', big: '✏️🔵', prompt: 'Un lápiz ___', options: ['azul', 'azula', 'azulo'],
+      explain: 'Azul no cambia: un lápiz azul, una pintura azul.' },
+    { type: 'mc', title: '¡Que combinen!', big: '🖍️🟢', prompt: 'Una pintura ___', options: ['verde', 'verda'],
+      explain: 'Verde no cambia: una pintura verde.' },
 
-    { type: 'learn', title: 'Gramática', heading: 'Los verbos con yo, tú, él / ella / usted', reveal: true,
+    { type: 'learn', title: 'Gramática', heading: 'Los verbos: yo · tú · él / ella / usted', reveal: true,
       html:
-        '<p>El final del verbo cambia según la persona. Con <b>él</b>, <b>ella</b> y <b>usted</b> el verbo es igual.</p>' +
-        '<div class="tw"><table class="conj"><thead><tr><th></th><th>-ar · tocar</th><th>-er · coger</th></tr></thead><tbody>' +
+        '<p>El final del verbo cambia con la persona. <b>Él</b>, <b>ella</b> y <b>usted</b> van igual.</p>' +
+        '<div class="tw"><table class="conj"><thead><tr><th></th><th>tocar ☝️</th><th>coger 🤲</th></tr></thead><tbody>' +
         '<tr><th>yo</th><td>toc<span class="reveal end-o">o</span></td><td>co<span class="reveal end-o">jo</span></td></tr>' +
         '<tr><th>tú</th><td>toc<span class="reveal end-o">as</span></td><td>cog<span class="reveal end-o">es</span></td></tr>' +
         '<tr><th>él / ella / usted</th><td>toc<span class="reveal end-o">a</span></td><td>cog<span class="reveal end-o">e</span></td></tr>' +
         '</tbody></table></div>' +
-        '<p class="note">Verbos especiales: <b>ir</b> → voy, vas, va · <b>volver</b> → vuelvo, vuelves, vuelve · <b>coger</b> → yo cojo (con j).</p>' },
-    { type: 'conj', title: 'Conjugación', verb: 'tocar', meaning: 'to touch', forms: ['toco', 'tocas', 'toca'] },
-    { type: 'conj', title: 'Conjugación', verb: 'andar', meaning: 'to walk', forms: ['ando', 'andas', 'anda'] },
-    { type: 'conj', title: 'Conjugación', verb: 'parar', meaning: 'to stop', forms: ['paro', 'paras', 'para'] },
-    { type: 'conj', title: 'Conjugación', verb: 'dejar', meaning: 'to leave / to lend', forms: ['dejo', 'dejas', 'deja'] },
-    { type: 'conj', title: 'Conjugación', verb: 'coger', meaning: 'to pick up', forms: ['cojo', 'coges', 'coge'], trap: 'cogo',
+        '<p class="note">⭐ Verbos especiales: <b>ir</b> → voy, vas, va · <b>volver</b> → vuelvo, vuelves, vuelve · <b>coger</b> → yo cojo.</p>' },
+    { type: 'conj', title: 'Conjugación', verb: 'tocar', pic: '☝️', meaning: 'to touch', forms: ['toco', 'tocas', 'toca'] },
+    { type: 'conj', title: 'Conjugación', verb: 'andar', pic: '👣', meaning: 'to walk', forms: ['ando', 'andas', 'anda'] },
+    { type: 'conj', title: 'Conjugación', verb: 'parar', pic: '🛑', meaning: 'to stop', forms: ['paro', 'paras', 'para'] },
+    { type: 'conj', title: 'Conjugación', verb: 'dejar', pic: '🤝', meaning: 'to leave / to lend', forms: ['dejo', 'dejas', 'deja'] },
+    { type: 'conj', title: 'Conjugación', verb: 'coger', pic: '🤲', meaning: 'to pick up', forms: ['cojo', 'coges', 'coge'], trap: 'cogo',
       explain: 'Con yo se escribe con j: cojo.' },
-    { type: 'conj', title: 'Conjugación', verb: 'volver', meaning: 'to come back', forms: ['vuelvo', 'vuelves', 'vuelve'], trap: 'volvo',
-      explain: 'Volver cambia la o por ue: vuelvo, vuelves, vuelve.' },
-    { type: 'conj', title: 'Conjugación', verb: 'ir', meaning: 'to go', forms: ['voy', 'vas', 'va'], trap: 'iro',
-      explain: 'Ir es muy especial: voy, vas, va.' },
+    { type: 'conj', title: 'Conjugación', verb: 'volver', pic: '🔙', meaning: 'to come back', forms: ['vuelvo', 'vuelves', 'vuelve'], trap: 'volvo',
+      explain: 'Volver cambia: vuelvo, vuelves, vuelve.' },
+    { type: 'conj', title: 'Conjugación', verb: 'ir', pic: '🚶‍♀️', meaning: 'to go', forms: ['voy', 'vas', 'va'], trap: 'iro',
+      explain: 'Ir es especial: voy, vas, va.' },
 
-    { type: 'mc', title: 'Amanda manda', prompt: 'Yo ___ la mesa.', sub: '(tocar)', options: ['toco', 'tocas', 'toca'] },
-    { type: 'mc', title: 'Amanda manda', prompt: 'Tú ___ a la puerta.', sub: '(ir)', options: ['vas', 'voy', 'va'] },
-    { type: 'mc', title: 'Amanda manda', prompt: 'Ella ___ a su sitio.', sub: '(volver)', options: ['vuelve', 'vuelvo', 'vuelves', 'volve'] },
-    { type: 'mc', title: 'Amanda manda', prompt: 'Usted ___ el lápiz.', sub: '(coger)', options: ['coge', 'cojo', 'coges'],
-      explain: 'Usted va como él / ella: coge.' },
-    { type: 'mc', title: 'Amanda manda', prompt: 'Él ___ por la clase.', sub: '(andar)', options: ['anda', 'ando', 'andas'] },
-    { type: 'mc', title: 'Amanda manda', prompt: '«Amanda manda tocar la mesa.»\n¿Qué tienes que hacer?',
-      options: ['Touch the table.', 'Walk to the table.', 'Leave the table.', 'Stop at the table.'] },
-    { type: 'mc', title: 'Amanda manda', prompt: '«Amanda manda… ¡parar!»\n¿Qué tienes que hacer?',
-      options: ['Stop.', 'Walk.', 'Come back.', 'Pick up a pencil.'] },
+    { type: 'mc', title: 'Amanda manda 🕹️', big: '☝️', prompt: 'Yo ___ la mesa.', sub: '(tocar)', options: ['toco', 'tocas', 'toca'] },
+    { type: 'mc', title: 'Amanda manda 🕹️', big: '✏️', prompt: 'Tú ___ el lápiz.', sub: '(coger)', options: ['coges', 'cojo', 'coge'] },
+    { type: 'mc', title: 'Amanda manda 🕹️', big: '🧽', prompt: 'Ella ___ la goma.', sub: '(dejar)', options: ['deja', 'dejo', 'dejas'] },
+    { type: 'mc', title: 'Amanda manda 🕹️', big: '🛑', prompt: 'Usted ___.', sub: '(parar)', options: ['para', 'paro', 'paras'],
+      explain: 'Usted va como él / ella: para.' },
+    { type: 'mc', title: 'Amanda manda 🕹️', big: '🔙', prompt: 'Él ___.', sub: '(volver)', options: ['vuelve', 'vuelvo', 'volve'] },
+    { type: 'mc', title: 'Amanda manda 🕹️', prompt: '«Amanda manda tocar la mesa.»\n¿Qué haces?',
+      options: ['☝️ Touch the table.', '👣 Walk to the table.', '🛑 Stop at the table.'] },
 
-    { type: 'build', title: 'Reto 5 · Descifra el código', prompt: 'E J R A D', sub: 'Ordena las letras para formar un verbo.',
-      letters: true, scrambled: 'EJRAD', answer: 'DEJAR' },
-    { type: 'build', title: 'Reto 5 · Descifra el código', prompt: 'O C G E R', sub: 'Ordena las letras para formar un verbo.',
-      letters: true, scrambled: 'OCGER', answer: 'COGER' },
-    { type: 'build', title: 'Reto 5 · Descifra el código', prompt: 'R A P R A', sub: 'Ordena las letras para formar un verbo.',
-      letters: true, scrambled: 'RAPRA', answer: 'PARAR' },
-    { type: 'build', title: 'Reto 9 · Pide prestado', prompt: 'Ordena la frase:', sub: 'Pide una pintura verde a tu amiga.',
+    { type: 'build', title: 'Descifra el código 🔐', prompt: 'E J R A D', sub: 'Ordena las letras. ¡Es un verbo!', letters: true, scrambled: 'EJRAD', answer: 'DEJAR' },
+    { type: 'build', title: 'Descifra el código 🔐', prompt: 'O C G E R', sub: 'Ordena las letras. ¡Es un verbo!', letters: true, scrambled: 'OCGER', answer: 'COGER' },
+    { type: 'build', title: 'Descifra el código 🔐', prompt: 'R A P R A', sub: 'Ordena las letras. ¡Es un verbo!', letters: true, scrambled: 'RAPRA', answer: 'PARAR' },
+    { type: 'build', title: 'Pide prestado 🖍️', prompt: 'Ordena la frase:', sub: 'Pide una pintura verde.',
       tiles: ['¿Me', 'dejas', 'una', 'pintura', 'verde,', 'por', 'favor?'] },
 
-    { type: 'tf', title: 'Reto 6 · ¿Verdad o mentira?', statements: [
+    { type: 'tf', title: '¿Verdad o mentira? 🤔', statements: [
       ['«Gracias» se dice cuando alguien te ayuda.', true],
       ['«Lo siento, no tengo» es una forma de decir que sí.', false],
       ['«Dieciocho» es el número 18.', true],
-      ['«Parar» significa seguir andando.', false],
-      ['Decimos «un pegamento amarillo» y «una goma amarilla».', true]
+      ['«Parar» significa seguir andando.', false]
     ] },
 
     { type: 'end' }
@@ -368,7 +397,7 @@ window.LESSON = {
   root.classList.add(L.theme || 'u12');
   root.lang = 'es';
 
-  var PRAISE = ['¡Muy bien!', '¡Genial!', '¡Perfecto!', '¡Fenomenal!', '¡Estupendo!', '¡Bravo!', '¡Olé!'];
+  var PRAISE = ['¡Muy bien! 🎉', '¡Genial! ⭐', '¡Perfecto! 🥳', '¡Fenomenal! 🌟', '¡Estupendo! 🙌', '¡Bravo! 👏', '¡Olé! 💃'];
   var app = document.getElementById('app');
   var slides, st, idx = 0, flash = null;
 
@@ -485,7 +514,7 @@ window.LESSON = {
   }
   function feedback(ok, right, why, extra) {
     if (ok == null) return h('p', { class: 'feedback', 'aria-live': 'polite' });
-    var msg = ok ? pick(PRAISE) + (extra ? ' ' + extra : '') : '¡Casi! La respuesta correcta es: ' + right;
+    var msg = ok ? pick(PRAISE) + (extra ? ' ' + extra : '') : '¡Casi! 💪 Es: ' + right;
     return h('p', { class: 'feedback ' + (ok ? 'ok' : 'bad'), 'aria-live': 'polite' },
       [msg, why ? h('span', { class: 'why' }, [why]) : null]);
   }
@@ -500,17 +529,34 @@ window.LESSON = {
     }
     return w;
   }
-  function done(i, ok, key) { flash = { i: i, ok: ok, key: key }; render(); }
+  function done(i, ok, key) { flash = { i: i, ok: ok, key: key }; render(); if (ok) confetti(); }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function confetti() {
+    if (reduce) return;
+    var c = document.createElement('canvas'); c.className = 'confetti'; c.setAttribute('aria-hidden', 'true');
+    var W = c.width = window.innerWidth, H = c.height = window.innerHeight; document.body.appendChild(c);
+    var x = c.getContext('2d'), cs = getComputedStyle(document.documentElement);
+    var cols = ['--c1', '--c2', '--c3', '--c4', '--c5', '--c6'].map(function (v) { return cs.getPropertyValue(v).trim() || '#f90'; });
+    var parts = []; for (var k = 0; k < 90; k++) parts.push({ x: W / 2 + (Math.random() - .5) * W * .3, y: H * .55, vx: (Math.random() - .5) * 16, vy: -Math.random() * 16 - 6,
+      r: Math.random() * 6 + 4, a: Math.random() * 6, va: (Math.random() - .5) * .4, col: cols[k % cols.length] });
+    var t0 = performance.now();
+    (function step(t) {
+      var dt = t - t0; x.clearRect(0, 0, W, H);
+      parts.forEach(function (p) { p.vy += .45; p.x += p.vx; p.y += p.vy; p.a += p.va; x.save(); x.translate(p.x, p.y); x.rotate(p.a); x.globalAlpha = Math.max(0, 1 - dt / 1400); x.fillStyle = p.col; x.fillRect(-p.r, -p.r / 2, p.r * 2, p.r); x.restore(); });
+      if (dt < 1400) requestAnimationFrame(step); else c.remove();
+    })(t0);
+  }
 
   /* ---------- slide renderers ---------- */
   function rTitle(s) {
     return [
       h('div', { class: 'crayons', 'aria-hidden': 'true' }, ['--c1', '--c2', '--c3', '--c4', '--c5', '--c6'].map(function (c) { return h('i', { style: 'background:var(' + c + ')' }); })),
       h('p', { class: 'eyebrow' }, [s.eyebrow]),
+      s.pics ? h('div', { class: 'titlepics', 'aria-hidden': 'true' }, s.pics.split(' ').map(function (e) { return h('span', {}, [e]); })) : null,
       h('h1', {}, [s.title]),
       h('p', { class: 'lead' }, [s.subtitle]),
       s.chips ? h('ul', { class: 'chips' }, s.chips.map(function (c) { return h('li', {}, [c]); })) : null,
-      h('p', { class: 'hint' }, ['Usa los botones de abajo o las flechas ← → del teclado para pasar de diapositiva.'])
+      h('p', { class: 'hint' }, ['Pulsa «Siguiente →» para empezar. ¡Mucha suerte! 🍀'])
     ];
   }
 
@@ -520,8 +566,8 @@ window.LESSON = {
       var card = h('div', { class: 'card' + (S.flipped[i] ? ' flip' : ''), role: 'button', tabindex: '0', 'aria-pressed': S.flipped[i] ? 'true' : 'false',
         'aria-label': c[0] + ' (toca para ver el significado)' }, [
         h('div', { class: 'in' }, [
-          h('div', { class: 'face front' }, [h('span', { class: 'es' }, [c[0]]), h('span', { class: 'tap' }, ['toca para girar'])]),
-          h('div', { class: 'face back' }, [h('span', { class: 'en' }, [c[1]]), h('span', { class: 'es', style: 'font-size:1rem;opacity:.75' }, [c[0]])])
+          h('div', { class: 'face front' }, [c[2] ? h('span', { class: 'pic' + (/^\d+$/.test(c[2]) ? ' num' : '') }, [c[2]]) : null, h('span', { class: 'es' }, [c[0]]), h('span', { class: 'tap' }, ['👆 toca'])]),
+          h('div', { class: 'face back' }, [c[2] ? h('span', { class: 'pic small' + (/^\d+$/.test(c[2]) ? ' num' : '') }, [c[2]]) : null, h('span', { class: 'en' }, [c[1]]), h('span', { class: 'es2' }, [c[0]])])
         ])
       ]);
       function toggle() { S.flipped[i] = !S.flipped[i]; card.classList.toggle('flip', !!S.flipped[i]); card.setAttribute('aria-pressed', S.flipped[i] ? 'true' : 'false'); if (S.flipped[i]) return; }
@@ -536,7 +582,7 @@ window.LESSON = {
       s.cards.forEach(function (_, i) { S.flipped[i] = any; });
       render();
     } }, ['Girar todas']);
-    return [h('h2', {}, [s.heading || 'Mi vocabulario']), h('p', { class: 'hint' }, [s.hint || 'Lee la palabra en voz alta y después toca la tarjeta para ver qué significa.']), grid, h('div', { class: 'tools' }, [all])];
+    return [h('h2', {}, [s.heading || 'Mi vocabulario']), h('p', { class: 'hint' }, [s.hint || '🗣️ Di la palabra en voz alta. Después toca la tarjeta.']), grid, h('div', { class: 'tools' }, [all])];
   }
 
   function rLearn(s, S) {
@@ -624,8 +670,8 @@ window.LESSON = {
     });
     var all = Object.keys(S.rows).length === s.rowsX.length;
     var allOk = all && pointsOf(i) === s.rowsX.length;
-    var head = h('div', { class: 'verbhead' }, [h('span', { class: 'v' }, [s.verb]), h('span', { class: 'm' }, [s.meaning]), sayBtn(s.forms.join(', '))]);
-    return [h('h2', {}, [s.heading || 'Conjuga el verbo']), head, h('p', { class: 'hint' }, [s.hint || 'Elige la forma correcta para cada persona.']),
+    var head = h('div', { class: 'verbhead' }, [s.pic ? h('span', { class: 'vpic', 'aria-hidden': 'true' }, [s.pic]) : null, h('span', { class: 'v' }, [s.verb]), h('span', { class: 'm' }, [s.meaning]), sayBtn(s.forms.join(', '))]);
+    return [h('h2', {}, [s.heading || 'Conjuga el verbo']), head, h('p', { class: 'hint' }, [s.hint || 'Elige la palabra correcta en cada fila. 👇']),
       h('div', {}, rows), all ? feedback(allOk ? true : false, s.forms.join(' · '), s.explain) : feedback(null)];
   }
 
@@ -686,16 +732,17 @@ window.LESSON = {
     }));
     var missed = [];
     slides.forEach(function (s, i) { if (itemsOf(s) && pointsOf(i) < itemsOf(s)) missed.push(i); });
-    var msg = n === 3 ? '¡Eres una superexploradora!' : n === 2 ? '¡Muy buen trabajo!' : '¡Buen intento! Vamos a repasar.';
+    var msg = n === 3 ? '¡Eres una superexploradora!' : n === 2 ? '¡Muy buen trabajo!' : '¡Buen intento! ¡Vamos a repasar!';
+    if (n >= 2) setTimeout(confetti, 300);
     return [
-      h('p', { class: 'eyebrow' }, ['Fin · ' + L.short]),
+      h('div', { class: 'trophy', 'aria-hidden': 'true' }, [n === 3 ? '🏆' : n === 2 ? '🥈' : '💪']),
+      h('p', { class: 'eyebrow' }, ['¡Has terminado! · ' + L.course]),
       h('h1', {}, [msg]), stars,
       h('p', { class: 'bigscore' }, [t.got + ' / ' + t.max]),
-      h('p', { class: 'hint' }, [t.done < t.max ? 'Respuestas correctas (quedan ' + (t.max - t.done) + ' preguntas sin contestar).' : 'Respuestas correctas.']),
-      missed.length ? h('div', {}, [h('p', { class: 'hint', style: 'margin-bottom:8px' }, ['Para repasar:']),
+      h('p', { class: 'hint' }, [t.done < t.max ? 'respuestas correctas (sin contestar: ' + (t.max - t.done) + ')' : 'respuestas correctas']),
+      missed.length ? h('div', {}, [h('p', { class: 'hint', style: 'margin-bottom:8px' }, ['📚 Para repasar:']),
         h('div', { class: 'review' }, missed.map(function (i) { return h('button', { type: 'button', onclick: function () { go(i); } }, ['Diapositiva ' + (i + 1) + (slides[i].title ? ' · ' + slides[i].title : '')]); }))]) : null,
-      h('div', { class: 'tools' }, [h('button', { type: 'button', class: 'btn', onclick: restart }, ['Jugar otra vez']),
-        h('span', { class: 'hint' }, ['Las respuestas cambian de sitio cada vez.'])])
+      h('div', { class: 'tools' }, [h('button', { type: 'button', class: 'btn', onclick: restart }, ['🔄 Jugar otra vez'])])
     ];
   }
 

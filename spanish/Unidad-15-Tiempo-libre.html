@@ -9,7 +9,7 @@
 <style>
 :root{
   /* Layout: a Spanish cuaderno de cuadrícula desk: header rail, one paper card per slide, footer nav rail */
-  --paper:#f5f7fc; --grid:#e2e8f4; --card:#ffffff; --ink:#18223d; --muted:#535e7a; --line:#d2daea;
+  --paper:#eaf4ff; --grid:#d6e7fb; --card:#ffffff; --ink:#18223d; --muted:#535e7a; --line:#d2daea;
   --accent:#2d55c8; --accent-soft:#e7edfc; --on-accent:#ffffff;
   --ok:#157a45; --ok-soft:#e0f3e7; --bad:#b9302a; --bad-soft:#fbe4e1;
   --c1:#e2483d; --c2:#ee9b14; --c3:#36a253; --c4:#2d6fd6; --c5:#8a4fd1; --c6:#e0588f;
@@ -17,7 +17,7 @@
   --display:"Baloo 2","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   --body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
 }
-:root.u15{ --accent:#bf4418; --accent-soft:#fbeae2; }
+:root.u15{ --accent:#d6400f; --accent-soft:#ffe9df; --paper:#eafaf1; --grid:#cdeedc; }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --paper:#11162a; --grid:#1a2138; --card:#1a2137; --ink:#e9edf8; --muted:#a4adc7; --line:#2f3956;
@@ -27,7 +27,7 @@
     --shadow:0 1px 0 rgba(0,0,0,.3), 0 14px 34px -14px rgba(0,0,0,.6);
     color-scheme:dark;
   }
-  :root.u15:not([data-theme="light"]){ --accent:#ff9c6e; --accent-soft:#3b2319; }
+  :root.u15:not([data-theme="light"]){ --accent:#ff9c6e; --accent-soft:#3b2319; --paper:#0f1d1a; --grid:#17302a; }
 }
 :root[data-theme="dark"]{
   --paper:#11162a; --grid:#1a2138; --card:#1a2137; --ink:#e9edf8; --muted:#a4adc7; --line:#2f3956;
@@ -37,14 +37,14 @@
   --shadow:0 1px 0 rgba(0,0,0,.3), 0 14px 34px -14px rgba(0,0,0,.6);
   color-scheme:dark;
 }
-:root.u15[data-theme="dark"]{ --accent:#ff9c6e; --accent-soft:#3b2319; }
+:root.u15[data-theme="dark"]{ --accent:#ff9c6e; --accent-soft:#3b2319; --paper:#0f1d1a; --grid:#17302a; }
 
 html,body{height:100%}
 *{box-sizing:border-box}
 body{
   margin:0; background-color:var(--paper); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.5;
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
-  background-size:26px 26px;
+  background-size:30px 30px;
 }
 button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:10px}
@@ -237,6 +237,41 @@ table.conj th{font-family:var(--display);color:var(--muted);font-weight:700}
   *{animation:none!important;transition:none!important}
 }
 
+/* ---------- kid-friendly layer ---------- */
+body{font-size:18px}
+.slide{border-radius:30px;border-width:3px}
+.titlepics{display:flex;gap:clamp(8px,2vw,18px);flex-wrap:wrap;font-size:clamp(2.6rem,7vw,4.6rem);line-height:1}
+.titlepics span{display:inline-block;animation:bob 2.4s ease-in-out infinite}
+.titlepics span:nth-child(2){animation-delay:.2s}.titlepics span:nth-child(3){animation-delay:.4s}.titlepics span:nth-child(4){animation-delay:.6s}.titlepics span:nth-child(5){animation-delay:.8s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.opt,.chip,.tile,.btn,.nav{border-bottom-width:6px;border-bottom-style:solid}
+.opt{border-radius:22px;padding:16px 20px;border-width:3px;border-bottom-width:7px}
+.opt:active:not(:disabled),.chip:active:not(:disabled),.tile:active:not(:disabled),.btn:active:not(:disabled),.nav:active:not(:disabled){transform:translateY(3px);border-bottom-width:3px}
+.chip{border-width:3px;border-bottom-width:6px;border-radius:16px;padding:10px 20px}
+.tile{border-width:3px;border-bottom-width:6px;border-radius:16px}
+.btn,.nav{border:0;border-bottom:6px solid rgba(0,0,0,.22);border-radius:18px}
+.nav{font-size:1.25rem;padding:10px 24px}
+.card{min-height:170px}
+.card .in{min-height:170px}
+.face{border-width:3px;border-radius:22px}
+.face.front{border-top-width:10px}
+.face .pic{font-size:clamp(2.6rem,5vw,3.4rem);line-height:1}
+.face .pic.num{font-family:var(--display);font-weight:800;color:var(--k,var(--accent))}
+.face .pic.small{font-size:1.8rem}
+.face .es2{font-size:.95rem;color:var(--muted)}
+.vpic{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1}
+.bigemoji{letter-spacing:.1em}
+.feedback{font-size:clamp(1.25rem,2.4vw,1.7rem)}
+.trophy{font-size:clamp(4rem,12vw,7rem);line-height:1;animation:pop .6s ease both}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+.score svg{width:26px;height:26px}
+.score{font-size:1.3rem}
+@media (max-width:640px){
+  .card,.card .in{min-height:140px}
+  .face .pic{font-size:2.3rem}
+  .face .es{font-size:1.05rem}
+}
+
 </style>
 </head>
 <body>
@@ -244,121 +279,103 @@ table.conj th{font-family:var(--display);color:var(--muted);font-weight:700}
 <noscript><p style="padding:24px">Este juego necesita JavaScript activado.</p></noscript>
 <script>
 /* Unidad 15 · ¿Qué te gusta hacer en tu tiempo libre? (La Pandilla 1)
-   In every "options" list, the FIRST option is the correct one (the game shuffles them). */
-var LEA_TEXT = '«¡Hola! Me llamo Lea. En mi tiempo libre <b>me gusta mucho</b> dibujar y leer. <b>Me gusta poco</b> ver la tele y <b>no me gusta nada</b> hacer la cama. <b>Sé</b> patinar, pero <b>no sé</b> tocar el violín. Mi amigo Juan <b>sabe</b> tocar la guitarra y <b>le gusta</b> mucho ir al parque.»';
-
+   Only vocabulary and grammar from the Unit 15 worksheet, singular pronouns only.
+   In every "options" list, the FIRST option is the correct one (the game shuffles them).
+   Cards: [Spanish, English, picture]. */
 window.LESSON = {
   theme: 'u15',
-  course: 'La Pandilla 1 · Unidad 15',
+  course: 'Unidad 15',
   short: 'Mi tiempo libre',
   slides: [
-    { type: 'title', eyebrow: 'La Pandilla 1 · Unidad 15', title: '¿Qué te gusta hacer en tu tiempo libre?',
-      subtitle: 'Las actividades de tiempo libre, cuánto nos gustan y lo que sabemos hacer.',
-      chips: ['Vocabulario', 'mucho · poco · nada', 'gustar: me · te · le', 'saber: sé · sabes · sabe'] },
+    { type: 'title', eyebrow: 'La Pandilla 1 · Unidad 15', title: '¿Qué te gusta hacer en tu tiempo libre?', pics: '🎸 🚲 ⚽ 💃 📖',
+      subtitle: '¡Vamos a practicar las actividades, «me gusta» y «sé»!' },
 
-    { type: 'cards', title: 'Mi vocabulario', heading: 'Cosas que me gusta hacer (1)',
-      cards: [['leer', 'to read'], ['dibujar', 'to draw'], ['cantar', 'to sing'], ['bailar', 'to dance'], ['patinar', 'to skate'], ['nadar', 'to swim'], ['cocinar', 'to cook']] },
-    { type: 'cards', title: 'Mi vocabulario', heading: 'Cosas que me gusta hacer (2)',
-      cards: [['silbar', 'to whistle'], ['jugar al fútbol', 'to play football'], ['montar en bici', 'to ride a bike'], ['ver la tele', 'to watch TV'], ['escuchar música', 'to listen to music'], ['ir al parque', 'to go to the park']] },
-    { type: 'cards', title: 'Mi vocabulario', heading: 'Cosas que me gusta hacer (3)',
-      cards: [['ir al cine', 'to go to the cinema'], ['tocar la guitarra', 'to play the guitar'], ['tocar la batería', 'to play the drums'], ['tocar el violín', 'to play the violin'], ['hacer la cama', 'to make the bed'], ['hacer los deberes', 'to do homework']] },
-    { type: 'cards', title: 'Mi vocabulario', heading: '¿Cuánto me gusta?',
-      cards: [['😍 Me gusta mucho.', 'I like it a lot.'], ['🙂 Me gusta poco.', 'I like it a little.'], ['🙁 No me gusta nada.', "I don't like it at all."]] },
+    { type: 'cards', title: 'Vocabulario', heading: 'Cosas que me gusta hacer (1)',
+      cards: [['leer', 'to read', '📖'], ['dibujar', 'to draw', '🖍️'], ['cantar', 'to sing', '🎤'], ['bailar', 'to dance', '💃'],
+        ['patinar', 'to skate', '⛸️'], ['nadar', 'to swim', '🏊'], ['cocinar', 'to cook', '🍳']] },
+    { type: 'cards', title: 'Vocabulario', heading: 'Cosas que me gusta hacer (2)',
+      cards: [['silbar', 'to whistle', '🎶'], ['jugar al fútbol', 'to play football', '⚽'], ['montar en bici', 'to ride a bike', '🚲'],
+        ['ver la tele', 'to watch TV', '📺'], ['escuchar música', 'to listen to music', '🎧'], ['ir al parque', 'to go to the park', '🌳']] },
+    { type: 'cards', title: 'Vocabulario', heading: 'Cosas que me gusta hacer (3)',
+      cards: [['ir al cine', 'to go to the cinema', '🎬'], ['tocar la guitarra', 'to play the guitar', '🎸'], ['tocar la batería', 'to play the drums', '🥁'],
+        ['tocar el violín', 'to play the violin', '🎻'], ['hacer la cama', 'to make the bed', '🛏️'], ['hacer los deberes', 'to do homework', '📝']] },
+    { type: 'cards', title: 'Vocabulario', heading: '¿Cuánto me gusta?',
+      cards: [['Me gusta mucho.', 'I like it a lot.', '😍'], ['Me gusta poco.', 'I like it a little.', '🙂'], ['No me gusta nada.', "I don't like it at all.", '🙁']] },
 
-    { type: 'mc', title: 'Vocabulario', prompt: '¿Qué significa «silbar»?', say: 'silbar',
-      options: ['to whistle', 'to sing', 'to swim', 'to skate'] },
-    { type: 'mc', title: 'Vocabulario', prompt: '¿Cómo se dice «to do homework»?',
-      options: ['hacer los deberes', 'hacer la cama', 'ver la tele', 'leer'] },
-    { type: 'mc', title: 'Vocabulario', prompt: '¿Cómo se dice «to play the drums»?',
-      options: ['tocar la batería', 'tocar la guitarra', 'tocar el violín', 'jugar al fútbol'] },
-    { type: 'type', title: 'Reto 1 · Completa la palabra', prompt: 'dibu_ar', sub: 'Escribe la palabra completa.', answer: ['dibujar'], say: 'dibujar' },
-    { type: 'type', title: 'Reto 1 · Completa la palabra', prompt: 'sil_ar', sub: 'Escribe la palabra completa.', answer: ['silbar'], say: 'silbar' },
-    { type: 'type', title: 'Reto 1 · Completa la palabra', prompt: 'tocar el vi_lín', sub: 'Escribe la palabra completa.', answer: ['tocar el violín'], say: 'tocar el violín',
+    { type: 'mc', title: 'Vocabulario', big: '🎶', prompt: '¿Qué es?', options: ['silbar', 'cantar', 'nadar', 'leer'] },
+    { type: 'mc', title: 'Vocabulario', big: '📝', prompt: '¿Qué es?', options: ['hacer los deberes', 'hacer la cama', 'ver la tele', 'dibujar'] },
+    { type: 'mc', title: 'Vocabulario', big: '🥁', prompt: '¿Qué es?', options: ['tocar la batería', 'tocar la guitarra', 'tocar el violín', 'escuchar música'] },
+    { type: 'mc', title: 'Vocabulario', big: '🚲', prompt: '¿Qué es?', options: ['montar en bici', 'patinar', 'jugar al fútbol', 'ir al parque'] },
+    { type: 'type', title: 'Completa la palabra', big: '🖍️', prompt: 'dibu_ar', sub: 'Escribe la palabra completa.', answer: ['dibujar'], say: 'dibujar' },
+    { type: 'type', title: 'Completa la palabra', big: '🎶', prompt: 'sil_ar', sub: 'Escribe la palabra completa.', answer: ['silbar'], say: 'silbar' },
+    { type: 'type', title: 'Completa la palabra', big: '🎻', prompt: 'tocar el vi_lín', sub: 'Escribe la palabra completa.', answer: ['tocar el violín'], say: 'tocar el violín',
       explain: 'Violín lleva tilde en la í.' },
 
-    { type: 'learn', title: 'Gramática', heading: 'Gustar: me · te · le', reveal: true,
+    { type: 'learn', title: 'Gramática', heading: 'Gustar: me · te · le 💛', reveal: true,
       html:
-        '<p>Para hablar de actividades decimos <b>gusta</b> + el verbo sin cambiar: «Me gusta bailar».</p>' +
+        '<p>Decimos <b>gusta</b> + el verbo sin cambiar: «Me gusta bailar» 💃.</p>' +
         '<div class="tw"><table class="conj"><tbody>' +
         '<tr><th>(a mí)</th><td><span class="reveal end-o">me</span> gusta bailar</td><td>I like</td></tr>' +
         '<tr><th>(a ti)</th><td><span class="reveal end-o">te</span> gusta bailar</td><td>you like</td></tr>' +
-        '<tr><th>(a él / a ella / a usted)</th><td><span class="reveal end-o">le</span> gusta bailar</td><td>he / she likes · you like</td></tr>' +
+        '<tr><th>(a él / a ella)</th><td><span class="reveal end-o">le</span> gusta bailar</td><td>he / she likes</td></tr>' +
         '</tbody></table></div>' +
-        '<p class="note">Con un nombre ponemos <b>a</b>: «<b>A</b> Juan le gusta ir al cine». Y <b>a + el = al</b>: ir al parque, jugar al fútbol.</p>' },
-    { type: 'conj', title: 'Conjugación', heading: '¿Me, te o le?', verb: 'gustar', meaning: 'to like',
-      pronouns: ['(a mí)', '(a ti)', '(a él / a ella / a usted)'], forms: ['me gusta', 'te gusta', 'le gusta'] },
+        '<p class="note">⭐ Con un nombre ponemos <b>a</b>: «<b>A</b> Juan le gusta ir al cine». Y <b>a + el = al</b>: ir al parque, jugar al fútbol.</p>' },
+    { type: 'conj', title: 'Conjugación', heading: '¿Me, te o le?', verb: 'gustar', pic: '💛', meaning: 'to like',
+      pronouns: ['(a mí)', '(a ti)', '(a él / a ella)'], forms: ['me gusta', 'te gusta', 'le gusta'] },
 
-    { type: 'learn', title: 'Gramática', heading: 'Saber + verbo = saber hacer algo', reveal: true,
+    { type: 'learn', title: 'Gramática', heading: 'Saber: sé · sabes · sabe 🧠', reveal: true,
       html:
-        '<p><b>Saber</b> + verbo significa <i>know how to</i>: «Sé nadar» = <i>I know how to swim</i>.</p>' +
+        '<p><b>Saber</b> + verbo = <i>know how to</i>: «Sé nadar» 🏊 = <i>I can swim</i>.</p>' +
         '<div class="tw"><table class="conj"><tbody>' +
         '<tr><th>(yo)</th><td><span class="reveal end-o">sé</span> nadar</td><td>I can swim</td></tr>' +
         '<tr><th>(tú)</th><td><span class="reveal end-o">sabes</span> nadar</td><td>you can swim</td></tr>' +
-        '<tr><th>(él / ella / usted)</th><td><span class="reveal end-o">sabe</span> nadar</td><td>he / she can swim · you can swim</td></tr>' +
+        '<tr><th>(él / ella)</th><td><span class="reveal end-o">sabe</span> nadar</td><td>he / she can swim</td></tr>' +
         '</tbody></table></div>' +
-        '<p class="note">¡Ojo con la tilde! <b>sé</b> (I know) lleva tilde. Sin tilde, «se» es otra palabra.</p>' },
-    { type: 'conj', title: 'Conjugación', verb: 'saber', meaning: 'to know how to', forms: ['sé', 'sabes', 'sabe'], trap: 'se',
-      explain: 'Recuerda: yo sé, con tilde.' },
-    { type: 'type', title: 'Conjugación', prompt: 'Yo ___ patinar.', sub: '(saber)', answer: ['sé'], strict: true,
+        '<p class="note">👀 ¡Ojo con la tilde! Yo <b>sé</b>.</p>' },
+    { type: 'conj', title: 'Conjugación', verb: 'saber', pic: '🧠', meaning: 'to know how to', pronouns: ['(yo)', '(tú)', '(él / ella)'],
+      forms: ['sé', 'sabes', 'sabe'], trap: 'se', explain: 'Recuerda: yo sé, con tilde.' },
+    { type: 'type', title: 'Conjugación', big: '⛸️', prompt: 'Yo ___ patinar.', sub: '(saber)', answer: ['sé'], strict: true,
       explain: 'Yo sé lleva tilde.' },
 
-    { type: 'mc', title: 'Reto 2 · ¿Me gusta… o sé?', prompt: '¿___ gusta bailar?', sub: '(a ti)', options: ['Te', 'Me', 'Le'] },
-    { type: 'mc', title: 'Reto 2 · ¿Me gusta… o sé?', prompt: 'A mi padre ___ gusta cocinar.', options: ['le', 'me', 'te'] },
-    { type: 'mc', title: 'Reto 2 · ¿Me gusta… o sé?', prompt: 'Yo ___ tocar la guitarra.', options: ['sé', 'sabe', 'sabes', 'se'] },
-    { type: 'mc', title: 'Reto 2 · ¿Me gusta… o sé?', prompt: '¿Tú ___ nadar?', options: ['sabes', 'sé', 'sabe'] },
-    { type: 'mc', title: 'Reto 2 · ¿Me gusta… o sé?', prompt: 'Mi madre ___ cantar muy bien.', options: ['sabe', 'sé', 'sabes'] },
-    { type: 'mc', title: 'Reto 2 · ¿Me gusta… o sé?', prompt: '—¿Sabes patinar?\n—No, no ___.', options: ['sé', 'sabes', 'sabe'] },
-    { type: 'mc', title: 'Reto 2 · ¿Me gusta… o sé?', prompt: 'A Ana ___ gusta leer.', options: ['le', 'me', 'te'] },
+    { type: 'mc', title: '¿Me gusta… o sé?', big: '💃', prompt: '¿___ gusta bailar?', sub: '(a ti)', options: ['Te', 'Me', 'Le'] },
+    { type: 'mc', title: '¿Me gusta… o sé?', big: '🍳', prompt: 'A mi padre ___ gusta cocinar.', options: ['le', 'me', 'te'] },
+    { type: 'mc', title: '¿Me gusta… o sé?', big: '📖', prompt: 'A Ana ___ gusta leer.', options: ['le', 'me', 'te'] },
+    { type: 'mc', title: '¿Me gusta… o sé?', big: '🎸', prompt: 'Yo ___ tocar la guitarra.', options: ['sé', 'sabe', 'sabes'] },
+    { type: 'mc', title: '¿Me gusta… o sé?', big: '🏊', prompt: '¿Tú ___ nadar?', options: ['sabes', 'sé', 'sabe'] },
+    { type: 'mc', title: '¿Me gusta… o sé?', big: '🎤', prompt: 'Mi madre ___ cantar muy bien.', options: ['sabe', 'sé', 'sabes'] },
+    { type: 'mc', title: '¿Me gusta… o sé?', big: '⛸️', prompt: '—¿Sabes patinar?\n—No, no ___.', options: ['sé', 'sabes', 'sabe'] },
 
-    { type: 'mc', title: 'Reto 5 · ¿Mucho, poco o nada?', big: '😍', prompt: 'Me gusta ___.', options: ['mucho', 'poco', 'nada'] },
-    { type: 'mc', title: 'Reto 5 · ¿Mucho, poco o nada?', big: '🙂', prompt: 'Me gusta ___.', options: ['poco', 'mucho', 'nada'] },
-    { type: 'mc', title: 'Reto 5 · ¿Mucho, poco o nada?', big: '🙁', prompt: 'No me gusta ___.', options: ['nada', 'mucho', 'poco'],
+    { type: 'mc', title: '¿Mucho, poco o nada?', big: '😍', prompt: 'Me gusta ___.', options: ['mucho', 'poco', 'nada'] },
+    { type: 'mc', title: '¿Mucho, poco o nada?', big: '🙂', prompt: 'Me gusta ___.', options: ['poco', 'mucho', 'nada'] },
+    { type: 'mc', title: '¿Mucho, poco o nada?', big: '🙁', prompt: 'No me gusta ___.', options: ['nada', 'mucho', 'poco'],
       explain: 'Con «nada» ponemos «no» delante: No me gusta nada.' },
 
-    { type: 'mc', title: 'Reto 4 · Adivina la actividad', prompt: 'Uso los pies y un balón en el campo.', options: ['jugar al fútbol', 'montar en bici', 'bailar', 'nadar'] },
-    { type: 'mc', title: 'Reto 4 · Adivina la actividad', prompt: 'Tiene dos ruedas y pedales.', options: ['montar en bici', 'tocar la guitarra', 'nadar', 'dibujar'] },
-    { type: 'mc', title: 'Reto 4 · Adivina la actividad', prompt: 'Necesito lápices de colores y papel.', options: ['dibujar', 'cocinar', 'bailar', 'jugar al fútbol'] },
-    { type: 'mc', title: 'Reto 4 · Adivina la actividad', prompt: 'Muevo brazos y piernas dentro de la piscina.', options: ['nadar', 'patinar', 'bailar', 'montar en bici'] },
-    { type: 'mc', title: 'Reto 4 · Adivina la actividad', prompt: 'Toco las cuerdas de un instrumento.', options: ['tocar la guitarra', 'tocar la batería', 'cantar', 'silbar'] },
-    { type: 'mc', title: 'Reto 4 · Adivina la actividad', prompt: 'Pongo música y muevo todo el cuerpo.', options: ['bailar', 'cantar', 'nadar', 'leer'] },
+    { type: 'mc', title: 'Adivina la actividad 🔮', prompt: 'Uso los pies y un balón en el campo.', options: ['jugar al fútbol', 'montar en bici', 'bailar', 'nadar'] },
+    { type: 'mc', title: 'Adivina la actividad 🔮', prompt: 'Tiene dos ruedas y pedales.', options: ['montar en bici', 'tocar la guitarra', 'nadar', 'dibujar'] },
+    { type: 'mc', title: 'Adivina la actividad 🔮', prompt: 'Necesito lápices de colores y papel.', options: ['dibujar', 'cocinar', 'bailar', 'jugar al fútbol'] },
+    { type: 'mc', title: 'Adivina la actividad 🔮', prompt: 'Muevo brazos y piernas dentro de la piscina.', options: ['nadar', 'patinar', 'bailar', 'montar en bici'] },
+    { type: 'mc', title: 'Adivina la actividad 🔮', prompt: 'Toco las cuerdas de un instrumento.', options: ['tocar la guitarra', 'tocar la batería', 'cantar', 'silbar'] },
+    { type: 'mc', title: 'Adivina la actividad 🔮', prompt: 'Pongo música y muevo todo el cuerpo.', options: ['bailar', 'cantar', 'nadar', 'leer'] },
 
-    { type: 'build', title: 'Reto 3 · Ordena y corrige', prompt: 'Ordena la frase.', sub: '¡Cuidado! Hay una palabra mal escrita que no debes usar.',
-      tiles: ['En', 'mi', 'tiempo', 'libre', 'me', 'gusta', 'montar en bici'], extra: ['gusto'],
-      alts: ['Me gusta montar en bici en mi tiempo libre'] },
-    { type: 'build', title: 'Reto 3 · Ordena y corrige', prompt: 'Ordena la frase.', sub: '¡Cuidado! Hay una palabra mal escrita que no debes usar.',
+    { type: 'build', title: 'Ordena y corrige 🧩', prompt: 'Ordena la frase.', sub: '¡Cuidado! Una palabra está mal escrita. ¡No la uses!',
+      tiles: ['En', 'mi', 'tiempo', 'libre', 'me', 'gusta', 'montar en bici'], extra: ['gusto'], alts: ['Me gusta montar en bici en mi tiempo libre'] },
+    { type: 'build', title: 'Ordena y corrige 🧩', prompt: 'Ordena la frase.', sub: '¡Cuidado! Una palabra está mal escrita. ¡No la uses!',
       tiles: ['A', 'Juan', 'le', 'gusta', 'ir', 'al cine'], extra: ['al sine'] },
-    { type: 'build', title: 'Reto 3 · Ordena y corrige', prompt: 'Ordena la frase.', sub: '¡Cuidado! Hay una palabra mal escrita que no debes usar.',
+    { type: 'build', title: 'Ordena y corrige 🧩', prompt: 'Ordena la frase.', sub: '¡Cuidado! Una palabra está mal escrita. ¡No la uses!',
       tiles: ['Yo', 'sé', 'nadar', 'y', 'patinar'], extra: ['sabo'], alts: ['Yo sé patinar y nadar'] },
-    { type: 'build', title: 'Reto 3 · Ordena y corrige', prompt: 'Ordena la frase.', sub: '¡Cuidado! Hay una palabra mal escrita que no debes usar.',
+    { type: 'build', title: 'Ordena y corrige 🧩', prompt: 'Ordena la frase.', sub: '¡Cuidado! Una palabra está mal escrita. ¡No la uses!',
       tiles: ['No', 'me', 'gusta', 'nada', 'cocinar'], extra: ['cocinars'] },
 
-    { type: 'learn', title: 'Reto 6 · Lee y responde', heading: 'Lee el texto con atención',
-      html: '<div class="passage" style="font-size:clamp(1.15rem,2.2vw,1.6rem);line-height:1.6">' + LEA_TEXT + '</div>' },
-    { type: 'mc', title: 'Reto 6 · Lee y responde', passage: LEA_TEXT, prompt: '¿Qué le gusta mucho a Lea?',
-      options: ['dibujar y leer', 'ver la tele', 'hacer la cama', 'tocar el violín'] },
-    { type: 'mc', title: 'Reto 6 · Lee y responde', passage: LEA_TEXT, prompt: '¿Qué no le gusta nada a Lea?',
-      options: ['hacer la cama', 'dibujar', 'patinar', 'leer'] },
-    { type: 'mc', title: 'Reto 6 · Lee y responde', passage: LEA_TEXT, prompt: '¿Sabe Lea tocar el violín?',
-      options: ['No, no sabe.', 'Sí, sabe.', 'No, no sé.'], explain: 'Hablamos de Lea (ella), por eso: no sabe.' },
-    { type: 'mc', title: 'Reto 6 · Lee y responde', passage: LEA_TEXT, prompt: '¿Qué sabe tocar Juan?',
-      options: ['la guitarra', 'el violín', 'la batería'] },
-    { type: 'tf', title: 'Reto 6 · Lee y responde', heading: '¿Verdad o mentira?', passage: LEA_TEXT, statements: [
-      ['A Lea le gusta mucho ver la tele.', false],
-      ['Lea sabe patinar.', true],
-      ['A Juan le gusta ir al parque.', true],
-      ['A Lea le gusta mucho hacer la cama.', false]
-    ] },
-
-    { type: 'mc', title: 'Reto 7 · Detective de errores', prompt: '¿Qué frase es correcta?',
+    { type: 'mc', title: 'Detective de errores 🕵️‍♀️', prompt: '¿Qué frase está bien?',
       options: ['A Juan le gusta ir al cine.', 'A Juan me gusta ir al cine.'], explain: 'Juan es «él», por eso: le gusta.' },
-    { type: 'mc', title: 'Reto 7 · Detective de errores', prompt: '¿Qué frase es correcta?',
+    { type: 'mc', title: 'Detective de errores 🕵️‍♀️', prompt: '¿Qué frase está bien?',
       options: ['Yo sé patinar muy bien.', 'Yo sabe patinar muy bien.'], explain: 'Con yo: sé.' },
-    { type: 'mc', title: 'Reto 7 · Detective de errores', prompt: '¿Qué frase es correcta?',
+    { type: 'mc', title: 'Detective de errores 🕵️‍♀️', prompt: '¿Qué frase está bien?',
       options: ['Tú sabes cantar en inglés.', 'Tú sé cantar en inglés.'], explain: 'Con tú: sabes.' },
-    { type: 'mc', title: 'Reto 7 · Detective de errores', prompt: '¿Qué frase es correcta?',
+    { type: 'mc', title: 'Detective de errores 🕵️‍♀️', prompt: '¿Qué frase está bien?',
       options: ['Me gusta jugar al fútbol.', 'Me gusta jugar a el fútbol.'], explain: 'a + el = al.' },
-    { type: 'mc', title: 'Reto 7 · Detective de errores', prompt: '¿Qué frase es correcta?',
-      options: ['A mi madre le gusta bailar.', 'Mi madre le gusta bailar.'], explain: 'Con una persona ponemos «a» delante: A mi madre le gusta…' },
+    { type: 'mc', title: 'Detective de errores 🕵️‍♀️', prompt: '¿Qué frase está bien?',
+      options: ['A mi madre le gusta bailar.', 'Mi madre le gusta bailar.'], explain: 'Con una persona ponemos «a» delante.' },
 
     { type: 'end' }
   ]
@@ -374,7 +391,7 @@ window.LESSON = {
   root.classList.add(L.theme || 'u12');
   root.lang = 'es';
 
-  var PRAISE = ['¡Muy bien!', '¡Genial!', '¡Perfecto!', '¡Fenomenal!', '¡Estupendo!', '¡Bravo!', '¡Olé!'];
+  var PRAISE = ['¡Muy bien! 🎉', '¡Genial! ⭐', '¡Perfecto! 🥳', '¡Fenomenal! 🌟', '¡Estupendo! 🙌', '¡Bravo! 👏', '¡Olé! 💃'];
   var app = document.getElementById('app');
   var slides, st, idx = 0, flash = null;
 
@@ -491,7 +508,7 @@ window.LESSON = {
   }
   function feedback(ok, right, why, extra) {
     if (ok == null) return h('p', { class: 'feedback', 'aria-live': 'polite' });
-    var msg = ok ? pick(PRAISE) + (extra ? ' ' + extra : '') : '¡Casi! La respuesta correcta es: ' + right;
+    var msg = ok ? pick(PRAISE) + (extra ? ' ' + extra : '') : '¡Casi! 💪 Es: ' + right;
     return h('p', { class: 'feedback ' + (ok ? 'ok' : 'bad'), 'aria-live': 'polite' },
       [msg, why ? h('span', { class: 'why' }, [why]) : null]);
   }
@@ -506,17 +523,34 @@ window.LESSON = {
     }
     return w;
   }
-  function done(i, ok, key) { flash = { i: i, ok: ok, key: key }; render(); }
+  function done(i, ok, key) { flash = { i: i, ok: ok, key: key }; render(); if (ok) confetti(); }
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function confetti() {
+    if (reduce) return;
+    var c = document.createElement('canvas'); c.className = 'confetti'; c.setAttribute('aria-hidden', 'true');
+    var W = c.width = window.innerWidth, H = c.height = window.innerHeight; document.body.appendChild(c);
+    var x = c.getContext('2d'), cs = getComputedStyle(document.documentElement);
+    var cols = ['--c1', '--c2', '--c3', '--c4', '--c5', '--c6'].map(function (v) { return cs.getPropertyValue(v).trim() || '#f90'; });
+    var parts = []; for (var k = 0; k < 90; k++) parts.push({ x: W / 2 + (Math.random() - .5) * W * .3, y: H * .55, vx: (Math.random() - .5) * 16, vy: -Math.random() * 16 - 6,
+      r: Math.random() * 6 + 4, a: Math.random() * 6, va: (Math.random() - .5) * .4, col: cols[k % cols.length] });
+    var t0 = performance.now();
+    (function step(t) {
+      var dt = t - t0; x.clearRect(0, 0, W, H);
+      parts.forEach(function (p) { p.vy += .45; p.x += p.vx; p.y += p.vy; p.a += p.va; x.save(); x.translate(p.x, p.y); x.rotate(p.a); x.globalAlpha = Math.max(0, 1 - dt / 1400); x.fillStyle = p.col; x.fillRect(-p.r, -p.r / 2, p.r * 2, p.r); x.restore(); });
+      if (dt < 1400) requestAnimationFrame(step); else c.remove();
+    })(t0);
+  }
 
   /* ---------- slide renderers ---------- */
   function rTitle(s) {
     return [
       h('div', { class: 'crayons', 'aria-hidden': 'true' }, ['--c1', '--c2', '--c3', '--c4', '--c5', '--c6'].map(function (c) { return h('i', { style: 'background:var(' + c + ')' }); })),
       h('p', { class: 'eyebrow' }, [s.eyebrow]),
+      s.pics ? h('div', { class: 'titlepics', 'aria-hidden': 'true' }, s.pics.split(' ').map(function (e) { return h('span', {}, [e]); })) : null,
       h('h1', {}, [s.title]),
       h('p', { class: 'lead' }, [s.subtitle]),
       s.chips ? h('ul', { class: 'chips' }, s.chips.map(function (c) { return h('li', {}, [c]); })) : null,
-      h('p', { class: 'hint' }, ['Usa los botones de abajo o las flechas ← → del teclado para pasar de diapositiva.'])
+      h('p', { class: 'hint' }, ['Pulsa «Siguiente →» para empezar. ¡Mucha suerte! 🍀'])
     ];
   }
 
@@ -526,8 +560,8 @@ window.LESSON = {
       var card = h('div', { class: 'card' + (S.flipped[i] ? ' flip' : ''), role: 'button', tabindex: '0', 'aria-pressed': S.flipped[i] ? 'true' : 'false',
         'aria-label': c[0] + ' (toca para ver el significado)' }, [
         h('div', { class: 'in' }, [
-          h('div', { class: 'face front' }, [h('span', { class: 'es' }, [c[0]]), h('span', { class: 'tap' }, ['toca para girar'])]),
-          h('div', { class: 'face back' }, [h('span', { class: 'en' }, [c[1]]), h('span', { class: 'es', style: 'font-size:1rem;opacity:.75' }, [c[0]])])
+          h('div', { class: 'face front' }, [c[2] ? h('span', { class: 'pic' + (/^\d+$/.test(c[2]) ? ' num' : '') }, [c[2]]) : null, h('span', { class: 'es' }, [c[0]]), h('span', { class: 'tap' }, ['👆 toca'])]),
+          h('div', { class: 'face back' }, [c[2] ? h('span', { class: 'pic small' + (/^\d+$/.test(c[2]) ? ' num' : '') }, [c[2]]) : null, h('span', { class: 'en' }, [c[1]]), h('span', { class: 'es2' }, [c[0]])])
         ])
       ]);
       function toggle() { S.flipped[i] = !S.flipped[i]; card.classList.toggle('flip', !!S.flipped[i]); card.setAttribute('aria-pressed', S.flipped[i] ? 'true' : 'false'); if (S.flipped[i]) return; }
@@ -542,7 +576,7 @@ window.LESSON = {
       s.cards.forEach(function (_, i) { S.flipped[i] = any; });
       render();
     } }, ['Girar todas']);
-    return [h('h2', {}, [s.heading || 'Mi vocabulario']), h('p', { class: 'hint' }, [s.hint || 'Lee la palabra en voz alta y después toca la tarjeta para ver qué significa.']), grid, h('div', { class: 'tools' }, [all])];
+    return [h('h2', {}, [s.heading || 'Mi vocabulario']), h('p', { class: 'hint' }, [s.hint || '🗣️ Di la palabra en voz alta. Después toca la tarjeta.']), grid, h('div', { class: 'tools' }, [all])];
   }
 
   function rLearn(s, S) {
@@ -630,8 +664,8 @@ window.LESSON = {
     });
     var all = Object.keys(S.rows).length === s.rowsX.length;
     var allOk = all && pointsOf(i) === s.rowsX.length;
-    var head = h('div', { class: 'verbhead' }, [h('span', { class: 'v' }, [s.verb]), h('span', { class: 'm' }, [s.meaning]), sayBtn(s.forms.join(', '))]);
-    return [h('h2', {}, [s.heading || 'Conjuga el verbo']), head, h('p', { class: 'hint' }, [s.hint || 'Elige la forma correcta para cada persona.']),
+    var head = h('div', { class: 'verbhead' }, [s.pic ? h('span', { class: 'vpic', 'aria-hidden': 'true' }, [s.pic]) : null, h('span', { class: 'v' }, [s.verb]), h('span', { class: 'm' }, [s.meaning]), sayBtn(s.forms.join(', '))]);
+    return [h('h2', {}, [s.heading || 'Conjuga el verbo']), head, h('p', { class: 'hint' }, [s.hint || 'Elige la palabra correcta en cada fila. 👇']),
       h('div', {}, rows), all ? feedback(allOk ? true : false, s.forms.join(' · '), s.explain) : feedback(null)];
   }
 
@@ -692,16 +726,17 @@ window.LESSON = {
     }));
     var missed = [];
     slides.forEach(function (s, i) { if (itemsOf(s) && pointsOf(i) < itemsOf(s)) missed.push(i); });
-    var msg = n === 3 ? '¡Eres una superexploradora!' : n === 2 ? '¡Muy buen trabajo!' : '¡Buen intento! Vamos a repasar.';
+    var msg = n === 3 ? '¡Eres una superexploradora!' : n === 2 ? '¡Muy buen trabajo!' : '¡Buen intento! ¡Vamos a repasar!';
+    if (n >= 2) setTimeout(confetti, 300);
     return [
-      h('p', { class: 'eyebrow' }, ['Fin · ' + L.short]),
+      h('div', { class: 'trophy', 'aria-hidden': 'true' }, [n === 3 ? '🏆' : n === 2 ? '🥈' : '💪']),
+      h('p', { class: 'eyebrow' }, ['¡Has terminado! · ' + L.course]),
       h('h1', {}, [msg]), stars,
       h('p', { class: 'bigscore' }, [t.got + ' / ' + t.max]),
-      h('p', { class: 'hint' }, [t.done < t.max ? 'Respuestas correctas (quedan ' + (t.max - t.done) + ' preguntas sin contestar).' : 'Respuestas correctas.']),
-      missed.length ? h('div', {}, [h('p', { class: 'hint', style: 'margin-bottom:8px' }, ['Para repasar:']),
+      h('p', { class: 'hint' }, [t.done < t.max ? 'respuestas correctas (sin contestar: ' + (t.max - t.done) + ')' : 'respuestas correctas']),
+      missed.length ? h('div', {}, [h('p', { class: 'hint', style: 'margin-bottom:8px' }, ['📚 Para repasar:']),
         h('div', { class: 'review' }, missed.map(function (i) { return h('button', { type: 'button', onclick: function () { go(i); } }, ['Diapositiva ' + (i + 1) + (slides[i].title ? ' · ' + slides[i].title : '')]); }))]) : null,
-      h('div', { class: 'tools' }, [h('button', { type: 'button', class: 'btn', onclick: restart }, ['Jugar otra vez']),
-        h('span', { class: 'hint' }, ['Las respuestas cambian de sitio cada vez.'])])
+      h('div', { class: 'tools' }, [h('button', { type: 'button', class: 'btn', onclick: restart }, ['🔄 Jugar otra vez'])])
     ];
   }
 

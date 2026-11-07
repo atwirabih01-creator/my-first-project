@@ -1,6 +1,6 @@
 :root{
   /* Layout: a Spanish cuaderno de cuadrícula desk: header rail, one paper card per slide, footer nav rail */
-  --paper:#f5f7fc; --grid:#e2e8f4; --card:#ffffff; --ink:#18223d; --muted:#535e7a; --line:#d2daea;
+  --paper:#eaf4ff; --grid:#d6e7fb; --card:#ffffff; --ink:#18223d; --muted:#535e7a; --line:#d2daea;
   --accent:#2d55c8; --accent-soft:#e7edfc; --on-accent:#ffffff;
   --ok:#157a45; --ok-soft:#e0f3e7; --bad:#b9302a; --bad-soft:#fbe4e1;
   --c1:#e2483d; --c2:#ee9b14; --c3:#36a253; --c4:#2d6fd6; --c5:#8a4fd1; --c6:#e0588f;
@@ -8,7 +8,7 @@
   --display:"Baloo 2","Trebuchet MS","Arial Rounded MT Bold",system-ui,sans-serif;
   --body:"Atkinson Hyperlegible","Segoe UI",system-ui,-apple-system,sans-serif;
 }
-:root.u15{ --accent:#bf4418; --accent-soft:#fbeae2; }
+:root.u15{ --accent:#d6400f; --accent-soft:#ffe9df; --paper:#eafaf1; --grid:#cdeedc; }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
     --paper:#11162a; --grid:#1a2138; --card:#1a2137; --ink:#e9edf8; --muted:#a4adc7; --line:#2f3956;
@@ -18,7 +18,7 @@
     --shadow:0 1px 0 rgba(0,0,0,.3), 0 14px 34px -14px rgba(0,0,0,.6);
     color-scheme:dark;
   }
-  :root.u15:not([data-theme="light"]){ --accent:#ff9c6e; --accent-soft:#3b2319; }
+  :root.u15:not([data-theme="light"]){ --accent:#ff9c6e; --accent-soft:#3b2319; --paper:#0f1d1a; --grid:#17302a; }
 }
 :root[data-theme="dark"]{
   --paper:#11162a; --grid:#1a2138; --card:#1a2137; --ink:#e9edf8; --muted:#a4adc7; --line:#2f3956;
@@ -28,14 +28,14 @@
   --shadow:0 1px 0 rgba(0,0,0,.3), 0 14px 34px -14px rgba(0,0,0,.6);
   color-scheme:dark;
 }
-:root.u15[data-theme="dark"]{ --accent:#ff9c6e; --accent-soft:#3b2319; }
+:root.u15[data-theme="dark"]{ --accent:#ff9c6e; --accent-soft:#3b2319; --paper:#0f1d1a; --grid:#17302a; }
 
 html,body{height:100%}
 *{box-sizing:border-box}
 body{
   margin:0; background-color:var(--paper); color:var(--ink); font-family:var(--body); font-size:17px; line-height:1.5;
   background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
-  background-size:26px 26px;
+  background-size:30px 30px;
 }
 button{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:10px}
@@ -226,4 +226,39 @@ table.conj th{font-family:var(--display);color:var(--muted);font-weight:700}
 }
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition:none!important}
+}
+
+/* ---------- kid-friendly layer ---------- */
+body{font-size:18px}
+.slide{border-radius:30px;border-width:3px}
+.titlepics{display:flex;gap:clamp(8px,2vw,18px);flex-wrap:wrap;font-size:clamp(2.6rem,7vw,4.6rem);line-height:1}
+.titlepics span{display:inline-block;animation:bob 2.4s ease-in-out infinite}
+.titlepics span:nth-child(2){animation-delay:.2s}.titlepics span:nth-child(3){animation-delay:.4s}.titlepics span:nth-child(4){animation-delay:.6s}.titlepics span:nth-child(5){animation-delay:.8s}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.opt,.chip,.tile,.btn,.nav{border-bottom-width:6px;border-bottom-style:solid}
+.opt{border-radius:22px;padding:16px 20px;border-width:3px;border-bottom-width:7px}
+.opt:active:not(:disabled),.chip:active:not(:disabled),.tile:active:not(:disabled),.btn:active:not(:disabled),.nav:active:not(:disabled){transform:translateY(3px);border-bottom-width:3px}
+.chip{border-width:3px;border-bottom-width:6px;border-radius:16px;padding:10px 20px}
+.tile{border-width:3px;border-bottom-width:6px;border-radius:16px}
+.btn,.nav{border:0;border-bottom:6px solid rgba(0,0,0,.22);border-radius:18px}
+.nav{font-size:1.25rem;padding:10px 24px}
+.card{min-height:170px}
+.card .in{min-height:170px}
+.face{border-width:3px;border-radius:22px}
+.face.front{border-top-width:10px}
+.face .pic{font-size:clamp(2.6rem,5vw,3.4rem);line-height:1}
+.face .pic.num{font-family:var(--display);font-weight:800;color:var(--k,var(--accent))}
+.face .pic.small{font-size:1.8rem}
+.face .es2{font-size:.95rem;color:var(--muted)}
+.vpic{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1}
+.bigemoji{letter-spacing:.1em}
+.feedback{font-size:clamp(1.25rem,2.4vw,1.7rem)}
+.trophy{font-size:clamp(4rem,12vw,7rem);line-height:1;animation:pop .6s ease both}
+.confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+.score svg{width:26px;height:26px}
+.score{font-size:1.3rem}
+@media (max-width:640px){
+  .card,.card .in{min-height:140px}
+  .face .pic{font-size:2.3rem}
+  .face .es{font-size:1.05rem}
 }

@@ -31,3 +31,10 @@ Ask the owner before anything that spends money, posts or sends anything publicl
 ## Learning from mistakes
 When the owner corrects an agent or says they prefer something, write that rule into
 this file or into the relevant agent's file, so the team remembers it next time.
+
+## Owner preferences (learned)
+- Teaching materials (Spanish class games for a young student): make them kid-friendly
+  (pictures, big buttons, cheerful feedback), and use ONLY the content from the owner's
+  lesson sheets: vocabulary and grammar, verbs with singular pronouns only. Don't add extra
+  topics, words or reading exercises the owner did not give.
+- Deliver a ready single file the owner can download and share directly.
