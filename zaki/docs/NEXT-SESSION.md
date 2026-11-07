@@ -1,5 +1,12 @@
 # Next session: start here
 
+## 2026-11-07: v1.3.0 — lessons with pictures + Try it! (packVersion 4)
+- APK: https://expo.dev/artifacts/eas/7IjsFmRwoEOzfPZQNhvzv7edYuEahMvwbeJA9yduMf4.apk ; server redeployed.
+- Founder added US$10 credit. Hosted server no longer blocks families it forgot (no DB) — Supabase still needed.
+- Live checks: Fractions EN (7 pictures, 4 try-its, US$0.05), water cycle AR, multiplication with family login (5 pictures, 3 try-its).
+- Later (founder): back-end curriculum knowledge as a hidden skill (see DECISIONS 2026-11-07), PDF uploads.
+
+
 ## 2026-11-03 (night): v1.2.0 — homework photos, story lessons, calm sensitive topics
 - APK: https://expo.dev/artifacts/eas/KBtXVd6jhtKmizsnImIl2ambLqtkC6VCWKwGK1JgeTM.apk (new native module expo-image-manipulator + camera permission). Server redeployed.
 - Live red team after fixes: tutor all categories + homework priority pass (re-run of changed groups 203/203 + 105/105).
