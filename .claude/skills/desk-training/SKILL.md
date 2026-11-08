@@ -64,7 +64,13 @@ Run it even when the scanner has no candidate. This is the practice that builds 
   triggers.json, so the 8 Nov review can still score it.
 - **What counts as a reason against:** it must predict the direction over the next 24h. "Could go
   either way" events don't count (Sage, 2 Nov).
-- **Review on Sun 8 Nov:**
+- **Refill triggers at once (from 9 Nov, Sage's card of 8 Nov):** when a trigger is used, or sits more
+  than 2% from price, Hawk writes a new level for that coin and direction in the same session, still
+  beyond the range edge.
+  - Check on Sun 15 Nov: no BTC or ETH direction without a live trigger at any session, and 5 or more
+    official trigger calls. Count same-day BTC and ETH calls as one bet.
+- **Review on Sun 8 Nov (done):** 3 calls, against a target of 8. The trial is kept; see
+  journal/2026-11-08-week.md.
   - Target: 8 or more scored calls.
   - Drop the trial if trigger calls are right less than 50% of the time after 20 calls.
 

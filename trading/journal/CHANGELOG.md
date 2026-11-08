@@ -83,3 +83,13 @@
   if price is still beyond the level when the call is recorded.
   - Added to desk-training/SKILL.md section 1.
   - Reviewed on 8 Nov.
+
+## 2026-11-08 · Weekly report card 2 (Sage): the trigger trial is kept, with "refill triggers at once"
+- **Week:**
+  - 3 trigger calls, 1 right; 4 scored in total, 1 right.
+  - Shadows (skipped calls): 3 of 4 would have been right.
+  - No trades; account $498.76.
+- **Trial target missed:** 3 calls against a target of 8. The drop rule has not been reached, so the
+  trial is kept.
+- **New:** Hawk refills a used trigger, or one more than 2% from price, in the same session
+  (desk-training/SKILL.md). Reviewed 15 Nov.
