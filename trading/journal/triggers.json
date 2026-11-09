@@ -22,7 +22,14 @@
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 2195
+   "level": 2195,
+   "used_utc": "2026-11-09 00:25",
+   "shadow": {
+    "start": 2133,
+    "start_utc": "2026-11-09 00:25",
+    "score_utc": "2026-11-10 00:25",
+    "note": "skipped: Sage ruled Atlas's reason valid - sellers exhausted after a 7.5% one-hour liquidation flush (24 Oct lesson)"
+   }
   },
   {
    "symbol": "PEPEUSDT",
