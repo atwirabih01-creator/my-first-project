@@ -1,47 +1,38 @@
 {
- "set": "trial-4 (BTC, ETH) + trial-1 (PEPE)",
- "frozen_utc": "2026-11-06 16:30",
+ "set": "trial-5 (all coins, refill rule)",
+ "frozen_utc": "2026-11-09 00:35",
  "rule": "two consecutive Binance 1h closes beyond the level; level beyond the current range edge; if a break at that level failed in the last 48h, also needs a retest that holds",
- "author": "Hawk (levels, after the 6 Nov jobs report)",
+ "author": "Hawk (levels within ~2% of price, beyond the post-drop range edges)",
  "triggers": [
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 77200
+   "level": 76250
   },
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 74700
+   "level": 73450
   },
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 2300
+   "level": 2175
   },
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 2195,
-   "used_utc": "2026-11-09 00:25",
-   "shadow": {
-    "start": 2133,
-    "start_utc": "2026-11-09 00:25",
-    "score_utc": "2026-11-10 00:25",
-    "note": "skipped: Sage ruled Atlas's reason valid - sellers exhausted after a 7.5% one-hour liquidation flush (24 Oct lesson)"
-   }
+   "level": 2095
   },
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 5.15e-06,
-   "needs_retest": true,
-   "note": "single close 0.00000516 at 16:00 4 Nov failed back below: needs retest"
+   "level": 5.14e-06
   },
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 4.65e-06
+   "level": 4.91e-06
   }
  ],
  "history": [
@@ -194,6 +185,53 @@
       "end": 2234.17,
       "result_pct": -0.789,
       "right": true
+     }
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 5.15e-06,
+     "needs_retest": true,
+     "note": "single close 0.00000516 at 16:00 4 Nov failed back below: needs retest"
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 4.65e-06
+    }
+   ]
+  },
+  {
+   "set": "trial-4 (BTC, ETH) + trial-1 (PEPE)",
+   "frozen_utc": "2026-11-06 16:30",
+   "rule": "two consecutive Binance 1h closes beyond the level; level beyond the current range edge; if a break at that level failed in the last 48h, also needs a retest that holds",
+   "author": "Hawk (levels, after the 6 Nov jobs report)",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 77200
+    },
+    {
+     "symbol": "BTCUSDT",
+     "dir": "down",
+     "level": 74700
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 2300
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "down",
+     "level": 2195,
+     "used_utc": "2026-11-09 00:25",
+     "shadow": {
+      "start": 2133,
+      "start_utc": "2026-11-09 00:25",
+      "score_utc": "2026-11-10 00:25",
+      "note": "skipped: Sage ruled Atlas's reason valid - sellers exhausted after a 7.5% one-hour liquidation flush (24 Oct lesson)"
      }
     },
     {
