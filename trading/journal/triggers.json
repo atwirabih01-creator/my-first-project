@@ -27,12 +27,16 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 5.14e-06
+   "level": 5.41e-06,
+   "needs_retest": true,
+   "note": "16:00 bar poked 0.00000540 and fell back under the 0.00000534 ceiling"
   },
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 4.91e-06
+   "level": 5.01e-06,
+   "needs_retest": true,
+   "note": "06:00-07:00 closes broke 0.00000502 and turned back up"
   }
  ],
  "history": [
@@ -245,6 +249,29 @@
      "symbol": "PEPEUSDT",
      "dir": "down",
      "level": 4.65e-06
+    }
+   ]
+  },
+  {
+   "set": "PEPE trial-5 levels (retired 9 Nov 16:25)",
+   "triggers": [
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 5.14e-06,
+     "used_utc": "2026-11-09 16:25",
+     "shadow": {
+      "start": 5.31e-06,
+      "start_utc": "2026-11-09 16:25",
+      "score_utc": "2026-11-10 16:25",
+      "note": "skipped: US CPI (major event) Tue 10 Nov 13:30 UTC inside the 24h"
+     }
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 4.91e-06,
+     "used_utc": "2026-11-09 16:25 (replaced, not fired)"
     }
    ]
   }
