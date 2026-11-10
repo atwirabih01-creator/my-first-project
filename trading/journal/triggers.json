@@ -235,7 +235,10 @@
       "start": 2133,
       "start_utc": "2026-11-09 00:25",
       "score_utc": "2026-11-10 00:25",
-      "note": "skipped: Sage ruled Atlas's reason valid - sellers exhausted after a 7.5% one-hour liquidation flush (24 Oct lesson)"
+      "note": "skipped: Sage ruled Atlas's reason valid - sellers exhausted after a 7.5% one-hour liquidation flush (24 Oct lesson)",
+      "end": 2133.73,
+      "result_pct": 0.034,
+      "right": false
      }
     },
     {
