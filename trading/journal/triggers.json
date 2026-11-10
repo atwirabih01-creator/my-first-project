@@ -15,16 +15,6 @@
    "level": 73450
   },
   {
-   "symbol": "ETHUSDT",
-   "dir": "up",
-   "level": 2175
-  },
-  {
-   "symbol": "ETHUSDT",
-   "dir": "down",
-   "level": 2095
-  },
-  {
    "symbol": "PEPEUSDT",
    "dir": "up",
    "level": 5.41e-06,
@@ -37,6 +27,20 @@
    "level": 5.01e-06,
    "needs_retest": true,
    "note": "06:00-07:00 closes broke 0.00000502 and turned back up"
+  },
+  {
+   "symbol": "ETHUSDT",
+   "dir": "up",
+   "level": 2140,
+   "needs_retest": true,
+   "note": "9 Nov 15:00 close 2,147.5 failed above"
+  },
+  {
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "level": 2080,
+   "needs_retest": true,
+   "note": "range low 2,083-2,084; 8 Nov flash break to 2,060 failed"
   }
  ],
  "history": [
@@ -275,6 +279,29 @@
      "dir": "down",
      "level": 4.91e-06,
      "used_utc": "2026-11-09 16:25 (replaced, not fired)"
+    }
+   ]
+  },
+  {
+   "set": "ETH trial-5 levels (retired 10 Nov 12:20)",
+   "triggers": [
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 2175,
+     "used_utc": "2026-11-10 12:20 (replaced, not fired)"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "down",
+     "level": 2095,
+     "used_utc": "2026-11-10 12:20",
+     "shadow": {
+      "start": 2092.63,
+      "start_utc": "2026-11-10 12:20",
+      "score_utc": "2026-11-11 12:20",
+      "note": "skipped: US CPI (major event) 10 Nov 13:30 UTC inside the 24h"
+     }
     }
    ]
   }
