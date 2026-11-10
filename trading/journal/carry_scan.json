@@ -1,7 +1,18 @@
 {
- "scanned_utc": "2026-11-10 00:14:00+00:00",
+ "scanned_utc": "2026-11-10 08:15:00+00:00",
  "candidates": [],
  "hottest": [
+  {
+   "coin": "WIF",
+   "venue": "OKX",
+   "yearly_last9": 0.1016,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    0.0001
+   ],
+   "versions": []
+  },
   {
    "coin": "HBAR",
    "venue": "HL",
@@ -49,9 +60,9 @@
   {
    "coin": "BTC",
    "venue": "HL",
-   "yearly_last9": 0.0979,
+   "yearly_last9": 0.0975,
    "last3_per8h": [
-    9.5e-05,
+    9.7e-05,
     9.7e-05,
     1.3e-05
    ],
@@ -76,17 +87,6 @@
     0.0001,
     0.0001,
     1.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "SEI",
-   "venue": "HL",
-   "yearly_last9": 0.0921,
-   "last3_per8h": [
-    9.7e-05,
-    6.3e-05,
-    -2e-06
    ],
    "versions": []
   }
