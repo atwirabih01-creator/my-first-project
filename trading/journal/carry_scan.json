@@ -1,5 +1,5 @@
 {
- "scanned_utc": "2026-11-10 12:18:00+00:00",
+ "scanned_utc": "2026-11-10 16:18:00+00:00",
  "candidates": [],
  "hottest": [
   {
@@ -16,77 +16,77 @@
   {
    "coin": "HBAR",
    "venue": "HL",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "ORDI",
    "venue": "HL",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "TURBO",
    "venue": "HL",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "OP",
-   "venue": "HL",
-   "yearly_last9": 0.1041,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "BTC",
-   "venue": "HL",
-   "yearly_last9": 0.1035,
-   "last3_per8h": [
-    9.7e-05,
-    9.7e-05,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "FET",
-   "venue": "HL",
-   "yearly_last9": 0.1032,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "PNUT",
    "venue": "HL",
-   "yearly_last9": 0.1024,
+   "yearly_last9": 0.0981,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "OP",
+   "venue": "HL",
+   "yearly_last9": 0.098,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "BTC",
+   "venue": "HL",
+   "yearly_last9": 0.0975,
+   "last3_per8h": [
+    9.7e-05,
+    0.0001,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "FET",
+   "venue": "HL",
+   "yearly_last9": 0.0972,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    1.3e-05
    ],
    "versions": []
   }

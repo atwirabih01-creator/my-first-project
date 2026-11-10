@@ -271,7 +271,10 @@
       "start": 5.31e-06,
       "start_utc": "2026-11-09 16:25",
       "score_utc": "2026-11-10 16:25",
-      "note": "skipped: US CPI (major event) Tue 10 Nov 13:30 UTC inside the 24h"
+      "note": "skipped: US CPI (major event) Tue 10 Nov 13:30 UTC inside the 24h",
+      "end": 5.25e-06,
+      "result_pct": -1.13,
+      "right": false
      }
     },
     {

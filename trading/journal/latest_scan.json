@@ -1,20 +1,20 @@
 {
- "scanned_utc": "2026-11-10 12:17:00+00:00",
+ "scanned_utc": "2026-11-10 16:16:00+00:00",
  "coins_checked": 40,
  "market_tide": "down",
  "candidates": [
   {
-   "scanned_utc": "2026-11-10 12:17:00+00:00",
-   "bar_utc": "2026-11-10 08:00:00+00:00",
+   "scanned_utc": "2026-11-10 16:16:00+00:00",
+   "bar_utc": "2026-11-10 12:00:00+00:00",
    "symbol": "ARBUSDT",
    "meme": false,
    "side": "short",
    "situation": "dip",
-   "price": 0.1624,
-   "atr4h_pct": 3.52,
-   "rsi4h": 42.1,
-   "buy_share_24h": 0.518,
-   "vol24h_musd": 27.4,
+   "price": 0.1614,
+   "atr4h_pct": 3.64,
+   "rsi4h": 41.1,
+   "buy_share_24h": 0.504,
+   "vol24h_musd": 22.9,
    "versions_allowed": "D01 D02 D03 D04 D05 D06 D07 D08 D09 D10 D11 D12 D13 D14"
   }
  ]
