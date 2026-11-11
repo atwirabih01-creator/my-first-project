@@ -26,7 +26,8 @@
    "dir": "down",
    "level": 5.01e-06,
    "needs_retest": true,
-   "note": "06:00-07:00 closes broke 0.00000502 and turned back up"
+   "note": "06:00-07:00 closes broke 0.00000502 and turned back up",
+   "used_utc": "2026-11-11 16:20"
   },
   {
    "symbol": "ETHUSDT",
