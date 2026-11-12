@@ -148,3 +148,9 @@ changes until they are scored.
 - **Rule (keep):** after a failed break, wait for a retest that holds. Compare the BTC case: the retest
   rule kept BTC out of a +3% run (a shadow result is kept), so the retest rule has a cost too. Score
   both before changing anything.
+
+## 2026-11-12 · Trigger call "PEPE down 24h" (trial-5) · RIGHT (−11.9%)
+- **Expected:** a 24h fall after PEPE broke 0.00000501 and the retest held (the 15:00 bar touched 0.00000504 and closed at 0.00000495, after a rejection at the 0.00000534 ceiling). Atlas found no valid reason against.
+- **Happened:** 0.00000495 → 0.00000436 (−11.9%). PEPE kept sliding with the wider market (BTC −3% and ETH −3% on 12 Nov), with a low of 0.00000430.
+- **Verdict:** a good decision with a good result. The chart plan held: the retest filter confirmed sellers at the level, the same pattern as the 4 Nov ETH right call. Research and the final check held. It was a market-wide slide, so one right call proves little.
+- **Rule (keep):** a break plus a retest that holds is now 2 for 2 on official calls (ETH 4 Nov, PEPE 12 Nov). Keep requiring the retest after a failed break, and tally the retest-held calls separately at the 15 Nov review.

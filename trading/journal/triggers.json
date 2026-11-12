@@ -12,22 +12,8 @@
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 73450
-  },
-  {
-   "symbol": "PEPEUSDT",
-   "dir": "up",
-   "level": 5.41e-06,
-   "needs_retest": true,
-   "note": "16:00 bar poked 0.00000540 and fell back under the 0.00000534 ceiling"
-  },
-  {
-   "symbol": "PEPEUSDT",
-   "dir": "down",
-   "level": 5.01e-06,
-   "needs_retest": true,
-   "note": "06:00-07:00 closes broke 0.00000502 and turned back up",
-   "used_utc": "2026-11-11 16:20"
+   "level": 73450,
+   "used_utc": "2026-11-12 16:20"
   },
   {
    "symbol": "ETHUSDT",
@@ -43,6 +29,18 @@
    "needs_retest": true,
    "note": "range low 2,083-2,084; 8 Nov flash break to 2,060 failed",
    "used_utc": "2026-11-12 00:25"
+  },
+  {
+   "symbol": "PEPEUSDT",
+   "dir": "up",
+   "level": 5.05e-06,
+   "note": "Hawk 12 Nov 16:25 refill: just above 24h top 0.00000501 (range-edge rule wins, >2% away)"
+  },
+  {
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "level": 4.28e-06,
+   "note": "Hawk 12 Nov 16:25 refill: just below range low 0.00000430 (13:00 low)"
   }
  ],
  "history": [
@@ -310,6 +308,26 @@
       "result_pct": -1.656,
       "right": true
      }
+    }
+   ]
+  },
+  {
+   "set": "PEPE levels retired 2026-11-12 16:25",
+   "triggers": [
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 5.41e-06,
+     "needs_retest": true,
+     "note": "16:00 bar poked 0.00000540 and fell back under the 0.00000534 ceiling"
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 5.01e-06,
+     "needs_retest": true,
+     "note": "06:00-07:00 closes broke 0.00000502 and turned back up",
+     "used_utc": "2026-11-11 16:20"
     }
    ]
   }
