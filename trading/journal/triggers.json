@@ -41,7 +41,8 @@
    "dir": "down",
    "level": 2080,
    "needs_retest": true,
-   "note": "range low 2,083-2,084; 8 Nov flash break to 2,060 failed"
+   "note": "range low 2,083-2,084; 8 Nov flash break to 2,060 failed",
+   "used_utc": "2026-11-12 00:25"
   }
  ],
  "history": [
