@@ -33,8 +33,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 4.86e-06,
-   "note": "Hawk's stated 16:25 instruction applied 20:15: just above the new 24h top 0.00000484 (range-edge rule wins, >2% away)"
+   "level": 4.8e-06,
+   "note": "Hawk's stated 16:25 instruction applied 20:15: just above the 24h top from 1h candles, 0.00000478 (range-edge rule wins, >2% away)"
   },
   {
    "symbol": "PEPEUSDT",
