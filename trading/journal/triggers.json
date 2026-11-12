@@ -33,8 +33,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 5.05e-06,
-   "note": "Hawk 12 Nov 16:25 refill: just above 24h top 0.00000501 (range-edge rule wins, >2% away)"
+   "level": 4.86e-06,
+   "note": "Hawk's stated 16:25 instruction applied 20:15: just above the new 24h top 0.00000484 (range-edge rule wins, >2% away)"
   },
   {
    "symbol": "PEPEUSDT",
@@ -328,6 +328,17 @@
      "needs_retest": true,
      "note": "06:00-07:00 closes broke 0.00000502 and turned back up",
      "used_utc": "2026-11-11 16:20"
+    }
+   ]
+  },
+  {
+   "set": "PEPE up retired 2026-11-12 20:15",
+   "triggers": [
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 5.05e-06,
+     "note": "Hawk 12 Nov 16:25 refill: just above 24h top 0.00000501 (range-edge rule wins, >2% away)"
     }
    ]
   }
