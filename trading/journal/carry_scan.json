@@ -1,5 +1,5 @@
 {
- "scanned_utc": "2026-11-12 08:18:00+00:00",
+ "scanned_utc": "2026-11-12 12:16:00+00:00",
  "candidates": [],
  "hottest": [
   {
@@ -29,8 +29,8 @@
    "venue": "OKX",
    "yearly_last9": 0.1079,
    "last3_per8h": [
-    0.0001,
     8.7e-05,
+    0.0001,
     0.0001
    ],
    "versions": []
@@ -38,55 +38,55 @@
   {
    "coin": "NEAR",
    "venue": "HL",
-   "yearly_last9": 0.1006,
+   "yearly_last9": 0.1067,
    "last3_per8h": [
     0.00011,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "FET",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "HBAR",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "OP",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "ORDI",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   }
