@@ -318,7 +318,7 @@ export const MATH_KNOWLEDGE: KnowledgeEntry[] = [
     visuals: [
       { type: "clock", hour: 7, minute: 0 },
       { type: "clock", hour: 3, minute: 0 },
-      { type: "sequence", items: [{ emoji: "🌅", label: "7:00 wake up" }, { emoji: "🏫", label: "8:00 school" }, { emoji: "🌙", label: "9:00 sleep" }] },
+      { type: "sequence", items: [{ emoji: "🌅", label: "7:00 wake up" }, { emoji: "🏫", label: "8:00 school" }, { emoji: "🌙", label: "9:00 at night: sleep" }] },
     ],
     vocabulary: [
       { en: "clock", ar: "ساعة" }, { en: "hour", ar: "ساعة (وحدة زمن)" }, { en: "o'clock", ar: "تمامًا" },
@@ -984,7 +984,7 @@ export const MATH_KNOWLEDGE: KnowledgeEntry[] = [
     ],
     workedExamples: [
       { problem: "A cake is cut into 8 equal pieces. 3 are eaten. What fraction is eaten?", solution: "3 parts out of 8 equal parts: 3/8." },
-      { problem: "What is 2/5 of 15 apples?", solution: "1/5 of 15 = 15 ÷ 5 = 3. 2/5 = 2 × 3 = 6 apples." },
+      { problem: "What is 2/5 of 15 apples?", solution: "1/5 of 15 = 15 ÷ 5 = 3. 2/5 of 15 = 2 × 3 = 6 apples." },
       { problem: "Which is bigger, 1/4 or 1/6?", solution: "Same-size wholes: 4 pieces are bigger than 6 pieces. 1/4 > 1/6." },
     ],
     misconceptions: [
@@ -2174,7 +2174,7 @@ export const MATH_KNOWLEDGE: KnowledgeEntry[] = [
     workedExamples: [
       { problem: "Find 15% of 80.", solution: "10% = 8, 5% = 4. 15% = 8 + 4 = 12." },
       { problem: "A test score is 42 out of 60. What percentage is it?", solution: "42/60 = 7/10 = 70/100 = 70%." },
-      { problem: "A jacket costs 45 coins with 20% off. What is the new price?", solution: "10% of 45 = 4.5, so 20% = 9. 45 − 9 = 36 coins." },
+      { problem: "A jacket costs 45 coins with 20% off. What is the new price?", solution: "10% of 45 = 4.5, so 20% of 45 = 9. 45 − 9 = 36 coins." },
     ],
     misconceptions: [
       { mistake: "Thinking 20% off then 20% on gets back to the start.", fix: "The second 20% is of a smaller amount; try it with 100." },
@@ -3758,7 +3758,7 @@ export const MATH_KNOWLEDGE: KnowledgeEntry[] = [
     steps: [
       "Find an average for each set (median or mean).",
       "Find a spread for each set: range, or interquartile range IQR = Q3 − Q1 (not affected by extreme values).",
-      "Quartiles: Q1 is the median of the lower half, Q3 the median of the upper half.",
+      "Quartiles: Q1 is the median of the lower half, Q3 the median of the upper half (with an odd number of values, leave the middle value out of both halves).",
       "Draw box plots (min, Q1, median, Q3, max) on the same scale.",
       "Write two comparison sentences: one about average, one about spread (consistency), in context.",
     ],
@@ -3807,7 +3807,7 @@ export const MATH_KNOWLEDGE: KnowledgeEntry[] = [
     workedExamples: [
       { problem: "Find the nth term of 5, 8, 11, 14.", solution: "d = 3. First term 5 = 3 × 1 + 2, so nth term = 3n + 2." },
       { problem: "Find the 20th term of 3n + 2.", solution: "3 × 20 + 2 = 62." },
-      { problem: "Is 100 in the sequence 3n + 2?", solution: "3n + 2 = 100 → 3n = 98 → n = 32.67, not whole. No." },
+      { problem: "Is 100 in the sequence 3n + 2?", solution: "3n + 2 = 100 → 3n = 98 → n = 98 ÷ 3 = 32 2/3 (about 32.67), not a whole number. No." },
     ],
     misconceptions: [
       { mistake: "Writing the nth term as n + 3 for 5, 8, 11.", fix: "The difference 3 multiplies n: 3n, then adjust: 3n + 2." },
