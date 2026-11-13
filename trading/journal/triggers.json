@@ -5,17 +5,6 @@
  "author": "Hawk (levels within ~2% of price, beyond the post-drop range edges)",
  "triggers": [
   {
-   "symbol": "BTCUSDT",
-   "dir": "up",
-   "level": 76250
-  },
-  {
-   "symbol": "BTCUSDT",
-   "dir": "down",
-   "level": 73450,
-   "used_utc": "2026-11-12 16:20"
-  },
-  {
    "symbol": "PEPEUSDT",
    "dir": "up",
    "level": 4.8e-06,
@@ -40,6 +29,19 @@
    "level": 1982,
    "note": "Hawk 13 Nov 00:15 refill: just below 24h low 1,983.82 (12 Nov 14:00 wick); no failed break",
    "used_utc": "2026-11-13 08:20"
+  },
+  {
+   "symbol": "BTCUSDT",
+   "dir": "up",
+   "level": 71700,
+   "needs_retest": true,
+   "note": "13 Nov 20:15 refill (leader applied Hawk's 13 Nov ETH method; Hawk to confirm): just above 24h top 71,636 (range-edge rule wins, +3.8%); price fell through here on 12 Nov"
+  },
+  {
+   "symbol": "BTCUSDT",
+   "dir": "down",
+   "level": 67450,
+   "note": "13 Nov 20:15 refill (Hawk's method; Hawk to confirm): just below 24h low 67,568 (13 Nov 05:00); no close below in 48h"
   }
  ],
  "history": [
@@ -358,6 +360,22 @@
      "needs_retest": true,
      "note": "range low 2,083-2,084; 8 Nov flash break to 2,060 failed",
      "used_utc": "2026-11-12 00:25"
+    }
+   ]
+  },
+  {
+   "set": "BTC levels retired 2026-11-13 20:15",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 76250
+    },
+    {
+     "symbol": "BTCUSDT",
+     "dir": "down",
+     "level": 73450,
+     "used_utc": "2026-11-12 16:20"
     }
    ]
   }

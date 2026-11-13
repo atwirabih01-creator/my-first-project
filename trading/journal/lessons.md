@@ -160,3 +160,9 @@ changes until they are scored.
 - **Happened:** 2,056.36 → 2,019.74 (−1.8%), with a low of 1,983.82 during the 12 Nov afternoon market drop (BTC −4%). Since then it has been flat at 2,005–2,020.
 - **Verdict:** a good decision with a good result, but a modest one: most of the gain came from the market-wide drop, and ETH bounced off the low. The chart plan, research and final check all held.
 - **Rule (keep):** a break plus a retest that holds is now 3 for 3 on official calls (ETH 4 Nov, PEPE 12 Nov, ETH 13 Nov). Calls with no retest are 0 for 3. That is a pattern to test at the 15 Nov review, not proof yet. The ETH and PEPE calls of 12 Nov overlap with the same market drop.
+
+## 2026-11-13 · Trigger call "BTC down 24h" (trial-5, no retest) · RIGHT (−3.9%)
+- **Expected:** a 24h fall after BTC broke 73,450 cleanly (two closes, 72,957 and 72,910), after an orderly 4% drop that ended in a ~10x-volume climax. Atlas found no valid reason against. Sage recorded the call so the trial could test this exact case: does the drop continue or snap back?
+- **Happened:** 71,710 → 68,900 (−3.9%). Overnight, longs were force-closed below 70k (about $622M in 4h) and BTC hit a 67,568 low on 13 Nov, then bounced back to ~69k.
+- **Verdict:** a good decision with a good result. The chart plan held, and research correctly did not use the 12 Nov volume climax as a veto. A big volume spike *without* a big price drop did not mark the bottom. The real flush came later.
+- **Rule (Sage, provisional):** "sellers exhausted → skip" needs a big price drop (like 9 Nov's 7.5% hour), not just big volume. Calls without a retest are now 1/4, and calls with a break plus a retest that held are 3/3. Review both counts on 15 Nov.
