@@ -50,13 +50,34 @@ export type Checked<T> = { value?: T; reason?: string; notes?: string[] };
 // Small field checkers
 // ---------------------------------------------------------------------------------------
 
-/** A clean short string: trimmed, links/phones stripped, Western digits, 1..max chars. */
+/** Arabic vowel marks (harakat, shadda, sukun, dagger alif), tatweel and emoji variation
+ *  selectors take no space of their own on screen. */
+const ZERO_WIDTH_MARKS = /[\u064B-\u065F\u0670\u0640\uFE0E\uFE0F]/g;
+
+/** Visible length: a fully vowelled Arabic label ("الجوُّ جميلٌ") counts like the bare one. */
+export function textLength(s: string): number {
+  return s.replace(ZERO_WIDTH_MARKS, "").length;
+}
+
+/** A clean short string: trimmed, links/phones stripped, Western digits, 1..max visible chars. */
 export function cleanText(v: unknown, max: number): string | null {
   if (typeof v !== "string") return null;
   const t = easternToWesternDigits(stripLinksAndPhones(v.trim()).text.trim());
-  if (!t || t.length > max) return null;
+  if (!t || textLength(t) > max || t.length > 2 * max) return null;
   return t;
 }
+
+/** Why cleanText refused a value (for the repair log). */
+function textProblem(v: unknown, max: number): string {
+  if (typeof v !== "string" || !v.trim()) return "missing";
+  const t = v.trim();
+  return `too long (${textLength(t)} > ${max})`;
+}
+
+/** Used instead of a missing, non-emoji ("←", "1️⃣") or blocked emoji on a list item. */
+export const DEFAULT_ITEM_EMOJI = "🔹";
+/** Used instead of a missing or not-allowed emoji on a word card. */
+export const DEFAULT_WORD_EMOJI = "📝";
 
 const isInt = (v: unknown, min: number, max: number): v is number => typeof v === "number" && Number.isInteger(v) && v >= min && v <= max;
 const isNum = (v: unknown, absMax: number): v is number => typeof v === "number" && Number.isFinite(v) && Math.abs(v) <= absMax;
@@ -101,18 +122,28 @@ export function emojiOf(v: unknown): string | null {
   return t;
 }
 
-function itemsOf(v: unknown): VisualItem[] | null {
-  if (!Array.isArray(v) || v.length < VISUAL_LIMITS.items.min || v.length > VISUAL_LIMITS.items.max) return null;
+/**
+ * 2-6 items of { emoji, label }. A missing, non-emoji or not-allowed emoji is replaced by a
+ * neutral one (noted), never kept; a bad label drops the picture with the item and the reason.
+ */
+function itemsOf(v: unknown): { items?: VisualItem[]; reason?: string; notes: string[] } {
+  const notes: string[] = [];
+  if (!Array.isArray(v)) return { reason: "items_missing", notes };
+  if (v.length < VISUAL_LIMITS.items.min || v.length > VISUAL_LIMITS.items.max) return { reason: `items_count: ${v.length} (needs 2-6)`, notes };
   const out: VisualItem[] = [];
-  for (const it of v) {
-    if (!it || typeof it !== "object") return null;
+  for (const [i, it] of v.entries()) {
+    if (!it || typeof it !== "object") return { reason: `item_${i + 1}_not_object`, notes };
     const o = it as Record<string, unknown>;
-    const emoji = emojiOf(o.emoji);
     const label = cleanText(o.label, VISUAL_LIMITS.itemLabel);
-    if (!emoji || !label) return null;
+    if (!label) return { reason: `item_${i + 1}_label ${textProblem(o.label, VISUAL_LIMITS.itemLabel)}`, notes };
+    let emoji = emojiOf(o.emoji);
+    if (!emoji) {
+      emoji = DEFAULT_ITEM_EMOJI;
+      notes.push(`item ${i + 1}: emoji ${JSON.stringify(String(o.emoji ?? "")).slice(0, 16)} replaced`);
+    }
     out.push({ emoji, label });
   }
-  return out;
+  return { items: out, notes };
 }
 
 const FRACTION_IN_TEXT = /(\d+)\s*\/\s*(\d+)/g;
@@ -218,7 +249,10 @@ function checkAgainstStep(v: Visual, stepText: string | undefined): Checked<Visu
  */
 export function validateVisual(raw: unknown, later: Question[] = [], stepText?: string): Checked<Visual> {
   const r = validateVisualShape(raw, later);
-  return r.value ? checkAgainstStep(r.value, stepText) : r;
+  if (!r.value) return r;
+  const c = checkAgainstStep(r.value, stepText);
+  const notes = [...(r.notes ?? []), ...(c.notes ?? [])];
+  return c.value && notes.length ? { ...c, notes } : c;
 }
 
 function validateVisualShape(raw: unknown, later: Question[]): Checked<Visual> {
@@ -228,13 +262,16 @@ function validateVisualShape(raw: unknown, later: Question[]): Checked<Visual> {
   if (typeof raw === "string") {
     const t = raw.trim();
     if (!t || /^null$/i.test(t)) return {};
-    if (t.length > VISUAL_LIMITS.jsonChars) return { reason: "visual JSON is too long" };
+    // The raw string may escape Arabic as \u0627 (6 characters per letter): the size limit is
+    // checked on the parsed picture, the raw string only gets a generous ceiling.
+    if (t.length > VISUAL_LIMITS.jsonChars * 6) return { reason: "json_too_long: visual JSON is too long" };
     try {
       raw = JSON.parse(t);
     } catch {
-      return { reason: "visual is not valid JSON" };
+      return { reason: "json_invalid: visual is not valid JSON" };
     }
     if (absent(raw)) return {};
+    if (JSON.stringify(raw).length > VISUAL_LIMITS.jsonChars) return { reason: "json_too_long: visual JSON is too long" };
   }
   if (typeof raw !== "object" || Array.isArray(raw)) return { reason: "visual is not an object" };
   const o = raw as Record<string, unknown>;
@@ -337,9 +374,9 @@ function validateVisualShape(raw: unknown, later: Question[]): Checked<Visual> {
     }
     case "sequence":
     case "labeled": {
-      const items = itemsOf(o.items);
-      if (!items) return bad("needs 2-6 items, each one emoji + a short label");
-      return { value: { type, items } };
+      const r = itemsOf(o.items);
+      if (!r.items) return bad(r.reason ?? "items");
+      return r.notes.length ? { value: { type, items: r.items }, notes: r.notes } : { value: { type, items: r.items } };
     }
     case "bars": {
       if (!Array.isArray(o.bars) || o.bars.length < VISUAL_LIMITS.items.min || o.bars.length > VISUAL_LIMITS.items.max) return bad("needs 2-6 bars");
@@ -386,10 +423,12 @@ function validateVisualShape(raw: unknown, later: Question[]): Checked<Visual> {
     }
     case "wordCard": {
       const word = cleanText(o.word, VISUAL_LIMITS.word);
-      const emoji = emojiOf(o.emoji);
       const meaning = cleanText(o.meaning, VISUAL_LIMITS.meaning);
-      if (!word || !emoji || !meaning) return bad("needs a word, one allowed emoji and a short meaning");
-      return { value: { type, word, emoji, meaning } };
+      if (!word) return bad(`word ${textProblem(o.word, VISUAL_LIMITS.word)}`);
+      if (!meaning) return bad(`meaning ${textProblem(o.meaning, VISUAL_LIMITS.meaning)}`);
+      const emoji = emojiOf(o.emoji);
+      const value: Visual = { type, word, emoji: emoji ?? DEFAULT_WORD_EMOJI, meaning };
+      return emoji ? { value } : { value, notes: [`emoji ${JSON.stringify(String(o.emoji ?? "")).slice(0, 16)} replaced`] };
     }
     default:
       return { reason: `unknown visual type ${String(type).slice(0, 20)}` };
@@ -433,12 +472,13 @@ export function validateTryIt(raw: unknown, later: Question[] = []): Checked<Try
   const L = VISUAL_LIMITS.tryIt;
   const q = cleanText(o.q, L.q);
   const explain = cleanText(o.explain, L.explain);
-  if (!q || !explain) return { reason: "tryIt needs a short q and explain" };
+  if (!q) return { reason: `tryIt_q ${textProblem(o.q, L.q)}` };
+  if (!explain) return { reason: `tryIt_explain ${textProblem(o.explain, L.explain)}` };
   if (!Array.isArray(o.choices) || o.choices.length < L.choicesMin || o.choices.length > L.choicesMax) return { reason: "tryIt needs 2-4 choices" };
   const choices: string[] = [];
   for (const c of o.choices) {
     const t = cleanText(typeof c === "number" ? String(c) : c, L.choice);
-    if (!t) return { reason: "tryIt has an empty or too long choice" };
+    if (!t) return { reason: `tryIt_choice ${textProblem(c, L.choice)}` };
     choices.push(t);
   }
   if (new Set(choices.map(compareKey)).size !== choices.length) return { reason: "tryIt choices are not unique" };

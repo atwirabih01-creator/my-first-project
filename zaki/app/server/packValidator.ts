@@ -15,6 +15,7 @@
 
 import { keywordScan } from "./safety";
 import { findRegionalWords, replaceRegionalWords } from "./regionalWords";
+import { normalizeBase } from "./normalize";
 import { stripLinksAndPhones } from "./textGuards";
 import { SUBJECTS, type Lang, type LessonPack, type Question, type RecapItem, type Subject, type TeachStep } from "./types";
 import { TRY_IT_FIELD_SCHEMA, VISUAL_FIELD_SCHEMA, mapVisualText, tryItTexts, validateTryIt, validateVisual, visualTexts } from "./visuals";
@@ -44,7 +45,37 @@ export type ValidationResult = {
   visualStats: VisualStats;
 };
 
-export type VisualStats = { visuals: number; visualsDropped: number; tryIts: number; tryItsDropped: number };
+export type VisualStats = {
+  visuals: number;
+  visualsDropped: number;
+  tryIts: number;
+  tryItsDropped: number;
+  /** Why pictures / quick questions were dropped ("visual teachSteps[2]: sequence: item_1_label
+   *  too long (34 > 30)"), max 10. Also in the repair log. No child data: AI-written text only. */
+  dropReasons?: string[];
+  /** Pictures taken from the matched teacher notes because the writer gave too few. */
+  visualsFromNotes?: number;
+};
+
+const MAX_DROP_REASONS = 10;
+
+/**
+ * An example that "answers" a question with the same sentence after "No:" / "لا:" contradicts
+ * itself ("كان المعلمان حاضرَين؟ لا: كان المعلمان حاضرَين."). Compared normalized (case,
+ * diacritics, punctuation).
+ */
+export function selfContradictoryExample(text: string): boolean {
+  // A sentence that trails off and "corrects itself" ("ما زالَ الحديقةُ... لا؛ نقول: ...",
+  // "... بل نقول ...", "... no, we say ...") shows a wrong sentence without a clear Wrong/Right label.
+  if (/(?:\.\.\.|…)\s*(?:لا|no)\b/i.test(text)) return true;
+  if (/(?:\.\.\.|…)\s*(?:بل|but)\s+(?:نقول|we say)/i.test(text)) return true;
+  if (/(?:^|[\s.؛;،,])(?:لا|no)\s*[؛;]\s*(?:نقول|we say)/i.test(text)) return true;
+  const m = text.match(/^(.*?)(?:^|[\s.?!؟،,:;])(?:no|لا)\s*[:،,]\s*(.+)$/is);
+  if (!m) return false;
+  const key = (s: string) => normalizeBase(s).replace(/^(?:yes|هل)\s+/, "").trim();
+  const before = key(m[1]);
+  return before.length > 0 && before === key(m[2]);
+}
 
 type Expect = {
   subject: Subject;
@@ -171,6 +202,7 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
   // (a tryIt or an equation must not give away a check/test answer).
   const later = [...checks, ...test, ...retestPool];
   const visualStats: VisualStats = { visuals: 0, visualsDropped: 0, tryIts: 0, tryItsDropped: 0 };
+  const dropReasons: string[] = [];
   const teachSteps = arr(o.teachSteps)
     .map((s, i) => {
       const so = (s ?? {}) as Record<string, unknown>;
@@ -179,7 +211,11 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
         softErrors.push(`teachSteps[${i}]: bad text`);
         return null;
       }
-      const example = so.example === undefined ? undefined : str(so.example, PACK_LIMITS.len.example) ?? undefined;
+      let example = so.example === undefined ? undefined : str(so.example, PACK_LIMITS.len.example) ?? undefined;
+      if (example && selfContradictoryExample(example)) {
+        repairs.push(`dropped teachSteps[${i}].example (contradicts itself: same sentence before and after "No:")`);
+        example = undefined;
+      }
       // title: optional short heading (pack version 3+); a bad or too-long title is dropped, not the step
       const title = so.title === undefined ? undefined : str(so.title, PACK_LIMITS.len.title) ?? undefined;
       const step: TeachStep = { text };
@@ -193,6 +229,7 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
       } else if (visual.reason) {
         visualStats.visualsDropped++;
         repairs.push(`dropped teachSteps[${i}].visual (${visual.reason})`);
+        dropReasons.push(`visual teachSteps[${i}]: ${visual.reason}`);
       }
       const tryIt = validateTryIt(so.tryIt, later);
       if (tryIt.value) {
@@ -201,11 +238,13 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
       } else if (tryIt.reason) {
         visualStats.tryItsDropped++;
         repairs.push(`dropped teachSteps[${i}].tryIt (${tryIt.reason})`);
+        dropReasons.push(`tryIt teachSteps[${i}]: ${tryIt.reason}`);
       }
       return step;
     })
     .filter((x): x is TeachStep => !!x)
     .slice(0, PACK_LIMITS.teachSteps.max);
+  if (dropReasons.length) visualStats.dropReasons = dropReasons.slice(0, MAX_DROP_REASONS).map((r) => r.slice(0, 160));
 
 
   const summary = arr(o.summary)

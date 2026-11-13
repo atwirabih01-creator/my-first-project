@@ -10,7 +10,7 @@ import { allSamplePacks, getSamplePack } from "../samples";
 import { shufflePack } from "../shuffle";
 import { packForModel } from "../tutor";
 import { type Question, type TeachStep } from "../types";
-import { checkEquation, emojiOf, validateTryIt, validateVisual, visualCaption } from "../visuals";
+import { DEFAULT_ITEM_EMOJI, DEFAULT_WORD_EMOJI, checkEquation, emojiOf, validateTryIt, validateVisual, visualCaption } from "../visuals";
 
 const ok = (v: unknown, later: Question[] = []) => {
   const r = validateVisual(v, later);
@@ -131,9 +131,13 @@ describe("visual: every type", () => {
     ok({ type: "labeled", items });
     bad({ type: "sequence", items: items.slice(0, 1) });
     bad({ type: "labeled", items: [...items, ...items, items[0]] });
-    bad({ type: "labeled", items: [{ emoji: "", label: "x" }, items[0]] });
     bad({ type: "labeled", items: [{ emoji: "☀️", label: "" }, items[0]] });
-    bad({ type: "labeled", items: [{ emoji: "💀", label: "skull" }, items[0]] });
+    // A missing, non-emoji or not-allowed emoji no longer drops the picture: a neutral one replaces it.
+    for (const emoji of ["", "💀", "←", "1️⃣"]) {
+      const r = validateVisual({ type: "labeled", items: [{ emoji, label: "x" }, items[0]] });
+      assert.equal((r.value as { items: { emoji: string }[] }).items[0].emoji, DEFAULT_ITEM_EMOJI, emoji);
+      assert.ok(r.notes?.some((n) => n.includes("replaced")), emoji);
+    }
   });
 
   it("bars: 2-6 bars, values 0-100", () => {
@@ -171,7 +175,7 @@ describe("visual: every type", () => {
   it("wordCard: word + one emoji + meaning", () => {
     ok({ type: "wordCard", word: "fluffy", emoji: "🐶", meaning: "soft and full of fur" });
     bad({ type: "wordCard", word: "fluffy", emoji: "🐶" });
-    bad({ type: "wordCard", word: "fluffy", emoji: "🐶🐶", meaning: "x" });
+    assert.equal((validateVisual({ type: "wordCard", word: "fluffy", emoji: "🐶🐶", meaning: "x" }).value as { emoji: string }).emoji, DEFAULT_WORD_EMOJI);
     bad({ type: "wordCard", word: "x".repeat(31), emoji: "🐶", meaning: "x" });
   });
 
@@ -242,7 +246,10 @@ describe("visual matches its step (live-output fixes)", () => {
     assert.equal(r.ok, true, r.errors.join("; "));
     assert.equal(r.pack!.teachSteps[0].visual, undefined);
     assert.deepEqual(r.pack!.teachSteps[1].visual, { type: "fraction", shape: "bar", parts: 6, shaded: 0 });
-    assert.deepEqual(r.visualStats, { visuals: 1, visualsDropped: 1, tryIts: 0, tryItsDropped: 0 });
+    const { dropReasons, ...counts } = r.visualStats;
+    assert.deepEqual(counts, { visuals: 1, visualsDropped: 1, tryIts: 0, tryItsDropped: 0 });
+    assert.equal(dropReasons?.length, 1);
+    assert.match(dropReasons![0], /^visual teachSteps\[0\]: fractionCompare: shows/);
     assert.ok(r.repairs.some((x) => x.includes("teachSteps[1].visual") && x.includes("interactive removed")));
     assert.ok(LESSON_VISUAL_RULES.includes("EXACTLY the numbers") && LESSON_VISUAL_RULES.includes("1 <= shaded < parts"));
   });
@@ -317,7 +324,13 @@ describe("validatePack with pictures and tryIt", () => {
     assert.equal(r.pack!.teachSteps[1].tryIt, undefined);
     assert.deepEqual(r.pack!.teachSteps[2].visual, { type: "objects", emoji: "🍎", count: 6, groups: 3 });
     assert.ok(r.pack!.teachSteps[2].tryIt);
-    assert.deepEqual(r.visualStats, { visuals: 1, visualsDropped: 2, tryIts: 1, tryItsDropped: 1 });
+    const { dropReasons, ...counts } = r.visualStats;
+    assert.deepEqual(counts, { visuals: 1, visualsDropped: 2, tryIts: 1, tryItsDropped: 1 });
+    assert.deepEqual(dropReasons, [
+      "visual teachSteps[0]: equation: wrong or broken sum: 3 + 4 = 8",
+      "visual teachSteps[1]: fraction: label 2/4 does not match 3/4",
+      "tryIt teachSteps[1]: tryIt needs 2-4 choices",
+    ]);
     assert.ok(r.repairs.some((x) => x.includes("teachSteps[0].visual") && x.includes("wrong")));
     assert.ok(!("visual" in r.pack!.teachSteps[3]));
   });

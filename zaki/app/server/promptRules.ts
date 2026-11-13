@@ -40,7 +40,8 @@ Writing rules:
 - Explain the idea BEFORE you name the technical word: "...we call this number the numerator", never the word first.
 - Use concrete things a child can picture: pizza, apples, a chocolate bar, a ball, a bus, a garden, a classroom.
 - No dense definitions (like "the top counts parts we take; the bottom counts all equal parts") unless a picture-able explanation comes first.
-- Examples teach; they must NOT give away the answer to any check or test question (use different numbers or things).`;
+- Examples teach; they must NOT give away the answer to any check or test question (use different numbers or things).
+- An example shows something TRUE and correct. Never build a fake question and answer inside an example: never write a sentence, then "No:" / "لا:", then the same sentence. To show a mistake, say clearly which form is wrong, then show the DIFFERENT correct form ("Wrong: كان الجوُّ جميلٌ. Right: كان الجوُّ جميلًا."). Never let an example trail off and correct itself ("...", "لا؛ نقول", "بل نقول", "no, we say"): every example sentence is complete and correct unless it is explicitly labelled Wrong/خطأ.`;
 
 /** The same style, briefly, for tutor re-explanations and homework hints. */
 export const SHORT_STYLE_RULE =
@@ -79,8 +80,14 @@ export const LESSON_VISUAL_RULES = `PICTURES AND "TRY IT" (every lesson must be 
   {"type":"shape","shape":"triangle"|"square"|"rectangle"|"circle"|"pentagon"|"hexagon","sideLabels"?:["3 cm", ...]}
   {"type":"placeValue","number":1-999}
   {"type":"wordCard","word":"...","emoji":"🐶","meaning":"..."}
-- At least 4 teach steps have a "visual" that SHOWS the idea with real, concrete numbers or things (not decoration). Examples: fractions: a pizza circle with 4 parts, 3 shaded, label "3/4"; then a bar; then fractionCompare. Addition: objects then an equation. Plants: labeled parts. Water cycle: sequence. Telling time: clock. Place value: placeValue. Vocabulary (English or Arabic lessons): wordCard.
-- The picture shows EXACTLY the numbers named in that step's text or example (if the text says 1/2 and 1/4, the picture shows 1/2 and 1/4, never other fractions); otherwise it is removed. Labels in the lesson language, short (max 30 characters); numbers as plain digits 0-9. One emoji per emoji field; no flags, no weapons, no scary or religious symbols.
+- EVERY lesson in EVERY subject (grammar and language lessons too) has a "visual" on AT LEAST 4 teach steps that SHOWS the idea with real, concrete numbers, words or things (not decoration). Ideas by subject:
+  Arabic or English grammar: a "sequence" showing the sentence change, one sentence per item (e.g. item 1 "الجوُّ جميلٌ", item 2 "كانَ الجوُّ جميلًا"; the app draws the arrows, so never put "←" or "→" inside a label); a "labeled" picture naming the parts ("اسم كان: الجوُّ", "خبر كان: جميلًا"; "subject: the cat", "verb: runs"); a "wordCard" for each key word (each of the sisters أصبح، ظلّ، صار...; a new vocabulary word).
+  Reading and writing: "sequence" for beginning, middle, end; "labeled" for parts of a letter or a paragraph.
+  Science: "sequence" for processes and life cycles, "labeled" for parts, "bars" for comparisons.
+  Math: the number pictures (fraction, objects, equation, numberLine, clock, placeValue, shape).
+  Every item has its own emoji (📝 🔤 ✏️ 📘 work for words). Labels may carry Arabic vowel marks.
+- More examples: fractions: a pizza circle with 4 parts, 3 shaded, label "3/4"; then a bar; then fractionCompare. Addition: objects then an equation. Plants: labeled parts. Water cycle: sequence. Telling time: clock. Place value: placeValue. Vocabulary (English or Arabic lessons): wordCard.
+- The picture shows EXACTLY the numbers named in that step's text or example (if the text says 1/2 and 1/4, the picture shows 1/2 and 1/4, never other fractions); otherwise it is removed. Labels in the lesson language, short (max 30 letters; vowel marks do not count); numbers as plain digits 0-9. One emoji per emoji field; no flags, no weapons, no scary or religious symbols.
 - Math lessons about fractions or counting: make ONE picture "interactive": true (a fraction the child colours by tapping, or objects the child taps to count).
   An interactive fraction: "shaded" is the TARGET the child colours, so 1 <= shaded < parts (never 0, never all), and that step's text or example says what to colour, e.g. "Colour 2 of the 6 parts." Interactive objects: count at least 2.
 - At least 3 teach steps have a "tryIt": a quick, easy question about the idea of THAT step, just taught (2-4 short unique choices, answerIndex = the right one, "explain" = one short sentence that says why). No score. It must be different from every check, test and retest question (other numbers, other things) and must not give away their answers.

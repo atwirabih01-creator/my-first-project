@@ -25,6 +25,7 @@ import { fixedMessage } from "./data/safetyMessages";
 import { topicsFor } from "../src/lib/curriculum";
 import { normalizeBase } from "./normalize";
 import { knowledgeBrief, matchKnowledge, type KnowledgeMatch } from "./knowledge";
+import { addNotesVisuals } from "./notesVisuals";
 import { GENERAL_EXAMPLES_RULE, LESSON_STORY_STYLE, LESSON_VISUAL_RULES, LEVEL_MISMATCH_RULE, levelLine } from "./promptRules";
 import { programGuide, usesDecimalComma } from "./programGuide";
 import { shufflePack } from "./shuffle";
@@ -408,7 +409,7 @@ async function buildWithAi(req: LessonPackRequest & { allowHistoryTopic?: boolea
   // Teacher notes first: a strong match is a reliable backbone, so the web research is skipped
   // (saves a model call and the search fee). No match or a weak one: research as before.
   let knowledge = lessonKnowledge(req);
-  let teacherNotes = knowledge ? knowledgeBrief(knowledge.entry, req.lang, req.program) : "";
+  let teacherNotes = knowledge ? knowledgeBrief(knowledge.entry, req.lang, req.program, req.grade) : "";
   let notes = "";
   let sources: Source[] = [];
   if (!knowledge?.strong) {
@@ -442,7 +443,7 @@ async function buildWithAi(req: LessonPackRequest & { allowHistoryTopic?: boolea
       // read from the pages may name the topic. Used if a retry is needed (no extra AI call).
       if (!knowledge) {
         knowledge = lessonKnowledge(req, pageText);
-        if (knowledge) teacherNotes = knowledgeBrief(knowledge.entry, req.lang, req.program);
+        if (knowledge) teacherNotes = knowledgeBrief(knowledge.entry, req.lang, req.program, req.grade);
       }
     }
     delete raw.pageText;
@@ -467,11 +468,26 @@ async function buildWithAi(req: LessonPackRequest & { allowHistoryTopic?: boolea
       lastErrors = verified.removedItems.map((r) => `${r.id}: ${r.reason}`);
       continue;
     }
+    // Too few pictures: borrow checked ones from the matched teacher notes (free, no AI call).
+    let finalPack = verified.pack;
+    const stats = { ...valid.visualStats };
+    if (knowledge) {
+      const extra = addNotesVisuals(finalPack, knowledge.entry);
+      if (extra.added) {
+        finalPack = extra.pack;
+        stats.visuals += extra.added;
+        stats.visualsFromNotes = extra.added;
+      }
+    }
+    if (stats.dropReasons?.length) {
+      // Server log only (AI-written text, no child data): why pictures / quick questions were dropped.
+      console.warn(`[lesson-pack] ${req.subject} grade ${req.grade} ${req.lang}: dropped ${stats.dropReasons.join(" | ")}`);
+    }
     return {
-      pack: shufflePack(verified.pack),
+      pack: shufflePack(finalPack),
       packVersion: PACK_VERSION,
       sources,
-      verify: { checked: verified.checked, removed: verified.removed, ...valid.visualStats, ...(usedKnowledge ? { knowledge: usedKnowledge } : {}) },
+      verify: { checked: verified.checked, removed: verified.removed, ...stats, ...(usedKnowledge ? { knowledge: usedKnowledge } : {}) },
     };
   }
   throw new LessonPackError(`could not build a valid pack: ${lastErrors.slice(0, 5).join("; ")}`, "invalid_pack");

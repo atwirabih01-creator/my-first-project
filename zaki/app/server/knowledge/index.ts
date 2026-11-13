@@ -10,9 +10,12 @@
 //     article and clitics, common suffixes), compared with the entry's topic names (weight 3),
 //     vocabulary (2) and key idea (1). Rare words count more (IDF over all entries). The score
 //     mixes "how much of the request the entry explains" and "how much of the entry's topic
-//     name the request contains".
+//     name the request contains". NEAR-EXACT: every word of the request is in the entry's
+//     topic name and covers it ("Kana and her sisters" = "Kana and its sisters").
 //  3. Subject must match; science <-> physics/chemistry/biology also match (a little lower).
-//     Same grade first, then grade +-1 (a little lower). Other grades never match.
+//     GRADES: programs teach a topic in different grades (founder decision), so an exact or
+//     near-exact NAME matches at any grade (weighted 1 / 0.78 / 0.65 / 0.55 for a gap of
+//     0 / 1 / 2 / 3+, still "strong"); a fuzzy match reaches +-2 grades only.
 //  4. A minimum score: a weak, accidental overlap returns [].
 // Everything is precomputed once at module load; a lookup scans only the entries of the
 // allowed subjects and grades (about 10-60) with set lookups.
@@ -107,6 +110,20 @@ export function knowledgeTokens(text: string): string[] {
   return out;
 }
 
+/** Only linking words are ignored for a near-exact name ("Kana and her sisters" = "Kana and its
+ *  sisters"); content words such as "كان" or "ones" always count. */
+const GLUE = new Set(["the", "a", "an", "and", "of", "its", "it", "her", "his", "their", "to", "in", "on", "with", "و", "في", "من"].map((w) => normalizeBase(w)));
+
+/** Every word except linking words, stemmed (for the near-exact name check). */
+function nameTokens(text: string): string[] {
+  const out = new Set<string>();
+  for (const w of normalizeBase(text).replace(/'/g, " ").split(" ")) {
+    if (!w || GLUE.has(w)) continue;
+    out.add(stem(w));
+  }
+  return [...out];
+}
+
 /** Exact-match key: normalized topic without punctuation. */
 function exactKey(t: string): string {
   return normalizeBase(t)
@@ -132,6 +149,8 @@ type Indexed = {
   /** Topic-name tokens (EN and AR separately: either side may be fully covered). */
   topicEn: string[];
   topicAr: string[];
+  /** Topic-name words for the near-exact check (EN, AR; with and without the "(...)" part). */
+  names: string[][];
 };
 
 const W_TOPIC = 3;
@@ -149,7 +168,8 @@ function indexEntry(e: KnowledgeEntry): Indexed {
   put(knowledgeTokens(e.keyIdea), W_IDEA);
   put(e.vocabulary.flatMap((v) => [...knowledgeTokens(v.en), ...knowledgeTokens(v.ar)]), W_VOCAB);
   put([...topicEn, ...topicAr], W_TOPIC);
-  return { entry: e, exact, weight, topicEn, topicAr };
+  const names = [e.topic, e.topicAr, withoutParens(e.topic), withoutParens(e.topicAr)].map(nameTokens).filter((t) => t.length > 0);
+  return { entry: e, exact, weight, topicEn, topicAr, names };
 }
 
 const INDEX: Indexed[] = ALL_KNOWLEDGE.map(indexEntry);
@@ -185,8 +205,11 @@ const SCIENCES: readonly Subject[] = ["physics", "chemistry", "biology"];
 export const KNOWLEDGE_MIN_SCORE = 0.42;
 /** At or above this score (or an exact name) the notes are a strong backbone (research is skipped). */
 export const KNOWLEDGE_STRONG_SCORE = 0.7;
-const SAME_GRADE = 1;
-const NEAR_GRADE = 0.78;
+/** Grade factor by grade gap (0, 1, 2, 3+). */
+const GRADE_FACTOR = [1, 0.78, 0.65, 0.55] as const;
+const gradeFactor = (gap: number) => GRADE_FACTOR[Math.min(gap, GRADE_FACTOR.length - 1)];
+/** A fuzzy (not exact / near-exact) match reaches at most this grade gap. */
+const FUZZY_MAX_GRADE_GAP = 2;
 const SAME_SUBJECT = 1;
 const SCIENCE_FAMILY = 0.92;
 
@@ -222,6 +245,15 @@ function requestCoverage(q: Set<string>, ix: Indexed): number {
     have += (ix.weight.get(t) ?? 0) * w;
   }
   return all ? have / all : 0;
+}
+
+/**
+ * Near-exact name: the request has the same words as the entry's topic name (EN or AR, with or
+ * without its "(...)" part), ignoring only linking words and simple endings.
+ */
+function nearExact(q: string[], ix: Indexed): boolean {
+  if (!q.length) return false;
+  return ix.names.some((toks) => toks.length === q.length && q.every((t) => toks.includes(t)));
 }
 
 /** Score of a short typed topic: both directions must agree. */
@@ -270,6 +302,7 @@ export type KnowledgeMatch = {
   id: string;
   /** 0-1 after the grade and subject factors. 1 = exact topic name, same grade and subject. */
   score: number;
+  /** Exact or near-exact topic name (matches at any grade). */
   exact: boolean;
   /** Exact name, or a fuzzy score >= KNOWLEDGE_STRONG_SCORE: good enough to skip web research. */
   strong: boolean;
@@ -284,6 +317,7 @@ export function matchKnowledge(query: KnowledgeQuery): KnowledgeMatch[] {
   const key = exactKey(topic);
   const keyNoParens = exactKey(withoutParens(topic));
   const qTopic = new Set(knowledgeTokens(topic));
+  const qName = nameTokens(topic);
   const qText = query.text?.trim() ? new Set([...knowledgeTokens(query.text.slice(0, MAX_TEXT_CHARS)), ...qTopic]) : null;
 
   const candidates: Indexed[] = [];
@@ -293,9 +327,9 @@ export function matchKnowledge(query: KnowledgeQuery): KnowledgeMatch[] {
   for (const ix of candidates) {
     const e = ix.entry;
     const gap = Math.abs(e.grade - grade);
-    if (gap > 1) continue;
-    const factor = (gap === 0 ? SAME_GRADE : NEAR_GRADE) * subjectFactor(query.subject, e.subject);
-    const exact = key.length >= 3 && (ix.exact.has(key) || ix.exact.has(keyNoParens));
+    const exact = (key.length >= 3 && (ix.exact.has(key) || ix.exact.has(keyNoParens))) || nearExact(qName, ix);
+    if (!exact && gap > FUZZY_MAX_GRADE_GAP) continue;
+    const factor = gradeFactor(gap) * subjectFactor(query.subject, e.subject);
     let raw = exact ? 1 : topicScore(qTopic, ix);
     if (!exact && qText) {
       const t = textScore(qText, ix);
@@ -314,7 +348,7 @@ export function matchKnowledge(query: KnowledgeQuery): KnowledgeMatch[] {
   return [best, ...second];
 }
 
-/** The best 0-2 teacher-note entries for a request (same grade first, then +-1). */
+/** The best 0-2 teacher-note entries for a request (same grade first, then nearer grades). */
 export function findKnowledge(query: KnowledgeQuery): KnowledgeEntry[] {
   return matchKnowledge(query).map((m) => m.entry);
 }
@@ -339,7 +373,13 @@ const bullet = (items: string[]) => items.map((s) => `- ${s}`).join("\n");
  * program, and suggested pictures as compact JSON strings in the lesson writer's `visual`
  * format. Kept under BRIEF_MAX_CHARS (~1,200 tokens): lower-priority parts are cut first.
  */
-export function knowledgeBrief(entry: KnowledgeEntry, lang: "en" | "ar", program?: SchoolProgram): string {
+/** "notes written for grade X; adapt ..." when the entry's grade is not the child's, else "". */
+export function gradeNote(entry: Pick<KnowledgeEntry, "grade">, childGrade?: number): string {
+  if (!childGrade || childGrade === entry.grade) return "";
+  return `Grade note: these notes were written for grade ${entry.grade}; adapt depth and wording to grade ${childGrade}.`;
+}
+
+export function knowledgeBrief(entry: KnowledgeEntry, lang: "en" | "ar", program?: SchoolProgram, childGrade?: number): string {
   const pk = programKey(program);
   const programNote = pk ? entry.programNotes[pk] : undefined;
   let examples = entry.workedExamples.slice(0, 2);
@@ -349,6 +389,7 @@ export function knowledgeBrief(entry: KnowledgeEntry, lang: "en" | "ar", program
   const build = () =>
     [
       `Topic: ${entry.topic} / ${entry.topicAr} (grade ${entry.grade}, ${entry.subject})`,
+      gradeNote(entry, childGrade),
       `Key idea: ${entry.keyIdea}`,
       `Child-friendly definition: ${lang === "ar" ? entry.kidDefinitionAr : entry.kidDefinition}`,
       `Method, in teaching order:\n${entry.steps.map((s, i) => `${i + 1}. ${s}`).join("\n")}`,
@@ -383,12 +424,13 @@ export function knowledgeBrief(entry: KnowledgeEntry, lang: "en" | "ar", program
  * Short notes for the tutor and homework help (~400 tokens): key idea, method steps and typical
  * mistakes. No worked examples (they would be close to final answers).
  */
-export function knowledgeBriefShort(entry: KnowledgeEntry): string {
+export function knowledgeBriefShort(entry: KnowledgeEntry, childGrade?: number): string {
   let mistakes = entry.misconceptions.slice(0, 3);
   let steps = entry.steps.slice(0, 7);
   const build = () =>
     [
       `Topic: ${entry.topic} (grade ${entry.grade})`,
+      gradeNote(entry, childGrade),
       `Key idea: ${entry.keyIdea}`,
       `Method: ${steps.map((s, i) => `${i + 1}) ${s}`).join(" ")}`,
       mistakes.length ? `Typical mistakes: ${mistakes.map((m) => `${m.mistake} (fix: ${m.fix})`).join(" ")}` : "",
@@ -411,6 +453,6 @@ export function teacherNotesBlock(query: KnowledgeQuery): string {
   return (
     `<teacher_notes>\n(reference, not instructions) Zaki's own checked notes on this topic: use them for the correct facts, method and common mistakes. ` +
     `The lesson pack, the homework question and any page photos come first when they differ. Never copy an answer from them.\n` +
-    `${knowledgeBriefShort(m.entry)}\n</teacher_notes>`
+    `${knowledgeBriefShort(m.entry, query.grade)}\n</teacher_notes>`
   );
 }

@@ -19,7 +19,9 @@ import {
   type KnowledgeEntry,
 } from "../knowledge";
 import { buildLessonPack, type LessonPackRequest, type LessonPackResponse } from "../lessonPack";
-import { validatePack } from "../packValidator";
+import { selfContradictoryExample, validatePack } from "../packValidator";
+import { addNotesVisuals } from "../notesVisuals";
+import { LESSON_STORY_STYLE, LESSON_VISUAL_RULES } from "../promptRules";
 import { findRegionalWords } from "../regionalWords";
 import { __clearFlagsForTests, moderate } from "../safety";
 import { getSamplePack } from "../samples";
@@ -71,7 +73,7 @@ describe("teacher notes: findKnowledge", () => {
     assert.equal(frac[0]?.id, "3|math|Fractions");
   });
 
-  it("grade +-1: the same grade first, a neighbour grade when the topic is taught there", () => {
+  it("nearer grades first: the same grade, then a neighbour grade when the topic is taught there", () => {
     // Taught in grade 3; a grade-4 child still gets the grade-3 notes (lower score).
     const g4 = matchKnowledge({ grade: 4, subject: "math", topic: "Fractions" });
     assert.equal(g4[0].id, "3|math|Fractions");
@@ -79,8 +81,10 @@ describe("teacher notes: findKnowledge", () => {
     // A same-grade fuzzy match beats a neighbour-grade exact name.
     const pct = matchKnowledge({ grade: 5, subject: "math", topic: "percentages" });
     assert.equal(pct[0].entry.grade, 5);
-    // Two grades away: nothing.
-    assert.deepEqual(findKnowledge({ grade: 6, subject: "math", topic: "Long division" }), []);
+    // An exact name two grades away still matches, with a lower score.
+    const ld = matchKnowledge({ grade: 6, subject: "math", topic: "Long division" });
+    assert.equal(ld[0].id, "4|math|Long division");
+    assert.ok(ld[0].score < g4[0].score && ld[0].strong);
   });
 
   it("science matches physics/chemistry/biology and back; other subjects never cross", () => {
@@ -294,5 +298,146 @@ describe("lesson-content safety scan (false alarms on school words)", () => {
     const m = await moderate("Sex chromosomes decide if a baby is a boy or a girl.", { speaker: "child", lang: "en", country: "LB", pageText: true });
     assert.notEqual(m.rawCategory, "adult_topic");
     assert.notEqual(m.rawCategory, "sexual");
+  });
+});
+
+// ---------------------------------------------------------------------------------------
+// Round 2 after live tests: any-grade names, more pictures, self-contradicting examples
+// ---------------------------------------------------------------------------------------
+
+const KANA_STEPS = [
+  { title: "هل لاحظتَ؟", text: "نبدأ بجملة اسمية: الجوُّ جميلٌ.", example: "الشمسُ مشرقةٌ.", visual: null, tryIt: null },
+  { title: "ماذا تفعل كان؟", text: "ندخل كان على الجملة: كانَ الجوُّ جميلًا. المبتدأ يبقى مرفوعًا ويُنصب الخبر.", example: "كانَ البابُ مفتوحًا.", visual: null, tryIt: null },
+  { title: "الأخوات", text: "أخوات كان: أصبحَ في الصباح، أمسى في المساء، صارَ للتحوّل، ليسَ للنفي.", example: "أصبحَ الطفلُ نشيطًا.", visual: null, tryIt: null },
+  { title: "مثال آخر", text: "ظلَّ الطالبُ مجتهدًا طوال النهار.", example: "باتَ القمرُ منيرًا.", visual: null, tryIt: null },
+  { title: "الآن تعرف", text: "الآن تعرف أن كان وأخواتها ترفع الاسم وتنصب الخبر.", example: "كانَ العصفورُ صغيرًا.", visual: null, tryIt: null },
+];
+const kanaPack = () => ({ ...structuredClone(getSamplePack("arabic", "ar")), topic: "كان وأخواتها", teachSteps: structuredClone(KANA_STEPS) });
+
+describe("teacher notes at any grade (programs teach topics in different grades)", () => {
+  it("an exact Arabic or English name matches at a far grade, lower score but strong", () => {
+    for (const topic of ["كان وأخواتها", "Kana and its sisters"]) {
+      const m = matchKnowledge({ grade: 7, subject: "arabic", topic });
+      assert.equal(m[0]?.id, "4|arabic|Kana and its sisters", topic);
+      assert.equal(m[0].strong, true);
+      assert.ok(m[0].score <= 0.56, `gap 3: ${m[0].score}`);
+      assert.ok(!m.some((x) => x.id.includes("Inna")), "not Inna and its sisters");
+    }
+    assert.equal(matchKnowledge({ grade: 9, subject: "math", topic: "Fractions" })[0]?.id, "3|math|Fractions");
+  });
+
+  it("near-exact name: 'Kana and her sisters' = 'Kana and its sisters'; one shared word is not enough", () => {
+    const m = matchKnowledge({ grade: 7, subject: "arabic", topic: "Kana and her sisters" });
+    assert.equal(m[0]?.id, "4|arabic|Kana and its sisters");
+    assert.equal(m[0].exact, true);
+    assert.deepEqual(findKnowledge({ grade: 9, subject: "math", topic: "tens" }), [], "'tens' is not 'Tens and ones'");
+  });
+
+  it("a fuzzy match reaches +-2 grades; a weak fuzzy match at a far grade still does not match", () => {
+    // Pythagoras' theorem is grade 8: fuzzy from grade 9 and 6, not from grade 5.
+    assert.equal(matchKnowledge({ grade: 6, subject: "math", topic: "Pythagoras" })[0]?.entry.grade, 8);
+    assert.deepEqual(findKnowledge({ grade: 5, subject: "math", topic: "Pythagoras" }), []);
+    assert.deepEqual(findKnowledge({ grade: 9, subject: "math", topic: "multiplication" }), []);
+  });
+
+  it("notes for another grade say so, in the writer brief and the chat brief", () => {
+    const [e] = findKnowledge({ grade: 7, subject: "arabic", topic: "كان وأخواتها" });
+    const note = "these notes were written for grade 4; adapt depth and wording to grade 7";
+    assert.ok(knowledgeBrief(e, "ar", undefined, 7).includes(note));
+    assert.ok(knowledgeBriefShort(e, 7).includes(note));
+    assert.ok(!knowledgeBrief(e, "ar", undefined, 4).includes("Grade note"));
+  });
+});
+
+describe("pictures: every lesson has pictures", () => {
+  it("Arabic grammar pictures with full vowel marks, arrows in a label or a non-emoji icon are kept", () => {
+    const long = { type: "sequence", items: [{ emoji: "📝", label: "الجوُّ جميلٌ ← كانَ الجوُّ جميلًا" }, { emoji: "1️⃣", label: "اسمُ كانَ مرفوعٌ وخبرُها منصوبٌ" }] };
+    const r = validateVisual(long);
+    assert.ok(r.value, r.reason);
+    const escaped = JSON.stringify({ type: "labeled", items: [1, 2, 3, 4, 5, 6].map(() => ({ emoji: "🔤", label: "خبرُ كانَ المنصوبُ هنا" })) }).replace(/[؀-ۿ]/g, (c) => "\\u" + c.charCodeAt(0).toString(16).padStart(4, "0"));
+    assert.ok(escaped.length > 800);
+    assert.ok(validateVisual(escaped).value, "escaped Arabic JSON is measured after parsing");
+    // Still dropped: a label that is really too long, with a reason code.
+    const tooLong = validateVisual({ type: "labeled", items: [{ emoji: "🔤", label: "ا".repeat(31) }, { emoji: "🔤", label: "ب" }] });
+    assert.match(tooLong.reason!, /item_1_label too long \(31 > 30\)/);
+  });
+
+  it("the writer rules ask for at least 4 pictures with grammar ideas, and forbid fake 'No:' examples", () => {
+    assert.ok(LESSON_VISUAL_RULES.includes("AT LEAST 4 teach steps") && LESSON_VISUAL_RULES.includes("اسم كان") && LESSON_VISUAL_RULES.includes("wordCard"));
+    assert.ok(LESSON_STORY_STYLE.includes('never write a sentence, then "No:"'));
+  });
+
+  it("free fallback: too few pictures -> fitting pictures from the notes join steps that have none", () => {
+    const [e] = findKnowledge({ grade: 7, subject: "arabic", topic: "كان وأخواتها" });
+    const pack = kanaPack();
+    const v = validatePack(pack, { subject: "arabic", grade: 7, lang: "ar" });
+    assert.ok(v.ok, v.errors.join("; "));
+    const r = addNotesVisuals(v.pack!, e);
+    assert.equal(r.added, 2);
+    const withPics = r.pack.teachSteps.map((s) => s.visual?.type ?? null);
+    assert.ok(withPics[0] === "sequence" || withPics[1] === "sequence", "the sentence change joins a step about الجوُّ جميلٌ");
+    assert.equal(withPics[2], "labeled", "the sisters join the step that names them");
+    assert.equal(addNotesVisuals(r.pack, e).added, 0, "only steps without a picture; stops when nothing else fits");
+  });
+
+  it("fallback never attaches on a guess: English labels in an Arabic lesson, numbers not in the step", () => {
+    const [fractions] = findKnowledge({ grade: 3, subject: "math", topic: "Fractions" });
+    const pack = kanaPack();
+    const v = validatePack(pack, { subject: "arabic", grade: 7, lang: "ar" });
+    assert.equal(addNotesVisuals(v.pack!, fractions).added, 0);
+    // Number pictures need EVERY number in that step: a step about "1/2" never gets a 3/4 pizza.
+    const math = structuredClone(getSamplePack("math", "en"));
+    math.teachSteps = math.teachSteps.map((s) => ({ title: s.title, text: "Half of a pizza is 1/2.", example: "Cut it in 2 parts." }));
+    const picked = addNotesVisuals(math, { ...fractions, visuals: [{ type: "fraction", shape: "circle", parts: 4, shaded: 3, label: "3/4" }] });
+    assert.equal(picked.added, 0);
+    const fits = addNotesVisuals(math, { ...fractions, visuals: [{ type: "fraction", shape: "circle", parts: 2, shaded: 1, label: "1/2" }] });
+    assert.equal(fits.added, 1);
+  });
+
+  it("lesson pack: the writer's few pictures are topped up from the notes; drop reasons are reported", async () => {
+    const steps = structuredClone(KANA_STEPS) as Record<string, unknown>[];
+    steps[0].visual = JSON.stringify({ type: "wordCard", word: "كانَ", emoji: "📘", meaning: "فعل ناسخ" });
+    steps[3].visual = JSON.stringify({ type: "sequence", items: [{ emoji: "🔤", label: "ظلَّ" }] }); // 1 item: dropped
+    const calls = mockClaude((p) =>
+      isClassifierCall(p) ? textMsg(NONE) : p.tools?.length ? textMsg("notes") : textMsg(JSON.stringify({ ...kanaPack(), teachSteps: steps, pageText: "" })),
+    );
+    const r = (await buildLessonPack({ subject: "arabic", topic: "كان وأخواتها", grade: 7, lang: "ar", country: "LB" })) as LessonPackResponse;
+    assert.equal(r.verify.knowledge, "4|arabic|Kana and its sisters");
+    assert.equal(researchCalls(calls).length, 0, "an exact name is strong at any grade");
+    assert.ok(promptText(writerCalls(calls)[0]).includes("adapt depth and wording to grade 7"));
+    assert.equal(r.verify.visualsFromNotes, 2);
+    assert.equal(r.verify.visuals, 3);
+    assert.ok(r.verify.dropReasons?.some((x) => x.includes("items_count")));
+  });
+});
+
+describe("self-contradicting examples", () => {
+  it("'X? No: X' is detected (Arabic and English); real corrections are not", () => {
+    assert.equal(selfContradictoryExample("كان المعلمان حاضرَين؟ لا: كان المعلمان حاضرَين."), true);
+    assert.equal(selfContradictoryExample("Is the cat big? No: is the cat big."), true);
+    assert.equal(selfContradictoryExample("Is the cat big? No, the cat is small."), false);
+    assert.equal(selfContradictoryExample("لا تنسَ أن خبر كان منصوب."), false);
+  });
+
+  it("the validator drops such an example and keeps the step", () => {
+    const pack = kanaPack();
+    pack.teachSteps[1].example = "كان المعلمان حاضرَين؟ لا: كان المعلمان حاضرَين.";
+    const r = validatePack(pack, { subject: "arabic", grade: 7, lang: "ar" });
+    assert.ok(r.ok, r.errors.join("; "));
+    assert.equal(r.pack!.teachSteps[1].example, undefined);
+    assert.ok(r.pack!.teachSteps[1].text.length > 0);
+    assert.ok(r.repairs.some((x) => x.includes("contradicts itself")));
+  });
+});
+
+describe("self-correcting examples", () => {
+  it("drops examples that trail off and correct themselves, keeps labelled ones", async () => {
+    const { selfContradictoryExample } = await import("../packValidator");
+    assert.equal(selfContradictoryExample("ما زالَ الحديقةُ... لا؛ نقول: ما زالتِ الحديقةُ خضراءَ."), true);
+    assert.equal(selfContradictoryExample("أصبحَ الحقلُ أخضرَ... بل نقول: صارَ الحقلُ أخضرَ."), true);
+    assert.equal(selfContradictoryExample("The cat run... no, we say: the cat runs."), true);
+    assert.equal(selfContradictoryExample("خطأ: أصبحَ الطقسَ باردًا. صواب: أصبحَ الطقسُ باردًا."), false);
+    assert.equal(selfContradictoryExample("لا تنسَ أن تنصب الخبر."), false);
+    assert.equal(selfContradictoryExample("No, the cat is small."), false);
   });
 });
