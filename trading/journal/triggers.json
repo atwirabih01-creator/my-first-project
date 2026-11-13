@@ -38,7 +38,8 @@
    "symbol": "ETHUSDT",
    "dir": "down",
    "level": 1982,
-   "note": "Hawk 13 Nov 00:15 refill: just below 24h low 1,983.82 (12 Nov 14:00 wick); no failed break"
+   "note": "Hawk 13 Nov 00:15 refill: just below 24h low 1,983.82 (12 Nov 14:00 wick); no failed break",
+   "used_utc": "2026-11-13 08:20"
   }
  ],
  "history": [
