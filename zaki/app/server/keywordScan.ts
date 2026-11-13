@@ -36,7 +36,8 @@ function compileArabicPhrase(phrase: string): KwWord[] {
 function compile(group: KeywordGroup, opts: { exactShortWords?: boolean } = {}): CompiledGroup {
   const latin = [...(group.en ?? []), ...(group.fr ?? []), ...(group.arabizi ?? [])]
     .map(normalizeBase)
-    .filter(Boolean);
+    // A keyword that collapses to one letter ("xxx" -> "x") would match any lone letter, e.g. "X-ray".
+    .filter((k) => k.length >= 2);
   const arabic = [...(group.ar ?? []), ...(group.arabizi ?? [])]
     .map(compileArabicPhrase)
     .map((p) => (opts.exactShortWords && p.length === 1 && p[0].skel.length < 4 ? [{ ...p[0], skel: "" }] : p))
@@ -269,7 +270,7 @@ export function keywordScan(text: string): KeywordScan {
     home,
     outside,
     personal: groupIn(views, COMPILED.personal) || containsPhoneNumber(text) || EMAIL_RE.test(text),
-    adult: groupIn(views, COMPILED.adult),
+    adult: groupIn(views, COMPILED.adult) || /(^|[^a-z])x{3,}([^a-z]|$)/i.test(text),
     politics: groupIn(views, COMPILED.politics),
     injection: groupIn(views, COMPILED.injection),
   };

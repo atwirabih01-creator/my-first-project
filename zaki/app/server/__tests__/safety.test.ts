@@ -235,3 +235,11 @@ describe("moderate() decisions", () => {
     assert.equal(r.fixedReplyKey, "reply_blocked");
   });
 });
+
+describe("one-letter leftovers are not keywords", () => {
+  it("X-ray is not an adult word, xxx still is", async () => {
+    const { keywordScan } = await import("../keywordScan");
+    assert.equal(keywordScan("X-rays help doctors see bones").adult, false);
+    assert.equal(keywordScan("watch xxx videos").adult, true);
+  });
+});
