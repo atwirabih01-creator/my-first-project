@@ -154,6 +154,7 @@ export default function Settings() {
                     small
                     variant="help"
                     title={t('deleteYes')}
+                    testID="delete-child-yes"
                     onPress={() => {
                       app.deleteChild(child.id);
                       setConfirmDelete(false);
@@ -164,7 +165,7 @@ export default function Settings() {
                 </Row>
               </>
             ) : (
-              <Btn small variant="secondary" title={t('deleteChild')} onPress={() => setConfirmDelete(true)} style={{ borderColor: C.coral }} />
+              <Btn small variant="secondary" title={t('deleteChild')} onPress={() => setConfirmDelete(true)} style={{ borderColor: C.coral }} testID="delete-child" />
             )}
           </Card>
         </View>

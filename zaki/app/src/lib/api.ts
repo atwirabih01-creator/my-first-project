@@ -8,7 +8,7 @@ import { getDemoPack } from './demoPacks';
 import type { HelpKind } from './helpRoutes';
 import { calmReply, kindFromCategory, localSafetyDecision } from './localSafety';
 import { translate } from './i18n';
-import type { Country, ExamQuestion, Lang, LessonPack, Question, Safety, Source, Subject } from './types';
+import type { Country, ExamQuestion, Lang, LessonPack, Question, Safety, SchoolCountry, SchoolProgram, Source, Subject } from './types';
 
 type SafetyHandler = (kind: HelpKind) => void;
 let safetyHandler: SafetyHandler | null = null;
@@ -128,8 +128,17 @@ export async function getHealth(): Promise<Health | null> {
   }
 }
 
-/** grade 1-9; age 5-16 (optional: older profiles have none, the server then assumes grade + 5). */
-type Common = { childRef: string; grade: number; age?: number; lang: Lang; country: Country };
+/**
+ * grade 1-9; age 5-16 (optional: older profiles have none, the server then assumes grade + 5).
+ * schoolCountry / program (optional): the child's school and its program, so Zaki teaches in that
+ * program's way (server/programGuide.ts). `country` is the FAMILY country (help lines only).
+ */
+type Common = { childRef: string; grade: number; age?: number; lang: Lang; country: Country; schoolCountry?: SchoolCountry; program?: SchoolProgram };
+
+/** The school fields of a learner card, for every lesson, tutor and homework request. */
+export function schoolOf(child: { schoolCountry?: SchoolCountry; program?: SchoolProgram }): { schoolCountry?: SchoolCountry; program?: SchoolProgram } {
+  return { schoolCountry: child.schoolCountry, program: child.program };
+}
 
 // ---------- lesson pack ----------
 export type LessonPackResult =

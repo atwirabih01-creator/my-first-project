@@ -7,7 +7,7 @@
 import { normalizeBase } from "./normalize";
 import { hasForbiddenPhrase, limitEmojis, limitLines, stripLinksAndPhones } from "./textGuards";
 import type { LessonPack, Question } from "./types";
-import { evaluate, normalizeMathText, numbersIn, ratToString, type Rational } from "./verify";
+import { decimalCommaToDot, evaluate, normalizeMathText, numbersIn, ratToString, type Rational } from "./verify";
 
 /** Items whose answers must not appear in this reply. */
 export function protectedItems(pack: LessonPack, step: string, questionId?: string): Question[] {
@@ -36,8 +36,9 @@ function numericLeak(reply: string, item: Question, value: Rational): boolean {
   const text = normalizeMathText(reply);
   const isInteger = value.d === 1n;
   if (!isInteger) {
-    // Any fraction/decimal equal to the answer (3/6 also catches 1/2).
-    return numbersIn(text).some((n) => eqR(n, value));
+    // Any fraction/decimal equal to the answer (3/6 also catches 1/2), also written with a
+    // decimal comma (3,5: French school program).
+    return [...numbersIn(text), ...numbersIn(decimalCommaToDot(text))].some((n) => eqR(n, value));
   }
   const v = ratToString(value);
   // "= 6", "is 6", "answer is 6", "يساوي 6"

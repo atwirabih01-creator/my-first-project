@@ -14,7 +14,7 @@ import { SubjectBadge, SubjectPicker } from '@/components/SubjectPicker';
 import { flagRouteFor, goToSafety, recordQuietFlag, scrubExcerpt } from '@/components/lesson';
 import { Bubble, Btn, Card, Chip, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
-import { ConsentRequiredError, fetchLessonPack, reportSafety } from '@/lib/api';
+import { ConsentRequiredError, fetchLessonPack, reportSafety, schoolOf } from '@/lib/api';
 import { topicsFor } from '@/lib/curriculum';
 import { localSafetyCheck } from '@/lib/localSafety';
 import { goTo, openLesson, useHelpReturn } from '@/lib/nav';
@@ -61,7 +61,7 @@ export default function TodayLesson() {
     setBusy(true);
     let res: Awaited<ReturnType<typeof fetchLessonPack>>;
     try {
-      res = await fetchLessonPack({ childRef: child.id, grade: child.grade, age: child.age, lang: child.lang, country: settings.country, subject, topic: name });
+      res = await fetchLessonPack({ childRef: child.id, grade: child.grade, age: child.age, lang: child.lang, country: settings.country, ...schoolOf(child), subject, topic: name });
     } catch (e) {
       setBusy(false);
       setNote(e instanceof ConsentRequiredError ? t('consentNeededText') : t('loadError'));

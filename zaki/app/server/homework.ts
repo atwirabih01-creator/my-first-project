@@ -27,8 +27,8 @@ import { fixedMessage } from "./data/safetyMessages";
 import { cleanBase64Image } from "./lessonPack";
 import { GENERAL_EXAMPLES_RULE, SHORT_STYLE_RULE, levelLine, sensitiveTopicRule } from "./promptRules";
 import { moderate, scrubPii } from "./safety";
-import { runGuardedTurn, type TutorResponse } from "./tutor";
-import type { Country, Lang, Question, Subject } from "./types";
+import { programCtx, runGuardedTurn, type TutorResponse } from "./tutor";
+import type { Country, Lang, Question, SchoolCountry, SchoolProgram, Subject } from "./types";
 import { evaluate, normalizeMathText, numbersIn, ratToString, type Rational } from "./verify";
 
 export const MAX_HOMEWORK_IMAGES = 3;
@@ -61,6 +61,10 @@ export type HomeworkRequest = {
   pageImages?: string[];
   /** Optional grown-up's note, max 300 chars (e.g. "only exercise 4"). DATA, safety-checked. */
   parentNote?: string;
+  /** Country of the child's school (optional; NOT `country`). Only picks the national program guide. */
+  schoolCountry?: SchoolCountry;
+  /** The child's school program (optional): method, order, notation and terms. */
+  program?: SchoolProgram;
 };
 
 /** Same shape as the tutor reply: { reply, hintLevel?, safety, demo?, budgetReached? }. */
@@ -179,7 +183,10 @@ function buildMessages(req: HomeworkRequest, images: string[], hintLevel: number
     `level: ${levelLine(req.grade, req.age)}`,
     `session start: ${req.history.length === 0 ? "yes (say you are an AI helper)" : "no"}`,
     `hint level: ${hintLevel}`,
-  ].join("\n");
+    programCtx(req),
+  ]
+    .filter(Boolean)
+    .join("\n");
   const msg = req.message?.trim()
     ? scrubPii(req.message).slice(0, MAX_TURN_CHARS).replace(/<\/?child_message>/gi, "")
     : "(The child has just shared this homework. Start helping: say what the question asks, then ask what they know or have tried.)";

@@ -1,4 +1,5 @@
-// Edit the current learner card (behind the parental gate): name, age, grade, language, avatar.
+// Edit the current learner card (behind the parental gate): name, age, grade, school country
+// and program, language, avatar.
 // Older profiles have no age yet: they keep working, and the grown-up can add one here.
 import { router } from 'expo-router';
 
@@ -24,7 +25,7 @@ export default function EditChild() {
           ) : null}
           <ChildForm
             key={child.id}
-            initial={{ nickname: child.nickname, age: child.age, grade: child.grade, lang: child.lang, avatar: child.avatar }}
+            initial={{ nickname: child.nickname, age: child.age, grade: child.grade, lang: child.lang, avatar: child.avatar, schoolCountry: child.schoolCountry, program: child.program }}
             submitTitle={t('save')}
             onSubmit={(v) => {
               app.updateChild(child.id, v);

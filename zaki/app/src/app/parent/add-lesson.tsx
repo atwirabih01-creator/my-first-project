@@ -9,7 +9,7 @@ import { ParentChildPicker } from '@/components/ParentChildPicker';
 import { Screen } from '@/components/Screen';
 import { Btn, Card, Chip, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
-import { fetchLessonPack } from '@/lib/api';
+import { fetchLessonPack, schoolOf } from '@/lib/api';
 import { pickHomeworkPhotos, type Photo } from '@/lib/homeworkPhotos';
 import { lessonKeyOf, todayStr, useChild, useT } from '@/lib/store';
 import { subjectsForChild } from '@/lib/subjects';
@@ -59,6 +59,7 @@ export default function AddLesson() {
       age: child.age,
       lang: child.lang,
       country: settings.country,
+      ...schoolOf(child),
       subject,
       topic: name,
       pageImages: photos.length ? photos.map((p) => p.base64) : undefined,

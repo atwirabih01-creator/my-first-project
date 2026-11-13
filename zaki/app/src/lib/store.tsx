@@ -2,7 +2,7 @@
 // Local only (Phase 1). Saved to device storage after every change.
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { consentRemote, fetchLessonPack, getHealth, MIN_PACK_VERSION, registerFamilyRemote, setConsentActive, setDemoMode, setFamilyAuth, syncFamilyRemote, type FamilyLink } from './api';
+import { consentRemote, fetchLessonPack, getHealth, MIN_PACK_VERSION, registerFamilyRemote, schoolOf, setConsentActive, setDemoMode, setFamilyAuth, syncFamilyRemote, type FamilyLink } from './api';
 import { CONSENT_VERSION } from './consentText';
 import { getDemoPack } from './demoPacks';
 import { deletePhotos } from './homeworkPhotos';
@@ -23,6 +23,8 @@ import type {
   LocalFlag,
   LessonStatus,
   PlanItem,
+  SchoolCountry,
+  SchoolProgram,
   Subject,
   TestResult,
 } from './types';
@@ -172,7 +174,7 @@ type AppState = Persisted & {
 type Actions = {
   setActiveChild: (id: string | null, keepLang?: boolean) => void;
   setUiLang: (lang: Lang, alsoChild?: boolean) => void;
-  addChild: (p: { nickname: string; grade: number; age?: number; lang: Lang; avatar: AvatarId }) => ChildProfile;
+  addChild: (p: { nickname: string; grade: number; age?: number; lang: Lang; avatar: AvatarId; schoolCountry?: SchoolCountry; program?: SchoolProgram }) => ChildProfile;
   deleteChild: (id: string) => void;
   updateChild: (id: string, patch: Partial<ChildProfile>) => void;
   updateSettings: (id: string, patch: Partial<ChildSettings>) => void;
@@ -291,7 +293,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       for (const child of snap.profiles) {
         const settingsFor = snap.settings[child.id] ?? DEFAULT_SETTINGS;
         for (const item of (snap.plans[child.id] ?? []).filter((p) => p.pending)) {
-          const res = await fetchLessonPack({ childRef: child.id, grade: child.grade, age: child.age, lang: child.lang, country: settingsFor.country, subject: item.subject, topic: item.topic });
+          const res = await fetchLessonPack({ childRef: child.id, grade: child.grade, age: child.age, lang: child.lang, country: settingsFor.country, ...schoolOf(child), subject: item.subject, topic: item.topic });
           if (res.budgetReached) return; // still over today's limit: stop, try another day
           if ('safetyStopped' in res && res.safetyStopped) continue;
           const key = lessonKeyOf(item.subject, item.topic);

@@ -20,7 +20,7 @@ import { SubjectBadge, SubjectPicker } from '@/components/SubjectPicker';
 import { flagRouteFor, goToSafety, recordQuietFlag, sanitizeReply, scrubExcerpt } from '@/components/lesson';
 import { Bubble, Btn, Card, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
-import { askHomework, ConsentRequiredError, reportSafety, type ChatTurn } from '@/lib/api';
+import { askHomework, ConsentRequiredError, reportSafety, schoolOf, type ChatTurn } from '@/lib/api';
 import { loadPhoto, type Photo } from '@/lib/homeworkPhotos';
 import { localSafetyCheck } from '@/lib/localSafety';
 import { goTo, useHelpReturn } from '@/lib/nav';
@@ -90,6 +90,7 @@ export default function Homework() {
         age: child.age,
         lang,
         country: settings.country,
+        ...schoolOf(child),
         subject,
         question: question.trim().slice(0, MAX_QUESTION),
         message,

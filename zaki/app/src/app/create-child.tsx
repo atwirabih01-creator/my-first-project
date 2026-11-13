@@ -1,4 +1,5 @@
-// Create a learner: first name or nickname, age 5-16, grade 1-9, language, preset cartoon avatar (never a photo).
+// Create a learner: first name or nickname, age 5-16, grade 1-9, school country + program (optional),
+// language, preset cartoon avatar (never a photo).
 import { router } from 'expo-router';
 
 import { ChildForm } from '@/components/ChildForm';

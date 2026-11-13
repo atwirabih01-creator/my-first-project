@@ -7,6 +7,18 @@ export type Subject = "math" | "science" | "physics" | "chemistry" | "biology" |
 
 export const SUBJECTS: readonly Subject[] = ["math", "science", "physics", "chemistry", "biology", "english", "arabic", "social"];
 
+/**
+ * The country of the child's SCHOOL (per child, optional). Only used to pick the school
+ * program's way of teaching (server/programGuide.ts). NOT the family `Country` above, which
+ * decides help lines and consent law.
+ */
+export type SchoolCountry = "LB" | "IQ" | "SY" | "JO" | "PS" | "EG" | "SA" | "AE" | "QA" | "KW" | "BH" | "OM" | "OTHER";
+export const SCHOOL_COUNTRIES: readonly SchoolCountry[] = ["LB", "IQ", "SY", "JO", "PS", "EG", "SA", "AE", "QA", "KW", "BH", "OM", "OTHER"];
+
+/** The child's school program (per child, optional). Changes method, order, notation and terms only. */
+export type SchoolProgram = "national" | "british" | "american" | "french" | "ib" | "other";
+export const SCHOOL_PROGRAMS: readonly SchoolProgram[] = ["national", "british", "american", "french", "ib", "other"];
+
 export type Question = {
   id: string;
   q: string;

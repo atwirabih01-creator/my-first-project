@@ -23,6 +23,7 @@ import { fixedMessage } from "./data/safetyMessages";
 import { topicsFor } from "../src/lib/curriculum";
 import { normalizeBase } from "./normalize";
 import { GENERAL_EXAMPLES_RULE, LESSON_STORY_STYLE, LESSON_VISUAL_RULES, LEVEL_MISMATCH_RULE, levelLine } from "./promptRules";
+import { programGuide, usesDecimalComma } from "./programGuide";
 import { shufflePack } from "./shuffle";
 export { shufflePack };
 import { callClaude, jsonOf, textOf, type ClaudeMessage, type ClaudeParams } from "./ai";
@@ -33,7 +34,7 @@ import { fixedReplyFor, moderate } from "./safety";
 import { BudgetExceededError, canSpend } from "./budget";
 import { getFromLibrary, libraryKey, saveToLibrary } from "./library";
 import { getSamplePack } from "./samples";
-import type { Country, Lang, LessonPack, Question, SafetyInfo, Subject } from "./types";
+import type { Country, Lang, LessonPack, Question, SafetyInfo, SchoolCountry, SchoolProgram, Subject } from "./types";
 import { verifyPack } from "./verify";
 
 export type LessonPackRequest = {
@@ -52,6 +53,10 @@ export type LessonPackRequest = {
   /** Who typed the topic: "parent" (parent area, behind the gate) or "child" (default). A
    *  parent-added Social Studies topic may be a sensitive history topic (e.g. a war). */
   source?: "parent" | "child";
+  /** Country of the child's school (optional; NOT `country`). Only picks the national program guide. */
+  schoolCountry?: SchoolCountry;
+  /** The child's school program (optional): method, order, notation and terms (server/programGuide.ts). */
+  program?: SchoolProgram;
 };
 
 /**
@@ -257,6 +262,7 @@ function buildUserContent(req: LessonPackRequest & { allowHistoryTopic?: boolean
       `- level: ${levelLine(req.grade, req.age)}`,
       `- examples: general and international (no local foods, places or dialect words)`,
       imgs.length ? `- photo lesson: follow the book's chapter, method and terms exactly; re-explain the page in the story structure with new simple examples, then check understanding` : "",
+      programLine(req),
       req.allowHistoryTopic ? `- history topic allowed: a Social Studies curriculum (or parent-chosen) topic; teach it calmly and factually` : "",
       ``,
       `<research_notes>\n${notes || "(no research notes available; use standard primary-school knowledge)"}\n</research_notes>`,
@@ -264,6 +270,12 @@ function buildUserContent(req: LessonPackRequest & { allowHistoryTopic?: boolean
     ].join("\n"),
   });
   return content;
+}
+
+/** "- school program: ..." for the request, or "" (no program / "other": as before). */
+function programLine(req: Pick<LessonPackRequest, "program" | "schoolCountry">): string {
+  const g = programGuide(req.program, req.schoolCountry, "lesson");
+  return g ? `- school program: ${g}` : "";
 }
 
 async function writePack(req: LessonPackRequest & { allowHistoryTopic?: boolean }, notes: string, extra: string): Promise<Record<string, unknown> | null> {
@@ -337,7 +349,7 @@ export async function buildLessonPack(req: LessonPackRequest): Promise<LessonPac
   const hasPhotos = (req.pageImages ?? []).length > 0;
   // Shared library first: typed-topic packs only, never photo packs. No AI cost. Entries
   // from an older pack version are skipped (rebuilt in the current style, then replaced).
-  const key = libraryKey(req.subject, req.topic, req.grade, req.lang);
+  const key = libraryKey(req.subject, req.topic, req.grade, req.lang, { program: req.program, schoolCountry: req.schoolCountry });
   if (!hasPhotos) {
     const hit = await getFromLibrary(key);
     if (hit && hit.packVersion === PACK_VERSION) {
@@ -408,7 +420,7 @@ async function buildWithAi(req: LessonPackRequest & { allowHistoryTopic?: boolea
       lastErrors = valid.errors;
       continue;
     }
-    const verified = verifyPack(pack);
+    const verified = verifyPack(pack, { decimalComma: usesDecimalComma(req.program) });
     if (verified.pack.checks.length < 1 || verified.pack.test.length < 3) {
       lastErrors = verified.removedItems.map((r) => `${r.id}: ${r.reason}`);
       continue;

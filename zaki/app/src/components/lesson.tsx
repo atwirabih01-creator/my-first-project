@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ComponentRef, type ReactNode } from '
 import { Modal, Platform, Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { C, R, S } from '@/constants/theme';
-import { askTutor, checkAnswer, reportSafety, type ChatTurn, type FeedbackKey, type QuietFlag } from '@/lib/api';
+import { askTutor, checkAnswer, reportSafety, schoolOf, type ChatTurn, type FeedbackKey, type QuietFlag } from '@/lib/api';
 import { localSafetyCheck } from '@/lib/localSafety';
 import { keywordScan } from '../../server/keywordScan';
 import { useApp, useChild, useT } from '@/lib/store';
@@ -298,6 +298,7 @@ export function AskZaki({ pack, step = 'chat' }: { pack: LessonPack | null; step
         age: child.age,
         lang,
         country: settings.country,
+        ...schoolOf(child),
         pack,
         step,
         history,

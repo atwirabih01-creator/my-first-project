@@ -80,6 +80,17 @@ export function normalizeMathText(s: string): string {
     .replace(/==/g, "=");
 }
 
+/**
+ * French notation -> dot notation, for our checks only (round 7, French school program):
+ * "3,5" -> "3.5" and "12 500" -> "12500" (a space, or a narrow/no-break space, between groups
+ * of three digits). Only used where the program is French: elsewhere "12,500" means 12500.
+ */
+export function decimalCommaToDot(s: string): string {
+  return s
+    .replace(/(?<![\d.,])(\d{1,3})((?:[ \u00A0\u202F]\d{3})+)(?![\d/,.]|[ \u00A0\u202F]\d)/g, (_m, a: string, rest: string) => a + rest.replace(/[ \u00A0\u202F]/g, ""))
+    .replace(/(\d),(\d)/g, "$1.$2");
+}
+
 export function tokenize(input: string): Tok[] {
   const s = normalizeMathText(input);
   const toks: Tok[] = [];
@@ -282,7 +293,9 @@ function sameValue(a: MathValue, b: MathValue): boolean {
 
 export type ItemCheck = { ok: boolean; reason?: string; expected?: string };
 
-export function verifyQuestion(q: Question): ItemCheck {
+export function verifyQuestion(q0: Question, opts: VerifyOptions = {}): ItemCheck {
+  // French notation (3,5 / 12 500) is read as 3.5 / 12500 for the check only.
+  const q = opts.decimalComma ? { ...q0, q: decimalCommaToDot(q0.q), choices: q0.choices.map(decimalCommaToDot) } : q0; // mathExpr always uses a dot
   if (!q.mathExpr || !q.mathExpr.trim()) return { ok: false, reason: "math item without mathExpr" };
   let expected: MathValue;
   try {
@@ -318,6 +331,11 @@ function needsMathCheck(q: Question, subject: LessonPack["subject"]): boolean {
   return subject === "math" && q.choices.length > 0 && q.choices.every((c) => numbersIn(c).length === 1);
 }
 
+export type VerifyOptions = {
+  /** French school program: choices and questions write decimals with a comma (3,5). */
+  decimalComma?: boolean;
+};
+
 export type VerifyResult = {
   pack: LessonPack;
   checked: number;
@@ -325,14 +343,14 @@ export type VerifyResult = {
   removedItems: { id: string; reason: string }[];
 };
 
-export function verifyPack(pack: LessonPack): VerifyResult {
+export function verifyPack(pack: LessonPack, opts: VerifyOptions = {}): VerifyResult {
   let checked = 0;
   const removedItems: { id: string; reason: string }[] = [];
   const filter = (list: Question[]) =>
     list.filter((q) => {
       if (!needsMathCheck(q, pack.subject)) return true;
       checked++;
-      const r = verifyQuestion(q);
+      const r = verifyQuestion(q, opts);
       if (!r.ok) removedItems.push({ id: q.id, reason: r.reason ?? "failed" });
       return r.ok;
     });

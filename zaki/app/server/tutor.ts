@@ -15,7 +15,8 @@ import { hasGrownUpCue, mentionsBodySymptom, postCheckReply, protectedItems } fr
 import { GENERAL_EXAMPLES_RULE, SHORT_STYLE_RULE, levelLine, sensitiveTopicRule } from "./promptRules";
 import { replaceRegionalWords } from "./regionalWords";
 import { fixedReplyFor, moderate, scrubPii } from "./safety";
-import type { Country, Lang, LessonPack, Question, SafetyInfo } from "./types";
+import { programGuide } from "./programGuide";
+import type { Country, Lang, LessonPack, Question, SafetyInfo, SchoolCountry, SchoolProgram } from "./types";
 
 export type TutorStep = "recap" | "teach" | "check" | "chat";
 export const TUTOR_STEPS: TutorStep[] = ["recap", "teach", "check", "chat"];
@@ -36,6 +37,10 @@ export type TutorRequest = {
   questionId?: string;
   /** Random app-side id, used only for the reviewer flag log. Never sent to the AI. */
   childRef?: string;
+  /** Country of the child's school (optional; NOT `country`). Only picks the national program guide. */
+  schoolCountry?: SchoolCountry;
+  /** The child's school program (optional): method, order, notation and terms. */
+  program?: SchoolProgram;
 };
 
 export type TutorResponse = {
@@ -124,6 +129,12 @@ function hintLevelFor(req: TutorRequest): number | undefined {
   return Math.min(3, zakiTurns + 1);
 }
 
+/** "school program: ..." for turn_context, or "" (no program / "other": as before). Shared with homework. */
+export function programCtx(req: { program?: SchoolProgram; schoolCountry?: SchoolCountry }): string {
+  const g = programGuide(req.program, req.schoolCountry, "chat");
+  return g ? `school program: ${g}` : "";
+}
+
 function buildMessages(req: TutorRequest, hintLevel: number | undefined) {
   const hist = req.history.slice(-MAX_HISTORY_TURNS).map((h) => ({
     role: h.role === "child" ? ("user" as const) : ("assistant" as const),
@@ -141,6 +152,7 @@ function buildMessages(req: TutorRequest, hintLevel: number | undefined) {
     `session start: ${req.history.length === 0 ? "yes (say you are an AI helper)" : "no"}`,
     hintLevel ? `hint level: ${hintLevel}` : "",
     current ? `current question id: ${current.id}` : "",
+    programCtx(req),
   ]
     .filter(Boolean)
     .join("\n");

@@ -1,5 +1,5 @@
 // Shared app-side types. The LessonPack / Question shapes follow ARCHITECTURE.md exactly.
-import type { TeachStep } from '../../server/types';
+import type { SchoolCountry, SchoolProgram, TeachStep } from '../../server/types';
 
 export type Lang = 'en' | 'ar';
 export type Country = 'LB' | 'QA';
@@ -24,6 +24,12 @@ export type Question = {
  * before drawing (src/lib/visuals.ts): anything it does not understand is simply not shown.
  */
 export type { TeachStep, TryIt, Visual, VisualItem } from '../../server/types';
+
+/**
+ * The child's SCHOOL country and program (round 7, both optional). Zaki then teaches in that
+ * program's order, method, notation and terms. Not the family `Country` (help lines, consent).
+ */
+export type { SchoolCountry, SchoolProgram } from '../../server/types';
 
 export type LessonPack = {
   id: string;
@@ -57,6 +63,10 @@ export type ChildProfile = {
   lang: Lang;
   avatar: AvatarId;
   createdAt: string;
+  /** Country of the child's school (optional; older profiles have none). NOT the family country. */
+  schoolCountry?: SchoolCountry;
+  /** The child's school program (optional; older profiles have none = general approach). */
+  program?: SchoolProgram;
 };
 
 export type ChildSettings = {

@@ -1,8 +1,8 @@
 // Small helpers shared by the API routes: size-capped JSON bodies, simple rate limiting,
 // input validation and error responses. Nothing here ever logs message text.
 
-import type { Country, Lang, Subject } from "./types";
-import { SUBJECTS } from "./types";
+import type { Country, Lang, SchoolCountry, SchoolProgram, Subject } from "./types";
+import { SCHOOL_COUNTRIES, SCHOOL_PROGRAMS, SUBJECTS } from "./types";
 import { MAX_AGE, MAX_GRADE, MIN_AGE, MIN_GRADE } from "../src/lib/curriculum";
 
 export class HttpError extends Error {
@@ -130,6 +130,20 @@ export function asOptionalCountry(v: unknown): Country | undefined {
 export function asCountry(v: unknown): Country {
   if (v === "LB" || v === "QA") return v;
   throw new HttpError(400, 'country must be "LB" or "QA"');
+}
+
+/** Country of the child's school (optional; NOT the family country used for help lines). */
+export function asOptionalSchoolCountry(v: unknown): SchoolCountry | undefined {
+  if (v === undefined || v === null || v === "") return undefined;
+  if (typeof v === "string" && (SCHOOL_COUNTRIES as readonly string[]).includes(v)) return v as SchoolCountry;
+  throw new HttpError(400, `schoolCountry must be one of ${SCHOOL_COUNTRIES.join(", ")}`);
+}
+
+/** The child's school program (optional). */
+export function asOptionalProgram(v: unknown): SchoolProgram | undefined {
+  if (v === undefined || v === null || v === "") return undefined;
+  if (typeof v === "string" && (SCHOOL_PROGRAMS as readonly string[]).includes(v)) return v as SchoolProgram;
+  throw new HttpError(400, `program must be one of ${SCHOOL_PROGRAMS.join(", ")}`);
 }
 
 export function asGrade(v: unknown): number {

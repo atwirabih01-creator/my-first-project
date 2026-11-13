@@ -3,11 +3,12 @@
 //        question (1-1000 chars), message? (0-1000 chars; empty on the first turn),
 //        history?: {role:"child"|"zaki", text}[] (max 50), pageImages?: string[] (base64 JPEG, max 3),
 //        parentNote?: string (max 300 chars; the grown-up's note, e.g. "exercise 4 only"; DATA,
-//        safety-checked like a message), familyId?, familyKey? }
+//        safety-checked like a message), familyId?, familyKey?,
+//        schoolCountry? (the school's country, NOT `country`), program? (school program) }
 // -> { reply, hintLevel?, safety, demo?, budgetReached? }   (same shape as /api/tutor)
 // Same safety pipeline as /api/tutor: rate limit, family consent, moderation of the question
 // + message, safety screen, flags, per-child daily turns, daily budget, reply checks.
-import { HttpError, SIZE_LIMITS, asChildRef, asGrade, asLang, asOptionalAge, asOptionalCountry, asSubject, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
+import { HttpError, SIZE_LIMITS, asChildRef, asGrade, asLang, asOptionalAge, asOptionalProgram, asOptionalSchoolCountry, asOptionalCountry, asSubject, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
 import { assertFamilyConsentIfPresent } from "../../../server/family";
 import { MAX_HOMEWORK_IMAGES, MAX_PARENT_NOTE_CHARS, MAX_QUESTION_CHARS, runHomeworkTurn, type HomeworkTurn } from "../../../server/homework";
 import { LessonPackError } from "../../../server/lessonPack";
@@ -23,6 +24,8 @@ export async function POST(request: Request): Promise<Response> {
     const country = asOptionalCountry(body.country);
     const childRef = asChildRef(body.childRef);
     const subject = asSubject(body.subject);
+    const schoolCountry = asOptionalSchoolCountry(body.schoolCountry);
+    const program = asOptionalProgram(body.program);
     const question = asText(body.question, "question", MAX_QUESTION_CHARS);
     const message = body.message === undefined || body.message === null || body.message === "" ? undefined : asText(body.message, "message", 1000);
     const parentNote =
@@ -41,7 +44,7 @@ export async function POST(request: Request): Promise<Response> {
       .map((h) => ({ role: h.role, text: h.text.slice(0, 1000) }));
 
     try {
-      const result = await runHomeworkTurn({ question, message, history, subject, grade, age, lang, country, childRef, pageImages: images as string[] | undefined, parentNote });
+      const result = await runHomeworkTurn({ question, message, history, subject, grade, age, lang, country, childRef, pageImages: images as string[] | undefined, parentNote, schoolCountry, program });
       return json(result);
     } catch (e) {
       if (e instanceof LessonPackError && e.code === "bad_image") throw new HttpError(400, e.message, e.code);

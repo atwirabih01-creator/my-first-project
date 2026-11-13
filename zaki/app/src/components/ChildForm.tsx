@@ -1,5 +1,5 @@
-// Learner card form (create + edit): first name or nickname, age 5-16, grade 1-9,
-// language and a preset cartoon avatar (never a photo).
+// Learner card form (create + edit): first name or nickname, age 5-16, grade 1-9, the
+// school's country and program (both optional), language and a preset cartoon avatar (never a photo).
 // Picking an age preselects the usual grade for that age; the grown-up can change it.
 import { useState } from 'react';
 import { Pressable, StyleSheet, TextInput } from 'react-native';
@@ -7,11 +7,22 @@ import { Pressable, StyleSheet, TextInput } from 'react-native';
 import { C, R, S } from '@/constants/theme';
 import { GRADES, MAX_AGE, MIN_AGE, clampGrade } from '@/lib/curriculum';
 import { useT } from '@/lib/store';
-import type { AvatarId, Lang } from '@/lib/types';
+import type { AvatarId, Lang, SchoolCountry, SchoolProgram } from '@/lib/types';
+import { SCHOOL_COUNTRIES, SCHOOL_PROGRAMS } from '../../server/types';
 import { AVATARS, Avatar } from './Avatar';
 import { Btn, Card, Chip, Row, Txt } from './ui';
 
-export type ChildFormValue = { nickname: string; age?: number; grade: number; lang: Lang; avatar: AvatarId };
+export type ChildFormValue = {
+  nickname: string;
+  age?: number;
+  grade: number;
+  lang: Lang;
+  avatar: AvatarId;
+  /** Optional: the school's country (NOT the family country used for help lines). */
+  schoolCountry?: SchoolCountry;
+  /** Optional: the school program (Zaki teaches in its way; lesson photos always come first). */
+  program?: SchoolProgram;
+};
 
 const AGES = Array.from({ length: MAX_AGE - MIN_AGE + 1 }, (_, i) => MIN_AGE + i);
 
@@ -40,6 +51,8 @@ export function ChildForm({
   const [autoGrade, setAutoGrade] = useState(false);
   const [lang, setLang] = useState<Lang>(initial.lang);
   const [avatar, setAvatar] = useState<AvatarId>(initial.avatar);
+  const [schoolCountry, setSchoolCountry] = useState<SchoolCountry | undefined>(initial.schoolCountry);
+  const [program, setProgram] = useState<SchoolProgram | undefined>(initial.program);
 
   const clean = cleanNickname(nickname);
   const ok = clean.trim().length >= 2 && (!requireAge || age !== undefined);
@@ -105,6 +118,52 @@ export function ChildForm({
         ) : null}
       </Card>
 
+      <Card testID="school-country-card">
+        <Txt bold>{t('schoolCountry')}</Txt>
+        <Txt variant="small">{t('schoolOptional')}</Txt>
+        <Row wrap>
+          {SCHOOL_COUNTRIES.map((c) => (
+            <Chip
+              key={c}
+              label={t(`sc_${c}`)}
+              selected={schoolCountry === c}
+              // Optional: tapping the chosen one again clears it.
+              onPress={() => setSchoolCountry((v) => (v === c ? undefined : c))}
+              testID={`school-country-${c}`}
+            />
+          ))}
+        </Row>
+      </Card>
+
+      <Card testID="school-program-card">
+        <Txt bold>{t('schoolProgram')}</Txt>
+        <Txt variant="small">{t('schoolOptional')}</Txt>
+        <Row wrap>
+          {SCHOOL_PROGRAMS.map((p) => (
+            <Chip
+              key={p}
+              label={t(`prog_${p}`)}
+              selected={program === p}
+              onPress={() => setProgram((v) => (v === p ? undefined : p))}
+              testID={`school-program-${p}`}
+            />
+          ))}
+        </Row>
+        <Txt variant="small" testID="school-hint">
+          {t('schoolHint')}
+        </Txt>
+        {program === 'british' ? (
+          <Txt variant="small" testID="school-british-note">
+            {t('schoolBritishNote', { y: grade + 1, n: grade })}
+          </Txt>
+        ) : null}
+        {program === 'french' ? (
+          <Txt variant="small" testID="school-french-note">
+            {t('schoolFrenchNote')}
+          </Txt>
+        ) : null}
+      </Card>
+
       <Card>
         <Txt bold>{t('language')}</Txt>
         <Row wrap>
@@ -136,7 +195,7 @@ export function ChildForm({
         big
         disabled={!ok}
         testID="create-btn"
-        onPress={() => onSubmit({ nickname: clean.trim(), age, grade, lang, avatar })}
+        onPress={() => onSubmit({ nickname: clean.trim(), age, grade, lang, avatar, schoolCountry, program })}
       />
     </>
   );

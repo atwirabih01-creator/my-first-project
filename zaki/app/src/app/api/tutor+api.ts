@@ -1,8 +1,9 @@
 // POST /api/tutor
 // body { packId, pack, step: "recap"|"teach"|"check"|"chat", history: {role:"child"|"zaki", text}[],
-//        message, lang, grade (1-9), age? (5-16), country?, childRef?, questionId? }
+//        message, lang, grade (1-9), age? (5-16), country?, childRef?, questionId?,
+//        schoolCountry? (the school's country, NOT `country`), program? (school program) }
 // -> { reply, hintLevel?, safety, demo? }
-import { HttpError, SIZE_LIMITS, asChildRef, asGrade, asLang, asOptionalAge, asOptionalCountry, asSubject, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
+import { HttpError, SIZE_LIMITS, asChildRef, asGrade, asLang, asOptionalAge, asOptionalProgram, asOptionalSchoolCountry, asOptionalCountry, asSubject, asText, handle, json, rateLimit, readJsonBody } from "../../../server/http";
 import { assertFamilyConsentIfPresent } from "../../../server/family";
 import { validatePack } from "../../../server/packValidator";
 import { TUTOR_STEPS, runTutorTurn, type TutorStep } from "../../../server/tutor";
@@ -17,6 +18,8 @@ export async function POST(request: Request): Promise<Response> {
     const age = asOptionalAge(body.age);
     const country = asOptionalCountry(body.country);
     const childRef = asChildRef(body.childRef);
+    const schoolCountry = asOptionalSchoolCountry(body.schoolCountry);
+    const program = asOptionalProgram(body.program);
     const step = body.step as TutorStep;
     if (!TUTOR_STEPS.includes(step)) throw new HttpError(400, `step must be one of ${TUTOR_STEPS.join(", ")}`);
     const message = asText(body.message, "message", 1000);
@@ -48,6 +51,8 @@ export async function POST(request: Request): Promise<Response> {
       age,
       country,
       childRef,
+      schoolCountry,
+      program,
       questionId: typeof body.questionId === "string" ? body.questionId.slice(0, 40) : undefined,
     });
     return json(result);

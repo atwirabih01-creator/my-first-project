@@ -6,7 +6,7 @@
 import { normalizeBase } from "./normalize";
 import { shufflePack } from "./shuffle";
 import { createFileStore, getStore, __setStoreForTests } from "./storage";
-import type { Lang, LessonPack, Subject } from "./types";
+import type { Lang, LessonPack, SchoolCountry, SchoolProgram, Subject } from "./types";
 
 export type LibraryEntry = {
   key: string;
@@ -18,13 +18,28 @@ export type LibraryEntry = {
   packVersion?: number;
 };
 
-/** "  Fractions!! " and "fractions" share a key; Arabic is normalized too. */
-export function libraryKey(subject: Subject, topic: string, grade: number, lang: Lang): string {
+/**
+ * "  Fractions!! " and "fractions" share a key; Arabic is normalized too.
+ * The school program is part of the key (a French-program lesson is never served to an
+ * American-program child); the national program also keeps the school's country apart.
+ * No program, or "other" = the old key (entries saved before programs existed still match).
+ */
+export function libraryKey(
+  subject: Subject,
+  topic: string,
+  grade: number,
+  lang: Lang,
+  school: { program?: SchoolProgram; schoolCountry?: SchoolCountry } = {},
+): string {
   const t = normalizeBase(topic)
     .replace(/[^\p{L}\p{N} ]+/gu, " ")
     .replace(/\s+/g, " ")
     .trim();
-  return `${subject}|${t}|${grade}|${lang}`;
+  const base = `${subject}|${t}|${grade}|${lang}`;
+  const { program, schoolCountry } = school;
+  if (!program || program === "other") return base;
+  if (program === "national") return `${base}|national-${schoolCountry ?? "OTHER"}`;
+  return `${base}|${program}`;
 }
 
 /** A cached pack for this key (answer positions re-shuffled), or null. Never throws. */

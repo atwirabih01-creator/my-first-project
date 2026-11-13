@@ -16,7 +16,7 @@ import { Screen } from '@/components/Screen';
 import { AskZaki, Choice, LessonHelpBar, QuestionWithHints, recordQuietFlag } from '@/components/lesson';
 import { Btn, Card, ProgressBar, Row, Txt } from '@/components/ui';
 import { C, R, S } from '@/constants/theme';
-import { fetchLessonPack, MIN_PACK_VERSION } from '@/lib/api';
+import { fetchLessonPack, MIN_PACK_VERSION, schoolOf } from '@/lib/api';
 import { clearInProgress, loadInProgress, saveInProgress } from '@/lib/inProgress';
 import { accessForKey } from '@/lib/unlock';
 import { shuffleChoices } from '../../server/shuffle';
@@ -111,7 +111,7 @@ export default function Lesson() {
       setPhase(startPhase);
       return true;
     };
-    fetchLessonPack({ childRef: child.id, grade: child.grade, age: child.age, lang: child.lang, country: settings.country, subject, topic })
+    fetchLessonPack({ childRef: child.id, grade: child.grade, age: child.age, lang: child.lang, country: settings.country, ...schoolOf(child), subject, topic })
       .then((res) => {
         if (!alive) return;
         // Old lesson + limit / offline / demo sample / refused: quietly keep the old lesson.
