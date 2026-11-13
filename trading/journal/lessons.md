@@ -154,3 +154,9 @@ changes until they are scored.
 - **Happened:** 0.00000495 → 0.00000436 (−11.9%). PEPE kept sliding with the wider market (BTC −3% and ETH −3% on 12 Nov), with a low of 0.00000430.
 - **Verdict:** a good decision with a good result. The chart plan held: the retest filter confirmed sellers at the level, the same pattern as the 4 Nov ETH right call. Research and the final check held. It was a market-wide slide, so one right call proves little.
 - **Rule (keep):** a break plus a retest that holds is now 2 for 2 on official calls (ETH 4 Nov, PEPE 12 Nov). Keep requiring the retest after a failed break, and tally the retest-held calls separately at the 15 Nov review.
+
+## 2026-11-13 · Trigger call "ETH down 24h" (trial-5b) · RIGHT (−1.8%)
+- **Expected:** a 24h fall after ETH broke 2,080 and the retest held (the 21:00 bar touched 2,083.5 and closed at 2,070.7; closes 2,057.5 and 2,056.4). Atlas found no valid reason against.
+- **Happened:** 2,056.36 → 2,019.74 (−1.8%), with a low of 1,983.82 during the 12 Nov afternoon market drop (BTC −4%). Since then it has been flat at 2,005–2,020.
+- **Verdict:** a good decision with a good result, but a modest one: most of the gain came from the market-wide drop, and ETH bounced off the low. The chart plan, research and final check all held.
+- **Rule (keep):** a break plus a retest that holds is now 3 for 3 on official calls (ETH 4 Nov, PEPE 12 Nov, ETH 13 Nov). Calls with no retest are 0 for 3. That is a pattern to test at the 15 Nov review, not proof yet. The ETH and PEPE calls of 12 Nov overlap with the same market drop.

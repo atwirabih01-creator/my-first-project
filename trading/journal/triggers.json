@@ -16,21 +16,6 @@
    "used_utc": "2026-11-12 16:20"
   },
   {
-   "symbol": "ETHUSDT",
-   "dir": "up",
-   "level": 2140,
-   "needs_retest": true,
-   "note": "9 Nov 15:00 close 2,147.5 failed above"
-  },
-  {
-   "symbol": "ETHUSDT",
-   "dir": "down",
-   "level": 2080,
-   "needs_retest": true,
-   "note": "range low 2,083-2,084; 8 Nov flash break to 2,060 failed",
-   "used_utc": "2026-11-12 00:25"
-  },
-  {
    "symbol": "PEPEUSDT",
    "dir": "up",
    "level": 4.8e-06,
@@ -41,6 +26,19 @@
    "dir": "down",
    "level": 4.28e-06,
    "note": "Hawk 12 Nov 16:25 refill: just below range low 0.00000430 (13:00 low)"
+  },
+  {
+   "symbol": "ETHUSDT",
+   "dir": "up",
+   "level": 2068,
+   "needs_retest": true,
+   "note": "Hawk 13 Nov 00:15 refill: just above 24h top 2,066.42 (range-edge rule wins, +2.5%); 11 Nov 15:00-21:00 closes above, then fell back"
+  },
+  {
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "level": 1982,
+   "note": "Hawk 13 Nov 00:15 refill: just below 24h low 1,983.82 (12 Nov 14:00 wick); no failed break"
   }
  ],
  "history": [
@@ -339,6 +337,26 @@
      "dir": "up",
      "level": 5.05e-06,
      "note": "Hawk 12 Nov 16:25 refill: just above 24h top 0.00000501 (range-edge rule wins, >2% away)"
+    }
+   ]
+  },
+  {
+   "set": "ETH levels retired 2026-11-13 00:15",
+   "triggers": [
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 2140,
+     "needs_retest": true,
+     "note": "9 Nov 15:00 close 2,147.5 failed above"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "down",
+     "level": 2080,
+     "needs_retest": true,
+     "note": "range low 2,083-2,084; 8 Nov flash break to 2,060 failed",
+     "used_utc": "2026-11-12 00:25"
     }
    ]
   }
