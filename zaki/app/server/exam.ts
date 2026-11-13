@@ -84,7 +84,7 @@ function acceptNewQuestion(raw: Record<string, unknown>, lessons: ExamLessonInpu
   }
   // Keyword safety on everything the child will see.
   for (const text of [q.q, ...q.choices, q.hint1, q.hint2, q.similarExample]) {
-    if (keywordCategory(keywordScan(text)) !== "none") return null;
+    if (keywordCategory(keywordScan(text, { lessonContent: true })) !== "none") return null;
     if (/https?:|www\.|\d[\d\s-]{6,}\d/.test(text)) return null;
   }
   return { ...q, lessonKey: lessons[idx].lessonKey };

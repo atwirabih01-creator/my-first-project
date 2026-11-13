@@ -28,6 +28,7 @@ import { cleanBase64Image } from "./lessonPack";
 import { GENERAL_EXAMPLES_RULE, SHORT_STYLE_RULE, levelLine, sensitiveTopicRule } from "./promptRules";
 import { moderate, scrubPii } from "./safety";
 import { programCtx, runGuardedTurn, type TutorResponse } from "./tutor";
+import { teacherNotesBlock } from "./knowledge";
 import type { Country, Lang, Question, SchoolCountry, SchoolProgram, Subject } from "./types";
 import { evaluate, normalizeMathText, numbersIn, ratToString, type Rational } from "./verify";
 
@@ -202,12 +203,23 @@ function buildMessages(req: HomeworkRequest, images: string[], hintLevel: number
   return [...hist, { role: "user" as const, content }];
 }
 
-function questionBlock(req: HomeworkRequest): string {
+/**
+ * Teacher notes (server/knowledge) matching the homework subject + question text (and the
+ * grown-up's note): key idea, method, typical mistakes (~400 tokens). "" when nothing matches.
+ */
+export function homeworkTeacherNotes(req: Pick<HomeworkRequest, "grade" | "subject" | "question" | "parentNote">): string {
+  if (req.subject === "social") return "";
+  const text = [req.question, req.parentNote].filter(Boolean).join("\n");
+  return teacherNotesBlock({ grade: req.grade, subject: req.subject, topic: "", text });
+}
+
+export function questionBlock(req: HomeworkRequest): string {
   const q = scrubPii(req.question).slice(0, MAX_QUESTION_CHARS).replace(/<\/?homework_question>/gi, "");
   const note = req.parentNote?.trim()
     ? `\n<parent_note>\n${scrubPii(req.parentNote).slice(0, MAX_PARENT_NOTE_CHARS).replace(/<\/?parent_note>/gi, "")}\n</parent_note>`
     : "";
-  return `Subject: ${req.subject}\n<homework_question>\n${q}\n</homework_question>${note}`;
+  const notes = homeworkTeacherNotes(req);
+  return `Subject: ${req.subject}\n<homework_question>\n${q}\n</homework_question>${note}${notes ? `\n${notes}` : ""}`;
 }
 
 const PAGE_TEXT_RE = /<page_text>([\s\S]*?)<\/page_text>/i;

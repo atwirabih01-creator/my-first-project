@@ -260,6 +260,8 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
   }
 
   // Hard safety keywords anywhere in the pack text => reject (no exceptions, no auto-fix).
+  // Scanned as LESSON CONTENT: school words such as "limestone", "under teacher supervision"
+  // or "sex chromosomes" are not mistaken for a child's disclosure (keywordScan lessonContent).
   const allText = [
     topic ?? "",
     ...recap.flatMap((r) => [r.q, ...r.choices]),
@@ -268,7 +270,7 @@ export function validatePack(raw: unknown, expect: Expect): ValidationResult {
     ...summary,
     ...flashcards.flatMap((f) => [f.front, f.back]),
   ].join("\n");
-  const scan = keywordScan(allText);
+  const scan = keywordScan(allText, { lessonContent: true });
   if (scan.selfHarm || scan.disclosure || scan.secrecy || scan.adult || scan.injection || scan.politics) {
     errors.push("pack text contains blocked safety words");
   }

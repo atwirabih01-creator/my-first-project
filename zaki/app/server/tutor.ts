@@ -16,6 +16,7 @@ import { GENERAL_EXAMPLES_RULE, SHORT_STYLE_RULE, levelLine, sensitiveTopicRule 
 import { replaceRegionalWords } from "./regionalWords";
 import { fixedReplyFor, moderate, scrubPii } from "./safety";
 import { programGuide } from "./programGuide";
+import { teacherNotesBlock } from "./knowledge";
 import type { Country, Lang, LessonPack, Question, SafetyInfo, SchoolCountry, SchoolProgram } from "./types";
 
 export type TutorStep = "recap" | "teach" | "check" | "chat";
@@ -129,6 +130,16 @@ function hintLevelFor(req: TutorRequest): number | undefined {
   return Math.min(3, zakiTurns + 1);
 }
 
+/**
+ * Teacher notes (server/knowledge) for the lesson on screen: key idea, method and typical
+ * mistakes (~400 tokens), as reference context after the lesson pack. "" when nothing matches.
+ */
+export function tutorTeacherNotes(req: Pick<TutorRequest, "pack" | "grade">): string {
+  const p = req.pack;
+  if (p.subject === "social") return "";
+  return teacherNotesBlock({ grade: req.grade || p.grade, subject: p.subject, topic: p.topic });
+}
+
 /** "school program: ..." for turn_context, or "" (no program / "other": as before). Shared with homework. */
 export function programCtx(req: { program?: SchoolProgram; schoolCountry?: SchoolCountry }): string {
   const g = programGuide(req.program, req.schoolCountry, "chat");
@@ -178,7 +189,12 @@ async function askClaude(req: TutorRequest, hintLevel: number | undefined, extra
     output_config: { effort: "low" },
     system: [
       { type: "text", text: ZAKI_SYSTEM_PROMPT, cache_control: { type: "ephemeral" } },
-      { type: "text", text: `<lesson_pack>\n${packForModel(req.pack)}\n</lesson_pack>`, cache_control: { type: "ephemeral" } },
+      {
+        type: "text",
+        // Teacher notes ride in the same cached block as the pack (stable for the whole lesson).
+        text: [`<lesson_pack>\n${packForModel(req.pack)}\n</lesson_pack>`, tutorTeacherNotes(req)].filter(Boolean).join("\n"),
+        cache_control: { type: "ephemeral" },
+      },
     ],
     messages,
     },

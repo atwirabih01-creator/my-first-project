@@ -211,7 +211,9 @@ export type ModerateOptions = {
 };
 
 export async function moderate(text: string, opts: ModerateOptions): Promise<ModerationResult> {
-  const scan = keywordScan(text);
+  // Text read from a textbook photo is school content: scanned like lesson-pack text (school
+  // vocabulary such as "sex chromosomes" is not an adult topic). The remote layers still run.
+  const scan = keywordScan(text, { lessonContent: opts.pageText === true });
   const kwCat = keywordCategory(scan);
   const layers: string[] = [];
   if (kwCat !== "none") layers.push(`keywords:${kwCat}`);

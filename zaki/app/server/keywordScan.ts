@@ -2,6 +2,7 @@
 // Shared by the server (server/safety.ts re-exports it) and the app's offline safety check
 // (src/lib/localSafety.ts), so both always use the same normalizer and keyword lists.
 import * as KW from "./data/safetyKeywords";
+import { CURRICULUM_SAFE_PHRASES } from "./data/curriculumVocabulary";
 import type { KeywordGroup } from "./data/safetyKeywords";
 import { normalizeBase, normalizeViews, phraseSkeleton, type NormalizedViews } from "./normalize";
 import type { SafetyCategory } from "./types";
@@ -73,12 +74,17 @@ const COMPILED = {
  *  - Arabizi (Latin word containing a digit, e.g. "2asf", "bi2tolni"): skeleton match.
  *  - Plain Latin words: skeleton match only for long keywords (so "safe" never matches قصف).
  */
-function wordMatches(textWordBase: string, variants: string[], k: KwWord, multiWord = false): boolean {
+function wordMatches(textWordBase: string, variants: string[], k: KwWord, multiWord = false, content = false): boolean {
   if (ARABIC_SCRIPT.test(textWordBase)) {
     if (textWordBase === k.lit || stripClitic(textWordBase) === k.litStripped) return true;
-    if (k.skel.length >= 4) return variants.some((v) => v === k.skel || v.includes(k.skel));
+    // Lesson content: the skeleton must be the WHOLE word ("نتحرك" we move ≠ "انتحر").
+    if (k.skel.length >= 4) return variants.some((v) => v === k.skel || (!content && v.includes(k.skel)));
     return false;
   }
+  // Lesson content (English/Arabic school text, never Arabizi): a Latin word is matched only
+  // literally, through the Latin keyword lists in groupIn ("limestone" ≠ لمستني, "supervision"
+  // ≠ يرفسني, "2b" in algebra ≠ اباحي).
+  if (content) return false;
   if (!k.skel) return textWordBase === k.lit;
   const looksArabizi = /\d/.test(textWordBase);
   // Inside a multi-word Arabizi phrase ("bde mut"), short words may match their exact skeleton.
@@ -86,12 +92,12 @@ function wordMatches(textWordBase: string, variants: string[], k: KwWord, multiW
   return variants.some((v) => v === k.skel || (k.skel.length >= 4 && v.includes(k.skel)));
 }
 
-function skeletonPhraseIn(views: NormalizedViews, words: string[], phrase: KwWord[]): boolean {
+function skeletonPhraseIn(views: NormalizedViews, words: string[], phrase: KwWord[], content = false): boolean {
   const n = phrase.length;
   for (let i = 0; i + n <= views.skeletonWords.length; i++) {
     let ok = true;
     for (let j = 0; j < n; j++) {
-      if (!wordMatches(words[i + j], views.skeletonWords[i + j], phrase[j], n >= 2)) {
+      if (!wordMatches(words[i + j], views.skeletonWords[i + j], phrase[j], n >= 2, content)) {
         ok = false;
         break;
       }
@@ -113,7 +119,7 @@ function wordListIn(base: string, words: string[], group: KeywordGroup): boolean
   return list.some((t) => t && (padded.includes(" " + t + " ") || stripped.includes(" " + t + " ")));
 }
 
-function groupIn(views: NormalizedViews, g: CompiledGroup): boolean {
+function groupIn(views: NormalizedViews, g: CompiledGroup, content = false): boolean {
   const words = views.base ? views.base.split(" ") : [];
   if (g.latin.some((p) => latinPhraseIn(views.base, p))) return true;
   // Phrases typed without spaces ("killmyself", or "b a d e m o u t" after de-spacing).
@@ -125,7 +131,7 @@ function groupIn(views: NormalizedViews, g: CompiledGroup): boolean {
     })
   )
     return true;
-  return g.arabic.some((p) => skeletonPhraseIn(views, words, p));
+  return g.arabic.some((p) => skeletonPhraseIn(views, words, p, content));
 }
 
 export const PHONE_RE = /(?:\+|00)?[0-9٠-٩][0-9٠-٩\s\-().]{5,}[0-9٠-٩]/g;
@@ -201,31 +207,65 @@ export function unleet(text: string): string {
     .join(" ");
 }
 
-function scanStrong(text: string) {
+function scanStrong(text: string, content = false) {
   const views = normalizeViews(text);
+  const g = (c: CompiledGroup) => groupIn(views, c, content);
   return {
-    selfHarm: groupIn(views, COMPILED.selfHarm),
-    disclosure: groupIn(views, COMPILED.disclosure),
-    secrecy: groupIn(views, COMPILED.secrecy),
-    fear: groupIn(views, COMPILED.fear),
-    helpSeeking: groupIn(views, COMPILED.helpSeeking),
-    war: groupIn(views, COMPILED.war),
-    threatIdiom: groupIn(views, COMPILED.threatIdiom),
-    death: groupIn(views, COMPILED.death),
-    homeFear: groupIn(views, COMPILED.homeFear),
-    fearOfDying: groupIn(views, COMPILED.fearOfDying),
-    griefPhrase: groupIn(views, COMPILED.griefPhrase),
+    selfHarm: g(COMPILED.selfHarm),
+    disclosure: g(COMPILED.disclosure),
+    secrecy: g(COMPILED.secrecy),
+    fear: g(COMPILED.fear),
+    helpSeeking: g(COMPILED.helpSeeking),
+    war: g(COMPILED.war),
+    threatIdiom: g(COMPILED.threatIdiom),
+    death: g(COMPILED.death),
+    homeFear: g(COMPILED.homeFear),
+    fearOfDying: g(COMPILED.fearOfDying),
+    griefPhrase: g(COMPILED.griefPhrase),
   };
 }
 
-export function keywordScan(text: string): KeywordScan {
+export type KeywordScanOptions = {
+  /**
+   * The text is LESSON CONTENT (an AI-written lesson pack or exam question, or text read from
+   * a textbook photo), never a child's message. School vocabulary from
+   * data/curriculumVocabulary.ts is removed first ("sex chromosomes", "naked eye"), and the
+   * fuzzy layers made for children's spelling tricks are off: no Arabizi/skeleton matching of
+   * Latin words, no partial-skeleton matching inside Arabic words, no de-spacing or leetspeak.
+   * Literal keywords (English, French, Arabic with its prefixes, exact Arabic skeletons) still
+   * block. Default (false) = the full chat scan, unchanged.
+   */
+  lessonContent?: boolean;
+};
+
+const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+/** One regex for the whole allowlist: whole words, any case, space or hyphen between words. */
+const CURRICULUM_SAFE_RE = new RegExp(
+  "(^|[^\\p{L}\\p{N}])(?:" +
+    [...CURRICULUM_SAFE_PHRASES]
+      .sort((a, b) => b.length - a.length)
+      .map((p) => p.split(/[\s-]+/).map(escapeRe).join("[\\s-]+"))
+      .join("|") +
+    ")(?=[^\\p{L}\\p{N}]|$)",
+  "giu",
+);
+
+/** Lesson content only: school phrases that look like safety words are blanked out. */
+export function maskCurriculumVocabulary(text: string): string {
+  return text.replace(CURRICULUM_SAFE_RE, "$1 ");
+}
+
+export function keywordScan(rawText: string, opts: KeywordScanOptions = {}): KeywordScan {
+  const content = opts.lessonContent === true;
+  const text = content ? maskCurriculumVocabulary(rawText) : rawText;
   const views = normalizeViews(text);
   const words = views.base ? views.base.split(" ") : [];
   // Strong lists are checked on the text, its de-spaced form and its leetspeak-decoded form.
   // "@" stands for "a" in tricks like "kh@yfe" (the normalizer would drop it).
+  // Lesson content: the text as written only (no spelling tricks in school text).
   const at = text.replace(/@/g, "a");
-  const variants = Array.from(new Set([text, despace(text), unleet(text), unleet(despace(text)), at]));
-  const hits = variants.map(scanStrong);
+  const variants = content ? [text] : Array.from(new Set([text, despace(text), unleet(text), unleet(despace(text)), at]));
+  const hits = variants.map((v) => scanStrong(v, content));
   const any = (k: keyof ReturnType<typeof scanStrong>) => hits.some((h) => h[k]);
 
   // "scared to go home" counts as possible home involvement (screen + reviewer, never parent).
@@ -269,10 +309,10 @@ export function keywordScan(text: string): KeywordScan {
     helpSeeking: any("helpSeeking"),
     home,
     outside,
-    personal: groupIn(views, COMPILED.personal) || containsPhoneNumber(text) || EMAIL_RE.test(text),
-    adult: groupIn(views, COMPILED.adult) || /(^|[^a-z])x{3,}([^a-z]|$)/i.test(text),
-    politics: groupIn(views, COMPILED.politics),
-    injection: groupIn(views, COMPILED.injection),
+    personal: groupIn(views, COMPILED.personal, content) || containsPhoneNumber(text) || EMAIL_RE.test(text),
+    adult: groupIn(views, COMPILED.adult, content) || /(^|[^a-z])x{3,}([^a-z]|$)/i.test(text),
+    politics: groupIn(views, COMPILED.politics, content),
+    injection: groupIn(views, COMPILED.injection, content),
   };
 }
 

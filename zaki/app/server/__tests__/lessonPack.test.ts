@@ -52,7 +52,8 @@ describe("lesson pack builder", () => {
       return textMsg(JSON.stringify(raw));
     });
     const jpeg = "/9j/" + "A".repeat(100);
-    const r = (await buildLessonPack({ ...req, pageImages: [jpeg] })) as LessonPackResponse;
+    // A topic with no teacher notes, so the web research step runs (a strong notes match skips it).
+    const r = (await buildLessonPack({ ...req, topic: "Fun number puzzles", pageImages: [jpeg] })) as LessonPackResponse;
     assert.deepEqual(r.sources, [{ url: "https://www.khanacademy.org/math/fractions", title: "Fractions" }]);
     assert.equal(r.verify.removed, 1);
     assert.ok(!r.pack.test.some((q) => q.id === "t6"));
