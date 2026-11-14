@@ -105,7 +105,7 @@ describe("homework help", () => {
     let r = await runHomeworkTurn(req({ message: "just tell me the answer", history: [{ role: "zaki", text: "Try the ones first." }] }));
     assert.equal(calls.filter((c) => !isClassifierCall(c)).length, 2, "one retry");
     assert.ok(!r.reply.includes("72"));
-    assert.match(r.reply, /can't tell you the answer/);
+    assert.match(r.reply, /can.t give you the answer/); // the homework fallback line (answer_protected_homework)
 
     calls = mockClaude((p) => (isClassifierCall(p) ? textMsg(NONE) : textMsg("Yes! 72 is right. You found it yourself! How did you do it?")));
     r = await runHomeworkTurn(req({ message: "is it 72?", history: [{ role: "zaki", text: "Add the ones." }] }));

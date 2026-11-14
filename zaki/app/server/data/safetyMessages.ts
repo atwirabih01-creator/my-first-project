@@ -16,6 +16,7 @@ export type FixedMessageKey =
   | "prompt_injection"
   | "reply_blocked"
   | "answer_protected"
+  | "answer_protected_homework"
   | "demo_tutor"
   | "demo_homework"
   | "ai_unavailable"
@@ -108,6 +109,10 @@ export const FIXED_MESSAGES: Record<FixedMessageKey, Record<Lang, string>> = {
   answer_protected: {
     en: "I can't tell you the answer, but I know you can find it!\nLet's look at it one small step at a time.",
     ar: "لا أستطيع أن أخبرك بالجواب، لكنني أعرف أنك تستطيع أن تجده!\nلننظر إليه خطوة صغيرة بعد خطوة.",
+  },
+  answer_protected_homework: {
+    en: "I can't give you the answer, but I know you can find it! ✏️\nRead the question again: what is it asking you to do?\nTell me your first try.",
+    ar: "لا أستطيع أن أعطيك الجواب، لكنني أعرف أنك تستطيع أن تجده! ✏️\nاقرأ السؤال مرة أخرى: ماذا يطلب منك أن تفعل؟\nأخبرني بمحاولتك الأولى.",
   },
   demo_tutor: {
     en: "Demo mode: Zaki's AI is not connected yet.\nI'm Zaki, an AI helper (not a person).\nTry the questions in this lesson and tap a hint if you need one.",

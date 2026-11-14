@@ -243,7 +243,8 @@ export type GuardedTurnInput = {
 
 const HEALTH_RETRY_NOTE =
   "Your last reply was blocked because it used a diagnosis word. Never diagnose and never use words like diagnose or تشخيص. Say in one short line to tell a grown-up at home or a doctor, then go back to the lesson.";
-const LEAK_RETRY_EXTRA = " Do NOT write the answer word itself, not even inside a hint, an example or a question.";
+const LEAK_RETRY_EXTRA =
+  " Do NOT write the answer word itself, not even inside a hint, an example, a comparison or a question. Use a DIFFERENT example word.";
 
 export type GuardedTurnResult = {
   reply: string;
