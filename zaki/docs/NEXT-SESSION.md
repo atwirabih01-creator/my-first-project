@@ -1,5 +1,13 @@
 # Next session: start here
 
+## 2026-11-14: v1.4.0 — school country + program, back-end teacher notes (392 topics), homework answer guard
+- APK: https://expo.dev/artifacts/eas/YaG0cDcYHfWQqR2rbVaYCQcbwg-qfOTucy7OVvGBNO8.apk ; server redeployed.
+- server/knowledge/*: teacher notes for every curriculum topic (math, science, physics, chemistry, biology, English, Arabic), reviewed (READY). Used as a hidden backbone by lesson writer (skips web research on a strong match), tutor and homework.
+- Live checks: Kana (ar g7) uses notes, 6 pictures; Past simple (British) 6 pictures; Decimals (French) decimal comma; Multiplication (IQ national) 6 pictures.
+- Live red team after changes: tutor/homework priority categories pass (homework answer leak fixed with hidden answer key).
+- Still open: Supabase (founder clicks); raise daily limit before family sharing; PDF uploads; review the 221 notes not read by hand when time allows.
+
+
 ## 2026-11-07: v1.3.0 — lessons with pictures + Try it! (packVersion 4)
 - APK: https://expo.dev/artifacts/eas/7IjsFmRwoEOzfPZQNhvzv7edYuEahMvwbeJA9yduMf4.apk ; server redeployed.
 - Founder added US$10 credit. Hosted server no longer blocks families it forgot (no DB) — Supabase still needed.
