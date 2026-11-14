@@ -23,6 +23,7 @@ import type { Country, HelpRouteKind, Lang, SafetyCategory, SafetyInfo } from ".
 
 // Layer B (keyword matching) lives in ./keywordScan so the app can share it offline.
 import { EMAIL_RE, PHONE_RE, keywordCategory, keywordScan } from "./keywordScan";
+import { mentionsBodySymptom } from "./replyChecks";
 export { containsPhoneNumber, despace, keywordCategory, keywordScan, unleet, type KeywordScan } from "./keywordScan";
 
 // ---------------------------------------------------------------------------------------
@@ -262,6 +263,8 @@ export async function moderate(text: string, opts: ModerateOptions): Promise<Mod
   const fearHome = scan.fearHomeCause || (Boolean(hk?.involvesHome) && !scan.fearCauseWarOrDeath);
   const isFear = category === "violence_fear";
   let result = decide(category, isFear ? fearHome : involvesHome, isFear ? scan.fearOutsideCause : scan.outside, opts.speaker, scan.politics, layers, { helpNeeded, where });
+  // A body pain/symptom in a calm-fear message (e.g. chest pain when running): point to a doctor too.
+  if (result.fixedReplyKey === "fear_calm" && !scan.fearCauseWarOrDeath && mentionsBodySymptom(text)) result = { ...result, fixedReplyKey: "health_tip" };
 
   if (opts.allowSensitive && result.category === "sensitive_topic") {
     // Curriculum history topic or a topic the parent added: a normal lesson, nothing to flag.

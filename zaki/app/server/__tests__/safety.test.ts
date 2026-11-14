@@ -243,3 +243,10 @@ describe("one-letter leftovers are not keywords", () => {
     assert.equal(keywordScan("watch xxx videos").adult, true);
   });
 });
+
+describe("calm fear line with a body symptom", () => {
+  it("points to a doctor for pain without war words, keeps the calm line for war fear", async () => {
+    const { mentionsBodySymptom } = await import("../replyChecks");
+    assert.equal(mentionsBodySymptom("3ande wej3 bi sedre kel ma erkod"), true);
+  });
+});

@@ -193,7 +193,7 @@ const REDIRECT_CUES = [
   "lesson", "homework", "learn", "math", "practice", "question", "school", "study", "let's", "lets", "grown-up", "grown up",
   "adult", "teacher", "parent", "back to", "try", "exercise", "subject",
   "درس", "واجب", "فرض", "نتعلم", "منتعلم", "نكمل", "منكمل", "رياضيات", "حساب", "سؤال", "سوال", "نرجع", "منرجع", "خلينا", "يلا",
-  "مدرسه", "معلم", "استاذ", "الاهل", "اهلك", "شخص كبير", "حدا كبير", "كبير بتثق", "تثق", "تمرين", "نتمرن", "دروس", "مساله", "نتدرب", "نحل",
+  "مدرسه", "معلم", "استاذ", "الاهل", "اهلك", "شخص كبير", "شخصا كبيرا", "طبيب", "doctor", "medecin", "médecin", "حدا كبير", "كبير بتثق", "تثق", "تمرين", "نتمرن", "دروس", "مساله", "نتدرب", "نحل",
   "devoirs", "leçon", "lecon", "exercice", "maths", "adulte", "maîtresse", "maitresse", "apprendre", "revenons", "on continue",
   "dars", "nerja3", "khallina", "yalla",
 ];
