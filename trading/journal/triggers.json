@@ -14,34 +14,33 @@
    "symbol": "PEPEUSDT",
    "dir": "down",
    "level": 4.28e-06,
-   "note": "Hawk 12 Nov 16:25 refill: just below range low 0.00000430 (13:00 low)"
-  },
-  {
-   "symbol": "ETHUSDT",
-   "dir": "up",
-   "level": 2068,
-   "needs_retest": true,
-   "note": "Hawk 13 Nov 00:15 refill: just above 24h top 2,066.42 (range-edge rule wins, +2.5%); 11 Nov 15:00-21:00 closes above, then fell back"
-  },
-  {
-   "symbol": "ETHUSDT",
-   "dir": "down",
-   "level": 1982,
-   "note": "Hawk 13 Nov 00:15 refill: just below 24h low 1,983.82 (12 Nov 14:00 wick); no failed break",
-   "used_utc": "2026-11-13 08:20"
+   "note": "Hawk 12 Nov 16:25 refill: just below range low 0.00000430 (13:00 low)",
+   "used_utc": "2026-11-14 08:20 (shadow)"
   },
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 71700,
-   "needs_retest": true,
-   "note": "13 Nov 20:15 refill (leader applied Hawk's 13 Nov ETH method; Hawk to confirm): just above 24h top 71,636 (range-edge rule wins, +3.8%); price fell through here on 12 Nov"
+   "level": 70250,
+   "note": "Hawk 14 Nov: just above 24h top 70,214 (range-edge rule wins, +4.4%)"
   },
   {
    "symbol": "BTCUSDT",
    "dir": "down",
    "level": 67450,
-   "note": "13 Nov 20:15 refill (Hawk's method; Hawk to confirm): just below 24h low 67,568 (13 Nov 05:00); no close below in 48h"
+   "used_utc": "2026-11-14 08:25",
+   "note": "Hawk confirmed; fired 03:00/04:00 14 Nov. Refill to 66,400 after this call is scored"
+  },
+  {
+   "symbol": "ETHUSDT",
+   "dir": "up",
+   "level": 1991,
+   "note": "Hawk 14 Nov: just above 24h top 1,989.11 (range-edge rule wins, +4.6%)"
+  },
+  {
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "level": 1876,
+   "note": "Hawk 14 Nov: just below 24h low 1,878 (three wicks held); clean"
   }
  ],
  "history": [
@@ -378,6 +377,48 @@
      "used_utc": "2026-11-12 16:20"
     }
    ]
+  },
+  {
+   "set": "ETH levels + BTC up retired 2026-11-14 08:25",
+   "triggers": [
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 2068,
+     "needs_retest": true,
+     "note": "Hawk 13 Nov 00:15 refill: just above 24h top 2,066.42 (range-edge rule wins, +2.5%); 11 Nov 15:00-21:00 closes above, then fell back"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "down",
+     "level": 1982,
+     "note": "Hawk 13 Nov 00:15 refill: just below 24h low 1,983.82 (12 Nov 14:00 wick); no failed break",
+     "used_utc": "2026-11-13 08:20"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 71700,
+     "needs_retest": true,
+     "note": "13 Nov 20:15 refill (leader applied Hawk's 13 Nov ETH method; Hawk to confirm): just above 24h top 71,636 (range-edge rule wins, +3.8%); price fell through here on 12 Nov"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "dir": "down",
+     "level": 67450,
+     "note": "13 Nov 20:15 refill (Hawk's method; Hawk to confirm): just below 24h low 67,568 (13 Nov 05:00); no close below in 48h"
+    }
+   ]
+  }
+ ],
+ "shadow": [
+  {
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "start": 4.29e-06,
+   "start_utc": "2026-11-14 08:20",
+   "score_utc": "2026-11-15 08:20",
+   "note": "down 0.00000428 fired (closes 0.00000425/0.00000424) but live price back above at recording; Sage: break failing, shadow only"
   }
  ]
 }
