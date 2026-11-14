@@ -14,7 +14,8 @@
    "symbol": "PEPEUSDT",
    "dir": "down",
    "level": 4.13e-06,
-   "note": "14 Nov 12:15 refill (leader applied Hawk's method; Hawk to confirm): just below 24h low 0.00000415 (05:00 wick), range-edge rule wins (-4.6%); no close below in 48h"
+   "note": "14 Nov 12:15 refill (leader applied Hawk's method; Hawk to confirm): just below 24h low 0.00000415 (05:00 wick), range-edge rule wins (-4.6%); no close below in 48h",
+   "used_utc": "2026-11-14 20:20"
   },
   {
    "symbol": "BTCUSDT",
