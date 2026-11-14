@@ -1,6 +1,21 @@
 {
- "scanned_utc": "2026-11-14 16:12:00+00:00",
+ "scanned_utc": "2026-11-14 20:11:00+00:00",
  "coins_checked": 40,
  "market_tide": "down",
- "candidates": []
+ "candidates": [
+  {
+   "scanned_utc": "2026-11-14 20:11:00+00:00",
+   "bar_utc": "2026-11-14 19:00:00+00:00",
+   "symbol": "PENGUUSDT",
+   "meme": true,
+   "side": "short",
+   "situation": "spike",
+   "price": 0.00494,
+   "atr4h_pct": 4.36,
+   "rsi4h": 19.0,
+   "buy_share_24h": 0.474,
+   "vol24h_musd": 14.8,
+   "versions_allowed": "D01 D03 D05 D09 D14"
+  }
+ ]
 }
