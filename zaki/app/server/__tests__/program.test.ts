@@ -140,7 +140,7 @@ describe("round 7: prompts carry the program guide", () => {
 
   it("research call never gets the program or country (only subject/topic/grade)", async () => {
     const calls = mockWriter();
-    await buildLessonPack(lessonReq({ topic: "Division research", program: "national", schoolCountry: "IQ" }));
+    await buildLessonPack(lessonReq({ topic: "Fun number puzzles", program: "national", schoolCountry: "IQ" }));
     const research = calls.filter((c) => c.tools?.length);
     assert.ok(research.length >= 1);
     assert.ok(!promptText(research[0]).includes("Iraq") && !promptText(research[0]).includes("school program"));

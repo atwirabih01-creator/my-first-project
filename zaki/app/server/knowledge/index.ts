@@ -64,6 +64,9 @@ const STOPWORDS = new Set(
     "find", "write", "work", "answer", "show", "use", "using", "make", "get", "let", "lets", "let's", "has", "have",
     "will", "would", "should", "there", "their", "they", "them", "he", "she", "his", "her", "when", "where", "also",
     "only", "very", "much", "many", "other", "like", "just", "same", "new", "way", "ways",
+    // Generic topic words: they must not decide WHICH topic it is ("Multiplication facts" is not "Division facts").
+    "fact", "facts", "basic", "basics", "introduction", "intro", "review", "revision", "simple", "part", "parts",
+    "rule", "rules", "practice", "skills", "skill", "basic facts", "more about",
     // Arabic (already normalized: ى->ي, ة->ه, أإآ->ا)
     "في", "من", "الي", "علي", "عن", "مع", "و", "او", "ثم", "هذا", "هذه", "ذلك", "تلك", "التي", "الذي", "الذين",
     "هو", "هي", "هم", "نحن", "انا", "انت", "ما", "ماذا", "كيف", "لماذا", "هل", "كل", "بعض", "كان", "كانت", "يكون",
