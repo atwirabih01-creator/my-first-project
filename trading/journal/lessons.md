@@ -166,3 +166,9 @@ changes until they are scored.
 - **Happened:** 71,710 → 68,900 (−3.9%). Overnight, longs were force-closed below 70k (about $622M in 4h) and BTC hit a 67,568 low on 13 Nov, then bounced back to ~69k.
 - **Verdict:** a good decision with a good result. The chart plan held, and research correctly did not use the 12 Nov volume climax as a veto. A big volume spike *without* a big price drop did not mark the bottom. The real flush came later.
 - **Rule (Sage, provisional):** "sellers exhausted → skip" needs a big price drop (like 9 Nov's 7.5% hour), not just big volume. Calls without a retest are now 1/4, and calls with a break plus a retest that held are 3/3. Review both counts on 15 Nov.
+
+## 2026-11-14 · Trigger call "ETH down 24h" (trial-5c, no retest) · RIGHT (−1.9%)
+- **Expected:** a 24h fall after ETH broke 1,982 directly (closes at 1,934.57 and 1,925.50), with no retest. The 05:00 lower low on rising volume ruled out the "sellers exhausted" veto. Atlas withdrew his own flush view. Sage recorded the call to test the "no retest" case.
+- **Happened:** 1,934.52 → 1,898.25 (−1.9%). It bounced to ~1,964 during the 13 Nov relief rally, then rolled over with BTC to a new low of 1,878 on 14 Nov.
+- **Verdict:** a good decision with a good result. Research was right to drop a view the data had disproved. It was a modest win and part of the same market-wide down move as the 13 Nov BTC call.
+- **Rule (keep):** when new data contradicts a reason against, drop the veto. Don't defend an earlier view. Calls without a retest are now 2/5, and calls with a break plus a retest that held are 3/3. Calls made while the market was trending one way (12–14 Nov) all moved together. Count them as one or two bets, not four.
