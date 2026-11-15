@@ -5,19 +5,6 @@
  "author": "Hawk (levels within ~2% of price, beyond the post-drop range edges)",
  "triggers": [
   {
-   "symbol": "PEPEUSDT",
-   "dir": "up",
-   "level": 4.8e-06,
-   "note": "Hawk's stated 16:25 instruction applied 20:15: just above the 24h top from 1h candles, 0.00000478 (range-edge rule wins, >2% away)"
-  },
-  {
-   "symbol": "PEPEUSDT",
-   "dir": "down",
-   "level": 4.13e-06,
-   "note": "14 Nov 12:15 refill (leader applied Hawk's method; Hawk to confirm): just below 24h low 0.00000415 (05:00 wick), range-edge rule wins (-4.6%); no close below in 48h",
-   "used_utc": "2026-11-14 20:20"
-  },
-  {
    "symbol": "BTCUSDT",
    "dir": "down",
    "level": 61950,
@@ -40,6 +27,18 @@
    "dir": "down",
    "level": 1709,
    "note": "Hawk 15 Nov 16:20: just below 24h low 1,711.08 (-5.3%); clean. Under 16 Nov rule would be 1,771 needs_retest"
+  },
+  {
+   "symbol": "PEPEUSDT",
+   "dir": "up",
+   "level": 4.09e-06,
+   "note": "15 Nov 20:15 refill (leader, Hawk's method; Hawk to confirm): just above 24h top 0.00000408 (+6%, edge wins); clean"
+  },
+  {
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "level": 3.68e-06,
+   "note": "15 Nov 20:15 refill (leader, Hawk's method; Hawk to confirm): just below 24h low 0.00000369 wick (-4.4%, edge wins); clean, lowest close 0.00000377"
   }
  ],
  "history": [
@@ -466,6 +465,24 @@
      "dir": "down",
      "level": 61950,
      "note": "15 Nov 08:15 refill (Hawk's method; Hawk to confirm): just below 24h low 62,006 (wick); range-edge rule wins (-3.2%)"
+    }
+   ]
+  },
+  {
+   "set": "PEPE levels retired 2026-11-15 20:15",
+   "triggers": [
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 4.8e-06,
+     "note": "Hawk's stated 16:25 instruction applied 20:15: just above the 24h top from 1h candles, 0.00000478 (range-edge rule wins, >2% away)"
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 4.13e-06,
+     "note": "14 Nov 12:15 refill (leader applied Hawk's method; Hawk to confirm): just below 24h low 0.00000415 (05:00 wick), range-edge rule wins (-4.6%); no close below in 48h",
+     "used_utc": "2026-11-14 20:20"
     }
    ]
   }

@@ -185,3 +185,9 @@ changes until they are scored.
 - **Happened:** 1,841.23 → 1,810.73 (−1.7%). It wicked to 1,711 overnight (−7%), then bounced most of the way back.
 - **Verdict:** a good decision, but the result flatters it. Most of the move came back. An 8h call would have been far more right, and a later start would have been wrong. Research, the chart plan and the final check all held.
 - **Rule:** after a deep wick in a stretched trend, part of the move reverses within the same day. A medium-confidence 24h call can still be right, but the margin is thin. Calls without a retest are now 4/6, and calls with a break plus a retest that held are 3/3. That is 9 trigger calls scored, 7 right.
+
+## 2026-11-15 · Trigger call "PEPE down 24h" (14 Nov 20:00, no retest) · RIGHT, barely (−0.26%)
+- **Expected:** a 24h fall after PEPE broke 0.00000413 directly. The bounce faded on drying volume, and BTC was not turning up. It was the first meme no-retest call, and it counted as one bet together with that day's BTC and ETH calls.
+- **Happened:** 0.00000392 → 0.00000391 (−0.26%). It wicked to 0.00000369 overnight (−6%), then came all the way back.
+- **Verdict:** right on paper but a coin flip in substance. The direction held for hours, then fully reversed. Nothing failed in the process; a 24h window after a −12% day leaves little room.
+- **Rule:** after a meme coin's big down day (−10% or more), a no-retest down call should be marked low-confidence, or its timing tested (shorter windows). Score this one as right but weak. The trial stands at 10 trigger calls scored, 8 right. No retest: 5/7. Break plus retest that held: 3/3.
