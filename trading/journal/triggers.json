@@ -18,19 +18,6 @@
    "used_utc": "2026-11-14 20:20"
   },
   {
-   "symbol": "BTCUSDT",
-   "dir": "up",
-   "level": 70250,
-   "note": "Hawk 14 Nov: just above 24h top 70,214 (range-edge rule wins, +4.4%)"
-  },
-  {
-   "symbol": "BTCUSDT",
-   "dir": "down",
-   "level": 67450,
-   "used_utc": "2026-11-14 08:25",
-   "note": "Hawk confirmed; fired 03:00/04:00 14 Nov. Refill to 66,400 after this call is scored"
-  },
-  {
    "symbol": "ETHUSDT",
    "dir": "up",
    "level": 1991,
@@ -42,6 +29,18 @@
    "level": 1876,
    "note": "Hawk 14 Nov: just below 24h low 1,878 (three wicks held); clean",
    "used_utc": "2026-11-14 16:20"
+  },
+  {
+   "symbol": "BTCUSDT",
+   "dir": "up",
+   "level": 67550,
+   "note": "15 Nov 08:15 refill (leader applied Hawk's method; Hawk to confirm): just above 24h top 67,523 (range-edge rule wins, +5.5%); price fell through from above, not a failed upside break"
+  },
+  {
+   "symbol": "BTCUSDT",
+   "dir": "down",
+   "level": 61950,
+   "note": "15 Nov 08:15 refill (Hawk's method; Hawk to confirm): just below 24h low 62,006 (wick); range-edge rule wins (-3.2%)"
   }
  ],
  "history": [
@@ -422,6 +421,24 @@
      "used_utc": "2026-11-14 08:20 (shadow)"
     }
    ]
+  },
+  {
+   "set": "BTC levels retired 2026-11-15 08:15",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 70250,
+     "note": "Hawk 14 Nov: just above 24h top 70,214 (range-edge rule wins, +4.4%)"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "dir": "down",
+     "level": 67450,
+     "used_utc": "2026-11-14 08:25",
+     "note": "Hawk confirmed; fired 03:00/04:00 14 Nov. Refill to 66,400 after this call is scored"
+    }
+   ]
   }
  ],
  "shadow": [
@@ -431,7 +448,10 @@
    "start": 4.29e-06,
    "start_utc": "2026-11-14 08:20",
    "score_utc": "2026-11-15 08:20",
-   "note": "down 0.00000428 fired (closes 0.00000425/0.00000424) but live price back above at recording; Sage: break failing, shadow only"
+   "note": "down 0.00000428 fired (closes 0.00000425/0.00000424) but live price back above at recording; Sage: break failing, shadow only",
+   "end": 3.88e-06,
+   "result_pct": -9.56,
+   "right": true
   }
  ]
 }

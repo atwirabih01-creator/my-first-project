@@ -172,3 +172,10 @@ changes until they are scored.
 - **Happened:** 1,934.52 → 1,898.25 (−1.9%). It bounced to ~1,964 during the 13 Nov relief rally, then rolled over with BTC to a new low of 1,878 on 14 Nov.
 - **Verdict:** a good decision with a good result. Research was right to drop a view the data had disproved. It was a modest win and part of the same market-wide down move as the 13 Nov BTC call.
 - **Rule (keep):** when new data contradicts a reason against, drop the veto. Don't defend an earlier view. Calls without a retest are now 2/5, and calls with a break plus a retest that held are 3/3. Calls made while the market was trending one way (12–14 Nov) all moved together. Count them as one or two bets, not four.
+
+## 2026-11-15 · Trigger call "BTC down 24h" (14 Nov, no retest) · RIGHT (−4.7%)
+- **Expected:** a 24h fall after a thin break of 67,450. The break was tagged from below and came on fading volume. Atlas found no valid reason against, and Sage recorded the call on two conditions: a calendar check and the price still below the level. Both were met.
+- **Happened:** 67,165 → 64,013 (−4.7%). The 14 Nov afternoon leg down took BTC to a 62,006 wick low overnight, and it bounced to ~64k.
+- **Verdict:** a good decision with a good result. The "thin break plus fading volume" worry did not predict a reversal, so Sage was right to treat it as medium confidence rather than skip.
+- **Rule:** in a strong downtrend, a weak-looking break still carries. Calls without a retest are now 3/6, and calls with a break plus a retest that held are 3/3.
+- **PEPE shadow** (skipped because the break was reclaimed at recording): 0.00000429 → 0.00000388, −9.6%, so the skip cost a right call. One result is not enough to change the 9 Nov rule (Sage); tally it at the review.

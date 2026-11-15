@@ -1,92 +1,92 @@
 {
- "scanned_utc": "2026-11-15 04:13:00+00:00",
+ "scanned_utc": "2026-11-15 08:12:00+00:00",
  "candidates": [],
  "hottest": [
   {
    "coin": "ORDI",
    "venue": "HL",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "PEOPLE",
+   "venue": "OKX",
+   "yearly_last9": 0.0969,
+   "last3_per8h": [
+    7.4e-05,
+    0.0001,
+    9e-05
    ],
    "versions": []
   },
   {
    "coin": "BOME",
    "venue": "HL",
-   "yearly_last9": 0.1009,
+   "yearly_last9": 0.0948,
    "last3_per8h": [
-    8.5e-05,
     0.0001,
-    6.3e-05
+    0.0001,
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "PEOPLE",
    "venue": "HL",
-   "yearly_last9": 0.1007,
+   "yearly_last9": 0.0923,
    "last3_per8h": [
-    0.0001,
     6.6e-05,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "PEOPLE",
-   "venue": "OKX",
-   "yearly_last9": 0.0982,
-   "last3_per8h": [
-    3.3e-05,
-    7.4e-05,
-    0.0001
+    8e-05,
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "SHIB",
    "venue": "HL",
-   "yearly_last9": 0.0929,
+   "yearly_last9": 0.0868,
    "last3_per8h": [
-    9.6e-05,
     1.7e-05,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "TURBO",
-   "venue": "OKX",
-   "yearly_last9": 0.0906,
-   "last3_per8h": [
-    8e-06,
-    9.9e-05,
-    0.0001
+    0.0001,
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "FLOKI",
    "venue": "HL",
-   "yearly_last9": 0.0871,
+   "yearly_last9": 0.0809,
    "last3_per8h": [
-    9.5e-05,
     9.3e-05,
-    5.4e-05
+    9.1e-05,
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "DOT",
    "venue": "HL",
-   "yearly_last9": 0.0761,
+   "yearly_last9": 0.0769,
    "last3_per8h": [
-    7.2e-05,
     -9e-06,
-    4e-05
+    7.8e-05,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "TURBO",
+   "venue": "OKX",
+   "yearly_last9": 0.0734,
+   "last3_per8h": [
+    9.9e-05,
+    0.0001,
+    -4.1e-05
    ],
    "versions": []
   }
