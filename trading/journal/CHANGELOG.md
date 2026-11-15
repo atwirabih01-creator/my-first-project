@@ -93,3 +93,9 @@
   trial is kept.
 - **New:** Hawk refills a used trigger, or one more than 2% from price, in the same session
   (desk-training/SKILL.md). Reviewed 15 Nov.
+
+## 15 Nov 2026 (Sage's weekly card 3, journal/2026-11-15-week.md)
+- **Week:** 5 trigger calls scored, all right. They were all one market-wide down move, so honestly they count as 1–2 independent bets. The trial stands at 8 trigger calls scored, 6 right (75%); the drop rule is not reached (8 of 20 calls). No trades; account $498.76.
+- **Trial check:** 5+ calls was met. "Always a live trigger" was not met: refills waited while calls were open, and up levels sat 8–22% away.
+- **Changed (from 16 Nov):** the refill rule. The range edge wins when it is more than 2% away. A 12h range is used when the 24h edge is more than 4% from price. Refills happen even while a call is open (any trigger that fires then is a shadow). This is reviewed on 22 Nov (desk-training/SKILL.md).
+- **Fixed:** the lessons.md "no retest" count is now 3/5.

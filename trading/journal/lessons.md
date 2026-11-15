@@ -177,5 +177,5 @@ changes until they are scored.
 - **Expected:** a 24h fall after a thin break of 67,450. The break was tagged from below and came on fading volume. Atlas found no valid reason against, and Sage recorded the call on two conditions: a calendar check and the price still below the level. Both were met.
 - **Happened:** 67,165 → 64,013 (−4.7%). The 14 Nov afternoon leg down took BTC to a 62,006 wick low overnight, and it bounced to ~64k.
 - **Verdict:** a good decision with a good result. The "thin break plus fading volume" worry did not predict a reversal, so Sage was right to treat it as medium confidence rather than skip.
-- **Rule:** in a strong downtrend, a weak-looking break still carries. Calls without a retest are now 3/6, and calls with a break plus a retest that held are 3/3.
+- **Rule:** in a strong downtrend, a weak-looking break still carries. Calls without a retest are now 3/5 (corrected 15 Nov: the 27 Oct call was not a trigger call), and calls with a break plus a retest that held are 3/3.
 - **PEPE shadow** (skipped because the break was reclaimed at recording): 0.00000429 → 0.00000388, −9.6%, so the skip cost a right call. One result is not enough to change the 9 Nov rule (Sage); tally it at the review.
