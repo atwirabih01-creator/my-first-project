@@ -179,3 +179,9 @@ changes until they are scored.
 - **Verdict:** a good decision with a good result. The "thin break plus fading volume" worry did not predict a reversal, so Sage was right to treat it as medium confidence rather than skip.
 - **Rule:** in a strong downtrend, a weak-looking break still carries. Calls without a retest are now 3/5 (corrected 15 Nov: the 27 Oct call was not a trigger call), and calls with a break plus a retest that held are 3/3.
 - **PEPE shadow** (skipped because the break was reclaimed at recording): 0.00000429 → 0.00000388, −9.6%, so the skip cost a right call. One result is not enough to change the 9 Nov rule (Sage); tally it at the review.
+
+## 2026-11-15 · Trigger call "ETH down 24h" (14 Nov 16:00, no retest) · RIGHT (−1.7%)
+- **Expected:** a 24h fall after ETH broke 1,876 directly. The bounce failed, selling volume was heavy and BTC was not turning up. Atlas found no valid reason against, the calendar was clear, and Sage recorded the call as part of one bet with the BTC call.
+- **Happened:** 1,841.23 → 1,810.73 (−1.7%). It wicked to 1,711 overnight (−7%), then bounced most of the way back.
+- **Verdict:** a good decision, but the result flatters it. Most of the move came back. An 8h call would have been far more right, and a later start would have been wrong. Research, the chart plan and the final check all held.
+- **Rule:** after a deep wick in a stretched trend, part of the move reverses within the same day. A medium-confidence 24h call can still be right, but the margin is thin. Calls without a retest are now 4/6, and calls with a break plus a retest that held are 3/3. That is 9 trigger calls scored, 7 right.
