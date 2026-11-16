@@ -14,14 +14,14 @@
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 66150,
-   "note": "16 Nov 04:15 refill (>2% from price): just above 24h top 66,132 (+1.9%); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 65850,
+   "note": "16 Nov 12:20 refill (>2% away): just above 24h top 65,800.75 (+2.8%); price came from above, clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1847,
-   "note": "16 Nov 04:15 refill (>2% from price): just above 24h top 1,845.18 (+1.5%); price fell through from above, clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1845,
+   "note": "16 Nov 12:20 refill (>2% away): just above 24h top 1,842.85 (+2.7%); price came from above, clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
@@ -33,8 +33,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 3.93e-06,
-   "note": "16 Nov 08:20 refill: 24h top +9.7% >4%, so just above 12h top 0.00000392 (+5.4%); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.91e-06,
+   "note": "16 Nov 12:20 refill (>2% away): 24h top +7.7% >4%, so just above 12h top 0.0000039 (+3.7%); price came from above, clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
@@ -560,6 +560,29 @@
      "dir": "up",
      "level": 3.96e-06,
      "note": "16 Nov 04:15 refill (>2% from price): 24h top +7.4% >4%, so just above 12h top 0.00000395 (+3.9%); clean (leader applied Hawk's method; Hawk to confirm)"
+    }
+   ]
+  },
+  {
+   "set": "up levels retired 2026-11-16 12:20",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 66150,
+     "note": "16 Nov 04:15 refill (>2% from price): just above 24h top 66,132 (+1.9%); clean (leader applied Hawk's method; Hawk to confirm)"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 1847,
+     "note": "16 Nov 04:15 refill (>2% from price): just above 24h top 1,845.18 (+1.5%); price fell through from above, clean (leader applied Hawk's method; Hawk to confirm)"
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 3.93e-06,
+     "note": "16 Nov 08:20 refill: 24h top +9.7% >4%, so just above 12h top 0.00000392 (+5.4%); clean (leader applied Hawk's method; Hawk to confirm)"
     }
    ]
   }
