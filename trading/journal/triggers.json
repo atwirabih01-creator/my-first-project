@@ -33,8 +33,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 3.96e-06,
-   "note": "16 Nov 04:15 refill (>2% from price): 24h top +7.4% >4%, so just above 12h top 0.00000395 (+3.9%); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.93e-06,
+   "note": "16 Nov 08:20 refill: 24h top +9.7% >4%, so just above 12h top 0.00000392 (+5.4%); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
@@ -549,6 +549,17 @@
      "dir": "up",
      "level": 4.06e-06,
      "note": "16 Nov rule (12h): 24h top +5.7% >4%, so just above 12h top 0.00000405 (+4.9%); clean (leader applied Hawk's method; Hawk to confirm)"
+    }
+   ]
+  },
+  {
+   "set": "PEPE up retired 2026-11-16 08:20",
+   "triggers": [
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 3.96e-06,
+     "note": "16 Nov 04:15 refill (>2% from price): 24h top +7.4% >4%, so just above 12h top 0.00000395 (+3.9%); clean (leader applied Hawk's method; Hawk to confirm)"
     }
    ]
   }
