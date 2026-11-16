@@ -40,8 +40,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.7e-06,
-   "note": "16 Nov 16:20: just below 24h low 0.00000371 (-3.6%); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.72e-06,
+   "note": "16 Nov 20:15: 24h low 5.8 pct away (over 4), so just below 12h low 0.00000373 (5.3 pct away; PEPE bounced fast); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "history": [
@@ -627,6 +627,17 @@
      "dir": "down",
      "level": 3.74e-06,
      "note": "16 Nov rule: just below 24h low 0.00000375 (-2.8%, edge wins); clean (lowest close 0.00000377) (leader applied Hawk's method; Hawk to confirm)"
+    }
+   ]
+  },
+  {
+   "set": "PEPE down retired 2026-11-16 20:15",
+   "triggers": [
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 3.7e-06,
+     "note": "16 Nov 16:20: just below 24h low 0.00000371 (-3.6%); clean (leader applied Hawk's method; Hawk to confirm)"
     }
    ]
   }
