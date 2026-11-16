@@ -7,8 +7,9 @@
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 61950,
-   "note": "Hawk confirmed 15 Nov 16:20: just below 62,006 wick (-4.2%); clean. Under 16 Nov rule would be 63,750 needs_retest"
+   "level": 64200,
+   "needs_retest": true,
+   "note": "16 Nov rule (12h): 24h low -4.8% >4%, so just below 12h low 64,257.65 (-1.3%); 15 Nov 00:00 close 63,425 broke below then recovered -> needs_retest (Hawk flagged same at 63,750) (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -25,20 +26,21 @@
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 1709,
-   "note": "Hawk 15 Nov 16:20: just below 24h low 1,711.08 (-5.3%); clean. Under 16 Nov rule would be 1,771 needs_retest"
+   "level": 1792,
+   "needs_retest": true,
+   "note": "16 Nov rule (12h): 24h low -6.4% >4%, so just below 12h low 1,794.43 (-1.9%); 14 Nov 22:00 close 1,745 broke below then recovered -> needs_retest (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 4.09e-06,
-   "note": "15 Nov 20:15 refill (leader, Hawk's method; Hawk to confirm): just above 24h top 0.00000408 (+6%, edge wins); clean"
+   "level": 4.06e-06,
+   "note": "16 Nov rule (12h): 24h top +5.7% >4%, so just above 12h top 0.00000405 (+4.9%); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.68e-06,
-   "note": "15 Nov 20:15 refill (leader, Hawk's method; Hawk to confirm): just below 24h low 0.00000369 wick (-4.4%, edge wins); clean, lowest close 0.00000377"
+   "level": 3.74e-06,
+   "note": "16 Nov rule: just below 24h low 0.00000375 (-2.8%, edge wins); clean (lowest close 0.00000377) (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "history": [
@@ -483,6 +485,47 @@
      "level": 4.13e-06,
      "note": "14 Nov 12:15 refill (leader applied Hawk's method; Hawk to confirm): just below 24h low 0.00000415 (05:00 wick), range-edge rule wins (-4.6%); no close below in 48h",
      "used_utc": "2026-11-14 20:20"
+    }
+   ]
+  },
+  {
+   "set": "levels before 16 Nov rule, retired 2026-11-16 00:15",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "down",
+     "level": 61950,
+     "note": "Hawk confirmed 15 Nov 16:20: just below 62,006 wick (-4.2%); clean. Under 16 Nov rule would be 63,750 needs_retest"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 66200,
+     "note": "Hawk 15 Nov 16:20: just above 24h top 66,190 (+2.3%); fell through from above, clean"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 1860,
+     "note": "Hawk 15 Nov 16:20: just above 24h top 1,858.25 (+2.8%); clean (same under 16 Nov rule)"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "down",
+     "level": 1709,
+     "note": "Hawk 15 Nov 16:20: just below 24h low 1,711.08 (-5.3%); clean. Under 16 Nov rule would be 1,771 needs_retest"
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 4.09e-06,
+     "note": "15 Nov 20:15 refill (leader, Hawk's method; Hawk to confirm): just above 24h top 0.00000408 (+6%, edge wins); clean"
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 3.68e-06,
+     "note": "15 Nov 20:15 refill (leader, Hawk's method; Hawk to confirm): just below 24h low 0.00000369 wick (-4.4%, edge wins); clean, lowest close 0.00000377"
     }
    ]
   }
