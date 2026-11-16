@@ -14,14 +14,14 @@
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 66200,
-   "note": "Hawk 15 Nov 16:20: just above 24h top 66,190 (+2.3%); fell through from above, clean"
+   "level": 66150,
+   "note": "16 Nov 04:15 refill (>2% from price): just above 24h top 66,132 (+1.9%); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1860,
-   "note": "Hawk 15 Nov 16:20: just above 24h top 1,858.25 (+2.8%); clean (same under 16 Nov rule)"
+   "level": 1847,
+   "note": "16 Nov 04:15 refill (>2% from price): just above 24h top 1,845.18 (+1.5%); price fell through from above, clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
@@ -33,8 +33,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 4.06e-06,
-   "note": "16 Nov rule (12h): 24h top +5.7% >4%, so just above 12h top 0.00000405 (+4.9%); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.96e-06,
+   "note": "16 Nov 04:15 refill (>2% from price): 24h top +7.4% >4%, so just above 12h top 0.00000395 (+3.9%); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
@@ -526,6 +526,29 @@
      "dir": "down",
      "level": 3.68e-06,
      "note": "15 Nov 20:15 refill (leader, Hawk's method; Hawk to confirm): just below 24h low 0.00000369 wick (-4.4%, edge wins); clean, lowest close 0.00000377"
+    }
+   ]
+  },
+  {
+   "set": "up levels retired 2026-11-16 04:15",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 66200,
+     "note": "Hawk 15 Nov 16:20: just above 24h top 66,190 (+2.3%); fell through from above, clean"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 1860,
+     "note": "Hawk 15 Nov 16:20: just above 24h top 1,858.25 (+2.8%); clean (same under 16 Nov rule)"
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 4.06e-06,
+     "note": "16 Nov rule (12h): 24h top +5.7% >4%, so just above 12h top 0.00000405 (+4.9%); clean (leader applied Hawk's method; Hawk to confirm)"
     }
    ]
   }
