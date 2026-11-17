@@ -1,70 +1,81 @@
 {
- "scanned_utc": "2026-11-17 00:12:00+00:00",
+ "scanned_utc": "2026-11-17 04:12:00+00:00",
  "candidates": [],
  "hottest": [
   {
    "coin": "ORDI",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "BOME",
    "venue": "HL",
-   "yearly_last9": 0.0971,
+   "yearly_last9": 0.1032,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "FLOKI",
    "venue": "HL",
-   "yearly_last9": 0.0964,
+   "yearly_last9": 0.1024,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "PEOPLE",
-   "venue": "HL",
-   "yearly_last9": 0.0917,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    1.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "INJ",
-   "venue": "HL",
-   "yearly_last9": 0.0897,
-   "last3_per8h": [
-    8e-05,
-    4.8e-05,
-    1.1e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "FET",
    "venue": "OKX",
-   "yearly_last9": 0.0714,
+   "yearly_last9": 0.0986,
+   "last3_per8h": [
+    7.4e-05,
+    0.0001,
+    0.0001
+   ],
+   "versions": []
+  },
+  {
+   "coin": "PEOPLE",
+   "venue": "HL",
+   "yearly_last9": 0.0978,
    "last3_per8h": [
     0.0001,
-    7.4e-05,
-    0.0001
+    0.0001,
+    6.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "INJ",
+   "venue": "HL",
+   "yearly_last9": 0.0958,
+   "last3_per8h": [
+    8e-05,
+    4.8e-05,
+    6.1e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "BTC",
+   "venue": "HL",
+   "yearly_last9": 0.0722,
+   "last3_per8h": [
+    3.9e-05,
+    9.5e-05,
+    5.2e-05
    ],
    "versions": []
   },
@@ -73,19 +84,8 @@
    "venue": "OKX",
    "yearly_last9": 0.0686,
    "last3_per8h": [
-    0.0001,
     7.7e-05,
-    8.4e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "ORDI",
-   "venue": "OKX",
-   "yearly_last9": 0.0686,
-   "last3_per8h": [
-    0.0001,
-    9e-05,
+    8.4e-05,
     0.0001
    ],
    "versions": []

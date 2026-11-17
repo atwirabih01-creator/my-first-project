@@ -34,14 +34,14 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 3.96e-06,
-   "note": "16 Nov 16:20: just above 24h top 0.00000395 (+3.1%); closes above were on the way down 15 Nov, clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.99e-06,
+   "note": "17 Nov 04:15: just above 24h top 0.00000398 (a wick; closes stayed at or below 0.00000395, so not a failed break), +1.0 pct; clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.74e-06,
-   "note": "17 Nov 00:15: 24h low 5.4 pct away, so just below 12h low 0.00000375 (4.3 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.83e-06,
+   "note": "17 Nov 04:15: 24h low 6.1 pct away, so just below 12h low 0.00000384 (2.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "history": [
@@ -649,6 +649,23 @@
      "dir": "down",
      "level": 3.72e-06,
      "note": "16 Nov 20:15: 24h low 5.8 pct away (over 4), so just below 12h low 0.00000373 (5.3 pct away; PEPE bounced fast); clean (leader applied Hawk's method; Hawk to confirm)"
+    }
+   ]
+  },
+  {
+   "set": "PEPE levels retired 2026-11-17 04:15",
+   "triggers": [
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 3.96e-06,
+     "note": "16 Nov 16:20: just above 24h top 0.00000395 (+3.1%); closes above were on the way down 15 Nov, clean (leader applied Hawk's method; Hawk to confirm)"
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 3.74e-06,
+     "note": "17 Nov 00:15: 24h low 5.4 pct away, so just below 12h low 0.00000375 (4.3 pct); clean (leader applied Hawk's method; Hawk to confirm)"
     }
    ]
   }
