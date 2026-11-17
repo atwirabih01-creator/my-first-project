@@ -58,7 +58,7 @@ Run it even when the scanner has no candidate. This is the practice that builds 
 - **Trigger set:** frozen in `journal/triggers.json` (set "trial-1", 1 Nov).
   - Each trigger needs two consecutive 1h closes beyond its level.
   - `python3 triggers.py` (run by scan_run.sh) prints FIRED and `TRIGGERS_FIRED=<n>`.
-  - Sage ruled that ISM is not a major event. Major events: Fed, CPI, the jobs report, PCE.
+  - Major events are only: the FOMC rate decision (the statement and press conference), CPI, the US jobs report and PCE. FOMC minutes, Fed speeches, PPI, ISM and all other releases are not major, whatever impact rating a calendar gives them (Sage, 17 Nov).
 - **One open call per coin (Sage, 2 Nov):** if an opposite trigger fires while a call on that coin is still
   open, skip the call and mark the trigger used. Write a shadow result (start price and time) in
   triggers.json, so the 8 Nov review can still score it.

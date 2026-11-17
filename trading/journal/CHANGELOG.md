@@ -99,3 +99,6 @@
 - **Trial check:** 5+ calls was met. "Always a live trigger" was not met: refills waited while calls were open, and up levels sat 8–22% away.
 - **Changed (from 16 Nov):** the refill rule. The range edge wins when it is more than 2% away. A 12h range is used when the 24h edge is more than 4% from price. Refills happen even while a call is open (any trigger that fires then is a shadow). This is reviewed on 22 Nov (desk-training/SKILL.md).
 - **Fixed:** the lessons.md "no retest" count is now 3/5.
+
+## 17 Nov 2026
+- **Clarified:** the major-event list (Sage). Only the FOMC rate decision, CPI, the jobs report and PCE count. FOMC minutes, Fed speeches, PPI, ISM and anything else do not, whatever a calendar's impact rating says (desk-training/SKILL.md).
