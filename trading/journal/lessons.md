@@ -191,3 +191,12 @@ changes until they are scored.
 - **Happened:** 0.00000392 → 0.00000391 (−0.26%). It wicked to 0.00000369 overnight (−6%), then came all the way back.
 - **Verdict:** right on paper but a coin flip in substance. The direction held for hours, then fully reversed. Nothing failed in the process; a 24h window after a −12% day leaves little room.
 - **Rule:** after a meme coin's big down day (−10% or more), a no-retest down call should be marked low-confidence, or its timing tested (shorter windows). Score this one as right but weak. The trial stands at 10 trigger calls scored, 8 right. No retest: 5/7. Break plus retest that held: 3/3.
+
+## 2026-11-18 · Trigger call "BTC down 24h" (17 Nov 20:00, break plus retest held) · RIGHT (−1.6%)
+- **Expected:** a 24h fall after BTC broke 63,850 inside a two-day range. The retest held three times (bars rose to the level and closed back below). Atlas found no valid reason against.
+  - Sage ruled FOMC minutes not major and did not block on Nvidia earnings, a two-sided event.
+- **Happened:** 63,753.75 → 62,747.22 (−1.6%).
+  - BTC first rallied 2% overnight (+1.8% at 00:10, back above the level). The climb began before Nvidia's 21:20 report.
+  - The range then broke down on 18 Nov at 14:00–16:00, and BTC drifted lower through the FOMC minutes (19:00 close 62,747).
+- **Verdict:** a good decision with a good result, but with a scary middle. The call was 1.8% wrong at the halfway mark. Research, chart plan and final check all held; the outside events did not reverse the move.
+- **Rule:** break plus retest held is now 4/4. Nvidia and FOMC minutes inside the window did not change the outcome, which is one data point for Sage's 22 Nov card. A 24h call can sit well underwater midway, so judge it only at the end.
