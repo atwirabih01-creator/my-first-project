@@ -35,7 +35,8 @@
    "dir": "down",
    "level": 3.79e-06,
    "needs_retest": true,
-   "note": "17 Nov 12:20: just below 12h low 0.0000038 (-1.3 pct); a one-close break of 0.00000383 (close 0.00000381) failed next bar -> needs_retest (leader applied Hawk's method; Hawk to confirm)"
+   "note": "17 Nov 12:20: just below 12h low 0.0000038 (-1.3 pct); a one-close break of 0.00000383 (close 0.00000381) failed next bar -> needs_retest (leader applied Hawk's method; Hawk to confirm)",
+   "used_utc": "2026-11-18 08:25"
   },
   {
    "symbol": "BTCUSDT",
