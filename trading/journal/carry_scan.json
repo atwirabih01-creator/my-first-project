@@ -1,70 +1,15 @@
 {
- "scanned_utc": "2026-11-18 04:13:00+00:00",
+ "scanned_utc": "2026-11-18 08:13:00+00:00",
  "candidates": [],
  "hottest": [
   {
    "coin": "FET",
    "venue": "OKX",
-   "yearly_last9": 0.1064,
+   "yearly_last9": 0.1095,
    "last3_per8h": [
     0.0001,
     0.0001,
     0.0001
-   ],
-   "versions": []
-  },
-  {
-   "coin": "BOME",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "HBAR",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "ORDI",
-   "venue": "HL",
-   "yearly_last9": 0.1049,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "FLOKI",
-   "venue": "HL",
-   "yearly_last9": 0.1006,
-   "last3_per8h": [
-    9e-05,
-    8.4e-05,
-    5.2e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "PEOPLE",
-   "venue": "HL",
-   "yearly_last9": 0.1004,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    2.9e-05
    ],
    "versions": []
   },
@@ -74,19 +19,74 @@
    "yearly_last9": 0.0995,
    "last3_per8h": [
     0.0001,
-    0.0001,
-    1.8e-05
+    1.8e-05,
+    0.0001
    ],
    "versions": []
   },
   {
-   "coin": "INJ",
+   "coin": "HBAR",
    "venue": "HL",
-   "yearly_last9": 0.0941,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
     0.0001,
-    9.6e-05,
-    5.3e-05
+    0.0001,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "ORDI",
+   "venue": "HL",
+   "yearly_last9": 0.0989,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "FLOKI",
+   "venue": "HL",
+   "yearly_last9": 0.094,
+   "last3_per8h": [
+    8.4e-05,
+    8.6e-05,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "PEOPLE",
+   "venue": "HL",
+   "yearly_last9": 0.0931,
+   "last3_per8h": [
+    0.0001,
+    5.7e-05,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "BNB",
+   "venue": "HL",
+   "yearly_last9": 0.0911,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "BOME",
+   "venue": "HL",
+   "yearly_last9": 0.0894,
+   "last3_per8h": [
+    0.0001,
+    4.8e-05,
+    -1.3e-05
    ],
    "versions": []
   }
