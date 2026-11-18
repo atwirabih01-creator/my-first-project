@@ -21,7 +21,8 @@
    "dir": "down",
    "level": 1785,
    "needs_retest": true,
-   "note": "16 Nov 16:20: just below 24h low 1,787.11 (-2.0%); 14 Nov 22:00 close 1,745 failed break -> needs_retest (leader applied Hawk's method; Hawk to confirm)"
+   "note": "16 Nov 16:20: just below 24h low 1,787.11 (-2.0%); 14 Nov 22:00 close 1,745 failed break -> needs_retest (leader applied Hawk's method; Hawk to confirm)",
+   "used_utc": "2026-11-18 20:25"
   },
   {
    "symbol": "PEPEUSDT",
@@ -39,7 +40,8 @@
    "symbol": "BTCUSDT",
    "dir": "down",
    "level": 63300,
-   "note": "18 Nov 00:15 refill while BTC call open (16 Nov rule: fires become shadows): just below 24h low 63,336 (-2.4%); clean (leader applied Hawk's method; Hawk to confirm)"
+   "note": "18 Nov 00:15 refill while BTC call open (16 Nov rule: fires become shadows): just below 24h low 63,336 (-2.4%); clean (leader applied Hawk's method; Hawk to confirm)",
+   "used_utc": "2026-11-18 20:25"
   }
  ],
  "history": [
