@@ -200,3 +200,9 @@ changes until they are scored.
   - The range then broke down on 18 Nov at 14:00–16:00, and BTC drifted lower through the FOMC minutes (19:00 close 62,747).
 - **Verdict:** a good decision with a good result, but with a scary middle. The call was 1.8% wrong at the halfway mark. Research, chart plan and final check all held; the outside events did not reverse the move.
 - **Rule:** break plus retest held is now 4/4. Nvidia and FOMC minutes inside the window did not change the outcome, which is one data point for Sage's 22 Nov card. A 24h call can sit well underwater midway, so judge it only at the end.
+
+## 2026-11-19 · Trigger call "PEPE down 24h" (18 Nov 08:00, break plus retest THIN) · WRONG (+1.3%)
+- **Expected:** a 24h fall after PEPE broke 0.00000379 and the retest held twice. Atlas called it a weak break: 1–2 ticks inside a 10h band, on fading volume. Sage recorded it because no written rule allowed a skip, and tagged it "thin" to keep it apart in the tally.
+- **Happened:** 0.00000378 → 0.00000383 (+1.3%). The call led by about 2% at the 16:00 range breakdown, then the market bounced overnight and PEPE ended above the start.
+- **Verdict:** a reasonable decision under the rules, with a bad result. The chart plan was the weak part: a break of 1–2 ticks inside a tight band is barely a break. Atlas's warning ("thin chop", support about 2.7% below, volume fading) was right, but it was opinion and not a valid veto.
+- **Rule (proposed for Sage's 22 Nov card):** a break must close at least 0.3% beyond the level (or one ATR-based margin), not just 1–2 ticks, before it counts as fired. Tally: "break plus retest held" is 4/4 clean and 0/1 thin. Trial: **12 trigger calls scored, 9 right (75%)**.

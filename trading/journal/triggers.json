@@ -7,8 +7,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.64e-06,
-   "note": "18 Nov 12:20: refill after use (call open, fires become shadows): just below 24h low 0.00000365 (-2.9%); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.66e-06,
+   "note": "19 Nov 08:15: 24h low -3.7 pct... level was -4.2 pct; just below 12h low 0.00000367 (-3.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -31,8 +31,8 @@
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 1731,
-   "note": "19 Nov 00:15 refill after use (ETH call open -> fires are shadows): just below 24h low 1,732.83 (-2.2%); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1749,
+   "note": "19 Nov 08:15: 24h low -4.0 pct, so just below 12h low 1,750.01 (-3.0 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
@@ -757,6 +757,23 @@
      "level": 63300,
      "note": "18 Nov 00:15 refill while BTC call open (16 Nov rule: fires become shadows): just below 24h low 63,336 (-2.4%); clean (leader applied Hawk's method; Hawk to confirm)",
      "used_utc": "2026-11-18 20:25"
+    }
+   ]
+  },
+  {
+   "set": "down levels retired 2026-11-19 08:15",
+   "triggers": [
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 3.64e-06,
+     "note": "18 Nov 12:20: refill after use (call open, fires become shadows): just below 24h low 0.00000365 (-2.9%); clean (leader applied Hawk's method; Hawk to confirm)"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "down",
+     "level": 1731,
+     "note": "19 Nov 00:15 refill after use (ETH call open -> fires are shadows): just below 24h low 1,732.83 (-2.2%); clean (leader applied Hawk's method; Hawk to confirm)"
     }
    ]
   }
