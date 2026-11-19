@@ -206,3 +206,16 @@ changes until they are scored.
 - **Happened:** 0.00000378 → 0.00000383 (+1.3%). The call led by about 2% at the 16:00 range breakdown, then the market bounced overnight and PEPE ended above the start.
 - **Verdict:** a reasonable decision under the rules, with a bad result. The chart plan was the weak part: a break of 1–2 ticks inside a tight band is barely a break. Atlas's warning ("thin chop", support about 2.7% below, volume fading) was right, but it was opinion and not a valid veto.
 - **Rule (proposed for Sage's 22 Nov card):** a break must close at least 0.3% beyond the level (or one ATR-based margin), not just 1–2 ticks, before it counts as fired. Tally: "break plus retest held" is 4/4 clean and 0/1 thin. Trial: **12 trigger calls scored, 9 right (75%)**.
+
+## 2026-11-19 · Trigger calls of 18 Nov 20:00, one bet · BTC down RIGHT (−0.6%), ETH down WRONG (+0.8%)
+- **Expected:** a 24h fall after hawkish FOMC minutes broke the range.
+  - BTC: 63,300 broke on a clean level, tagged from below.
+  - ETH: 1,785 broke and the retest held.
+  - Atlas found no valid reason against.
+- **Happened:**
+  - BTC 62,747.22 → 62,372.01 (−0.6%).
+  - ETH 1,756.02 → 1,770.82 (+0.8%).
+  - An overnight bounce (BTC to 63,950, ETH to 1,813) put both behind for most of the day. Weekly claims and Philly Fed at 13:30 turned the market back down, but only BTC got back below its start.
+- **Verdict:** a reasonable decision; the result was split. Both calls entered late, after a −3% day near the 62k floor, and ETH bounced harder off its 1,733 low. The chart plan's level was fine. The open question is timing: both were recorded at a stretched low.
+- **Rule (for Sage's 22 Nov card):** clean break-plus-retest is now 4/5 (ETH is the first loss). Since 12 Nov, every call entered after a −3% day bounced first. Consider "no new down call after a 24h move of −3% or more unless the retest happens after a bounce".
+- **Trial:** 14 trigger calls scored, 10 right (71%). Counted as independent bets, it is fewer.

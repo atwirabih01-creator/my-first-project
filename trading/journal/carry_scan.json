@@ -1,5 +1,5 @@
 {
- "scanned_utc": "2026-11-19 16:14:00+00:00",
+ "scanned_utc": "2026-11-19 20:12:00+00:00",
  "candidates": [],
  "hottest": [
   {
@@ -27,66 +27,66 @@
   {
    "coin": "NEIRO",
    "venue": "OKX",
-   "yearly_last9": 0.105,
+   "yearly_last9": 0.106,
    "last3_per8h": [
     0.0001,
-    0.0001,
-    7.1e-05
+    7.1e-05,
+    0.0001
    ],
    "versions": []
   },
   {
    "coin": "HBAR",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "ORDI",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "PENGU",
-   "venue": "OKX",
-   "yearly_last9": 0.0966,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    3.1e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "PEOPLE",
    "venue": "HL",
-   "yearly_last9": 0.0936,
+   "yearly_last9": 0.0997,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "BOME",
    "venue": "HL",
-   "yearly_last9": 0.0894,
+   "yearly_last9": 0.0955,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "ENA",
+   "venue": "HL",
+   "yearly_last9": 0.0941,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    6.3e-05
    ],
    "versions": []
   }
