@@ -13,8 +13,8 @@
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 64100,
-   "note": "19 Nov 16:20: just above 24h top 64,080.8 (+1.5 pct); (leader applied Hawk's method; Hawk to confirm)"
+   "level": 62650,
+   "note": "20 Nov 12:20: 24h top +4.3 pct, so just above 12h top 62,639.52 (+2.0 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -25,8 +25,8 @@
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1819,
-   "note": "19 Nov 16:20: just above 24h top 1,817.57 (+2.1 pct); (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1772,
+   "note": "20 Nov 12:20: 24h top +4.8 pct, so just above 12h top 1,770.55 (+2.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
@@ -839,6 +839,23 @@
      "dir": "up",
      "level": 4.06e-06,
      "note": "19 Nov 16:20: old 0.00000384 fired 12:00 (closes 0.00000394/0.00000402) then failed back to 0.0000038 between sessions; new level just above 24h/12h top 0.00000405 (+6.6 pct); (leader applied Hawk's method; Hawk to confirm)"
+    }
+   ]
+  },
+  {
+   "set": "up levels retired 2026-11-20 12:20",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 64100,
+     "note": "19 Nov 16:20: just above 24h top 64,080.8 (+1.5 pct); (leader applied Hawk's method; Hawk to confirm)"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 1819,
+     "note": "19 Nov 16:20: just above 24h top 1,817.57 (+2.1 pct); (leader applied Hawk's method; Hawk to confirm)"
     }
    ]
   }
