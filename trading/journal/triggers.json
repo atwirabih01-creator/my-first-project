@@ -32,7 +32,8 @@
    "symbol": "ETHUSDT",
    "dir": "down",
    "level": 1762,
-   "note": "19 Nov 12:15: 24h low -4.0 pct, so just below 12h low 1,764.11 (-2.2 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "note": "19 Nov 12:15: 24h low -4.0 pct, so just below 12h low 1,764.11 (-2.2 pct); clean (leader applied Hawk's method; Hawk to confirm)",
+   "used_utc": "2026-11-20 00:25"
   },
   {
    "symbol": "PEPEUSDT",
