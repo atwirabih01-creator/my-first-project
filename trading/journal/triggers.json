@@ -7,8 +7,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.5e-06,
-   "note": "20 Nov 08:15: refill after use (PEPE call open -> fires are shadows): just below 24h low 0.00000351 (-2.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.32e-06,
+   "note": "20 Nov 20:15: refill after shadow fire: just below 24h low 0.00000333 (-2.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -19,9 +19,8 @@
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 62000,
-   "note": "62,000: broke 04:00-05:00 20 Nov and failed (06:00 back above) -> needs_retest; fired again 14:00-15:00 (61,770/59,475), no retest yet",
-   "needs_retest": true
+   "level": 57700,
+   "note": "20 Nov 20:15: 62,000 sat 6 pct above price with no retest; refill just below 24h low 57,778 (-1.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
@@ -32,8 +31,8 @@
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 1716,
-   "note": "20 Nov 08:15: refill after use (ETH call open -> fires are shadows): just below 24h low 1,717.82 (-2.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1580,
+   "note": "20 Nov 20:15: refill after shadow fire: just below 24h low 1,581.47 (-1.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
@@ -882,6 +881,30 @@
      "note": "20 Nov 08:15: 24h top +12 pct, so just above 12h top 0.00000375 (+3.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
     }
    ]
+  },
+  {
+   "set": "down levels retired 2026-11-20 20:15",
+   "triggers": [
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "down",
+     "level": 3.5e-06,
+     "note": "20 Nov 08:15: refill after use (PEPE call open -> fires are shadows): just below 24h low 0.00000351 (-2.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+    },
+    {
+     "symbol": "BTCUSDT",
+     "dir": "down",
+     "level": 62000,
+     "note": "62,000: broke 04:00-05:00 20 Nov and failed (06:00 back above) -> needs_retest; fired again 14:00-15:00 (61,770/59,475), no retest yet",
+     "needs_retest": true
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "down",
+     "level": 1716,
+     "note": "20 Nov 08:15: refill after use (ETH call open -> fires are shadows): just below 24h low 1,717.82 (-2.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+    }
+   ]
   }
  ],
  "shadow": [
@@ -895,6 +918,22 @@
    "end": 3.88e-06,
    "result_pct": -9.56,
    "right": true
+  },
+  {
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "start": 1607.97,
+   "start_utc": "2026-11-20 20:15",
+   "score_utc": "2026-11-21 20:15",
+   "note": "down 1,716 fired (closes 1,616.67/1,607.97) while ETH call open -> shadow (one call per coin)"
+  },
+  {
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "start": 3.4e-06,
+   "start_utc": "2026-11-20 20:15",
+   "score_utc": "2026-11-21 20:15",
+   "note": "down 0.0000035 fired (closes 0.00000345/0.0000034) while PEPE call open -> shadow (one call per coin)"
   }
  ]
 }
