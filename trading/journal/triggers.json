@@ -13,20 +13,21 @@
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 62650,
-   "note": "20 Nov 12:20: 24h top +4.3 pct, so just above 12h top 62,639.52 (+2.0 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 62350,
+   "note": "20 Nov 16:25: 24h top +6.1 pct, so just above 12h top 62,341.94 (+4.3 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
    "dir": "down",
    "level": 62000,
-   "note": "19 Nov 00:15 refill after use (BTC call open -> fires are shadows): just below 24h low 62,063 (-1.2%); clean (leader applied Hawk's method; Hawk to confirm)"
+   "note": "62,000: broke 04:00-05:00 20 Nov and failed (06:00 back above) -> needs_retest; fired again 14:00-15:00 (61,770/59,475), no retest yet",
+   "needs_retest": true
   },
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1772,
-   "note": "20 Nov 12:20: 24h top +4.8 pct, so just above 12h top 1,770.55 (+2.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1765,
+   "note": "20 Nov 16:25: 24h top +8 pct, so just above 12h top 1,763.33 (+6.3 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
@@ -37,8 +38,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 3.76e-06,
-   "note": "20 Nov 08:15: 24h top +12 pct, so just above 12h top 0.00000375 (+3.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.65e-06,
+   "note": "20 Nov 16:25: 24h top +12 pct, so just above 12h top 0.00000364 (+5.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "history": [
@@ -856,6 +857,29 @@
      "dir": "up",
      "level": 1819,
      "note": "19 Nov 16:20: just above 24h top 1,817.57 (+2.1 pct); (leader applied Hawk's method; Hawk to confirm)"
+    }
+   ]
+  },
+  {
+   "set": "up levels retired 2026-11-20 16:25",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 62650,
+     "note": "20 Nov 12:20: 24h top +4.3 pct, so just above 12h top 62,639.52 (+2.0 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 1772,
+     "note": "20 Nov 12:20: 24h top +4.8 pct, so just above 12h top 1,770.55 (+2.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 3.76e-06,
+     "note": "20 Nov 08:15: 24h top +12 pct, so just above 12h top 0.00000375 (+3.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
     }
    ]
   }
