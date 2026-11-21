@@ -232,3 +232,12 @@ changes until they are scored.
 - **Verdict:** a good decision with a good result. A clear break in a strong downtrend carried on.
 - **Rule:** clear breaks are 1/1 and thin breaks 1/2. Together with ETH, it was the same market bet: one bet, right. Trial: **16 trigger calls scored, 12 right (75%)**.
 - **Honest note:** on 20 Nov at 16:15, Atlas rejected 15 spike shorts as "entering at a stretched low", and the market then fell another ~5%. The forecast calls caught the move; the trade filter did not. Bring this to Sage's 22 Nov card. Is the "stretched low" judgment too cautious in a trend, or did it simply avoid risk?
+
+## 2026-11-21 · Team trade HWK "BTC short on failed retest" · LOSS (−2.1%, −$4.99, exactly the planned 1% risk)
+- **Expected:** after the liquidation cascade broke the 57.8k yearly low, a bounce back into 57.6–57.85k would be sold. Stop 58,650 (above the 58.2–58.6k shelf), target 56,850, 24h hold. Atlas, Hawk and Sage all agreed.
+- **Happened:**
+  - The 06:00 bar squeezed +4% (55,793 → 58,115) and filled the short at 57,600.
+  - The 07:00 bar wicked to 58,672, just $22 above the stop, which stopped the trade out at 58,650.
+  - It then closed back at 57,997, and price is ~57,790 now, below the entry. The idea itself is still alive: the wider-stop versions D01–D14 are open.
+- **Verdict:** a good idea with a bad stop, so the chart plan was the weak part. The stop was 1.8% from entry, but BTC's 4h range (ATR) was 2.4%, so it sat inside normal noise. Hawk and Sage both flagged the weekend squeeze risk and still accepted it; sizing kept the loss to exactly 1%.
+- **Rule (Hawk):** in squeeze conditions (weekend, or right after a liquidation cascade), the stop must be at least 1× the 4h ATR beyond the entry zone, and a stop just above a shelf is too close. If that makes the loss more than 3× the target, there is no trade. Account $493.77 (3 trades, 1 win).
