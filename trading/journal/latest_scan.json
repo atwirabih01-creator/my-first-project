@@ -1,6 +1,35 @@
 {
- "scanned_utc": "2026-11-21 12:11:00+00:00",
+ "scanned_utc": "2026-11-21 16:11:00+00:00",
  "coins_checked": 40,
  "market_tide": "down",
- "candidates": []
+ "candidates": [
+  {
+   "scanned_utc": "2026-11-21 16:11:00+00:00",
+   "bar_utc": "2026-11-21 12:00:00+00:00",
+   "symbol": "DOGEUSDT",
+   "meme": true,
+   "side": "short",
+   "situation": "hold",
+   "price": 0.05516,
+   "atr4h_pct": 3.18,
+   "rsi4h": 42.3,
+   "buy_share_24h": 0.494,
+   "vol24h_musd": 56.9,
+   "versions_allowed": "D08"
+  },
+  {
+   "scanned_utc": "2026-11-21 16:11:00+00:00",
+   "bar_utc": "2026-11-21 12:00:00+00:00",
+   "symbol": "PENGUUSDT",
+   "meme": true,
+   "side": "short",
+   "situation": "hold",
+   "price": 0.004336,
+   "atr4h_pct": 4.46,
+   "rsi4h": 39.9,
+   "buy_share_24h": 0.479,
+   "vol24h_musd": 5.1,
+   "versions_allowed": "D08"
+  }
+ ]
 }
