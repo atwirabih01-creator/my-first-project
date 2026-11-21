@@ -14,7 +14,8 @@
    "symbol": "BTCUSDT",
    "dir": "up",
    "level": 59250,
-   "note": "21 Nov 12:15: 24h top +6.8 pct, so just above 12h top 59,248 (+1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "note": "21 Nov 12:15: 24h top +6.8 pct, so just above 12h top 59,248 (+1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)",
+   "used_utc": "2026-11-21 16:20 (shadow)"
   },
   {
    "symbol": "BTCUSDT",
@@ -26,7 +27,8 @@
    "symbol": "ETHUSDT",
    "dir": "up",
    "level": 1673,
-   "note": "21 Nov 12:15: 24h top +6.4 pct, so just above 12h top 1,672.05 (+1.2 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "note": "21 Nov 12:15: 24h top +6.4 pct, so just above 12h top 1,672.05 (+1.2 pct); clean (leader applied Hawk's method; Hawk to confirm)",
+   "used_utc": "2026-11-21 16:20 (shadow)"
   },
   {
    "symbol": "ETHUSDT",
@@ -957,6 +959,22 @@
    "start_utc": "2026-11-20 20:15",
    "score_utc": "2026-11-21 20:15",
    "note": "down 0.0000035 fired (closes 0.00000345/0.0000034) while PEPE call open -> shadow (one call per coin)"
+  },
+  {
+   "symbol": "BTCUSDT",
+   "dir": "up",
+   "start": 59800,
+   "start_utc": "2026-11-21 16:20",
+   "score_utc": "2026-11-22 16:20",
+   "note": "up 59,250 fired after +8.5% relief bounce; Atlas veto 'short-covering bounce, no new demand' (Wintermute/Kobeissi via Yahoo 21 Nov); Sage SKIP"
+  },
+  {
+   "symbol": "ETHUSDT",
+   "dir": "up",
+   "start": 1679,
+   "start_utc": "2026-11-21 16:20",
+   "score_utc": "2026-11-22 16:20",
+   "note": "up 1,673 fired (thin, +0.35%), same veto; Sage SKIP"
   }
  ]
 }
