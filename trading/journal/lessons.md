@@ -225,3 +225,10 @@ changes until they are scored.
 - **Happened:** 1,757.32 → 1,623.09 (−7.6%). The cross-market "sell everything" flush at 15:00 (Reuters/CNBC, 20 Nov) took BTC below $60k and ETH to 1,581.
 - **Verdict:** a good decision under the rules, with a lucky-sized result. The thin break would have been blocked by the 0.3% rule, and the blocked call would have been a big winner, so this is evidence against the margin rule. Even so, the result came from an outside shock, not from the break itself.
 - **Rule (for Sage's 22 Nov card):** thin-break calls are now 1/2 (PEPE 18 Nov wrong, ETH 20 Nov right), so a 0.3% margin rule would have cost more than it saved. Don't adopt it on this sample. Trial: **15 trigger calls scored, 11 right (73%)**.
+
+## 2026-11-21 · Trigger call "PEPE down 24h" (20 Nov 04:00, CLEAR break ~3% beyond) · RIGHT (−8.9%)
+- **Expected:** a 24h fall after PEPE broke 0.00000368 clearly (−3.2% hour, highs held below). Atlas and Sage both agreed. It was the same bet as the open ETH call.
+- **Happened:** 0.00000359 → 0.00000327 (−8.9%). The 20 Nov "sell everything" flush and a second leg down at 03:00 on 21 Nov did most of the work.
+- **Verdict:** a good decision with a good result. A clear break in a strong downtrend carried on.
+- **Rule:** clear breaks are 1/1 and thin breaks 1/2. Together with ETH, it was the same market bet: one bet, right. Trial: **16 trigger calls scored, 12 right (75%)**.
+- **Honest note:** on 20 Nov at 16:15, Atlas rejected 15 spike shorts as "entering at a stretched low", and the market then fell another ~5%. The forecast calls caught the move; the trade filter did not. Bring this to Sage's 22 Nov card. Is the "stretched low" judgment too cautious in a trend, or did it simply avoid risk?
