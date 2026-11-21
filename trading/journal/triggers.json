@@ -13,9 +13,8 @@
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 59250,
-   "note": "21 Nov 12:15: 24h top +6.8 pct, so just above 12h top 59,248 (+1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)",
-   "used_utc": "2026-11-21 16:20 (shadow)"
+   "level": 61050,
+   "note": "21 Nov 20:15: refill after shadow use: just above 24h top 60,996 (+1.2 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -26,21 +25,20 @@
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1673,
-   "note": "21 Nov 12:15: 24h top +6.4 pct, so just above 12h top 1,672.05 (+1.2 pct); clean (leader applied Hawk's method; Hawk to confirm)",
-   "used_utc": "2026-11-21 16:20 (shadow)"
+   "level": 1718,
+   "note": "21 Nov 20:15: refill after shadow use: just above 24h top 1,716.58 (+1.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 1580,
-   "note": "20 Nov 20:15: refill after shadow fire: just below 24h low 1,581.47 (-1.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1625,
+   "note": "21 Nov 20:15: 24h low -8.8 pct, so just below 12h low 1,627.06 (-3.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 3.48e-06,
-   "note": "21 Nov 12:15: 24h top +6.8 pct, so just above 12h top 0.00000347 (+3.3 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.52e-06,
+   "note": "21 Nov 20:15: just above 24h top 0.00000351 (+3.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "history": [
@@ -930,6 +928,37 @@
      "note": "20 Nov 16:25: 24h top +12 pct, so just above 12h top 0.00000364 (+5.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
     }
    ]
+  },
+  {
+   "set": "levels retired 2026-11-21 20:15",
+   "triggers": [
+    {
+     "symbol": "BTCUSDT",
+     "dir": "up",
+     "level": 59250,
+     "note": "21 Nov 12:15: 24h top +6.8 pct, so just above 12h top 59,248 (+1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)",
+     "used_utc": "2026-11-21 16:20 (shadow)"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "up",
+     "level": 1673,
+     "note": "21 Nov 12:15: 24h top +6.4 pct, so just above 12h top 1,672.05 (+1.2 pct); clean (leader applied Hawk's method; Hawk to confirm)",
+     "used_utc": "2026-11-21 16:20 (shadow)"
+    },
+    {
+     "symbol": "ETHUSDT",
+     "dir": "down",
+     "level": 1580,
+     "note": "20 Nov 20:15: refill after shadow fire: just below 24h low 1,581.47 (-1.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+    },
+    {
+     "symbol": "PEPEUSDT",
+     "dir": "up",
+     "level": 3.48e-06,
+     "note": "21 Nov 12:15: 24h top +6.8 pct, so just above 12h top 0.00000347 (+3.3 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+    }
+   ]
   }
  ],
  "shadow": [
@@ -950,7 +979,10 @@
    "start": 1607.97,
    "start_utc": "2026-11-20 20:15",
    "score_utc": "2026-11-21 20:15",
-   "note": "down 1,716 fired (closes 1,616.67/1,607.97) while ETH call open -> shadow (one call per coin)"
+   "note": "down 1,716 fired (closes 1,616.67/1,607.97) while ETH call open -> shadow (one call per coin)",
+   "end": 1686.18,
+   "result_pct": 4.86,
+   "right": false
   },
   {
    "symbol": "PEPEUSDT",
@@ -958,7 +990,10 @@
    "start": 3.4e-06,
    "start_utc": "2026-11-20 20:15",
    "score_utc": "2026-11-21 20:15",
-   "note": "down 0.0000035 fired (closes 0.00000345/0.0000034) while PEPE call open -> shadow (one call per coin)"
+   "note": "down 0.0000035 fired (closes 0.00000345/0.0000034) while PEPE call open -> shadow (one call per coin)",
+   "end": 3.39e-06,
+   "result_pct": -0.29,
+   "right": true
   },
   {
    "symbol": "BTCUSDT",
