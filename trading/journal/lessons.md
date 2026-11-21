@@ -219,3 +219,9 @@ changes until they are scored.
 - **Verdict:** a reasonable decision; the result was split. Both calls entered late, after a −3% day near the 62k floor, and ETH bounced harder off its 1,733 low. The chart plan's level was fine. The open question is timing: both were recorded at a stretched low.
 - **Rule (for Sage's 22 Nov card):** clean break-plus-retest is now 4/5 (ETH is the first loss). Since 12 Nov, every call entered after a −3% day bounced first. Consider "no new down call after a 24h move of −3% or more unless the retest happens after a bounce".
 - **Trial:** 14 trigger calls scored, 10 right (71%). Counted as independent bets, it is fewer.
+
+## 2026-11-21 · Trigger call "ETH down 24h" (20 Nov 00:00, THIN break after bounce) · RIGHT (−7.6%)
+- **Expected:** a 24h fall after ETH barely broke 1,762 (0.16% beyond), right after a bounce off a fresh low. Sage recorded it under the written rules as a test of his unwritten 0.3% minimum-margin idea. Atlas's opinion was that it looked like our two recent losses.
+- **Happened:** 1,757.32 → 1,623.09 (−7.6%). The cross-market "sell everything" flush at 15:00 (Reuters/CNBC, 20 Nov) took BTC below $60k and ETH to 1,581.
+- **Verdict:** a good decision under the rules, with a lucky-sized result. The thin break would have been blocked by the 0.3% rule, and the blocked call would have been a big winner, so this is evidence against the margin rule. Even so, the result came from an outside shock, not from the break itself.
+- **Rule (for Sage's 22 Nov card):** thin-break calls are now 1/2 (PEPE 18 Nov wrong, ETH 20 Nov right), so a 0.3% margin rule would have cost more than it saved. Don't adopt it on this sample. Trial: **15 trigger calls scored, 11 right (73%)**.

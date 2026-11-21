@@ -1,92 +1,92 @@
 {
- "scanned_utc": "2026-11-20 20:13:00+00:00",
+ "scanned_utc": "2026-11-21 00:12:00+00:00",
  "candidates": [],
  "hottest": [
   {
    "coin": "TURBO",
    "venue": "HL",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "PEOPLE",
    "venue": "HL",
-   "yearly_last9": 0.0972,
+   "yearly_last9": 0.0963,
    "last3_per8h": [
-    0.0001,
     9.7e-05,
-    4.5e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "FLOKI",
-   "venue": "HL",
-   "yearly_last9": 0.0956,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    6.3e-05
+    8.2e-05,
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "BOME",
    "venue": "HL",
-   "yearly_last9": 0.0917,
+   "yearly_last9": 0.0919,
    "last3_per8h": [
-    0.0001,
     6.8e-05,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "ORDI",
-   "venue": "HL",
-   "yearly_last9": 0.0917,
-   "last3_per8h": [
     0.0001,
-    0.0001,
-    -4.7e-05
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "FLOKI",
-   "venue": "OKX",
-   "yearly_last9": 0.0901,
+   "venue": "HL",
+   "yearly_last9": 0.0912,
    "last3_per8h": [
-    5.9e-05,
     0.0001,
-    5.5e-05
+    0.0001,
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "MEME",
    "venue": "HL",
-   "yearly_last9": 0.0863,
+   "yearly_last9": 0.081,
    "last3_per8h": [
-    0.0001,
     9.3e-05,
-    6.3e-05
+    0.0001,
+    1.3e-05
    ],
    "versions": []
   },
   {
-   "coin": "LINK",
-   "venue": "HL",
-   "yearly_last9": 0.0829,
+   "coin": "FLOKI",
+   "venue": "OKX",
+   "yearly_last9": 0.078,
    "last3_per8h": [
-    4.8e-05,
-    8e-05,
-    -6e-06
+    0.0001,
+    5.5e-05,
+    -1e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "ORDI",
+   "venue": "HL",
+   "yearly_last9": 0.0761,
+   "last3_per8h": [
+    0.0001,
+    -7.2e-05,
+    -3e-06
+   ],
+   "versions": []
+  },
+  {
+   "coin": "ENA",
+   "venue": "HL",
+   "yearly_last9": 0.0737,
+   "last3_per8h": [
+    0.0001,
+    2e-05,
+    1.1e-05
    ],
    "versions": []
   }
