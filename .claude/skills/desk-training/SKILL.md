@@ -67,10 +67,14 @@ Run it even when the scanner has no candidate. This is the practice that builds 
 - **Refill triggers at once (from 16 Nov, Sage's card of 15 Nov):** when a trigger is used, or sits more
   than 2% from price, Hawk writes a new level for that coin and direction in the same session, just beyond
   the range edge (if the edge is more than 2% away, the edge wins). Use the 24h range of 1h candles, but
-  if that edge is more than 4% from price, use the last 12h range instead. Refill even while a call on
-  that coin is open; a trigger that fires then is a shadow under the one-call-per-coin rule.
-  - Check on Sun 22 Nov: no BTC or ETH direction more than 4% from a live trigger at any session; tally
-    calls and shadows from 12h levels separately (right vs wrong). Drop rule unchanged.
+  if that edge is more than 4% from price, use the last 12h range instead. If the 12h edge is also more
+  than 4% from price, use the last 6h range instead (from 23 Nov, Sage's card of 22 Nov); mark these
+  levels "6h" in the note. Refill even while a call on that coin is open; a trigger that fires then is a
+  shadow under the one-call-per-coin rule.
+  - Check on Sun 22 Nov (done, not met: up levels sat 4-10% away for 5 sessions after the 20 Nov flush).
+  - Check on Sun 29 Nov: count sessions with a BTC or ETH direction more than 4% from a live trigger
+    (target: none); tally calls and shadows from 6h levels separately (right vs wrong). If 6h-level
+    calls and shadows are under 50% right after 4 or more, drop the 6h fallback.
   - Review on Sun 15 Nov (done): see journal/2026-11-15-week.md.
 - **Review on Sun 8 Nov (done):** 3 calls, against a target of 8. The trial is kept; see
   journal/2026-11-08-week.md.

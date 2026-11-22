@@ -102,3 +102,7 @@
 
 ## 17 Nov 2026
 - **Clarified:** the major-event list (Sage). Only the FOMC rate decision, CPI, the jobs report and PCE count. FOMC minutes, Fed speeches, PPI, ISM and anything else do not, whatever a calendar's impact rating says (desk-training/SKILL.md).
+
+## 22 Nov 2026 — weekly card 4 (Sage)
+- desk-training SKILL.md: refill rule gets a 6h fallback when the 12h edge is also more than 4% from price. In force from 23 Nov; check on 29 Nov, and drop it if 6h-level calls and shadows are under 50% right after 4 or more.
+- Rejected after review: the 0.3% margin rule and "no down call after a −3% day". The break-plus-retest tag is no longer called "proven".
