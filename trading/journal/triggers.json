@@ -8,37 +8,40 @@
    "symbol": "PEPEUSDT",
    "dir": "down",
    "level": 3.3e-06,
-   "note": "22 Nov 12:15: 3.33 sat 2.6 pct away; just below 24h low 0.00000331 (-3.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "note": "Hawk confirmed 22 Nov: just below 24h low 0.00000331 (-3.5 pct); last break below ran to 0.00000317, not failed; clean"
   },
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 61050,
-   "note": "21 Nov 20:15: refill after shadow use: just above 24h top 60,996 (+1.2 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 61400,
+   "note": "Hawk set 22 Nov: 61,050 now inside range (24h top 61,365, price above it); 09:00 single close above failed at 10:00, and 20 Nov 12-14h closes above 61,400 failed at 15:00 (<48h) -> needs retest that holds",
+   "needs_retest": true
   },
   {
    "symbol": "BTCUSDT",
    "dir": "down",
    "level": 58700,
-   "note": "22 Nov 12:15: 58,100 sat 4.8 pct away; 24h low 58,140 also -4.8 pct, so just below 12h low 58,768.51 (-3.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "note": "Hawk confirmed 22 Nov: 24h low 58,140 is -5.0 pct, so just below 12h low 58,768.51 (-4.0 pct); last break below (21 Nov) ran to 55,130, not failed; clean"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1718,
-   "note": "21 Nov 20:15: refill after shadow use: just above 24h top 1,716.58 (+1.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1725,
+   "note": "Hawk set 22 Nov: 24h top now 1,723.88 (09:00 wick, 10:00 wick 1,718.95, no close above 1,718 = no failed break); but 20 Nov 12-14h closes above 1,725 failed at 15:00 (<48h) -> needs retest that holds",
+   "needs_retest": true
   },
   {
    "symbol": "ETHUSDT",
    "dir": "down",
    "level": 1648,
-   "note": "22 Nov 00:15: 1,625 sat 3.6 pct away; 24h low -8.8 pct, so just below 12h low 1,650.12 (-2.2 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "note": "Hawk confirmed 22 Nov: just below 24h low 1,648.35 (-3.8 pct); last break below ran to 1,538, not failed; clean"
   },
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
    "level": 3.46e-06,
-   "note": "22 Nov 04:15: 24h top 0.00000351 is +4.8 pct, so just above 12h top 0.00000345 (+3.3 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "note": "Hawk confirmed 22 Nov: just above 12h top 0.00000345 (+0.9 pct); 24h top 0.00000351 rolls out by 14:00; 21 Nov 13:00 single close 0.00000349 failed at 14:00 -> needs retest that holds",
+   "needs_retest": true
   }
  ],
  "history": [
