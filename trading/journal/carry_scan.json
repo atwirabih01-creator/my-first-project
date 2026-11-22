@@ -1,92 +1,92 @@
 {
- "scanned_utc": "2026-11-21 20:13:00+00:00",
+ "scanned_utc": "2026-11-22 00:13:00+00:00",
  "candidates": [],
  "hottest": [
   {
    "coin": "TURBO",
    "venue": "HL",
-   "yearly_last9": 0.1049,
+   "yearly_last9": 0.0989,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "PEOPLE",
    "venue": "HL",
-   "yearly_last9": 0.1024,
+   "yearly_last9": 0.0963,
    "last3_per8h": [
     0.0001,
     0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "BOME",
    "venue": "HL",
-   "yearly_last9": 0.098,
+   "yearly_last9": 0.0919,
    "last3_per8h": [
-    0.0001,
     7.4e-05,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "MEME",
-   "venue": "HL",
-   "yearly_last9": 0.0959,
-   "last3_per8h": [
     0.0001,
-    0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "FLOKI",
    "venue": "HL",
-   "yearly_last9": 0.0928,
+   "yearly_last9": 0.09,
+   "last3_per8h": [
+    5.5e-05,
+    7.2e-05,
+    1.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "MEME",
+   "venue": "HL",
+   "yearly_last9": 0.0841,
    "last3_per8h": [
     0.0001,
-    5.5e-05,
-    3.4e-05
+    5.1e-05,
+    1.3e-05
    ],
    "versions": []
   },
   {
    "coin": "SHIB",
    "venue": "HL",
-   "yearly_last9": 0.0879,
+   "yearly_last9": 0.0816,
    "last3_per8h": [
-    9.9e-05,
     9.8e-05,
-    6.3e-05
+    0.0001,
+    9e-06
+   ],
+   "versions": []
+  },
+  {
+   "coin": "PEOPLE",
+   "venue": "OKX",
+   "yearly_last9": 0.0759,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    0.0001
    ],
    "versions": []
   },
   {
    "coin": "ENA",
    "venue": "HL",
-   "yearly_last9": 0.0809,
+   "yearly_last9": 0.0748,
    "last3_per8h": [
-    3.4e-05,
     8.5e-05,
-    6.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "ORDI",
-   "venue": "HL",
-   "yearly_last9": 0.0757,
-   "last3_per8h": [
-    3.2e-05,
     0.0001,
-    6.3e-05
+    1.3e-05
    ],
    "versions": []
   }
