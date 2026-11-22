@@ -31,3 +31,9 @@ Ask the owner before anything that spends money, posts or sends anything publicl
 ## Learning from mistakes
 When the owner corrects an agent or says they prefer something, write that rule into
 this file or into the relevant agent's file, so the team remembers it next time.
+
+## Project focus (owner's decision)
+The business idea is an AI beauty tool for women in the GCC. The owner decided the focus is
+**shade/colour matching and ingredients** (which ingredients suit her skin). Summer/winter
+and climate advice is NOT a main selling point; women mostly already know what to use per
+season. Treat climate as a small extra at most.
