@@ -241,3 +241,8 @@ changes until they are scored.
   - It then closed back at 57,997, and price is ~57,790 now, below the entry. The idea itself is still alive: the wider-stop versions D01–D14 are open.
 - **Verdict:** a good idea with a bad stop, so the chart plan was the weak part. The stop was 1.8% from entry, but BTC's 4h range (ATR) was 2.4%, so it sat inside normal noise. Hawk and Sage both flagged the weekend squeeze risk and still accepted it; sizing kept the loss to exactly 1%.
 - **Rule (Hawk):** in squeeze conditions (weekend, or right after a liquidation cascade), the stop must be at least 1× the 4h ATR beyond the entry zone, and a stop just above a shelf is too close. If that makes the loss more than 3× the target, there is no trade. Account $493.77 (3 trades, 1 win).
+
+## Review — shadows scored 22 Nov 16:20 (BTC up, ETH up; Atlas "short-covering bounce" veto of 21 Nov)
+- BTC up from 59,800 → 60,895: **right**, +1.83%. ETH up from 1,679 → 1,718: **right**, +2.35%.
+- The veto (Wintermute/Kobeissi via Yahoo, 21 Nov: "no new demand") was wrong on both. Combined with the 20 Nov "stretched low" reject that missed a 5% fall, Atlas's narrative vetoes are now **0 for 3** against fired triggers.
+- Lesson (candidate, not yet a rule): a sourced "no new demand" story is not a 24h reason against. The SKILL already requires that a reason against predicts the 24h direction, and this one did not. Tally veto outcomes separately; Sage to review on 29 Nov.

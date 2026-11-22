@@ -1046,7 +1046,10 @@
    "start": 59800,
    "start_utc": "2026-11-21 16:20",
    "score_utc": "2026-11-22 16:20",
-   "note": "up 59,250 fired after +8.5% relief bounce; Atlas veto 'short-covering bounce, no new demand' (Wintermute/Kobeissi via Yahoo 21 Nov); Sage SKIP"
+   "note": "up 59,250 fired after +8.5% relief bounce; Atlas veto 'short-covering bounce, no new demand' (Wintermute/Kobeissi via Yahoo 21 Nov); Sage SKIP",
+   "end": 60894.91,
+   "result_pct": 1.83,
+   "right": true
   },
   {
    "symbol": "ETHUSDT",
@@ -1054,7 +1057,10 @@
    "start": 1679,
    "start_utc": "2026-11-21 16:20",
    "score_utc": "2026-11-22 16:20",
-   "note": "up 1,673 fired (thin, +0.35%), same veto; Sage SKIP"
+   "note": "up 1,673 fired (thin, +0.35%), same veto; Sage SKIP",
+   "end": 1718.4,
+   "result_pct": 2.35,
+   "right": true
   }
  ]
 }
