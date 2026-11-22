@@ -7,8 +7,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.33e-06,
-   "note": "22 Nov 00:15: 24h low 0.00000317 is -7.3 pct, so just below 12h low 0.00000334 (-2.6 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.3e-06,
+   "note": "22 Nov 12:15: 3.33 sat 2.6 pct away; just below 24h low 0.00000331 (-3.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -19,8 +19,8 @@
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 58100,
-   "note": "22 Nov 00:15: 57,700 sat 4.2 pct away; 24h low 55,130 is -8.4 pct, so just below 12h low 58,140 (-3.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 58700,
+   "note": "22 Nov 12:15: 58,100 sat 4.8 pct away; 24h low 58,140 also -4.8 pct, so just below 12h low 58,768.51 (-3.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
@@ -987,6 +987,20 @@
    "dir": "up",
    "level": 3.52e-06,
    "note": "21 Nov 20:15: just above 24h top 0.00000351 (+3.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-22 12:15",
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "level": 3.33e-06,
+   "note": "22 Nov 00:15: 24h low 0.00000317 is -7.3 pct, so just below 12h low 0.00000334 (-2.6 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-22 12:15",
+   "symbol": "BTCUSDT",
+   "dir": "down",
+   "level": 58100,
+   "note": "22 Nov 00:15: 57,700 sat 4.2 pct away; 24h low 55,130 is -8.4 pct, so just below 12h low 58,140 (-3.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
