@@ -13,9 +13,8 @@
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 61400,
-   "note": "Hawk set 22 Nov: 61,050 now inside range (24h top 61,365, price above it); 09:00 single close above failed at 10:00, and 20 Nov 12-14h closes above 61,400 failed at 15:00 (<48h) -> needs retest that holds",
-   "needs_retest": true
+   "level": 62000,
+   "note": "23 Nov 08:15: refill after use: just above 24h top 61,959.93 (+0.9 pct); clean (leader applied Hawk's method; Hawk to confirm). BTC call open -> fires are shadows"
   },
   {
    "symbol": "BTCUSDT",
@@ -1018,6 +1017,15 @@
    "dir": "down",
    "level": 1648,
    "note": "Hawk confirmed 22 Nov: just below 24h low 1,648.35 (-3.8 pct); last break below ran to 1,538, not failed; clean"
+  },
+  {
+   "retired_utc": "2026-11-23 08:15",
+   "used": "fired -> call",
+   "symbol": "BTCUSDT",
+   "dir": "up",
+   "level": 61400,
+   "note": "Hawk set 22 Nov: 61,050 now inside range (24h top 61,365, price above it); 09:00 single close above failed at 10:00, and 20 Nov 12-14h closes above 61,400 failed at 15:00 (<48h) -> needs retest that holds",
+   "needs_retest": true
   }
  ],
  "shadow": [
