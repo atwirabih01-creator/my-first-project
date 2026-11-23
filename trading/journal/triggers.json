@@ -7,8 +7,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.3e-06,
-   "note": "Hawk confirmed 22 Nov: just below 24h low 0.00000331 (-3.5 pct); last break below ran to 0.00000317, not failed; clean"
+   "level": 3.39e-06,
+   "note": "23 Nov 12:15: 6h level. 3.30 sat 4.6 pct away; 24h and 12h low 0.00000331 both -4.3 pct, so just below 6h low 0.00000340 (-2.0 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -1026,6 +1026,13 @@
    "level": 61400,
    "note": "Hawk set 22 Nov: 61,050 now inside range (24h top 61,365, price above it); 09:00 single close above failed at 10:00, and 20 Nov 12-14h closes above 61,400 failed at 15:00 (<48h) -> needs retest that holds",
    "needs_retest": true
+  },
+  {
+   "retired_utc": "2026-11-23 12:15",
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "level": 3.3e-06,
+   "note": "Hawk confirmed 22 Nov: just below 24h low 0.00000331 (-3.5 pct); last break below ran to 0.00000317, not failed; clean"
   }
  ],
  "shadow": [
