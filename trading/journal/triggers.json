@@ -20,8 +20,8 @@
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 58700,
-   "note": "Hawk confirmed 22 Nov: 24h low 58,140 is -5.0 pct, so just below 12h low 58,768.51 (-4.0 pct); last break below (21 Nov) ran to 55,130, not failed; clean"
+   "level": 60400,
+   "note": "23 Nov 00:15: 58,700 sat 4.2 pct away; 24h low 58,768 is -4.1 pct, so just below 12h low 60,464 (-1.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
@@ -33,8 +33,8 @@
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 1648,
-   "note": "Hawk confirmed 22 Nov: just below 24h low 1,648.35 (-3.8 pct); last break below ran to 1,538, not failed; clean"
+   "level": 1694,
+   "note": "23 Nov 00:15: 1,648 sat 4.4 pct away; 24h low -4.4 pct, so just below 12h low 1,695.76 (-1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
@@ -1004,6 +1004,20 @@
    "dir": "down",
    "level": 58100,
    "note": "22 Nov 00:15: 57,700 sat 4.2 pct away; 24h low 55,130 is -8.4 pct, so just below 12h low 58,140 (-3.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-23 00:15",
+   "symbol": "BTCUSDT",
+   "dir": "down",
+   "level": 58700,
+   "note": "Hawk confirmed 22 Nov: 24h low 58,140 is -5.0 pct, so just below 12h low 58,768.51 (-4.0 pct); last break below (21 Nov) ran to 55,130, not failed; clean"
+  },
+  {
+   "retired_utc": "2026-11-23 00:15",
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "level": 1648,
+   "note": "Hawk confirmed 22 Nov: just below 24h low 1,648.35 (-3.8 pct); last break below ran to 1,538, not failed; clean"
   }
  ],
  "shadow": [
