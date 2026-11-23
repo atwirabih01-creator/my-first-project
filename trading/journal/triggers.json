@@ -25,10 +25,8 @@
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1725,
-   "note": "Hawk set 22 Nov: 24h top now 1,723.88 (09:00 wick, 10:00 wick 1,718.95, no close above 1,718 = no failed break); but 20 Nov 12-14h closes above 1,725 failed at 15:00 (<48h) -> needs retest that holds",
-   "needs_retest": true,
-   "fired_awaiting_retest": "23 Nov 16:15: fired on 13:00 spike; no retest yet (lows stayed 2-4 pct above level); call only if a bar touches the level and closes back above while the break holds"
+   "level": 1850,
+   "note": "23 Nov 20:15: refill after use: just above 24h/12h/6h top 1,845.07 (+6.8 pct; all edges >4 pct, so the edge stands); clean (leader applied Hawk's method; Hawk to confirm). ETH call open -> fires are shadows"
   },
   {
    "symbol": "ETHUSDT",
@@ -39,10 +37,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 3.46e-06,
-   "note": "Hawk confirmed 22 Nov: just above 12h top 0.00000345 (+0.9 pct); 24h top 0.00000351 rolls out by 14:00; 21 Nov 13:00 single close 0.00000349 failed at 14:00 -> needs retest that holds",
-   "needs_retest": true,
-   "fired_awaiting_retest": "23 Nov 16:15: fired on 13:00 spike; no retest yet (lows stayed 2-4 pct above level); call only if a bar touches the level and closes back above while the break holds"
+   "level": 3.78e-06,
+   "note": "23 Nov 20:15: refill after use: just above 24h/12h/6h top 0.00000377 (+8.9 pct; all edges >4 pct); clean (leader applied Hawk's method; Hawk to confirm). PEPE call open -> fires are shadows"
   }
  ],
  "history": [
@@ -1050,6 +1046,26 @@
    "dir": "down",
    "level": 1694,
    "note": "23 Nov 00:15: 1,648 sat 4.4 pct away; 24h low -4.4 pct, so just below 12h low 1,695.76 (-1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-23 20:15",
+   "used": "fired + retest -> call",
+   "symbol": "ETHUSDT",
+   "dir": "up",
+   "level": 1725,
+   "note": "Hawk set 22 Nov: 24h top now 1,723.88 (09:00 wick, 10:00 wick 1,718.95, no close above 1,718 = no failed break); but 20 Nov 12-14h closes above 1,725 failed at 15:00 (<48h) -> needs retest that holds",
+   "needs_retest": true,
+   "fired_awaiting_retest": "23 Nov 16:15: fired on 13:00 spike; no retest yet (lows stayed 2-4 pct above level); call only if a bar touches the level and closes back above while the break holds"
+  },
+  {
+   "retired_utc": "2026-11-23 20:15",
+   "used": "fired + retest -> call",
+   "symbol": "PEPEUSDT",
+   "dir": "up",
+   "level": 3.46e-06,
+   "note": "Hawk confirmed 22 Nov: just above 12h top 0.00000345 (+0.9 pct); 24h top 0.00000351 rolls out by 14:00; 21 Nov 13:00 single close 0.00000349 failed at 14:00 -> needs retest that holds",
+   "needs_retest": true,
+   "fired_awaiting_retest": "23 Nov 16:15: fired on 13:00 spike; no retest yet (lows stayed 2-4 pct above level); call only if a bar touches the level and closes back above while the break holds"
   }
  ],
  "shadow": [
