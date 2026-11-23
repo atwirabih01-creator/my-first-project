@@ -13,8 +13,8 @@
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 62000,
-   "note": "23 Nov 08:15: refill after use: just above 24h top 61,959.93 (+0.9 pct); clean (leader applied Hawk's method; Hawk to confirm). BTC call open -> fires are shadows"
+   "level": 64650,
+   "note": "23 Nov 16:15: refill after shadow use: just above 24h top 64,603 (+2.8 pct, edge wins); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -27,20 +27,22 @@
    "dir": "up",
    "level": 1725,
    "note": "Hawk set 22 Nov: 24h top now 1,723.88 (09:00 wick, 10:00 wick 1,718.95, no close above 1,718 = no failed break); but 20 Nov 12-14h closes above 1,725 failed at 15:00 (<48h) -> needs retest that holds",
-   "needs_retest": true
+   "needs_retest": true,
+   "fired_awaiting_retest": "23 Nov 16:15: fired on 13:00 spike; no retest yet (lows stayed 2-4 pct above level); call only if a bar touches the level and closes back above while the break holds"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 1694,
-   "note": "23 Nov 00:15: 1,648 sat 4.4 pct away; 24h low -4.4 pct, so just below 12h low 1,695.76 (-1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1710,
+   "note": "23 Nov 16:15: 1,694 sat 4.5 pct away; 24h low 1,696.5 -4.4 pct, so just below 12h low 1,713.33 (-3.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
    "level": 3.46e-06,
    "note": "Hawk confirmed 22 Nov: just above 12h top 0.00000345 (+0.9 pct); 24h top 0.00000351 rolls out by 14:00; 21 Nov 13:00 single close 0.00000349 failed at 14:00 -> needs retest that holds",
-   "needs_retest": true
+   "needs_retest": true,
+   "fired_awaiting_retest": "23 Nov 16:15: fired on 13:00 spike; no retest yet (lows stayed 2-4 pct above level); call only if a bar touches the level and closes back above while the break holds"
   }
  ],
  "history": [
@@ -1033,6 +1035,21 @@
    "dir": "down",
    "level": 3.3e-06,
    "note": "Hawk confirmed 22 Nov: just below 24h low 0.00000331 (-3.5 pct); last break below ran to 0.00000317, not failed; clean"
+  },
+  {
+   "retired_utc": "2026-11-23 16:15",
+   "used": "fired -> shadow",
+   "symbol": "BTCUSDT",
+   "dir": "up",
+   "level": 62000,
+   "note": "23 Nov 08:15: refill after use: just above 24h top 61,959.93 (+0.9 pct); clean (leader applied Hawk's method; Hawk to confirm). BTC call open -> fires are shadows"
+  },
+  {
+   "retired_utc": "2026-11-23 16:15",
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "level": 1694,
+   "note": "23 Nov 00:15: 1,648 sat 4.4 pct away; 24h low -4.4 pct, so just below 12h low 1,695.76 (-1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
@@ -1090,6 +1107,14 @@
    "end": 1718.4,
    "result_pct": 2.35,
    "right": true
+  },
+  {
+   "symbol": "BTCUSDT",
+   "dir": "up",
+   "start": 62897.79,
+   "start_utc": "2026-11-23 16:15",
+   "score_utc": "2026-11-24 16:15",
+   "note": "up 62,000 fired (closes 63,840.95/62,895.36/62,897.79) after 13:00 spike while BTC call open -> shadow (one call per coin); CLEAR break (+1.4%)"
   }
  ]
 }

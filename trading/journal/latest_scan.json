@@ -1,21 +1,6 @@
 {
- "scanned_utc": "2026-11-23 12:14:00+00:00",
+ "scanned_utc": "2026-11-23 16:13:00+00:00",
  "coins_checked": 40,
  "market_tide": "down",
- "candidates": [
-  {
-   "scanned_utc": "2026-11-23 12:14:00+00:00",
-   "bar_utc": "2026-11-23 08:00:00+00:00",
-   "symbol": "PEPEUSDT",
-   "meme": true,
-   "side": "short",
-   "situation": "hold",
-   "price": 3.46e-06,
-   "atr4h_pct": 3.39,
-   "rsi4h": 45.5,
-   "buy_share_24h": 0.47,
-   "vol24h_musd": 19.5,
-   "versions_allowed": "D08"
-  }
- ]
+ "candidates": []
 }
