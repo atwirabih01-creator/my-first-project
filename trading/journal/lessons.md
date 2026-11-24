@@ -246,3 +246,9 @@ changes until they are scored.
 - BTC up from 59,800 → 60,895: **right**, +1.83%. ETH up from 1,679 → 1,718: **right**, +2.35%.
 - The veto (Wintermute/Kobeissi via Yahoo, 21 Nov: "no new demand") was wrong on both. Combined with the 20 Nov "stretched low" reject that missed a 5% fall, Atlas's narrative vetoes are now **0 for 3** against fired triggers.
 - Lesson (candidate, not yet a rule): a sourced "no new demand" story is not a 24h reason against. The SKILL already requires that a reason against predicts the 24h direction, and this one did not. Tally veto outcomes separately; Sage to review on 29 Nov.
+
+## Review — BTC UP call scored 24 Nov 08:00 (from 61,459.5 → 60,436.01, −1.67%): WRONG
+- **Expected:** up. The 61,400 trigger fired with a THIN break (+0.1%) and a retest that held, and Atlas found no reason against.
+- **What happened:** the Nvidia/Huang news spike took BTC to 64,603 at 14:00 on 23 Nov, so the call was +5% at its best. The spike then fully faded, and BTC slid to 59,455 overnight before ending at 60,436.
+- **Verdict:** a good process with an unlucky result. The direction was right for 6 hours and a news shock decided the outcome; no agent's part clearly failed.
+- **Lesson (candidate, for the 29 Nov card):** thin breaks are now 1 right out of 3 (1/2 before this one). Sage should re-look at the margin question with this new data point, and also check whether a call made just before a big news spike should be scored as normal or tagged "news-shocked".
