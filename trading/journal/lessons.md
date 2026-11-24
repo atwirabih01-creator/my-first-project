@@ -252,3 +252,9 @@ changes until they are scored.
 - **What happened:** the Nvidia/Huang news spike took BTC to 64,603 at 14:00 on 23 Nov, so the call was +5% at its best. The spike then fully faded, and BTC slid to 59,455 overnight before ending at 60,436.
 - **Verdict:** a good process with an unlucky result. The direction was right for 6 hours and a news shock decided the outcome; no agent's part clearly failed.
 - **Lesson (candidate, for the 29 Nov card):** thin breaks are now 1 right out of 3 (1/2 before this one). Sage should re-look at the margin question with this new data point, and also check whether a call made just before a big news spike should be scored as normal or tagged "news-shocked".
+
+## Review — ETH UP and PEPE UP calls scored 24 Nov 20:00 (the Nvidia-spike retest calls): both WRONG
+- **Expected:** up. After the 23 Nov 13:00 Nvidia/Huang spike, the ETH 1,725 and PEPE 0.00000346 triggers broke, then retested and held at 19:00. Both were thin breaks (+0.4% and +0.3%). Atlas found no reason against.
+- **What happened:** ETH went from 1,731.84 to 1,673.70 (−3.36%) and PEPE from 0.00000347 to 0.00000344 (−0.86%). The spike fully reversed: BTC slid from 64,603 to 59,260.
+- **Verdict:** a process weakness, not just bad luck. Together with the BTC up call (−1.67%) and the BTC up shadow (−5.05%), all four up signals from the spike were wrong. The retest "held" only because the price was fading back to the level after a news pump, not because of new demand. The chart plan (trigger plus retest) failed to tell a news-pump fade apart from a real breakout; the research step had no rule to catch it.
+- **Lesson (candidate rule for Sage, 29 Nov):** after a single-news move of more than 4% in one hour, skip trigger calls in that direction for 24h; shadow-score them instead. Evidence so far: 0 right out of 4 signals (BTC call, BTC shadow, ETH call, PEPE call; one bet).

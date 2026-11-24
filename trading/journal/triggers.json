@@ -7,8 +7,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.36e-06,
-   "note": "24 Nov 12:15: 3.39 sat inside range (24h low 0.00000337) and 2.9 pct away; just below 24h low (-3.7 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.3e-06,
+   "note": "24 Nov 20:15: 3.36 inside range after wick to 0.00000331; 24h/12h/6h lows all -3.8 pct+, edge stands: just below (-4.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -19,26 +19,26 @@
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 59400,
-   "note": "24 Nov 04:15: refill after shadow use: just below 24h low 59,455 (-1.6 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 59200,
+   "note": "24 Nov 20:15: 59,400 inside range after wick to 59,260; just below 24h low (-0.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1712,
-   "note": "24 Nov 16:15: 1,726 sat 2.9 pct away; 24h top 1,779 +6 pct, so just above 12h top 1,709.99 (+2.0 pct); ETH call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1738,
+   "note": "24 Nov 20:15: 1,712 sat 2.3 pct away; just above 24h top 1,736.11 (+3.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 1666,
-   "note": "24 Nov 04:15: refill after shadow use: just below 24h low 1,669 (-1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1662,
+   "note": "24 Nov 20:15: 1,666 inside range after wick to 1,664.18; just below 24h low (-0.7 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 3.51e-06,
-   "note": "24 Nov 16:15: 6h level. 3.62 sat 8 pct away; 24h/12h/6h tops all >4 pct, so the 6h edge stands: just above 6h top 0.00000350 (+5 pct); PEPE call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.58e-06,
+   "note": "24 Nov 20:15: 3.51 sat 2.0 pct away; 24h top +4.9 pct, so just above 12h top 0.00000357 (+4.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "history": [
@@ -1150,6 +1150,41 @@
    "dir": "up",
    "level": 3.62e-06,
    "note": "24 Nov 12:15: 3.54 sat inside range (wick to 0.00000360); 24h top 0.00000377 is +8 pct, so just above 12h top 0.00000361 (+3.7 pct); PEPE call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-24 20:15",
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "level": 3.36e-06,
+   "note": "24 Nov 12:15: 3.39 sat inside range (24h low 0.00000337) and 2.9 pct away; just below 24h low (-3.7 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-24 20:15",
+   "symbol": "BTCUSDT",
+   "dir": "down",
+   "level": 59400,
+   "note": "24 Nov 04:15: refill after shadow use: just below 24h low 59,455 (-1.6 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-24 20:15",
+   "symbol": "ETHUSDT",
+   "dir": "up",
+   "level": 1712,
+   "note": "24 Nov 16:15: 1,726 sat 2.9 pct away; 24h top 1,779 +6 pct, so just above 12h top 1,709.99 (+2.0 pct); ETH call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-24 20:15",
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "level": 1666,
+   "note": "24 Nov 04:15: refill after shadow use: just below 24h low 1,669 (-1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-24 20:15",
+   "symbol": "PEPEUSDT",
+   "dir": "up",
+   "level": 3.51e-06,
+   "note": "24 Nov 16:15: 6h level. 3.62 sat 8 pct away; 24h/12h/6h tops all >4 pct, so the 6h edge stands: just above 6h top 0.00000350 (+5 pct); PEPE call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
