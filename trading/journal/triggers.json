@@ -13,26 +13,26 @@
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 61800,
-   "note": "24 Nov 00:15: 6h level. 64,650 sat 5.5 pct away; 24h/12h top 64,603 also >4 pct, so just above 6h top 61,770 (+0.9 pct); clean (leader applied Hawk's method; Hawk to confirm). BTC call open -> fires are shadows"
+   "level": 61700,
+   "note": "24 Nov 04:15: 6h level. 24h top 64,603 +7 pct and 12h top 62,943 +4.3 pct, so just above 6h top 61,682 (+2.3 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 60400,
-   "note": "23 Nov 00:15: 58,700 sat 4.2 pct away; 24h low 58,768 is -4.1 pct, so just below 12h low 60,464 (-1.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 59400,
+   "note": "24 Nov 04:15: refill after shadow use: just below 24h low 59,455 (-1.6 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1752,
-   "note": "24 Nov 00:15: 6h level. 1,850 sat 8.1 pct away; 24h/12h top >4 pct, so just above 6h top 1,749.59 (+2.4 pct); clean (leader applied Hawk's method; Hawk to confirm). ETH call open -> fires are shadows"
+   "level": 1726,
+   "note": "24 Nov 04:15: 6h level. 24h/12h tops >4 pct, so just above 6h top 1,724.33 (+1.7 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 1710,
-   "note": "23 Nov 16:15: 1,694 sat 4.5 pct away; 24h low 1,696.5 -4.4 pct, so just below 12h low 1,713.33 (-3.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1666,
+   "note": "24 Nov 04:15: refill after shadow use: just below 24h low 1,669 (-1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
@@ -1087,6 +1087,34 @@
    "dir": "up",
    "level": 3.78e-06,
    "note": "23 Nov 20:15: refill after use: just above 24h/12h/6h top 0.00000377 (+8.9 pct; all edges >4 pct); clean (leader applied Hawk's method; Hawk to confirm). PEPE call open -> fires are shadows"
+  },
+  {
+   "retired_utc": "2026-11-24 04:15",
+   "symbol": "BTCUSDT",
+   "dir": "up",
+   "level": 61800,
+   "note": "24 Nov 00:15: 6h level. 64,650 sat 5.5 pct away; 24h/12h top 64,603 also >4 pct, so just above 6h top 61,770 (+0.9 pct); clean (leader applied Hawk's method; Hawk to confirm). BTC call open -> fires are shadows"
+  },
+  {
+   "retired_utc": "2026-11-24 04:15",
+   "symbol": "BTCUSDT",
+   "dir": "down",
+   "level": 60400,
+   "note": "23 Nov 00:15: 58,700 sat 4.2 pct away; 24h low 58,768 is -4.1 pct, so just below 12h low 60,464 (-1.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-24 04:15",
+   "symbol": "ETHUSDT",
+   "dir": "up",
+   "level": 1752,
+   "note": "24 Nov 00:15: 6h level. 1,850 sat 8.1 pct away; 24h/12h top >4 pct, so just above 6h top 1,749.59 (+2.4 pct); clean (leader applied Hawk's method; Hawk to confirm). ETH call open -> fires are shadows"
+  },
+  {
+   "retired_utc": "2026-11-24 04:15",
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "level": 1710,
+   "note": "23 Nov 16:15: 1,694 sat 4.5 pct away; 24h low 1,696.5 -4.4 pct, so just below 12h low 1,713.33 (-3.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
@@ -1152,6 +1180,22 @@
    "start_utc": "2026-11-23 16:15",
    "score_utc": "2026-11-24 16:15",
    "note": "up 62,000 fired (closes 63,840.95/62,895.36/62,897.79) after 13:00 spike while BTC call open -> shadow (one call per coin); CLEAR break (+1.4%)"
+  },
+  {
+   "symbol": "BTCUSDT",
+   "dir": "down",
+   "start": 60338.34,
+   "start_utc": "2026-11-24 04:15",
+   "score_utc": "2026-11-25 04:15",
+   "note": "down 60,400 fired (closes 60,074.90/60,338.34) while BTC up call open -> shadow; THIN (-0.1 pct), no retest"
+  },
+  {
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "start": 1696.44,
+   "start_utc": "2026-11-24 04:15",
+   "score_utc": "2026-11-25 04:15",
+   "note": "down 1,710 fired (closes 1,685.04/1,696.44) while ETH up call open -> shadow; CLEAR (-0.8 pct), no retest"
   }
  ]
 }
