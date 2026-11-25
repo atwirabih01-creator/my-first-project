@@ -19,20 +19,20 @@
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 59200,
-   "note": "24 Nov 20:15: 59,400 inside range after wick to 59,260; just below 24h low (-0.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 58900,
+   "note": "25 Nov 04:15: 59,200 inside range after wick to 58,952; just below 24h low (-0.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1723,
-   "note": "25 Nov 00:15: 1,738 sat 3.4 pct away; just above 24h top 1,721.88 (+2.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1712,
+   "note": "25 Nov 04:15: 1,723 sat 3.5 pct away; just above 24h top 1,709.99 (+2.9 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 1662,
-   "note": "24 Nov 20:15: 1,666 inside range after wick to 1,664.18; just below 24h low (-0.7 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1646,
+   "note": "25 Nov 04:15: 1,662 inside range after wick to 1,649.1; just below 24h low (-1.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
@@ -1206,6 +1206,27 @@
    "dir": "up",
    "level": 3.58e-06,
    "note": "24 Nov 20:15: 3.51 sat 2.0 pct away; 24h top +4.9 pct, so just above 12h top 0.00000357 (+4.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-25 04:15",
+   "symbol": "BTCUSDT",
+   "dir": "down",
+   "level": 59200,
+   "note": "24 Nov 20:15: 59,400 inside range after wick to 59,260; just below 24h low (-0.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-25 04:15",
+   "symbol": "ETHUSDT",
+   "dir": "up",
+   "level": 1723,
+   "note": "25 Nov 00:15: 1,738 sat 3.4 pct away; just above 24h top 1,721.88 (+2.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-25 04:15",
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "level": 1662,
+   "note": "24 Nov 20:15: 1,666 inside range after wick to 1,664.18; just below 24h low (-0.7 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
@@ -1281,7 +1302,10 @@
    "start": 60338.34,
    "start_utc": "2026-11-24 04:15",
    "score_utc": "2026-11-25 04:15",
-   "note": "down 60,400 fired (closes 60,074.90/60,338.34) while BTC up call open -> shadow; THIN (-0.1 pct), no retest"
+   "note": "down 60,400 fired (closes 60,074.90/60,338.34) while BTC up call open -> shadow; THIN (-0.1 pct), no retest",
+   "end": 59421.85,
+   "result_pct": -1.52,
+   "right": true
   },
   {
    "symbol": "ETHUSDT",
@@ -1289,7 +1313,10 @@
    "start": 1696.44,
    "start_utc": "2026-11-24 04:15",
    "score_utc": "2026-11-25 04:15",
-   "note": "down 1,710 fired (closes 1,685.04/1,696.44) while ETH up call open -> shadow; CLEAR (-0.8 pct), no retest"
+   "note": "down 1,710 fired (closes 1,685.04/1,696.44) while ETH up call open -> shadow; CLEAR (-0.8 pct), no retest",
+   "end": 1664.44,
+   "result_pct": -1.89,
+   "right": true
   }
  ]
 }

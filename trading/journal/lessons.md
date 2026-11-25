@@ -258,3 +258,8 @@ changes until they are scored.
 - **What happened:** ETH went from 1,731.84 to 1,673.70 (−3.36%) and PEPE from 0.00000347 to 0.00000344 (−0.86%). The spike fully reversed: BTC slid from 64,603 to 59,260.
 - **Verdict:** a process weakness, not just bad luck. Together with the BTC up call (−1.67%) and the BTC up shadow (−5.05%), all four up signals from the spike were wrong. The retest "held" only because the price was fading back to the level after a news pump, not because of new demand. The chart plan (trigger plus retest) failed to tell a news-pump fade apart from a real breakout; the research step had no rule to catch it.
 - **Lesson (candidate rule for Sage, 29 Nov):** after a single-news move of more than 4% in one hour, skip trigger calls in that direction for 24h; shadow-score them instead. Evidence so far: 0 right out of 4 signals (BTC call, BTC shadow, ETH call, PEPE call; one bet).
+
+## Review — shadows scored 25 Nov 04:15 (BTC down, ETH down; fired 24 Nov 04:15 while the up calls were open)
+- BTC down from 60,338.34 → 59,421.85 (−1.52%): **right**. ETH down from 1,696.44 → 1,664.44 (−1.89%): **right**.
+- The one-call-per-coin rule kept us in the losing up calls and turned the correct down signals into shadows. This is the second time (the first was 20 Nov ETH). Shadows from opposite fires are now 2 right, 1 wrong.
+- **Lesson (candidate for Sage, 29 Nov):** when an opposite trigger fires CLEAR against an open call, consider closing the open call early (scored at that moment) and taking the new direction. Today that would have scored ETH up −2.0% wrong at 04:15 and ETH down −1.9% right, instead of ETH up −3.4% wrong. Test it on the shadow log before adopting it.
