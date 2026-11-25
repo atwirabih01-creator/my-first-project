@@ -1,5 +1,5 @@
 {
- "scanned_utc": "2026-11-25 16:14:00+00:00",
+ "scanned_utc": "2026-11-25 20:12:00+00:00",
  "candidates": [],
  "hottest": [
   {
@@ -16,51 +16,62 @@
   {
    "coin": "FLOKI",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "ORDI",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "PEOPLE",
-   "venue": "HL",
-   "yearly_last9": 0.0989,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    1.3e-05
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "WIF",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.1049,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "PEOPLE",
+   "venue": "HL",
+   "yearly_last9": 0.1047,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    6e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "BOME",
+   "venue": "HL",
+   "yearly_last9": 0.102,
+   "last3_per8h": [
+    7.5e-05,
+    0.0001,
+    6.3e-05
    ],
    "versions": []
   },
   {
    "coin": "FET",
    "venue": "OKX",
-   "yearly_last9": 0.096,
+   "yearly_last9": 0.0965,
    "last3_per8h": [
     0.0001,
     0.0001,
@@ -69,24 +80,13 @@
    "versions": []
   },
   {
-   "coin": "BOME",
-   "venue": "HL",
-   "yearly_last9": 0.0959,
-   "last3_per8h": [
-    7.5e-05,
-    0.0001,
-    1.3e-05
-   ],
-   "versions": []
-  },
-  {
    "coin": "WIF",
    "venue": "OKX",
-   "yearly_last9": 0.0797,
+   "yearly_last9": 0.0892,
    "last3_per8h": [
     0.0001,
-    0.0001,
-    8.4e-05
+    8.4e-05,
+    0.0001
    ],
    "versions": []
   }
