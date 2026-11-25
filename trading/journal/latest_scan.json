@@ -1,20 +1,20 @@
 {
- "scanned_utc": "2026-11-25 08:11:00+00:00",
+ "scanned_utc": "2026-11-25 12:12:00+00:00",
  "coins_checked": 40,
  "market_tide": "down",
  "candidates": [
   {
-   "scanned_utc": "2026-11-25 08:11:00+00:00",
-   "bar_utc": "2026-11-25 04:00:00+00:00",
-   "symbol": "DOGEUSDT",
+   "scanned_utc": "2026-11-25 12:12:00+00:00",
+   "bar_utc": "2026-11-25 08:00:00+00:00",
+   "symbol": "PEPEUSDT",
    "meme": true,
    "side": "short",
    "situation": "hold",
-   "price": 0.05429,
-   "atr4h_pct": 2.52,
-   "rsi4h": 41.2,
-   "buy_share_24h": 0.473,
-   "vol24h_musd": 24.2,
+   "price": 3.4e-06,
+   "atr4h_pct": 3.97,
+   "rsi4h": 44.6,
+   "buy_share_24h": 0.503,
+   "vol24h_musd": 29.9,
    "versions_allowed": "D08"
   }
  ]
