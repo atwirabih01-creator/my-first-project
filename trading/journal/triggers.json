@@ -7,8 +7,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.3e-06,
-   "note": "25 Nov 12:15: 3.41 sat at the 6h low; 24h low 0.00000331 now within 4 pct (-2.6), so just below it; clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.27e-06,
+   "note": "25 Nov 16:15: 3.30 inside range after wick to 0.00000328; just below 24h low (-1.2 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -19,8 +19,8 @@
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 58400,
-   "note": "25 Nov 12:15: 58,900 inside range (chop, closes 58,900.00/58,640 not two beyond); just below 24h low 58,456 (-0.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 57250,
+   "note": "25 Nov 16:15: refill after use: just below 24h low 57,300.38 (-1.9 pct); clean (leader applied Hawk's method; Hawk to confirm). BTC call open -> fires are shadows"
   },
   {
    "symbol": "ETHUSDT",
@@ -31,8 +31,8 @@
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 1630,
-   "note": "25 Nov 12:15: 1,646 inside range (closes alternating either side); just below 24h low 1,633.11 (-0.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1605,
+   "note": "25 Nov 16:15: 1,630 inside range after wick to 1,608.86; just below 24h low (-2.6 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
@@ -1255,6 +1255,28 @@
    "dir": "down",
    "level": 1646,
    "note": "25 Nov 04:15: 1,662 inside range after wick to 1,649.1; just below 24h low (-1.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-25 16:15",
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "level": 3.3e-06,
+   "note": "25 Nov 12:15: 3.41 sat at the 6h low; 24h low 0.00000331 now within 4 pct (-2.6), so just below it; clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-25 16:15",
+   "used": "fired -> call",
+   "symbol": "BTCUSDT",
+   "dir": "down",
+   "level": 58400,
+   "note": "25 Nov 12:15: 58,900 inside range (chop, closes 58,900.00/58,640 not two beyond); just below 24h low 58,456 (-0.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-25 16:15",
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "level": 1630,
+   "note": "25 Nov 12:15: 1,646 inside range (closes alternating either side); just below 24h low 1,633.11 (-0.5 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
