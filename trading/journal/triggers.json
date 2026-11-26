@@ -7,8 +7,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.45e-06,
-   "note": "26 Nov 12:15: 3.43 sat 3.4 pct away; 24h low -8.5 pct, so just below 12h low 0.00000346 (-2.8 pct); PEPE up call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.36e-06,
+   "note": "26 Nov 16:15: 3.45 inside range after wick to 0.00000337; 24h low -6 pct, so just below 12h low (-2.9 pct); PEPE up call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -19,8 +19,8 @@
   {
    "symbol": "BTCUSDT",
    "dir": "down",
-   "level": 60350,
-   "note": "26 Nov 12:15: 59,400 sat 2.2 pct away; 24h low 57,300 -5.6 pct, so just below 12h low 60,377 (-0.6 pct); BTC down call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
+   "level": 59880,
+   "note": "26 Nov 16:15: 60,350 inside range after wick to 59,915; 24h low 58,103 -4.1 pct, so just below 12h low (-1.2 pct); BTC call closed -> live again; (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
@@ -31,8 +31,8 @@
   {
    "symbol": "ETHUSDT",
    "dir": "down",
-   "level": 1674,
-   "note": "26 Nov 00:15: 6h level. 1,605 sat 5.2 pct away; 24h/12h low 1,608.86 >4 pct, so just below 6h low 1,675.83 (-1.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1665,
+   "note": "26 Nov 16:15: 1,674 inside range after wick to 1,667.94; just below 12h low (-1.6 pct; 24h low 1,630 -3.7 pct also ok but 12h is nearer edge after wick); (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "PEPEUSDT",
@@ -1342,6 +1342,27 @@
    "dir": "down",
    "level": 59400,
    "note": "26 Nov 00:15: 6h level. 57,250 sat 5.3 pct away; 24h/12h low 57,300 -5.2 pct, so just below 6h low 59,485.9 (-1.7 pct); BTC down call open -> fires are shadows (same direction: note only); (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-26 16:15",
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "level": 3.45e-06,
+   "note": "26 Nov 12:15: 3.43 sat 3.4 pct away; 24h low -8.5 pct, so just below 12h low 0.00000346 (-2.8 pct); PEPE up call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-26 16:15",
+   "symbol": "BTCUSDT",
+   "dir": "down",
+   "level": 60350,
+   "note": "26 Nov 12:15: 59,400 sat 2.2 pct away; 24h low 57,300 -5.6 pct, so just below 12h low 60,377 (-0.6 pct); BTC down call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-26 16:15",
+   "symbol": "ETHUSDT",
+   "dir": "down",
+   "level": 1674,
+   "note": "26 Nov 00:15: 6h level. 1,605 sat 5.2 pct away; 24h/12h low 1,608.86 >4 pct, so just below 6h low 1,675.83 (-1.1 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [

@@ -263,3 +263,13 @@ changes until they are scored.
 - BTC down from 60,338.34 → 59,421.85 (−1.52%): **right**. ETH down from 1,696.44 → 1,664.44 (−1.89%): **right**.
 - The one-call-per-coin rule kept us in the losing up calls and turned the correct down signals into shadows. This is the second time (the first was 20 Nov ETH). Shadows from opposite fires are now 2 right, 1 wrong.
 - **Lesson (candidate for Sage, 29 Nov):** when an opposite trigger fires CLEAR against an open call, consider closing the open call early (scored at that moment) and taking the new direction. Today that would have scored ETH up −2.0% wrong at 04:15 and ETH down −1.9% right, instead of ETH up −3.4% wrong. Test it on the shadow log before adopting it.
+
+## Review — BTC DOWN call scored 26 Nov 16:00 (from 58,344.01 → 60,618.79, +3.90%): WRONG
+- **Expected:** down. The 58,400 trigger fired after the hawkish PCE (core 3.3%, the highest since 2023). It was a THIN break (−0.1%) and the retest held. Atlas found no UP reason.
+- **What happened:** BTC bottomed at 57,300 in the PCE hour itself and recovered all the way, +5.8% from the low. The "news" was fully priced within the release hour.
+- **Verdict:** this is the same failure as the Nvidia spike, in reverse. The trigger fired *after* a news-driven move had already happened, so we were late. The chart plan cannot see this; the research step called the news correctly but missed that it was already priced in.
+- **Lesson (strong candidate, for Sage on 29 Nov):** **THIN breaks are now 1 right out of 6.** All four thin calls since 23 Nov were wrong (BTC up, ETH up, PEPE up, BTC down). Two candidate rules, to be tested together:
+  - (a) require a margin of at least 0.5% beyond the level at recording time;
+  - (b) no trigger call within 6h after a scheduled major event or a single-news move of more than 4% in an hour.
+  - The evidence now outweighs Sage's 22 Nov rejection of the margin rule. That ruling was made on 1 of 2.
+- Calls overall: 21 scored, 12 right (**57%**), now below the 60% graduation line.
