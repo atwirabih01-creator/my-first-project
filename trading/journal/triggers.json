@@ -13,8 +13,8 @@
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 60800,
-   "note": "24 Nov 16:15: 61,700 sat 3.3 pct away; 24h top 62,943 +5.4 pct, so just above 12h top 60,768.56 (+1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 61650,
+   "note": "26 Nov 04:15: 60,800 inside range after wick to 61,622; just above 24h top (+1.4 pct); BTC down call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -25,8 +25,8 @@
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1690,
-   "note": "25 Nov 08:15: 1,712 sat 4.3 pct away; 24h top 1,708 +4.1 pct, so just above 12h top 1,688.55 (+3.0 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1732,
+   "note": "26 Nov 04:15: refill after use: just above 24h top 1,730 (+2.0 pct); ETH call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
@@ -37,8 +37,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 3.53e-06,
-   "note": "25 Nov 00:15: 3.58 sat 3.5 pct away; 24h top +4.3 pct, so just above 12h top 0.00000352 (+2.0 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.6e-06,
+   "note": "26 Nov 04:15: refill after use: just above 24h top 0.00000359 (+1.7 pct); PEPE call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "history": [
@@ -1298,6 +1298,29 @@
    "dir": "down",
    "level": 1605,
    "note": "25 Nov 16:15: 1,630 inside range after wick to 1,608.86; just below 24h low (-2.6 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-26 04:15",
+   "symbol": "BTCUSDT",
+   "dir": "up",
+   "level": 60800,
+   "note": "24 Nov 16:15: 61,700 sat 3.3 pct away; 24h top 62,943 +5.4 pct, so just above 12h top 60,768.56 (+1.8 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-26 04:15",
+   "used": "fired -> call",
+   "symbol": "ETHUSDT",
+   "dir": "up",
+   "level": 1690,
+   "note": "25 Nov 08:15: 1,712 sat 4.3 pct away; 24h top 1,708 +4.1 pct, so just above 12h top 1,688.55 (+3.0 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-26 04:15",
+   "used": "fired -> call",
+   "symbol": "PEPEUSDT",
+   "dir": "up",
+   "level": 3.53e-06,
+   "note": "25 Nov 00:15: 3.58 sat 3.5 pct away; 24h top +4.3 pct, so just above 12h top 0.00000352 (+2.0 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
