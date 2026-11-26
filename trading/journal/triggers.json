@@ -7,8 +7,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.37e-06,
-   "note": "26 Nov 00:15: 6h level. 3.27 sat 6.3 pct away; 24h/12h low 0.00000325 >4 pct, so just below 6h low 0.00000338 (-3.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.43e-06,
+   "note": "26 Nov 08:15: 3.37 sat 3.7 pct away; 24h low 0.00000325 -7 pct, so just below 12h low 0.00000344 (-2.0 pct); PEPE up call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -1321,6 +1321,13 @@
    "dir": "up",
    "level": 3.53e-06,
    "note": "25 Nov 00:15: 3.58 sat 3.5 pct away; 24h top +4.3 pct, so just above 12h top 0.00000352 (+2.0 pct); clean (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-26 08:15",
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "level": 3.37e-06,
+   "note": "26 Nov 00:15: 6h level. 3.27 sat 6.3 pct away; 24h/12h low 0.00000325 >4 pct, so just below 6h low 0.00000338 (-3.4 pct); clean (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
