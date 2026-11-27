@@ -26,7 +26,7 @@
    "symbol": "ETHUSDT",
    "dir": "up",
    "level": 1757,
-   "note": "27 Nov 08:15: 1,741 inside range (one close 1,741.71 then back; wick 1,755.22); just above 24h top (+1.2 pct); note: single-close poke counts as failed break -> needs_retest; (leader applied Hawk's method; Hawk to confirm)"
+   "note": "27 Nov 08:15: 1,741 inside range (one close 1,741.71 then back; wick 1,755.22); just above 24h top (+1.2 pct); (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
