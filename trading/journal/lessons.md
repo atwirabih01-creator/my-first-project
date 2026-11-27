@@ -273,3 +273,13 @@ changes until they are scored.
   - (b) no trigger call within 6h after a scheduled major event or a single-news move of more than 4% in an hour.
   - The evidence now outweighs Sage's 22 Nov rejection of the margin rule. That ruling was made on 1 of 2.
 - Calls overall: 21 scored, 12 right (**57%**), now below the 60% graduation line.
+
+## Review — ETH UP and PEPE UP calls scored 27 Nov 04:00: both RIGHT
+- **Calls:** ETH from 1,697.83 → 1,728.64 (+1.82%) and PEPE from 0.00000354 → 0.00000359 (+1.41%). Both were thin breaks (+0.5% and +0.3%). ETH had no retest; PEPE's retest held.
+- **What happened:** the slow post-PCE recovery carried on through the quiet Thanksgiving session. There was no news shock.
+- **Verdict:** good calls. Unlike the four losers, these were **not** made right after a news spike or a scheduled release. They came about 14 hours after PCE, in a steady drift.
+- **What this teaches:** the thin-break tally is now 3 right out of 8. Split by context:
+  - thin breaks within 6h of a news spike or major event: **0 of 4**
+  - thin breaks otherwise: **3 of 4**
+  - That supports candidate rule (b), "no call within 6h of a major event or news spike", more than rule (a), the margin rule. Sage to rule on 29 Nov.
+- Calls overall: 23 scored, 14 right (**61%**), back above the 60% line.

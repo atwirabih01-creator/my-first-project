@@ -1,21 +1,6 @@
 {
- "scanned_utc": "2026-11-27 00:11:00+00:00",
+ "scanned_utc": "2026-11-27 04:11:00+00:00",
  "coins_checked": 40,
  "market_tide": "down",
- "candidates": [
-  {
-   "scanned_utc": "2026-11-27 00:11:00+00:00",
-   "bar_utc": "2026-11-26 20:00:00+00:00",
-   "symbol": "TRUMPUSDT",
-   "meme": true,
-   "side": "short",
-   "situation": "hold",
-   "price": 0.865,
-   "atr4h_pct": 3.36,
-   "rsi4h": 48.0,
-   "buy_share_24h": 0.532,
-   "vol24h_musd": 5.1,
-   "versions_allowed": "D08"
-  }
- ]
+ "candidates": []
 }
