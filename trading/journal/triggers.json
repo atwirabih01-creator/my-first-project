@@ -25,8 +25,8 @@
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1733,
-   "note": "27 Nov 16:15: 1,757 sat 5 pct away; 24h top 1,755 >4 pct, so just above 6h top 1,731.72 (+3.6 pct); (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1728,
+   "note": "27 Nov 20:15: 6h level. 24h top +5 pct, 12h top +4.4 pct, so just above 6h top 1,726.63 (+3.4 pct); (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
@@ -1461,6 +1461,13 @@
    "dir": "down",
    "level": 1665,
    "note": "26 Nov 16:15: 1,674 inside range after wick to 1,667.94; just below 12h low (-1.6 pct; 24h low 1,630 -3.7 pct also ok but 12h is nearer edge after wick); (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-27 20:15",
+   "symbol": "ETHUSDT",
+   "dir": "up",
+   "level": 1733,
+   "note": "27 Nov 16:15: 1,757 sat 5 pct away; 24h top 1,755 >4 pct, so just above 6h top 1,731.72 (+3.6 pct); (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
