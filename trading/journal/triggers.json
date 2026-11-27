@@ -7,14 +7,14 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.42e-06,
-   "note": "27 Nov 04:15: 6h level. 3.36 sat 6.4 pct away; all lows >4 pct, nearest edge stands: just below 6h low 0.00000343 (-4.7 pct); (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.5e-06,
+   "note": "27 Nov 08:15: 6h level. 3.42 sat 5.3 pct away; 24h/12h lows >4 pct, so just below 6h low 0.00000351 (-3.0 pct); (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 61900,
-   "note": "27 Nov 04:15: 61,650 inside range after wick to 61,881; just above 24h top (+0.8 pct); (leader applied Hawk's method; Hawk to confirm)"
+   "level": 62050,
+   "note": "27 Nov 08:15: 61,900 inside range after wick to 62,025; just above 24h top (+0.6 pct); (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -25,8 +25,8 @@
   {
    "symbol": "ETHUSDT",
    "dir": "up",
-   "level": 1741,
-   "note": "27 Nov 04:15: refill after call scored; 1,732 inside range after wick to 1,739; just above 24h top (+0.7 pct); (leader applied Hawk's method; Hawk to confirm)"
+   "level": 1757,
+   "note": "27 Nov 08:15: 1,741 inside range (one close 1,741.71 then back; wick 1,755.22); just above 24h top (+1.2 pct); note: single-close poke counts as failed break -> needs_retest; (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "ETHUSDT",
@@ -1391,6 +1391,27 @@
    "dir": "up",
    "level": 3.6e-06,
    "note": "26 Nov 04:15: refill after use: just above 24h top 0.00000359 (+1.7 pct); PEPE call open -> fires are shadows; (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-27 08:15",
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "level": 3.42e-06,
+   "note": "27 Nov 04:15: 6h level. 3.36 sat 6.4 pct away; all lows >4 pct, nearest edge stands: just below 6h low 0.00000343 (-4.7 pct); (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-27 08:15",
+   "symbol": "BTCUSDT",
+   "dir": "up",
+   "level": 61900,
+   "note": "27 Nov 04:15: 61,650 inside range after wick to 61,881; just above 24h top (+0.8 pct); (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-27 08:15",
+   "symbol": "ETHUSDT",
+   "dir": "up",
+   "level": 1741,
+   "note": "27 Nov 04:15: refill after call scored; 1,732 inside range after wick to 1,739; just above 24h top (+0.7 pct); (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
