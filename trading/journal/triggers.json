@@ -7,14 +7,14 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.5e-06,
-   "note": "27 Nov 08:15: 6h level. 3.42 sat 5.3 pct away; 24h/12h lows >4 pct, so just below 6h low 0.00000351 (-3.0 pct); (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.56e-06,
+   "note": "27 Nov 12:15: 6h level. 3.50 sat 3.8 pct away; 24h/12h lows >4 pct, so just below 6h low 0.00000357 (-2.2 pct); (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
    "dir": "up",
-   "level": 62050,
-   "note": "27 Nov 08:15: 61,900 inside range after wick to 62,025; just above 24h top (+0.6 pct); (leader applied Hawk's method; Hawk to confirm)"
+   "level": 62300,
+   "note": "27 Nov 12:15: 62,050 inside range after wick to 62,248.91; just above 24h top (+1.0 pct); (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -37,8 +37,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "up",
-   "level": 3.64e-06,
-   "note": "27 Nov 04:15: refill after call scored; 3.60 inside range after wick to 0.00000363; just above 24h top (+1.4 pct); (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.68e-06,
+   "note": "27 Nov 12:15: 3.64 inside range after wick to 0.00000367 (closes 3.65 then 3.64 = one close beyond); just above 24h top (+1.1 pct); (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "history": [
@@ -1412,6 +1412,27 @@
    "dir": "up",
    "level": 1741,
    "note": "27 Nov 04:15: refill after call scored; 1,732 inside range after wick to 1,739; just above 24h top (+0.7 pct); (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-27 12:15",
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "level": 3.5e-06,
+   "note": "27 Nov 08:15: 6h level. 3.42 sat 5.3 pct away; 24h/12h lows >4 pct, so just below 6h low 0.00000351 (-3.0 pct); (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-27 12:15",
+   "symbol": "BTCUSDT",
+   "dir": "up",
+   "level": 62050,
+   "note": "27 Nov 08:15: 61,900 inside range after wick to 62,025; just above 24h top (+0.6 pct); (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-27 12:15",
+   "symbol": "PEPEUSDT",
+   "dir": "up",
+   "level": 3.64e-06,
+   "note": "27 Nov 04:15: refill after call scored; 3.60 inside range after wick to 0.00000363; just above 24h top (+1.4 pct); (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
