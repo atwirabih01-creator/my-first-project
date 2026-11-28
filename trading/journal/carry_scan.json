@@ -1,5 +1,5 @@
 {
- "scanned_utc": "2026-11-28 00:12:00+00:00",
+ "scanned_utc": "2026-11-28 04:13:00+00:00",
  "candidates": [],
  "hottest": [
   {
@@ -14,7 +14,7 @@
    "versions": []
   },
   {
-   "coin": "MEME",
+   "coin": "WIF",
    "venue": "OKX",
    "yearly_last9": 0.1095,
    "last3_per8h": [
@@ -25,35 +25,46 @@
    "versions": []
   },
   {
-   "coin": "PENGU",
-   "venue": "OKX",
-   "yearly_last9": 0.1067,
-   "last3_per8h": [
-    0.0001,
-    7.7e-05,
-    0.0001
-   ],
-   "versions": []
-  },
-  {
-   "coin": "WIF",
-   "venue": "OKX",
-   "yearly_last9": 0.1048,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    0.0001
-   ],
-   "versions": []
-  },
-  {
    "coin": "FET",
    "venue": "HL",
-   "yearly_last9": 0.1005,
+   "yearly_last9": 0.1066,
    "last3_per8h": [
     0.0001,
     0.0001,
-    1.3e-05
+    6.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "FLOKI",
+   "venue": "HL",
+   "yearly_last9": 0.1049,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    6.3e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "PENGU",
+   "venue": "OKX",
+   "yearly_last9": 0.1039,
+   "last3_per8h": [
+    7.7e-05,
+    0.0001,
+    7.8e-05
+   ],
+   "versions": []
+  },
+  {
+   "coin": "HBAR",
+   "venue": "HL",
+   "yearly_last9": 0.1038,
+   "last3_per8h": [
+    0.0001,
+    0.0001,
+    6.3e-05
    ],
    "versions": []
   },
@@ -69,24 +80,13 @@
    "versions": []
   },
   {
-   "coin": "FLOKI",
+   "coin": "PEOPLE",
    "venue": "HL",
-   "yearly_last9": 0.0989,
+   "yearly_last9": 0.0963,
    "last3_per8h": [
     0.0001,
-    0.0001,
-    1.3e-05
-   ],
-   "versions": []
-  },
-  {
-   "coin": "HBAR",
-   "venue": "HL",
-   "yearly_last9": 0.0977,
-   "last3_per8h": [
-    0.0001,
-    0.0001,
-    1.3e-05
+    4.4e-05,
+    5e-05
    ],
    "versions": []
   }
