@@ -7,8 +7,8 @@
   {
    "symbol": "PEPEUSDT",
    "dir": "down",
-   "level": 3.48e-06,
-   "note": "28 Nov 00:15: 6h level. 3.39 sat 4.5 pct away; 24h/12h low 0.0000034 -4.2 pct, so just below 6h low 0.00000349 (-2.0 pct); PEPE down call open -> same-direction fire is a note only; (leader applied Hawk's method; Hawk to confirm)"
+   "level": 3.39e-06,
+   "note": "28 Nov 08:15: 3.48 inside range after wick to 0.00000343; 24h low 0.0000034 now within 4 pct (-2.6), so just below it; (leader applied Hawk's method; Hawk to confirm)"
   },
   {
    "symbol": "BTCUSDT",
@@ -1482,6 +1482,13 @@
    "dir": "up",
    "level": 1728,
    "note": "27 Nov 20:15: 6h level. 24h top +5 pct, 12h top +4.4 pct, so just above 6h top 1,726.63 (+3.4 pct); (leader applied Hawk's method; Hawk to confirm)"
+  },
+  {
+   "retired_utc": "2026-11-28 08:15",
+   "symbol": "PEPEUSDT",
+   "dir": "down",
+   "level": 3.48e-06,
+   "note": "28 Nov 00:15: 6h level. 3.39 sat 4.5 pct away; 24h/12h low 0.0000034 -4.2 pct, so just below 6h low 0.00000349 (-2.0 pct); PEPE down call open -> same-direction fire is a note only; (leader applied Hawk's method; Hawk to confirm)"
   }
  ],
  "shadow": [
