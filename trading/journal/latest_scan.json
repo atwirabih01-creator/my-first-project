@@ -1,6 +1,21 @@
 {
- "scanned_utc": "2026-11-27 20:11:00+00:00",
+ "scanned_utc": "2026-11-28 00:11:00+00:00",
  "coins_checked": 40,
  "market_tide": "down",
- "candidates": []
+ "candidates": [
+  {
+   "scanned_utc": "2026-11-28 00:11:00+00:00",
+   "bar_utc": "2026-11-27 20:00:00+00:00",
+   "symbol": "LINKUSDT",
+   "meme": false,
+   "side": "short",
+   "situation": "dip",
+   "price": 9.375,
+   "atr4h_pct": 2.35,
+   "rsi4h": 59.0,
+   "buy_share_24h": 0.522,
+   "vol24h_musd": 16.5,
+   "versions_allowed": "D01 D02 D03 D04 D05 D06 D07 D08 D09 D10 D11 D12 D13 D14"
+  }
+ ]
 }
